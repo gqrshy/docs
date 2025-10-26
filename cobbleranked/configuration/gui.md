@@ -531,35 +531,7 @@ Row 6: 45  46  47  48  49  50  51  52  53
 }
 ```
 
-### Example 2: Add Multi (2v2singles) Queue Button
-
-```json5
-{
-  "gui_ranked": {
-    "items": {
-      // ... existing buttons ...
-
-      "multi_queue": {
-        "slot": 22,  // Bottom center
-        "id": "cobblemon:ultra_ball",
-        "display": "&5Multi Battle",
-        "lore": [
-          "",
-          "&72v2 Singles Match",
-          "&7Each player controls 2 Pokemon",
-          "",
-          " &7Players in queue: &c{queue_multi}",
-          "",
-          "&aClick to join queue",
-          ""
-        ]
-      }
-    }
-  }
-}
-```
-
-### Example 3: Customize Leaderboard Display
+### Example 2: Customize Leaderboard Display
 
 ```json5
 {
@@ -587,7 +559,7 @@ Row 6: 45  46  47  48  49  50  51  52  53
 }
 ```
 
-### Example 4: Themed Rewards Menu
+### Example 3: Themed Rewards Menu
 
 ```json5
 {

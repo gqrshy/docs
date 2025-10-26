@@ -11,7 +11,7 @@ Common questions and answers about CobbleRanked. Click on any question to expand
 
 CobbleRanked is a competitive ranked battle system for Minecraft servers running Cobblemon. It provides:
 - **Elo-based matchmaking** - Skill-based player matching
-- **Multiple battle formats** - Singles (1v1), Doubles (2v2), Multi (2v2singles)
+- **Multiple battle formats** - Singles (1v1), Doubles (2v2)
 - **Seasonal leaderboards** - Automatic rotation and rewards
 - **Customizable restrictions** - Ban Pokemon/moves/abilities/items
 - **Cross-server support** - MySQL + Redis for multi-server networks
@@ -482,7 +482,6 @@ See [Elo System Guide](../features/elo-system.md) for detailed explanation.
 **Example player stats:**
 - **Singles:** 1450 Elo, 28W-14L (Rank #5)
 - **Doubles:** 1100 Elo, 8W-6L (Rank #23)
-- **Multi:** 1200 Elo, 15W-10L (Rank #12)
 
 **Why separate?**
 - Different formats require different skills
@@ -977,7 +976,7 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 
 **What's migrated:**
 - ✅ All player stats (Elo, wins, losses)
-- ✅ Format-specific stats (Singles, Doubles, Multi)
+- ✅ Format-specific stats (Singles, Doubles)
 - ✅ Season data
 - ✅ Reward collection flags
 
@@ -1171,7 +1170,7 @@ Example: Economy command requires economy plugin
 - `{player}` - Player username
 - `{elo}` - Player's current Elo
 - `{rank}` - Player's rank position
-- `{format}` - Battle format (SINGLES/DOUBLES/MULTI)
+- `{format}` - Battle format (SINGLES/DOUBLES)
 
 </details>
 

@@ -158,7 +158,6 @@ Common dimension identifiers:
 |---------------|------------------|
 | Singles (1v1) | 20x20 blocks |
 | Doubles (2v2) | 25x25 blocks |
-| Multi (2v2 singles) | 30x30 blocks |
 
 ### Design Best Practices
 

@@ -12,7 +12,7 @@ Ranked battles are competitive Pokemon battles where players compete for Elo rat
 
 **Player joins queue:**
 1. Opens ranked GUI (`/ranked`)
-2. Selects battle format (Singles, Doubles, Multi)
+2. Selects battle format (Singles or Doubles)
 3. Clicks queue button
 4. Enters matchmaking pool
 
@@ -29,7 +29,7 @@ Ranked battles are competitive Pokemon battles where players compete for Elo rat
 - Range expands over time if no match found
 
 **Matchmaking criteria:**
-1. **Same format:** Both players queued for Singles/Doubles/Multi
+1. **Same format:** Both players queued for same format (Singles or Doubles)
 2. **Elo range:** Within configured range (default ±200, expands over time)
 3. **Valid party:** Both players have valid Pokemon teams
 
@@ -183,17 +183,6 @@ CobbleRanked supports three battle formats with independent rankings:
 - 6 Pokemon in party
 - Lead pair selection
 
-### Multi (2v2 Singles)
-
-**Format:** `GEN_9_MULTI`
-- 2v2 using singles mechanics
-- Each Pokemon battles independently
-- Unique format for variety
-
-**Team requirements:**
-- 6 Pokemon in party
-- Lead pair selection
-
 ## Independent Rankings
 
 Each format has separate:
@@ -207,7 +196,6 @@ Each format has separate:
 Player A Stats:
   Singles: 1200 Elo, 15W-5L
   Doubles: 1000 Elo, 0W-0L (never played)
-  Multi: 1100 Elo, 8W-7L
 ```
 
 ## Disconnect Handling
