@@ -12,7 +12,7 @@
 - **Elo Rating System** - Two modes available:
   - Legacy random point system
   - Pokemon Showdown-style K-factor calculation
-- **Multiple Battle Formats** - Singles, Doubles, Multi (2v2singles) with independent rankings
+- **Multiple Battle Formats** - Singles and Doubles with independent rankings
 - **Seasonal Leaderboards** - Automatic season rotation with customizable duration
 
 ### ⚔️ Battle Management
