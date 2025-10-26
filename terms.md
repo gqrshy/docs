@@ -4,12 +4,6 @@
 
 ---
 
-## 📄 License Summary
-
-**CobbleRanked is licensed, not sold.**
-
-All rights, title, and interest in this mod, including its source code and assets, remain the sole property of **@gashi** (Gashi Studios).
-
 ### ✅ Permitted Use
 
 - **Personal use**: Play on your own Minecraft client
@@ -201,17 +195,5 @@ If any provision of these terms is found to be invalid or unenforceable, the rem
 ### 17. Entire Agreement
 
 These terms constitute the entire agreement between you and Gashi Studios regarding the Software and supersede all prior agreements.
-
----
-
-## Contact
-
-For questions, licensing inquiries, or permission requests:
-
-- **Email**: garshy.gaming@gmail.com
-- **Discord**: @gashicha
-- **GitHub**: [github.com/gqrshy](https://github.com/gqrshy)
-
----
 
 **By using the Software, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.**
