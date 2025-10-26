@@ -1,512 +1,240 @@
 # Frequently Asked Questions
 
-Common questions and answers about CobbleRanked.
+Common questions and answers about CobbleRanked. Click on any question to expand the answer.
 
-## General Questions
+---
 
-### What is CobbleRanked?
+## 📌 General Questions
+
+<details>
+<summary><strong>What is CobbleRanked?</strong></summary>
 
 CobbleRanked is a competitive ranked battle system for Minecraft servers running Cobblemon. It provides:
-- Elo-based matchmaking
-- Multiple battle formats (Singles, Doubles, Multi)
-- Seasonal leaderboards
-- Customizable Pokemon/move/ability restrictions
-- Cross-server support
+- **Elo-based matchmaking** - Skill-based player matching
+- **Multiple battle formats** - Singles (1v1), Doubles (2v2), Multi (2v2singles)
+- **Seasonal leaderboards** - Automatic rotation and rewards
+- **Customizable restrictions** - Ban Pokemon/moves/abilities/items
+- **Cross-server support** - MySQL + Redis for multi-server networks
 
-### Is CobbleRanked compatible with my server?
+</details>
+
+<details>
+<summary><strong>Is CobbleRanked compatible with my server?</strong></summary>
 
 **Requirements:**
-- Minecraft 1.21.1
-- Fabric Loader 0.17.2+
-- Cobblemon 1.7.0+
-- Fabric API 0.116.6+
+- Minecraft **1.21.1**
+- Fabric Loader **0.17.2+**
+- Cobblemon **1.7.0+**
+- Fabric API **0.116.6+**
 
 If your server meets these requirements, CobbleRanked will work!
 
-### Can I use CobbleRanked with other mods?
+**Check your versions:**
+```bash
+/version
+/fabric
+```
 
-Yes! CobbleRanked is compatible with most Fabric mods. Tested with:
-- Cobblemon addons (Cobbledex, Cobblepedia)
-- WorldGuard/GriefPrevention (for arena protection)
-- Economy mods (for reward commands)
-- Permission mods (LuckPerms, PermissionsEx)
+</details>
 
-### Is cross-server support required?
+<details>
+<summary><strong>Can I use CobbleRanked with other mods?</strong></summary>
 
-No! CobbleRanked works in two modes:
-- **Single-server:** Uses SQLite, no additional setup
-- **Cross-server:** Uses MySQL + Redis, requires configuration
+**Yes!** CobbleRanked is compatible with most Fabric mods.
 
-Most servers use single-server mode.
+**Tested with:**
+- ✅ Cobblemon addons (Cobbledex, Cobblepedia)
+- ✅ World protection (WorldGuard, GriefPrevention)
+- ✅ Economy mods (for reward commands)
+- ✅ Permission mods (LuckPerms, PermissionsEx)
+- ✅ Chat mods
+- ✅ Utility mods
 
-## Installation & Setup
+**Potential conflicts:**
+- ❌ Mods that modify battle mechanics
+- ❌ Mods that override Pokemon stats
 
-### Where do I download CobbleRanked?
+</details>
 
-Download from:
-- GitHub Releases (recommended)
-- Modrinth
-- CurseForge
+<details>
+<summary><strong>Is cross-server support required?</strong></summary>
 
-Always download from official sources!
+**No!** CobbleRanked works in two modes:
 
-### How do I install CobbleRanked?
+**Single-Server Mode (Default):**
+- Uses SQLite (built-in)
+- No additional setup needed
+- Perfect for 1-100 players
 
-1. Download the JAR file
-2. Place in `mods/` folder
-3. Ensure dependencies are installed
-4. Start server (configs auto-generate)
+**Cross-Server Mode (Optional):**
+- Uses MySQL + Redis
+- Requires configuration
+- For networks with multiple servers (lobby + battle servers)
 
-See [Installation Guide](../getting-started/installation.md) for details.
+**Most servers use single-server mode.**
 
-### Configuration files not generating?
+</details>
 
-**Solution:**
-1. Verify CobbleRanked is in `mods/` folder
-2. Check `logs/latest.log` for errors
-3. Ensure Fabric Loader is installed correctly
-4. Remove conflicting mods (if any)
+<details>
+<summary><strong>Where can I download CobbleRanked?</strong></summary>
 
-### How do I update CobbleRanked?
+**Official sources:**
+- [GitHub Releases](https://github.com/gqrshy/CobbleRanked/releases) (recommended)
+- Modrinth _(coming soon)_
+- CurseForge _(coming soon)_
 
-1. **Backup:** Copy `config/cobbleranked/` folder
-2. **Stop server**
-3. **Replace JAR:** Delete old version, add new version to `mods/`
-4. **Start server:** Configs will migrate automatically
-5. **Test:** Run `/rankedarena reload`
+**⚠️ Always download from official sources only!**
 
-## Configuration
+Unofficial sources may contain:
+- Outdated versions
+- Malware
+- Modified code
 
-### Can I ban legendary Pokemon?
+</details>
 
-Yes! Use the blacklist system:
+---
+
+## ⚙️ Installation & Setup
+
+<details>
+<summary><strong>How do I install CobbleRanked?</strong></summary>
+
+**Quick installation:**
+
+1. **Download** the JAR file from [GitHub Releases](https://github.com/gqrshy/CobbleRanked/releases)
+2. **Place** in `mods/` folder
+3. **Ensure dependencies** are installed (Cobblemon, Fabric API)
+4. **Start server** - Configs auto-generate in `config/cobbleranked/`
+5. **Create arena:** `/rankedarena setArena main_arena pos1` (repeat for pos2)
+6. **Test:** `/ranked`
+
+See [Installation Guide](../getting-started/installation.md) for detailed steps.
+
+</details>
+
+<details>
+<summary><strong>Configuration files not generating?</strong></summary>
+
+**Troubleshooting steps:**
+
+1. **Verify CobbleRanked is loaded:**
+   ```bash
+   /mod list
+   ```
+   Should show "CobbleRanked" in the list.
+
+2. **Check logs for errors:**
+   ```bash
+   tail -f logs/latest.log | grep CobbleRanked
+   ```
+
+3. **Ensure dependencies installed:**
+   - Cobblemon 1.7.0+
+   - Fabric API 0.116.6+
+
+4. **Remove conflicting mods** (if any)
+
+5. **Reinstall:**
+   - Delete CobbleRanked from `mods/`
+   - Download latest version
+   - Restart server
+
+**Still broken?** Check [Troubleshooting](troubleshooting.md).
+
+</details>
+
+<details>
+<summary><strong>How do I update CobbleRanked?</strong></summary>
+
+**Safe update procedure:**
+
+1. **Backup configs:**
+   ```bash
+   cp -r config/cobbleranked config/cobbleranked.backup
+   ```
+
+2. **Backup database (SQLite):**
+   ```bash
+   cp config/cobbleranked/ranked.db config/cobbleranked/ranked.db.backup
+   ```
+
+3. **Stop server:**
+   ```bash
+   /stop
+   ```
+
+4. **Replace JAR:**
+   - Delete old `CobbleRanked-*.jar` from `mods/`
+   - Add new version to `mods/`
+
+5. **Start server:**
+   - Configs migrate automatically
+   - Check console for migration messages
+
+6. **Test:**
+   ```bash
+   /rankedarena reload
+   /ranked
+   ```
+
+See [Migration Guide](../getting-started/migration.md) for version-specific instructions.
+
+</details>
+
+---
+
+## 🔧 Configuration
+
+<details>
+<summary><strong>Can I ban legendary Pokemon?</strong></summary>
+
+**Yes!** Use the label-based blacklist system:
 
 ```json5
 {
   "black_list_labels": [
-    "legendary",  // Bans all legendaries
-    "mythical"    // Bans all mythicals
+    "legendary",  // Bans all legendary Pokemon
+    "mythical",   // Bans all mythical Pokemon
+    "ultra_beast" // Bans all Ultra Beasts
   ]
 }
 ```
 
-See [Blacklist Configuration](../configuration/blacklist.md).
+**File:** `config/cobbleranked/blacklist.json5`
 
-### How do I change the season length?
+**Available labels:**
+- `legendary` - Mewtwo, Rayquaza, Dialga, etc.
+- `mythical` - Mew, Celebi, Jirachi, etc.
+- `ultra_beast` - Nihilego, Buzzwole, etc.
+- `paradox` - Iron Treads, Great Tusk, etc.
+- `powerhouse` - Dragonite, Garchomp, etc.
 
-Edit `config.json5`:
+See [Blacklist Configuration](../configuration/blacklist.md) for full list.
+
+</details>
+
+<details>
+<summary><strong>How do I change the season length?</strong></summary>
+
+**Edit config.json5:**
 
 ```json5
 {
   "ranked_match": {
-    "reset_days": 30  // Change to desired days
+    "reset_days": 30  // Change to desired days (0 = disabled)
   }
 }
 ```
 
-Reload: `/rankedarena reload`
+**Examples:**
+- `reset_days: 7` - Weekly seasons
+- `reset_days: 30` - Monthly seasons (default)
+- `reset_days: 90` - Quarterly seasons
+- `reset_days: 0` - Disable automatic rotation
 
-### Can I customize rewards?
-
-Yes! Edit `rewards.json5`:
-
-```json5
-{
-  "season_rewards": {
-    "first_place": {
-      "enabled": true,
-      "commands": [
-        "give %player% minecraft:diamond 64"
-      ]
-    }
-  }
-}
-```
-
-See [Rewards Configuration](../configuration/rewards.md).
-
-### How do I add multiple languages?
-
-CobbleRanked includes 4 languages:
-- English (`en-Us`)
-- Japanese (`ja-Jp`)
-- Portuguese (`pt-Br`)
-- Russian (`ru-Ru`)
-
-Change language in `config.json5`:
-```json5
-{
-  "language": "ja-Jp"  // Change here
-}
-```
-
-Custom languages: Create new files in `language/` and `gui/` folders.
-
-### Can I disable certain battle formats?
-
-No direct disable, but you can:
-1. Hide GUI buttons (edit `gui-*.json5`)
-2. Use permissions to restrict access
-3. Only promote one format to players
-
-All formats are always available via commands.
-
-## Gameplay
-
-### How does Elo rating work?
-
-Elo is a skill-based rating system:
-- Start at 1000 Elo
-- Win: Gain Elo (10-30 points default)
-- Lose: Lose Elo (10-30 points default)
-- Higher Elo = better rank
-
-Two systems available:
-- **Legacy:** Random points (10-30)
-- **Pokemon Showdown:** K-factor based (recommended)
-
-See [Elo System Guide](../features/elo-system.md).
-
-### Do stats reset each season?
-
-**What resets:**
-- Reward collection flags (can claim rewards again)
-
-**What persists:**
-- Elo rating
-- Win/loss record
-- Flee count
-- All statistics
-
-This allows long-term progression!
-
-### What happens if I disconnect during a battle?
-
-**Penalties:**
-- Flee count +1
-- Counts as loss
-- Elo penalty applied
-- Opponent wins
-
-**Note:** Legitimate crashes are treated the same to prevent abuse. Contact an admin to reset flee count if needed.
-
-### Can I have different Elo for each format?
-
-Yes! Each format has independent:
-- Elo rating
-- Win/loss record
-- Leaderboard ranking
-
-Example:
-- Singles: 1200 Elo
-- Doubles: 1000 Elo
-- Multi: 1100 Elo
-
-### How does matchmaking work?
-
-1. Join queue for a format
-2. System searches for opponent with similar Elo (±200 default)
-3. Range expands over time if no match found
-4. When match found, battle starts
-
-See [Ranked Battles](../features/ranked-battles.md) for details.
-
-### What is flee count?
-
-Flee count tracks disconnects during battles:
-- Increases by 1 per disconnect
-- Visible in player stats
-- Never decreases automatically
-- Admin can reset: `/rankedarena flee reset <player>`
-
-Used to identify rage quitters.
-
-## Battles
-
-### My Pokemon is banned but not in the blacklist?
-
-**Possible causes:**
-
-1. **Label-based ban:**
-   - Check `black_list_labels` in `blacklist.json5`
-   - Example: `"legendary"` bans all legendaries
-
-2. **Move/ability/item ban:**
-   - Check `black_list_moves`, `black_list_ability`, `black_list_items_pokemon`
-   - Your Pokemon may have a banned move/ability/item
-
-3. **Special format:**
-   - Check `special_format` section
-   - Examples: Little Cup (first stage only), Shiny Only
-
-4. **Config not reloaded:**
-   - Run `/rankedarena reload`
-
-### Battle ends in draw every time?
-
-**Cause:** Turn limit reached
-
-**Solution:** Increase turn limit in `config.json5`:
-
-```json5
-{
-  "battle": {
-    "maxTurns": 200  // Increase from 100
-  }
-}
-```
-
-### Can I use Mega Evolution/Terastallization?
-
-**Default:** Both enabled
-
-**Disable in `config.json5`:**
-```json5
-{
-  "competitive": {
-    "allowMegaEvolution": false,  // Disable Mega
-    "allowTeraType": false         // Disable Tera
-  }
-}
-```
-
-### Level scaling not working?
-
-**Verify configuration:**
-```json5
-{
-  "battle": {
-    "levelMatch": 70,         // Desired level
-    "forceLevelCap": true     // Must be true!
-  }
-}
-```
-
-**If still broken:**
-1. Check console for errors
-2. Test with `/rankedarena reload`
-3. Verify Cobblemon version (1.7.0+ required)
-
-## Arenas
-
-### How many arenas should I create?
-
-**Recommendations:**
-- **Minimum:** 1 (for testing)
-- **Ideal:** 5-10 (variety without overwhelming)
-- **Maximum:** No limit (but 20+ is overkill)
-
-### Can arenas be in different dimensions?
-
-Yes! Arenas support:
-- Overworld (`minecraft:overworld`)
-- Nether (`minecraft:the_nether`)
-- End (`minecraft:the_end`)
-- Custom dimensions (from mods)
-
-Example:
-```
-/rankedarena arena set nether_arena
-```
-
-### Players spawn in walls/underground?
-
-**Fix:**
-1. Stand at correct spawn point
-2. Re-create arena: `/rankedarena arena set arena_name`
-3. Verify Y coordinate is at ground level
-
-**Prevention:**
-- Use flat, even terrain
-- Test arena: `/rankedarena arena tp arena_name`
-
-### Arena protection (WorldGuard)?
-
-**Recommended flags:**
+**Reload config:**
 ```bash
-/region flag arena_name build deny           # No breaking/placing
-/region flag arena_name pvp deny             # No PvP (not needed for Cobblemon)
-/region flag arena_name mob-spawning deny    # No mob spawns
-```
-
-See [Arena Configuration](../configuration/arenas.md).
-
-## Cross-Server
-
-### Do I need Redis for cross-server?
-
-**MySQL:** Required (shares player data)
-**Redis:** Optional but recommended (real-time queue sync)
-
-Without Redis:
-- Players can still battle across servers
-- Matchmaking slower (database polling)
-
-### Multiple battle servers allowed?
-
-**No!** Only ONE server should have `battle_server: ""` in config.
-
-**Why:**
-- Prevents duplicate season management
-- Avoids conflicting matchmaking
-- Single source of truth
-
-See [Cross-Server Setup](../advanced/cross-server.md).
-
-### How do I migrate SQLite to MySQL?
-
-Use the migration command:
-
-```bash
-/rankedarena database migrate sqlite mysql
-```
-
-**Before migration:**
-1. Configure MySQL in `config.json5`
-2. Test MySQL connection
-3. Backup SQLite database: `config/cobbleranked/ranked.db`
-
-### Cross-server not syncing stats?
-
-**Checklist:**
-1. ✅ MySQL connection working?
-2. ✅ All servers use same MySQL database?
-3. ✅ `cross_server.enabled: true` in config?
-4. ✅ All servers restarted after config change?
-
-**Test connection:**
-```bash
-mysql -u username -p -h host database
-```
-
-## Rewards
-
-### Rewards not giving items?
-
-**Possible causes:**
-
-1. **Syntax error in commands:**
-   ```json5
-   "commands": [
-     "give %player% minecraft:diamond 64"  // Correct
-     // NOT: "give {player} diamond 64"
-   ]
-   ```
-
-2. **Player already collected:**
-   - Rewards only given once per season
-   - Check `elosColllect` flag in player stats
-
-3. **Reward disabled:**
-   ```json5
-   {
-     "enabled": true  // Must be true!
-   }
-   ```
-
-### Can I use custom commands?
-
-Yes! Any server command works:
-
-```json5
-{
-  "commands": [
-    "give %player% minecraft:diamond 64",
-    "eco give %player% 1000",                    // Economy
-    "lp user %player% permission set vip true",  // Permissions
-    "broadcast %player% reached 100 wins!"       // Announcements
-  ]
-}
-```
-
-Use `%player%` placeholder for player name.
-
-### Milestone rewards vs season rewards?
-
-**Season rewards:**
-- Given at end of season
-- Top 3 players only
-- Based on leaderboard position
-
-**Milestone rewards:**
-- Given immediately upon achievement
-- Any player can earn
-- Based on total wins (10, 25, 50, 100)
-
-Both can be configured independently!
-
-## Permissions
-
-### What permissions plugin do I need?
-
-CobbleRanked works with:
-- LuckPerms (recommended)
-- PermissionsEx
-- Any Fabric permissions plugin
-
-**No plugin?** Defaults to OP system.
-
-### How do I give ranked access to all players?
-
-**LuckPerms:**
-```bash
-/lp group default permission set cobbleranked.* true
-```
-
-**PermissionsEx:**
-```yaml
-groups:
-  default:
-    permissions:
-      - cobbleranked.*
-```
-
-### Admin permissions not working?
-
-**Verify OP status:**
-```bash
-/op YourUsername
-```
-
-**Or grant permission:**
-```bash
-/lp user YourUsername permission set cobbleranked.admin true
-```
-
-## Troubleshooting
-
-### "No arenas configured" error?
-
-**Solution:**
-```bash
-/rankedarena arena set main_arena
-```
-
-Must create at least one arena before battles can start.
-
-### Blacklist not blocking Pokemon?
-
-**Checklist:**
-1. ✅ Correct spelling in `blacklist.json5`?
-2. ✅ Reloaded config: `/rankedarena reload`?
-3. ✅ Testing with correct Pokemon/form?
-4. ✅ No JSON syntax errors?
-
-**Test:**
-1. Ban Mewtwo: `"black_list_pokemon": ["Mewtwo"]`
-2. Reload: `/rankedarena reload`
-3. Join queue with Mewtwo in party
-4. Should see validation error
-
-### Season not rotating automatically?
-
-**Verify settings:**
-```json5
-{
-  "ranked_match": {
-    "reset_days": 30  // Must be > 0
-  }
-}
+/rankedarena reload
 ```
 
 **Check current season:**
@@ -514,155 +242,1010 @@ Must create at least one arena before battles can start.
 /rankedarena season info
 ```
 
-**Manual rotation:**
+</details>
+
+<details>
+<summary><strong>Can I customize rewards?</strong></summary>
+
+**Yes!** Edit `rewards.json5`:
+
+```json5
+{
+  "season_rewards": {
+    "singles": {
+      "rank_1": {
+        "rank_range": "1",
+        "display": "&6&l🏆 Champion Reward",
+        "item": "minecraft:diamond",
+        "commands": [
+          "give {player} minecraft:diamond 64",
+          "eco give {player} 1000",
+          "lp user {player} permission set cobbleranked.title.legend true"
+        ]
+      }
+    }
+  },
+  "milestone_rewards": {
+    "singles": {
+      "wins_10": {
+        "type": "WINS",
+        "requirement": 10,
+        "commands": ["give {player} minecraft:gold_ingot 10"]
+      }
+    }
+  }
+}
+```
+
+**Placeholders:**
+- `{player}` - Player username
+- `{elo}` - Player's Elo rating
+- `{rank}` - Player's rank position
+
+See [Rewards Configuration](../configuration/rewards.md) for detailed guide.
+
+</details>
+
+<details>
+<summary><strong>How do I add multiple languages?</strong></summary>
+
+**Built-in languages:**
+- English (`en-Us`)
+- Japanese (`ja-Jp`)
+- Portuguese (`pt-Br`)
+- Russian (`ru-Ru`)
+
+**Change language:**
+
+Edit `config.json5`:
+```json5
+{
+  "language": "ja-Jp"  // Change to desired language
+}
+```
+
+**Create custom language:**
+
+1. **Copy existing language file:**
+   ```bash
+   cp config/cobbleranked/language/en-Us.json5 config/cobbleranked/language/fr-Fr.json5
+   ```
+
+2. **Translate all text** in the new file
+
+3. **Copy GUI file:**
+   ```bash
+   cp config/cobbleranked/gui/gui-enUs.json5 config/cobbleranked/gui/gui-frFr.json5
+   ```
+
+4. **Translate GUI text**
+
+5. **Set language in config:**
+   ```json5
+   {
+     "language": "fr-Fr"
+   }
+   ```
+
+See [Language Customization](../configuration/languages.md).
+
+</details>
+
+<details>
+<summary><strong>Can I disable certain battle formats?</strong></summary>
+
+**No direct disable**, but you can effectively hide formats:
+
+**Method 1: Hide GUI buttons**
+
+Edit `gui-enUs.json5` and remove or hide the queue button:
+
+```json5
+{
+  "gui_ranked": {
+    "items": {
+      // Remove or comment out this entire section
+      // "doubles_queue": { ... }
+    }
+  }
+}
+```
+
+**Method 2: Set extremely high minimum Pokemon requirement**
+
+```json5
+{
+  "ranked_match": {
+    "limitPokemon_doubles": 999  // Effectively disables Doubles
+  }
+}
+```
+
+**Method 3: Use permissions** (requires permission plugin)
+
+Grant only Singles permission:
 ```bash
-/rankedarena season rotate
+/lp group default permission set cobbleranked.queue.singles true
+/lp group default permission set cobbleranked.queue.doubles false
 ```
 
-### Elo stuck at 1000?
+**Note:** All formats are always available via commands to players with permissions.
 
-**Possible causes:**
-
-1. **Draw battles:** Turn limit reached, no Elo change
-2. **Database error:** Check console logs
-3. **Elo system disabled:** Verify `eloSystem.mode` in config
-
-**Test:**
-1. Complete a battle with clear win/loss
-2. Check `/elo` after battle
-3. If unchanged, check console for errors
-
-### GUI not opening?
-
-**Checklist:**
-1. ✅ Permission: `cobbleranked.gui`
-2. ✅ GUI files exist: `config/cobbleranked/gui/gui-*.json5`
-3. ✅ Language setting correct in `config.json5`
-4. ✅ No JSON syntax errors in GUI files
-
-**Test:**
-```bash
-/ranked
-```
-
-**If error, check:**
-- Console logs
-- GUI file syntax
-
-### Leaderboard empty?
-
-**Causes:**
-- No battles completed yet
-- Database connection error
-- Wrong format selected
-
-**Solution:**
-1. Complete at least one battle
-2. Check `/leaderboard singles` (or doubles/multi)
-3. Verify database connection
-
-## Performance
-
-### Does CobbleRanked lag the server?
-
-**Performance impact:** Minimal
-
-- Database queries: Async (non-blocking)
-- Matchmaking: O(n) complexity (very fast)
-- Battle tracking: Lightweight event listeners
-
-**Typical overhead:** < 1% TPS impact
-
-### How many players can use CobbleRanked?
-
-**Limits:**
-- **Queue:** Thousands of players (tested up to 500 concurrent)
-- **Database:** Millions of player records (SQLite: 10K+, MySQL: unlimited)
-- **Cross-server:** No limit on server count
-
-**Bottlenecks:**
-- MySQL connection pool size (configurable)
-- Redis throughput (extremely high)
-
-### Database size concerns?
-
-**Typical sizes:**
-- 100 players: ~100 KB (SQLite)
-- 1,000 players: ~1 MB
-- 10,000 players: ~10 MB
-
-**Growth rate:** ~1 KB per player
-
-**Recommendation:** Use MySQL for 1000+ players.
-
-## Migration & Data
-
-### Can I reset all player stats?
-
-**Warning:** This is irreversible!
-
-**SQLite:**
-1. Stop server
-2. Delete `config/cobbleranked/ranked.db`
-3. Start server (new database created)
-
-**MySQL:**
-```sql
-TRUNCATE TABLE player_ranked_stats;
-TRUNCATE TABLE format_stats;
-```
-
-### Can I import stats from another system?
-
-Not natively, but possible with custom SQL:
-
-1. Export data from old system
-2. Convert to CobbleRanked format
-3. Insert into database
-
-Contact support for migration assistance.
-
-### How do I backup player data?
-
-**SQLite:**
-- Copy `config/cobbleranked/ranked.db`
-
-**MySQL:**
-```bash
-mysqldump -u username -p cobbleranked > backup.sql
-```
-
-**Recommendation:** Daily automatic backups!
-
-## Getting Help
-
-### Where can I get support?
-
-- **Documentation:** You're reading it!
-- **GitHub Issues:** [Report bugs](https://github.com/your-repo/issues)
-- **Discord:** [Join community](https://discord.gg/your-invite) (if available)
-
-### How do I report a bug?
-
-**Include:**
-1. CobbleRanked version
-2. Cobblemon version
-3. Steps to reproduce
-4. Console logs (`logs/latest.log`)
-5. Configuration files (if relevant)
-
-**GitHub:** [Create issue](https://github.com/your-repo/issues)
-
-### Can I request features?
-
-Yes! Use GitHub issues with `[Feature Request]` tag.
-
-**Popular requests:**
-- Ranked tournaments
-- Team battles (4v4, 6v6)
-- Custom rank titles
-- Discord integration
+</details>
 
 ---
 
-**Still have questions?** Check [Troubleshooting](troubleshooting.md) or ask in the community!
+## 🎮 Gameplay
+
+<details>
+<summary><strong>How does Elo rating work?</strong></summary>
+
+Elo is a skill-based rating system that adjusts based on your battle performance.
+
+**How it works:**
+- **Start:** 1000 Elo (default)
+- **Win:** Gain Elo (amount depends on opponent's rating)
+- **Lose:** Lose Elo (amount depends on opponent's rating)
+- **Higher Elo = Better rank**
+
+**Three systems available:**
+
+**1. LEGACY (Simple Random)**
+- Win: +10 to +30 points (random)
+- Loss: -10 to -30 points (random)
+
+**2. POKEMON_SHOWDOWN (Recommended)**
+- K-factor based calculation
+- Win against higher Elo = more points
+- Provisional period: First 10 matches use higher K-factor (faster adjustment)
+- Elo decay for inactive players
+
+**3. GLICKO2 (Advanced)**
+- Rating Deviation (RD) measures uncertainty
+- Volatility tracks rating stability
+- More accurate for competitive play
+- Recommended for serious ranked servers
+
+**Formula (Pokemon Showdown):**
+```
+Expected Score = 1 / (1 + 10^((Opponent Elo - Your Elo) / 400))
+New Elo = Old Elo + K * (Actual Score - Expected Score)
+```
+
+See [Elo System Guide](../features/elo-system.md) for detailed explanation.
+
+</details>
+
+<details>
+<summary><strong>Do stats reset each season?</strong></summary>
+
+**What resets:**
+- ✅ Reward collection flags (can claim rewards again)
+
+**What persists (does NOT reset):**
+- ✅ Elo rating (unless configured to reset)
+- ✅ Win/loss record (unless configured to reset)
+- ✅ Flee count
+- ✅ All match history
+
+**Configurable in config.json5:**
+```json5
+{
+  "ranked_match": {
+    "season_reset": {
+      "reset_elo": false,          // Set true to reset Elo
+      "reset_wins_losses": false   // Set true to reset W/L
+    }
+  }
+}
+```
+
+**Default:** Stats persist for long-term progression!
+
+</details>
+
+<details>
+<summary><strong>What happens if I disconnect during a battle?</strong></summary>
+
+**Immediate effects:**
+- **Flee count +1** (tracked permanently)
+- **Counts as loss** (Elo penalty applied)
+- **Opponent wins** (receives Elo gain)
+
+**Flee count tracking:**
+- Never decreases automatically
+- Visible in player stats
+- Admins can reset: `/rankedarena setflee <player> 0`
+
+**Disconnect penalties:**
+- Same for crashes and intentional disconnects (prevents abuse)
+- Contact admin to reset flee count if crash was legitimate
+
+**Prevention:**
+- Ensure stable connection before queuing
+- Don't queue during server restarts
+- Fix client crashes before playing ranked
+
+</details>
+
+<details>
+<summary><strong>Can I have different Elo for each format?</strong></summary>
+
+**Yes!** Each format has completely independent stats:
+
+**Per-Format Tracking:**
+- ✅ Separate Elo rating
+- ✅ Separate win/loss record
+- ✅ Separate leaderboard ranking
+- ✅ Separate rewards
+
+**Example player stats:**
+- **Singles:** 1450 Elo, 28W-14L (Rank #5)
+- **Doubles:** 1100 Elo, 8W-6L (Rank #23)
+- **Multi:** 1200 Elo, 15W-10L (Rank #12)
+
+**Why separate?**
+- Different formats require different skills
+- Encourages trying multiple formats
+- Fair competition within each format
+
+</details>
+
+<details>
+<summary><strong>How does matchmaking work?</strong></summary>
+
+**Matchmaking flow:**
+
+1. **Join queue** for a format (`/ranked` → select format)
+
+2. **Initial search** for opponent with similar Elo:
+   - Range: ±100 Elo (immediate match)
+   - Same format only (Singles vs Singles, etc.)
+
+3. **Dynamic range expansion** (if no match found):
+   - Every 30 seconds: Range expands by +5 Elo
+   - Max expansion: 3x initial range (±600 Elo)
+
+4. **Match found:**
+   - Both players notified
+   - Teleported to random arena
+   - Battle starts after 10-second countdown
+
+**Configuration:**
+
+```json5
+{
+  "matchmaking": {
+    "dynamicEloRange": {
+      "enabled": true,
+      "initialRange": 200,        // ±200 Elo initial
+      "expansionDelay": 30,        // Wait 30s before expanding
+      "expansionRate": 5,          // +5 Elo per second after delay
+      "maxMultiplier": 3.0,        // Max 3x initial range
+      "immediateMatchRange": 100   // ±100 Elo = instant match
+    }
+  }
+}
+```
+
+See [Ranked Battles](../features/ranked-battles.md) for details.
+
+</details>
+
+<details>
+<summary><strong>What is flee count and how does it work?</strong></summary>
+
+**Flee count** tracks how many times a player disconnected during ranked battles.
+
+**How it increases:**
+- +1 every time you disconnect during an active battle
+- Includes crashes, timeouts, and intentional disconnects
+- Same penalty for all disconnect types (prevents abuse)
+
+**How it's used:**
+- Visible in player stats
+- Helps identify rage quitters
+- Can be used for automated penalties (custom plugins)
+
+**Resetting flee count:**
+
+**Admin command:**
+```bash
+/rankedarena setflee <player> 0
+```
+
+**Never decreases automatically** to maintain integrity.
+
+**Legitimate crashes:**
+Contact an admin with:
+- Crash report
+- Server logs
+- Explanation
+
+</details>
+
+---
+
+## ⚔️ Battles
+
+<details>
+<summary><strong>My Pokemon is banned but it's not in the blacklist?</strong></summary>
+
+**Possible causes:**
+
+**1. Label-based ban:**
+
+Check `blacklist.json5` for label bans:
+```json5
+{
+  "black_list_labels": [
+    "legendary",  // Bans ALL legendary Pokemon
+    "mythical",
+    "ultra_beast"
+  ]
+}
+```
+
+If your Pokemon has a banned label, it's blocked even if not explicitly listed.
+
+**2. Move/ability/item ban:**
+
+Your Pokemon may have:
+- Banned move (e.g., "Fissure")
+- Banned ability (e.g., "Moody")
+- Banned held item (e.g., "Bright Powder")
+
+Check these sections in `blacklist.json5`:
+```json5
+{
+  "black_list_moves": ["Fissure", "Double Team"],
+  "black_list_ability": ["Moody", "Shadow Tag"],
+  "black_list_items_pokemon": ["Bright Powder"]
+}
+```
+
+**3. Special format restriction:**
+
+Check if special format is enabled:
+```json5
+{
+  "special_format": {
+    "enabled": true,
+    "format_type": "little_cup"  // Only first-stage Pokemon
+  }
+}
+```
+
+**Format types:**
+- `baby_cup` - Only Pokemon that can evolve
+- `little_cup` - Only base-form Pokemon
+- `monotype` - All Pokemon must share a type
+- `shiny_only` - Only shiny Pokemon
+- `dex_range` - Specific National Dex range
+- `nfe` - Not Fully Evolved only
+
+**4. Config not reloaded:**
+
+Reload configuration:
+```bash
+/rankedarena reload
+```
+
+**Debug:**
+```bash
+/ranked  # Try to queue and see validation error message
+```
+
+</details>
+
+<details>
+<summary><strong>Battle ends in draw every time?</strong></summary>
+
+**Cause:** Turn limit reached before either player won.
+
+**Solution:** Increase turn limit in `config.json5`:
+
+```json5
+{
+  "battle": {
+    "maxTurns": 200  // Increase from default 100
+  }
+}
+```
+
+**Recommended limits:**
+- **Singles:** 100-150 turns
+- **Doubles:** 150-200 turns (battles end faster)
+- **Stall teams:** 300+ turns
+
+**Check turn count:**
+Battle logs show: `"Battle ended after {N} turns"`
+
+**Alternative:** Use time limit instead of turn limit (custom plugin required).
+
+</details>
+
+<details>
+<summary><strong>Can I use Mega Evolution/Z-Moves/Terastallization?</strong></summary>
+
+**Mega Evolution:** Supported by Cobblemon
+
+**Z-Moves:** Not yet implemented in Cobblemon
+
+**Terastallization:** Not yet implemented in Cobblemon
+
+**Configuration (when available):**
+```json5
+{
+  "competitive": {
+    "allowMegaEvolution": true,   // Enable/disable Mega
+    "allowZMoves": false,          // Future feature
+    "allowTeraType": false         // Future feature
+  }
+}
+```
+
+**Current limitations:** Depends on Cobblemon's battle system implementation.
+
+</details>
+
+<details>
+<summary><strong>Level scaling not working?</strong></summary>
+
+**Verify configuration:**
+
+```json5
+{
+  "battle": {
+    "levelMatch": 70  // All Pokemon forced to level 70
+  }
+}
+```
+
+**Troubleshooting:**
+
+1. **Reload config:**
+   ```bash
+   /rankedarena reload
+   ```
+
+2. **Check console for errors:**
+   ```bash
+   tail -f logs/latest.log | grep level
+   ```
+
+3. **Verify Cobblemon version:**
+   ```bash
+   /mod list | grep Cobblemon
+   ```
+   Requires Cobblemon 1.7.0+
+
+4. **Test in battle:**
+   - Join ranked queue
+   - Check Pokemon levels during battle
+   - Should show `Lv. 70` regardless of actual level
+
+**Still broken?** See [Troubleshooting](troubleshooting.md).
+
+</details>
+
+---
+
+## 🏟️ Arenas
+
+<details>
+<summary><strong>How many arenas should I create?</strong></summary>
+
+**Recommendations:**
+
+**Minimum:** 1 arena
+- For testing only
+- Not recommended for production
+
+**Ideal:** 3-5 arenas
+- Provides variety
+- Not overwhelming
+- Easy to maintain
+
+**Maximum:** 10+ arenas
+- Large servers only
+- Requires good organization
+- 20+ arenas is overkill
+
+**Quality > Quantity:**
+- 3 great arenas > 10 mediocre arenas
+- Theme each arena (forest, desert, ocean, etc.)
+- Ensure balanced terrain (no advantage for either player)
+
+</details>
+
+<details>
+<summary><strong>Can arenas be in different dimensions?</strong></summary>
+
+**Yes!** Arenas support all dimensions:
+
+**Vanilla dimensions:**
+- Overworld (`minecraft:overworld`)
+- Nether (`minecraft:the_nether`)
+- End (`minecraft:the_end`)
+
+**Custom dimensions:**
+- Any dimension added by mods
+- Twilight Forest
+- Aether
+- Custom world gen mods
+
+**Example setup:**
+
+Create arena in Nether:
+```bash
+# In Nether dimension
+/rankedarena setArena nether_arena pos1
+# Move to opposite corner
+/rankedarena setArena nether_arena pos2
+```
+
+**Important:**
+- Set exit location in Overworld (or main lobby)
+- Players teleport to exit after battle, not back to queue location
+
+</details>
+
+<details>
+<summary><strong>Players spawn in walls/underground?</strong></summary>
+
+**Fix steps:**
+
+1. **Stand at correct spawn point:**
+   - At ground level (not floating or underground)
+   - Clear 3x3 area around spawn
+   - No blocks above head
+
+2. **Re-create arena positions:**
+   ```bash
+   /rankedarena setArena arena_name pos1
+   # Move to opposite corner
+   /rankedarena setArena arena_name pos2
+   ```
+
+3. **Verify Y coordinate:**
+   - Use F3 debug screen
+   - Y should be at ground level (not air or inside blocks)
+
+4. **Test arena:**
+   ```bash
+   /rankedarena teleportArena arena_name
+   ```
+   Verifies spawn point is safe.
+
+**Prevention:**
+- Use flat, even terrain
+- Build proper battle platforms
+- Test arenas before enabling for players
+
+</details>
+
+<details>
+<summary><strong>How do I protect arenas from griefing?</strong></summary>
+
+**WorldGuard (recommended):**
+
+```bash
+# Create region
+/region define arena_name
+
+# Set flags
+/region flag arena_name build deny           # No breaking/placing
+/region flag arena_name pvp deny             # No PvP damage
+/region flag arena_name mob-spawning deny    # No mob spawns
+/region flag arena_name enderman-grief deny  # No enderman griefing
+/region flag arena_name creeper-explosion deny
+```
+
+**GriefPrevention:**
+
+```bash
+# Create claim at arena
+/claim
+
+# Trust only admins
+/trust public
+```
+
+**Other protection mods:** Similar commands, check mod documentation.
+
+**Important:** Protection mods don't interfere with Cobblemon battles!
+
+See [Arena Configuration](../configuration/arenas.md).
+
+</details>
+
+---
+
+## 🌐 Cross-Server
+
+<details>
+<summary><strong>Do I need Redis for cross-server?</strong></summary>
+
+**Short answer:** No, but strongly recommended.
+
+**MySQL (Required):**
+- ✅ Shares player data across servers
+- ✅ Stores Elo, wins, losses
+- ✅ Synchronizes seasons
+- ✅ Handles rewards
+
+**Redis (Optional but recommended):**
+- ✅ Real-time queue synchronization
+- ✅ Instant matchmaking across servers
+- ✅ Faster than database polling
+- ✅ Reduces MySQL load
+
+**Without Redis:**
+- ❌ Queue updates slower (5-10 second delay)
+- ❌ Higher database load
+- ❌ Matchmaking less responsive
+- ✅ But still works!
+
+**Recommendation:** Use Redis for 2+ servers.
+
+</details>
+
+<details>
+<summary><strong>Can I have multiple battle servers?</strong></summary>
+
+**❌ NO!** Only **ONE** server should be the battle server.
+
+**Correct configuration:**
+
+**Battle Server (battle1):**
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "battle1",
+    "battle_server": ""  // EMPTY = This IS the battle server
+  }
+}
+```
+
+**Lobby Server (lobby1):**
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "lobby1",
+    "battle_server": "battle1"  // Points to battle server
+  }
+}
+```
+
+**Why only one?**
+- ❌ Prevents duplicate season management
+- ❌ Avoids conflicting matchmaking
+- ❌ Single source of truth for rankings
+
+**Error detection:**
+If multiple battle servers detected, CobbleRanked logs:
+```
+CRITICAL ERROR: Multiple Battle Servers Detected!
+FIX: Only ONE server should have battle_server: ""
+```
+
+See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
+
+</details>
+
+<details>
+<summary><strong>How do I migrate SQLite to MySQL?</strong></summary>
+
+**Prerequisites:**
+
+1. **Configure MySQL** in `config.json5`:
+   ```json5
+   {
+     "cross_server": {
+       "enabled": true,
+       "mysql": {
+         "host": "localhost",
+         "database": "cobbleranked",
+         "username": "your_username",
+         "password": "your_password"
+       }
+     }
+   }
+   ```
+
+2. **Create MySQL database:**
+   ```sql
+   CREATE DATABASE cobbleranked;
+   CREATE USER 'cobbleranked'@'%' IDENTIFIED BY 'your_password';
+   GRANT ALL PRIVILEGES ON cobbleranked.* TO 'cobbleranked'@'%';
+   FLUSH PRIVILEGES;
+   ```
+
+3. **Test MySQL connection:**
+   ```bash
+   mysql -u cobbleranked -p -h localhost cobbleranked
+   ```
+
+**Migration:**
+
+```bash
+/rankedarena database migrate sqlite mysql
+```
+
+**What's migrated:**
+- ✅ All player stats (Elo, wins, losses)
+- ✅ Format-specific stats (Singles, Doubles, Multi)
+- ✅ Season data
+- ✅ Reward collection flags
+
+**Backup created:**
+- SQLite file renamed to `ranked.db.backup`
+- Rollback possible if needed
+
+**Verify migration:**
+```bash
+/stats YourUsername
+```
+
+See [Database Migration](../advanced/database.md).
+
+</details>
+
+<details>
+<summary><strong>Cross-server stats not syncing?</strong></summary>
+
+**Troubleshooting checklist:**
+
+**1. MySQL connection:**
+```bash
+mysql -u username -p -h host database
+```
+If fails, check:
+- Host/port correct?
+- Firewall allows port 3306?
+- MySQL user has permissions?
+
+**2. Config verification:**
+```json5
+{
+  "cross_server": {
+    "enabled": true,  // Must be true!
+    "mysql": {
+      "host": "correct_ip_here",
+      "database": "cobbleranked",
+      "username": "correct_user",
+      "password": "correct_password"
+    }
+  }
+}
+```
+
+**3. All servers use same database:**
+- Check every server's `config.json5`
+- Must connect to SAME MySQL instance
+- Same database name
+
+**4. Restart all servers:**
+```bash
+/stop  # On each server
+# Restart all servers
+```
+
+**5. Test sync:**
+```bash
+# On server 1:
+/setelo gashi 1500 SINGLES
+
+# On server 2:
+/stats gashi
+```
+Should show 1500 Elo.
+
+**Still broken?** Check [Troubleshooting](troubleshooting.md).
+
+</details>
+
+---
+
+## 🎁 Rewards
+
+<details>
+<summary><strong>Rewards not giving items?</strong></summary>
+
+**Common issues:**
+
+**1. Placeholder syntax:**
+
+**❌ Wrong:**
+```json5
+"commands": [
+  "give {player} diamond 64"  // Missing minecraft: prefix
+]
+```
+
+**✅ Correct:**
+```json5
+"commands": [
+  "give {player} minecraft:diamond 64"
+]
+```
+
+**2. Player already collected:**
+
+Rewards only given once per season.
+
+Check if already collected:
+```bash
+/rankedarena season info
+```
+
+Reset for testing:
+```sql
+-- MySQL only
+UPDATE format_stats SET reward_flags = '[]' WHERE player_uuid = '<uuid>';
+```
+
+**3. Reward disabled:**
+
+```json5
+{
+  "season_rewards": {
+    "singles": {
+      "rank_1": {
+        "rank_range": "1",
+        // Missing or set to false
+        "enabled": true  // MUST BE TRUE
+      }
+    }
+  }
+}
+```
+
+**4. Command requires permissions/plugin:**
+
+Example: Economy command requires economy plugin
+```json5
+"commands": [
+  "eco give {player} 1000"  // Requires EssentialsX or similar
+]
+```
+
+**Test rewards:**
+```bash
+/give @p minecraft:diamond 64  # Test command manually
+```
+
+</details>
+
+<details>
+<summary><strong>Can I use custom commands in rewards?</strong></summary>
+
+**Yes!** Any server command works.
+
+**Examples:**
+
+**Economy:**
+```json5
+"commands": [
+  "eco give {player} 1000",  // EssentialsX
+  "money give {player} 1000"  // Other economy plugins
+]
+```
+
+**Permissions:**
+```json5
+"commands": [
+  "lp user {player} permission set vip.rank true",  // LuckPerms
+  "pex user {player} add vip.rank"  // PermissionsEx
+]
+```
+
+**Teleportation:**
+```json5
+"commands": [
+  "tp {player} 100 64 200",
+  "warp {player} vip_area"
+]
+```
+
+**Announcements:**
+```json5
+"commands": [
+  "broadcast &6{player} &ehas reached &aRank #1&e!",
+  "title @a title {\"text\":\"New Champion!\",\"color\":\"gold\"}"
+]
+```
+
+**Custom plugin commands:**
+```json5
+"commands": [
+  "customplugin reward {player} legendary_key",
+  "crate give {player} legendary 1"
+]
+```
+
+**Available placeholders:**
+- `{player}` - Player username
+- `{elo}` - Player's current Elo
+- `{rank}` - Player's rank position
+- `{format}` - Battle format (SINGLES/DOUBLES/MULTI)
+
+</details>
+
+<details>
+<summary><strong>What's the difference between season rewards and milestone rewards?</strong></summary>
+
+**Season Rewards:**
+
+**When given:** End of season (automatic rotation or admin command)
+
+**Who gets them:** Top-ranked players only
+
+**Based on:** Leaderboard position
+
+**Example:**
+```json5
+{
+  "season_rewards": {
+    "singles": {
+      "rank_1": {
+        "rank_range": "1",  // 1st place only
+        "commands": ["give {player} minecraft:diamond 64"]
+      },
+      "rank_2_3": {
+        "rank_range": "2-3",  // 2nd and 3rd place
+        "commands": ["give {player} minecraft:gold_ingot 32"]
+      }
+    }
+  }
+}
+```
+
+**Milestone Rewards:**
+
+**When given:** Immediately upon reaching milestone
+
+**Who gets them:** Any player who reaches the milestone
+
+**Based on:** Total stats (wins, matches played, Elo reached)
+
+**Example:**
+```json5
+{
+  "milestone_rewards": {
+    "singles": {
+      "wins_10": {
+        "type": "WINS",
+        "requirement": 10,  // 10 wins total
+        "commands": ["give {player} minecraft:gold_ingot 10"]
+      },
+      "elo_1500": {
+        "type": "ELO",
+        "requirement": 1500,  // Reach 1500 Elo
+        "commands": ["give {player} minecraft:diamond 3"]
+      }
+    }
+  }
+}
+```
+
+**Comparison:**
+
+| Feature | Season Rewards | Milestone Rewards |
+|---------|---------------|------------------|
+| **Timing** | End of season | Immediate |
+| **Who gets** | Top 3-25 players | Anyone who qualifies |
+| **Based on** | Rank position | Total stats |
+| **Repeatable** | Every season | Once per milestone |
+| **Competitiveness** | High (top players only) | Low (anyone can earn) |
+
+**Both can be configured independently!**
+
+</details>
+
+---
+
+**Still have questions?** Check [Troubleshooting](troubleshooting.md) or open a [GitHub Issue](https://github.com/gqrshy/CobbleRanked/issues)!
