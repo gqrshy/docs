@@ -4,5 +4,9 @@ structure:
   readme: README.md
   summary: SUMMARY.md
 
+# Space configuration
+title: Gashi Studios
+description: Official documentation for Gashi Studios mods
+
 redirects:
   previous/page: new-folder/page.md
