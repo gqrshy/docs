@@ -1,41 +1,51 @@
 # Table of contents
 
-* [Welcome](README.md)
+* [Gashi Studios Home](README.md)
 
-## Getting Started
+## CobbleRanked
 
-* [Installation](getting-started/installation.md)
-* [Quick Start Guide](getting-started/quick-start.md)
-* [Commands & Permissions](getting-started/commands.md)
+* [Welcome to CobbleRanked](cobbleranked/README.md)
 
-## Configuration
+### Getting Started
 
-* [Configuration Overview](configuration/README.md)
-* [Main Configuration](configuration/config.md)
-* [Blacklist System](configuration/blacklist.md)
-* [Arena Setup](configuration/arenas.md)
-* [Rewards System](configuration/rewards.md)
-* [Language Files](configuration/languages.md)
-* [GUI Customization](configuration/gui.md)
+* [Installation](cobbleranked/getting-started/installation.md)
+* [Quick Start Guide](cobbleranked/getting-started/quick-start.md)
+* [Commands & Permissions](cobbleranked/getting-started/commands.md)
 
-## Features
+### Configuration
 
-* [Ranked Battles](features/ranked-battles.md)
-* [Elo Rating System](features/elo-system.md)
-* [Season Management](features/seasons.md)
-* [Battle Formats](features/battle-formats.md)
-* [Leaderboards](features/leaderboards.md)
-* [Rewards & Milestones](features/rewards.md)
+* [Configuration Overview](cobbleranked/configuration/README.md)
+* [Main Configuration](cobbleranked/configuration/config.md)
+* [Blacklist System](cobbleranked/configuration/blacklist.md)
+* [Arena Setup](cobbleranked/configuration/arenas.md)
+* [Rewards System](cobbleranked/configuration/rewards.md)
+* [Language Files](cobbleranked/configuration/languages.md)
+* [GUI Customization](cobbleranked/configuration/gui.md)
 
-## Advanced
+### Features
 
-* [Cross-Server Setup](advanced/cross-server.md)
-* [Database Configuration](advanced/database.md)
-* [Redis Integration](advanced/redis.md)
-* [Migration Guide](advanced/migration.md)
+* [Ranked Battles](cobbleranked/features/ranked-battles.md)
+* [Elo Rating System](cobbleranked/features/elo-system.md)
+* [Season Management](cobbleranked/features/seasons.md)
+* [Battle Formats](cobbleranked/features/battle-formats.md)
+* [Leaderboards](cobbleranked/features/leaderboards.md)
+* [Rewards & Milestones](cobbleranked/features/rewards.md)
 
-## Support
+### Advanced
 
-* [Troubleshooting](support/troubleshooting.md)
-* [FAQ](support/faq.md)
-* [API Reference](support/api.md)
+* [Cross-Server Setup](cobbleranked/advanced/cross-server.md)
+* [Database Configuration](cobbleranked/advanced/database.md)
+* [Redis Integration](cobbleranked/advanced/redis.md)
+* [Migration Guide](cobbleranked/advanced/migration.md)
+
+### Support
+
+* [Troubleshooting](cobbleranked/support/troubleshooting.md)
+* [FAQ](cobbleranked/support/faq.md)
+* [API Reference](cobbleranked/support/api.md)
+
+---
+
+## Future Mods
+
+_More mods coming soon!_
