@@ -42,15 +42,36 @@ Cobblemon向けの競技ランクバトルシステム
 
 ## 📄 License
 
-すべてのModは **All Rights Reserved** ライセンスの下で公開されています。
+**CobbleRanked is licensed, not sold.**
 
-- ✅ **個人利用**: 自由に使用可能
-- ✅ **サーバー利用**: 自由に使用可能（規模問わず）
-- ✅ **改変**: 個人的な改変は可能（再配布は不可）
-- ❌ **商用利用**: 事前の許可が必要
-- ❌ **再配布**: 許可なく再配布することは禁止
+All rights, title, and interest in this mod, including its source code and assets, remain the sole property of **@gashi**.
 
-商用利用や特別なライセンスが必要な場合は、お問い合わせください。
+### ✅ Permitted Use
+
+- **Personal use**: Play on your own Minecraft client
+- **Server use**: Install on your Minecraft server (any size, non-commercial)
+
+### ❌ Strictly Prohibited
+
+You are **strictly prohibited** from:
+
+- **Reverse engineering, decompiling, or disassembling** this software
+- **Modifying, redistributing, or reusing** any part of this software without written permission
+- **Creating derivative works** or incorporating this software into other mods
+- **Using components** of this software in other projects
+- **Selling, sublicensing, or distributing** this software without explicit authorization
+
+### ⚖️ Ownership
+
+All rights, title, and interest in this mod, including its source code and assets, remain the sole property of **@gashi**.
+
+### ⚠️ Disclaimer
+
+This software is provided **"as is"**, without warranty of any kind. The developer shall not be held liable for any damages arising from its use.
+
+### 📧 Special Licensing
+
+Commercial use or special licensing requests should be directed to: **garshy.gaming@gmail.com**
 
 ## 🛠️ Services
 
