@@ -51,36 +51,6 @@ Before contacting support, check the documentation:
 - **[FAQ](cobbleranked/support/faq.md)** - Frequently asked questions
 - **[Configuration](cobbleranked/configuration/config.md)** - All configuration options
 
-## 🛠️ Services
-
-### Server Setup ($10+)
-
-Need help setting up a CobbleRanked server? I offer professional setup services:
-
-**Included:**
-- Full CobbleRanked installation and configuration
-- Arena creation and blacklist setup
-- Cross-server configuration (MySQL + Redis)
-- Performance optimization
-- Custom reward system setup
-
-**Pricing:**
-- Basic Setup: $10 (single server, basic config)
-- Advanced Setup: $25 (cross-server, custom features)
-- Enterprise Setup: $50+ (multiple servers, full customization)
-
-**Contact**: garshy.gaming@gmail.com with subject "Server Setup Request"
-
-### Server Hosting (Friends Only)
-
-24/7 server hosting for:
-- Minecraft (with CobbleRanked)
-- Palworld
-- Rust
-- Counter-Strike 2
-
-**Currently available to friends only.** Contact for availability.
-
 ## 💰 Support Development
 
 If you enjoy CobbleRanked and want to support development:
