@@ -121,12 +121,27 @@ Your privacy is important:
 
 ---
 
-## FAQ Quick Links
+## Quick Links
 
-**Common questions:**
-- [How do I install CobbleRanked?](cobbleranked/getting-started/installation.md)
-- [How do I ban legendary Pokemon?](cobbleranked/configuration/blacklist.md)
-- [How does the Elo system work?](cobbleranked/features/elo-system.md)
-- [Can I use this commercially?](terms.md)
+**Getting Started:**
+- [Installation Guide](cobbleranked/getting-started/installation.md)
+- [Quick Start](cobbleranked/getting-started/quick-start.md)
+- [Commands Reference](cobbleranked/getting-started/commands.md)
+- [Migration Guide](cobbleranked/getting-started/migration.md)
+
+**Configuration:**
+- [Blacklist Configuration](cobbleranked/configuration/blacklist.md)
+- [Rewards System](cobbleranked/configuration/rewards.md)
+- [GUI Customization](cobbleranked/configuration/gui.md)
+
+**Features:**
+- [Elo Rating System](cobbleranked/features/elo-system.md)
+- [Battle Formats](cobbleranked/features/battle-formats.md)
+- [Seasons](cobbleranked/features/seasons.md)
+
+**Support:**
+- [FAQ](cobbleranked/support/faq.md)
+- [Troubleshooting](cobbleranked/support/troubleshooting.md)
+- [Terms and Conditions](terms.md)
 
 **Still need help?** Don't hesitate to reach out using the contact methods above!

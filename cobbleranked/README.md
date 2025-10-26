@@ -9,9 +9,10 @@
 ## Features
 
 ### 🏆 Competitive Ranking System
-- **Elo Rating System** - Two modes available:
+- **Elo Rating System** - Three modes available:
   - Legacy random point system
   - Pokemon Showdown-style K-factor calculation
+  - Glicko-2 advanced rating system
 - **Multiple Battle Formats** - Singles and Doubles with independent rankings
 - **Seasonal Leaderboards** - Automatic season rotation with customizable duration
 
@@ -47,28 +48,44 @@
 
 <table>
 <tr>
-<td width="33%">
+<td width="25%">
 
 ### 🚀 Getting Started
-- [Installation Guide](getting-started/installation.md)
+- [Installation](getting-started/installation.md)
 - [Quick Start](getting-started/quick-start.md)
 - [Commands](getting-started/commands.md)
+- [Migration Guide](getting-started/migration.md)
 
 </td>
-<td width="33%">
+<td width="25%">
 
 ### ⚙️ Configuration
 - [Main Config](configuration/config.md)
-- [Blacklist Setup](configuration/blacklist.md)
-- [Arena Config](configuration/arenas.md)
+- [Blacklist System](configuration/blacklist.md)
+- [Arena Setup](configuration/arenas.md)
+- [Rewards](configuration/rewards.md)
+- [Languages](configuration/languages.md)
+- [GUI Customization](configuration/gui.md)
 
 </td>
-<td width="33%">
+<td width="25%">
 
-### 📚 Advanced
+### 🎮 Features
+- [Ranked Battles](features/ranked-battles.md)
+- [Elo Rating System](features/elo-system.md)
+- [Battle Formats](features/battle-formats.md)
+- [Seasons](features/seasons.md)
+- [Leaderboards](features/leaderboards.md)
+
+</td>
+<td width="25%">
+
+### 📚 Advanced & Support
 - [Cross-Server Setup](advanced/cross-server.md)
-- [Database Config](advanced/database.md)
+- [Database Management](advanced/database.md)
+- [Redis Configuration](advanced/redis.md)
 - [Troubleshooting](support/troubleshooting.md)
+- [FAQ](support/faq.md)
 
 </td>
 </tr>
