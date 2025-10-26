@@ -1,111 +1,56 @@
 # Gashi Studios
 
-**雑食ゲーマー兼クリエイター | Omnivorous Gamer & Creator**
+**Omnivorous Gamer & Creator**
 
-こんにちは！Gashiです。愛知県出身、東京在住の20歳のゲーマー兼開発者です。
+Hi! I'm Gashi, a 20-year-old gamer and developer from Aichi, Japan, currently based in Tokyo.
 
-13年間のMinecraftプレイ経験と、20以上のサーバー公開実績を活かして、Cobblemon向けのModを開発しています。
+With 13 years of Minecraft experience and 20+ published servers, I create mods for Cobblemon to enhance competitive gameplay.
 
 ## 🎮 About Me
 
-- **Experience**: Minecraft歴13年、20+サーバー公開
-- **Specialization**: サーバー構築、Mod開発、インフラ管理
+- **Experience**: 13 years of Minecraft, 20+ servers published
+- **Specialization**: Server infrastructure, mod development, competitive systems
 - **Tech Stack**: Java, Python, JavaScript, MySQL, Redis, Azure
-- **Gaming**: FPS全般、競技性のあるゲームが好き
+- **Gaming**: FPS enthusiast, competitive gaming
 
-## 📦 My Mods
-
-すべてのModは**個人利用・サーバー利用ともに無料**です。商用利用については個別にご相談ください。
+## 📦 Mods
 
 ### CobbleRanked
 
-Cobblemon向けの競技ランクバトルシステム
+A comprehensive competitive ranked battle system for Cobblemon servers.
 
-**主な機能:**
-- 🏆 Eloレーティングシステム
-- ⚔️ 複数のバトル形式（シングル、ダブル）
-- 📊 シーズン制のリーダーボード
-- 🌍 クロスサーバー対応（MySQL + Redis）
+**Features:**
+- 🏆 Elo-based matchmaking system
+- ⚔️ Multiple battle formats (Singles, Doubles)
+- 📊 Seasonal leaderboards with automatic rotation
+- 🚫 Customizable Pokemon/move/ability restrictions
+- 🌍 Cross-server support (MySQL + Redis)
 
-**[ドキュメントを見る →](cobbleranked/)**
+**[View Documentation →](cobbleranked/)**
 
-**ダウンロード:**
+**Download:**
 - [GitHub Releases](https://github.com/gqrshy/CobbleRanked/releases)
-- Modrinth _(準備中)_
-- CurseForge _(準備中)_
+- Modrinth _(coming soon)_
+- CurseForge _(coming soon)_
 
 ---
 
-### 🔜 今後のMod
-
-新しいCobblemon拡張Modを開発中です。お楽しみに！
-
-## 📄 License
-
-**CobbleRanked is licensed, not sold.**
-
-All rights, title, and interest in this mod, including its source code and assets, remain the sole property of **@gashi**.
-
-### ✅ Permitted Use
-
-- **Personal use**: Play on your own Minecraft client
-- **Server use**: Install on your Minecraft server (any size, non-commercial)
-
-### ❌ Strictly Prohibited
-
-You are **strictly prohibited** from:
-
-- **Reverse engineering, decompiling, or disassembling** this software
-- **Modifying, redistributing, or reusing** any part of this software without written permission
-- **Creating derivative works** or incorporating this software into other mods
-- **Using components** of this software in other projects
-- **Selling, sublicensing, or distributing** this software without explicit authorization
-
-### ⚖️ Ownership
-
-All rights, title, and interest in this mod, including its source code and assets, remain the sole property of **@gashi**.
-
-### ⚠️ Disclaimer
-
-This software is provided **"as is"**, without warranty of any kind. The developer shall not be held liable for any damages arising from its use.
-
-### 📧 Special Licensing
-
-Commercial use or special licensing requests should be directed to: **garshy.gaming@gmail.com**
-
-## 🛠️ Services
-
-### サーバーセットアップ代行（$10～）
-
-Minecraftサーバーの構築を代行します：
-- Mod/プラグインのインストールと設定
-- プロキシサーバーの構築
-- パフォーマンス最適化
-- クロスサーバー構成
-
-### サーバーレンタル（友人限定）
-
-Minecraft、Palworld、Rust、CS2などのゲームサーバーを24/7稼働でレンタル可能です。
-
 ## 📞 Contact
 
-質問、バグ報告、依頼などはこちらまで：
+Questions, bug reports, or inquiries:
 
 - **Discord**: [@gashicha](https://discord.com)
 - **Email**: [garshy.gaming@gmail.com](mailto:garshy.gaming@gmail.com)
 - **GitHub**: [github.com/gqrshy](https://github.com/gqrshy)
 
-### Support
+## 💰 Support Development
 
-- 💬 [GitHub Issues](https://github.com/gqrshy/CobbleRanked/issues) - バグ報告・機能リクエスト
-- 📖 [CobbleRanked Docs](cobbleranked/) - 詳細なドキュメント
+If you enjoy my mods and want to support development:
 
-## 💰 Donations
+- **PayPal**: [paypal.me/gashicha](https://paypal.me/gashicha)
 
-開発を応援してくれる方はこちらから：
-- **PayPal**: [PayPal.me](https://paypal.me/gqrshy) _(リンクを更新してください)_
-- **PayPay**: _(IDを追加してください)_
+Your support helps with continued development, server infrastructure, and new features.
 
 ---
 
-**Powered by Cobblemon** • すべてのModはCobblemonの素晴らしいコミュニティに感謝を込めて。
+**Powered by Cobblemon** • All mods are made with appreciation for the amazing Cobblemon community.

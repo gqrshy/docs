@@ -85,8 +85,7 @@ Need help setting up a CobbleRanked server? I offer professional setup services:
 
 If you enjoy CobbleRanked and want to support development:
 
-- **PayPal**: [PayPal.me/gqrshy](https://paypal.me/gqrshy)
-- **PayPay**: (Contact for details)
+- **PayPal**: [paypal.me/gashicha](https://paypal.me/gashicha)
 
 Your support helps with:
 - Continued development and updates
