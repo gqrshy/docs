@@ -174,7 +174,6 @@ Let's run through a complete battle flow!
 2. **Select battle format:**
    - Singles (1v1)
    - Doubles (2v2)
-   - Multi (2v2 singles format)
 
 3. **Join the queue** by clicking the queue button
 

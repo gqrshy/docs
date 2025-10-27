@@ -267,36 +267,153 @@ Clauses are competitive battle rules:
 ```json5
 {
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //  COMPETITIVE SETTINGS
+  //  COMPETITIVE INTEGRITY
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   "competitive": {
-    "allowTeraType": true,               // Allow Terastallization
-    "allowMegaEvolution": true,          // Allow Mega Evolution
-    "allowZMoves": true,                 // Allow Z-Moves
-    "allowDynamax": false,               // Allow Dynamax/Gigantamax
-    "requireOriginalTrainer": true,      // Must be OT of Pokemon
-    "allowLegends": false,               // Allow legendary Pokemon
-    "teamSize": 6                        // Required party size
+    "syncLocalQueue": true,              // Sync queue with Redis (cross-server)
+    "preventDuplicatePenalty": true,     // Prevent duplicate disconnect penalties
+    "asyncSeasonManager": true,          // Use async season management
+    "pendingMatchTimeout": 30,           // Timeout for pending matches (seconds)
+    "cleanupResources": true,            // Clean up resources after battle
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  Flee Penalty System
+    // ─────────────────────────────────────────────────────────────────────────
+
+    "flee_penalty": {
+      "tiers": [
+        {
+          "flee_min": 1,
+          "flee_max": 5,
+          "penalty_minutes": 5          // 5 minute queue ban
+        },
+        {
+          "flee_min": 6,
+          "flee_max": 10,
+          "penalty_minutes": 15         // 15 minute queue ban
+        },
+        {
+          "flee_min": 11,
+          "flee_max": 999,
+          "penalty_minutes": 30         // 30 minute queue ban
+        }
+      ]
+    },
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  Flee Count Decay System
+    // ─────────────────────────────────────────────────────────────────────────
+
+    "flee_decay": {
+      "enabled": true,                   // Enable automatic flee count reduction
+      "decay_rate": 1,                   // Reduce flee count by this amount per interval
+      "decay_interval_hours": 24         // Reduce flee count every 24 hours
+    }
   }
 }
 ```
 
-#### Competitive Rules
+#### Competitive Integrity Settings
 
 | Field | Default | Description |
 |-------|---------|-------------|
-| `allowTeraType` | true | Enable Terastallization (Gen 9) |
-| `allowMegaEvolution` | true | Enable Mega Evolution (Gen 6+) |
-| `allowZMoves` | true | Enable Z-Moves (Gen 7) |
-| `allowDynamax` | false | Enable Dynamax/Gigantamax (Gen 8) |
-| `requireOriginalTrainer` | true | Player must be OT (prevents traded teams) |
-| `allowLegends` | false | Allow legendary Pokemon (overrides blacklist) |
-| `teamSize` | 6 | Required number of Pokemon in party |
+| `syncLocalQueue` | true | Synchronize local queue with Redis (cross-server mode) |
+| `preventDuplicatePenalty` | true | Prevent duplicate disconnect penalties |
+| `asyncSeasonManager` | true | Use async season management (recommended) |
+| `pendingMatchTimeout` | 30 | Seconds before auto-canceling pending matches |
+| `cleanupResources` | true | Clean up battle resources after completion |
 
-**Note:** These settings work alongside [blacklist.json5](blacklist.md). For example:
-- `allowLegends: false` + blacklist with `"legendary"` = double restriction
-- `allowTeraType: false` = Terastallization disabled even if Pokemon can Tera
+---
+
+#### Flee Penalty System
+
+Configurable queue ban tiers for players who disconnect during battles.
+
+| Field | Description |
+|-------|-------------|
+| `flee_min` | Minimum flee count for this tier |
+| `flee_max` | Maximum flee count for this tier |
+| `penalty_minutes` | Queue ban duration in minutes |
+
+**Default tiers:**
+- **1-5 flee count**: 5 minute queue ban
+- **6-10 flee count**: 15 minute queue ban
+- **11+ flee count**: 30 minute queue ban
+
+**Customization examples:**
+
+**Lenient server:**
+```json5
+"flee_penalty": {
+  "tiers": [
+    { "flee_min": 1, "flee_max": 3, "penalty_minutes": 0 },    // No penalty for first 3
+    { "flee_min": 4, "flee_max": 10, "penalty_minutes": 5 },   // 5 min for 4-10
+    { "flee_min": 11, "flee_max": 999, "penalty_minutes": 15 } // 15 min for 11+
+  ]
+}
+```
+
+**Strict server:**
+```json5
+"flee_penalty": {
+  "tiers": [
+    { "flee_min": 1, "flee_max": 2, "penalty_minutes": 10 },   // 10 min for first 2
+    { "flee_min": 3, "flee_max": 5, "penalty_minutes": 30 },   // 30 min for 3-5
+    { "flee_min": 6, "flee_max": 999, "penalty_minutes": 60 }  // 60 min for 6+
+  ]
+}
+```
+
+---
+
+#### Flee Decay System
+
+Automatically reduces flee count over time to forgive past disconnects.
+
+| Field | Default | Description |
+|-------|---------|-------------|
+| `enabled` | true | Enable automatic flee count decay |
+| `decay_rate` | 1 | Flee count reduction per interval |
+| `decay_interval_hours` | 24 | Hours between decay intervals |
+
+**How decay works:**
+- Decay is calculated based on **time elapsed**, not player activity
+- Works **offline** - decay accumulates even when player is not logged in
+- When flee count reaches 0, all queue bans are cleared
+- Decay happens automatically when checking penalties or incrementing flee count
+
+**Example scenarios:**
+
+**Default (decay_rate: 1, decay_interval_hours: 24):**
+- Player has flee count = 10
+- After 24 hours → flee count = 9
+- After 48 hours → flee count = 8
+- After 10 days (240 hours) → flee count = 0
+
+**Faster decay (decay_rate: 2, decay_interval_hours: 12):**
+- Player has flee count = 10
+- After 12 hours → flee count = 8
+- After 24 hours → flee count = 6
+- After 2.5 days (60 hours) → flee count = 0
+
+**Slower decay (decay_rate: 1, decay_interval_hours: 168):**
+- Player has flee count = 10
+- After 1 week → flee count = 9
+- After 2 weeks → flee count = 8
+- After 10 weeks → flee count = 0
+
+**Disabled decay:**
+```json5
+"flee_decay": {
+  "enabled": false  // Flee count never decreases (old behavior)
+}
+```
+
+**⚠️ Important notes:**
+- Decay does **not** reset when flee count increases (new disconnects)
+- Decay timer continues running even during queue bans
+- Admins can still manually reset with `/rankedarena setflee <player> 0`
 
 ---
 
@@ -309,19 +426,26 @@ Clauses are competitive battle rules:
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   "eloSystem": {
-    "mode": "POKEMON_SHOWDOWN",          // LEGACY or POKEMON_SHOWDOWN
+    "mode": "POKEMON_SHOWDOWN",          // LEGACY, POKEMON_SHOWDOWN, or GLICKO2
 
     // Pokemon Showdown System (K-factor based)
     "pokemonShowdown": {
-      "kFactor": 32,                     // K-factor for calculations
-      "provisionalMatches": 10,          // Matches before stable rating
-      "provisionalKFactor": 64           // Higher K-factor for new players
+      "initialElo": 1000.0,              // Starting Elo for new players
+      "floorElo": 1000.0,                // Minimum Elo (can't drop below)
+      "decay": {
+        "enabled": true,                 // Enable Elo decay for inactive players
+        "runAtUtcHour": 9,               // Run decay at 9 AM UTC daily
+        "slowDecayReduction": 2          // Elo reduction per day of inactivity
+      }
     },
 
-    // Legacy System (Random points)
-    "legacy": {
-      "minPoints": 10,                   // Minimum Elo change
-      "maxPoints": 30                    // Maximum Elo change
+    // Glicko-2 System (Advanced rating with uncertainty)
+    "glicko2": {
+      "initialRating": 1500.0,           // Starting rating for new players
+      "initialRD": 350.0,                // Initial rating deviation (uncertainty)
+      "initialVolatility": 0.06,         // Initial volatility (rating stability)
+      "systemConstant": 0.5,             // Controls volatility change (0.3-1.2)
+      "rdDecayDays": 30                  // Days before RD starts increasing (inactivity)
     }
   }
 }
@@ -330,39 +454,60 @@ Clauses are competitive battle rules:
 #### Elo System Modes
 
 **`POKEMON_SHOWDOWN`** (Recommended)
-- Uses K-factor based Elo calculation
-- New players have higher K-factor (more volatile ratings)
-- Settles to stable ratings after provisional period
-- Similar to Pokemon Showdown, Chess.com, etc.
+- Uses K-factor based Elo calculation similar to Pokemon Showdown
+- Simple and effective for competitive play
+- Includes Elo decay for inactive players
+- Floor Elo prevents dropping below minimum rating
+
+**`GLICKO2`** (Advanced)
+- Considers rating uncertainty (RD - Rating Deviation)
+- More accurate for players with few matches
+- Volatility system for rating stability
+- Used by competitive games like CS:GO, Dota 2
+- More complex but more precise
 
 **`LEGACY`**
-- Random Elo change between min and max
+- Random Elo change between configured min/max
 - Simple but less accurate
 - Good for casual servers
+- Not recommended for competitive play
 
 #### Pokemon Showdown Settings
 
 | Field | Default | Description |
 |-------|---------|-------------|
-| `kFactor` | 32 | Standard K-factor (16-32 common) |
-| `provisionalMatches` | 10 | Matches before rating stabilizes |
-| `provisionalKFactor` | 64 | K-factor for new players (higher = more change) |
+| `initialElo` | 1000.0 | Starting Elo for new players |
+| `floorElo` | 1000.0 | Minimum Elo (players can't drop below this) |
+| `decay.enabled` | true | Enable Elo decay for inactive players |
+| `decay.runAtUtcHour` | 9 | Hour (0-23) to run decay daily (UTC time) |
+| `decay.slowDecayReduction` | 2 | Elo points lost per day of inactivity |
 
-**K-Factor Guide:**
-- `16` - Very stable, small rating changes (top players)
-- `24` - Balanced stability
-- `32` - Standard competitive (recommended)
-- `40` - Higher volatility
-- `64` - Provisional players only
+**Elo Decay System:**
+- Prevents inactive players from holding top leaderboard spots
+- Only affects players who haven't played in a while
+- Runs once per day at configured UTC hour
+- Can be disabled by setting `enabled: false`
 
-#### Legacy Settings
+#### Glicko-2 Settings
 
 | Field | Default | Description |
 |-------|---------|-------------|
-| `minPoints` | 10 | Minimum Elo gained/lost |
-| `maxPoints` | 30 | Maximum Elo gained/lost |
+| `initialRating` | 1500.0 | Starting rating for new players |
+| `initialRD` | 350.0 | Initial rating deviation (uncertainty, lower = more certain) |
+| `initialVolatility` | 0.06 | Initial volatility (rating stability) |
+| `systemConstant` | 0.5 | Controls volatility change (0.3-1.2 recommended) |
+| `rdDecayDays` | 30 | Days before RD starts increasing due to inactivity |
 
-**Example:** Winner gets random 10-30 points, loser loses same amount.
+**Glicko-2 Concepts:**
+- **Rating**: Your skill level (like Elo)
+- **RD (Rating Deviation)**: Uncertainty about your rating (350 = new player, 50 = established)
+- **Volatility**: How erratic your performance is
+- **System Constant**: Higher = more volatility change after upsets
+
+**RD Behavior:**
+- New players: High RD (350) = rating changes a lot
+- Established players: Low RD (50-150) = rating stable
+- Inactive players: RD increases = rating becomes uncertain again
 
 ---
 

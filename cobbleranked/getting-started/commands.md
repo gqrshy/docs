@@ -15,7 +15,7 @@ Opens the main ranked GUI for queue management and leaderboards.
 - **Usage:** `/ranked`
 
 **GUI Features:**
-- Join queue for Singles/Doubles/Multi
+- Join queue for Singles/Doubles
 - View leaderboard
 - Check your stats
 - Claim milestone rewards
@@ -53,7 +53,6 @@ Display the top 10 ranked players.
   /leaderboard            # Overall leaderboard
   /leaderboard singles    # Singles format only
   /leaderboard doubles    # Doubles format only
-  /leaderboard multi      # Multi format only
   ```
 
 ---

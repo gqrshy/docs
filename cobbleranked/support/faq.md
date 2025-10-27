@@ -541,20 +541,45 @@ See [Ranked Battles](../features/ranked-battles.md) for details.
 - Includes crashes, timeouts, and intentional disconnects
 - Same penalty for all disconnect types (prevents abuse)
 
-**Automatic penalties:**
-Based on total flee count, you receive temporary queue bans:
+**Automatic penalties (configurable):**
+Based on total flee count, you receive temporary queue bans. Default tiers:
 - **1-5 flee count**: 5 minute queue ban
 - **6-10 flee count**: 15 minute queue ban
 - **11+ flee count**: 30 minute queue ban
 
-**Important limitations:**
-- ⚠️ Flee count **never decreases automatically**
-- ⚠️ This means penalties accumulate permanently
-- ⚠️ Legitimate crashes also count (no automatic detection)
+**⚠️ Admins can customize these tiers in [config.json5](../configuration/README.md#flee-penalty-system):**
+```json5
+"flee_penalty": {
+  "tiers": [
+    { "flee_min": 1, "flee_max": 5, "penalty_minutes": 5 },
+    { "flee_min": 6, "flee_max": 10, "penalty_minutes": 15 },
+    { "flee_min": 11, "flee_max": 999, "penalty_minutes": 30 }
+  ]
+}
+```
 
-**Resetting flee count:**
+**✅ Automatic decay system (NEW):**
+Flee count now **automatically decreases** over time:
+- **Default**: -1 flee count every 24 hours
+- Decay works **even while offline** (based on time elapsed)
+- When flee count reaches 0, queue bans are cleared
+- Admins can configure decay rate and interval
 
-Only admins can reset flee count:
+**Decay configuration ([config.json5](../configuration/README.md#flee-decay-system)):**
+```json5
+"flee_decay": {
+  "enabled": true,              // Enable automatic decay
+  "decay_rate": 1,              // Reduce by 1 per interval
+  "decay_interval_hours": 24    // Every 24 hours
+}
+```
+
+**Example decay scenarios:**
+- **flee count = 10** → After 24h → **flee count = 9**
+- **flee count = 5, offline for 3 days** → After login → **flee count = 2** (3 intervals elapsed)
+- **flee count = 2, offline for 2 days** → After login → **flee count = 0** (penalty cleared)
+
+**Manual reset (admin command):**
 ```bash
 /rankedarena setflee <player> 0
 ```
@@ -565,12 +590,11 @@ Contact an admin on Discord with:
 - Server logs showing disconnect
 - Explanation of what happened
 
-**Potential future improvement:**
-- Automatic decay over time (e.g., -1 flee count per week of good behavior)
-- Grace period for first disconnect
-- Different penalties for intentional vs. crash disconnects
-
-Currently, flee count serves as a **permanent record** rather than a temporary penalty system.
+**Admins can:**
+- Disable decay entirely (`"enabled": false`)
+- Speed up decay (`"decay_interval_hours": 12` = every 12 hours)
+- Increase decay rate (`"decay_rate": 2` = -2 per interval)
+- Create custom penalty tiers (e.g., 1-minute ban for first offense)
 
 </details>
 
