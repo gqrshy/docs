@@ -903,6 +903,159 @@ See [Arena Configuration](../configuration/arenas.md).
 ## 🌐 Cross-Server
 
 <details>
+<summary><strong>How does cross-server work? One mod for multiple servers?</strong></summary>
+
+**Yes, it's one mod that connects everything.**
+
+You install the **same CobbleRanked mod** on each backend server in your network. The mod works differently depending on how you configure it:
+
+**Architecture:**
+- **Battle Server** (1 server): Handles all ranked battles, matchmaking, and season management
+- **Entry/Lobby Servers** (1+ servers): Provide the GUI, accept queue joins, and transfer players to the battle server
+
+**No separate registrations needed.** Just install the mod, set a few config values, and Velocity/BungeeCord handles the rest.
+
+**Player experience example:**
+
+Network: `main1` (survival), `main2` (survival), `arena` (battles only) — all behind Velocity proxy.
+
+1. **Player A** is on `main1` (survival server)
+2. **Player B** is on `main2` (survival server)
+3. Both open `/ranked` and join the Singles queue
+4. **Match found!** Both players are transferred to `arena` server via Velocity
+5. Battle starts on `arena` server
+6. Battle ends, results saved to MySQL
+7. Players are returned to their original servers (`main1` and `main2`)
+
+**From the player's perspective:** Seamless. They queue, get transferred, battle, and return.
+
+**Minimal config required:**
+
+Entry servers (main1, main2):
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "main1",        // Must match Velocity server name
+    "battle_server": "arena"     // Where to send players
+  }
+}
+```
+
+Battle server (arena):
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "arena",
+    "battle_server": ""          // Empty = this IS the battle server
+  }
+}
+```
+
+You'll also need MySQL (shared database) and Redis (real-time queue sync).
+
+See [Cross-Server Setup](../advanced/cross-server.md) for full configuration guide.
+
+</details>
+
+<details>
+<summary><strong>Is cross-server setup out-of-the-box or complex?</strong></summary>
+
+**Pretty much out-of-the-box — once you're on Velocity.**
+
+**You don't need to:**
+- Manually enter other servers' IP addresses
+- Create custom API keys or tokens
+- Set up complex routing rules
+
+**You DO need to:**
+- Install Velocity/BungeeCord proxy (standard for multi-server networks)
+- Set up MySQL (shared database) — one-time setup
+- Set up Redis (real-time queue sync) — one-time setup
+- Match `server_id` in CobbleRanked to Velocity's server names
+
+**After initial setup:** Adding new lobby/main servers is just copying the mod + config.
+
+**Time estimate:**
+- Velocity setup: 15-30 minutes (if new to proxies)
+- MySQL setup: 10-15 minutes
+- Redis setup: 5-10 minutes
+- CobbleRanked config: 5 minutes per server
+
+**Total:** 1-2 hours for first-time setup. Adding more servers later: 5 minutes each.
+
+</details>
+
+<details>
+<summary><strong>Can different modded servers link up?</strong></summary>
+
+**Yes, but with requirements:**
+
+✅ **Can link:**
+- Multiple Cobblemon servers with the same mod versions
+- Same Minecraft version + loader (Fabric/Forge)
+- Compatible mod sets across all servers
+
+❌ **Cannot link:**
+- Different Minecraft versions (1.20.1 vs 1.21.1)
+- Different loaders (Fabric vs Forge)
+- Incompatible mod sets (client registry mismatches kick players)
+
+**Recommendation:** Keep all backend servers on the **exact same modpack version**. Mixing very different modpacks across servers under one proxy is risky.
+
+**Best practice:** Keep the battle server lightweight (void/superflat world + arenas only). This keeps TPS stable and makes matches predictable.
+
+**Example safe setup:**
+```
+main1: Cobblemon 1.7.0 + 50 addon mods (survival)
+main2: Cobblemon 1.7.0 + 50 addon mods (survival)
+arena: Cobblemon 1.7.0 + 50 addon mods (void world, arenas only)
+```
+
+All three servers use identical mod lists, just different world types.
+
+</details>
+
+<details>
+<summary><strong>How many players can cross-server handle?</strong></summary>
+
+**Theoretical limit:** ~500 concurrent players across multiple servers.
+
+**Why it scales well:**
+- Survival/lobby servers don't run heavy logic (they just transfer players)
+- TPS impact on entry servers is near zero
+- All matchmaking + battle logic runs on the lightweight arena server
+- Multiple lobby servers distribute GUI/queue load
+
+**Example topology:**
+```
+[lobby]     ──┐
+[main1]     ──┤
+[main2]     ──┼──► [Velocity] ──► [arena] (battles)
+[main3]     ──┤                     ↓
+[creative]  ──┘                  [MySQL + Redis]
+```
+
+In this setup:
+- 5 entry servers accept queue joins (100 players each = 500 total)
+- 1 arena server handles all battles (sequential battles, not concurrent)
+- MySQL stores rankings
+- Redis syncs queues in real-time
+
+**Real-world performance:**
+- Small network (2-3 servers): 50-100 players no problem
+- Medium network (4-6 servers): 150-300 players comfortable
+- Large network (7+ servers): 500+ players possible with optimization
+
+**Bottlenecks:**
+- MySQL (can handle thousands of queries/sec)
+- Redis (extremely fast, not a bottleneck)
+- Arena server TPS (keep world lightweight)
+
+</details>
+
+<details>
 <summary><strong>Do I need Redis for cross-server?</strong></summary>
 
 **Short answer:** No, but strongly recommended.
