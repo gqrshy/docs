@@ -356,25 +356,51 @@ See [Cross-Server Setup](../advanced/cross-server.md) for details.
 
 ---
 
-## Season Naming (Optional)
+## Season Naming
 
-### Custom Season Names
+### Default Season Name (Config)
 
-Give seasons custom names:
+Set a default name for auto-created seasons in `config.yml`:
+
+```yaml
+season_announcement:
+  enabled: true
+  interval_minutes: 30
+  show_remaining_days: true
+  default_season_name: "Winter Cup"  # Default name for new seasons
+```
+
+**Naming behavior:**
+- If `default_season_name` is set → Uses custom name
+- If `default_season_name: ""` (empty) → Auto-generates "YYYY-MM" format
+
+**Examples:**
+```yaml
+default_season_name: "Winter Cup"     # → "Winter Cup"
+default_season_name: "2025 Q4"        # → "2025 Q4"
+default_season_name: "Champion League" # → "Champion League"
+default_season_name: ""               # → "2025-10" (auto)
+```
+
+**Message display:**
+```
+[Ranked] Winter Cup ends in 30 days! Play now to earn amazing rewards!
+```
+
+### Rename Current Season
+
+Change current season name manually:
 
 ```bash
 /rankedarena season setname "Summer Championship 2025"
 ```
 
-**Default naming:**
-- Season 1, Season 2, Season 3, etc.
-
-**Custom naming use cases:**
+**Use cases:**
 - Themed seasons (Summer, Winter, Spring, Fall)
-- Tournament seasons (Championship Season, Playoff Season)
+- Tournament seasons (Championship, Playoffs)
 - Event seasons (Halloween Cup, Holiday Battle)
 
-**Display:**
+**After renaming:**
 ```
 Current Season: Summer Championship 2025
 Started: 2025-06-01 00:00:00

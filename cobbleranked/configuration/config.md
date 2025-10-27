@@ -511,6 +511,73 @@ Automatically reduces flee count over time to forgive past disconnects.
 
 ---
 
+### Season Announcement Configuration
+
+Configure automatic season announcements and default season naming.
+
+```json5
+{
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  SEASON ANNOUNCEMENTS
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  "season_announcement": {
+    "enabled": true,                     // Enable automatic season announcements
+    "interval_minutes": 30,              // Announcement interval (minutes)
+    "show_remaining_days": true,         // Show remaining days in announcements
+    "default_season_name": "Winter Cup"  // Default name for new seasons (empty = auto)
+  }
+}
+```
+
+#### Season Announcement Settings
+
+| Field | Default | Description |
+|-------|---------|-------------|
+| `enabled` | true | Enable automatic season end announcements |
+| `interval_minutes` | 30 | How often to announce (in minutes) |
+| `show_remaining_days` | true | Always show days remaining, or only when < 7 days |
+| `default_season_name` | "" | Default name for auto-created seasons |
+
+**Announcement Behavior:**
+
+When `enabled: true`:
+- Announces to all online players periodically
+- Shows clickable message (click to open `/ranked`)
+- Format: `[Ranked] {season} ends in {days} day(s)! Play now to earn amazing rewards!`
+
+**Show Remaining Days:**
+- `true`: Always announce remaining days
+- `false`: Only announce when less than 7 days remain
+
+**Default Season Name:**
+
+Controls auto-generated season names when new seasons are created:
+
+```yaml
+# Custom name
+default_season_name: "Winter Cup"      # → "Winter Cup"
+default_season_name: "2025 Q4"         # → "2025 Q4"
+default_season_name: "Champion League" # → "Champion League"
+
+# Auto-generate (YYYY-MM format)
+default_season_name: ""                # → "2025-10"
+```
+
+**Message Examples:**
+
+```
+# With custom name
+[Ranked] Winter Cup ends in 30 days! Play now to earn amazing rewards!
+
+# With auto-generated name
+[Ranked] 2025-10 ends in 30 days! Play now to earn amazing rewards!
+```
+
+**Note:** Season names can be changed manually with `/rankedarena season setname "Name"`
+
+---
+
 ## Complete Example
 
 A competitive VGC-style configuration:
