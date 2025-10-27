@@ -581,7 +581,11 @@ Flee count now **automatically decreases** over time:
 
 **Manual reset (admin command):**
 ```bash
-/rankedarena setflee <player> 0
+/rankedarena setflee <player> <amount>
+
+# Examples:
+/rankedarena setflee PlayerName 0      # Reset to 0 (clear penalty)
+/rankedarena setflee PlayerName 5      # Set to 5
 ```
 
 **For legitimate crashes:**

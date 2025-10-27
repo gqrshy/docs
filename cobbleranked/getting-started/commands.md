@@ -273,6 +273,30 @@ Remove Elo points from a player.
 
 ---
 
+### `/rankedarena setflee <player> <amount>`
+
+Set a player's flee count (disconnect penalty counter).
+
+- **Permission:** `cobbleranked.admin` (OP level 2)
+- **Usage:** `/rankedarena setflee <player> <amount>`
+- **Examples:**
+  ```
+  /rankedarena setflee PlayerName 0      # Reset flee count (clear penalty)
+  /rankedarena setflee PlayerName 5      # Set to 5
+  ```
+
+**What this does:**
+- Sets the player's flee count to the specified value
+- Clears any active queue ban penalty
+- Resets the flee decay timer
+
+**Use cases:**
+- Reset flee count for players who had legitimate crashes
+- Clear penalties after investigating disconnect reports
+- Manually adjust flee count for testing
+
+---
+
 ### `/rankedarena stats reset <player>`
 
 Reset a player's ranked statistics.
