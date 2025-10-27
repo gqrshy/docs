@@ -89,9 +89,9 @@ You may not:
 - Share compiled or modified versions of the Software
 
 **Official distribution channels:**
-- [GitHub Releases](https://github.com/gqrshy/CobbleRanked/releases)
-- Modrinth (when available)
-- CurseForge (when available)
+- [Discord Server](https://discord.gg/VVVvBTqqyP) (currently the only official source)
+- Modrinth (coming soon)
+- CurseForge (coming soon)
 
 ### 6. Disclaimer of Warranties
 
@@ -139,7 +139,7 @@ Continued use after changes constitutes acceptance of the new terms.
 While Gashi Studios may provide:
 - Bug fixes and updates at its discretion
 - Documentation and community support
-- Responses to issues on GitHub
+- Responses to feedback on Discord
 
 There is no obligation to:
 - Provide technical support

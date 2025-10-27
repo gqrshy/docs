@@ -107,7 +107,7 @@ Use the `/rankedarena reload` command to reload configuration without restarting
 
 - **Documentation**: Read the specific configuration guides linked above
 - **Examples**: Each JSON5 file includes comments explaining options
-- **Support**: Report issues at https://github.com/gqrshy/CobbleRanked/issues
+- **Support**: Ask in our [Discord Server](https://discord.gg/VVVvBTqqyP) (#feedback channel)
 
 ## Next Steps
 

@@ -105,7 +105,7 @@ Need help? Check out these resources:
 
 - **Troubleshooting**: [Common Issues](support/troubleshooting.md)
 - **FAQ**: [Frequently Asked Questions](support/faq.md)
-- **GitHub Issues**: [Report a Bug](https://github.com/your-repo/issues)
+- **Discord Server**: [Join for Support](https://discord.gg/VVVvBTqqyP) (#feedback channel)
 
 ## Credits
 

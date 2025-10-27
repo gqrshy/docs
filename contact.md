@@ -6,9 +6,9 @@ Need help with CobbleRanked or want to get in touch? Here's how to reach us.
 
 ### General Inquiries
 
+- **Discord**: Join our [Discord Server](https://discord.gg/VVVvBTqqyP)
 - **Email**: [garshy.gaming@gmail.com](mailto:garshy.gaming@gmail.com)
-- **Discord**: [@gashicha](https://discord.com)
-- **GitHub**: [github.com/gqrshy](https://github.com/gqrshy)
+- **Discord DM**: @gashicha
 
 ### Business & Licensing
 
@@ -18,26 +18,26 @@ For commercial licensing, partnerships, or business inquiries:
 
 ## 🐛 Bug Reports
 
-Found a bug? Please report it on GitHub:
+Found a bug? Please report it on our Discord server:
 
-**[Report a Bug →](https://github.com/gqrshy/CobbleRanked/issues)**
+**[Join Discord Server →](https://discord.gg/VVVvBTqqyP)**
 
-When reporting bugs, include:
+Go to the **#feedback** channel and include:
 - CobbleRanked version
 - Cobblemon version
 - Minecraft version
-- Server type (Fabric/Forge)
+- Server type (Fabric)
 - Steps to reproduce
 - Console logs (`logs/latest.log`)
 - Configuration files (if relevant)
 
 ## 💡 Feature Requests
 
-Have an idea for CobbleRanked? Submit a feature request:
+Have an idea for CobbleRanked? Share it on our Discord server:
 
-**[Request a Feature →](https://github.com/gqrshy/CobbleRanked/issues)**
+**[Join Discord Server →](https://discord.gg/VVVvBTqqyP)**
 
-Use the `[Feature Request]` tag and describe:
+Go to the **#ideas** thread and describe:
 - What you want to achieve
 - Why it would be useful
 - How it should work (if you have ideas)
@@ -66,10 +66,10 @@ Your support helps with:
 ## ⏰ Response Time
 
 **Expected response times:**
-- GitHub Issues: 1-3 business days
+- Discord (#feedback, #ideas): 1-3 days
 - Email (General): 2-5 business days
 - Email (Business/Urgent): 1-2 business days
-- Discord: 1-7 days (best effort)
+- Discord DM: 1-7 days (best effort)
 
 **Note:** I'm based in Tokyo, Japan (JST timezone). Response times may vary.
 
@@ -85,7 +85,7 @@ Feel free to contact me in either language!
 
 Your privacy is important:
 - Emails are kept confidential
-- Bug reports may be made public on GitHub
+- Bug reports in Discord are visible to server members
 - No personal information is shared with third parties
 - Payment information is handled securely through PayPal
 

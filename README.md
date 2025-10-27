@@ -21,7 +21,7 @@ A comprehensive competitive ranked battle system for Cobblemon servers.
 **[View Documentation →](cobbleranked/)**
 
 **Download:**
-- [GitHub Releases](https://github.com/gqrshy/CobbleRanked/releases)
+- Join our [Discord Server](https://discord.gg/VVVvBTqqyP) for latest releases
 - Modrinth _(coming soon)_
 - CurseForge _(coming soon)_
 

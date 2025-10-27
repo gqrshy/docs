@@ -78,17 +78,17 @@ If your server meets these requirements, CobbleRanked will work!
 <details>
 <summary><strong>Where can I download CobbleRanked?</strong></summary>
 
-**Official sources:**
-- [GitHub Releases](https://github.com/gqrshy/CobbleRanked/releases) (recommended)
+**Official source:**
+- **[Discord Server](https://discord.gg/VVVvBTqqyP)** - Join for latest releases
 - Modrinth _(coming soon)_
 - CurseForge _(coming soon)_
 
-**⚠️ Always download from official sources only!**
+**⚠️ Currently only distributed via Discord!**
 
-Unofficial sources may contain:
-- Outdated versions
-- Malware
-- Modified code
+Do not download from unofficial sources:
+- May contain outdated versions
+- May contain malware
+- May contain modified/malicious code
 
 </details>
 
@@ -101,7 +101,7 @@ Unofficial sources may contain:
 
 **Quick installation:**
 
-1. **Download** the JAR file from [GitHub Releases](https://github.com/gqrshy/CobbleRanked/releases)
+1. **Download** the JAR file from our [Discord Server](https://discord.gg/VVVvBTqqyP)
 2. **Place** in `mods/` folder
 3. **Ensure dependencies** are installed (Cobblemon, Fabric API)
 4. **Start server** - Configs auto-generate in `config/cobbleranked/`
@@ -1247,4 +1247,4 @@ Example: Economy command requires economy plugin
 
 ---
 
-**Still have questions?** Check [Troubleshooting](troubleshooting.md) or open a [GitHub Issue](https://github.com/gqrshy/CobbleRanked/issues)!
+**Still have questions?** Check [Troubleshooting](troubleshooting.md) or ask in our [Discord Server](https://discord.gg/VVVvBTqqyP) (#feedback channel)!

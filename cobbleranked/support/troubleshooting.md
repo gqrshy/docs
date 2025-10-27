@@ -177,7 +177,7 @@ Common issues and their solutions for CobbleRanked.
 
 4. **Try manual battle command:**
    - Not officially supported, but may help diagnose
-   - Report bug on GitHub if persistent
+   - Report bug in Discord #feedback if persistent
 
 ### Elo not updating after battle
 
@@ -665,10 +665,10 @@ When asking for help, include:
 
 ### Where to Get Help
 
-- **GitHub Issues:** [Report a Bug](https://github.com/gqrshy/CobbleRanked/issues)
+- **Discord Server:** [Join for Support](https://discord.gg/VVVvBTqqyP) (#feedback channel)
 - **Documentation:** [FAQ](faq.md)
 - **Email:** garshy.gaming@gmail.com
-- **Discord:** @gashicha
+- **Discord DM:** @gashicha
 
 ---
 

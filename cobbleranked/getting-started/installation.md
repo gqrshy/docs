@@ -26,9 +26,9 @@ Before installing CobbleRanked, ensure your server meets these requirements:
 ### 1. Download CobbleRanked
 
 Download the latest release from:
-- GitHub Releases (recommended)
-- Modrinth
-- CurseForge
+- **[Discord Server](https://discord.gg/VVVvBTqqyP)** (currently the only official source)
+- Modrinth _(coming soon)_
+- CurseForge _(coming soon)_
 
 ### 2. Install the Mod
 
