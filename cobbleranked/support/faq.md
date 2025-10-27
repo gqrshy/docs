@@ -541,25 +541,36 @@ See [Ranked Battles](../features/ranked-battles.md) for details.
 - Includes crashes, timeouts, and intentional disconnects
 - Same penalty for all disconnect types (prevents abuse)
 
-**How it's used:**
-- Visible in player stats
-- Helps identify rage quitters
-- Can be used for automated penalties (custom plugins)
+**Automatic penalties:**
+Based on total flee count, you receive temporary queue bans:
+- **1-5 flee count**: 5 minute queue ban
+- **6-10 flee count**: 15 minute queue ban
+- **11+ flee count**: 30 minute queue ban
+
+**Important limitations:**
+- ⚠️ Flee count **never decreases automatically**
+- ⚠️ This means penalties accumulate permanently
+- ⚠️ Legitimate crashes also count (no automatic detection)
 
 **Resetting flee count:**
 
-**Admin command:**
+Only admins can reset flee count:
 ```bash
 /rankedarena setflee <player> 0
 ```
 
-**Never decreases automatically** to maintain integrity.
+**For legitimate crashes:**
+Contact an admin on Discord with:
+- Crash report (`crash-reports/` folder)
+- Server logs showing disconnect
+- Explanation of what happened
 
-**Legitimate crashes:**
-Contact an admin with:
-- Crash report
-- Server logs
-- Explanation
+**Potential future improvement:**
+- Automatic decay over time (e.g., -1 flee count per week of good behavior)
+- Grace period for first disconnect
+- Different penalties for intentional vs. crash disconnects
+
+Currently, flee count serves as a **permanent record** rather than a temporary penalty system.
 
 </details>
 
