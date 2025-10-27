@@ -2,6 +2,133 @@
 
 Configure CobbleRanked to work across multiple Minecraft servers in a network.
 
+---
+
+## How Does It Work?
+
+### One Mod, Multiple Servers
+
+**Yes, it's one mod that connects everything.**
+
+You install the **same CobbleRanked mod** on each backend server in your network. The mod works differently depending on how you configure it:
+
+- **Battle Server** (1 server): Handles all ranked battles, matchmaking, and season management
+- **Entry/Lobby Servers** (1+ servers): Provide the GUI, accept queue joins, and transfer players to the battle server
+
+**No separate registrations needed.** Just install the mod, set a few config values, and Velocity/BungeeCord handles the rest.
+
+---
+
+### How Players Experience It
+
+**Example network:** `main1` (survival), `main2` (survival), `arena` (battles only) — all behind Velocity proxy.
+
+1. **Player A** is on `main1` (survival server)
+2. **Player B** is on `main2` (survival server)
+3. Both open `/ranked` and join the Singles queue
+4. **Match found!** Both players are transferred to `arena` server via Velocity
+5. Battle starts on `arena` server
+6. Battle ends, results saved to MySQL
+7. Players are returned to their original servers (`main1` and `main2`)
+
+**From the player's perspective:** Seamless. They queue, get transferred, battle, and return.
+
+---
+
+### Minimal Configuration
+
+**On entry/lobby servers (main1, main2):**
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "main1",        // Must match Velocity server name
+    "battle_server": "arena"     // Where to send players for battles
+  }
+}
+```
+
+**On battle server (arena):**
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "arena",
+    "battle_server": ""          // Empty = this IS the battle server
+  }
+}
+```
+
+**That's it for basic setup.** You'll also need MySQL and Redis (explained below), but the mod config is minimal.
+
+---
+
+### Out-of-the-Box Experience?
+
+**Pretty much, yes — once you're on Velocity.**
+
+You don't need to:
+- Manually enter other servers' IP addresses
+- Create custom API keys or tokens
+- Set up complex routing rules
+
+You **do** need to:
+- Install Velocity/BungeeCord proxy
+- Set up MySQL (shared database)
+- Set up Redis (real-time queue sync)
+- Match `server_id` in CobbleRanked to Velocity's server names
+
+**After initial setup:** Adding new lobby/main servers is just copying the mod + config.
+
+---
+
+### Can Different Modded Servers Link Up?
+
+**Yes, but with requirements:**
+
+✅ **Can link:**
+- Multiple Cobblemon servers with the same mod versions
+- Same Minecraft version + loader (Fabric/Forge)
+- Compatible mod sets across all servers
+
+❌ **Cannot link:**
+- Different Minecraft versions (1.20.1 vs 1.21.1)
+- Different loaders (Fabric vs Forge)
+- Incompatible mod sets (client registry mismatches kick players)
+
+**Recommendation:** Keep all backend servers on the **exact same modpack version**. Mixing very different modpacks across servers under one proxy is risky.
+
+**Best practice:** Keep the battle server lightweight (void/superflat world + arenas only). This keeps TPS stable and makes matches predictable.
+
+---
+
+### Scalability
+
+**Theoretical limit:** ~500 concurrent players across multiple servers.
+
+**Why it scales well:**
+- Survival/lobby servers don't run heavy logic (they just transfer players)
+- TPS impact on entry servers is near zero
+- All matchmaking + battle logic runs on the lightweight arena server
+- Multiple lobby servers distribute GUI/queue load
+
+**Example topology:**
+```
+[lobby]     ──┐
+[main1]     ──┤
+[main2]     ──┼──► [Velocity] ──► [arena] (battles)
+[main3]     ──┤                     ↓
+[creative]  ──┘                  [MySQL + Redis]
+```
+
+In this setup:
+- 5 entry servers accept queue joins
+- 1 arena server handles all battles
+- MySQL stores rankings
+- Redis syncs queues in real-time
+
+---
+
 ## Overview
 
 Cross-server mode allows players on different servers to compete together in a unified ranked system. Benefits include:
