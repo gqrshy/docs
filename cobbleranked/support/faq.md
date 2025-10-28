@@ -57,9 +57,9 @@ If your server meets these requirements, CobbleRanked will work!
 </details>
 
 <details>
-<summary><strong>Is cross-server support required?</strong></summary>
+<summary><strong>Only support cross-servers?</strong></summary>
 
-**No!** CobbleRanked works in two modes:
+**No!** CobbleRanked works in two modes!
 
 **Single-Server Mode (Default):**
 - Uses SQLite (built-in)
