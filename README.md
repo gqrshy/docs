@@ -2,7 +2,7 @@
 
 **Omnivorous Gamer & Creator**
 
-Hi! I'm Gashi, a 20-year-old gamer and developer from Aichi, Japan, currently based in Tokyo.
+Hi! I'm gashi , a 20-year-old gamer and developer from Aichi, Japan, currently based in Tokyo.
 
 
 ## 📦 Mods
