@@ -38,3 +38,5 @@ Your support helps with continued development, server infrastructure, and new fe
 ---
 
 **Powered by Cobblemon** • All mods are made with appreciation for the amazing Cobblemon community.
+
+_Last updated: October 27, 2025_
