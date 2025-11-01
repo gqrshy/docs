@@ -25,6 +25,8 @@
 * [Season Management](features/seasons.md)
 * [Battle Formats](features/battle-formats.md)
 * [Leaderboards](features/leaderboards.md)
+* [Disconnect Penalties](features/disconnect-penalties.md)
+* [Dynamic Matchmaking](features/dynamic-matchmaking.md)
 * [Rewards & Milestones](features/rewards.md)
 
 ## Advanced
@@ -38,4 +40,3 @@
 
 * [Troubleshooting](support/troubleshooting.md)
 * [FAQ](support/faq.md)
-* [API Reference](support/api.md)
