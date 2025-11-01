@@ -1440,3 +1440,328 @@ Example: Economy command requires economy plugin
 ---
 
 **Still have questions?** Check [Troubleshooting](troubleshooting.md) or ask in our [Discord Server](https://discord.gg/VVVvBTqqyP) (#feedback channel)!
+
+---
+
+## 🎮 Disconnect Penalties
+
+<details>
+<summary><strong>How does the flee penalty system work?</strong></summary>
+
+When a player disconnects during a ranked battle:
+1. **Flee count** increases by 1
+2. **Battle forfeit** - Opponent wins
+3. **Elo penalty** - Same as losing normally
+4. **Queue ban** - Based on flee count tier
+
+**Default tiers:**
+- 1-5 flee count: 5 minute ban
+- 6-10 flee count: 15 minute ban
+- 11+ flee count: 30 minute ban
+
+**Flee decay:** Automatically reduces by 1 every 24 hours (configurable).
+
+See [Disconnect Penalties](../features/disconnect-penalties.md) for configuration.
+
+</details>
+
+<details>
+<summary><strong>What if my internet disconnected accidentally?</strong></summary>
+
+**Flee decay forgives accidental disconnects:**
+- Default: -1 flee count every 24 hours
+- Player with 5 disconnects → clean slate in 5 days
+- Can be configured faster for lenient servers
+
+**Admin can also reset:**
+```
+/rankedadmin resetflee <player> <format>
+```
+
+**Server crashes don't count** - Only player disconnects trigger penalties.
+
+</details>
+
+<details>
+<summary><strong>Can I disable disconnect penalties?</strong></summary>
+
+**Not recommended**, but you can set penalties to 0:
+
+```json5
+{
+  "flee_penalty": {
+    "tiers": [
+      { "flee_min": 1, "flee_max": 999, "penalty_minutes": 0 }
+    ]
+  }
+}
+```
+
+Better option: **Lenient settings**
+```json5
+{
+  "flee_penalty": {
+    "tiers": [
+      { "flee_min": 1, "flee_max": 3, "penalty_minutes": 0 },  // First 3 free
+      { "flee_min": 4, "flee_max": 999, "penalty_minutes": 5 }
+    ]
+  },
+  "flee_decay": {
+    "decay_rate": 2,              // Faster forgiveness
+    "decay_interval_hours": 12    // Every 12 hours
+  }
+}
+```
+
+</details>
+
+---
+
+## 🎯 Dynamic Matchmaking
+
+<details>
+<summary><strong>Why is matchmaking taking so long?</strong></summary>
+
+**Possible reasons:**
+1. **Not enough players in queue** - Need at least 2 players
+2. **Elo range too narrow** - High/low Elo players wait longer
+3. **Different formats** - Singles queue won't match with Doubles queue
+4. **Peak hours** - More players = faster matches
+
+**Solutions:**
+- Adjust dynamic matchmaking settings (see below)
+- Encourage more players to join queue
+- Consider cross-server setup for larger player pool
+
+</details>
+
+<details>
+<summary><strong>How does dynamic matchmaking work?</strong></summary>
+
+Elo range expands gradually as you wait:
+
+**Example (1500 Elo player):**
+- 0-30 seconds: ±200 Elo (1300-1700)
+- 60 seconds: ±206 Elo (1294-1706)
+- 5 minutes: ±254 Elo (1246-1754)
+- 10 minutes: ±314 Elo (1186-1814)
+- Maximum: ±600 Elo (900-2100)
+
+**Formula:**
+```
+range = initial_range + (seconds_waited / expansion_rate)
+```
+
+See [Dynamic Matchmaking](../features/dynamic-matchmaking.md) for configuration.
+
+</details>
+
+<details>
+<summary><strong>Can I make matchmaking faster?</strong></summary>
+
+**Yes! Adjust these settings:**
+
+```json5
+{
+  "matchmaking": {
+    "initial_range": 300,        // Wider starting range
+    "expansion_delay": 15,       // Start expanding after 15s
+    "expansion_rate": 3,         // Expand faster (1 Elo per 3s)
+    "max_multiplier": 4.0        // Allow wider max range
+  }
+}
+```
+
+**Trade-off:** Faster matches but less balanced Elo differences.
+
+</details>
+
+<details>
+<summary><strong>Matches are too unbalanced - 1000 Elo vs 1800 Elo!</strong></summary>
+
+**This happens when:**
+- One player waited very long (range expanded too much)
+- Not enough players in similar Elo range
+- Dynamic expansion settings too aggressive
+
+**Solution - Strict matchmaking:**
+```json5
+{
+  "matchmaking": {
+    "initial_range": 100,        // Narrower start
+    "expansion_delay": 60,       // Wait longer before expanding
+    "expansion_rate": 10,        // Expand slower
+    "max_multiplier": 2.0        // Lower max range
+  }
+}
+```
+
+**Trade-off:** More balanced matches but longer queue times.
+
+</details>
+
+---
+
+## 🏆 Elo System
+
+<details>
+<summary><strong>What's the difference between Pokemon Showdown and Glicko-2?</strong></summary>
+
+| Feature | Pokemon Showdown | Glicko-2 |
+|---------|------------------|----------|
+| **Complexity** | Simple | Advanced |
+| **Accuracy** | Good | Best |
+| **New player handling** | K-factor based | Rating Deviation (RD) |
+| **Best for** | Most servers | Large competitive servers (100+ players) |
+| **Recommended** | ✅ Yes | Only if 100+ active players |
+
+**Pokemon Showdown** is recommended for 95% of servers. Glicko-2 only provides meaningful benefits with large, active player bases.
+
+</details>
+
+<details>
+<summary><strong>Why does my Elo change by different amounts each match?</strong></summary>
+
+**Elo change depends on:**
+1. **Rating difference** - Beating higher Elo = more gain
+2. **Expected outcome** - Upsets give more Elo
+3. **K-factor** - New players (K=64) change faster than established (K=32)
+
+**Examples:**
+- Beat equal opponent (1000 vs 1000): ±16 Elo
+- Upset win (900 vs 1200): +28 Elo
+- Expected win (1200 vs 900): +4 Elo
+
+**This is intentional** - rewards beating stronger opponents!
+
+</details>
+
+<details>
+<summary><strong>Can I customize K-factor values?</strong></summary>
+
+**Yes:**
+
+```json5
+{
+  "pokemonShowdown": {
+    "kFactor": 32,              // Standard (16-40 recommended)
+    "provisionalKFactor": 64    // New players (64-128)
+  }
+}
+```
+
+**K-factor guide:**
+- Lower (16-24): Slower, more stable changes
+- Standard (32): Balanced (recommended)
+- Higher (40-48): Faster progression
+
+**Provisional K-factor** should be ~2x regular K-factor.
+
+</details>
+
+<details>
+<summary><strong>What is the Elo floor and why does my Elo stop decreasing?</strong></summary>
+
+**Elo floor** is the minimum Elo rating (default: 1000).
+
+**Why it exists:**
+- Prevents discouragement from dropping too low
+- Matches Pokemon Showdown's system
+- Ensures new players start at baseline
+
+**Can be adjusted:**
+```json5
+{
+  "pokemonShowdown": {
+    "floorElo": 1000  // Change to 800, 900, etc.
+  }
+}
+```
+
+**Note:** Setting too low (e.g., 500) may discourage players.
+
+</details>
+
+---
+
+## 🔄 Cross-Server
+
+<details>
+<summary><strong>What happens if Redis goes down?</strong></summary>
+
+**Impact:**
+- ❌ Cross-server matchmaking stops
+- ❌ Queue synchronization fails
+- ✅ Local server battles still work (SQLite database)
+- ✅ Player stats preserved in MySQL
+
+**Recovery:**
+1. Restart Redis server
+2. CobbleRanked reconnects automatically
+3. Queue resumes normal operation
+
+**Prevention:**
+- Monitor Redis uptime
+- Use Redis persistence (RDB/AOF)
+- Set up Redis alerts
+
+</details>
+
+<details>
+<summary><strong>Can I have multiple battle servers?</strong></summary>
+
+**⚠️ Not recommended!**
+
+**Problem:** Multiple battle servers cause:
+- Duplicate season rotation
+- Conflicting reward distribution
+- Database race conditions
+
+**Current limitation:** Only ONE server should have `battle_server: ""` (empty).
+
+**Workaround for high load:**
+- Use Velocity load balancing
+- Point to multiple battle servers at Velocity level
+- CobbleRanked treats them as one logical battle server
+
+**Future feature:** True multi-battle server support may be added.
+
+</details>
+
+<details>
+<summary><strong>How do I migrate from single-server to cross-server?</strong></summary>
+
+**Steps:**
+
+1. **Backup SQLite database:**
+   ```bash
+   cp config/cobbleranked/ranked.db ranked_backup.db
+   ```
+
+2. **Set up MySQL and import data:**
+   ```bash
+   # MySQL import commands (see Migration Guide)
+   ```
+
+3. **Install Redis:**
+   ```bash
+   sudo apt install redis-server
+   ```
+
+4. **Update config.json5:**
+   ```json5
+   {
+     "cross_server": {
+       "enabled": true,
+       "database": { "type": "MYSQL", ... },
+       "redis": { ... }
+     }
+   }
+   ```
+
+5. **Restart all servers**
+
+See [Migration Guide](../advanced/migration.md) for detailed steps.
+
+</details>
+
