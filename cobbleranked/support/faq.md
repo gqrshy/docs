@@ -181,6 +181,48 @@ See [Migration Guide](../getting-started/migration.md) for version-specific inst
 
 </details>
 
+<details>
+<summary><strong>Is Cobblemon 1.6.x supported?</strong></summary>
+
+**Yes, with limitations:**
+
+CobbleRanked fully supports Cobblemon 1.6.x for **core ranked battle features**, but **custom background music is disabled** due to technical limitations.
+
+**What works on Cobblemon 1.6.x:**
+- ✅ Ranked battles (Singles, Doubles, Multi)
+- ✅ Elo system and matchmaking
+- ✅ Leaderboards and statistics
+- ✅ Season management
+- ✅ Cross-server support (Redis)
+- ✅ Rewards and item collection
+- ✅ All GUI menus
+- ✅ Commands and permissions
+
+**What doesn't work on Cobblemon 1.6.x:**
+- ❌ Custom background music (queue music, battle music, etc.)
+
+**Why is music disabled?**
+
+Cobblemon 1.6.x uses a different music packet system (`SoundEvent` vs `ResourceLocation`) that requires classes not consistently available at runtime due to Fabric's obfuscation. Attempting to use music on 1.6.x would cause:
+```
+ClassNotFoundException: net.minecraft.core.registries.BuiltInRegistries
+ClassNotFoundException: net.minecraft.sounds.SoundEvent
+```
+
+**What you'll see on startup (Cobblemon 1.6.x):**
+```
+[MusicUtil] Detected Cobblemon V1_6_X - Custom music DISABLED (not supported in 1.6.x)
+```
+
+**Recommended versions:**
+- **Cobblemon 1.7.0+** for full feature support including custom music
+- **Cobblemon 1.6.1** works perfectly for all ranked battle features (just no custom music)
+
+**Upgrade path:**
+If you want custom music, upgrade to Cobblemon 1.7.0+. All other features work identically between versions.
+
+</details>
+
 ---
 
 ## 🔧 Configuration

@@ -64,6 +64,39 @@ Common issues and their solutions for CobbleRanked.
    grep -i "error" logs/latest.log | grep -i "cobbleranked"
    ```
 
+### Music errors (Cobblemon 1.6.x)
+
+**Symptoms:**
+- Errors like `ClassNotFoundException: net.minecraft.core.registries.BuiltInRegistries`
+- Errors like `ClassNotFoundException: net.minecraft.sounds.SoundEvent`
+- Warning: `[MusicUtil] Custom music DISABLED (not supported in 1.6.x)`
+
+**Cause:**
+Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to compatibility issues with Fabric's runtime class obfuscation.
+
+**Solutions:**
+
+1. **This is normal behavior** - No action required
+   - CobbleRanked detects Cobblemon 1.6.x and automatically disables music
+   - All other features work perfectly
+   - Music silently skips without errors
+
+2. **Expected log message:**
+   ```
+   [MusicUtil] Detected Cobblemon V1_6_X - Custom music DISABLED (not supported in 1.6.x)
+   ```
+
+3. **To enable custom music:**
+   - Upgrade to **Cobblemon 1.7.0+**
+   - All other features work identically between versions
+
+**What still works on 1.6.x:**
+- ✅ Ranked battles
+- ✅ Matchmaking and Elo
+- ✅ All GUIs and commands
+- ✅ Cross-server support
+- ❌ Custom background music only
+
 ---
 
 ## Queue & Matchmaking Issues
