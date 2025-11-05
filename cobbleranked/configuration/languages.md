@@ -142,6 +142,32 @@ Many messages support placeholders that are dynamically replaced:
 | `{pokemon}` | Pokemon name | "pokemon_switched": "Selected {pokemon}" |
 | `{error}` | Error details | "pokemon-label-limit": "Exceeded limit: {error}" |
 
+### Timer & Battle Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{seconds}` | Seconds remaining | "battle_timer_critical": "Time remaining: {seconds}s" |
+| `{minutes}` | Minutes remaining | "battle_timer_normal": "{minutes}m {seconds}s" |
+| `{type}` | Selection type (Team/Lead) | "selection_timeout_critical": "{type} Selection" |
+
+### Pokemon & Team Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{level}` | Pokemon level | "team_selection_pokemon_level": "Level: {level}" |
+| `{current}` | Current HP | "team_selection_pokemon_hp": "HP: {current}/{max}" |
+| `{max}` | Maximum HP | "team_selection_pokemon_hp": "HP: {current}/{max}" |
+| `{label}` | Pokemon label/category | "team_selection_label_limit_item": "{label}: {current}/{limit}" |
+| `{color}` | Color code | "team_selection_label_limit_item": "{color}• {label}" |
+
+### Format & System Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{format}` | Battle format name | "format_selector_selected": "▶ {format}" |
+| `{index}` | List item number | "validation_error_list_item": "{index}. {pokemon}" |
+| `{remaining}` | Amount remaining | "milestone_progress_needed": "{remaining} more needed" |
+
 ### Example with Placeholders
 
 ```json5

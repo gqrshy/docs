@@ -1807,3 +1807,273 @@ See [Migration Guide](../advanced/migration.md) for detailed steps.
 
 </details>
 
+---
+
+## 🎵 Custom Music
+
+<details>
+<summary><strong>Why isn't custom music playing in Cobblemon 1.6.1?</strong></summary>
+
+**It should be playing!** As of the latest update, CobbleRanked **fully supports custom music in Cobblemon 1.6.1**.
+
+**Check these first:**
+
+1. **Verify music is enabled in logs:**
+   ```
+   [MusicUtil] Detected Cobblemon V1_6_X - Custom music ENABLED
+   ```
+
+2. **Ensure music files exist:**
+   - Check `assets/cobbleranked/sounds/music/` directory
+   - Files must be `.ogg` format
+   - Registered in `sounds.json`
+
+3. **Verify players have resource pack:**
+   - Music files must be in client-side resource pack
+   - Resource pack must be enabled
+
+**If music still doesn't play:**
+- Enable debug logging: `"debug_music": true`
+- Check for sound errors in client logs
+- Verify sound IDs are correct in config
+
+See [Custom Music Documentation](../features/custom-music.md) for full setup guide.
+
+</details>
+
+<details>
+<parameter name="summary"><strong>What's the difference between 1.6.x and 1.7.x music support?</strong></summary>
+
+Both versions are **fully supported**, but use different APIs internally:
+
+| Feature | Cobblemon 1.6.x | Cobblemon 1.7.x |
+|---------|----------------|----------------|
+| Music playback | ✅ Works | ✅ Works |
+| API used | `SoundEvent` | `ResourceLocation` |
+| Restart existing music | ❌ Not available | ✅ Available |
+| Auto-detection | ✅ Automatic | ✅ Automatic |
+
+**As a server admin, you don't need to worry about the differences.** CobbleRanked automatically detects your version and uses the correct API.
+
+**Configuration is identical** across both versions!
+
+</details>
+
+<details>
+<parameter name="summary"><strong>Can I disable music for specific phases?</strong></summary>
+
+**Yes!** Set music ID to empty string:
+
+```json5
+{
+  "ranked_match": {
+    "queueMusic": "",  // No queue music
+    "teamSelectionMusic": "cobbleranked:team_selection",  // Keep this
+    "eloBattleMusic": []  // No battle music
+  }
+}
+```
+
+**Per-phase control:**
+- Queue music: `"queueMusic": ""`
+- Team selection: `"teamSelectionMusic": ""`
+- Battle music: `"eloBattleMusic": []`
+
+</details>
+
+<details>
+<parameter name="summary"><strong>How do I add custom music from my own mod?</strong></summary>
+
+**Reference your mod's sounds:**
+
+```json5
+{
+  "ranked_match": {
+    "queueMusic": "yourmod:your_queue_music",
+    "teamSelectionMusic": "yourmod:your_team_music",
+    "eloBattleMusic": [
+      {
+        "min_elo": 0,
+        "max_elo": 99999,
+        "music": "yourmod:your_battle_music",
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  }
+}
+```
+
+**Your mod must:**
+1. Register sounds in `assets/yourmod/sounds.json`
+2. Include `.ogg` files in `assets/yourmod/sounds/`
+3. Be installed on client side (as resource pack or mod)
+
+</details>
+
+---
+
+## 🚫 Banned Items
+
+<details>
+<parameter name="summary"><strong>What are banned inventory items?</strong></summary>
+
+Banned inventory items prevent players from joining ranked queues if they have specific items in their inventory.
+
+**Default banned items:**
+- `mega_showdown:tera_orb` - Prevents Terastallization
+- `mega_showdown:dynamax_band` - Prevents Dynamax/Gigantamax
+
+**Use cases:**
+- Competitive balance (no unfair mod items)
+- Server rules enforcement
+- Tournament restrictions
+
+**Configuration:**
+```json5
+{
+  "ranked_match": {
+    "banned_inventory_items": [
+      "mega_showdown:tera_orb",
+      "mega_showdown:dynamax_band",
+      "custommod:overpowered_item"
+    ]
+  }
+}
+```
+
+See [Banned Items Documentation](../features/banned-items.md) for full guide.
+
+</details>
+
+<details>
+<parameter name="summary"><strong>How do I find an item's ID to ban it?</strong></summary>
+
+**Method 1: F3+H in-game**
+1. Press `F3 + H` in Minecraft
+2. Hover over item in inventory
+3. Item ID shows in tooltip (e.g., `mega_showdown:tera_orb`)
+
+**Method 2: /give command**
+```
+/give @s <tab>
+```
+Autocomplete shows available item IDs.
+
+**Method 3: Check mod source**
+Look for item registration in mod code:
+```java
+registerItem("tera_orb", ...)
+```
+
+**Format:** Always `modid:item_name` (e.g., `minecraft:diamond`, `cobblemon:poke_ball`)
+
+</details>
+
+<details>
+<parameter name="summary"><strong>Player says they removed the item but still can't queue?</strong></summary>
+
+**Common causes:**
+
+1. **Multiple instances of the item:**
+   - Check all inventory slots (hotbar + main)
+   - Item may be in multiple places
+
+2. **Ghost item (rare):**
+   ```
+   /clear @s <item_id>
+   ```
+   This force-removes the item.
+
+3. **Wrong item removed:**
+   - Error message shows exact item ID
+   - Must match exactly (case-sensitive)
+
+4. **Server cache (very rare):**
+   - Have player reconnect
+
+**Verification:**
+1. Press `F3 + H`
+2. Check every inventory slot
+3. Ensure item ID matches exactly
+
+</details>
+
+<details>
+<parameter name="summary"><strong>Can I ban items from armor slots or offhand?</strong></summary>
+
+**Current limitations:**
+
+✅ **Checked:**
+- Hotbar (9 slots)
+- Main inventory (27 slots)
+
+❌ **Not checked:**
+- Armor slots (head, chest, legs, feet)
+- Offhand
+- Ender chest
+
+**Workaround for armor/offhand:**
+Use the Pokemon blacklist system if the item affects Pokemon directly (e.g., held items).
+
+**Future update:** Armor slot checking may be added if requested.
+
+</details>
+
+---
+
+## 🐛 Bug Fixes & Known Issues
+
+<details>
+<parameter name="summary"><strong>I selected 4 Pokemon but 6 appeared in battle!</strong></summary>
+
+**This bug was fixed in the latest version!**
+
+**If you're still experiencing this:**
+
+1. **Update to latest CobbleRanked:**
+   - Download from Discord
+   - Replace old JAR file
+   - Restart server
+
+2. **Verify fix in logs:**
+   ```
+   [Battle] Pokemon selection mode - filtering to selected Pokemon only
+   [Battle] Player1: 4 selected, Player2: 4 selected
+   ```
+
+3. **If still broken:**
+   - Report to Discord with logs
+   - Include server version and Cobblemon version
+
+**Technical details:** Now uses `BattleBuilder.pvp1v1()` with custom `partyAccessor` to correctly filter Pokemon.
+
+</details>
+
+<details>
+<parameter name="summary"><strong>Arena shows "not available" after someone disconnected during selection!</strong></summary>
+
+**This bug was fixed in the latest version!**
+
+**Symptoms:**
+- Player disconnects during Pokemon/Lead selection
+- Next match shows "no arena available"
+- Arena stuck in "in use" state
+
+**Fix (in latest version):**
+- Arenas are now properly released when players disconnect
+- Includes detailed logging: `[Selection] Released arena 'arena1' after disconnect`
+
+**If still occurring:**
+1. Update to latest CobbleRanked
+2. Restart server
+3. Check logs for arena release messages
+
+**Manual workaround (if update unavailable):**
+```
+/rankedarena reload
+```
+This resets all arena states.
+
+</details>
+

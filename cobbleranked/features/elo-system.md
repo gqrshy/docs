@@ -22,15 +22,20 @@ Elo rating determines:
 - **Lose** → Lose Elo
 - **Points exchanged** depend on rating difference
 
-### Examples
+### Examples (Pokemon Showdown mode, K=32)
 
-| Scenario | Your Elo | Opponent | Result | Change |
-|----------|----------|----------|--------|--------|
-| Even match | 1000 | 1000 | Win | +16 |
-| Upset win | 900 | 1200 | Win | +28 |
-| Expected win | 1200 | 900 | Win | +4 |
+| Scenario | Your Elo | Opponent | Win Probability | Win | Lose |
+|----------|----------|----------|-----------------|-----|------|
+| Even match | 1000 | 1000 | 50% | **+16** | -16 |
+| Upset win | 900 | 1200 | 24% | **+24** | -8 |
+| Expected win | 1200 | 900 | 76% | **+8** | -24 |
+| Major upset | 800 | 1400 | 5% | **+30** | -2 |
 
-**Key:** Beating stronger opponents = more Elo!
+**Key insights:**
+- Even match (50/50): ±16 Elo
+- Beating higher-ranked = big gain, small loss risk
+- Losing to lower-ranked = big loss, small gain potential
+- Total Elo in system stays constant (zero-sum)
 
 ---
 
@@ -79,40 +84,66 @@ Winner gains +10 to +30 Elo (random).
 
 ### Glicko-2 (Advanced)
 
-Most accurate system. Tracks rating uncertainty (RD).
+Most accurate system used by Chess.com and Lichess. Tracks **rating uncertainty (RD)** in addition to rating.
 
 ```json5
 {
   "eloSystem": {
     "mode": "GLICKO2",
     "glicko2": {
-      "initialRating": 1500.0,
-      "initialRD": 350.0,          // Rating uncertainty
-      "initialVolatility": 0.06,
-      "tau": 0.5,
-      "rdDecayDays": 30
+      "initialRating": 1500.0,        // Starting rating (higher than standard Elo)
+      "initialRD": 350.0,              // Rating Deviation (uncertainty)
+      "initialVolatility": 0.06,       // How erratic rating changes are
+      "tau": 0.5,                      // System volatility constraint
+      "rdDecayDays": 30                // RD increases if inactive
     }
   }
 }
 ```
 
+**How it works:**
+- **Rating (R):** Your skill level (like Elo)
+- **Rating Deviation (RD):** Confidence in your rating
+  - New player: RD = 350 (uncertain)
+  - After 20+ matches: RD ≈ 50-100 (confident)
+  - Inactive players: RD increases (uncertainty grows)
+- **Volatility (σ):** How consistently you perform
+
+**Rating changes:**
+- New players (high RD): **±100 points** per match
+- Established players (low RD): **±20-40 points** per match
+- Beating uncertain players (high RD): smaller gain
+- Beating confident players (low RD): larger gain
+
 **When to use:**
-- ✅ Large competitive server (100+ players)
-- ❌ Small casual server (use Pokemon Showdown)
+- ✅ Large competitive server (100+ active players)
+- ✅ Want fair ratings for returning players
+- ✅ Need to account for rating confidence
+- ❌ Small casual server (use Pokemon Showdown instead)
 
 ---
 
 ## Configuration
 
-### K-Factor Guide
+### K-Factor Guide (Pokemon Showdown Mode)
 
-| K-Factor | Volatility | Use Case |
-|----------|------------|----------|
-| 16 | Very low | Top players only |
-| 24 | Low | Competitive |
-| **32** | **Standard** | **Recommended** |
-| 40 | High | Casual |
-| 64 | Very high | New players |
+K-Factor controls how much Elo changes per match. Higher = faster changes.
+
+**Formula:** `Elo change = K × (actual result - expected result)`
+
+| K-Factor | Rating Change | Use Case | Example |
+|----------|---------------|----------|---------|
+| 16 | ±4 to ±12 | Very stable, top-ranked players only | Chess grandmasters |
+| 24 | ±6 to ±18 | Competitive, slower progression | Ranked competitive |
+| **32** | **±8 to ±24** | **Standard** | **Pokemon Showdown default** |
+| 40 | ±10 to ±30 | Faster progression, casual | Casual competitive |
+| 64 | ±16 to ±48 | Very fast (new players only) | First 10 matches |
+
+**Recommendation:**
+- **Competitive server:** K = 32 (standard: 64), provisional K = 64
+- **Casual server:** K = 40 (standard: 64), provisional K = 80
+- **High activity:** Lower K-factor (ratings stabilize faster)
+- **Low activity:** Higher K-factor (ratings adjust faster)
 
 ### Elo Decay
 
@@ -132,18 +163,7 @@ Inactive players lose Elo to prevent ladder stagnation.
 
 **Example:** 10 days inactive = -20 Elo
 
----
-
-## Elo Ranges
-
-| Elo Range | Skill Level | % of Players |
-|-----------|-------------|--------------|
-| 800-999 | Beginner | ~15% |
-| 1000-1199 | Intermediate | ~35% |
-| 1200-1399 | Advanced | ~30% |
-| 1400-1599 | Expert | ~15% |
-| 1600-1799 | Master | ~4% |
-| 1800+ | Grandmaster | ~1% |
+**Note:** Glicko-2 mode uses RD decay instead (rating stays, uncertainty increases).
 
 ---
 
