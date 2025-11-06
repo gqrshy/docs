@@ -22,16 +22,16 @@ Arenas are locations where ranked battles take place.
 2. **Stand at the spawn point** where you want players to teleport
 3. **Run the command:**
    ```
-   /rankedarena arena set <arena_name>
+   /rankedadmin arena set <arena_name>
    ```
    Example:
    ```
-   /rankedarena arena set main_arena
+   /rankedadmin arena set main_arena
    ```
 
 4. **Verify creation:**
    ```
-   /rankedarena arena list
+   /rankedadmin arena list
    ```
 
 ### Multiple Arenas (Optional)
@@ -39,9 +39,9 @@ Arenas are locations where ranked battles take place.
 Create multiple arenas for variety:
 
 ```bash
-/rankedarena arena set volcano_arena
-/rankedarena arena set ice_arena
-/rankedarena arena set forest_arena
+/rankedadmin arena set volcano_arena
+/rankedadmin arena set ice_arena
+/rankedadmin arena set forest_arena
 ```
 
 CobbleRanked will randomly select from available arenas.
@@ -66,7 +66,7 @@ By default, **all Pokemon are allowed**. Let's ban some overpowered Pokemon:
 
 3. **Save and reload:**
    ```
-   /rankedarena reload
+   /rankedadmin reload
    ```
 
 ### Quick Presets
@@ -134,7 +134,7 @@ Seasons automatically rotate based on your configuration.
 ### Check Current Season
 
 ```
-/rankedarena season info
+/rankedadmin season info
 ```
 
 You should see:
@@ -156,7 +156,7 @@ Edit `config/cobbleranked/config.json5`:
 
 Reload:
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 ## Step 4: Test the System
@@ -230,7 +230,7 @@ Open `config/cobbleranked/rewards.json5`:
 
 Reload:
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 ## Verification Checklist
@@ -253,7 +253,7 @@ Before going live, verify:
 
 **Fix:**
 ```
-/rankedarena arena set main_arena
+/rankedadmin arena set main_arena
 ```
 
 ### Players can use banned Pokemon
@@ -262,7 +262,7 @@ Before going live, verify:
 
 **Fix:**
 1. Check `blacklist.json5` syntax (no trailing commas!)
-2. Reload: `/rankedarena reload`
+2. Reload: `/rankedadmin reload`
 3. Test with `/ranked` GUI validation
 
 ### Elo not updating
@@ -280,7 +280,7 @@ Before going live, verify:
 
 **Fix:**
 ```
-/rankedarena season rotate
+/rankedadmin season rotate
 ```
 This will create a new season and clear reward flags.
 

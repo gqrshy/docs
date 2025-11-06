@@ -352,7 +352,7 @@ See [Elo System](elo-system.md#elo-decay-system) for details.
 Leaderboards are **read-only** for all players.
 
 **To modify rankings:**
-- Use Elo admin commands: `/rankedarena elo set <player> <amount>`
+- Use Elo admin commands: `/rankedadmin elo set <player> <amount>`
 - See [Commands](../getting-started/commands.md)
 
 ---

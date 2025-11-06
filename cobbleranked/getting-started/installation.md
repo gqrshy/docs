@@ -220,9 +220,9 @@ redis-cli -h localhost -p 6379 PING
 Run these commands to verify installation:
 
 ```
-/rankedarena reload          # Reload all configs
-/rankedarena arena list      # View configured arenas
-/rankedarena season info     # Check current season
+/rankedadmin reload          # Reload all configs
+/rankedadmin arena list      # View configured arenas
+/rankedadmin season info     # Check current season
 /ranked                      # Open ranked GUI
 ```
 
@@ -327,7 +327,7 @@ redis-cli
 
 4. **Check format matches:**
    - Players in Singles queue won't match Doubles queue
-   - Check format with `/rankedarena queue list`
+   - Check format with `/rankedadmin queue list`
 
 5. **Check Elo ranges:**
    - Default ±200 Elo range

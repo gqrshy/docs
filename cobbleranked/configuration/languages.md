@@ -31,7 +31,7 @@ Edit `config/cobbleranked/config.json5`:
 ### 2. Reload Configuration
 
 ```bash
-/rankedarena reload
+/rankedadmin reload
 ```
 
 That's it! All messages will now use your selected language.
@@ -275,7 +275,7 @@ Edit `config.json5`:
 ### Step 4: Reload
 
 ```bash
-/rankedarena reload
+/rankedadmin reload
 ```
 
 ---
@@ -452,7 +452,7 @@ Use `\\` to escape backslashes:
 ### 1. Reload Configuration
 
 ```bash
-/rankedarena reload
+/rankedadmin reload
 ```
 
 ### 2. Test Common Messages
@@ -460,7 +460,7 @@ Use `\\` to escape backslashes:
 - Join queue: `/ranked` → Queue button
 - Battle messages: Complete a battle
 - Validation: Try banned Pokemon/moves
-- Admin: `/rankedarena reload`
+- Admin: `/rankedadmin reload`
 
 ### 3. Check Console
 
@@ -486,7 +486,7 @@ When CobbleRanked updates with new features:
 1. **Check for new keys** in `en-Us.json5` (reference)
 2. **Add missing keys** to your custom language file
 3. **Translate new messages**
-4. **Reload**: `/rankedarena reload`
+4. **Reload**: `/rankedadmin reload`
 
 ### Best Practices
 
@@ -514,7 +514,7 @@ When CobbleRanked updates with new features:
 **Solutions:**
 1. Check `language` setting in `config.json5`
 2. Verify file name matches exactly (case-sensitive)
-3. Reload: `/rankedarena reload`
+3. Reload: `/rankedadmin reload`
 4. Check console for errors
 
 ### Missing messages

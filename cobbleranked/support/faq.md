@@ -105,7 +105,7 @@ Do not download from unofficial sources:
 2. **Place** in `mods/` folder
 3. **Ensure dependencies** are installed (Cobblemon, Fabric API)
 4. **Start server** - Configs auto-generate in `config/cobbleranked/`
-5. **Create arena:** `/rankedarena setArena main_arena pos1` (repeat for pos2)
+5. **Create arena:** `/rankedadmin setArena main_arena pos1` (repeat for pos2)
 6. **Test:** `/ranked`
 
 See [Installation Guide](../getting-started/installation.md) for detailed steps.
@@ -173,7 +173,7 @@ See [Installation Guide](../getting-started/installation.md) for detailed steps.
 
 6. **Test:**
    ```bash
-   /rankedarena reload
+   /rankedadmin reload
    /ranked
    ```
 
@@ -276,12 +276,12 @@ See [Blacklist Configuration](../configuration/blacklist.md) for full list.
 
 **Reload config:**
 ```bash
-/rankedarena reload
+/rankedadmin reload
 ```
 
 **Check current season:**
 ```bash
-/rankedarena season info
+/rankedadmin season info
 ```
 
 </details>
@@ -497,7 +497,7 @@ See [Elo System Guide](../features/elo-system.md) for detailed explanation.
 **Flee count tracking:**
 - Never decreases automatically
 - Visible in player stats
-- Admins can reset: `/rankedarena setflee <player> 0`
+- Admins can reset: `/rankedadmin setflee <player> 0`
 
 **Disconnect penalties:**
 - Same for crashes and intentional disconnects (prevents abuse)
@@ -623,11 +623,11 @@ Flee count now **automatically decreases** over time:
 
 **Manual reset (admin command):**
 ```bash
-/rankedarena setflee <player> <amount>
+/rankedadmin setflee <player> <amount>
 
 # Examples:
-/rankedarena setflee PlayerName 0      # Reset to 0 (clear penalty)
-/rankedarena setflee PlayerName 5      # Set to 5
+/rankedadmin setflee PlayerName 0      # Reset to 0 (clear penalty)
+/rankedadmin setflee PlayerName 5      # Set to 5
 ```
 
 **For legitimate crashes:**
@@ -708,7 +708,7 @@ Check if special format is enabled:
 
 Reload configuration:
 ```bash
-/rankedarena reload
+/rankedadmin reload
 ```
 
 **Debug:**
@@ -786,7 +786,7 @@ Battle logs show: `"Battle ended after {N} turns"`
 
 1. **Reload config:**
    ```bash
-   /rankedarena reload
+   /rankedadmin reload
    ```
 
 2. **Check console for errors:**
@@ -860,9 +860,9 @@ Battle logs show: `"Battle ended after {N} turns"`
 Create arena in Nether:
 ```bash
 # In Nether dimension
-/rankedarena setArena nether_arena pos1
+/rankedadmin setArena nether_arena pos1
 # Move to opposite corner
-/rankedarena setArena nether_arena pos2
+/rankedadmin setArena nether_arena pos2
 ```
 
 **Important:**
@@ -883,9 +883,9 @@ Create arena in Nether:
 
 2. **Re-create arena positions:**
    ```bash
-   /rankedarena setArena arena_name pos1
+   /rankedadmin setArena arena_name pos1
    # Move to opposite corner
-   /rankedarena setArena arena_name pos2
+   /rankedadmin setArena arena_name pos2
    ```
 
 3. **Verify Y coordinate:**
@@ -894,7 +894,7 @@ Create arena in Nether:
 
 4. **Test arena:**
    ```bash
-   /rankedarena teleportArena arena_name
+   /rankedadmin teleportArena arena_name
    ```
    Verifies spawn point is safe.
 
@@ -1205,7 +1205,7 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 **Migration:**
 
 ```bash
-/rankedarena database migrate sqlite mysql
+/rankedadmin database migrate sqlite mysql
 ```
 
 **What's migrated:**
@@ -1312,7 +1312,7 @@ Rewards only given once per season.
 
 Check if already collected:
 ```bash
-/rankedarena season info
+/rankedadmin season info
 ```
 
 Reset for testing:
@@ -2071,7 +2071,7 @@ Use the Pokemon blacklist system if the item affects Pokemon directly (e.g., hel
 
 **Manual workaround (if update unavailable):**
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 This resets all arena states.
 

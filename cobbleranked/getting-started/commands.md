@@ -110,7 +110,7 @@ Current Season: Season 1
 
 Commands for server administrators:
 
-### `/rankedarena`
+### `/rankedadmin`
 
 Main admin command for CobbleRanked management.
 
@@ -119,12 +119,12 @@ Main admin command for CobbleRanked management.
 
 ---
 
-### `/rankedarena reload`
+### `/rankedadmin reload`
 
 Reload all configuration files without restarting the server.
 
 - **Permission:** `cobbleranked.admin.reload`
-- **Usage:** `/rankedarena reload`
+- **Usage:** `/rankedadmin reload`
 
 **Reloads:**
 - `config.json5`
@@ -136,15 +136,15 @@ Reload all configuration files without restarting the server.
 
 ---
 
-### `/rankedarena arena set <name>`
+### `/rankedadmin arena set <name>`
 
 Create or update a battle arena at your current location.
 
 - **Permission:** `cobbleranked.admin.arena`
-- **Usage:** `/rankedarena arena set <arena_name>`
+- **Usage:** `/rankedadmin arena set <arena_name>`
 - **Example:**
   ```
-  /rankedarena arena set volcano_arena
+  /rankedadmin arena set volcano_arena
   ```
 
 **Notes:**
@@ -154,25 +154,25 @@ Create or update a battle arena at your current location.
 
 ---
 
-### `/rankedarena arena remove <name>`
+### `/rankedadmin arena remove <name>`
 
 Delete a battle arena.
 
 - **Permission:** `cobbleranked.admin.arena`
-- **Usage:** `/rankedarena arena remove <arena_name>`
+- **Usage:** `/rankedadmin arena remove <arena_name>`
 - **Example:**
   ```
-  /rankedarena arena remove old_arena
+  /rankedadmin arena remove old_arena
   ```
 
 ---
 
-### `/rankedarena arena list`
+### `/rankedadmin arena list`
 
 List all configured arenas.
 
 - **Permission:** `cobbleranked.admin.arena`
-- **Usage:** `/rankedarena arena list`
+- **Usage:** `/rankedadmin arena list`
 
 **Output:**
 ```
@@ -184,21 +184,21 @@ Configured Arenas (3):
 
 ---
 
-### `/rankedarena arena tp <name>`
+### `/rankedadmin arena tp <name>`
 
 Teleport to a specific arena.
 
 - **Permission:** `cobbleranked.admin.arena`
-- **Usage:** `/rankedarena arena tp <arena_name>`
+- **Usage:** `/rankedadmin arena tp <arena_name>`
 
 ---
 
-### `/rankedarena season info`
+### `/rankedadmin season info`
 
 Display current season information.
 
 - **Permission:** `cobbleranked.admin.season`
-- **Usage:** `/rankedarena season info`
+- **Usage:** `/rankedadmin season info`
 
 **Output:**
 ```
@@ -211,12 +211,12 @@ Days Remaining: 30
 
 ---
 
-### `/rankedarena season rotate`
+### `/rankedadmin season rotate`
 
 Manually start a new season.
 
 - **Permission:** `cobbleranked.admin.season`
-- **Usage:** `/rankedarena season rotate`
+- **Usage:** `/rankedadmin season rotate`
 
 **Actions:**
 1. Ends current season
@@ -229,60 +229,60 @@ Manually start a new season.
 
 ---
 
-### `/rankedarena season rewards <player>`
+### `/rankedadmin season rewards <player>`
 
 Manually grant season rewards to a player.
 
 - **Permission:** `cobbleranked.admin.season`
-- **Usage:** `/rankedarena season rewards <player>`
+- **Usage:** `/rankedadmin season rewards <player>`
 
 ---
 
-### `/rankedarena elo set <player> <amount>`
+### `/rankedadmin elo set <player> <amount>`
 
 Set a player's Elo rating.
 
 - **Permission:** `cobbleranked.admin.elo`
-- **Usage:** `/rankedarena elo set <player> <elo>`
+- **Usage:** `/rankedadmin elo set <player> <elo>`
 - **Example:**
   ```
-  /rankedarena elo set PlayerName 1500
+  /rankedadmin elo set PlayerName 1500
   ```
 
 ---
 
-### `/rankedarena elo add <player> <amount>`
+### `/rankedadmin elo add <player> <amount>`
 
 Add Elo points to a player.
 
 - **Permission:** `cobbleranked.admin.elo`
-- **Usage:** `/rankedarena elo add <player> <amount>`
+- **Usage:** `/rankedadmin elo add <player> <amount>`
 - **Example:**
   ```
-  /rankedarena elo add PlayerName 100
+  /rankedadmin elo add PlayerName 100
   ```
 
 ---
 
-### `/rankedarena elo remove <player> <amount>`
+### `/rankedadmin elo remove <player> <amount>`
 
 Remove Elo points from a player.
 
 - **Permission:** `cobbleranked.admin.elo`
-- **Usage:** `/rankedarena elo remove <player> <amount>`
+- **Usage:** `/rankedadmin elo remove <player> <amount>`
 
 ---
 
-### `/rankedarena setflee <player> <amount>`
+### `/rankedadmin setflee <player> <amount>`
 
 Set a player's flee count (disconnect penalty counter).
 
 - **Permission:** `cobbleranked.admin` (OP level 2)
-- **Usage:** `/rankedarena setflee <player> <amount>`
+- **Usage:** `/rankedadmin setflee <player> <amount>`
 - **Examples:**
   ```
-  /rankedarena setflee PlayerName 0      # Reset flee count (clear penalty)
-  /rankedarena setflee PlayerName 5      # Set to 5
+  /rankedadmin setflee PlayerName 0      # Reset flee count (clear penalty)
+  /rankedadmin setflee PlayerName 5      # Set to 5
   ```
 
 **What this does:**
@@ -297,12 +297,12 @@ Set a player's flee count (disconnect penalty counter).
 
 ---
 
-### `/rankedarena stats reset <player>`
+### `/rankedadmin stats reset <player>`
 
 Reset a player's ranked statistics.
 
 - **Permission:** `cobbleranked.admin.stats`
-- **Usage:** `/rankedarena stats reset <player>`
+- **Usage:** `/rankedadmin stats reset <player>`
 
 **Resets:**
 - Elo to 1000
@@ -313,21 +313,21 @@ Reset a player's ranked statistics.
 
 ---
 
-### `/rankedarena flee reset <player>`
+### `/rankedadmin flee reset <player>`
 
 Reset a player's flee count (disconnect penalties).
 
 - **Permission:** `cobbleranked.admin.flee`
-- **Usage:** `/rankedarena flee reset <player>`
+- **Usage:** `/rankedadmin flee reset <player>`
 
 ---
 
-### `/rankedarena database migrate <from> <to>`
+### `/rankedadmin database migrate <from> <to>`
 
 Migrate database from SQLite to MySQL or vice versa.
 
 - **Permission:** `cobbleranked.admin.database`
-- **Usage:** `/rankedarena database migrate sqlite mysql`
+- **Usage:** `/rankedadmin database migrate sqlite mysql`
 
 **Supported migrations:**
 - `sqlite` → `mysql`
@@ -335,12 +335,12 @@ Migrate database from SQLite to MySQL or vice versa.
 
 ---
 
-### `/rankedarena debug toggle`
+### `/rankedadmin debug toggle`
 
 Toggle debug mode for detailed logging.
 
 - **Permission:** `cobbleranked.admin.debug`
-- **Usage:** `/rankedarena debug toggle`
+- **Usage:** `/rankedadmin debug toggle`
 
 **Debug info:**
 - Queue state
@@ -430,15 +430,15 @@ Quick reference for command aliases:
 |--------------|---------|
 | `/ranked` | `/rankedgui`, `/rankgui` |
 | `/leaderboard` | `/lb`, `/top`, `/ranktop` |
-| `/rankedarena` | `/radmin` |
+| `/rankedadmin` | `/radmin` |
 
 ## Auto-Completion
 
 All commands support tab completion:
 
 ```
-/rankedarena arena <TAB>        # Shows: set, remove, list, tp
-/rankedarena season <TAB>       # Shows: info, rotate, rewards
+/rankedadmin arena <TAB>        # Shows: set, remove, list, tp
+/rankedadmin season <TAB>       # Shows: info, rotate, rewards
 /queue join <TAB>               # Shows: singles, doubles, multi
 ```
 

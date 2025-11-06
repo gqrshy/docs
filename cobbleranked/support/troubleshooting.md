@@ -128,7 +128,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 4. **Check ranked status:**
    - System might be closed
    - Error: "Ranked match is not open"
-   - Solution: Contact admin to open: `/rankedarena open`
+   - Solution: Contact admin to open: `/rankedadmin open`
 
 ### Queue taking forever
 
@@ -165,13 +165,13 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 1. **Check arenas configured:**
    ```bash
-   /rankedarena arena list
+   /rankedadmin arena list
    ```
-   If no arenas: `/rankedarena arena set main_arena`
+   If no arenas: `/rankedadmin arena set main_arena`
 
 2. **Check arena world loaded:**
    - Arena dimension must be loaded
-   - Try teleporting manually: `/rankedarena arena tp arena_name`
+   - Try teleporting manually: `/rankedadmin arena tp arena_name`
 
 3. **Check console errors:**
    ```bash
@@ -259,7 +259,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 - Intentional: None (this is intended behavior)
 - Unintentional (crash/internet): Admin can reset flee count
   ```bash
-  /rankedarena flee reset PlayerName
+  /rankedadmin flee reset PlayerName
   ```
 
 ---
@@ -270,7 +270,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 **Symptoms:**
 - Changed `config.json5`
-- Ran `/rankedarena reload`
+- Ran `/rankedadmin reload`
 - Changes not applied
 
 **Solutions:**
@@ -312,7 +312,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 2. **Check reloaded:**
    ```bash
-   /rankedarena reload
+   /rankedadmin reload
    ```
 
 3. **Check validation message:**
@@ -353,7 +353,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 3. **Reload config:**
    ```bash
-   /rankedarena reload
+   /rankedadmin reload
    ```
 
 4. **Check console:**
@@ -388,7 +388,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 4. **Reload rewards:**
    ```bash
-   /rankedarena reload
+   /rankedadmin reload
    ```
 
 ### Reward commands not executing
@@ -593,7 +593,7 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 
 3. **Reload GUI:**
    ```bash
-   /rankedarena reload
+   /rankedadmin reload
    ```
 
 ---

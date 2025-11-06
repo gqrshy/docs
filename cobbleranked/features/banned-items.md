@@ -49,12 +49,15 @@ Edit `config/cobbleranked/config.json5`:
 
 ### Default Banned Items
 
-CobbleRanked comes pre-configured to ban common Mega Showdown items:
+CobbleRanked comes pre-configured to ban all Mega Showdown battle gimmick items:
 
 | Item | Mod | Effect | Reason |
 |------|-----|--------|--------|
 | `mega_showdown:tera_orb` | Mega Showdown | Enables Terastallization | Gives unfair type advantage |
 | `mega_showdown:dynamax_band` | Mega Showdown | Enables Dynamax/Gigantamax | Significantly boosts Pokemon stats |
+| `mega_showdown:mega_bracelet` | Mega Showdown | Enables Mega Evolution | Gives significant stat boost |
+| `mega_showdown:z_ring` | Mega Showdown | Enables Z-Moves | Allows powerful one-time moves |
+| `mega_showdown:omni_ring` | Mega Showdown | Enables all battle gimmicks | Combines all advantages |
 
 ### Adding More Banned Items
 
@@ -62,10 +65,12 @@ To ban additional items, add their item IDs to the list:
 
 ```json5
 "banned_inventory_items": [
-  // Mega Showdown items
-  "mega_showdown:tera_orb",
-  "mega_showdown:dynamax_band",
-  "mega_showdown:z_ring",           // Prevent Z-Moves
+  // Mega Showdown battle gimmick items (default)
+  "mega_showdown:tera_orb",          // Terastallization
+  "mega_showdown:dynamax_band",      // Dynamax/Gigantamax
+  "mega_showdown:mega_bracelet",     // Mega Evolution
+  "mega_showdown:z_ring",            // Z-Moves
+  "mega_showdown:omni_ring",         // All gimmicks
 
   // Hypothetical custom mod items
   "custommod:legendary_boost",
@@ -129,9 +134,13 @@ for (slot in 0 until player.inventory.size()) {
 **What is checked:**
 - ✅ Hotbar (9 slots)
 - ✅ Main inventory (27 slots)
+- ✅ Trinket slots (if Trinkets mod is installed)
 - ❌ Armor slots (not checked)
 - ❌ Offhand (not checked)
 - ❌ Ender chest (not checked)
+
+**Trinket Mod Support:**
+CobbleRanked automatically detects if the [Trinkets mod](https://modrinth.com/mod/trinkets) is installed and checks all trinket/accessory slots (necklace, ring, belt, etc.). Players cannot bypass item bans by equipping items in trinket slots.
 
 ### Error Messages
 
@@ -157,8 +166,9 @@ Remove these items from your inventory and try again.
 "banned_inventory_items": [
   "mega_showdown:tera_orb",          // Terastallization
   "mega_showdown:dynamax_band",      // Dynamax/Gigantamax
+  "mega_showdown:mega_bracelet",     // Mega Evolution
   "mega_showdown:z_ring",            // Z-Moves
-  "mega_showdown:mega_bracelet",     // Mega Evolution (if not in Pokemon)
+  "mega_showdown:omni_ring"          // All gimmicks
 ]
 ```
 
@@ -166,9 +176,12 @@ Remove these items from your inventory and try again.
 
 ```json5
 "banned_inventory_items": [
-  // Mega Showdown
+  // Mega Showdown (all battle gimmicks)
   "mega_showdown:tera_orb",
   "mega_showdown:dynamax_band",
+  "mega_showdown:mega_bracelet",
+  "mega_showdown:z_ring",
+  "mega_showdown:omni_ring",
 
   // Hypothetical power-up items
   "powerups:stat_booster",

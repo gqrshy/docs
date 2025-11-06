@@ -89,7 +89,7 @@ CobbleRanked automatically creates these tables:
 ### SQLite to MySQL
 
 ```bash
-/rankedarena database migrate sqlite mysql
+/rankedadmin database migrate sqlite mysql
 ```
 
 **Requirements:**
@@ -105,7 +105,7 @@ CobbleRanked automatically creates these tables:
 ### MySQL to SQLite
 
 ```bash
-/rankedarena database migrate mysql sqlite
+/rankedadmin database migrate mysql sqlite
 ```
 
 **Use case:** Downgrading from cross-server to single-server.

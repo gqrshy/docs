@@ -32,7 +32,7 @@ mysqldump -u cobbleranked -p cobbleranked > cobbleranked_backup.sql
 
 **2. Check current version:**
 ```bash
-/rankedarena version
+/rankedadmin version
 ```
 
 **3. Read changelog:**
@@ -67,7 +67,7 @@ rm mods/CobbleRanked-v2.0.jar
 ls config/cobbleranked/*.json5
 
 # Verify database
-/rankedarena database info
+/rankedadmin database info
 
 # Test player stats
 /stats YourName
@@ -246,7 +246,7 @@ Edit `config/cobbleranked/config.json5`:
 
 ```bash
 # After MySQL is configured
-/rankedarena database migrate sqlite mysql
+/rankedadmin database migrate sqlite mysql
 ```
 
 **Console output:**
@@ -270,7 +270,7 @@ Edit `config/cobbleranked/config.json5`:
 
 **4. Reload:**
 ```bash
-/rankedarena reload
+/rankedadmin reload
 ```
 
 See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
@@ -341,7 +341,7 @@ Database automatically creates `format_stats` table on first v2.2 startup.
 Run this command to auto-migrate rewards config:
 
 ```bash
-/rankedarena migrate rewards
+/rankedadmin migrate rewards
 ```
 
 **Manual migration:**
@@ -386,13 +386,13 @@ mysql -h 192.168.1.100 -u cobbleranked -p cobbleranked
 
 **3. Run migration:**
 ```bash
-/rankedarena database migrate sqlite mysql
+/rankedadmin database migrate sqlite mysql
 ```
 
 **4. Verify data:**
 ```bash
 # Check player count
-/rankedarena database stats
+/rankedadmin database stats
 
 # Check individual stats
 /stats PlayerName
@@ -416,7 +416,7 @@ mysql -h 192.168.1.100 -u cobbleranked -p cobbleranked
 
 **1. Run migration:**
 ```bash
-/rankedarena database migrate mysql sqlite
+/rankedadmin database migrate mysql sqlite
 ```
 
 **2. Disable cross-server mode:**
@@ -430,7 +430,7 @@ mysql -h 192.168.1.100 -u cobbleranked -p cobbleranked
 
 **3. Reload:**
 ```bash
-/rankedarena reload
+/rankedadmin reload
 ```
 
 **Warning:** Only migrates data from MySQL to local SQLite. Other servers' queues won't be accessible.
@@ -555,7 +555,7 @@ blacklist:
 }
 ```
 
-**Migration:** Run `/rankedarena migrate rewards` to auto-convert.
+**Migration:** Run `/rankedadmin migrate rewards` to auto-convert.
 
 ---
 
@@ -604,14 +604,14 @@ rm mods/CobbleRanked-v2.2.jar
 
 **1. Export player stats:**
 ```bash
-/rankedarena database export players.json
+/rankedadmin database export players.json
 ```
 
 **2. Downgrade mod (as above)**
 
 **3. Import player stats:**
 ```bash
-/rankedarena database import players.json
+/rankedadmin database import players.json
 ```
 
 **Note:** Only works if database schema is compatible.
@@ -668,10 +668,10 @@ cp config/cobbleranked/*.yml.backup config/cobbleranked/
 
 ```bash
 # Export from old database
-/rankedarena database export players.json
+/rankedadmin database export players.json
 
 # Import to new database
-/rankedarena database import players.json
+/rankedadmin database import players.json
 ```
 
 ### Rewards not working after format migration
@@ -684,7 +684,7 @@ cp config/cobbleranked/*.yml.backup config/cobbleranked/
 
 Run reward migration command:
 ```bash
-/rankedarena migrate rewards
+/rankedadmin migrate rewards
 ```
 
 Or manually update `rewards.json5`:

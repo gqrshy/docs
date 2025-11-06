@@ -25,7 +25,7 @@ Arenas are physical locations where ranked battles take place. When a match is f
 2. **Stand at the spawn point** where you want players to appear
 3. **Run the command:**
    ```
-   /rankedarena arena set main_arena
+   /rankedadmin arena set main_arena
    ```
 
 That's it! Your arena is now configured.
@@ -34,7 +34,7 @@ That's it! Your arena is now configured.
 
 List all configured arenas:
 ```
-/rankedarena arena list
+/rankedadmin arena list
 ```
 
 Output:
@@ -50,10 +50,10 @@ Configured Arenas (1):
 CobbleRanked randomly selects from available arenas for variety:
 
 ```bash
-/rankedarena arena set volcano_arena
-/rankedarena arena set ice_arena
-/rankedarena arena set forest_arena
-/rankedarena arena set desert_arena
+/rankedadmin arena set volcano_arena
+/rankedadmin arena set ice_arena
+/rankedadmin arena set forest_arena
+/rankedadmin arena set desert_arena
 ```
 
 **Recommendation:** Create at least 3-5 arenas for variety.
@@ -63,7 +63,7 @@ CobbleRanked randomly selects from available arenas for variety:
 Delete an arena configuration:
 
 ```
-/rankedarena arena remove old_arena
+/rankedadmin arena remove old_arena
 ```
 
 **Warning:** This does not delete the physical build, only removes it from rotation.
@@ -73,7 +73,7 @@ Delete an arena configuration:
 Preview an arena location:
 
 ```
-/rankedarena arena tp main_arena
+/rankedadmin arena tp main_arena
 ```
 
 Useful for:
@@ -86,7 +86,7 @@ Useful for:
 View all configured arenas:
 
 ```
-/rankedarena arena list
+/rankedadmin arena list
 ```
 
 Output shows:
@@ -274,7 +274,7 @@ You can manually edit `arenas.json5` for bulk changes:
 
 **After editing:**
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 ### WorldGuard Integration
@@ -330,10 +330,10 @@ After battle ends:
 **Symptom:** Match found but players stay in place
 
 **Solution:**
-1. Check arena exists: `/rankedarena arena list`
+1. Check arena exists: `/rankedadmin arena list`
 2. Verify world is loaded
 3. Check console for errors
-4. Test arena: `/rankedarena arena tp arena_name`
+4. Test arena: `/rankedadmin arena tp arena_name`
 
 ### Invalid world error
 
@@ -349,7 +349,7 @@ After battle ends:
 **Symptom:** Players spawn in blocks or fall
 
 **Solution:**
-1. Re-create arena: Stand at correct spot, `/rankedarena arena set arena_name`
+1. Re-create arena: Stand at correct spot, `/rankedadmin arena set arena_name`
 2. Verify Y coordinate is correct (ground level, not underground)
 3. Check `arenas.json5` coordinates manually
 
@@ -358,9 +358,9 @@ After battle ends:
 **Symptom:** Specific arena never selected
 
 **Solution:**
-1. Verify arena in list: `/rankedarena arena list`
+1. Verify arena in list: `/rankedadmin arena list`
 2. Check world is loaded (cross-dimensional arenas)
-3. Reload config: `/rankedarena reload`
+3. Reload config: `/rankedadmin reload`
 
 ### Coordinates off-center
 

@@ -224,7 +224,7 @@ Players can earn rewards in **both** formats.
 After editing `rewards.json5`:
 
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 ---
@@ -233,8 +233,8 @@ After editing `rewards.json5`:
 
 **Rewards not appearing?**
 - Check `rank_range` syntax
-- Verify season ended: `/rankedarena season info`
-- Reload config: `/rankedarena reload`
+- Verify season ended: `/rankedadmin season info`
+- Reload config: `/rankedadmin reload`
 
 **Commands not executing?**
 - Test command manually first

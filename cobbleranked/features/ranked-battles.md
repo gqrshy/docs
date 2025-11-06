@@ -216,7 +216,7 @@ Player A Stats:
 **Flee count tracking:**
 - Visible in player stats
 - Never decreases automatically
-- Admin can reset: `/rankedarena flee reset <player>`
+- Admin can reset: `/rankedadmin flee reset <player>`
 
 ### Unintentional Disconnect (Crash/Internet)
 
@@ -227,7 +227,7 @@ Player A Stats:
 
 **Protection:**
 - Admin can manually reset flee count for legitimate crashes
-- Elo can be manually adjusted: `/rankedarena elo add <player> <amount>`
+- Elo can be manually adjusted: `/rankedadmin elo add <player> <amount>`
 
 ### Connection Issues
 
@@ -406,7 +406,7 @@ Commands after battle:
 
 **Solution:**
 1. Check blacklist validation message
-2. Verify arena exists: `/rankedarena arena list`
+2. Verify arena exists: `/rankedadmin arena list`
 3. Check console for errors
 
 ### Elo not updating

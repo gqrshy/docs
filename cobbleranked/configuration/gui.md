@@ -624,7 +624,7 @@ To add a new language:
 **Symptoms:** Changes to GUI files don't appear in-game
 
 **Solutions:**
-1. Reload config: `/rankedarena reload`
+1. Reload config: `/rankedadmin reload`
 2. Reopen GUI (close and open again)
 3. Check console for JSON5 syntax errors
 4. Verify file is in correct folder (`config/cobbleranked/gui/`)

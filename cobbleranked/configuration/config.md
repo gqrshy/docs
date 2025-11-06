@@ -232,7 +232,7 @@ MySQL connection pool settings (cross-server only).
 After editing config:
 
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 Reloads all configuration files without server restart.
@@ -247,7 +247,7 @@ Reloads all configuration files without server restart.
 - Verify file path: `config/cobbleranked/config.json5`
 
 **Changes not applying?**
-- Run `/rankedarena reload`
+- Run `/rankedadmin reload`
 - Restart server if reload fails
 
 **Cross-server not working?**

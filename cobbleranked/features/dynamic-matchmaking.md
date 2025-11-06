@@ -107,7 +107,7 @@ Automatically expands Elo range as players wait in queue for faster matches.
 
 **Expansion not working?**
 - Check `enabled: true`
-- Reload config: `/rankedarena reload`
+- Reload config: `/rankedadmin reload`
 
 ---
 

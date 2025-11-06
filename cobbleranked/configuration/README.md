@@ -97,10 +97,10 @@ config/cobbleranked/
 
 ## Reloading Configuration
 
-Use the `/rankedarena reload` command to reload configuration without restarting:
+Use the `/rankedadmin reload` command to reload configuration without restarting:
 
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 ## Getting Help
