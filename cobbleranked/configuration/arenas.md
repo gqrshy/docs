@@ -159,52 +159,6 @@ Common dimension identifiers:
 | Singles (1v1) | 20x20 blocks |
 | Doubles (2v2) | 25x25 blocks |
 
-### Design Best Practices
-
-**✅ DO:**
-- Use flat, even terrain for fair battles
-- Provide clear boundaries (walls, barriers, invisible barriers)
-- Ensure good lighting (prevents mob spawns)
-- Use spawn protection (WorldGuard regions)
-- Include spectator areas (optional)
-- Create thematic arenas (volcano, ice, forest, etc.)
-
-**❌ DON'T:**
-- Use cramped spaces (hard to see battle)
-- Include hazards (lava, void, etc.)
-- Use cluttered decorations (performance issues)
-- Place near mob spawners
-- Use transparent floors (can be disorienting)
-
-### Example Arena Builds
-
-#### Basic Flat Arena
-
-```
-Materials: Stone bricks, quartz, glowstone
-Size: 20x20
-Features: Simple flat platform, glowstone lighting
-Build Time: ~10 minutes
-```
-
-#### Themed Volcano Arena
-
-```
-Materials: Netherrack, magma blocks, glass barriers
-Size: 25x25
-Features: Lava pools (protected), heat haze effects
-Build Time: ~30 minutes
-```
-
-#### Floating Sky Arena
-
-```
-Materials: Quartz, sea lanterns, barriers
-Size: 20x20
-Features: Floating platform, cloud decorations
-Build Time: ~20 minutes
-```
-
 ## Spawn Point Positioning
 
 ### Player Placement
