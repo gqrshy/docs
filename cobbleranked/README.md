@@ -107,11 +107,6 @@ Need help? Check out these resources:
 - **FAQ**: [Frequently Asked Questions](support/faq.md)
 - **Discord Server**: [Join for Support](https://discord.gg/VVVvBTqqyP) (#feedback channel)
 
-## Credits
-
-**Author**: Gqrshy
-**License**: All Rights Reserved
-
 ---
 
 Ready to get started? Head to the [Installation Guide](getting-started/installation.md) to begin your competitive Pokemon journey!
