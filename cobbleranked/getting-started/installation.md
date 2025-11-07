@@ -24,7 +24,7 @@ Cross-server setup requires additional infrastructure:
 |----------|---------|---------|
 | **MySQL** | 8.0+ | Player data, stats, seasons (shared across servers) |
 | **Redis** | 6.0+ | Real-time queue, matchmaking, messaging (pub/sub) |
-| **Velocity** | 3.4.0+ | Proxy for server transfers (recommended) |
+| **Velocity** | 3.4.0+ | Proxy for server transfers |
 
 See [Cross-Server Setup Guide](../advanced/cross-server.md) for detailed instructions.
 
