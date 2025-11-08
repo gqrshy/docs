@@ -81,13 +81,13 @@ Your Rank: #42
 
 All admin commands require OP level 2 or higher.
 
-### /rankedarena
+### /rankedadmin
 
 Root command for all admin features.
 
 **Usage:**
 ```
-/rankedarena <subcommand>
+/rankedadmin <subcommand>
 ```
 
 **Permission:** Requires OP level 2
@@ -104,13 +104,13 @@ Root command for all admin features.
 
 Commands for creating and managing battle arenas.
 
-### /rankedarena setArena
+### /rankedadmin setArena
 
 Set player spawn positions for an arena.
 
 **Usage:**
 ```
-/rankedarena setArena <name> <pos1|pos2>
+/rankedadmin setArena <name> <pos1|pos2>
 ```
 
 **Parameters:**
@@ -121,11 +121,11 @@ Set player spawn positions for an arena.
 
 **Examples:**
 ```
-/rankedarena setArena arena1 pos1
-/rankedarena setArena arena1 pos2
+/rankedadmin setArena arena1 pos1
+/rankedadmin setArena arena1 pos2
 
-/rankedarena setArena vgcarena pos1
-/rankedarena setArena vgcarena pos2
+/rankedadmin setArena vgcarena pos1
+/rankedadmin setArena vgcarena pos2
 ```
 
 **How to use:**
@@ -147,13 +147,13 @@ Set player spawn positions for an arena.
 
 ---
 
-### /rankedarena setexit
+### /rankedadmin setexit
 
 Set the exit point where players spawn after battles.
 
 **Usage:**
 ```
-/rankedarena setexit
+/rankedadmin setexit
 ```
 
 **Permission:** OP level 2
@@ -165,7 +165,7 @@ Set the exit point where players spawn after battles.
 
 **Examples:**
 ```
-/rankedarena setexit
+/rankedadmin setexit
 ```
 
 **Typical Locations:**
@@ -175,13 +175,13 @@ Set the exit point where players spawn after battles.
 
 ---
 
-### /rankedarena teleportArena
+### /rankedadmin teleportArena
 
 Teleport to a specific arena.
 
 **Usage:**
 ```
-/rankedarena teleportArena <arena>
+/rankedadmin teleportArena <arena>
 ```
 
 **Parameters:**
@@ -191,8 +191,8 @@ Teleport to a specific arena.
 
 **Examples:**
 ```
-/rankedarena teleportArena arena1
-/rankedarena teleportArena vgcarena
+/rankedadmin teleportArena arena1
+/rankedadmin teleportArena vgcarena
 ```
 
 **Tab Completion:**
@@ -210,13 +210,13 @@ Teleport to a specific arena.
 
 Commands for modifying player Elo ratings.
 
-### /rankedarena setelo
+### /rankedadmin setelo
 
 Set a player's Elo to a specific value.
 
 **Usage:**
 ```
-/rankedarena setelo <amount> <player> <format>
+/rankedadmin setelo <amount> <player> <format>
 ```
 
 **Parameters:**
@@ -228,9 +228,9 @@ Set a player's Elo to a specific value.
 
 **Examples:**
 ```
-/rankedarena setelo 1500 Notch SINGLES
-/rankedarena setelo 2000 Steve DOUBLES
-/rankedarena setelo 1000 Alex SINGLES
+/rankedadmin setelo 1500 Notch SINGLES
+/rankedadmin setelo 2000 Steve DOUBLES
+/rankedadmin setelo 1000 Alex SINGLES
 ```
 
 **Tab Completion:**
@@ -246,13 +246,13 @@ Set a player's Elo to a specific value.
 
 ---
 
-### /rankedarena addelo
+### /rankedadmin addelo
 
 Add Elo points to a player.
 
 **Usage:**
 ```
-/rankedarena addelo <amount> <player> <format>
+/rankedadmin addelo <amount> <player> <format>
 ```
 
 **Parameters:**
@@ -264,8 +264,8 @@ Add Elo points to a player.
 
 **Examples:**
 ```
-/rankedarena addelo 100 Notch SINGLES
-/rankedarena addelo 250 Steve DOUBLES
+/rankedadmin addelo 100 Notch SINGLES
+/rankedadmin addelo 250 Steve DOUBLES
 ```
 
 **Use cases:**
@@ -275,13 +275,13 @@ Add Elo points to a player.
 
 ---
 
-### /rankedarena removeelo
+### /rankedadmin removeelo
 
 Remove Elo points from a player.
 
 **Usage:**
 ```
-/rankedarena removeelo <amount> <player> <format>
+/rankedadmin removeelo <amount> <player> <format>
 ```
 
 **Parameters:**
@@ -293,8 +293,8 @@ Remove Elo points from a player.
 
 **Examples:**
 ```
-/rankedarena removeelo 50 Notch SINGLES
-/rankedarena removeelo 100 Steve DOUBLES
+/rankedadmin removeelo 50 Notch SINGLES
+/rankedadmin removeelo 100 Steve DOUBLES
 ```
 
 **Use cases:**
@@ -304,13 +304,13 @@ Remove Elo points from a player.
 
 ---
 
-### /rankedarena setflee
+### /rankedadmin setflee
 
 Set a player's flee count (disconnect penalty).
 
 **Usage:**
 ```
-/rankedarena setflee <player> <amount>
+/rankedadmin setflee <player> <amount>
 ```
 
 **Parameters:**
@@ -321,9 +321,9 @@ Set a player's flee count (disconnect penalty).
 
 **Examples:**
 ```
-/rankedarena setflee Steve 0       # Clear penalty
-/rankedarena setflee Alex 5        # Set to 5 flees
-/rankedarena setflee Notch 10      # Set to 10 flees
+/rankedadmin setflee Steve 0       # Clear penalty
+/rankedadmin setflee Alex 5        # Set to 5 flees
+/rankedadmin setflee Notch 10      # Set to 10 flees
 ```
 
 **Tab Completion:**
@@ -348,13 +348,13 @@ Commands for creating and managing competitive seasons.
 
 **Important:** Season commands only work on the **battle server** in cross-server setups!
 
-### /rankedarena season info
+### /rankedadmin season info
 
 View current season details.
 
 **Usage:**
 ```
-/rankedarena season info
+/rankedadmin season info
 ```
 
 **Permission:** OP level 2 (works on all servers)
@@ -368,7 +368,7 @@ View current season details.
 
 **Examples:**
 ```
-/rankedarena season info
+/rankedadmin season info
 ```
 
 **Sample Output:**
@@ -383,13 +383,13 @@ Total Seasons: 3
 
 ---
 
-### /rankedarena season history
+### /rankedadmin season history
 
 View past seasons.
 
 **Usage:**
 ```
-/rankedarena season history [limit]
+/rankedadmin season history [limit]
 ```
 
 **Parameters:**
@@ -399,9 +399,9 @@ View past seasons.
 
 **Examples:**
 ```
-/rankedarena season history         # Show last 5 seasons
-/rankedarena season history 10      # Show last 10 seasons
-/rankedarena season history 20      # Show last 20 seasons
+/rankedadmin season history         # Show last 5 seasons
+/rankedadmin season history 10      # Show last 10 seasons
+/rankedadmin season history 20      # Show last 20 seasons
 ```
 
 **Sample Output:**
@@ -414,13 +414,13 @@ Season History:
 
 ---
 
-### /rankedarena season create
+### /rankedadmin season create
 
 Create a new season.
 
 **Usage:**
 ```
-/rankedarena season create <days> <name>
+/rankedadmin season create <days> <name>
 ```
 
 **Parameters:**
@@ -431,9 +431,9 @@ Create a new season.
 
 **Examples:**
 ```
-/rankedarena season create 30 Season 1
-/rankedarena season create 14 Spring Championships
-/rankedarena season create 60 Summer Season 2025
+/rankedadmin season create 30 Season 1
+/rankedadmin season create 14 Spring Championships
+/rankedadmin season create 60 Summer Season 2025
 ```
 
 **Tab Completion:**
@@ -453,13 +453,13 @@ Create a new season.
 
 ---
 
-### /rankedarena season rotate
+### /rankedadmin season rotate
 
 Force immediate season rotation.
 
 **Usage:**
 ```
-/rankedarena season rotate
+/rankedadmin season rotate
 ```
 
 **Permission:** OP level 2 (battle server only)
@@ -472,7 +472,7 @@ Force immediate season rotation.
 
 **Examples:**
 ```
-/rankedarena season rotate
+/rankedadmin season rotate
 ```
 
 **Use cases:**
@@ -482,13 +482,13 @@ Force immediate season rotation.
 
 ---
 
-### /rankedarena season end
+### /rankedadmin season end
 
 End the current season.
 
 **Usage:**
 ```
-/rankedarena season end
+/rankedadmin season end
 ```
 
 **Permission:** OP level 2 (battle server only)
@@ -500,20 +500,20 @@ End the current season.
 
 **Examples:**
 ```
-/rankedarena season end
+/rankedadmin season end
 ```
 
 **Note:** This is functionally the same as `season rotate`.
 
 ---
 
-### /rankedarena season setend
+### /rankedadmin season setend
 
 Extend or shorten current season.
 
 **Usage:**
 ```
-/rankedarena season setend <minutes>
+/rankedadmin season setend <minutes>
 ```
 
 **Parameters:**
@@ -523,10 +523,10 @@ Extend or shorten current season.
 
 **Examples:**
 ```
-/rankedarena season setend 10080    # Add 7 days (10080 minutes)
-/rankedarena season setend 1440     # Add 1 day (1440 minutes)
-/rankedarena season setend 43200    # Add 30 days
-/rankedarena season setend -1440    # Subtract 1 day
+/rankedadmin season setend 10080    # Add 7 days (10080 minutes)
+/rankedadmin season setend 1440     # Add 1 day (1440 minutes)
+/rankedadmin season setend 43200    # Add 30 days
+/rankedadmin season setend -1440    # Subtract 1 day
 ```
 
 **Common Values:**
@@ -545,13 +545,13 @@ Extend or shorten current season.
 
 ---
 
-### /rankedarena season rename
+### /rankedadmin season rename
 
 Rename the current season.
 
 **Usage:**
 ```
-/rankedarena season rename <name>
+/rankedadmin season rename <name>
 ```
 
 **Parameters:**
@@ -561,9 +561,9 @@ Rename the current season.
 
 **Examples:**
 ```
-/rankedarena season rename "Season 1: Battle of Champions"
-/rankedarena season rename "Winter Cup 2025"
-/rankedarena season rename "Pre-Season Testing"
+/rankedadmin season rename "Season 1: Battle of Champions"
+/rankedadmin season rename "Winter Cup 2025"
+/rankedadmin season rename "Pre-Season Testing"
 ```
 
 **Tab Completion:**
@@ -580,13 +580,13 @@ Rename the current season.
 
 General system management commands.
 
-### /rankedarena reload
+### /rankedadmin reload
 
 Reload configuration files.
 
 **Usage:**
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 **Permission:** OP level 2
@@ -601,7 +601,7 @@ Reload configuration files.
 
 **Examples:**
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 **Important Notes:**
@@ -618,13 +618,13 @@ Reload configuration files.
 
 ---
 
-### /rankedarena closeRanked
+### /rankedadmin closeRanked
 
 Toggle the entire ranked system on/off.
 
 **Usage:**
 ```
-/rankedarena closeRanked
+/rankedadmin closeRanked
 ```
 
 **Permission:** OP level 2
@@ -640,8 +640,8 @@ Toggle the entire ranked system on/off.
 
 **Examples:**
 ```
-/rankedarena closeRanked    # Disable system
-/rankedarena closeRanked    # Enable system
+/rankedadmin closeRanked    # Disable system
+/rankedadmin closeRanked    # Enable system
 ```
 
 **Use cases:**
@@ -659,7 +659,7 @@ Toggle the entire ranked system on/off.
 | Level | Who Has It | Commands Available |
 |-------|-----------|-------------------|
 | 0 | All players | `/ranked`, `/season` |
-| 2 | Server operators | All `/rankedarena` commands |
+| 2 | Server operators | All `/rankedadmin` commands |
 
 ### Giving Permissions
 
@@ -678,15 +678,15 @@ Toggle the entire ranked system on/off.
 In cross-server mode, season management commands are **battle server only**:
 
 **Available Everywhere:**
-- `/rankedarena season info`
-- `/rankedarena season history`
+- `/rankedadmin season info`
+- `/rankedadmin season history`
 
 **Battle Server Only:**
-- `/rankedarena season create`
-- `/rankedarena season rotate`
-- `/rankedarena season end`
-- `/rankedarena season setend`
-- `/rankedarena season rename`
+- `/rankedadmin season create`
+- `/rankedadmin season rotate`
+- `/rankedadmin season end`
+- `/rankedadmin season setend`
+- `/rankedadmin season rename`
 
 **Why?** Only one server should manage seasons to prevent conflicts.
 
@@ -698,70 +698,70 @@ In cross-server mode, season management commands are **battle server only**:
 
 ```bash
 # 1. Create your first arena
-/rankedarena setArena arena1 pos1
-/rankedarena setArena arena1 pos2
+/rankedadmin setArena arena1 pos1
+/rankedadmin setArena arena1 pos2
 
 # 2. Set exit point
-/rankedarena setexit
+/rankedadmin setexit
 
 # 3. Create first season
-/rankedarena season create 30 "Season 1"
+/rankedadmin season create 30 "Season 1"
 
 # 4. Reload config after editing blacklists
-/rankedarena reload
+/rankedadmin reload
 ```
 
 ### Managing a Tournament
 
 ```bash
 # Before tournament: Give participants starting Elo
-/rankedarena setelo 1500 Player1 SINGLES
-/rankedarena setelo 1500 Player2 SINGLES
+/rankedadmin setelo 1500 Player1 SINGLES
+/rankedadmin setelo 1500 Player2 SINGLES
 
 # After tournament: Reward winner
-/rankedarena addelo 500 WinnerName SINGLES
+/rankedadmin addelo 500 WinnerName SINGLES
 
 # Clear flee penalties for participants
-/rankedarena setflee Player1 0
-/rankedarena setflee Player2 0
+/rankedadmin setflee Player1 0
+/rankedadmin setflee Player2 0
 ```
 
 ### Handling Server Issues
 
 ```bash
 # If server had downtime, extend season
-/rankedarena season setend 1440    # Add 1 day
+/rankedadmin season setend 1440    # Add 1 day
 
 # If bug caused Elo loss, compensate
-/rankedarena addelo 100 AffectedPlayer SINGLES
+/rankedadmin addelo 100 AffectedPlayer SINGLES
 
 # If need to reset everything, restart season
-/rankedarena season rotate
+/rankedadmin season rotate
 ```
 
 ### Testing Changes
 
 ```bash
 # Disable system while testing
-/rankedarena closeRanked
+/rankedadmin closeRanked
 
 # Test your changes...
 
 # Re-enable when done
-/rankedarena closeRanked
+/rankedadmin closeRanked
 ```
 
 ### Moderating Players
 
 ```bash
 # Reset rage-quitter's flee count after apology
-/rankedarena setflee Player 0
+/rankedadmin setflee Player 0
 
 # Punish cheater (remove Elo)
-/rankedarena removeelo 1000 Cheater SINGLES
+/rankedadmin removeelo 1000 Cheater SINGLES
 
 # Reward helpful community member
-/rankedarena addelo 100 Helper DOUBLES
+/rankedadmin addelo 100 Helper DOUBLES
 ```
 
 ---
@@ -773,43 +773,43 @@ CobbleRanked provides helpful tab completion for all commands.
 ### Arena Commands
 
 ```
-/rankedarena setArena <TAB>
+/rankedadmin setArena <TAB>
 → Existing arenas + "Create new arena" hint
 
-/rankedarena teleportArena <TAB>
+/rankedadmin teleportArena <TAB>
 → List of all arenas
 ```
 
 ### Elo Commands
 
 ```
-/rankedarena setelo <TAB>
+/rankedadmin setelo <TAB>
 → 0, 1000, 1200, 1500, 2000
 
-/rankedarena setelo 1500 <TAB>
+/rankedadmin setelo 1500 <TAB>
 → Online player names
 
-/rankedarena setelo 1500 Notch <TAB>
+/rankedadmin setelo 1500 Notch <TAB>
 → SINGLES, DOUBLES
 ```
 
 ### Season Commands
 
 ```
-/rankedarena season create <TAB>
+/rankedadmin season create <TAB>
 → 7, 14, 30, 60, 90 (days)
 
-/rankedarena season create 30 <TAB>
+/rankedadmin season create 30 <TAB>
 → Example season names
 ```
 
 ### Flee Commands
 
 ```
-/rankedarena setflee <TAB>
+/rankedadmin setflee <TAB>
 → Online player names
 
-/rankedarena setflee Player <TAB>
+/rankedadmin setflee Player <TAB>
 → 0 (clear), 3, 5, 10
 ```
 
@@ -828,37 +828,37 @@ CobbleRanked provides helpful tab completion for all commands.
 
 | Command | Description |
 |---------|-------------|
-| `/rankedarena setArena <name> <pos1\|pos2>` | Set arena corners |
-| `/rankedarena setexit` | Set exit point |
-| `/rankedarena teleportArena <arena>` | Teleport to arena |
+| `/rankedadmin setArena <name> <pos1\|pos2>` | Set arena corners |
+| `/rankedadmin setexit` | Set exit point |
+| `/rankedadmin teleportArena <arena>` | Teleport to arena |
 
 ### Elo Management
 
 | Command | Description |
 |---------|-------------|
-| `/rankedarena setelo <amount> <player> <format>` | Set player Elo |
-| `/rankedarena addelo <amount> <player> <format>` | Add Elo points |
-| `/rankedarena removeelo <amount> <player> <format>` | Remove Elo points |
-| `/rankedarena setflee <player> <amount>` | Set flee count |
+| `/rankedadmin setelo <amount> <player> <format>` | Set player Elo |
+| `/rankedadmin addelo <amount> <player> <format>` | Add Elo points |
+| `/rankedadmin removeelo <amount> <player> <format>` | Remove Elo points |
+| `/rankedadmin setflee <player> <amount>` | Set flee count |
 
 ### Season Management
 
 | Command | Description |
 |---------|-------------|
-| `/rankedarena season info` | Current season details |
-| `/rankedarena season history [limit]` | Past seasons |
-| `/rankedarena season create <days> <name>` | Create new season |
-| `/rankedarena season rotate` | Force season rotation |
-| `/rankedarena season end` | End current season |
-| `/rankedarena season setend <minutes>` | Extend/shorten season |
-| `/rankedarena season rename <name>` | Rename season |
+| `/rankedadmin season info` | Current season details |
+| `/rankedadmin season history [limit]` | Past seasons |
+| `/rankedadmin season create <days> <name>` | Create new season |
+| `/rankedadmin season rotate` | Force season rotation |
+| `/rankedadmin season end` | End current season |
+| `/rankedadmin season setend <minutes>` | Extend/shorten season |
+| `/rankedadmin season rename <name>` | Rename season |
 
 ### System
 
 | Command | Description |
 |---------|-------------|
-| `/rankedarena reload` | Reload configurations |
-| `/rankedarena closeRanked` | Toggle system on/off |
+| `/rankedadmin reload` | Reload configurations |
+| `/rankedadmin closeRanked` | Toggle system on/off |
 
 ---
 

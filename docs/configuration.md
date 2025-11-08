@@ -132,6 +132,15 @@ Settings for multi-server networks using Velocity proxy, MySQL, and Redis.
 - **Server ID** (e.g., `"battle"`) = This is NOT the battle server
 - **Critical:** Only ONE server should have empty string!
 
+**Important:** Only the battle server can run season management commands:
+- `/rankedadmin season create`
+- `/rankedadmin season rotate`
+- `/rankedadmin season end`
+- `/rankedadmin season setend`
+- `/rankedadmin season rename`
+
+Main/lobby servers can only view season info with `/season` or `/rankedadmin season info`.
+
 **Example configurations:**
 
 **Battle Server:**

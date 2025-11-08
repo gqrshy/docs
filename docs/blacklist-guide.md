@@ -43,7 +43,7 @@ config/cobbleranked/blacklist/doubles.json5  # Doubles (2v2) rules
 
 **How to apply changes:**
 1. Edit the `.json5` file
-2. Run `/rankedarena reload` or restart server
+2. Run `/rankedadmin reload` or restart server
 3. Changes take effect immediately
 
 **Important:** Both files use the same format, just with different rules.
@@ -712,7 +712,7 @@ Players can view banned Pokemon visually in-game!
 
 **Forgetting to reload:**
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 **Case sensitivity:**
@@ -790,7 +790,7 @@ Post this in Discord/website for player reference.
 ### "My blacklist isn't working"
 
 **Check:**
-1. Did you restart server or run `/rankedarena reload`?
+1. Did you restart server or run `/rankedadmin reload`?
 2. Are Pokemon names spelled exactly right?
 3. Are item IDs in correct format (`modid:item_name`)?
 4. Is the JSON5 syntax valid?

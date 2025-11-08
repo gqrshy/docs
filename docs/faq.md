@@ -81,7 +81,7 @@ Common questions and solutions for CobbleRanked players and server owners.
 
 **"You are banned from queue for X minutes"**
 - **Problem:** You have flee penalties from disconnecting
-- **Solution:** Wait for the ban to expire, or ask admin to reset with `/rankedarena setflee YourName 0`
+- **Solution:** Wait for the ban to expire, or ask admin to reset with `/rankedadmin setflee YourName 0`
 
 **"Queue system not available"**
 - **Problem:** Ranked system is disabled or you're on the battle server
@@ -160,7 +160,7 @@ Common questions and solutions for CobbleRanked players and server owners.
 
 **Flee count reduction:**
 - Automatically decreases by 1 every 24 hours (default)
-- Admin can manually reset: `/rankedarena setflee YourName 0`
+- Admin can manually reset: `/rankedadmin setflee YourName 0`
 
 **Important tips:**
 - **Always finish your battles!**
@@ -335,15 +335,15 @@ Top players get exclusive rewards:
 
 4. **Set up first arena**
    ```
-   /rankedarena setArena arena1 pos1
-   /rankedarena setArena arena1 pos2
-   /rankedarena setexit
+   /rankedadmin setArena arena1 pos1
+   /rankedadmin setArena arena1 pos2
+   /rankedadmin setexit
    ```
 
 5. **Configure blacklists** (optional)
    - Edit `config/cobbleranked/blacklist/singles.json5`
    - Edit `config/cobbleranked/blacklist/doubles.json5`
-   - Run `/rankedarena reload`
+   - Run `/rankedadmin reload`
 
 6. **Test**
    - Have a player run `/ranked`
@@ -409,7 +409,7 @@ Top players get exclusive rewards:
 
 3. **Save and reload**
    ```
-   /rankedarena reload
+   /rankedadmin reload
    ```
 
 **Ban entire categories:**
@@ -553,7 +553,7 @@ Top players get exclusive rewards:
 
 **After editing:**
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 ---
@@ -663,7 +663,7 @@ try = [
 **Common issues:**
 
 **1. Forgot to restart/reload**
-- **Solution:** Restart server or run `/rankedarena reload`
+- **Solution:** Restart server or run `/rankedadmin reload`
 - **Some settings require restart** (Elo system, cross-server, database)
 
 **2. JSON5 syntax error**

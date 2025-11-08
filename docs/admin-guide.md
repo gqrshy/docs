@@ -40,7 +40,7 @@ Complete guide for server owners to install, configure, and manage CobbleRanked 
    - See [Basic Configuration](#basic-configuration) below
 
 4. **Set Up Arenas**
-   - Use `/rankedarena setArena` commands
+   - Use `/rankedadmin setArena` commands
    - See [Arena Setup](#arena-setup) below
 
 5. **Restart the Server**
@@ -69,21 +69,21 @@ You need at least one battle arena. Here's how to create one:
 
 1. **Go to your desired arena location**
    - Find a flat area or build a custom arena
-   - Minimum size: 20x20 blocks recommended
-
+   - **Important:** pos1/pos2 are just teleport destinations, NOT arena boundaries
 
 2. **Stand at Player 1's spawn position**
    - This is where the first player will teleport when a match starts
+   - The system will automatically calculate yaw to make players face each other
    ```
-   /rankedarena setArena myarena pos1
+   /rankedadmin setArena myarena pos1
    ```
 
 3. **Move to Player 2's spawn position**
    - This is where the second player will teleport
-   - Place this 10-20 blocks away from pos1 for best results
-   - Players will automatically face each other when teleported
+   - Place this 10-20 blocks away from pos1 for best battle spacing
+   - Facing direction will be auto-calculated to face Player 1
    ```
-   /rankedarena setArena myarena pos2
+   /rankedadmin setArena myarena pos2
    ```
 
 
@@ -97,11 +97,11 @@ You need at least one battle arena. Here's how to create one:
 4. **Set the exit point** (where players teleport after battle)
    - Stand where you want players to exit
    ```
-   /rankedarena setexit
+   /rankedadmin setexit
    ```
 
 5. **Test the arena**
-   - Teleport to it: `/rankedarena teleportArena myarena`
+   - Teleport to it: `/rankedadmin teleportArena myarena`
    - Verify the spawn positions are appropriate
 
 ### Step 3: Configure Battle Rules
@@ -118,7 +118,7 @@ You need at least one battle arena. Here's how to create one:
 
 3. **Reload Configuration**
    ```
-   /rankedarena reload
+   /rankedadmin reload
    ```
 
 ### Step 4: Test the System
@@ -352,26 +352,27 @@ Arenas are the locations where ranked battles take place.
 ### Creating an Arena
 
 1. **Choose a Location**
-   - Flat terrain recommended
-   - Minimum 20x20 blocks
+   - Flat terrain recommended for aesthetics
+   - Give players ~10-20 blocks of space between spawn points
    - Away from player structures (battles can be destructive)
+   - **Note:** Arena boundaries are NOT enforced by the system - pos1/pos2 are just player spawn locations
 
 2. **Set Player Spawn Positions**
    - Stand at Player 1's spawn position
-   - `/rankedarena setArena <name> pos1`
+   - `/rankedadmin setArena <name> pos1`
    - Move 10-20 blocks away to Player 2's spawn position
-   - `/rankedarena setArena <name> pos2`
+   - `/rankedadmin setArena <name> pos2`
    - **Note**: Players will automatically face each other when teleported to these positions
 
 3. **Set Exit Point**
    - Stand where players should spawn after battles
-   - `/rankedarena setexit`
+   - `/rankedadmin setexit`
 
 ### Managing Arenas
 
 **Teleport to Arena**
 ```
-/rankedarena teleportArena <arena_name>
+/rankedadmin teleportArena <arena_name>
 ```
 
 **List All Arenas**
@@ -379,21 +380,28 @@ Check `config/cobbleranked/arenas.json5`:
 ```json5
 {
   "myarena": {
+    "display": "My Arena",
     "pos1": {
-      "x": 100,
-      "y": 64,
-      "z": 200,
+      "x": 100.0,
+      "y": 64.0,
+      "z": 200.0,
+      "yaw": 0.0,
+      "pitch": 0.0,
       "world": "minecraft:overworld"
     },
     "pos2": {
-      "x": 150,
-      "y": 80,
-      "z": 250,
+      "x": 120.0,
+      "y": 64.0,
+      "z": 200.0,
+      "yaw": 180.0,
+      "pitch": 0.0,
       "world": "minecraft:overworld"
     }
   }
 }
 ```
+
+**Note:** The `yaw` values are automatically calculated when you use `/rankedadmin setArena`, making players face each other. You can manually edit these values to adjust player facing direction.
 
 **Delete an Arena**
 Edit `arenas.json5` manually and remove the arena entry.
@@ -403,11 +411,11 @@ Edit `arenas.json5` manually and remove the arena entry.
 You can create multiple arenas:
 
 ```
-/rankedarena setArena arena1 pos1
-/rankedarena setArena arena1 pos2
+/rankedadmin setArena arena1 pos1
+/rankedadmin setArena arena1 pos2
 
-/rankedarena setArena arena2 pos1
-/rankedarena setArena arena2 pos2
+/rankedadmin setArena arena2 pos1
+/rankedadmin setArena arena2 pos2
 ```
 
 The system will randomly select an available arena for each match.
@@ -422,14 +430,14 @@ Seasons are competitive periods with automatic rotation and rewards.
 
 **Syntax:**
 ```
-/rankedarena season create <days> <season_name>
+/rankedadmin season create <days> <season_name>
 ```
 
 **Examples:**
 ```
-/rankedarena season create 30 Season 1
-/rankedarena season create 14 Spring Championships
-/rankedarena season create 60 Summer Season 2025
+/rankedadmin season create 30 Season 1
+/rankedadmin season create 14 Spring Championships
+/rankedadmin season create 60 Summer Season 2025
 ```
 
 - `<days>`: How long the season lasts
@@ -439,7 +447,7 @@ Seasons are competitive periods with automatic rotation and rewards.
 
 **Current Season:**
 ```
-/rankedarena season info
+/rankedadmin season info
 ```
 
 Shows:
@@ -451,42 +459,42 @@ Shows:
 
 **Season History:**
 ```
-/rankedarena season history [limit]
+/rankedadmin season history [limit]
 ```
 
 Shows past seasons. Default limit: 5
 
 **Examples:**
 ```
-/rankedarena season history
-/rankedarena season history 10
+/rankedadmin season history
+/rankedadmin season history 10
 ```
 
 ### Managing Active Seasons
 
 **Rename Current Season:**
 ```
-/rankedarena season rename <new_name>
+/rankedadmin season rename <new_name>
 ```
 
 Example:
 ```
-/rankedarena season rename "Season 1: Battle of Champions"
+/rankedadmin season rename "Season 1: Battle of Champions"
 ```
 
 **Extend Season:**
 ```
-/rankedarena season setend <minutes>
+/rankedadmin season setend <minutes>
 ```
 
 Add time to current season:
 ```
-/rankedarena season setend 10080  # Add 7 days (10080 minutes)
+/rankedadmin season setend 10080  # Add 7 days (10080 minutes)
 ```
 
 **End Season Early:**
 ```
-/rankedarena season end
+/rankedadmin season end
 ```
 
 This will:
@@ -496,7 +504,7 @@ This will:
 
 **Force Season Rotation:**
 ```
-/rankedarena season rotate
+/rankedadmin season rotate
 ```
 
 Manually trigger season rotation (same as `season end` but explicitly named).
@@ -585,46 +593,46 @@ Commands for managing player data and rankings.
 
 **Set Player Elo:**
 ```
-/rankedarena setelo <amount> <player> <format>
+/rankedadmin setelo <amount> <player> <format>
 ```
 
 Examples:
 ```
-/rankedarena setelo 1500 Notch SINGLES
-/rankedarena setelo 2000 Steve DOUBLES
+/rankedadmin setelo 1500 Notch SINGLES
+/rankedadmin setelo 2000 Steve DOUBLES
 ```
 
 **Add Elo Points:**
 ```
-/rankedarena addelo <amount> <player> <format>
+/rankedadmin addelo <amount> <player> <format>
 ```
 
 Examples:
 ```
-/rankedarena addelo 100 Notch SINGLES  # Add 100 Elo
+/rankedadmin addelo 100 Notch SINGLES  # Add 100 Elo
 ```
 
 **Remove Elo Points:**
 ```
-/rankedarena removeelo <amount> <player> <format>
+/rankedadmin removeelo <amount> <player> <format>
 ```
 
 Examples:
 ```
-/rankedarena removeelo 50 Notch SINGLES  # Subtract 50 Elo
+/rankedadmin removeelo 50 Notch SINGLES  # Subtract 50 Elo
 ```
 
 ### Flee Penalty Management
 
 **Set Flee Count:**
 ```
-/rankedarena setflee <player> <amount>
+/rankedadmin setflee <player> <amount>
 ```
 
 Examples:
 ```
-/rankedarena setflee Steve 0      # Clear flee penalty
-/rankedarena setflee Steve 5      # Set to 5 flees
+/rankedadmin setflee Steve 0      # Clear flee penalty
+/rankedadmin setflee Steve 5      # Set to 5 flees
 ```
 
 Use `0` to clear a player's disconnect penalties.
@@ -633,7 +641,7 @@ Use `0` to clear a player's disconnect penalties.
 
 **Reload Configuration:**
 ```
-/rankedarena reload
+/rankedadmin reload
 ```
 
 Reloads:
@@ -645,7 +653,7 @@ Reloads:
 
 **Toggle Ranked System:**
 ```
-/rankedarena closeRanked
+/rankedadmin closeRanked
 ```
 
 Toggles the entire ranked system on/off. Useful for:
@@ -894,7 +902,7 @@ Main/lobby servers are read-only for seasons.
 
 **Solution:**
 - Always restart server after config changes
-- OR use `/rankedarena reload` (some settings require restart)
+- OR use `/rankedadmin reload` (some settings require restart)
 - Check console for config syntax errors
 
 #### Rewards not being given
