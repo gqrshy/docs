@@ -23,10 +23,8 @@ Cross-server setup requires additional infrastructure:
 | Software | Version | Purpose |
 |----------|---------|---------|
 | **MySQL** | 8.0+ | Player data, stats, seasons (shared across servers) |
-| **MariaDB** | 10.5+ | Alternative to MySQL |
 | **Redis** | 6.0+ | Real-time queue, matchmaking, messaging (pub/sub) |
-| **Velocity** | 3.4.0+ | Proxy for server transfers (recommended) |
-| **BungeeCord** | Latest | Alternative proxy (legacy) |
+| **Velocity** | 3.4.0+ | Proxy for server transfers |
 
 See [Cross-Server Setup Guide](../advanced/cross-server.md) for detailed instructions.
 
