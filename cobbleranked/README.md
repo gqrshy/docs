@@ -35,9 +35,10 @@
 - **Command Execution** - Run any command as reward (items, currency, permissions)
 
 ### 🌍 Cross-Server Support
-- **MySQL Integration** - Share rankings across multiple servers
+- **MySQL/MongoDB Integration** - Share rankings across multiple servers
 - **Redis Sync** - Real-time queue and matchmaking across servers
 - **Battle Server** - Dedicate specific servers for battles
+- **Cloud-Ready** - MongoDB Atlas support for cloud deployments
 
 ### 🎨 Customization
 - **Multilingual Support** - English, Japanese, Portuguese, Russian

@@ -16,22 +16,97 @@ The blacklist system allows you to:
 
 ---
 
-## Finding Item IDs
+## Finding Internal Names
 
-### In-Game Method (Recommended)
+### Item IDs
+
+#### In-Game Method (Recommended)
 
 1. Press `F3 + H` in Minecraft to enable advanced tooltips
 2. Hover over any item in your inventory
 3. The item ID appears at the bottom (e.g., `cobblemon:bright_powder`)
 
-### Command Method
+#### Command Method
 
 ```
 /give @s <tab>
 ```
 Autocomplete shows available item IDs.
 
+**Supported Formats:**
+- Full item ID: `cobblemon:bright_powder`
+- Cobblemon internal name: `bright_powder` (automatically checks both)
+- Minecraft items: `minecraft:diamond`, `minecraft:netherite_sword`
+
 **Important:** Always use the full format `mod_id:item_name` (e.g., `cobblemon:bright_powder`, not "Bright Powder"). This prevents conflicts between mods with similar item names.
+
+### Ability Names
+
+Ability internal names use **snake_case** format (lowercase with underscores).
+
+#### In-Game Method
+
+1. Press `F3 + H` in Minecraft to enable advanced tooltips
+2. Open your Pokemon's summary screen
+3. Hover over the ability icon
+4. The internal name appears in the tooltip (e.g., `intimidate`, `drought`)
+
+#### Common Ability Names Reference
+
+| Display Name | Internal Name | Notes |
+|--------------|---------------|-------|
+| Intimidate | `intimidate` | Lowers opponent's Attack |
+| Drought | `drought` | Summons harsh sunlight |
+| Drizzle | `drizzle` | Summons rain |
+| Sand Stream | `sand_stream` | Summons sandstorm |
+| Snow Warning | `snow_warning` | Summons snow |
+| Moody | `moody` | Banned in Smogon (random stat changes) |
+| Shadow Tag | `shadow_tag` | Banned in Smogon (prevents switching) |
+| Arena Trap | `arena_trap` | Banned in Smogon (traps grounded Pokemon) |
+| Huge Power | `huge_power` | Doubles Attack stat |
+| Pure Power | `pure_power` | Same as Huge Power |
+| Wonder Guard | `wonder_guard` | Only super-effective moves hit |
+| Protean | `protean` | Changes type to move used |
+| Libero | `libero` | Same as Protean |
+| As One (Ice Rider) | `as_one_ice_rider` | Combines Unnerve + Chilling Neigh |
+| As One (Shadow Rider) | `as_one_shadow_rider` | Combines Unnerve + Grim Neigh |
+
+**Pattern:**
+- Replace spaces with underscores: "Shadow Tag" → `shadow_tag`
+- Use lowercase: "Huge Power" → `huge_power`
+- Parentheses in display name become separate words: "As One (Ice Rider)" → `as_one_ice_rider`
+
+#### Data Files Method
+
+Cobblemon's ability data is stored in:
+```
+.minecraft/data/cobblemon/species/
+```
+
+Each Pokemon's JSON file lists its abilities with internal names:
+```json
+{
+  "abilities": [
+    "intimidate",
+    "moxie",
+    "h:sheer_force"
+  ]
+}
+```
+
+**Format:**
+- Regular abilities: `"intimidate"`
+- Hidden abilities: `"h:sheer_force"` (prefix with `h:`)
+
+#### Testing Method
+
+1. Set up a test team with the ability you want to ban
+2. Enable debug logging in config:
+   ```json5
+   "debug_queue": true
+   ```
+3. Try to join queue
+4. Check server logs for ability validation messages
 
 ---
 

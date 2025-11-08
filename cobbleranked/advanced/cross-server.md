@@ -29,20 +29,26 @@ Cross-server mode allows players on different servers to compete in a unified ra
 | Component | Version | Purpose |
 |-----------|---------|---------|
 | **Velocity** | Latest | Server switching |
-| **MySQL** | 8.0+ | Shared player data |
+| **MySQL or MongoDB** | 8.0+ / 6.0+ | Shared player data |
 | **Redis** | 6.0+ | Real-time queue sync |
 | **CobbleRanked** | Latest | On all servers |
 
-**Minimum:** 2 servers (1 battle + 1 lobby/main)  
+**Minimum:** 2 servers (1 battle + 1 lobby/main)
 **Recommended:** 3+ servers (1 battle + 1 lobby + 1+ main)
+
+**Database Options:**
+- **MySQL**: Traditional relational database (recommended for 2-5 servers)
+- **MongoDB**: NoSQL database (recommended for 5+ servers or cloud deployments)
 
 ---
 
 ## Quick Start
 
-### 1. Install MySQL & Redis
+### 1. Install Database & Redis
 
-**MySQL:**
+**Choose ONE database:**
+
+#### Option A: MySQL
 ```bash
 # Ubuntu/Debian
 sudo apt install mysql-server
@@ -55,7 +61,29 @@ GRANT ALL ON cobbleranked.* TO 'cobbleranked'@'%';
 FLUSH PRIVILEGES;
 ```
 
-**Redis:**
+#### Option B: MongoDB (Local)
+```bash
+# Ubuntu/Debian
+sudo apt install mongodb-server
+sudo systemctl start mongodb
+
+# Create database and user
+mongosh
+use cobbleranked
+db.createUser({
+  user: "cobbleranked",
+  pwd: "secure_password",
+  roles: [{ role: "readWrite", db: "cobbleranked" }]
+})
+```
+
+#### Option C: MongoDB Atlas (Cloud)
+1. Create free cluster at [mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)
+2. Get connection string
+3. Add server IP to whitelist
+4. No local installation needed!
+
+**Redis (Required for all options):**
 ```bash
 # Ubuntu/Debian
 sudo apt install redis-server
@@ -70,27 +98,78 @@ See [Database Setup](database.md) and [Redis Setup](redis.md) for details.
 
 `config/cobbleranked/config.json5`:
 
+**MySQL:**
 ```json5
 {
   "cross_server": {
     "enabled": true,
     "server_id": "battle1",
     "battle_server": "",  // Empty = this IS battle server
-    
-    "database": {
-      "type": "MYSQL",
+    "database_type": "mysql",
+
+    "mysql": {
       "host": "localhost",
       "port": 3306,
       "database": "cobbleranked",
       "username": "cobbleranked",
       "password": "password"
     },
-    
+
     "redis": {
       "host": "localhost",
-      "port": 6379,
-      "password": "",
-      "database": 0
+      "port": 6379
+    }
+  }
+}
+```
+
+**MongoDB (Local):**
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "battle1",
+    "battle_server": "",
+    "database_type": "mongodb",
+
+    "mongodb": {
+      "connection_string": "mongodb://localhost:27017",
+      "database": "cobbleranked",
+      "username": "cobbleranked",
+      "password": "secure_password",
+      "auth_database": "admin",
+      "use_srv": false
+    },
+
+    "redis": {
+      "host": "localhost",
+      "port": 6379
+    }
+  }
+}
+```
+
+**MongoDB Atlas (Cloud):**
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "battle1",
+    "battle_server": "",
+    "database_type": "mongodb",
+
+    "mongodb": {
+      "connection_string": "cluster0.xxxxx.mongodb.net",
+      "database": "cobbleranked",
+      "username": "your-username",
+      "password": "your-password",
+      "auth_database": "admin",
+      "use_srv": true  // Important!
+    },
+
+    "redis": {
+      "host": "localhost",
+      "port": 6379
     }
   }
 }
@@ -102,31 +181,11 @@ See [Database Setup](database.md) and [Redis Setup](redis.md) for details.
 
 `config/cobbleranked/config.json5`:
 
-```json5
-{
-  "cross_server": {
-    "enabled": true,
-    "server_id": "lobby1",      // Unique per server
-    "battle_server": "battle1",  // Points to battle server
-    
-    "database": {
-      "type": "MYSQL",
-      "host": "localhost",
-      "port": 3306,
-      "database": "cobbleranked",
-      "username": "cobbleranked",
-      "password": "password"
-    },
-    
-    "redis": {
-      "host": "localhost",
-      "port": 6379,
-      "password": "",
-      "database": 0
-    }
-  }
-}
-```
+**Same as battle server**, but change:
+- `"server_id"`: Unique name (e.g., `"lobby1"`, `"main1"`)
+- `"battle_server"`: `"battle1"` (points to battle server)
+
+All other settings (database, redis) must match battle server exactly.
 
 **Important:**
 - `server_id` must be unique per server
@@ -229,14 +288,21 @@ Prevents players stuck in Ready GUI if battle server crashes.
 
 ## Testing
 
-### 1. Test MySQL Connection
+### 1. Test Database Connection
 
+**MySQL:**
 ```bash
 mysql -h MYSQL_HOST -u cobbleranked -p cobbleranked
 SHOW TABLES;
 ```
 
-Should see: `format_stats`, `season_info`, etc.
+**MongoDB:**
+```bash
+mongosh "mongodb://cobbleranked:password@MONGO_HOST:27017/cobbleranked"
+show collections
+```
+
+Should see: `format_stats`, `seasons`, etc.
 
 ### 2. Test Redis Connection
 
@@ -324,6 +390,15 @@ Multiple battle servers will cause:
 ```bash
 mysqldump -u cobbleranked -p cobbleranked > backup.sql
 ```
+
+**MongoDB:**
+```bash
+mongodump --db cobbleranked --out /backup/$(date +%Y%m%d)
+```
+
+**MongoDB Atlas:**
+- Automatic cloud backups (included in free tier)
+- Configure in Atlas dashboard
 
 **Redis:**
 ```bash
