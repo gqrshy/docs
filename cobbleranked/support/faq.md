@@ -572,7 +572,7 @@ CobbleRanked provides placeholders to display top player data.
 /rankedplaceholder test %cobbleranked_top_1_name%
 ```
 
-See: [PLACEHOLDER_GUIDE.md](../../PLACEHOLDER_GUIDE.md)
+**Full documentation:** [Placeholder API Guide](../integration/placeholders.md)
 
 </details>
 

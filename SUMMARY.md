@@ -15,5 +15,6 @@
   * [Arena Setup](cobbleranked/configuration/arenas.md)
   * [Ranked Battles](cobbleranked/features/ranked-battles.md)
   * [Elo Rating System](cobbleranked/features/elo-system.md)
+  * [Placeholder API](cobbleranked/integration/placeholders.md)
   * [Cross-Server Setup](cobbleranked/advanced/cross-server.md)
   * [FAQ](cobbleranked/support/faq.md)

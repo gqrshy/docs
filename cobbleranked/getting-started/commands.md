@@ -712,4 +712,4 @@ All commands support intelligent tab completion:
 - [Quick Start Guide](quick-start.md) - Initial setup
 - [Arena Configuration](../configuration/arenas.md) - Detailed arena setup
 - [Season Management](../features/seasons.md) - Season system details
-- [Placeholder Guide](../../PLACEHOLDER_GUIDE.md) - Placeholder usage
+- [Placeholder API](../integration/placeholders.md) - Complete placeholder reference
