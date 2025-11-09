@@ -495,7 +495,7 @@ Ban specific held items (use full item ID: `modid:item_name`).
 ]
 ```
 
-**Note:** Use `banned_inventory_items` in `config.json5` to prevent players from **carrying** these items when queueing.
+**Note:** Use `banned_items` in `config/cobbleranked/blacklist/inventory.json5` to prevent players from **carrying** these items when queueing. See [Banned Items Guide](../cobbleranked/features/banned-items.md).
 
 ### How to Find Item IDs
 
@@ -812,8 +812,8 @@ Post this in Discord/website for player reference.
 ### "Items not being blocked"
 
 **Remember:**
-- `black_list_items_pokemon` = Held items on Pokemon
-- `banned_inventory_items` (in `config.json5`) = Items in player inventory
+- `black_list_items_pokemon` (in `singles.json5`/`doubles.json5`) = Held items on Pokemon
+- `banned_items` (in `blacklist/inventory.json5`) = Items in player inventory/trinkets
 - These are different systems!
 
 ---

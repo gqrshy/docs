@@ -853,12 +853,13 @@ Main/lobby servers are read-only for seasons.
 
 #### "Cannot queue with banned items"
 
-**Problem:** Player has banned items in inventory.
+**Problem:** Player has banned items in inventory or trinket slots.
 
 **Solution:**
-- Remove items listed in `banned_inventory_items`
-- Default bans: Tera Orb, Dynamax Band (from Mega Showdown mod)
-- Player must remove items before queueing
+- Check `config/cobbleranked/blacklist/inventory.json5` for banned items list
+- Default bans: Tera Orb, Dynamax Band, Mega Bracelet, Z-Ring, Omni Ring (from Mega Showdown mod)
+- Player must remove items from inventory and trinket slots before queueing
+- See [Banned Items Guide](../cobbleranked/features/banned-items.md) for details
 
 #### "Your Pokemon contains banned species/moves/abilities"
 

@@ -34,18 +34,25 @@ Enforce specific ranked battle rules:
 
 ### Basic Setup
 
-Edit `config/cobbleranked/config.json5`:
+Banned inventory items are configured in a **separate file** for easier management alongside Pokemon blacklists.
+
+Edit `config/cobbleranked/blacklist/inventory.json5`:
 
 ```json5
 {
-  "ranked_match": {
-    "banned_inventory_items": [
-      "mega_showdown:tera_orb",      // Prevents Terastallization
-      "mega_showdown:dynamax_band",  // Prevents Dynamax/Gigantamax
-    ]
-  }
+  "banned_items": [
+    "mega_showdown:tera_orb",        // Terastallization
+    "mega_showdown:dynamax_band",    // Dynamax/Gigantamax
+    "mega_showdown:mega_bracelet",   // Mega Evolution
+    "mega_showdown:z_ring",          // Z-Moves
+    "mega_showdown:omni_ring"        // All battle gimmicks
+  ]
 }
 ```
+
+> **📁 File Location:** `config/cobbleranked/blacklist/inventory.json5`
+>
+> This file is automatically created on first server start with sensible defaults.
 
 ### Default Banned Items
 
@@ -61,25 +68,27 @@ CobbleRanked comes pre-configured to ban all Mega Showdown battle gimmick items:
 
 ### Adding More Banned Items
 
-To ban additional items, add their item IDs to the list:
+To ban additional items, add their item IDs to the list in `blacklist/inventory.json5`:
 
 ```json5
-"banned_inventory_items": [
-  // Mega Showdown battle gimmick items (default)
-  "mega_showdown:tera_orb",          // Terastallization
-  "mega_showdown:dynamax_band",      // Dynamax/Gigantamax
-  "mega_showdown:mega_bracelet",     // Mega Evolution
-  "mega_showdown:z_ring",            // Z-Moves
-  "mega_showdown:omni_ring",         // All gimmicks
+{
+  "banned_items": [
+    // Mega Showdown battle gimmick items (default)
+    "mega_showdown:tera_orb",          // Terastallization
+    "mega_showdown:dynamax_band",      // Dynamax/Gigantamax
+    "mega_showdown:mega_bracelet",     // Mega Evolution
+    "mega_showdown:z_ring",            // Z-Moves
+    "mega_showdown:omni_ring",         // All gimmicks
 
-  // Hypothetical custom mod items
-  "custommod:legendary_boost",
-  "custommod:infinite_pp_item",
+    // Hypothetical custom mod items
+    "custommod:legendary_boost",
+    "custommod:infinite_pp_item",
 
-  // Vanilla Minecraft items (if desired)
-  "minecraft:netherite_sword",
-  "minecraft:totem_of_undying",
-]
+    // Vanilla Minecraft items (if desired)
+    "minecraft:netherite_sword",
+    "minecraft:totem_of_undying"
+  ]
+}
 ```
 
 ### Finding Item IDs
@@ -163,43 +172,49 @@ Remove these items from your inventory and try again.
 ### Example 1: Ban All Mega Showdown Battle Items
 
 ```json5
-"banned_inventory_items": [
-  "mega_showdown:tera_orb",          // Terastallization
-  "mega_showdown:dynamax_band",      // Dynamax/Gigantamax
-  "mega_showdown:mega_bracelet",     // Mega Evolution
-  "mega_showdown:z_ring",            // Z-Moves
-  "mega_showdown:omni_ring"          // All gimmicks
-]
+{
+  "banned_items": [
+    "mega_showdown:tera_orb",          // Terastallization
+    "mega_showdown:dynamax_band",      // Dynamax/Gigantamax
+    "mega_showdown:mega_bracelet",     // Mega Evolution
+    "mega_showdown:z_ring",            // Z-Moves
+    "mega_showdown:omni_ring"          // All gimmicks
+  ]
+}
 ```
 
 ### Example 2: Strict Competitive Mode (No External Items)
 
 ```json5
-"banned_inventory_items": [
-  // Mega Showdown (all battle gimmicks)
-  "mega_showdown:tera_orb",
-  "mega_showdown:dynamax_band",
-  "mega_showdown:mega_bracelet",
-  "mega_showdown:z_ring",
-  "mega_showdown:omni_ring",
+{
+  "banned_items": [
+    // Mega Showdown (all battle gimmicks)
+    "mega_showdown:tera_orb",
+    "mega_showdown:dynamax_band",
+    "mega_showdown:mega_bracelet",
+    "mega_showdown:z_ring",
+    "mega_showdown:omni_ring",
 
-  // Hypothetical power-up items
-  "powerups:stat_booster",
-  "powerups:exp_share_plus",
+    // Hypothetical power-up items
+    "powerups:stat_booster",
+    "powerups:exp_share_plus",
 
-  // Hypothetical utility items
-  "utilities:instant_heal",
-  "utilities:revive_token",
-]
+    // Hypothetical utility items
+    "utilities:instant_heal",
+    "utilities:revive_token"
+  ]
+}
 ```
 
 ### Example 3: Tournament Specific Rules
 
 ```json5
-"banned_inventory_items": [
-  // Only ban items that break tournament rules
-  "mega_showdown:tera_orb",  // No Tera allowed in this tournament
-]
+{
+  "banned_items": [
+    // Only ban items that break tournament rules
+    "mega_showdown:tera_orb"  // No Tera allowed in this tournament
+  ]
+}
 ```
 
 ### Example 4: No Banned Items
@@ -207,7 +222,9 @@ Remove these items from your inventory and try again.
 To disable this feature entirely:
 
 ```json5
-"banned_inventory_items": []
+{
+  "banned_items": []
+}
 ```
 
 ## Integration with Other Systems
@@ -337,7 +354,7 @@ If you're developing a mod that needs to interact with this system:
 
 ```kotlin
 // Check if player has banned items (server-side only)
-val bannedItems = CobbleRankedMod.configManager.mainConfig.rankedMatch.bannedInventoryItems
+val bannedItems = CobbleRankedMod.configManager.inventoryBlacklistConfig.bannedItems
 
 fun checkPlayerInventory(player: ServerPlayerEntity): List<String> {
     val foundItems = mutableListOf<String>()

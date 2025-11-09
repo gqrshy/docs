@@ -378,29 +378,44 @@ Core settings for competitive matches, seasons, and Elo.
 
 ### Banned Inventory Items
 
+> **📁 Moved to:** `config/cobbleranked/blacklist/inventory.json5`
+
+Banned inventory items are now configured in a separate file alongside Pokemon blacklists (singles.json5 and doubles.json5).
+
+**File structure:**
 ```json5
-"banned_inventory_items": [
-  "mega_showdown:tera_orb",
-  "mega_showdown:dynamax_band"
-]
+{
+  "banned_items": [
+    "mega_showdown:tera_orb",
+    "mega_showdown:dynamax_band",
+    "mega_showdown:mega_bracelet",
+    "mega_showdown:z_ring",
+    "mega_showdown:omni_ring"
+  ]
+}
 ```
 
-**Purpose:** Items players cannot have in inventory when joining queue.
+**Purpose:** Items players cannot have in inventory/trinket slots when joining queue.
 
 **Why ban these?**
 - Tera Orb enables Terastallization (often banned in competitive)
 - Dynamax Band enables Dynamax/Gigantamax (often banned)
 
 **How to add more:**
+Edit `config/cobbleranked/blacklist/inventory.json5`:
 ```json5
-"banned_inventory_items": [
-  "mega_showdown:tera_orb",
-  "mega_showdown:dynamax_band",
-  "modid:item_name"
-]
+{
+  "banned_items": [
+    "mega_showdown:tera_orb",
+    "mega_showdown:dynamax_band",
+    "modid:item_name"
+  ]
+}
 ```
 
 Use format: `"modid:item_id"`
+
+For detailed information, see [Banned Items Guide](../cobbleranked/features/banned-items.md).
 
 ### Elo-Based Battle Music
 
