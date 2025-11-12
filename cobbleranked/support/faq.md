@@ -374,14 +374,276 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 - ✅ Cross-server support
 - ❌ Custom background music only
 
-**To enable custom music:**
-- Upgrade to **Cobblemon 1.7.0+**
+**To enable custom music on 1.6.1:**
+- Use **GUtils mod** (client-side)
+- Supports custom BGM functionality
+- Players need to install GUtils + server resource pack
+
+**To enable custom music on 1.7.0+:**
+- No client mod required!
+- Use server resource packs
 - All other features work identically
 
 **Expected log message:**
 ```
 [MusicUtil] Detected Cobblemon V1_6_X - Custom music DISABLED (not supported in 1.6.x)
 ```
+
+See: [How to set up server resource packs](#how-do-i-set-up-server-resource-packs-for-custom-music)
+
+</details>
+
+<details>
+<summary><strong>How do I set up server resource packs for custom music?</strong></summary>
+
+**Server resource packs allow you to add custom music without requiring players to manually download files.**
+
+### Step 1: Create Your Resource Pack
+
+1. **Create the pack structure:**
+   ```
+   cobbleranked-music-pack/
+   ├── pack.mcmeta
+   └── assets/
+       └── cobbleranked/
+           └── sounds/
+               ├── music/
+               │   ├── battle_beginner.ogg
+               │   ├── battle_intermediate.ogg
+               │   ├── battle_advanced.ogg
+               │   ├── battle_expert.ogg
+               │   └── battle_master.ogg
+               └── sounds.json
+   ```
+
+2. **Create `pack.mcmeta`:**
+   ```json
+   {
+     "pack": {
+       "pack_format": 34,
+       "description": "CobbleRanked Custom Battle Music"
+     }
+   }
+   ```
+
+   **Pack Format Reference:**
+   - Minecraft 1.21.1: `34`
+   - See [Minecraft Wiki - Pack Format](https://minecraft.wiki/w/Pack_format) for other versions
+
+3. **Create `assets/cobbleranked/sounds.json`:**
+   ```json
+   {
+     "music.battle_beginner": {
+       "sounds": [
+         {
+           "name": "cobbleranked:music/battle_beginner",
+           "stream": true
+         }
+       ]
+     },
+     "music.battle_intermediate": {
+       "sounds": [
+         {
+           "name": "cobbleranked:music/battle_intermediate",
+           "stream": true
+         }
+       ]
+     },
+     "music.battle_advanced": {
+       "sounds": [
+         {
+           "name": "cobbleranked:music/battle_advanced",
+           "stream": true
+         }
+       ]
+     },
+     "music.battle_expert": {
+       "sounds": [
+         {
+           "name": "cobblemon:music/battle_expert",
+           "stream": true
+         }
+       ]
+     },
+     "music.battle_master": {
+       "sounds": [
+         {
+           "name": "cobbleranked:music/battle_master",
+           "stream": true
+         }
+       ]
+     }
+   }
+   ```
+
+4. **Add your music files:**
+   - Place `.ogg` files in `assets/cobbleranked/sounds/music/`
+   - Recommended: Use 128-192 kbps OGG Vorbis format
+   - File size: Keep individual files under 10MB
+
+5. **Zip the resource pack:**
+   ```bash
+   cd cobbleranked-music-pack
+   zip -r ../cobbleranked-music-pack.zip *
+   ```
+
+### Step 2: Host Your Resource Pack
+
+**Option A: mc-packs.net (Recommended)**
+
+1. Visit [mc-packs.net](https://www.mc-packs.net/)
+2. Upload your `.zip` file
+3. Copy the download URL provided
+4. Format: `https://www.mc-packs.net/pack/your-pack-id`
+
+**Option B: Dropbox**
+- Upload zip → Get share link → Change `?dl=0` to `?dl=1`
+
+**Option C: Google Drive**
+- Upload → Get Link → Use: `https://drive.google.com/uc?export=download&id=YOUR_FILE_ID`
+
+**Option D: Your Own Web Server**
+- Host the `.zip` with direct HTTP/HTTPS access
+
+### Step 3: Configure Your Server
+
+**For Vanilla/Fabric Servers** - Edit `server.properties`:
+```properties
+resource-pack=https://www.mc-packs.net/pack/your-pack-id
+resource-pack-sha1=YOUR_SHA1_HASH
+require-resource-pack=false
+resource-pack-prompt=CobbleRanked Custom Music Pack
+```
+
+Generate SHA1 hash:
+```bash
+# Linux/Mac
+sha1sum cobbleranked-music-pack.zip
+
+# Windows (PowerShell)
+Get-FileHash cobbleranked-music-pack.zip -Algorithm SHA1
+```
+
+**For Velocity Proxy** - Edit `velocity.toml`:
+```toml
+[forced-hosts]
+"your-server.com" = [
+  {
+    resource-pack = "https://www.mc-packs.net/pack/your-pack-id"
+    hash = "YOUR_SHA1_HASH"
+    prompt = "CobbleRanked Custom Music Pack"
+    should-force = false
+  }
+]
+```
+
+### Step 4: Configure CobbleRanked
+
+Edit `config/cobbleranked/config.json5`:
+
+```json5
+{
+  "music": {
+    "elo_based_music": [
+      {
+        "min_combined_elo": 0,
+        "max_combined_elo": 2000,
+        "music_list": ["cobbleranked:music.battle_beginner"]
+      },
+      {
+        "min_combined_elo": 2001,
+        "max_combined_elo": 2500,
+        "music_list": ["cobbleranked:music.battle_intermediate"]
+      },
+      {
+        "min_combined_elo": 2501,
+        "max_combined_elo": 3000,
+        "music_list": ["cobbleranked:music.battle_advanced"]
+      },
+      {
+        "min_combined_elo": 3001,
+        "max_combined_elo": 3500,
+        "music_list": ["cobbleranked:music.battle_expert"]
+      },
+      {
+        "min_combined_elo": 3501,
+        "max_combined_elo": 999999,
+        "music_list": ["cobbleranked:music.battle_master"]
+      }
+    ]
+  }
+}
+```
+
+### Troubleshooting
+
+**Players can't hear music:**
+1. Check resource pack was accepted (press F3 + T)
+2. Verify music files are `.ogg` format
+3. Check volume settings (Options → Music & Sounds)
+4. Cobblemon 1.6.1: Install [GUtils mod](https://modrinth.com/mod/gutils)
+5. Cobblemon 1.7.0+: No client mod needed
+
+**Resource pack not downloading:**
+1. Test URL in browser
+2. Verify SHA1 hash matches
+3. Check server.properties syntax
+4. File size must be under 100MB
+
+</details>
+
+<details>
+<summary><strong>Players get disconnected when joining queue (1.6.1 servers)</strong></summary>
+
+**Problem:** Players without GUtils mod get forcefully disconnected when joining ranked queue on Cobblemon 1.6.1 servers
+
+**Root cause:**
+- Cobblemon 1.6.1 doesn't have built-in music packet support
+- CobbleRanked uses custom MusicPacket that requires GUtils mod on client
+- Vanilla clients crash when receiving the custom packet
+
+**Solution:**
+
+CobbleRanked v1.0.0+ includes automatic client protection:
+
+**Option 1: Disable music for clients without GUtils (recommended)**
+
+Edit `config/cobbleranked/config.json5`:
+```json5
+{
+  "music": {
+    "enabled": true,
+    "require_client_mod": true  // Safe mode: skip music in 1.6.1
+  }
+}
+```
+
+**Option 2: Require ALL clients to install GUtils**
+
+1. Distribute GUtils mod to all players
+2. Set `require_client_mod: false` in config
+3. Verify all clients have the mod before enabling
+
+**Option 3: Disable music completely**
+
+```json5
+{
+  "music": {
+    "enabled": false  // Disable all music
+  }
+}
+```
+
+**For Cobblemon 1.7+ servers:**
+- No client mod required
+- Music works automatically for all clients
+- `require_client_mod` setting is ignored
+
+**Technical details:**
+- Config check: `music.enabled` (master switch)
+- Config check: `music.require_client_mod` (1.6.1 protection)
+- Fallback: Silent failure if client incompatible
+- Logging: Warns when music is skipped
 
 </details>
 
