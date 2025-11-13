@@ -28,10 +28,10 @@ Cross-server mode allows players on different servers to compete in a unified ra
 
 | Component | Version | Purpose |
 |-----------|---------|---------|
-| **Velocity** | Latest | Server switching |
+| **Velocity** | 3.3.0+ | Proxy server for server switching |
 | **MySQL or MongoDB** | 8.0+ / 6.0+ | Shared player data |
 | **Redis** | 6.0+ | Real-time queue sync |
-| **CobbleRanked** | Latest | On all servers |
+| **CobbleRanked** | Latest | On all Fabric servers |
 
 **Minimum:** 2 servers (1 battle + 1 lobby/main)
 **Recommended:** 3+ servers (1 battle + 1 lobby + 1+ main)
@@ -39,6 +39,297 @@ Cross-server mode allows players on different servers to compete in a unified ra
 **Database Options:**
 - **MySQL**: Traditional relational database (recommended for 2-5 servers)
 - **MongoDB**: NoSQL database (recommended for 5+ servers or cloud deployments)
+
+### Required Mods & Plugins
+
+#### Velocity Proxy (plugins folder)
+- **[ProxyCommand Reloaded](https://modrinth.com/plugin/proxy-command-reloaded)** - Enable cross-server commands and player transfers
+
+#### Fabric Servers (mods folder)
+All backend servers (lobby, main, battle) need these mods:
+- **[CrossStitch](https://modrinth.com/mod/crossstitch)** - Velocity support for Fabric
+- **[FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite)** - Proxy protocol support
+- **[Placeholder API](https://modrinth.com/mod/placeholder-api)** - Required for CobbleRanked (version 2.4.2+1.21+)
+- **[CobbleRanked](https://modrinth.com/mod/cobbleranked)** - This mod
+- **[Cobblemon](https://modrinth.com/mod/cobblemon)** - 1.6.1+ required
+
+---
+
+## Velocity Proxy Setup for Fabric
+
+This section covers the complete setup process for connecting Fabric servers through Velocity proxy.
+
+### Step 1: Install Velocity Proxy
+
+1. **Download Velocity**
+   - Get the latest version from [PaperMC](https://papermc.io/downloads/velocity)
+   - Recommended: Velocity 3.3.0 or newer
+
+2. **Run Velocity once to generate config**
+   ```bash
+   java -Xms512M -Xmx512M -jar velocity.jar
+   ```
+
+3. **Stop Velocity** after config generation (Ctrl+C)
+
+### Step 2: Configure Velocity
+
+Edit `velocity.toml`:
+
+```toml
+# Server connection configuration
+bind = "0.0.0.0:25577"  # Proxy listens on this port (players connect here)
+motd = "&3My Cobblemon Network"
+
+# Player info forwarding (REQUIRED for Fabric)
+[player-info-forwarding]
+mode = "modern"  # Use "modern" for Fabric 1.21+
+secret = "your-secret-key-here"  # Generate a random string (32+ characters)
+
+# Backend servers
+[servers]
+lobby = "127.0.0.1:25565"    # Lobby server
+main1 = "127.0.0.1:25566"    # Main survival server
+battle = "127.0.0.1:25567"   # Battle server
+
+# Default server when players join
+try = ["lobby"]
+
+# Forced hosts (optional - different domains route to different servers)
+[forced-hosts]
+"play.example.com" = ["lobby"]
+"battle.example.com" = ["battle"]
+```
+
+**Important Notes:**
+- `secret` must be a unique random string (use a password generator)
+- Server names must match CobbleRanked `server_id` and `battle_server` values
+- All servers must be on the same machine or accessible via LAN/VPN
+- `mode = "modern"` is required for Fabric 1.20.1+ servers
+
+### Step 3: Install Velocity Plugins
+
+1. **Download ProxyCommand Reloaded**
+   - Get from [Modrinth](https://modrinth.com/plugin/proxy-command-reloaded)
+   - Place in `velocity/plugins/` folder
+
+2. **Restart Velocity**
+   ```bash
+   java -Xms512M -Xmx512M -jar velocity.jar
+   ```
+
+**What ProxyCommand does:**
+- Enables `/server <name>` command for players
+- Allows CobbleRanked to transfer players between servers
+- Provides admin commands for server management
+
+### Step 4: Configure Fabric Servers
+
+Each Fabric server needs special configuration for Velocity compatibility.
+
+#### Install Required Mods
+
+Place these mods in the `mods/` folder of **EVERY** Fabric server:
+
+1. **CrossStitch** ([Modrinth](https://modrinth.com/mod/crossstitch))
+   - Enables Velocity modern forwarding support
+   - Required for player authentication through proxy
+
+2. **FabricProxy-Lite** ([Modrinth](https://modrinth.com/mod/fabricproxy-lite))
+   - Handles proxy protocol and player data
+   - Prevents players from bypassing proxy
+
+3. **Placeholder API 2.4.2+1.21** ([Modrinth](https://modrinth.com/mod/placeholder-api))
+   - Required dependency for CobbleRanked
+   - Provides placeholder system for GUI and messages
+
+4. **Cobblemon 1.6.1+** ([Modrinth](https://modrinth.com/mod/cobblemon))
+   - The Pokemon mod this is built for
+   - Must be same version across all servers
+
+5. **CobbleRanked** (this mod)
+
+#### Configure Each Fabric Server
+
+Edit `config/fabricproxy-lite.toml` on **EVERY** Fabric server:
+
+```toml
+# Must match Velocity's player-info-forwarding section
+[proxy]
+# Connection secret - MUST MATCH velocity.toml secret
+secret = "your-secret-key-here"  # Same as Velocity
+```
+
+**CRITICAL:** The `secret` value must **exactly match** the one in `velocity.toml`. If they don't match, players cannot join.
+
+Edit `server.properties` on **EVERY** Fabric server:
+
+```properties
+# Prevent direct connections (force players through proxy)
+online-mode=false  # REQUIRED when using Velocity
+
+# Server port (each server needs unique port)
+server-port=25565  # Lobby: 25565, Main: 25566, Battle: 25567
+
+# Prevent IP forwarding conflicts
+prevent-proxy-connections=false
+```
+
+### Step 5: Configure Firewall
+
+**IMPORTANT:** Secure your backend servers so players can't bypass the proxy.
+
+```bash
+# Allow only localhost and proxy IP to connect to backend servers
+# Example using UFW (Ubuntu):
+
+# Lobby server (port 25565)
+sudo ufw allow from 127.0.0.1 to any port 25565
+sudo ufw allow from YOUR_PROXY_IP to any port 25565
+
+# Main server (port 25566)
+sudo ufw allow from 127.0.0.1 to any port 25566
+sudo ufw allow from YOUR_PROXY_IP to any port 25566
+
+# Battle server (port 25567)
+sudo ufw allow from 127.0.0.1 to any port 25567
+sudo ufw allow from YOUR_PROXY_IP to any port 25567
+
+# Proxy port (publicly accessible)
+sudo ufw allow 25577/tcp
+```
+
+If all servers are on the same machine (localhost), you only need:
+```bash
+sudo ufw allow 25577/tcp  # Only the proxy port is public
+```
+
+### Step 6: Start Servers in Order
+
+1. **Start backend Fabric servers first**
+   ```bash
+   # Terminal 1 - Lobby
+   cd lobby-server
+   ./start.sh
+
+   # Terminal 2 - Main
+   cd main-server
+   ./start.sh
+
+   # Terminal 3 - Battle
+   cd battle-server
+   ./start.sh
+   ```
+
+2. **Wait for all Fabric servers to fully load** (check logs for "Done")
+
+3. **Start Velocity proxy**
+   ```bash
+   # Terminal 4 - Proxy
+   cd velocity
+   java -Xms512M -Xmx512M -jar velocity.jar
+   ```
+
+4. **Verify connection in Velocity console:**
+   ```
+   [INFO]: Loaded 3 plugins
+   [INFO]: lobby - successfully connected
+   [INFO]: main1 - successfully connected
+   [INFO]: battle - successfully connected
+   ```
+
+### Step 7: Test the Setup
+
+1. **Connect to the proxy** (port 25577, not individual servers)
+   ```
+   minecraft.example.com:25577
+   ```
+
+2. **Test server switching:**
+   ```
+   /server battle
+   /server lobby
+   ```
+
+3. **Test CobbleRanked:**
+   - Open `/ranked` GUI on lobby
+   - Join queue
+   - When matched, you should auto-transfer to battle server
+
+### Troubleshooting Velocity Setup
+
+#### "If you wish to use IP forwarding, please enable it in your BungeeCord config as well!"
+
+**Problem:** FabricProxy-Lite secret doesn't match Velocity secret
+
+**Solution:**
+1. Check `velocity.toml` → `[player-info-forwarding]` → `secret`
+2. Check `config/fabricproxy-lite.toml` → `secret` on **all servers**
+3. Make sure they are **exactly the same** (case-sensitive)
+4. Restart all servers
+
+#### "Can't connect to server"
+
+**Problem:** Backend server not reachable from Velocity
+
+**Solution:**
+1. Check server IP/port in `velocity.toml` → `[servers]`
+2. Verify backend servers are running (`/list` in console)
+3. Test connection: `telnet 127.0.0.1 25565`
+4. Check firewall rules
+
+#### "Disconnected: You are not authenticated with the proxy"
+
+**Problem:** Player connecting directly to backend server instead of proxy
+
+**Solution:**
+1. Make sure players connect to proxy port (25577), not backend ports
+2. Set `online-mode=false` in backend `server.properties`
+3. Configure firewall to block direct connections (see Step 5)
+
+#### Players stuck after match ready
+
+**Problem:** CobbleRanked can't transfer players to battle server
+
+**Solution:**
+1. Check `battle_server` name in `config/cobbleranked/config.json5` matches Velocity server name
+2. Verify ProxyCommand plugin is installed on Velocity
+3. Check battle server is online and in Velocity config
+4. Review CobbleRanked logs for transfer errors
+
+### Performance Tips
+
+**Velocity JVM Flags** (for 50+ players):
+```bash
+java -Xms1G -Xmx1G \
+  -XX:+UseG1GC \
+  -XX:G1HeapRegionSize=4M \
+  -XX:+UnlockExperimentalVMOptions \
+  -XX:+ParallelRefProcEnabled \
+  -XX:+AlwaysPreTouch \
+  -jar velocity.jar
+```
+
+**Network Optimization** (edit `velocity.toml`):
+```toml
+[advanced]
+compression-threshold = 256
+compression-level = -1  # Use fastest compression
+login-ratelimit = 3000
+```
+
+### Additional Resources
+
+**Detailed Japanese Guide (Fabric + Velocity):**
+- [Fabricサーバー複数台構成 (とことん日記)](https://tokoton0ch.com/2023/12/03/post-4983/)
+- Comprehensive guide covering Velocity proxy setup with Fabric servers
+- Includes CrossStitch and FabricProxy-Lite configuration
+- Step-by-step troubleshooting for common issues
+
+**Official Documentation:**
+- [Velocity Documentation](https://docs.papermc.io/velocity)
+- [CrossStitch GitHub](https://github.com/VelocityPowered/CrossStitch)
+- [FabricProxy-Lite Modrinth](https://modrinth.com/mod/fabricproxy-lite)
 
 ---
 
