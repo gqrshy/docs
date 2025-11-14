@@ -256,47 +256,6 @@ sudo ufw allow 25577/tcp  # Only the proxy port is public
    - Join queue
    - When matched, you should auto-transfer to battle server
 
-### Troubleshooting Velocity Setup
-
-#### "If you wish to use IP forwarding, please enable it in your BungeeCord config as well!"
-
-**Problem:** FabricProxy-Lite secret doesn't match Velocity secret
-
-**Solution:**
-1. Check `velocity.toml` → `[player-info-forwarding]` → `secret`
-2. Check `config/fabricproxy-lite.toml` → `secret` on **all servers**
-3. Make sure they are **exactly the same** (case-sensitive)
-4. Restart all servers
-
-#### "Can't connect to server"
-
-**Problem:** Backend server not reachable from Velocity
-
-**Solution:**
-1. Check server IP/port in `velocity.toml` → `[servers]`
-2. Verify backend servers are running (`/list` in console)
-3. Test connection: `telnet 127.0.0.1 25565`
-4. Check firewall rules
-
-#### "Disconnected: You are not authenticated with the proxy"
-
-**Problem:** Player connecting directly to backend server instead of proxy
-
-**Solution:**
-1. Make sure players connect to proxy port (25577), not backend ports
-2. Set `online-mode=false` in backend `server.properties`
-3. Configure firewall to block direct connections (see Step 5)
-
-#### Players stuck after match ready
-
-**Problem:** CobbleRanked can't transfer players to battle server
-
-**Solution:**
-1. Check `battle_server` name in `config/cobbleranked/config.json5` matches Velocity server name
-2. Verify ProxyCommand plugin is installed on Velocity
-3. Check battle server is online and in Velocity config
-4. Review CobbleRanked logs for transfer errors
-
 ### Performance Tips
 
 **Velocity JVM Flags** (for 50+ players):
@@ -611,35 +570,11 @@ Should return: `PONG`
 
 ---
 
-## Troubleshooting
+## See Also
 
-### Players can't match
-
-**Check:**
-- All servers using same MySQL database
-- All servers using same Redis database number
-- Queue format matches (Singles vs Doubles)
-- Verify with: `redis-cli KEYS "*queue*"`
-
-### Stats not syncing
-
-**Check:**
-- All servers using same MySQL host
-- Check battle server logs for database errors
-- Verify Redis connection on all servers
-
-### Transfer fails
-
-**Check:**
-- `battle_server` name matches Velocity config
-- Velocity can reach battle server
-- Battle server is online
-
-### Stats not persisting after 60s
-
-**Check:**
-- Battle server database connection
-- Check logs for: `[Batch] Saved FormatStats`
+- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
+- [Database Setup](database.md) - MySQL and MongoDB configuration
+- [Redis Setup](redis.md) - Redis configuration and management
 
 ---
 

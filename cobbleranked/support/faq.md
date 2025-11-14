@@ -475,6 +475,406 @@ Or grant `cobbleranked.admin` via permissions plugin
 
 ---
 
+## Installation Troubleshooting
+
+<details>
+<summary><strong>Mod Not Loading</strong></summary>
+
+**Symptom:** No CobbleRanked messages in console
+
+**Fix:**
+1. Check all dependencies are in `mods/`:
+   - Fabric API ✅
+   - Cobblemon ✅
+   - Fabric Language Kotlin ✅
+2. Review `logs/latest.log` for:
+   - Missing dependency errors
+   - Version mismatches
+   - Mod conflicts
+
+</details>
+
+<details>
+<summary><strong>Config Not Updating</strong></summary>
+
+**Symptom:** Changes don't apply in-game
+
+**Fix:**
+1. Save file (Ctrl+S)
+2. Run `/rankedadmin reload`
+3. Check for JSON5 syntax errors:
+   - Missing commas
+   - Unclosed brackets
+   - Invalid comments
+
+**Note:** Cross-server settings require server restart (cannot reload)
+
+</details>
+
+<details>
+<summary><strong>Database Connection Failed</strong></summary>
+
+**Symptom:** `Failed to connect to MySQL database`
+
+**Fix:**
+1. Verify MySQL is running:
+   ```bash
+   sudo systemctl status mysql
+   ```
+2. Test credentials:
+   ```bash
+   mysql -u cobbleranked -p -h localhost cobbleranked
+   ```
+3. Check firewall (port 3306)
+
+</details>
+
+<details>
+<summary><strong>Permission Denied</strong></summary>
+
+**Symptom:** `You do not have permission to use this command`
+
+**Fix:**
+```
+/op YourUsername
+```
+
+Or grant `cobbleranked.admin` via LuckPerms/PermissionsEx
+
+</details>
+
+---
+
+## Configuration Troubleshooting
+
+<details>
+<summary><strong>Config not loading?</strong></summary>
+
+**Symptoms:**
+- Changes not taking effect
+- Default values appearing in-game
+- Missing configuration options
+
+**Solutions:**
+- Check JSON5 syntax (commas, brackets)
+- Look for errors in server console
+- Verify file path: `config/cobbleranked/config.json5`
+
+</details>
+
+<details>
+<summary><strong>Changes not applying?</strong></summary>
+
+**Solutions:**
+- Run `/rankedadmin reload`
+- Restart server if reload fails
+- Verify file was saved after editing
+
+</details>
+
+<details>
+<summary><strong>Cross-server not working?</strong></summary>
+
+**Solutions:**
+- Verify MySQL connection
+- Test Redis: `redis-cli PING`
+- Check all servers use same database
+
+</details>
+
+---
+
+## Arena Troubleshooting
+
+<details>
+<summary><strong>Players not teleporting</strong></summary>
+
+**Symptom:** Match found but players stay in place
+
+**Solution:**
+1. Check arena exists: `/rankedadmin arena list`
+2. Verify world is loaded
+3. Check console for errors
+4. Test arena: `/rankedadmin arena tp arena_name`
+
+</details>
+
+<details>
+<summary><strong>Invalid world error</strong></summary>
+
+**Symptom:** `World 'modname:dimension' does not exist`
+
+**Solution:**
+1. Check dimension ID spelling in `arenas.json5`
+2. Ensure dimension mod is installed
+3. Use correct format: `modname:dimension_name` (no spaces)
+
+</details>
+
+<details>
+<summary><strong>Players spawn in wrong location</strong></summary>
+
+**Symptom:** Players spawn in blocks or fall
+
+**Solution:**
+1. Re-create arena: Stand at correct spot, `/rankedadmin arena set arena_name`
+2. Verify Y coordinate is correct (ground level, not underground)
+3. Check `arenas.json5` coordinates manually
+
+</details>
+
+<details>
+<summary><strong>Arena not in rotation</strong></summary>
+
+**Symptom:** Specific arena never selected
+
+**Solution:**
+1. Verify arena in list: `/rankedadmin arena list`
+2. Check world is loaded (cross-dimensional arenas)
+3. Reload config: `/rankedadmin reload`
+
+</details>
+
+<details>
+<summary><strong>Coordinates off-center</strong></summary>
+
+**Symptom:** Players spawn at edge of arena
+
+**Solution:**
+
+Coordinates save with decimals:
+- Stand at exact center
+- Use F3 coordinates
+- Manually edit `arenas.json5` to `.5` decimal (e.g., `100.5` centers on block)
+
+</details>
+
+---
+
+## Velocity & Cross-Server Troubleshooting
+
+<details>
+<summary><strong>"If you wish to use IP forwarding, please enable it in your BungeeCord config as well!"</strong></summary>
+
+**Problem:** FabricProxy-Lite secret doesn't match Velocity secret
+
+**Solution:**
+1. Check `velocity.toml` → `[player-info-forwarding]` → `secret`
+2. Check `config/fabricproxy-lite.toml` → `secret` on **all servers**
+3. Make sure they are **exactly the same** (case-sensitive)
+4. Restart all servers
+
+</details>
+
+<details>
+<summary><strong>"Can't connect to server"</strong></summary>
+
+**Problem:** Backend server not reachable from Velocity
+
+**Solution:**
+1. Check server IP/port in `velocity.toml` → `[servers]`
+2. Verify backend servers are running (`/list` in console)
+3. Test connection: `telnet 127.0.0.1 25565`
+4. Check firewall rules
+
+</details>
+
+<details>
+<summary><strong>"Disconnected: You are not authenticated with the proxy"</strong></summary>
+
+**Problem:** Player connecting directly to backend server instead of proxy
+
+**Solution:**
+1. Make sure players connect to proxy port (25577), not backend ports
+2. Set `online-mode=false` in backend `server.properties`
+3. Configure firewall to block direct connections (see Step 5)
+
+</details>
+
+<details>
+<summary><strong>Players stuck after match ready</strong></summary>
+
+**Problem:** CobbleRanked can't transfer players to battle server
+
+**Solution:**
+1. Check `battle_server` name in `config/cobbleranked/config.json5` matches Velocity server name
+2. Verify ProxyCommand plugin is installed on Velocity
+3. Check battle server is online and in Velocity config
+4. Review CobbleRanked logs for transfer errors
+
+</details>
+
+<details>
+<summary><strong>Players can't match</strong></summary>
+
+**Check:**
+- All servers using same MySQL database
+- All servers using same Redis database number
+- Queue format matches (Singles vs Doubles)
+- Verify with: `redis-cli KEYS "*queue*"`
+
+</details>
+
+<details>
+<summary><strong>Stats not syncing</strong></summary>
+
+**Check:**
+- All servers using same MySQL host
+- Check battle server logs for database errors
+- Verify Redis connection on all servers
+
+</details>
+
+<details>
+<summary><strong>Transfer fails</strong></summary>
+
+**Check:**
+- `battle_server` name matches Velocity config
+- Velocity can reach battle server
+- Battle server is online
+
+</details>
+
+<details>
+<summary><strong>Stats not persisting after 60s</strong></summary>
+
+**Check:**
+- Battle server database connection
+- Check logs for: `[Batch] Saved FormatStats`
+
+</details>
+
+---
+
+## Placeholder API Troubleshooting
+
+<details>
+<summary><strong>Placeholder Shows Raw Text</strong></summary>
+
+**Problem:**
+```
+Hologram displays: %cobbleranked_top_1_name%
+Instead of: Notch
+```
+
+**Solutions for Fabric servers:**
+
+1. **Check Text Placeholder API is installed:**
+   ```bash
+   /mods list
+   # Should show: text_placeholder_api or placeholder-api
+   ```
+
+2. **Check CobbleRanked is loaded:**
+   ```bash
+   /mods list
+   # Should show: cobbleranked
+   ```
+
+3. **Test placeholder manually:**
+   ```bash
+   /rankedplaceholder test %cobbleranked_top_1_name%
+   ```
+
+4. **Verify hologram mod supports Text Placeholder API:**
+   - Check the hologram mod's documentation
+   - Most Fabric hologram mods support Text Placeholder API
+
+**Solutions for Hybrid servers (Arclight only):**
+
+1. **Check PlaceholderAPI is installed:**
+   ```bash
+   /plugins
+   # Should show: PlaceholderAPI (green)
+   ```
+
+2. **Register with PlaceholderAPI:**
+   ```bash
+   /papi reload
+   /papi parse me %cobbleranked_top_1_name%
+   ```
+
+</details>
+
+<details>
+<summary><strong>Placeholder Returns "N/A"</strong></summary>
+
+**Problem:**
+All placeholders return "N/A" or empty values.
+
+**Possible causes:**
+
+1. **No players have played ranked yet:**
+   - Solution: Play at least 1 ranked match to populate leaderboard
+
+2. **Database not initialized:**
+   ```bash
+   # Check server logs for:
+   [CobbleRanked] Database initialized
+   [CobbleRanked] Loaded X player stats
+   ```
+
+3. **Cache is stale:**
+   ```bash
+   /rankedplaceholder clear
+   ```
+
+4. **Wrong format specified:**
+   ```bash
+   # If no players have played Singles:
+   %cobbleranked_top_singles_1_name% → "N/A"
+
+   # But combined might work:
+   %cobbleranked_top_1_name% → Shows Doubles players
+   ```
+
+</details>
+
+<details>
+<summary><strong>Placeholder Returns Old Data</strong></summary>
+
+**Problem:**
+Placeholder shows outdated stats after a match.
+
+**Solutions:**
+
+1. **Wait for cache to expire (60 seconds):**
+   - Automatic refresh after 1 minute
+
+2. **Manually clear cache:**
+   ```bash
+   /rankedplaceholder clear
+   ```
+
+3. **Check if match results saved:**
+   ```bash
+   # Server logs should show:
+   [BattleResult] Saved stats for <player>
+   ```
+
+</details>
+
+<details>
+<summary><strong>High Rank Returns "N/A" (e.g., rank 50+)</strong></summary>
+
+**Problem:**
+```
+%cobbleranked_top_50_name% → "N/A"
+```
+
+**Cause:**
+Server has fewer than 50 players with ranked stats.
+
+**Solution:**
+This is expected behavior. Use lower ranks or check total players:
+```bash
+/rankedplaceholder test %cobbleranked_top_10_name%
+```
+
+</details>
+
+---
+
 ## Other
 
 <details>

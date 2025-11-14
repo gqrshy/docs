@@ -213,61 +213,9 @@ sudo systemctl start redis-server
 
 ---
 
-## Troubleshooting
+## See Also
 
-### Mod Not Loading
-
-**Symptom:** No CobbleRanked messages in console
-
-**Fix:**
-1. Check all dependencies are in `mods/`:
-   - Fabric API ✅
-   - Cobblemon ✅
-   - Fabric Language Kotlin ✅
-2. Review `logs/latest.log` for:
-   - Missing dependency errors
-   - Version mismatches
-   - Mod conflicts
-
-### Config Not Updating
-
-**Symptom:** Changes don't apply in-game
-
-**Fix:**
-1. Save file (Ctrl+S)
-2. Run `/rankedadmin reload`
-3. Check for JSON5 syntax errors:
-   - Missing commas
-   - Unclosed brackets
-   - Invalid comments
-
-**Note:** Cross-server settings require server restart (cannot reload)
-
-### Database Connection Failed
-
-**Symptom:** `Failed to connect to MySQL database`
-
-**Fix:**
-1. Verify MySQL is running:
-   ```bash
-   sudo systemctl status mysql
-   ```
-2. Test credentials:
-   ```bash
-   mysql -u cobbleranked -p -h localhost cobbleranked
-   ```
-3. Check firewall (port 3306)
-
-### Permission Denied
-
-**Symptom:** `You do not have permission to use this command`
-
-**Fix:**
-```
-/op YourUsername
-```
-
-Or grant `cobbleranked.admin` via LuckPerms/PermissionsEx
+- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
 
 ---
 

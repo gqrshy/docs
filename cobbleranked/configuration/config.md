@@ -239,22 +239,9 @@ Reloads all configuration files without server restart.
 
 ---
 
-## Troubleshooting
+## See Also
 
-**Config not loading?**
-- Check JSON5 syntax (commas, brackets)
-- Look for errors in server console
-- Verify file path: `config/cobbleranked/config.json5`
-
-**Changes not applying?**
-- Run `/rankedadmin reload`
-- Restart server if reload fails
-
-**Cross-server not working?**
-- Verify MySQL connection
-- Test Redis: `redis-cli PING`
-- Check all servers use same database
-
----
-
-**Related:** [Cross-Server Setup](../advanced/cross-server.md) · [Rewards](rewards.md) · [Commands](../getting-started/commands.md)
+- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
+- [Cross-Server Setup](../advanced/cross-server.md) - Multi-server configuration
+- [Rewards](rewards.md) - Season and milestone rewards
+- [Commands](../getting-started/commands.md) - Admin commands

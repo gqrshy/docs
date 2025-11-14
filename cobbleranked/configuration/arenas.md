@@ -277,56 +277,6 @@ After battle ends:
 - Battle teleports to Overworld arena
 - After battle, returns to Nether `(100, 64, 200)`
 
-## Troubleshooting
-
-### Players not teleporting
-
-**Symptom:** Match found but players stay in place
-
-**Solution:**
-1. Check arena exists: `/rankedadmin arena list`
-2. Verify world is loaded
-3. Check console for errors
-4. Test arena: `/rankedadmin arena tp arena_name`
-
-### Invalid world error
-
-**Symptom:** `World 'modname:dimension' does not exist`
-
-**Solution:**
-1. Check dimension ID spelling in `arenas.json5`
-2. Ensure dimension mod is installed
-3. Use correct format: `modname:dimension_name` (no spaces)
-
-### Players spawn in wrong location
-
-**Symptom:** Players spawn in blocks or fall
-
-**Solution:**
-1. Re-create arena: Stand at correct spot, `/rankedadmin arena set arena_name`
-2. Verify Y coordinate is correct (ground level, not underground)
-3. Check `arenas.json5` coordinates manually
-
-### Arena not in rotation
-
-**Symptom:** Specific arena never selected
-
-**Solution:**
-1. Verify arena in list: `/rankedadmin arena list`
-2. Check world is loaded (cross-dimensional arenas)
-3. Reload config: `/rankedadmin reload`
-
-### Coordinates off-center
-
-**Symptom:** Players spawn at edge of arena
-
-**Solution:**
-
-Coordinates save with decimals:
-- Stand at exact center
-- Use F3 coordinates
-- Manually edit `arenas.json5` to `.5` decimal (e.g., `100.5` centers on block)
-
 ## Examples
 
 ### Single Arena Setup
@@ -426,4 +376,8 @@ Teleporting across dimensions:
 
 ---
 
-**Next:** Configure [Rewards System](rewards.md) for season and milestone rewards.
+## See Also
+
+- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
+- [Rewards System](rewards.md) - Season and milestone rewards
+- [Commands](../getting-started/commands.md) - Arena management commands
