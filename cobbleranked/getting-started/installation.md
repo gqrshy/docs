@@ -1,43 +1,43 @@
-# インストールガイド
+# Installation Guide
 
-CobbleRankedをサーバーに導入する手順です。
-
----
-
-## 必要なMOD
-
-以下を全て `mods` フォルダに配置：
-
-| MOD | バージョン | リンク |
-|-----|----------|--------|
-| Fabric Loader | 0.17.2+ | [DL](https://fabricmc.net/use/server/) |
-| Fabric API | 0.116.6+ | [DL](https://www.curseforge.com/minecraft/mc-mods/fabric-api) |
-| Cobblemon | 1.7.0+ | [DL](https://modrinth.com/mod/cobblemon) |
-| Fabric Language Kotlin | 1.13.6+ | [DL](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin) |
-| CobbleRanked | 最新版 | [Discord](https://discord.gg/VVVvBTqqyP) |
-
-**対象バージョン:** Minecraft 1.21.1
+Step-by-step guide to install CobbleRanked on your server.
 
 ---
 
-## インストール手順
+## Required Mods
 
-### 1. MODを配置
-上記の全てのMODを `mods` フォルダに入れる
+Place all of these in your `mods` folder:
 
-### 2. サーバー起動
-初回起動時に `config/cobbleranked/` が自動生成される
+| Mod | Version | Link |
+|-----|---------|------|
+| Fabric Loader | 0.17.2+ | [Download](https://fabricmc.net/use/server/) |
+| Fabric API | 0.116.6+ | [Download](https://www.curseforge.com/minecraft/mc-mods/fabric-api) |
+| Cobblemon | 1.7.0+ | [Download](https://modrinth.com/mod/cobblemon) |
+| Fabric Language Kotlin | 1.13.6+ | [Download](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin) |
+| CobbleRanked | Latest | [Discord](https://discord.gg/VVVvBTqqyP) |
 
-### 3. 動作確認
-ゲーム内で `/ranked` コマンドを実行してGUIが開けばOK
+**Target Version:** Minecraft 1.21.1
 
 ---
 
-## 初期設定（オプション）
+## Installation Steps
 
-### 言語を変更
+### 1. Place Mods
+Put all required mods in your `mods` folder
 
-`config/cobbleranked/config.json5` を編集：
+### 2. Start Server
+On first launch, `config/cobbleranked/` will be auto-generated
+
+### 3. Verify Installation
+Run `/ranked` in-game - if the GUI opens, you're done!
+
+---
+
+## Initial Setup (Optional)
+
+### Change Language
+
+Edit `config/cobbleranked/config.json5`:
 
 ```json5
 {
@@ -45,17 +45,17 @@ CobbleRankedをサーバーに導入する手順です。
 }
 ```
 
-### アリーナを設定
+### Set Arena
 
-バトル開始座標を設定：
+Set battle spawn coordinates:
 
 ```
 /rankedadmin arena set main_arena
 ```
 
-### 基本的なルール設定
+### Basic Rules
 
-`config/cobbleranked/blacklist.json5` を編集：
+Edit `config/cobbleranked/blacklist.json5`:
 
 ```json5
 {
@@ -64,40 +64,40 @@ CobbleRankedをサーバーに導入する手順です。
 }
 ```
 
-**詳細:** [ブラックリスト設定](../configuration/blacklist.md)
+**Details:** [Blacklist Configuration](../configuration/blacklist.md)
 
 ---
 
-## クロスサーバー（上級者向け）
+## Cross-Server (Advanced)
 
-複数サーバーでランキングを共有する場合：
+For sharing rankings across multiple servers:
 
-**必要なもの:** MySQL/MongoDB, Redis, Velocity
+**Required:** MySQL/MongoDB, Redis, Velocity
 
-**詳細:** [クロスサーバーセットアップガイド](../advanced/cross-server.md)
+**Details:** [Cross-Server Setup Guide](../advanced/cross-server.md)
 
 ---
 
-## トラブルシューティング
+## Troubleshooting
 
-### MODが読み込まれない
-- 全ての依存MODがあるか確認
-- `logs/latest.log` でエラーを確認
+### Mod Not Loading
+- Check all dependencies are installed
+- Review `logs/latest.log` for errors
 
-### 設定が反映されない
-- ファイルを保存後 `/rankedadmin reload` を実行
-- JSON5の文法エラーを確認
+### Config Not Updating
+- Save file, then run `/rankedadmin reload`
+- Check JSON5 syntax errors
 
-### その他の問題
+### Other Issues
 - [FAQ](../support/faq.md)
-- [トラブルシューティング](../support/troubleshooting.md)
+- [Troubleshooting](../support/troubleshooting.md)
 - [Discord](https://discord.gg/VVVvBTqqyP)
 
 ---
 
-## 次のステップ
+## Next Steps
 
-- [クイックスタート](quick-start.md) - 基本的な使い方
-- [ブラックリスト設定](../configuration/blacklist.md) - ルールのカスタマイズ
-- [アリーナ設定](../configuration/arenas.md) - 複数アリーナの設定
-- [報酬設定](../configuration/rewards.md) - シーズン報酬の追加
+- [Quick Start](quick-start.md) - Basic usage
+- [Blacklist Config](../configuration/blacklist.md) - Customize rules
+- [Arena Config](../configuration/arenas.md) - Multiple arenas
+- [Rewards Config](../configuration/rewards.md) - Season rewards

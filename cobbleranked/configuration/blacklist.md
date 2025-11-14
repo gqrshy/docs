@@ -1,14 +1,14 @@
-# ブラックリスト設定
+# Blacklist Configuration
 
-ランク戦で使用できるポケモン、技、特性、持ち物を制限します。
+Restrict Pokemon, moves, abilities, and items in ranked battles.
 
-**設定ファイル:** `config/cobbleranked/blacklist.json5`
+**Config File:** `config/cobbleranked/blacklist.json5`
 
 ---
 
-## 基本設定
+## Basic Setup
 
-### シンプルな例
+### Simple Example
 
 ```json5
 {
@@ -17,13 +17,13 @@
 }
 ```
 
-ファイルを保存後、`/rankedadmin reload` で反映されます。
+Save and run `/rankedadmin reload` to apply.
 
 ---
 
-## ポケモンの制限
+## Pokemon Restrictions
 
-### ラベルで禁止
+### Ban by Label
 
 ```json5
 {
@@ -31,89 +31,89 @@
 }
 ```
 
-**利用可能なラベル:**
+**Available Labels:**
 
-| ラベル | 説明 |
-|-------|------|
-| `legendary` | 伝説のポケモン |
-| `mythical` | 幻のポケモン |
-| `restricted` | VGC制限級 |
-| `ultra_beast` | ウルトラビースト |
-| `paradox` | パラドックスポケモン |
-| `starter` | 御三家 |
-| `fossil` | 化石ポケモン |
-| `baby` | ベビィポケモン |
-| `powerhouse` | 600族 |
-| `gen1` ~ `gen9` | 世代別 |
+| Label | Description |
+|-------|-------------|
+| `legendary` | Legendary Pokemon |
+| `mythical` | Mythical Pokemon |
+| `restricted` | VGC restricted |
+| `ultra_beast` | Ultra Beasts |
+| `paradox` | Paradox Pokemon |
+| `starter` | Starter Pokemon |
+| `fossil` | Fossil Pokemon |
+| `baby` | Baby Pokemon |
+| `powerhouse` | Pseudo-legendaries (600 BST) |
+| `gen1` ~ `gen9` | By generation |
 
-### 数量制限
+### Quantity Limits
 
 ```json5
 {
   "restricted_label_limits": {
-    "legendary": 1,      // 伝説は1匹まで
-    "restricted": 2      // 制限級は2匹まで
+    "legendary": 1,      // Max 1 legendary
+    "restricted": 2      // Max 2 restricted
   }
 }
 ```
 
-### 個別に禁止
+### Ban Specific Pokemon
 
 ```json5
 {
   "black_list_pokemon": [
-    "mewtwo",            // 全フォーム禁止
-    "rayquaza:mega"      // メガレックウザのみ禁止
+    "mewtwo",            // All forms banned
+    "rayquaza:mega"      // Only Mega Rayquaza banned
   ]
 }
 ```
 
 ---
 
-## 技・特性・アイテムの制限
+## Move, Ability, Item Restrictions
 
-### 技の禁止
+### Ban Moves
 
 ```json5
 {
   "black_list_moves": [
-    "fissure",           // じわれ
-    "sheer_cold",        // ぜったいれいど
-    "baton_pass",        // バトンタッチ
-    "last_respects"      // おはかまいり
+    "fissure",           // Fissure
+    "sheer_cold",        // Sheer Cold
+    "baton_pass",        // Baton Pass
+    "last_respects"      // Last Respects
   ]
 }
 ```
 
-### 特性の禁止
+### Ban Abilities
 
 ```json5
 {
   "black_list_ability": [
-    "moody",             // ムラっけ
-    "shadow_tag",        // かげふみ
-    "arena_trap"         // ありじごく
+    "moody",             // Moody
+    "shadow_tag",        // Shadow Tag
+    "arena_trap"         // Arena Trap
   ]
 }
 ```
 
-### 持ち物の禁止
+### Ban Items
 
 ```json5
 {
   "black_list_items_pokemon": [
-    "cobblemon:bright_powder",    // ひかりのこな
-    "cobblemon:lax_incense",      // のんきのおこう
-    "cobblemon:quick_claw"        // せんせいのツメ
+    "cobblemon:bright_powder",    // Bright Powder
+    "cobblemon:lax_incense",      // Lax Incense
+    "cobblemon:quick_claw"        // Quick Claw
   ]
 }
 ```
 
-> **注意:** アイテムは `cobblemon:item_name` の形式で指定（`F3 + H` で確認可能）
+> **Note:** Items must use `cobblemon:item_name` format (check with `F3 + H`)
 
 ---
 
-## よく使われる設定
+## Common Configurations
 
 ### Smogon OU
 
@@ -140,27 +140,27 @@
 
 ---
 
-## トラブルシューティング
+## Troubleshooting
 
-### 設定が反映されない
-- `/rankedadmin reload` を実行
-- JSON5の文法エラーを確認
+### Config Not Applying
+- Run `/rankedadmin reload`
+- Check JSON5 syntax errors
 
-### アイテムが禁止されない
-- `F3 + H` でアイテムIDを確認
-- `cobblemon:item_name` の形式で指定
+### Items Not Banned
+- Verify item ID with `F3 + H`
+- Use `cobblemon:item_name` format
 
-### 詳細情報
-- 技名・特性名の確認方法
-- フォーム指定の詳細
-- 複雑な設定例
+### More Information
+- Move/ability name lookup
+- Form-specific bans
+- Complex examples
 
-**これらは [FAQ](../support/faq.md) を参照してください**
+**See [FAQ](../support/faq.md) for details**
 
 ---
 
-## 関連ガイド
+## Related Guides
 
-- [メイン設定](config.md)
-- [バトルフォーマット](../features/battle-formats.md)
+- [Main Config](config.md)
+- [Battle Formats](../features/battle-formats.md)
 - [FAQ](../support/faq.md)

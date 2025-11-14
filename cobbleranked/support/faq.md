@@ -1,35 +1,35 @@
-# よくある質問（FAQ）
+# Frequently Asked Questions (FAQ)
 
-CobbleRankedに関するよくある質問と回答です。
+Common questions and answers about CobbleRanked.
 
 ---
 
-## 基本情報
+## Basic Information
 
 <details>
-<summary><strong>CobbleRankedとは？</strong></summary>
+<summary><strong>What is CobbleRanked?</strong></summary>
 
-Cobblemonサーバーに競技性の高いランク戦システムを追加するMODです。
+A competitive ranked battle system for Cobblemon servers.
 
-- Eloレートによるマッチング
-- シングル・ダブルバトル対応
-- シーズンシステムと報酬
-- ポケモン・技・特性・アイテムの制限
-- クロスサーバー対応（オプション）
+- Elo-based matchmaking
+- Singles/Doubles battles
+- Season system with rewards
+- Pokemon/move/ability/item restrictions
+- Cross-server support (optional)
 
 </details>
 
 <details>
-<summary><strong>どこでダウンロードできますか？</strong></summary>
+<summary><strong>Where can I download it?</strong></summary>
 
-**公式:** [Discord](https://discord.gg/VVVvBTqqyP)（現在唯一の配布場所）
+**Official:** [Discord](https://discord.gg/VVVvBTqqyP) (currently the only distribution channel)
 
-Modrinth/CurseForgeは準備中です。
+Modrinth/CurseForge coming soon.
 
 </details>
 
 <details>
-<summary><strong>必要な環境は？</strong></summary>
+<summary><strong>What are the requirements?</strong></summary>
 
 - Minecraft 1.21.1
 - Fabric Loader 0.17.2+
@@ -40,140 +40,140 @@ Modrinth/CurseForgeは準備中です。
 </details>
 
 <details>
-<summary><strong>クロスサーバーは必須ですか？</strong></summary>
+<summary><strong>Is cross-server required?</strong></summary>
 
-いいえ。シングルサーバーならゼロ設定で動作します。
+No. Single-server mode works with zero configuration.
 
-クロスサーバーは複数サーバーでランキングを共有したい場合のみ必要です。
+Cross-server is only needed if you want to share rankings across multiple servers.
 
 </details>
 
 ---
 
-## インストール・設定
+## Installation & Setup
 
 <details>
-<summary><strong>設定ファイルが生成されない</strong></summary>
+<summary><strong>Config files not generating</strong></summary>
 
-1. 全ての依存MODがインストールされているか確認
-2. サーバーを完全に起動させる
-3. `logs/latest.log` でエラーを確認
+1. Verify all dependencies are installed
+2. Fully start the server
+3. Check `logs/latest.log` for errors
 
 </details>
 
 <details>
-<summary><strong>言語を日本語に変更したい</strong></summary>
+<summary><strong>How do I change the language?</strong></summary>
 
-`config/cobbleranked/config.json5` を編集：
+Edit `config/cobbleranked/config.json5`:
 
 ```json5
 {
-  "language": "ja-Jp"
+  "language": "ja-Jp"  // en-Us, ja-Jp, pt-Br, ru-Ru
 }
 ```
 
-保存後、`/rankedadmin reload` で反映されます。
+Save and run `/rankedadmin reload`.
 
 </details>
 
 <details>
-<summary><strong>設定変更後、反映されない</strong></summary>
+<summary><strong>Config changes not applying</strong></summary>
 
-1. ファイルを保存したか確認
-2. `/rankedadmin reload` を実行
-3. JSON5の文法エラーを確認（カンマ、括弧の閉じ忘れ）
-4. サーバーログで `[CobbleRanked] Configuration loaded` を確認
+1. Confirm file is saved
+2. Run `/rankedadmin reload`
+3. Check JSON5 syntax (commas, brackets)
+4. Look for `[CobbleRanked] Configuration loaded` in server logs
 
 </details>
 
 ---
 
-## ブラックリスト設定
+## Blacklist Configuration
 
 <details>
-<summary><strong>技名の確認方法</strong></summary>
+<summary><strong>How do I find move names?</strong></summary>
 
-技名は**英語の小文字・スネークケース**で指定します。
+Move names use **lowercase snake_case** format.
 
-| 日本語名 | 内部名 |
-|---------|--------|
-| じわれ | `fissure` |
-| ぜったいれいど | `sheer_cold` |
-| バトンタッチ | `baton_pass` |
-| おはかまいり | `last_respects` |
-| 10まんボルト | `thunderbolt` |
+| Display Name | Internal Name |
+|--------------|---------------|
+| Fissure | `fissure` |
+| Sheer Cold | `sheer_cold` |
+| Baton Pass | `baton_pass` |
+| Last Respects | `last_respects` |
+| Thunderbolt | `thunderbolt` |
 
-**パターン:** スペースをアンダースコアに、全て小文字
+**Pattern:** Replace spaces with underscores, use lowercase
 
 </details>
 
 <details>
-<summary><strong>特性名の確認方法</strong></summary>
+<summary><strong>How do I find ability names?</strong></summary>
 
-### ゲーム内で確認
+### In-Game Method
 
-1. `F3 + H` を押す
-2. ポケモンのステータス画面を開く
-3. 特性アイコンにカーソルを合わせる
+1. Press `F3 + H`
+2. Open Pokemon summary screen
+3. Hover over ability icon
 
-### よく使われる特性
+### Common Abilities
 
-| 日本語名 | 内部名 |
-|---------|--------|
-| いかく | `intimidate` |
-| ひでり | `drought` |
-| ムラっけ | `moody` |
-| かげふみ | `shadow_tag` |
-| ありじごく | `arena_trap` |
-| ちからもち | `huge_power` |
+| Display Name | Internal Name |
+|--------------|---------------|
+| Intimidate | `intimidate` |
+| Drought | `drought` |
+| Moody | `moody` |
+| Shadow Tag | `shadow_tag` |
+| Arena Trap | `arena_trap` |
+| Huge Power | `huge_power` |
 
 </details>
 
 <details>
-<summary><strong>アイテムIDの確認方法</strong></summary>
+<summary><strong>How do I find item IDs?</strong></summary>
 
-### 最も簡単な方法
+### Easiest Method
 
-1. `F3 + H` を押す
-2. インベントリでアイテムにカーソルを合わせる
-3. 下部にIDが表示される（例: `cobblemon:bright_powder`）
+1. Press `F3 + H`
+2. Hover over item in inventory
+3. ID appears at bottom (e.g., `cobblemon:bright_powder`)
 
-### コマンドで確認
+### Using Commands
 
 ```
 /give @s <TAB>
 ```
 
-Tab キーでアイテムID一覧が表示されます。
+Tab key shows item ID list.
 
-### 形式
+### Format
 
-必ず `cobblemon:item_name` の形式で指定してください。
+Must use `cobblemon:item_name` format.
 
 ```
-正しい: "cobblemon:bright_powder"
-間違い: "Bright Powder", "brightpowder"
+Correct: "cobblemon:bright_powder"
+Wrong: "Bright Powder", "brightpowder"
 ```
 
 </details>
 
 <details>
-<summary><strong>フォーム（メガシンカ等）の指定方法</strong></summary>
+<summary><strong>How do I ban specific forms (Megas, etc.)?</strong></summary>
 
-### 基本ルール
+### Basic Rules
 
-- **フォームなし** (`mewtwo`): **全てのフォーム**が禁止
-- **フォームあり** (`mewtwo:mega_x`): **そのフォームのみ**禁止
+- **No form** (`mewtwo`): **All forms** banned
+- **With form** (`mewtwo:mega_x`): **Only that form** banned
 
-### 例
+### Examples
 
 ```json5
 {
   "black_list_pokemon": [
-    "mewtwo",            // 通常・メガX・メガY全て禁止
-    "charizard:mega_x",  // メガリザードンXのみ禁止（通常・Yは使用可能）
-    "weezing:galar",     // ガラルマタドガスのみ禁止
-    "muk:alola"          // アローラベトベトンのみ禁止
+    "mewtwo",            // Normal + Mega X + Mega Y all banned
+    "charizard:mega_x",  // Only Mega Charizard X banned (normal/Y allowed)
+    "weezing:galar",     // Only Galarian Weezing banned
+    "muk:alola"          // Only Alolan Muk banned
   ]
 }
 ```
@@ -181,35 +181,35 @@ Tab キーでアイテムID一覧が表示されます。
 </details>
 
 <details>
-<summary><strong>ラベル制限と完全禁止の違いは？</strong></summary>
+<summary><strong>What's the difference between label limits and bans?</strong></summary>
 
-### ラベル制限（数量指定）
+### Label Limits (Quantity)
 
 ```json5
 {
   "restricted_label_limits": {
-    "legendary": 1  // 伝説は1匹まで使える
+    "legendary": 1  // Max 1 legendary allowed
   }
 }
 ```
 
-### 完全禁止
+### Complete Ban
 
 ```json5
 {
-  "black_list_labels": ["legendary"]  // 伝説は全て使えない
+  "black_list_labels": ["legendary"]  // No legendaries allowed
 }
 ```
 
-### 組み合わせ例
+### Combined Example
 
 ```json5
 {
   "restricted_label_limits": {
-    "legendary": 1       // 伝説は1匹まで
+    "legendary": 1       // Max 1 legendary
   },
   "black_list_pokemon": [
-    "mewtwo"             // ただしミュウツーは例外で完全禁止
+    "mewtwo"             // But Mewtwo is completely banned
   ]
 }
 ```
@@ -217,9 +217,9 @@ Tab キーでアイテムID一覧が表示されます。
 </details>
 
 <details>
-<summary><strong>カジュアルサーバー向けの設定例</strong></summary>
+<summary><strong>Casual server config example</strong></summary>
 
-一撃必殺技のみ禁止、他は自由：
+Ban only OHKO moves, everything else allowed:
 
 ```json5
 {
@@ -231,13 +231,14 @@ Tab キーでアイテムID一覧が表示されます。
 </details>
 
 <details>
-<summary><strong>競技向けサーバーの設定例</strong></summary>
+<summary><strong>Competitive server config example</strong></summary>
 
-Smogon OUに準拠：
+Smogon OU format:
 
+`config.json5`:
 ```json5
 {
-  "language": "ja-Jp",
+  "language": "en-Us",
   "ranked_match": {
     "reset_days": 90,
     "levelMatch": 50,
@@ -263,12 +264,12 @@ Smogon OUに準拠：
 
 ---
 
-## クロスサーバー
+## Cross-Server
 
 <details>
-<summary><strong>クロスサーバーの設定手順（MySQL）</strong></summary>
+<summary><strong>Cross-server setup guide (MySQL)</strong></summary>
 
-### 1. MySQLデータベース作成
+### 1. Create MySQL Database
 
 ```sql
 CREATE DATABASE cobbleranked CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -277,15 +278,15 @@ GRANT ALL PRIVILEGES ON cobbleranked.* TO 'cobbleranked'@'%';
 FLUSH PRIVILEGES;
 ```
 
-### 2. 全サーバーの設定
+### 2. Configure All Servers
 
-**バトルサーバー:**
+**Battle Server:**
 ```json5
 {
   "cross_server": {
     "enabled": true,
     "server_id": "battle",
-    "battle_server": "",  // 空 = バトルサーバー
+    "battle_server": "",  // Empty = this is battle server
     "database": {
       "type": "MYSQL",
       "host": "localhost",
@@ -298,12 +299,12 @@ FLUSH PRIVILEGES;
 }
 ```
 
-**ロビー/メインサーバー:**
+**Lobby/Main Servers:**
 ```json5
 {
   "cross_server": {
     "enabled": true,
-    "server_id": "lobby1",  // サーバーごとに変える
+    "server_id": "lobby1",  // Change per server
     "battle_server": "battle",
     "database": {
       "type": "MYSQL",
@@ -317,14 +318,14 @@ FLUSH PRIVILEGES;
 }
 ```
 
-**詳細:** [クロスサーバーガイド](../advanced/cross-server.md)
+**Details:** [Cross-Server Guide](../advanced/cross-server.md)
 
 </details>
 
 <details>
-<summary><strong>Redisのインストールと設定</strong></summary>
+<summary><strong>Redis installation and setup</strong></summary>
 
-### インストール（Ubuntu/Debian）
+### Install (Ubuntu/Debian)
 
 ```bash
 sudo apt install redis-server
@@ -332,7 +333,7 @@ sudo systemctl start redis-server
 sudo systemctl enable redis-server
 ```
 
-### リモートアクセス許可
+### Allow Remote Access
 
 `/etc/redis/redis.conf`:
 ```
@@ -344,7 +345,7 @@ requirepass your_password
 sudo systemctl restart redis-server
 ```
 
-### 全サーバーの設定
+### Configure All Servers
 
 ```json5
 {
@@ -359,99 +360,99 @@ sudo systemctl restart redis-server
 }
 ```
 
-### 接続確認
+### Test Connection
 
 ```bash
 redis-cli -h localhost -p 6379 PING
-# 返答: PONG
+# Response: PONG
 ```
 
 </details>
 
 <details>
-<summary><strong>クロスサーバーでマッチングしない</strong></summary>
+<summary><strong>Cross-server matchmaking not working</strong></summary>
 
-### 確認ポイント
+### Checklist
 
-1. **Redis接続確認:**
+1. **Check Redis connection:**
    ```bash
    redis-cli
    > KEYS cobbleranked:queue:*
    ```
 
-2. **MySQL接続確認:**
+2. **Check MySQL connection:**
    ```sql
    SELECT * FROM player_ranked_stats;
    ```
 
-3. **server_idが重複していないか確認**
+3. **Verify server_id is unique**
 
-4. **battle_serverの設定確認:**
-   - バトルサーバー: `battle_server: ""`
-   - その他: `battle_server: "battle"`
+4. **Check battle_server config:**
+   - Battle server: `battle_server: ""`
+   - Others: `battle_server: "battle"`
 
-5. **Velocityのサーバー名と一致しているか確認**
+5. **Verify Velocity server names match**
 
 </details>
 
 <details>
-<summary><strong>バトル後に元のサーバーに戻らない</strong></summary>
+<summary><strong>Players not returning after battle</strong></summary>
 
-### 解決方法
+### Solutions
 
-1. **Velocityのサーバー名を確認**
-   - `battle_server` が `velocity.toml` の名前と完全一致しているか
-   - 大文字小文字を区別
+1. **Check Velocity server names**
+   - `battle_server` must exactly match `velocity.toml` name
+   - Case-sensitive
 
-2. **Redisで元サーバー情報を確認:**
+2. **Check Redis origin data:**
    ```bash
    redis-cli
    > GET player_origin:{UUID}
    ```
 
-3. **ログを確認:**
-   - `[BATTLE-END] Transferring players back to: lobby1`
+3. **Check logs:**
+   - Look for `[BATTLE-END] Transferring players back to: lobby1`
 
 </details>
 
 ---
 
-## トラブルシューティング
+## Troubleshooting
 
 <details>
-<summary><strong>コマンドが使えない（権限エラー）</strong></summary>
+<summary><strong>Permission errors</strong></summary>
 
-管理者コマンドはOP権限が必要：
+Admin commands require OP:
 
 ```
 /op YourUsername
 ```
 
-または権限プラグインで `cobbleranked.admin` を付与
+Or grant `cobbleranked.admin` via permissions plugin
 
 </details>
 
 <details>
-<summary><strong>データベース接続エラー</strong></summary>
+<summary><strong>Database connection error</strong></summary>
 
-1. MySQLが起動しているか確認:
+1. Check MySQL is running:
    ```bash
    sudo systemctl status mysql
    ```
 
-2. 認証情報を確認（username, password）
+2. Verify credentials (username, password)
 
-3. データベースが存在するか確認:
+3. Check database exists:
    ```bash
    mysql -u cobbleranked -p -e "SHOW DATABASES;"
    ```
 
-4. ポート3306が開いているか確認
+4. Verify port 3306 is open
 
 </details>
 
 <details>
-<summary><strong>プレイヤーのEloをリセットしたい</strong></summary>
+<summary><strong>Reset player Elo</strong></summary>
 
 ```
 /rankedadmin setelo 1000 PlayerName singles
@@ -461,25 +462,25 @@ redis-cli -h localhost -p 6379 PING
 </details>
 
 <details>
-<summary><strong>シーズンを手動で終了したい</strong></summary>
+<summary><strong>Manually end season</strong></summary>
 
 ```
 /rankedadmin season end
 /rankedadmin season rotate
 ```
 
-**注意:** クロスサーバーの場合、バトルサーバーで実行してください
+**Note:** For cross-server, run on battle server only
 
 </details>
 
 ---
 
-## その他
+## Other
 
 <details>
-<summary><strong>PlaceholderAPIとの連携</strong></summary>
+<summary><strong>PlaceholderAPI integration</strong></summary>
 
-100位までのランキングプレースホルダーが利用可能：
+Rank placeholders available for top 100:
 
 ```
 %cobbleranked_top_1_name%
@@ -488,18 +489,18 @@ redis-cli -h localhost -p 6379 PING
 %cobbleranked_top_doubles_1_winrate%
 ```
 
-**詳細:** [PlaceholderAPI連携](../integration/placeholders.md)
+**Details:** [PlaceholderAPI Integration](../integration/placeholders.md)
 
 </details>
 
 <details>
-<summary><strong>サポートが必要な場合</strong></summary>
+<summary><strong>Need support?</strong></summary>
 
-1. [トラブルシューティングガイド](troubleshooting.md)を確認
-2. [Discord](https://discord.gg/VVVvBTqqyP) の #feedbackチャンネルで質問
-3. バグ報告時は以下を添付：
-   - サーバーログ（`logs/latest.log`）
-   - 設定ファイル（`config/cobbleranked/config.json5`）
-   - 再現手順
+1. Check [Troubleshooting Guide](troubleshooting.md)
+2. Ask in [Discord](https://discord.gg/VVVvBTqqyP) #feedback channel
+3. For bug reports, include:
+   - Server logs (`logs/latest.log`)
+   - Config file (`config/cobbleranked/config.json5`)
+   - Steps to reproduce
 
 </details>
