@@ -478,7 +478,7 @@ Or grant `cobbleranked.admin` via permissions plugin
 ## Other
 
 <details>
-<summary><strong>PlaceholderAPI integration</strong></summary>
+<summary><strong>Text Placeholder API integration</strong></summary>
 
 Rank placeholders available for top 100:
 
@@ -489,7 +489,7 @@ Rank placeholders available for top 100:
 %cobbleranked_top_doubles_1_winrate%
 ```
 
-**Details:** [PlaceholderAPI Integration](../integration/placeholders.md)
+**Details:** [Text Placeholder API Integration](../integration/placeholders.md)
 
 </details>
 

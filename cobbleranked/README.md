@@ -126,7 +126,7 @@ Loss: -16 Elo
 - [Redis](advanced/redis.md) - Real-time sync
 
 ### 🔌 Integration
-- [PlaceholderAPI](integration/placeholders.md) - Top 100 placeholders
+- [Placeholder API](integration/placeholders.md) - Text Placeholder API integration (top 100 ranks)
 
 ### 💬 Support
 - [FAQ](support/faq.md) - Common questions
@@ -234,7 +234,7 @@ Decay: -1 flee per 24 hours
 
 **v1.0.1** (2024-11-08)
 - ✨ MongoDB support (local + Atlas cloud)
-- ✨ PlaceholderAPI expansion (top 100 ranks)
+- ✨ Text Placeholder API integration (top 100 ranks, Fabric native)
 - 🐛 SQLite leaderboard initialization fix
 - 🐛 Pokemon form label blacklist fix
 

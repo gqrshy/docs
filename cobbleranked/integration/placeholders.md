@@ -1,19 +1,20 @@
 # Placeholder API
 
-CobbleRanked provides a comprehensive placeholder API for displaying ranked statistics in holograms, signs, chat plugins, and other third-party plugins that support PlaceholderAPI.
+CobbleRanked integrates with [Text Placeholder API](https://placeholders.pb4.eu/) to display ranked statistics in holograms, signs, and other Fabric mods that support placeholders.
 
 ---
 
 ## Overview
 
-Placeholders allow you to display real-time ranked statistics anywhere that supports standard Minecraft placeholder format (`%placeholder%`).
+Placeholders allow you to display real-time ranked statistics anywhere that supports the Text Placeholder API format (`%placeholder%`).
 
 **Common use cases:**
-- Leaderboard holograms (FancyHolograms, DecentHolograms)
-- Scoreboard displays
-- Chat prefixes/suffixes
-- MOTD/tab list
-- Custom NPCs
+- Leaderboard holograms (Fabric-based hologram mods)
+- Scoreboard displays (Fabric scoreboard mods)
+- Chat formatting (compatible Fabric chat mods)
+- Custom displays via Text Placeholder API
+
+**Note:** This uses **Text Placeholder API** (Fabric mod), not PlaceholderAPI (Bukkit/Spigot plugin). For hybrid servers (Arclight), both APIs are supported.
 
 **Performance:**
 - All placeholders are cached for 60 seconds
@@ -166,41 +167,34 @@ Force immediate cache refresh (normally refreshes every 60 seconds automatically
 
 ## Integration Examples
 
-### FancyHolograms
+### Fabric Hologram Mods
 
-Create a leaderboard hologram using FancyHolograms:
+CobbleRanked placeholders work with any Fabric hologram mod that supports Text Placeholder API.
+
+**Example placeholder usage:**
 
 ```
-/holo create top_ranked
-/holo addline top_ranked &6&l◆ Top Ranked Players ◆
-/holo addline top_ranked &e1st: &f%cobbleranked_top_1_name% &7- &a%cobbleranked_top_1_elo% Elo
-/holo addline top_ranked &e2nd: &f%cobbleranked_top_2_name% &7- &a%cobbleranked_top_2_elo% Elo
-/holo addline top_ranked &e3rd: &f%cobbleranked_top_3_name% &7- &a%cobbleranked_top_3_elo% Elo
-```
-
-**Format-specific holograms:**
-
-Singles leaderboard:
-```
-/holo create singles_top
-/holo addline singles_top &b&l◆ Top Singles Players ◆
-/holo addline singles_top &e1st: &f%cobbleranked_top_singles_1_name% &7(&a%cobbleranked_top_singles_1_wins%W &c%cobbleranked_top_singles_1_losses%L&7)
-/holo addline singles_top &e2nd: &f%cobbleranked_top_singles_2_name% &7(&a%cobbleranked_top_singles_2_wins%W &c%cobbleranked_top_singles_2_losses%L&7)
+%cobbleranked_top_1_name% - Top player name
+%cobbleranked_top_1_elo% - Top player Elo
+%cobbleranked_top_singles_1_name% - Top Singles player
+%cobbleranked_top_doubles_1_elo% - Top Doubles Elo
 ```
 
-Doubles leaderboard:
-```
-/holo create doubles_top
-/holo addline doubles_top &d&l◆ Top Doubles Players ◆
-/holo addline doubles_top &e1st: &f%cobbleranked_top_doubles_1_name% &7- &6%cobbleranked_top_doubles_1_winrate%% WR
-/holo addline doubles_top &e2nd: &f%cobbleranked_top_doubles_2_name% &7- &6%cobbleranked_top_doubles_2_winrate%% WR
-```
+**Recommended Fabric hologram mods:**
+- Check [Text Placeholder API's wiki](https://placeholders.pb4.eu/) for compatible hologram mods
+- Most Fabric hologram mods with placeholder support will work
 
 ---
 
-### DecentHolograms
+### Hybrid Servers (Arclight)
 
-Create a leaderboard with DecentHolograms:
+For hybrid Fabric+Bukkit servers (like Arclight), CobbleRanked supports **both**:
+- **Text Placeholder API** (Fabric side)
+- **PlaceholderAPI** (Bukkit/Spigot side)
+
+**Bukkit/Spigot plugin examples (Arclight only):**
+
+#### DecentHolograms (Bukkit plugin)
 
 ```yaml
 # plugins/DecentHolograms/holograms/ranked_top.yml
@@ -219,46 +213,17 @@ ranked_top:
     - ""
     - "&e2nd: &f%cobbleranked_top_2_name%"
     - "&7Elo: &a%cobbleranked_top_2_elo% &7| WR: &6%cobbleranked_top_2_winrate%%"
-    - ""
-    - "&e3rd: &f%cobbleranked_top_3_name%"
-    - "&7Elo: &a%cobbleranked_top_3_elo% &7| WR: &6%cobbleranked_top_3_winrate%%"
 ```
 
----
-
-### Chat Prefix/Suffix
-
-Use with chat plugins (LuckPerms + Vault):
-
-```
-/lp group champion meta addprefix "&6[#1] "
-```
-
-Then create a script to automatically assign the "champion" group to the top player:
+#### LuckPerms Chat Prefix (Bukkit plugin)
 
 ```bash
-# Pseudo-code for auto-rank script
-top_player=$(placeholder_api_query "%cobbleranked_top_1_name%")
-/lp user $top_player parent set champion
+# Set champion prefix for top player
+/lp group champion meta addprefix "&6[#1] "
+/lp user <top_player> parent set champion
 ```
 
----
-
-### Scoreboard (via plugin)
-
-Example using a scoreboard plugin that supports PlaceholderAPI:
-
-```yaml
-# Scoreboard lines
-lines:
-  - "&6&lRANKED STATS"
-  - ""
-  - "&e#1: &f%cobbleranked_top_1_name%"
-  - "&7Elo: &a%cobbleranked_top_1_elo%"
-  - ""
-  - "&e#2: &f%cobbleranked_top_2_name%"
-  - "&7Elo: &a%cobbleranked_top_2_elo%"
-```
+**Note:** These Bukkit/Spigot examples only work on **hybrid servers** (Arclight). Pure Fabric servers should use Fabric-compatible mods only.
 
 ---
 
@@ -327,7 +292,30 @@ Hologram displays: %cobbleranked_top_1_name%
 Instead of: Notch
 ```
 
-**Solutions:**
+**Solutions for Fabric servers:**
+
+1. **Check Text Placeholder API is installed:**
+   ```bash
+   /mods list
+   # Should show: text_placeholder_api or placeholder-api
+   ```
+
+2. **Check CobbleRanked is loaded:**
+   ```bash
+   /mods list
+   # Should show: cobbleranked
+   ```
+
+3. **Test placeholder manually:**
+   ```bash
+   /rankedplaceholder test %cobbleranked_top_1_name%
+   ```
+
+4. **Verify hologram mod supports Text Placeholder API:**
+   - Check the hologram mod's documentation
+   - Most Fabric hologram mods support Text Placeholder API
+
+**Solutions for Hybrid servers (Arclight only):**
 
 1. **Check PlaceholderAPI is installed:**
    ```bash
@@ -335,22 +323,11 @@ Instead of: Notch
    # Should show: PlaceholderAPI (green)
    ```
 
-2. **Register CobbleRanked with PlaceholderAPI:**
+2. **Register with PlaceholderAPI:**
    ```bash
    /papi reload
-   /papi list
-   # Should show: cobbleranked
-   ```
-
-3. **Test placeholder manually:**
-   ```bash
    /papi parse me %cobbleranked_top_1_name%
    ```
-
-4. **Check hologram plugin supports PlaceholderAPI:**
-   - FancyHolograms: Yes (built-in)
-   - DecentHolograms: Yes (built-in)
-   - HolographicDisplays: Requires PlaceholderAPI expansion
 
 ---
 
