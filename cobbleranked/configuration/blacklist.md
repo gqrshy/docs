@@ -1,486 +1,603 @@
-# Pokemon Blacklist & Restrictions
+# ブラックリスト設定
 
-Configure Pokemon, move, ability, and item restrictions for ranked battles.
+ランク戦で使用できるポケモン、技、特性、持ち物を制限する機能です。
 
-**Configuration file:** `config/cobbleranked/config.json5` (section: `"blacklist"`)
-
----
-
-## Quick Start
-
-The blacklist system allows you to:
-- Ban specific Pokemon species or forms
-- Ban Pokemon by labels (legendary, mythical, restricted, etc.)
-- Limit quantities of labeled Pokemon (e.g., max 2 restricted)
-- Ban specific moves, abilities, or held items
+**設定ファイル:** `config/cobbleranked/blacklist.json5`
 
 ---
 
-## Finding Internal Names
+## 🎯 できること
 
-### Item IDs
+- ✅ **ラベル指定で一括禁止** - 伝説、幻、準伝説などをまとめて禁止
+- ✅ **個別のポケモン禁止** - 特定のポケモンやフォーム（メガシンカ等）を禁止
+- ✅ **数量制限** - 「伝説は1匹まで」「準伝説は2匹まで」など
+- ✅ **技の禁止** - 一撃必殺技、バトンタッチなど
+- ✅ **特性の禁止** - ムラっけ、かげふみなど
+- ✅ **持ち物の禁止** - こうこうのしっぽ、きあいのタスキなど
 
-#### In-Game Method (Recommended)
+---
 
-1. Press `F3 + H` in Minecraft to enable advanced tooltips
-2. Hover over any item in your inventory
-3. The item ID appears at the bottom (e.g., `cobblemon:bright_powder`)
+## 📋 クイックスタート
 
-#### Command Method
+### 最もシンプルな設定
 
-```
-/give @s <tab>
-```
-Autocomplete shows available item IDs.
+伝説・幻ポケモンと一撃必殺技を禁止する場合：
 
-**Supported Formats:**
-- Full item ID: `cobblemon:bright_powder`
-- Cobblemon internal name: `bright_powder` (automatically checks both)
-- Minecraft items: `minecraft:diamond`, `minecraft:netherite_sword`
-
-**Important:** Always use the full format `mod_id:item_name` (e.g., `cobblemon:bright_powder`, not "Bright Powder"). This prevents conflicts between mods with similar item names.
-
-### Ability Names
-
-Ability internal names use **snake_case** format (lowercase with underscores).
-
-#### In-Game Method
-
-1. Press `F3 + H` in Minecraft to enable advanced tooltips
-2. Open your Pokemon's summary screen
-3. Hover over the ability icon
-4. The internal name appears in the tooltip (e.g., `intimidate`, `drought`)
-
-#### Common Ability Names Reference
-
-| Display Name | Internal Name | Notes |
-|--------------|---------------|-------|
-| Intimidate | `intimidate` | Lowers opponent's Attack |
-| Drought | `drought` | Summons harsh sunlight |
-| Drizzle | `drizzle` | Summons rain |
-| Sand Stream | `sand_stream` | Summons sandstorm |
-| Snow Warning | `snow_warning` | Summons snow |
-| Moody | `moody` | Banned in Smogon (random stat changes) |
-| Shadow Tag | `shadow_tag` | Banned in Smogon (prevents switching) |
-| Arena Trap | `arena_trap` | Banned in Smogon (traps grounded Pokemon) |
-| Huge Power | `huge_power` | Doubles Attack stat |
-| Pure Power | `pure_power` | Same as Huge Power |
-| Wonder Guard | `wonder_guard` | Only super-effective moves hit |
-| Protean | `protean` | Changes type to move used |
-| Libero | `libero` | Same as Protean |
-| As One (Ice Rider) | `as_one_ice_rider` | Combines Unnerve + Chilling Neigh |
-| As One (Shadow Rider) | `as_one_shadow_rider` | Combines Unnerve + Grim Neigh |
-
-**Pattern:**
-- Replace spaces with underscores: "Shadow Tag" → `shadow_tag`
-- Use lowercase: "Huge Power" → `huge_power`
-- Parentheses in display name become separate words: "As One (Ice Rider)" → `as_one_ice_rider`
-
-#### Data Files Method
-
-Cobblemon's ability data is stored in:
-```
-.minecraft/data/cobblemon/species/
-```
-
-Each Pokemon's JSON file lists its abilities with internal names:
-```json
+```json5
 {
-  "abilities": [
-    "intimidate",
-    "moxie",
-    "h:sheer_force"
+  "black_list_labels": ["legendary", "mythical"],
+  "black_list_moves": ["fissure", "sheer_cold", "horn_drill", "guillotine"]
+}
+```
+
+これだけで完了です！ファイルを保存して `/rankedadmin reload` を実行してください。
+
+<details>
+<summary><strong>設定を反映する方法</strong></summary>
+
+1. `config/cobbleranked/blacklist.json5` を編集
+2. ファイルを保存
+3. サーバーで `/rankedadmin reload` を実行
+4. テストとしてキューに参加してみる
+
+</details>
+
+---
+
+## 🏷️ ポケモンのラベル禁止（推奨）
+
+**一番簡単な方法**は、ポケモンをラベルで禁止することです。
+
+### 利用可能なラベル
+
+| ラベル | 説明 | 例 |
+|-------|------|-----|
+| `legendary` | 伝説のポケモン | ミュウツー、ルギア、レックウザ、ディアルガ |
+| `mythical` | 幻のポケモン | ミュウ、セレビィ、ジラーチ、ビクティニ |
+| `restricted` | VGC制限級 | 伝説ポケモン（カバーレジェンド） |
+| `ultra_beast` | ウルトラビースト | ウツロイド、マッシブーン、デンジュモク |
+| `paradox` | パラドックスポケモン（第9世代） | テツノワダチ、イダイナキバ、ハバタクカミ |
+| `starter` | 御三家 | フシギダネ、ヒトカゲ、ゼニガメ |
+| `fossil` | 化石ポケモン | オムナイト、カブト、プテラ |
+| `baby` | ベビィポケモン | ピチュー、ピィ、ププリン |
+| `powerhouse` | 600族（疑似伝説） | カイリュー、ガブリアス、ボーマンダ |
+| `gen1` ~ `gen9` | 世代別 | `gen1` = カントー、`gen9` = パルデア |
+
+### 設定例
+
+<details>
+<summary><strong>例1: 伝説・幻ポケモンを禁止</strong></summary>
+
+```json5
+{
+  "black_list_labels": ["legendary", "mythical"]
+}
+```
+
+これだけで、ミュウツー、ルギア、ミュウ、セレビィなど全ての伝説・幻ポケモンが禁止されます。
+
+</details>
+
+<details>
+<summary><strong>例2: 第9世代ポケモンを禁止</strong></summary>
+
+```json5
+{
+  "black_list_labels": ["gen9", "paradox"]
+}
+```
+
+パルデア地方のポケモンとパラドックスポケモンが使用できなくなります。
+
+</details>
+
+<details>
+<summary><strong>例3: 複数のラベルを組み合わせて禁止</strong></summary>
+
+```json5
+{
+  "black_list_labels": [
+    "legendary",
+    "mythical",
+    "restricted",
+    "ultra_beast",
+    "paradox"
   ]
 }
 ```
 
-**Format:**
-- Regular abilities: `"intimidate"`
-- Hidden abilities: `"h:sheer_force"` (prefix with `h:`)
+競技性の高いルールセットに適した設定です。
 
-#### Testing Method
-
-1. Set up a test team with the ability you want to ban
-2. Enable debug logging in config:
-   ```json5
-   "debug_queue": true
-   ```
-3. Try to join queue
-4. Check server logs for ability validation messages
+</details>
 
 ---
 
-## Configuration Options
+## 🔢 ポケモンの数量制限
 
-### 1. Ban by Label (Recommended)
+完全に禁止するのではなく、「〜匹まで」という制限をかけられます。
 
-Ban all Pokemon with specific labels:
-
-```json5
-"black_list_labels": [
-  "legendary",
-  "mythical",
-  "ultra_beast"
-]
-```
-
-**Available Labels:**
-
-| Label | Description | Examples |
-|-------|-------------|----------|
-| `legendary` | Legendary Pokemon | Mewtwo, Lugia, Rayquaza, Dialga |
-| `mythical` | Mythical Pokemon | Mew, Celebi, Jirachi, Victini |
-| `restricted` | VGC restricted Pokemon | Box legendaries, cover legendaries |
-| `ultra_beast` | Ultra Beasts | Nihilego, Buzzwole, Xurkitree |
-| `paradox` | Paradox Pokemon (Gen 9) | Iron Treads, Great Tusk, Flutter Mane |
-| `starter` | Starter Pokemon | Bulbasaur, Charmander, Squirtle |
-| `fossil` | Fossil Pokemon | Omanyte, Kabuto, Aerodactyl |
-| `baby` | Baby Pokemon | Pichu, Cleffa, Igglybuff |
-| `powerhouse` | Pseudo-legendaries | Dragonite, Garchomp, Salamence |
-| `gen1` - `gen9` | By generation | `gen1` = Kanto, `gen9` = Paldea |
-
-### 2. Limit Pokemon by Label
-
-Allow limited quantities instead of complete bans:
-
-```json5
-"restricted_label_limits": {
-  "legendary": 1,      // Max 1 legendary per team
-  "mythical": 0,       // Ban mythicals (same as black_list_labels)
-  "restricted": 2      // Max 2 VGC restricted Pokemon
-}
-```
-
-**VGC Series 1 Example:**
-```json5
-"restricted_label_limits": {
-  "restricted": 2      // Allows 2 restricted Pokemon (VGC rule)
-}
-```
-
-This automatically applies to all Pokemon with the `restricted` label - no need to list individual species.
-
-### 3. Ban Specific Pokemon
-
-Ban individual Pokemon by species name:
-
-```json5
-"black_list_pokemon": [
-  "mewtwo",
-  "rayquaza",
-  "zacian"
-]
-```
-
-**Case-insensitive:** "Mewtwo", "MEWTWO", and "mewtwo" all work.
-
-### 4. Ban Specific Forms
-
-Ban only specific forms using `species:form` syntax:
-
-```json5
-"black_list_pokemon": [
-  "mewtwo:mega_x",           // Ban Mega Mewtwo X only
-  "mewtwo:mega_y",           // Ban Mega Mewtwo Y only
-  "zygarde:10",              // Ban Zygarde 10% only
-  "lycanroc:midday:dusk"     // Ban multiple forms
-]
-```
-
-**Note:** Blacklisting "mewtwo" (without form) bans ALL forms. Blacklisting "mewtwo:mega_x" bans ONLY that form.
-
-### 5. Ban Moves
-
-Ban specific moves by name:
-
-```json5
-"black_list_moves": [
-  "baton_pass",
-  "last_respects",
-  "shed_tail",
-  "fissure",
-  "sheer_cold"
-]
-```
-
-### 6. Ban Abilities
-
-Ban specific abilities by name:
-
-```json5
-"black_list_ability": [
-  "moody",
-  "shadow_tag",
-  "arena_trap"
-]
-```
-
-### 7. Ban Held Items
-
-Ban items Pokemon can hold using **Minecraft item IDs**:
-
-```json5
-"black_list_items_pokemon": [
-  "cobblemon:bright_powder",       // Evasion boost
-  "cobblemon:lax_incense",         // Evasion boost
-  "cobblemon:soul_dew",            // Latios/Latias boost
-  "cobblemon:quick_claw"           // Priority boost
-]
-```
-
-**How to find item IDs:** Press `F3 + H` in-game, hover over the item, copy the ID shown.
-
-**Why use item IDs?**
-- **Mod compatibility:** Distinguishes `cobblemon:potion` vs `minecraft:potion`
-- **No translation issues:** Works in any language
-- **Exact matching:** Prevents accidental bans
-
----
-
-## Common Configurations
-
-### Smogon OU (Over Used)
-
-```json5
-{
-  "blacklist": {
-    "black_list_labels": [
-      "legendary",
-      "mythical",
-      "restricted"
-    ],
-    "black_list_moves": [
-      "baton_pass",
-      "last_respects",
-      "shed_tail"
-    ],
-    "black_list_ability": [
-      "moody",
-      "shadow_tag",
-      "arena_trap"
-    ],
-    "black_list_items_pokemon": [
-      "cobblemon:bright_powder",
-      "cobblemon:lax_incense"
-    ]
-  }
-}
-```
-
-### VGC Series 1 (2 Restricted Pokemon)
-
-```json5
-{
-  "blacklist": {
-    "restricted_label_limits": {
-      "restricted": 2      // Max 2 restricted Pokemon
-    },
-    "black_list_labels": [
-      "mythical"           // Mythicals not allowed in VGC
-    ],
-    "black_list_moves": [
-      "fissure",
-      "sheer_cold",
-      "guillotine",
-      "horn_drill"
-    ]
-  }
-}
-```
-
-### Monotype (Species Clause + Evasion Clause)
-
-```json5
-{
-  "blacklist": {
-    "black_list_labels": [
-      "legendary",
-      "mythical"
-    ],
-    "black_list_moves": [
-      "baton_pass"
-    ],
-    "black_list_items_pokemon": [
-      "cobblemon:bright_powder",
-      "cobblemon:lax_incense"
-    ]
-  }
-}
-```
-
-### Gen 1-8 Only (No Gen 9)
-
-```json5
-{
-  "blacklist": {
-    "black_list_labels": [
-      "gen9",
-      "paradox"
-    ]
-  }
-}
-```
-
----
-
-## Validation Flow
-
-When a player joins the ranked queue:
-
-```
-1. Check label-based blacklist
-   ❌ Banned → "Blacklisted Pokemon: <name> (blacklisted label)"
-
-2. Check name/form-based blacklist
-   ❌ Banned → "Blacklisted Pokemon: <name>"
-
-3. Check label limits
-   ❌ Over limit → "Too many <label>: <count>/<limit>"
-
-4. Check moves
-   ❌ Banned move → "Blacklisted move: <move>"
-
-5. Check abilities
-   ❌ Banned ability → "Blacklisted ability: <ability>"
-
-6. Check held items
-   ❌ Banned item → "Blacklisted item: <item_id>"
-
-✅ All checks pass → Join queue
-```
-
----
-
-## Advanced Examples
-
-### Ban All Megas Except One
-
-```json5
-"black_list_pokemon": [
-  "charizard:mega_x",
-  "charizard:mega_y",
-  "mewtwo:mega_x",
-  "mewtwo:mega_y"
-  // Allow Lucario Mega by omitting it
-]
-```
-
-### Ban Specific Regional Forms
-
-```json5
-"black_list_pokemon": [
-  "weezing:galar",      // Ban Galarian Weezing only
-  "muk:alola"           // Ban Alolan Muk only
-]
-```
-
-### Mix Label Limits and Bans
+### 設定方法
 
 ```json5
 {
   "restricted_label_limits": {
-    "legendary": 1           // Max 1 legendary
+    "legendary": 1,      // 伝説のポケモンは1匹まで
+    "restricted": 2,     // 準伝説は2匹まで
+    "mythical": 0        // 幻のポケモンは0匹（完全禁止と同じ）
+  }
+}
+```
+
+### 実用例
+
+<details>
+<summary><strong>VGC Series 1ルール（制限級2匹まで）</strong></summary>
+
+VGCの公式ルールを再現：
+
+```json5
+{
+  "restricted_label_limits": {
+    "restricted": 2      // 制限級ポケモンは2匹まで
+  },
+  "black_list_labels": ["mythical"]  // 幻のポケモンは禁止
+}
+```
+
+</details>
+
+<details>
+<summary><strong>カジュアルサーバー（伝説1匹までOK）</strong></summary>
+
+```json5
+{
+  "restricted_label_limits": {
+    "legendary": 1,      // 伝説は1匹まで
+    "mythical": 1        // 幻も1匹まで
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>ラベル禁止と数量制限の組み合わせ</strong></summary>
+
+特定のポケモンだけ個別で禁止することもできます：
+
+```json5
+{
+  "restricted_label_limits": {
+    "legendary": 1       // 伝説は1匹まで
   },
   "black_list_pokemon": [
-    "mewtwo",                // But ban Mewtwo specifically
-    "rayquaza"               // And Rayquaza
+    "mewtwo",            // ただしミュウツーは完全禁止
+    "rayquaza"           // レックウザも完全禁止
   ]
 }
 ```
 
-This allows 1 legendary EXCEPT Mewtwo and Rayquaza.
+この場合、伝説ポケモンは1匹まで使えますが、ミュウツーとレックウザは例外として完全に禁止されます。
+
+</details>
 
 ---
 
-## Troubleshooting
+## 🚫 個別のポケモン禁止
 
-### Items Not Being Banned
+特定のポケモンだけを禁止したい場合に使います。
 
-**Problem:** Player can still queue with a banned item.
-
-**Solution:**
-1. Verify item ID format:
-   ```json5
-   // ❌ Wrong
-   "Bright Powder"
-   "brightpowder"
-
-   // ✅ Correct
-   "cobblemon:bright_powder"
-   ```
-
-2. Enable debug logging:
-   ```json5
-   "debug_queue": true
-   ```
-
-3. Check server logs for:
-   ```
-   [Queue] Player has banned item: cobblemon:bright_powder
-   ```
-
-### Pokemon Not Being Banned
-
-**Problem:** Player can queue with a banned Pokemon.
-
-**Solution:**
-1. Check spelling (case-insensitive but typos matter)
-2. Verify label exists for the Pokemon
-3. Check form syntax: `species:form`
-
-### Label Limits Not Working
-
-**Problem:** Player can use more restricted Pokemon than allowed.
-
-**Solution:**
-1. Verify label name matches Cobblemon's labels (lowercase)
-2. Check if Pokemon has that label in Cobblemon's species data
-
----
-
-<details>
-<summary><strong>📝 Complete Configuration Example (Click to expand)</strong></summary>
+### 基本的な禁止
 
 ```json5
 {
-  "blacklist": {
-    // Ban Pokemon by label (legendary, mythical, etc.)
-    "black_list_labels": [
-      "mythical"
-    ],
+  "black_list_pokemon": [
+    "mewtwo",
+    "rayquaza",
+    "zacian"
+  ]
+}
+```
 
-    // Ban specific Pokemon by name or form
-    "black_list_pokemon": [
-      "mewtwo",
-      "rayquaza:mega"
-    ],
+> **注意:** 大文字小文字は区別されません（`mewtwo`, `Mewtwo`, `MEWTWO` は全て同じ）
 
-    // Limit Pokemon with specific labels
-    "restricted_label_limits": {
-      "restricted": 2,      // Max 2 VGC restricted Pokemon
-      "legendary": 1        // Max 1 legendary
-    },
+### フォーム（姿）の指定
 
-    // Ban specific moves
-    "black_list_moves": [
-      "baton_pass",
-      "fissure",
-      "sheer_cold"
-    ],
+メガシンカやリージョンフォームだけを禁止できます：
 
-    // Ban specific abilities
-    "black_list_ability": [
-      "moody",
-      "shadow_tag"
-    ],
+<details>
+<summary><strong>メガシンカのみ禁止</strong></summary>
 
-    // Ban held items (use item IDs from F3+H)
-    "black_list_items_pokemon": [
-      "cobblemon:bright_powder",
-      "cobblemon:lax_incense",
-      "cobblemon:soul_dew"
-    ]
-  }
+```json5
+{
+  "black_list_pokemon": [
+    "mewtwo:mega_x",     // メガミュウツーXのみ禁止
+    "mewtwo:mega_y",     // メガミュウツーYのみ禁止
+    "charizard:mega_x",
+    "charizard:mega_y"
+  ]
+}
+```
+
+通常のミュウツーとリザードンは使用可能です。
+
+</details>
+
+<details>
+<summary><strong>リージョンフォームのみ禁止</strong></summary>
+
+```json5
+{
+  "black_list_pokemon": [
+    "weezing:galar",     // ガラルマタドガスのみ禁止
+    "muk:alola"          // アローラベトベトンのみ禁止
+  ]
+}
+```
+
+通常のマタドガスとベトベトンは使用可能です。
+
+</details>
+
+<details>
+<summary><strong>フォーム指定の注意点</strong></summary>
+
+- **フォームなし** (`mewtwo`): **全てのフォーム**が禁止される
+- **フォームあり** (`mewtwo:mega_x`): **そのフォームのみ**が禁止される
+
+```json5
+// ❌ これは全てのミュウツーが禁止される
+"black_list_pokemon": ["mewtwo"]
+
+// ✅ これはメガミュウツーXのみが禁止される
+"black_list_pokemon": ["mewtwo:mega_x"]
+```
+
+</details>
+
+---
+
+## ⚔️ 技の禁止
+
+特定の技を使えないようにします。
+
+### 設定方法
+
+```json5
+{
+  "black_list_moves": [
+    "fissure",           // じわれ
+    "sheer_cold",        // ぜったいれいど
+    "horn_drill",        // つのドリル
+    "guillotine",        // ハサミギロチン
+    "baton_pass",        // バトンタッチ
+    "last_respects",     // おはかまいり
+    "shed_tail"          // しっぽきり
+  ]
+}
+```
+
+### よく使われる禁止技
+
+<details>
+<summary><strong>一撃必殺技（OHKO）</strong></summary>
+
+```json5
+{
+  "black_list_moves": [
+    "fissure",
+    "sheer_cold",
+    "horn_drill",
+    "guillotine"
+  ]
+}
+```
+
+</details>
+
+<details>
+<summary><strong>Smogon OUで禁止されている技</strong></summary>
+
+```json5
+{
+  "black_list_moves": [
+    "baton_pass",        // バトンタッチ
+    "last_respects",     // おはかまいり（第9世代）
+    "shed_tail"          // しっぽきり（第9世代）
+  ]
+}
+```
+
+</details>
+
+<details>
+<summary><strong>技名の確認方法</strong></summary>
+
+技名は**英語の小文字・スネークケース**で指定します：
+
+| 日本語名 | 内部名 |
+|---------|--------|
+| じわれ | `fissure` |
+| ぜったいれいど | `sheer_cold` |
+| バトンタッチ | `baton_pass` |
+| おはかまいり | `last_respects` |
+| 10まんボルト | `thunderbolt` |
+
+**確認方法:**
+1. Cobblemonの技データを確認
+2. または、実際に技を覚えさせてキューに参加し、ログで内部名を確認
+
+</details>
+
+---
+
+## 🧬 特性の禁止
+
+特定の特性を禁止できます。
+
+### 設定方法
+
+```json5
+{
+  "black_list_ability": [
+    "moody",             // ムラっけ
+    "shadow_tag",        // かげふみ
+    "arena_trap"         // ありじごく
+  ]
+}
+```
+
+### よく禁止される特性
+
+<details>
+<summary><strong>Smogonで禁止されている特性</strong></summary>
+
+```json5
+{
+  "black_list_ability": [
+    "moody",             // ムラっけ（ランダムな能力変化）
+    "shadow_tag",        // かげふみ（交代を封じる）
+    "arena_trap"         // ありじごく（地面タイプを逃がさない）
+  ]
+}
+```
+
+</details>
+
+<details>
+<summary><strong>特性名の確認方法</strong></summary>
+
+### ゲーム内で確認（推奨）
+
+1. `F3 + H` を押して詳細ツールチップを有効化
+2. ポケモンのステータス画面を開く
+3. 特性アイコンにカーソルを合わせる
+4. 内部名が表示されます（例: `intimidate`, `drought`）
+
+### よく使われる特性名リファレンス
+
+| 日本語名 | 内部名 | 備考 |
+|---------|--------|------|
+| いかく | `intimidate` | 相手の攻撃を下げる |
+| ひでり | `drought` | 晴れ状態にする |
+| あめふらし | `drizzle` | 雨状態にする |
+| すなおこし | `sand_stream` | 砂嵐状態にする |
+| ゆきふらし | `snow_warning` | 雪状態にする |
+| ムラっけ | `moody` | ランダムな能力変化 |
+| かげふみ | `shadow_tag` | 交代を封じる |
+| ありじごく | `arena_trap` | 地面タイプを逃がさない |
+| ちからもち | `huge_power` | 攻撃2倍 |
+| ふしぎなまもり | `wonder_guard` | 効果抜群のみ受ける |
+| へんげんじざい | `protean` | 技のタイプに変化 |
+| リベロ | `libero` | へんげんじざいと同じ |
+
+**パターン:**
+- スペースはアンダースコアに: "Shadow Tag" → `shadow_tag`
+- 小文字を使用: "Huge Power" → `huge_power`
+
+</details>
+
+---
+
+## 🎒 持ち物の禁止
+
+特定のアイテムを持たせられないようにします。
+
+### 設定方法
+
+```json5
+{
+  "black_list_items_pokemon": [
+    "cobblemon:bright_powder",    // ひかりのこな（回避率UP）
+    "cobblemon:lax_incense",      // のんきのおこう（回避率UP）
+    "cobblemon:quick_claw",       // せんせいのツメ（先制攻撃）
+    "cobblemon:soul_dew"          // こころのしずく（ラティ専用）
+  ]
+}
+```
+
+> **重要:** アイテムIDは必ず `cobblemon:item_name` の形式で指定してください。
+
+### よく禁止されるアイテム
+
+<details>
+<summary><strong>回避率UPアイテム</strong></summary>
+
+```json5
+{
+  "black_list_items_pokemon": [
+    "cobblemon:bright_powder",    // ひかりのこな
+    "cobblemon:lax_incense"       // のんきのおこう
+  ]
+}
+```
+
+</details>
+
+<details>
+<summary><strong>Smogon OUで禁止されているアイテム</strong></summary>
+
+```json5
+{
+  "black_list_items_pokemon": [
+    "cobblemon:bright_powder",
+    "cobblemon:lax_incense",
+    "cobblemon:quick_claw"        // 運ゲー要素が強いため
+  ]
+}
+```
+
+</details>
+
+<details>
+<summary><strong>アイテムIDの確認方法</strong></summary>
+
+### ゲーム内で確認（一番簡単）
+
+1. `F3 + H` を押す（詳細ツールチップを有効化）
+2. インベントリでアイテムにカーソルを合わせる
+3. 下部にIDが表示されます（例: `cobblemon:bright_powder`）
+
+### コマンドで確認
+
+```
+/give @s <TAB>
+```
+
+Tab キーを押すと、オートコンプリートでアイテムID一覧が表示されます。
+
+### なぜフルIDが必要？
+
+- **MOD間の競合を防ぐ**: `cobblemon:potion` と `minecraft:potion` を区別
+- **言語に依存しない**: どの言語設定でも動作
+- **正確なマッチング**: 誤った禁止を防ぐ
+
+**形式:**
+```
+正しい: "cobblemon:bright_powder"
+間違い: "Bright Powder", "brightpowder", "bright powder"
+```
+
+</details>
+
+---
+
+## 📖 設定例集
+
+### Smogon OU（競技向け）
+
+<details>
+<summary><strong>設定を見る</strong></summary>
+
+```json5
+{
+  "black_list_labels": [
+    "legendary",
+    "mythical",
+    "restricted",
+    "ultra_beast",
+    "paradox"
+  ],
+  "black_list_moves": [
+    "baton_pass",
+    "last_respects",
+    "shed_tail",
+    "fissure",
+    "sheer_cold",
+    "horn_drill",
+    "guillotine"
+  ],
+  "black_list_ability": [
+    "moody",
+    "shadow_tag",
+    "arena_trap"
+  ],
+  "black_list_items_pokemon": [
+    "cobblemon:bright_powder",
+    "cobblemon:lax_incense"
+  ]
+}
+```
+
+</details>
+
+### VGC Series 1（公式ルール）
+
+<details>
+<summary><strong>設定を見る</strong></summary>
+
+```json5
+{
+  "restricted_label_limits": {
+    "restricted": 2      // 制限級ポケモン2匹まで
+  },
+  "black_list_labels": [
+    "mythical"           // 幻のポケモンは禁止
+  ],
+  "black_list_moves": [
+    "fissure",
+    "sheer_cold",
+    "horn_drill",
+    "guillotine"
+  ]
+}
+```
+
+</details>
+
+### カジュアルサーバー
+
+<details>
+<summary><strong>設定を見る</strong></summary>
+
+```json5
+{
+  "black_list_labels": [],  // 何も禁止しない
+  "black_list_moves": [
+    "fissure",             // 一撃必殺技のみ禁止
+    "sheer_cold",
+    "horn_drill",
+    "guillotine"
+  ]
+}
+```
+
+</details>
+
+### 第1〜8世代のみ（第9世代禁止）
+
+<details>
+<summary><strong>設定を見る</strong></summary>
+
+```json5
+{
+  "black_list_labels": [
+    "gen9",
+    "paradox"
+  ]
+}
+```
+
+</details>
+
+### モノタイプ（単タイプ統一）
+
+<details>
+<summary><strong>設定を見る</strong></summary>
+
+```json5
+{
+  "black_list_labels": [
+    "legendary",
+    "mythical"
+  ],
+  "black_list_moves": [
+    "baton_pass"
+  ],
+  "black_list_items_pokemon": [
+    "cobblemon:bright_powder",
+    "cobblemon:lax_incense"
+  ]
 }
 ```
 
@@ -488,18 +605,142 @@ This allows 1 legendary EXCEPT Mewtwo and Rayquaza.
 
 ---
 
-## Best Practices
+## 🔍 検証の流れ
 
-1. **Use labels when possible** - Easier to maintain than individual lists
-2. **Test after changes** - Run `/rankedadmin reload` and test with banned Pokemon
-3. **Use item IDs (F3+H)** - Never use display names for items
-4. **Document your ruleset** - Add comments explaining your choices
+プレイヤーがキューに参加すると、以下の順序でチェックされます：
+
+```
+1. ラベル禁止チェック
+   ❌ 禁止 → "Blacklisted Pokemon: <name> (blacklisted label)"
+
+2. 個別ポケモン禁止チェック
+   ❌ 禁止 → "Blacklisted Pokemon: <name>"
+
+3. ラベル数量制限チェック
+   ❌ 超過 → "Too many <label>: <count>/<limit>"
+
+4. 技禁止チェック
+   ❌ 禁止技あり → "Blacklisted move: <move>"
+
+5. 特性禁止チェック
+   ❌ 禁止特性あり → "Blacklisted ability: <ability>"
+
+6. 持ち物禁止チェック
+   ❌ 禁止アイテムあり → "Blacklisted item: <item_id>"
+
+✅ 全てパス → キューに参加
+```
 
 ---
 
-## See Also
+## 🔧 トラブルシューティング
 
-- [Configuration Guide](config.md) - Full configuration reference
-- [Matchmaking System](../features/matchmaking.md) - How queue system works
-- [Battle Formats](../features/formats.md) - Singles vs Doubles
-- [FAQ](../support/faq.md) - Common questions
+<details>
+<summary><strong>設定が反映されない</strong></summary>
+
+**解決方法:**
+
+1. ファイルを保存したか確認
+2. `/rankedadmin reload` を実行
+3. JSON5の文法エラーがないか確認（カンマ、括弧の閉じ忘れなど）
+4. サーバーログで `[CobbleRanked] Configuration loaded` を確認
+
+</details>
+
+<details>
+<summary><strong>アイテムが禁止されない</strong></summary>
+
+**よくある間違い:**
+
+```json5
+// ❌ 間違い
+"Bright Powder"
+"brightpowder"
+"bright powder"
+
+// ✅ 正しい
+"cobblemon:bright_powder"
+```
+
+**確認方法:**
+
+1. `F3 + H` でアイテムIDを確認
+2. デバッグログを有効化:
+   ```json5
+   "debug_queue": true
+   ```
+3. ログで `[Queue] Player has banned item: cobblemon:bright_powder` を確認
+
+</details>
+
+<details>
+<summary><strong>ポケモンが禁止されない</strong></summary>
+
+**確認ポイント:**
+
+1. **スペルミス**: `rayquaza` を `rayquza` と書いていないか
+2. **フォーム指定**: `mewtwo` と `mewtwo:mega_x` は別扱い
+3. **ラベルの有無**: そのポケモンが指定したラベルを持っているか確認
+
+**デバッグ方法:**
+
+```json5
+{
+  "debug_queue": true  // config.json5 で有効化
+}
+```
+
+ログでどのチェックが失敗しているか確認できます。
+
+</details>
+
+<details>
+<summary><strong>数量制限が機能しない</strong></summary>
+
+**確認ポイント:**
+
+1. ラベル名が正しいか（小文字、スペルミス）
+2. そのポケモンが実際にそのラベルを持っているか
+3. `black_list_labels` と `restricted_label_limits` を混同していないか
+
+**例:**
+
+```json5
+// ❌ 間違い: 伝説ポケモンが完全に禁止される
+"black_list_labels": ["legendary"]
+
+// ✅ 正しい: 伝説ポケモンは1匹まで使える
+"restricted_label_limits": {
+  "legendary": 1
+}
+```
+
+</details>
+
+---
+
+## ✅ ベストプラクティス
+
+1. **ラベル指定を優先する** - 個別指定より管理が楽
+2. **変更後は必ずテストする** - `/rankedadmin reload` して実際に試す
+3. **アイテムIDは必ず確認** - `F3 + H` で正確なIDを取得
+4. **コメントを活用** - JSON5はコメントが使えます
+
+```json5
+{
+  // 伝説・幻ポケモンを禁止（競技向け）
+  "black_list_labels": ["legendary", "mythical"],
+
+  // 一撃必殺技を禁止
+  "black_list_moves": ["fissure", "sheer_cold", "horn_drill", "guillotine"]
+}
+```
+
+---
+
+## 🔗 関連ガイド
+
+- **[メイン設定](config.md)** - `config.json5` の全オプション
+- **[バトルフォーマット](../features/battle-formats.md)** - シングル・ダブル・マルチ
+- **[FAQ](../support/faq.md)** - よくある質問
+- **[トラブルシューティング](../support/troubleshooting.md)** - 問題解決ガイド

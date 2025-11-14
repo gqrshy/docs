@@ -1,376 +1,542 @@
-# Installation
+# インストールガイド
 
-This guide will walk you through installing CobbleRanked on your Minecraft server.
+CobbleRankedをサーバーに導入する手順を説明します。**シングルサーバー**なら5分で完了します。
 
-## Prerequisites
+---
 
-Before installing CobbleRanked, ensure your server meets these requirements:
+## 🎯 インストール方法（基本）
 
-### Required Software
+### ステップ1: 必要なMODを準備
 
-| Software | Version | Download |
-|----------|---------|----------|
-| **Minecraft** | 1.21.1 | [minecraft.net](https://www.minecraft.net) |
+以下のMODを全て `mods` フォルダに配置してください：
+
+| MOD名 | バージョン | ダウンロード |
+|-------|----------|------------|
 | **Fabric Loader** | 0.17.2+ | [fabricmc.net](https://fabricmc.net/use/server/) |
 | **Fabric API** | 0.116.6+ | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) |
 | **Cobblemon** | 1.7.0+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
 | **Fabric Language Kotlin** | 1.13.6+ | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin) |
+| **CobbleRanked** | 最新版 | [Discord](https://discord.gg/VVVvBTqqyP) |
 
-### Optional (For Cross-Server)
+> **対象バージョン:** Minecraft 1.21.1
 
-Cross-server setup requires additional infrastructure:
+### ステップ2: サーバーを起動
 
-| Software | Version | Purpose |
-|----------|---------|---------|
-| **MySQL** | 8.0+ | Player data, stats, seasons (shared across servers) |
-| **Redis** | 6.0+ | Real-time queue, matchmaking, messaging (pub/sub) |
-| **Velocity** | 3.4.0+ | Proxy for server transfers |
+サーバーを起動すると、`config/cobbleranked/` フォルダに設定ファイルが自動生成されます。
 
-See [Cross-Server Setup Guide](../advanced/cross-server.md) for detailed instructions.
+### ステップ3: 動作確認
 
-## Installation Steps
-
-### 1. Download CobbleRanked
-
-Download the latest release from:
-- **[Discord Server](https://discord.gg/VVVvBTqqyP)** (currently the only official source)
-- Modrinth _(coming soon)_
-- CurseForge _(coming soon)_
-
-### 2. Install the Mod
-
-1. **Stop your server** if it's running
-2. Place `CobbleRanked-1.0.0.jar` in your server's `mods/` folder
-3. Ensure all dependencies are installed in `mods/`:
-   - `fabric-api-*.jar`
-   - `cobblemon-*.jar`
-   - `fabric-language-kotlin-*.jar`
-
-### 3. Start the Server
-
-Start your server for the first time. CobbleRanked will:
-- Create configuration files in `config/cobbleranked/`
-- Initialize the SQLite database (default)
-- Generate default arenas, blacklist, and language files
-
-### 4. Verify Installation
-
-Check the server console for:
+サーバーコンソールに以下のメッセージが表示されれば成功です：
 
 ```
 [CobbleRanked] Mod initialized successfully
-[CobbleRanked] Configuration loaded
 [CobbleRanked] Database initialized (SQLite)
 [CobbleRanked] Season manager initialized
 ```
 
-If you see these messages, installation was successful!
+ゲーム内で `/ranked` コマンドを実行してGUIが開けばOKです！
 
-## File Structure
+---
 
-After first launch, you'll find these files:
+## 📁 生成されるファイル
+
+初回起動後、以下のファイルが作成されます：
+
+<details>
+<summary><strong>設定ファイル一覧</strong></summary>
 
 ```
 config/cobbleranked/
-├── config.json5          # Main configuration
-├── blacklist.json5       # Pokemon/move/ability bans
-├── arenas.json5          # Battle arena locations
-├── rewards.json5         # Season & milestone rewards
+├── config.json5          # メイン設定
+├── blacklist.json5       # ポケモン・技・特性・アイテムの禁止設定
+├── arenas.json5          # バトルアリーナの座標
+├── rewards.json5         # シーズン・マイルストーン報酬
+├── ranked.db             # データベース（SQLite）
 ├── gui/
-│   ├── gui-enUs.json5    # English GUI
-│   ├── gui-jaJp.json5    # Japanese GUI
-│   ├── gui-ptBr.json5    # Portuguese GUI
-│   └── gui-ruRu.json5    # Russian GUI
+│   ├── gui-enUs.json5    # 英語GUI
+│   ├── gui-jaJp.json5    # 日本語GUI
+│   ├── gui-ptBr.json5    # ポルトガル語GUI
+│   └── gui-ruRu.json5    # ロシア語GUI
 └── language/
-    ├── en-Us.json5       # English messages
-    ├── ja-Jp.json5       # Japanese messages
-    ├── pt-Br.json5       # Portuguese messages
-    └── ru-Ru.json5       # Russian messages
+    ├── en-Us.json5       # 英語メッセージ
+    ├── ja-Jp.json5       # 日本語メッセージ
+    ├── pt-Br.json5       # ポルトガル語メッセージ
+    └── ru-Ru.json5       # ロシア語メッセージ
 ```
 
-## Database Setup
+**全てのファイルはデフォルト設定で生成されるので、編集不要でそのまま使えます。**
 
-### SQLite (Default)
+</details>
 
-No additional setup required. CobbleRanked uses SQLite by default, which stores data in:
+---
+
+## ⚙️ 初期設定（オプション）
+
+基本的には設定不要ですが、以下の設定を推奨します：
+
+### 1. 言語設定
+
+デフォルトは英語です。日本語に変更する場合：
+
+`config/cobbleranked/config.json5` を開いて以下を変更：
+
+```json5
+{
+  "language": "ja-Jp"  // en-Us → ja-Jp に変更
+}
 ```
-config/cobbleranked/ranked.db
+
+<details>
+<summary>利用可能な言語</summary>
+
+- `en-Us` - 英語（デフォルト）
+- `ja-Jp` - 日本語
+- `pt-Br` - ポルトガル語
+- `ru-Ru` - ロシア語
+
+</details>
+
+### 2. バトルアリーナの設定
+
+バトル開始時にプレイヤーを指定座標にテレポートさせる設定です。
+
+1. バトルアリーナにしたい場所に移動
+2. 以下のコマンドを実行：
+
+```
+/rankedadmin arena set main_arena
 ```
 
-**Pros:**
-- No configuration needed
-- Works out of the box
-- Perfect for single-server setups
+これで現在地がバトル開始座標として登録されます。
 
-**Cons:**
-- Cannot share data across multiple servers
+<details>
+<summary>複数のアリーナを設定する</summary>
 
-### MySQL (Cross-Server)
+複数のアリーナを登録することで、ランダムな場所でバトルを開始できます：
 
-For cross-server setups, configure MySQL on **all servers**:
+```
+/rankedadmin arena set arena_1
+/rankedadmin arena set arena_2
+/rankedadmin arena set arena_3
+```
 
-1. **Create a database (run once on MySQL server):**
+**詳細:** [アリーナ設定ガイド](../configuration/arenas.md)
+
+</details>
+
+### 3. 基本的なルール設定
+
+伝説ポケモンや一撃必殺技を禁止したい場合：
+
+`config/cobbleranked/blacklist.json5` を編集：
+
+```json5
+{
+  "black_list_labels": ["legendary", "mythical"],  // 伝説・幻のポケモンを禁止
+  "black_list_moves": ["fissure", "sheer_cold", "horn_drill", "guillotine"]  // 一撃必殺技を禁止
+}
+```
+
+<details>
+<summary>その他の禁止設定</summary>
+
+```json5
+{
+  "black_list_labels": ["legendary", "mythical", "restricted", "ultra_beast", "paradox"],
+  "black_list_pokemon": ["mewtwo", "rayquaza"],  // 個別のポケモンを禁止
+  "black_list_moves": ["baton_pass", "last_respects"],  // 特定の技を禁止
+  "black_list_ability": ["moody", "shadow_tag"],  // 特定の特性を禁止
+  "black_list_items_pokemon": ["cobblemon:bright_powder"]  // 特定のアイテムを禁止
+}
+```
+
+**詳細:** [ブラックリスト設定ガイド](../configuration/blacklist.md)
+
+</details>
+
+---
+
+## 🌍 クロスサーバーセットアップ（上級者向け）
+
+複数のサーバー間でランキングを共有したい場合のみ必要です。**シングルサーバーの場合はスキップしてください。**
+
+### 必要なもの
+
+| ソフトウェア | バージョン | 用途 |
+|------------|----------|------|
+| **MySQL** または **MongoDB** | 8.0+ / 6.0+ | データ共有 |
+| **Redis** | 6.0+ | リアルタイムキュー同期 |
+| **Velocity** | 3.4.0+ | サーバー間転送 |
+
+### クロスサーバー構成
+
+```
+[ロビーサーバー1] ━━━┓
+                    ┃
+[ロビーサーバー2] ━━━╋━━━ [Velocity Proxy] ━━━ [バトルサーバー]
+                    ┃                              ↓
+[メインサーバー] ━━━┛                        [MySQL + Redis]
+                                                (共有データ)
+```
+
+- **ロビー/メインサーバー**: プレイヤーがキューに参加
+- **バトルサーバー**: 実際のバトルを処理
+- **MySQL/MongoDB**: 全サーバー共通のデータベース
+- **Redis**: リアルタイムでキュー情報を同期
+
+<details>
+<summary><strong>ステップ1: MySQLのセットアップ</strong></summary>
+
+### MySQLデータベースの作成
+
+MySQLサーバーで以下のコマンドを実行：
+
 ```sql
 CREATE DATABASE cobbleranked CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'cobbleranked'@'%' IDENTIFIED BY 'your_password';
+CREATE USER 'cobbleranked'@'%' IDENTIFIED BY 'your_secure_password';
 GRANT ALL PRIVILEGES ON cobbleranked.* TO 'cobbleranked'@'%';
 FLUSH PRIVILEGES;
 ```
 
-2. **Configure each server's [config.json5](../configuration/config.md#cross-server-configuration):**
+### 全サーバーの設定
 
-**Battle Server (handles battles):**
+**バトルサーバーの `config.json5`:**
+
 ```json5
-"cross_server": {
-  "enabled": true,
-  "server_id": "battle",        // Unique ID for this server
-  "battle_server": "",           // Empty = this is battle server
-  "database": {
-    "type": "MYSQL",
-    "host": "localhost",
-    "port": 3306,
-    "database": "cobbleranked",
-    "username": "cobbleranked",
-    "password": "your_password"
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "battle",      // このサーバーの識別名
+    "battle_server": "",         // 空 = このサーバーがバトルサーバー
+    "database": {
+      "type": "MYSQL",
+      "host": "localhost",       // MySQLサーバーのIP
+      "port": 3306,
+      "database": "cobbleranked",
+      "username": "cobbleranked",
+      "password": "your_secure_password"
+    }
   }
 }
 ```
 
-**Lobby/Main Servers (redirect players):**
+**ロビー/メインサーバーの `config.json5`:**
+
 ```json5
-"cross_server": {
-  "enabled": true,
-  "server_id": "main1",         // Unique per server: "main1", "main2", etc.
-  "battle_server": "battle",    // Must match battle server_id AND Velocity name
-  "database": {
-    "type": "MYSQL",
-    "host": "localhost",
-    "port": 3306,
-    "database": "cobbleranked",
-    "username": "cobbleranked",
-    "password": "your_password"
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "lobby1",       // サーバーごとに異なる名前（lobby1, lobby2, main など）
+    "battle_server": "battle",   // バトルサーバーのserver_idと一致させる
+    "database": {
+      "type": "MYSQL",
+      "host": "localhost",
+      "port": 3306,
+      "database": "cobbleranked",
+      "username": "cobbleranked",
+      "password": "your_secure_password"
+    }
   }
 }
 ```
 
-3. **Important: Only ONE battle server!**
-   - ⚠️ Only one server should have `battle_server: ""`
-   - All other servers must specify battle server name
-   - Multiple battle servers cause duplicate seasons
+**重要:** `battle_server` は Velocity の `velocity.toml` で設定したサーバー名と**完全一致**させてください。
 
-4. **Restart all servers**
+</details>
 
-## Redis Setup (Cross-Server)
+<details>
+<summary><strong>ステップ2: MongoDBのセットアップ（MySQLの代わり）</strong></summary>
 
-For real-time cross-server queue sync, **all servers** must connect to the same Redis instance:
+MongoDBを使う場合（クラウド対応、スケーラブル）：
 
-1. **Install Redis (run once on Redis server):**
+### MongoDB Atlasの使用（無料）
+
+1. [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) でアカウント作成
+2. 無料クラスターを作成
+3. 接続文字列を取得（例: `mongodb+srv://user:pass@cluster.mongodb.net/cobbleranked`）
+
+### 全サーバーの設定
+
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "battle",  // または "lobby1", "main" など
+    "battle_server": "",    // バトルサーバーは空、それ以外は "battle"
+    "database": {
+      "type": "MONGODB",
+      "host": "cluster.mongodb.net",  // Atlas のホスト
+      "port": 27017,
+      "database": "cobbleranked",
+      "username": "your_username",
+      "password": "your_password"
+    }
+  }
+}
+```
+
+**詳細:** [CHANGELOG-MONGODB.md](../CHANGELOG-MONGODB.md)
+
+</details>
+
+<details>
+<summary><strong>ステップ3: Redisのセットアップ</strong></summary>
+
+### Redisのインストール
+
+**Ubuntu/Debian:**
 ```bash
-# Ubuntu/Debian
 sudo apt install redis-server
 sudo systemctl start redis-server
 sudo systemctl enable redis-server
-
-# Windows: Download from https://redis.io/download
-# Or use WSL for testing
 ```
 
-2. **Configure Redis for remote access (if needed):**
+**Windows:**
+- [Redis for Windows](https://github.com/microsoftarchive/redis/releases) をダウンロード
+- または WSL (Windows Subsystem for Linux) を使用
+
+### リモートアクセスの許可（必要な場合）
+
+`/etc/redis/redis.conf` を編集：
+
+```
+bind 0.0.0.0              # 全てのIPからアクセス許可（ファイアウォール必須）
+requirepass your_password  # パスワード設定（推奨）
+```
+
+再起動：
 ```bash
-# Edit /etc/redis/redis.conf
-bind 0.0.0.0  # Allow remote connections (security risk - use firewall!)
-# requirepass your_secure_password  # Recommended for production
+sudo systemctl restart redis-server
 ```
 
-3. **Configure [config.json5](../configuration/config.md#redis-configuration) on ALL servers:**
+### 全サーバーの設定
+
+全サーバーの `config.json5` に追加：
+
 ```json5
-"cross_server": {
-  "redis": {
-    "host": "localhost",       // Redis server IP (same for all servers)
-    "port": 6379,
-    "password": "",            // Leave empty if no password
-    "database": 0              // Use database 0-15
+{
+  "cross_server": {
+    "redis": {
+      "host": "localhost",      // Redisサーバーのホスト（全サーバー共通）
+      "port": 6379,
+      "password": "",           // パスワード設定した場合は入力
+      "database": 0             // 0-15 の番号を選択
+    }
   }
 }
 ```
 
-4. **Verify Redis connection:**
+### 接続確認
+
 ```bash
-# On each Minecraft server
 redis-cli -h localhost -p 6379 PING
-# Should return: PONG
+# 返答: PONG
 ```
 
-5. **Restart all servers**
+</details>
 
-**Redis Usage:**
-- Queue data (sorted sets per format)
-- Matchmaking coordination
-- Ready state synchronization
-- Server heartbeats (30s interval)
-- Player origin tracking (TTL: 30 minutes)
-- Transfer locks (TTL: 30 seconds)
+<details>
+<summary><strong>ステップ4: Velocityの設定</strong></summary>
 
-## Verification Commands
+### velocity.toml の設定
 
-### Single-Server Mode
+Velocity の `velocity.toml` でサーバー名を定義：
 
-Run these commands to verify installation:
-
-```
-/rankedadmin reload          # Reload all configs
-/rankedadmin arena list      # View configured arenas
-/rankedadmin season info     # Check current season
-/ranked                      # Open ranked GUI
+```toml
+[servers]
+lobby1 = "127.0.0.1:25565"
+lobby2 = "127.0.0.1:25566"
+battle = "127.0.0.1:25567"
+main = "127.0.0.1:25568"
 ```
 
-### Cross-Server Mode
+**重要:** ここで設定した名前（`battle`, `lobby1` など）を、CobbleRanked の `server_id` と `battle_server` に使用してください。
 
-**On each server, check logs for:**
+</details>
 
-**Battle Server:**
+<details>
+<summary><strong>動作確認</strong></summary>
+
+### 各サーバーのログを確認
+
+**バトルサーバー:**
 ```
-[CrossServer] Connected to MySQL
+[CrossServer] Connected to MySQL/MongoDB
 [CrossServer] Connected to Redis
-[CrossServer] Server heartbeat started: battle
 [SeasonManager] Initialized season manager
 [CobbleRanked] Battle server ready
 ```
 
-**Lobby/Main Servers:**
+**ロビー/メインサーバー:**
 ```
-[CrossServer] Connected to MySQL
+[CrossServer] Connected to MySQL/MongoDB
 [CrossServer] Connected to Redis
-[CrossServer] Server heartbeat started: main1
 [CrossServer] Battle server: battle
 [CobbleRanked] Lobby server ready
 ```
 
-**Verify cross-server communication:**
-```bash
-# In Redis CLI
-redis-cli
-> KEYS cobbleranked:*
-# Should show queue keys, heartbeat keys
+### マッチメイキングのテスト
 
-> KEYS server_heartbeat:*
-# Should show all connected servers
-```
+1. ロビー1でプレイヤーAがキューに参加
+2. ロビー2でプレイヤーBが同じフォーマットのキューに参加
+3. マッチングしたら自動でバトルサーバーに転送される
+4. バトル終了後、元のサーバーに戻る
 
-**Test matchmaking:**
-1. Join queue on main1: `/ranked` → Join Queue → Select Format
-2. Join queue on main2: `/ranked` → Join Queue → Same Format
-3. Should match across servers within Elo range
+**詳細:** [クロスサーバーセットアップガイド](../advanced/cross-server.md)
 
-## Troubleshooting
-
-### Mod not loading
-
-**Symptoms:** No CobbleRanked messages in console
-
-**Solution:**
-- Verify Fabric Loader is installed
-- Check `mods/` folder for all dependencies
-- Review `logs/latest.log` for errors
-
-### Configuration not found
-
-**Symptoms:** `Failed to load config.json5`
-
-**Solution:**
-- Stop server
-- Delete `config/cobbleranked/` folder
-- Restart server (configs will regenerate)
-
-### Database connection failed
-
-**Symptoms:** `Failed to connect to MySQL database`
-
-**Solution:**
-- Verify MySQL is running
-- Check credentials in `config.json5`
-- Ensure database exists
-- Test connection: `mysql -u cobbleranked -p -h localhost cobbleranked`
-
-### Permission errors
-
-**Symptoms:** `You do not have permission to use this command`
-
-**Solution:**
-- Grant permissions using your permissions plugin
-- Default permission: `cobbleranked.admin`
-- See [Commands & Permissions](commands.md) for full list
-
-### Cross-server players can't match
-
-**Symptoms:** Players on different servers don't match
-
-**Solution:**
-1. **Verify MySQL shared across servers:**
-   ```sql
-   SELECT * FROM format_stats;
-   # Should show players from all servers
-   ```
-
-2. **Verify Redis shared across servers:**
-   ```bash
-   redis-cli
-   > KEYS cobbleranked:queue:*
-   # Should show queue entries
-   ```
-
-3. **Check server IDs are unique:**
-   - Each server needs unique `server_id`
-   - Battle server must have `battle_server: ""`
-
-4. **Check format matches:**
-   - Players in Singles queue won't match Doubles queue
-   - Check format with `/rankedadmin queue list`
-
-5. **Check Elo ranges:**
-   - Default ±200 Elo range
-   - Expands over time (50s per expansion)
-
-### Players stuck on battle server
-
-**Symptoms:** Players don't return after battle
-
-**Solution:**
-1. **Check Velocity server names:**
-   - `battle_server` must match Velocity `servers` name exactly
-   - Case-sensitive!
-
-2. **Verify player origin saved:**
-   ```bash
-   redis-cli
-   > GET player_origin:{uuid}
-   # Should show origin server ID
-   ```
-
-3. **Check logs:**
-   - Look for `[BATTLE-END] Transferring players back`
-   - Check for transfer errors
-
-## Next Steps
-
-Now that CobbleRanked is installed:
-
-### Single-Server Setup
-1. **Configure blacklist** - [Blacklist Guide](../configuration/blacklist.md)
-2. **Set up arenas** - [Arena Setup](../configuration/arenas.md)
-3. **Customize rewards** - [Rewards System](../configuration/rewards.md)
-4. **Read Quick Start** - [Quick Start Guide](quick-start.md)
-
-### Cross-Server Setup
-1. **Complete cross-server guide** - [Cross-Server Setup](../advanced/cross-server.md)
-2. **Configure Velocity/BungeeCord** - Server transfer plugin
-3. **Set up arenas (battle server only)** - [Arena Setup](../configuration/arenas.md)
-4. **Test cross-server matchmaking** - Try joining from different servers
-5. **Configure rewards** - [Rewards System](../configuration/rewards.md)
+</details>
 
 ---
 
-**Need help?**
-- Cross-server issues: [Cross-Server Guide](../advanced/cross-server.md#troubleshooting)
-- General issues: [Troubleshooting Guide](../support/troubleshooting.md)
-- Common questions: [FAQ](../support/faq.md)
+## 🔧 トラブルシューティング
+
+<details>
+<summary><strong>MODが読み込まれない</strong></summary>
+
+**症状:** コンソールにCobbleRankedのメッセージが表示されない
+
+**解決方法:**
+1. Fabric Loaderがインストールされているか確認
+2. `mods` フォルダに全ての依存MODがあるか確認
+   - Fabric API
+   - Cobblemon
+   - Fabric Language Kotlin
+3. `logs/latest.log` でエラーを確認
+
+</details>
+
+<details>
+<summary><strong>設定ファイルが見つからない</strong></summary>
+
+**症状:** `Failed to load config.json5`
+
+**解決方法:**
+1. サーバーを停止
+2. `config/cobbleranked/` フォルダを削除
+3. サーバーを再起動（自動で再生成されます）
+
+</details>
+
+<details>
+<summary><strong>データベース接続エラー</strong></summary>
+
+**症状:** `Failed to connect to MySQL database`
+
+**解決方法:**
+1. MySQLが起動しているか確認：
+   ```bash
+   sudo systemctl status mysql
+   ```
+2. 認証情報が正しいか確認（`config.json5` のusername, password）
+3. データベースが存在するか確認：
+   ```bash
+   mysql -u cobbleranked -p -h localhost -e "SHOW DATABASES;"
+   ```
+4. ファイアウォールでポート3306が開いているか確認
+
+</details>
+
+<details>
+<summary><strong>クロスサーバーでマッチングしない</strong></summary>
+
+**症状:** 異なるサーバーのプレイヤー同士がマッチしない
+
+**解決方法:**
+
+1. **Redisの接続確認:**
+   ```bash
+   redis-cli
+   > KEYS cobbleranked:queue:*
+   # キューデータが表示されるはず
+   ```
+
+2. **全サーバーが同じMySQLに接続しているか確認:**
+   ```sql
+   SELECT * FROM player_ranked_stats;
+   # 全サーバーのプレイヤーが表示されるはず
+   ```
+
+3. **server_idが重複していないか確認:**
+   - 各サーバーの `server_id` は一意でなければなりません
+
+4. **battle_serverの設定を確認:**
+   - バトルサーバーのみ `battle_server: ""`
+   - その他のサーバーは `battle_server: "battle"` （Velocityの名前と一致）
+
+5. **同じフォーマットでキューに参加しているか確認:**
+   - シングルとダブルは別のキュー
+
+</details>
+
+<details>
+<summary><strong>バトル後に元のサーバーに戻らない</strong></summary>
+
+**症状:** プレイヤーがバトルサーバーに残ったまま
+
+**解決方法:**
+
+1. **Velocityのサーバー名を確認:**
+   - `battle_server` が `velocity.toml` の `[servers]` 名と完全一致しているか確認
+   - 大文字小文字を区別します！
+
+2. **Redisで元サーバー情報を確認:**
+   ```bash
+   redis-cli
+   > GET player_origin:{プレイヤーのUUID}
+   # 元のサーバーIDが表示されるはず
+   ```
+
+3. **ログを確認:**
+   - `[BATTLE-END] Transferring players back to: lobby1` のようなメッセージを探す
+
+</details>
+
+<details>
+<summary><strong>コマンドが使えない（権限エラー）</strong></summary>
+
+**症状:** `You do not have permission to use this command`
+
+**解決方法:**
+
+管理者コマンドはOP権限が必要です：
+
+```
+/op YourUsername
+```
+
+または、権限プラグイン（LuckPerms等）で以下の権限を付与：
+
+```
+cobbleranked.admin
+```
+
+**詳細:** [コマンドリファレンス](commands.md)
+
+</details>
+
+---
+
+## ✅ 次のステップ
+
+インストールが完了したら、以下のガイドをご覧ください：
+
+### シングルサーバーの場合
+
+1. **[クイックスタートガイド](quick-start.md)** - 基本的な使い方
+2. **[ブラックリスト設定](../configuration/blacklist.md)** - ルールのカスタマイズ
+3. **[アリーナ設定](../configuration/arenas.md)** - バトルエリアの設定
+4. **[報酬設定](../configuration/rewards.md)** - シーズン報酬の追加
+
+### クロスサーバーの場合
+
+1. **[クロスサーバーガイド](../advanced/cross-server.md)** - 詳細な設定
+2. **[データベース管理](../advanced/database.md)** - MySQL/MongoDBの比較
+3. **[Redis設定](../advanced/redis.md)** - リアルタイム同期の詳細
+4. **[アリーナ設定](../configuration/arenas.md)** - バトルサーバーのみ
+
+---
+
+**サポートが必要な場合:**
+- [トラブルシューティングガイド](../support/troubleshooting.md)
+- [FAQ](../support/faq.md)
+- [Discord](https://discord.gg/VVVvBTqqyP) - #feedbackチャンネル
