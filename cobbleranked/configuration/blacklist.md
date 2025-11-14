@@ -1,323 +1,310 @@
-# Pokemon Blacklist & Restrictions
+# Blacklist Configuration
 
-Configure Pokemon, move, ability, and item restrictions for ranked battles.
+Restrict Pokemon, moves, abilities, and held items in ranked battles.
 
-**Configuration file:** `config/cobbleranked/config.json5` (section: `"blacklist"`)
+**Config File:** `config/cobbleranked/blacklist.json5`
 
 ---
 
 ## Quick Start
 
-The blacklist system allows you to:
-- Ban specific Pokemon species or forms
-- Ban Pokemon by labels (legendary, mythical, restricted, etc.)
-- Limit quantities of labeled Pokemon (e.g., max 2 restricted)
-- Ban specific moves, abilities, or held items
+### Minimal Example
 
----
-
-## Finding Internal Names
-
-### Item IDs
-
-#### In-Game Method (Recommended)
-
-1. Press `F3 + H` in Minecraft to enable advanced tooltips
-2. Hover over any item in your inventory
-3. The item ID appears at the bottom (e.g., `cobblemon:bright_powder`)
-
-#### Command Method
-
-```
-/give @s <tab>
-```
-Autocomplete shows available item IDs.
-
-**Supported Formats:**
-- Full item ID: `cobblemon:bright_powder`
-- Cobblemon internal name: `bright_powder` (automatically checks both)
-- Minecraft items: `minecraft:diamond`, `minecraft:netherite_sword`
-
-**Important:** Always use the full format `mod_id:item_name` (e.g., `cobblemon:bright_powder`, not "Bright Powder"). This prevents conflicts between mods with similar item names.
-
-### Ability Names
-
-Ability internal names use **snake_case** format (lowercase with underscores).
-
-#### In-Game Method
-
-1. Press `F3 + H` in Minecraft to enable advanced tooltips
-2. Open your Pokemon's summary screen
-3. Hover over the ability icon
-4. The internal name appears in the tooltip (e.g., `intimidate`, `drought`)
-
-#### Common Ability Names Reference
-
-| Display Name | Internal Name | Notes |
-|--------------|---------------|-------|
-| Intimidate | `intimidate` | Lowers opponent's Attack |
-| Drought | `drought` | Summons harsh sunlight |
-| Drizzle | `drizzle` | Summons rain |
-| Sand Stream | `sand_stream` | Summons sandstorm |
-| Snow Warning | `snow_warning` | Summons snow |
-| Moody | `moody` | Banned in Smogon (random stat changes) |
-| Shadow Tag | `shadow_tag` | Banned in Smogon (prevents switching) |
-| Arena Trap | `arena_trap` | Banned in Smogon (traps grounded Pokemon) |
-| Huge Power | `huge_power` | Doubles Attack stat |
-| Pure Power | `pure_power` | Same as Huge Power |
-| Wonder Guard | `wonder_guard` | Only super-effective moves hit |
-| Protean | `protean` | Changes type to move used |
-| Libero | `libero` | Same as Protean |
-| As One (Ice Rider) | `as_one_ice_rider` | Combines Unnerve + Chilling Neigh |
-| As One (Shadow Rider) | `as_one_shadow_rider` | Combines Unnerve + Grim Neigh |
-
-**Pattern:**
-- Replace spaces with underscores: "Shadow Tag" → `shadow_tag`
-- Use lowercase: "Huge Power" → `huge_power`
-- Parentheses in display name become separate words: "As One (Ice Rider)" → `as_one_ice_rider`
-
-#### Data Files Method
-
-Cobblemon's ability data is stored in:
-```
-.minecraft/data/cobblemon/species/
-```
-
-Each Pokemon's JSON file lists its abilities with internal names:
-```json
+```json5
 {
-  "abilities": [
-    "intimidate",
-    "moxie",
-    "h:sheer_force"
-  ]
+  "black_list_labels": ["legendary", "mythical"],
+  "black_list_moves": ["fissure", "sheer_cold", "horn_drill", "guillotine"]
 }
 ```
 
-**Format:**
-- Regular abilities: `"intimidate"`
-- Hidden abilities: `"h:sheer_force"` (prefix with `h:`)
+**Reload:** `/rankedadmin reload`
 
-#### Testing Method
-
-1. Set up a test team with the ability you want to ban
-2. Enable debug logging in config:
-   ```json5
-   "debug_queue": true
-   ```
-3. Try to join queue
-4. Check server logs for ability validation messages
+**Effect:** Bans all legendaries/mythicals + OHKO moves
 
 ---
 
-## Configuration Options
+## Pokemon Restrictions
 
-### 1. Ban by Label (Recommended)
+### Ban by Label (Recommended)
 
-Ban all Pokemon with specific labels:
+Most efficient way to ban multiple Pokemon:
 
 ```json5
-"black_list_labels": [
-  "legendary",
-  "mythical",
-  "ultra_beast"
-]
+{
+  "black_list_labels": ["legendary", "mythical", "restricted"]
+}
 ```
 
 **Available Labels:**
 
-| Label | Description | Examples |
-|-------|-------------|----------|
-| `legendary` | Legendary Pokemon | Mewtwo, Lugia, Rayquaza, Dialga |
-| `mythical` | Mythical Pokemon | Mew, Celebi, Jirachi, Victini |
-| `restricted` | VGC restricted Pokemon | Box legendaries, cover legendaries |
-| `ultra_beast` | Ultra Beasts | Nihilego, Buzzwole, Xurkitree |
-| `paradox` | Paradox Pokemon (Gen 9) | Iron Treads, Great Tusk, Flutter Mane |
-| `starter` | Starter Pokemon | Bulbasaur, Charmander, Squirtle |
-| `fossil` | Fossil Pokemon | Omanyte, Kabuto, Aerodactyl |
-| `baby` | Baby Pokemon | Pichu, Cleffa, Igglybuff |
-| `powerhouse` | Pseudo-legendaries | Dragonite, Garchomp, Salamence |
-| `gen1` - `gen9` | By generation | `gen1` = Kanto, `gen9` = Paldea |
+| Label | Count | Examples |
+|-------|-------|----------|
+| `legendary` | ~60 | Mewtwo, Lugia, Rayquaza, Dialga |
+| `mythical` | ~20 | Mew, Celebi, Jirachi, Victini |
+| `restricted` | ~40 | Box legendaries (VGC restricted) |
+| `ultra_beast` | 11 | Nihilego, Buzzwole, Xurkitree |
+| `paradox` | 16 | Iron Treads, Great Tusk, Flutter Mane |
+| `starter` | ~30 | Bulbasaur line, Charmander line, etc. |
+| `fossil` | ~15 | Omanyte, Kabuto, Aerodactyl |
+| `baby` | ~20 | Pichu, Cleffa, Igglybuff |
+| `powerhouse` | ~12 | 600 BST Pokemon (Dragonite, Garchomp) |
+| `gen1` - `gen9` | Varies | Filter by generation |
 
-### 2. Limit Pokemon by Label
+> **[📸 INSERT: Screenshot showing validation error when trying to use banned legendary]**
+
+### Quantity Limits
 
 Allow limited quantities instead of complete bans:
 
 ```json5
-"restricted_label_limits": {
-  "legendary": 1,      // Max 1 legendary per team
-  "mythical": 0,       // Ban mythicals (same as black_list_labels)
-  "restricted": 2      // Max 2 VGC restricted Pokemon
+{
+  "restricted_label_limits": {
+    "legendary": 1,      // Max 1 legendary per team
+    "restricted": 2,     // Max 2 restricted (VGC format)
+    "powerhouse": 3      // Max 3 pseudo-legendaries
+  }
 }
 ```
 
-**VGC Series 1 Example:**
+**Example:** VGC Series 1 format (2 restricted Pokemon allowed)
+
+### Ban Specific Pokemon
+
 ```json5
-"restricted_label_limits": {
-  "restricted": 2      // Allows 2 restricted Pokemon (VGC rule)
+{
+  "black_list_pokemon": [
+    "mewtwo",            // All forms banned
+    "rayquaza:mega",     // Only Mega Rayquaza
+    "charizard:mega_x",  // Only Mega Charizard X
+    "weezing:galar"      // Only Galarian Weezing
+  ]
 }
 ```
 
-This automatically applies to all Pokemon with the `restricted` label - no need to list individual species.
+**Form Syntax:**
+- No form (`mewtwo`) = **All forms** banned
+- With form (`mewtwo:mega_x`) = **Only that form** banned
 
-### 3. Ban Specific Pokemon
-
-Ban individual Pokemon by species name:
-
-```json5
-"black_list_pokemon": [
-  "mewtwo",
-  "rayquaza",
-  "zacian"
-]
-```
-
-**Case-insensitive:** "Mewtwo", "MEWTWO", and "mewtwo" all work.
-
-### 4. Ban Specific Forms
-
-Ban only specific forms using `species:form` syntax:
-
-```json5
-"black_list_pokemon": [
-  "mewtwo:mega_x",           // Ban Mega Mewtwo X only
-  "mewtwo:mega_y",           // Ban Mega Mewtwo Y only
-  "zygarde:10",              // Ban Zygarde 10% only
-  "lycanroc:midday:dusk"     // Ban multiple forms
-]
-```
-
-**Note:** Blacklisting "mewtwo" (without form) bans ALL forms. Blacklisting "mewtwo:mega_x" bans ONLY that form.
-
-### 5. Ban Moves
-
-Ban specific moves by name:
-
-```json5
-"black_list_moves": [
-  "baton_pass",
-  "last_respects",
-  "shed_tail",
-  "fissure",
-  "sheer_cold"
-]
-```
-
-### 6. Ban Abilities
-
-Ban specific abilities by name:
-
-```json5
-"black_list_ability": [
-  "moody",
-  "shadow_tag",
-  "arena_trap"
-]
-```
-
-### 7. Ban Held Items
-
-Ban items Pokemon can hold using **Minecraft item IDs**:
-
-```json5
-"black_list_items_pokemon": [
-  "cobblemon:bright_powder",       // Evasion boost
-  "cobblemon:lax_incense",         // Evasion boost
-  "cobblemon:soul_dew",            // Latios/Latias boost
-  "cobblemon:quick_claw"           // Priority boost
-]
-```
-
-**How to find item IDs:** Press `F3 + H` in-game, hover over the item, copy the ID shown.
-
-**Why use item IDs?**
-- **Mod compatibility:** Distinguishes `cobblemon:potion` vs `minecraft:potion`
-- **No translation issues:** Works in any language
-- **Exact matching:** Prevents accidental bans
+**Common Forms:**
+- Mega: `:mega`, `:mega_x`, `:mega_y`
+- Regional: `:alola`, `:galar`, `:hisui`
+- Other: `:primal`, `:origin`, `:10` (Zygarde 10%)
 
 ---
 
-## Common Configurations
+## Move Restrictions
 
-### Smogon OU (Over Used)
+### Ban Moves
 
 ```json5
 {
-  "blacklist": {
-    "black_list_labels": [
-      "legendary",
-      "mythical",
-      "restricted"
-    ],
-    "black_list_moves": [
-      "baton_pass",
-      "last_respects",
-      "shed_tail"
-    ],
-    "black_list_ability": [
-      "moody",
-      "shadow_tag",
-      "arena_trap"
-    ],
-    "black_list_items_pokemon": [
-      "cobblemon:bright_powder",
-      "cobblemon:lax_incense"
-    ]
-  }
+  "black_list_moves": [
+    // OHKO moves
+    "fissure",
+    "sheer_cold",
+    "horn_drill",
+    "guillotine",
+
+    // Smogon bans
+    "baton_pass",        // Speed Boost passing
+    "last_respects",     // Gen 9 OP move
+    "shed_tail"          // Gen 9 OP move
+  ]
 }
 ```
 
-### VGC Series 1 (2 Restricted Pokemon)
+**Move Names:** Lowercase snake_case (spaces → underscores)
+
+<details>
+<summary><strong>Common Banned Moves Reference</strong></summary>
+
+| Display Name | Internal Name | Reason |
+|--------------|---------------|--------|
+| Fissure | `fissure` | OHKO |
+| Sheer Cold | `sheer_cold` | OHKO |
+| Horn Drill | `horn_drill` | OHKO |
+| Guillotine | `guillotine` | OHKO |
+| Baton Pass | `baton_pass` | Smogon OU ban |
+| Last Respects | `last_respects` | Smogon Gen 9 ban |
+| Shed Tail | `shed_tail` | Smogon Gen 9 ban |
+| Double Team | `double_team` | Evasion (if evasion_clause: false) |
+| Minimize | `minimize` | Evasion (if evasion_clause: false) |
+
+</details>
+
+---
+
+## Ability Restrictions
+
+### Ban Abilities
 
 ```json5
 {
-  "blacklist": {
-    "restricted_label_limits": {
-      "restricted": 2      // Max 2 restricted Pokemon
-    },
-    "black_list_labels": [
-      "mythical"           // Mythicals not allowed in VGC
-    ],
-    "black_list_moves": [
-      "fissure",
-      "sheer_cold",
-      "guillotine",
-      "horn_drill"
-    ]
-  }
+  "black_list_ability": [
+    "moody",             // Random stat boosts (Smogon ban)
+    "shadow_tag",        // Prevents switching (Smogon ban)
+    "arena_trap"         // Traps grounded Pokemon (Smogon ban)
+  ]
 }
 ```
 
-### Monotype (Species Clause + Evasion Clause)
+**Ability Names:** Lowercase snake_case
+
+<details>
+<summary><strong>Commonly Banned Abilities</strong></summary>
+
+| Display Name | Internal Name | Reason |
+|--------------|---------------|--------|
+| Moody | `moody` | Smogon OU (random +2/-1 stats) |
+| Shadow Tag | `shadow_tag` | Smogon OU (trapping) |
+| Arena Trap | `arena_trap` | Smogon OU (trapping) |
+| Power Construct | `power_construct` | Zygarde transformation |
+| Huge Power | `huge_power` | Doubles Attack (balance choice) |
+| Wonder Guard | `wonder_guard` | Only super-effective hits |
+
+</details>
+
+**Find Ability Names:**
+1. Press `F3 + H` in-game
+2. Open Pokemon summary
+3. Hover over ability icon
+4. Internal name shown in tooltip
+
+---
+
+## Item Restrictions
+
+### Ban Held Items
 
 ```json5
 {
-  "blacklist": {
-    "black_list_labels": [
-      "legendary",
-      "mythical"
-    ],
-    "black_list_moves": [
-      "baton_pass"
-    ],
-    "black_list_items_pokemon": [
-      "cobblemon:bright_powder",
-      "cobblemon:lax_incense"
-    ]
-  }
+  "black_list_items_pokemon": [
+    "cobblemon:bright_powder",    // +10% evasion
+    "cobblemon:lax_incense",      // +10% evasion
+    "cobblemon:quick_claw",       // 20% priority
+    "cobblemon:soul_dew"          // Latios/Latias boost
+  ]
 }
 ```
 
-### Gen 1-8 Only (No Gen 9)
+**Item Format:** `cobblemon:item_name` (required!)
+
+**Find Item IDs:**
+1. Press `F3 + H`
+2. Hover over item in inventory
+3. ID appears at bottom of tooltip
+
+> **[📸 INSERT: Screenshot showing F3+H tooltip with item ID]**
+
+<details>
+<summary><strong>Commonly Banned Items</strong></summary>
+
+| Item | ID | Reason |
+|------|-----|--------|
+| Bright Powder | `cobblemon:bright_powder` | Evasion boost |
+| Lax Incense | `cobblemon:lax_incense` | Evasion boost |
+| Quick Claw | `cobblemon:quick_claw` | RNG priority |
+| Soul Dew | `cobblemon:soul_dew` | Lati@s specific boost |
+| King's Rock | `cobblemon:kings_rock` | Flinch chance |
+
+</details>
+
+---
+
+## Pre-made Configurations
+
+### Smogon OU
+
+Competitive standard format:
 
 ```json5
 {
-  "blacklist": {
-    "black_list_labels": [
-      "gen9",
-      "paradox"
-    ]
-  }
+  "black_list_labels": ["legendary", "mythical", "restricted", "ultra_beast", "paradox"],
+  "black_list_moves": [
+    "baton_pass", "last_respects", "shed_tail",
+    "fissure", "sheer_cold", "horn_drill", "guillotine"
+  ],
+  "black_list_ability": ["moody", "shadow_tag", "arena_trap"],
+  "black_list_items_pokemon": [
+    "cobblemon:bright_powder",
+    "cobblemon:lax_incense"
+  ]
+}
+```
+
+**Also set:** `levelMatch: 50` in `config.json5`
+
+### VGC Series 1
+
+Official VGC format:
+
+```json5
+{
+  "restricted_label_limits": {
+    "restricted": 2  // Max 2 restricted Pokemon
+  },
+  "black_list_labels": ["mythical"],  // Mythicals not allowed
+  "black_list_moves": [
+    "fissure", "sheer_cold", "horn_drill", "guillotine"
+  ]
+}
+```
+
+**Also set:** `item_clause: true` + `levelMatch: 50`
+
+### Casual (Minimal Bans)
+
+Only ban unfair moves:
+
+```json5
+{
+  "black_list_labels": [],
+  "black_list_moves": ["fissure", "sheer_cold", "horn_drill", "guillotine"]
+}
+```
+
+---
+
+## Advanced Examples
+
+### Mix Limits + Bans
+
+Allow 1 legendary, but ban specific ones:
+
+```json5
+{
+  "restricted_label_limits": {
+    "legendary": 1       // Max 1 legendary
+  },
+  "black_list_pokemon": [
+    "mewtwo",            // Exception: Mewtwo always banned
+    "rayquaza"           // Exception: Rayquaza always banned
+  ]
+}
+```
+
+**Result:** Can use 1 legendary (Lugia, Dialga, etc.) but NOT Mewtwo or Rayquaza
+
+### Generation Filter
+
+Ban Gen 9 Pokemon only:
+
+```json5
+{
+  "black_list_labels": ["gen9", "paradox"]
+}
+```
+
+### Monotype Support
+
+No additional config needed - players manage teams manually
+
+Recommended blacklist:
+
+```json5
+{
+  "black_list_labels": ["legendary", "mythical"],
+  "black_list_moves": ["baton_pass"]
 }
 ```
 
@@ -325,181 +312,56 @@ Ban items Pokemon can hold using **Minecraft item IDs**:
 
 ## Validation Flow
 
-When a player joins the ranked queue:
+When player joins queue:
 
 ```
-1. Check label-based blacklist
-   ❌ Banned → "Blacklisted Pokemon: <name> (blacklisted label)"
+1. Check label blacklist
+   ❌ "Blacklisted Pokemon: Mewtwo (legendary)"
 
-2. Check name/form-based blacklist
-   ❌ Banned → "Blacklisted Pokemon: <name>"
+2. Check name/form blacklist
+   ❌ "Blacklisted Pokemon: Mewtwo"
 
 3. Check label limits
-   ❌ Over limit → "Too many <label>: <count>/<limit>"
+   ❌ "Too many legendary: 2/1"
 
 4. Check moves
-   ❌ Banned move → "Blacklisted move: <move>"
+   ❌ "Blacklisted move: Fissure"
 
 5. Check abilities
-   ❌ Banned ability → "Blacklisted ability: <ability>"
+   ❌ "Blacklisted ability: Moody"
 
 6. Check held items
-   ❌ Banned item → "Blacklisted item: <item_id>"
+   ❌ "Blacklisted item: cobblemon:bright_powder"
 
-✅ All checks pass → Join queue
+✅ All pass → Join queue
 ```
 
----
-
-## Advanced Examples
-
-### Ban All Megas Except One
-
-```json5
-"black_list_pokemon": [
-  "charizard:mega_x",
-  "charizard:mega_y",
-  "mewtwo:mega_x",
-  "mewtwo:mega_y"
-  // Allow Lucario Mega by omitting it
-]
-```
-
-### Ban Specific Regional Forms
-
-```json5
-"black_list_pokemon": [
-  "weezing:galar",      // Ban Galarian Weezing only
-  "muk:alola"           // Ban Alolan Muk only
-]
-```
-
-### Mix Label Limits and Bans
-
-```json5
-{
-  "restricted_label_limits": {
-    "legendary": 1           // Max 1 legendary
-  },
-  "black_list_pokemon": [
-    "mewtwo",                // But ban Mewtwo specifically
-    "rayquaza"               // And Rayquaza
-  ]
-}
-```
-
-This allows 1 legendary EXCEPT Mewtwo and Rayquaza.
+> **[📸 INSERT: Screenshot of validation error message]**
 
 ---
 
 ## Troubleshooting
 
-### Items Not Being Banned
+### Config Not Applying
+- Run `/rankedadmin reload`
+- Check JSON5 syntax (missing commas, brackets)
 
-**Problem:** Player can still queue with a banned item.
+### Items Not Banned
+- Use `cobblemon:item_name` format (not display name)
+- Verify with `F3 + H`
 
-**Solution:**
-1. Verify item ID format:
-   ```json5
-   // ❌ Wrong
-   "Bright Powder"
-   "brightpowder"
+### Pokemon Still Allowed
+- Check spelling (case-insensitive but typos matter)
+- Verify label exists for that Pokemon
+- Check form syntax (`:mega` vs `:mega_x`)
 
-   // ✅ Correct
-   "cobblemon:bright_powder"
-   ```
-
-2. Enable debug logging:
-   ```json5
-   "debug_queue": true
-   ```
-
-3. Check server logs for:
-   ```
-   [Queue] Player has banned item: cobblemon:bright_powder
-   ```
-
-### Pokemon Not Being Banned
-
-**Problem:** Player can queue with a banned Pokemon.
-
-**Solution:**
-1. Check spelling (case-insensitive but typos matter)
-2. Verify label exists for the Pokemon
-3. Check form syntax: `species:form`
-
-### Label Limits Not Working
-
-**Problem:** Player can use more restricted Pokemon than allowed.
-
-**Solution:**
-1. Verify label name matches Cobblemon's labels (lowercase)
-2. Check if Pokemon has that label in Cobblemon's species data
+### More Help
+- [FAQ - Blacklist Section](../support/faq.md#blacklist-configuration)
+- [Discord](https://discord.gg/VVVvBTqqyP) #feedback
 
 ---
 
-<details>
-<summary><strong>📝 Complete Configuration Example (Click to expand)</strong></summary>
-
-```json5
-{
-  "blacklist": {
-    // Ban Pokemon by label (legendary, mythical, etc.)
-    "black_list_labels": [
-      "mythical"
-    ],
-
-    // Ban specific Pokemon by name or form
-    "black_list_pokemon": [
-      "mewtwo",
-      "rayquaza:mega"
-    ],
-
-    // Limit Pokemon with specific labels
-    "restricted_label_limits": {
-      "restricted": 2,      // Max 2 VGC restricted Pokemon
-      "legendary": 1        // Max 1 legendary
-    },
-
-    // Ban specific moves
-    "black_list_moves": [
-      "baton_pass",
-      "fissure",
-      "sheer_cold"
-    ],
-
-    // Ban specific abilities
-    "black_list_ability": [
-      "moody",
-      "shadow_tag"
-    ],
-
-    // Ban held items (use item IDs from F3+H)
-    "black_list_items_pokemon": [
-      "cobblemon:bright_powder",
-      "cobblemon:lax_incense",
-      "cobblemon:soul_dew"
-    ]
-  }
-}
-```
-
-</details>
-
----
-
-## Best Practices
-
-1. **Use labels when possible** - Easier to maintain than individual lists
-2. **Test after changes** - Run `/rankedadmin reload` and test with banned Pokemon
-3. **Use item IDs (F3+H)** - Never use display names for items
-4. **Document your ruleset** - Add comments explaining your choices
-
----
-
-## See Also
-
-- [Configuration Guide](config.md) - Full configuration reference
-- [Matchmaking System](../features/matchmaking.md) - How queue system works
-- [Battle Formats](../features/formats.md) - Singles vs Doubles
-- [FAQ](../support/faq.md) - Common questions
+**Related:**
+- [Main Config](config.md) - Season, Elo, clauses
+- [Battle Formats](../features/battle-formats.md) - Format details
+- [Commands](../getting-started/commands.md) - `/rankedadmin` reference
