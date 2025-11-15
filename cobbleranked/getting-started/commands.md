@@ -51,6 +51,14 @@ Time Remaining: 29 days, 14 hours, 23 minutes
 
 All admin commands require OP level 2 or equivalent permission.
 
+**Permission System:**
+- **Default:** Requires OP level 2 (vanilla Minecraft permissions)
+- **With LuckPerms:** Commands can be controlled via LuckPerms permissions
+- Permission nodes follow the pattern: `cobbleranked.command.<command_name>`
+- For granular control, install LuckPerms and assign specific command permissions to groups/players
+
+**Note:** LuckPerms integration for rank syncing (groups/prefixes/suffixes) is configured but not yet fully implemented. Command permissions work via standard OP level checks.
+
 ### Core Commands
 
 #### `/rankedadmin reload`

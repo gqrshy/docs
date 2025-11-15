@@ -24,10 +24,13 @@
 * [Elo Rating System](features/elo-system.md)
 * [Season Management](features/seasons.md)
 * [Battle Formats](features/battle-formats.md)
+* [Random Battles](features/random-battles.md)
+* [Turn Timer System](features/turn-timer.md)
 * [Leaderboards](features/leaderboards.md)
 * [Disconnect Penalties](features/disconnect-penalties.md)
 * [Dynamic Matchmaking](features/dynamic-matchmaking.md)
-* [Rewards & Milestones](features/rewards.md)
+* [Banned Inventory Items](features/banned-items.md)
+* [Custom Music Pack](features/custom-music.md)
 
 ## Advanced
 
