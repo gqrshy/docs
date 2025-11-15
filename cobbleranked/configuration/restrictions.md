@@ -2,7 +2,7 @@
 
 Complete reference for `config/cobbleranked/restrictions.json5`.
 
-The restriction system controls what actions players can perform during different ranked match states (queue, match preparation, and active battles). This WorldGuard-style flag system provides fine-grained control over player behavior to ensure fair competitive matches.
+The restriction system controls what actions players can perform during different ranked match states (queue, match preparation, and active battles). This system provides fine-grained control over player behavior to ensure fair competitive matches.
 
 ---
 
@@ -10,7 +10,7 @@ The restriction system controls what actions players can perform during differen
 
 `config/cobbleranked/restrictions.json5`
 
-> **Note:** This is a separate file from the main `config.json5` for better organization and easier management.
+> **Note:** This is a separate file from the main `config.json5` for better organization.
 
 ---
 
@@ -30,6 +30,29 @@ The restriction system controls what actions players can perform during differen
 
 ---
 
+## Configuration Format
+
+Each flag is a **boolean** value:
+- `true` = **DENY** (block the action)
+- `false` = **INHERIT** (allow the action)
+
+**Example:**
+```json5
+{
+  "queue": {
+    "movement": {
+      "teleport": true,        // Block teleportation
+      "respawn": false,        // Allow respawning
+      "ender_pearl": false     // Allow ender pearls
+    }
+  }
+}
+```
+
+> **Messages:** All error messages are managed in language files (`ja-Jp.json5`, `en-Us.json5`, etc.), not in the config file.
+
+---
+
 ## Game States
 
 The restriction system has three independent profiles:
@@ -37,55 +60,30 @@ The restriction system has three independent profiles:
 ### 1. Queue State
 **When:** Player is waiting for a match in the matchmaking queue
 
-**Default Behavior:** Minimal restrictions
-- Block PC access (prevents team changes)
-- Block teleport commands (prevents queue dodging)
-- Allow normal gameplay (building, farming, etc.)
+**Default Restrictions:**
+- ✅ Block PC access (prevents team changes)
+- ✅ Block teleport commands (prevents queue dodging)
+- ✅ Block `/pc` command
+- ❌ Allow normal gameplay (building, farming, etc.)
 
 ### 2. Match Preparation State
 **When:** Match found → ReadyGUI appears → 5-second countdown
 
-**Default Behavior:** Queue restrictions + inventory restrictions
-- Block PC access
-- Block teleport commands
-- Block ender chests, shulker boxes (prevents team swapping)
-- Allow normal gameplay
+**Default Restrictions:**
+- ✅ Queue restrictions +
+- ✅ Block ender chests, shulker boxes (prevents team swapping)
+- ❌ Allow normal gameplay
 
 ### 3. Battle State
 **When:** Player is actively in a ranked Pokémon battle
 
-**Default Behavior:** Maximum restrictions
-- Block ALL item usage (including ender pearls, chorus fruit)
-- Block ALL block interactions
-- Block ALL entity interactions (except battle mechanics)
-- Block PvP and PvE combat
-- Block inventory access
-- Allow chat for communication
-
----
-
-## Flag States
-
-Each flag can have one of three states:
-
-| State | Behavior | Example |
-|-------|----------|---------|
-| `allow` | Explicitly allow the action | Override a parent "deny" |
-| `deny` | Explicitly block the action | Prevent teleportation |
-| `inherit` | Use default behavior (usually allow) | No restriction |
-
-### Custom Messages
-
-Each flag can have an optional custom deny message:
-
-```json5
-{
-  "state": "deny",
-  "message": "&cYou cannot use ender pearls during a ranked battle!"
-}
-```
-
-Messages support Minecraft color codes (`&a`, `&c`, `&e`, etc.)
+**Default Restrictions:**
+- ✅ Block ALL item usage (including ender pearls, chorus fruit)
+- ✅ Block ALL block interactions
+- ✅ Block ALL entity interactions (except battle mechanics)
+- ✅ Block PvP and PvE combat
+- ✅ Block inventory access
+- ❌ Allow chat for communication
 
 ---
 
@@ -97,17 +95,17 @@ Control what items players can use.
 {
   "queue": {
     "item": {
-      "use": { "state": "inherit" },                  // General item usage
-      "drop": { "state": "inherit" },                 // Dropping items (Q key)
-      "pickup": { "state": "inherit" },               // Picking up items from ground
-      "consume_food": { "state": "inherit" },         // Eating food
-      "use_potion": { "state": "inherit" },           // Drinking potions
-      "use_tool": { "state": "inherit" },             // Using tools (pickaxe, axe, etc.)
-      "change_armor": { "state": "inherit" },         // Equipping/removing armor
-      "use_bucket": { "state": "inherit" },           // Using buckets (water, lava, milk)
-      "use_flint_and_steel": { "state": "inherit" },  // Starting fires
-      "use_ender_pearl": { "state": "inherit" },      // Throwing ender pearls (teleportation)
-      "use_chorus_fruit": { "state": "inherit" }      // Eating chorus fruit (teleportation)
+      "use": false,                  // General item usage
+      "drop": false,                 // Dropping items (Q key)
+      "pickup": false,               // Picking up items from ground
+      "consume_food": false,         // Eating food
+      "use_potion": false,           // Drinking potions
+      "use_tool": false,             // Using tools (pickaxe, axe, etc.)
+      "change_armor": false,         // Equipping/removing armor
+      "use_bucket": false,           // Using buckets (water, lava, milk)
+      "use_flint_and_steel": false,  // Starting fires
+      "use_ender_pearl": false,      // Throwing ender pearls (teleportation)
+      "use_chorus_fruit": false      // Eating chorus fruit (teleportation)
     }
   }
 }
@@ -115,21 +113,21 @@ Control what items players can use.
 
 ### Flag Details
 
-| Flag | Blocks | Use Case |
-|------|--------|----------|
-| `use` | All right-click item actions | General item restriction |
-| `drop` | Q key, dropping from inventory | Prevent item loss |
-| `pickup` | Collecting items from ground | Prevent inventory changes |
-| `consume_food` | Eating food items | Block healing/saturation |
-| `use_potion` | Drinking potions | Block buffs/debuffs |
-| `use_tool` | Tool usage (dig, chop, etc.) | Block world modification |
-| `change_armor` | Armor equip/unequip | Lock equipment |
-| `use_bucket` | Bucket fill/empty | Block fluid manipulation |
-| `use_flint_and_steel` | Fire starting | Block griefing |
-| `use_ender_pearl` | **Ender pearl throwing** | **Prevent arena escape** |
-| `use_chorus_fruit` | **Chorus fruit eating** | **Prevent teleport escape** |
+| Flag | Blocks | Critical? |
+|------|--------|-----------|
+| `use` | All right-click item actions | |
+| `drop` | Q key, dropping from inventory | |
+| `pickup` | Collecting items from ground | |
+| `consume_food` | Eating food items | |
+| `use_potion` | Drinking potions | |
+| `use_tool` | Tool usage (dig, chop, etc.) | |
+| `change_armor` | Armor equip/unequip | |
+| `use_bucket` | Bucket fill/empty | |
+| `use_flint_and_steel` | Fire starting | |
+| `use_ender_pearl` | **Ender pearl throwing** | **⚠️ YES - Arena escape** |
+| `use_chorus_fruit` | **Chorus fruit eating** | **⚠️ YES - Teleport escape** |
 
-> **Critical:** `use_ender_pearl` and `use_chorus_fruit` should be set to `"deny"` during battles to prevent players from escaping arenas!
+> **Critical:** Set `use_ender_pearl` and `use_chorus_fruit` to `true` during battles to prevent arena escapes!
 
 ### Example: Block Teleportation Items
 
@@ -137,14 +135,8 @@ Control what items players can use.
 {
   "battle": {
     "item": {
-      "use_ender_pearl": {
-        "state": "deny",
-        "message": "&cYou cannot use ender pearls during a ranked battle!"
-      },
-      "use_chorus_fruit": {
-        "state": "deny",
-        "message": "&cYou cannot use chorus fruit during a ranked battle!"
-      }
+      "use_ender_pearl": true,   // Block ender pearls
+      "use_chorus_fruit": true   // Block chorus fruit
     }
   }
 }
@@ -160,33 +152,19 @@ Control block interactions.
 {
   "queue": {
     "block": {
-      "break": { "state": "inherit" },           // Breaking blocks
-      "place": { "state": "inherit" },           // Placing blocks
-      "interact": { "state": "inherit" },        // Right-clicking blocks
-      "door_interact": { "state": "inherit" },   // Opening/closing doors
-      "container_access": { "state": "inherit" }, // Chests, furnaces, hoppers
-      "button_press": { "state": "inherit" },    // Pressing buttons
-      "lever_use": { "state": "inherit" },       // Flipping levers
-      "crop_trample": { "state": "inherit" },    // Jumping on farmland
-      "pressure_plate": { "state": "inherit" }   // Stepping on pressure plates
+      "break": false,           // Breaking blocks
+      "place": false,           // Placing blocks
+      "interact": false,        // Right-clicking blocks
+      "door_interact": false,   // Opening/closing doors
+      "container_access": false, // Chests, furnaces, hoppers
+      "button_press": false,    // Pressing buttons
+      "lever_use": false,       // Flipping levers
+      "crop_trample": false,    // Jumping on farmland
+      "pressure_plate": false   // Stepping on pressure plates
     }
   }
 }
 ```
-
-### Flag Details
-
-| Flag | Blocks | Use Case |
-|------|--------|----------|
-| `break` | Block breaking | Prevent world modification |
-| `place` | Block placing | Prevent building |
-| `interact` | General block right-click | Generic block restriction |
-| `door_interact` | Doors, trapdoors, fence gates | Control entry/exit |
-| `container_access` | Chests, barrels, furnaces, hoppers | Block storage access |
-| `button_press` | Stone/wood buttons | Block redstone activation |
-| `lever_use` | Levers | Block redstone activation |
-| `crop_trample` | Farmland trampling | Protect farms |
-| `pressure_plate` | Pressure plates | Block redstone activation |
 
 ### Example: Block All Building
 
@@ -194,14 +172,8 @@ Control block interactions.
 {
   "battle": {
     "block": {
-      "break": {
-        "state": "deny",
-        "message": "&cYou cannot break blocks during a ranked battle!"
-      },
-      "place": {
-        "state": "deny",
-        "message": "&cYou cannot place blocks during a ranked battle!"
-      }
+      "break": true,   // Block breaking
+      "place": true    // Block placing
     }
   }
 }
@@ -217,43 +189,14 @@ Control entity interactions.
 {
   "queue": {
     "entity": {
-      "interact": { "state": "inherit" },        // Right-clicking entities
-      "damage": { "state": "inherit" },          // Attacking entities (non-player)
-      "mount": { "state": "inherit" },           // Mounting horses, boats, etc.
-      "villager_trade": { "state": "inherit" },  // Trading with villagers
-      "animal_breeding": { "state": "inherit" }, // Breeding animals
-      "pet_interact": { "state": "inherit" },    // Interacting with pets
-      "npc_interact": { "state": "inherit" },    // Interacting with NPCs
-      "leash_entity": { "state": "inherit" }     // Using leads on entities
-    }
-  }
-}
-```
-
-### Flag Details
-
-| Flag | Blocks | Use Case |
-|------|--------|----------|
-| `interact` | General entity right-click | Generic entity restriction |
-| `damage` | Attacking non-player entities | Block PvE damage |
-| `mount` | Mounting horses, boats, minecarts | Block movement utilities |
-| `villager_trade` | Villager trading GUI | Block economy access |
-| `animal_breeding` | Feeding animals to breed | Block farming |
-| `pet_interact` | Interacting with pets (sit/stand) | Block pet control |
-| `npc_interact` | Custom NPC interactions | Block NPC systems |
-| `leash_entity` | Attaching/detaching leads | Block mob control |
-
-### Example: Block All Entity Interaction
-
-```json5
-{
-  "battle": {
-    "entity": {
-      "interact": { "state": "deny" },
-      "damage": {
-        "state": "deny",
-        "message": "&cYou cannot damage entities during a ranked battle!"
-      }
+      "interact": false,        // Right-clicking entities
+      "damage": false,          // Attacking entities (non-player)
+      "mount": false,           // Mounting horses, boats, etc.
+      "villager_trade": false,  // Trading with villagers
+      "animal_breeding": false, // Breeding animals
+      "pet_interact": false,    // Interacting with pets
+      "npc_interact": false,    // Interacting with NPCs
+      "leash_entity": false     // Using leads on entities
     }
   }
 }
@@ -269,27 +212,17 @@ Control combat actions.
 {
   "queue": {
     "combat": {
-      "pvp": { "state": "inherit" },              // Player vs Player combat
-      "pve": { "state": "inherit" },              // Player vs Entity combat
-      "projectile_launch": { "state": "inherit" }, // Shooting arrows, throwing items
-      "explosion_damage": { "state": "inherit" },  // TNT, creeper explosions
-      "fire_damage": { "state": "inherit" }        // Fire, lava damage
+      "pvp": false,              // Player vs Player combat
+      "pve": false,              // Player vs Entity combat
+      "projectile_launch": false, // Shooting arrows, throwing items
+      "explosion_damage": false,  // TNT, creeper explosions
+      "fire_damage": false        // Fire, lava damage
     }
   }
 }
 ```
 
-### Flag Details
-
-| Flag | Blocks | Use Case |
-|------|--------|----------|
-| `pvp` | Attacking other players | Prevent player griefing |
-| `pve` | Attacking mobs (zombies, creepers, etc.) | Block mob combat |
-| `projectile_launch` | Bow shooting, snowball throwing | Block ranged combat |
-| `explosion_damage` | Explosion damage to player | Protect from explosions |
-| `fire_damage` | Fire and lava damage | Protect from environmental damage |
-
-> **Note:** During battles, PvP and PvE should be blocked to prevent interference with the Pokémon battle system.
+> **Note:** During battles, `pvp` and `pve` should be `true` to prevent interference with the Pokémon battle system.
 
 ### Example: Block All Combat
 
@@ -297,14 +230,8 @@ Control combat actions.
 {
   "battle": {
     "combat": {
-      "pvp": {
-        "state": "deny",
-        "message": "&cPlayer vs Player combat is disabled during ranked battles!"
-      },
-      "pve": {
-        "state": "deny",
-        "message": "&cYou cannot attack mobs during a ranked battle!"
-      }
+      "pvp": true,   // Block PvP
+      "pve": true    // Block PvE
     }
   }
 }
@@ -320,12 +247,12 @@ Control player movement and teleportation.
 {
   "queue": {
     "movement": {
-      "teleport": { "state": "deny" },        // Command teleportation (/tp, /home)
-      "respawn": { "state": "inherit" },      // Respawning after death
-      "portal_use": { "state": "inherit" },   // Nether/End portal entry
-      "flight": { "state": "inherit" },       // Creative/spectator flight
-      "ender_pearl": { "state": "inherit" },  // Ender pearl teleportation
-      "chorus_fruit": { "state": "inherit" }  // Chorus fruit teleportation
+      "teleport": true,        // Command teleportation (/tp, /home)
+      "respawn": false,        // Respawning after death
+      "portal_use": false,     // Nether/End portal entry
+      "flight": false,         // Creative/spectator flight
+      "ender_pearl": false,    // Ender pearl teleportation
+      "chorus_fruit": false    // Chorus fruit teleportation
     }
   }
 }
@@ -333,16 +260,16 @@ Control player movement and teleportation.
 
 ### Flag Details
 
-| Flag | Blocks | Use Case |
-|------|--------|----------|
-| `teleport` | **/tp, /home, /spawn commands** | **Prevent queue dodging** |
-| `respawn` | Respawning after death | Allow death recovery |
-| `portal_use` | Nether/End portal entry | Block dimension travel |
-| `flight` | Flying (creative/spectator mode) | Block flight advantage |
-| `ender_pearl` | **Ender pearl teleportation** | **Prevent arena escape** |
-| `chorus_fruit` | **Chorus fruit teleportation** | **Prevent arena escape** |
+| Flag | Blocks | Critical? |
+|------|--------|-----------|
+| `teleport` | **/tp, /home, /spawn commands** | **⚠️ YES - Queue dodging** |
+| `respawn` | Respawning after death | |
+| `portal_use` | Nether/End portal entry | |
+| `flight` | Flying (creative/spectator mode) | |
+| `ender_pearl` | **Ender pearl teleportation** | **⚠️ YES - Arena escape** |
+| `chorus_fruit` | **Chorus fruit teleportation** | **⚠️ YES - Arena escape** |
 
-> **Critical:** `teleport`, `ender_pearl`, and `chorus_fruit` should ALWAYS be set to `"deny"` during queue, preparation, and battles to prevent players from leaving the match!
+> **Critical:** Set `teleport`, `ender_pearl`, and `chorus_fruit` to `true` during queue/preparation/battles!
 
 ### Example: Block All Teleportation
 
@@ -350,18 +277,9 @@ Control player movement and teleportation.
 {
   "queue": {
     "movement": {
-      "teleport": {
-        "state": "deny",
-        "message": "&cYou cannot teleport while in queue!"
-      },
-      "ender_pearl": {
-        "state": "deny",
-        "message": "&cYou cannot throw ender pearls while in queue!"
-      },
-      "chorus_fruit": {
-        "state": "deny",
-        "message": "&cYou cannot eat chorus fruit while in queue!"
-      }
+      "teleport": true,       // Block commands
+      "ender_pearl": true,    // Block ender pearls
+      "chorus_fruit": true    // Block chorus fruit
     }
   }
 }
@@ -377,11 +295,11 @@ Control system-level actions.
 {
   "queue": {
     "system": {
-      "pc_access": { "state": "deny" },         // Cobblemon PC access
-      "commands": { "state": "deny" },          // Blacklisted commands
-      "chat_commands": { "state": "inherit" },  // Chat commands (/msg, /tell)
-      "gui_open": { "state": "inherit" },       // Opening GUIs
-      "chat": { "state": "inherit" }            // Chat messages
+      "pc_access": true,         // Cobblemon PC access
+      "commands": true,          // Blacklisted commands
+      "chat_commands": false,    // Chat commands (/msg, /tell)
+      "gui_open": false,         // Opening GUIs
+      "chat": false              // Chat messages
     }
   }
 }
@@ -389,50 +307,32 @@ Control system-level actions.
 
 ### Flag Details
 
-| Flag | Blocks | Use Case |
-|------|--------|----------|
-| `pc_access` | **Cobblemon PC GUI access** | **Prevent team changes** |
-| `commands` | Commands in `command_blacklist` config | Block specific commands |
-| `chat_commands` | Chat commands (/msg, /tell, /w) | Allow player communication |
-| `gui_open` | Opening GUIs | Block GUI access |
-| `chat` | Sending chat messages | Allow/block communication |
+| Flag | Blocks | Critical? |
+|------|--------|-----------|
+| `pc_access` | **Cobblemon PC GUI access** | **⚠️ YES - Team changes** |
+| `commands` | Commands in `blockedCommands` config | **⚠️ YES - Includes `/pc`** |
+| `chat_commands` | Chat commands (/msg, /tell, /w) | |
+| `gui_open` | Opening GUIs | |
+| `chat` | Sending chat messages | |
 
-> **Critical:** `pc_access` should ALWAYS be set to `"deny"` during queue, preparation, and battles to prevent players from changing their Pokémon team!
+> **Critical:** `pc_access` and `commands` should ALWAYS be `true` during queue/preparation/battles!
 
-### Example: Block PC Access
+### Command Blacklist
 
-```json5
-{
-  "queue": {
-    "system": {
-      "pc_access": {
-        "state": "deny",
-        "message": "&cPC access is blocked while in queue!"
-      },
-      "commands": {
-        "state": "deny",
-        "message": "&cThis command is blocked while in queue!"
-      }
-    }
-  }
-}
-```
-
-**Command Blacklist Configuration:**
-
-Commands blocked by the `commands` flag are configured in the main `config.json5`:
+Commands blocked when `system.commands` is `true` are configured in the main `config.json5`:
 
 ```json5
 {
-  "competitive": {
-    "command_blacklist": [
-      "tp",
-      "teleport",
-      "home",
-      "spawn",
-      "warp"
-    ]
-  }
+  "blockedCommands": [
+    "tp",
+    "warp",
+    "spawn",
+    "warps",
+    "ranked",
+    "home",
+    "kit",
+    "pc"        // PC command blocked by default!
+  ]
 }
 ```
 
@@ -446,13 +346,13 @@ Control inventory access and item movement.
 {
   "queue": {
     "inventory": {
-      "ender_chest": { "state": "inherit" },     // Ender chest access
-      "shulker_box": { "state": "inherit" },     // Shulker box opening
-      "trapped_chest": { "state": "inherit" },   // Trapped chest access
-      "open": { "state": "inherit" },            // Opening inventory (E key)
-      "hotbar_switch": { "state": "inherit" },   // Switching hotbar slots
-      "item_move": { "state": "inherit" },       // Moving items in inventory
-      "crafting": { "state": "inherit" }         // Using crafting table
+      "ender_chest": false,     // Ender chest access
+      "shulker_box": false,     // Shulker box opening
+      "trapped_chest": false,   // Trapped chest access
+      "open": false,            // Opening inventory (E key)
+      "hotbar_switch": false,   // Switching hotbar slots
+      "item_move": false,       // Moving items in inventory
+      "crafting": false         // Using crafting table
     }
   }
 }
@@ -460,17 +360,17 @@ Control inventory access and item movement.
 
 ### Flag Details
 
-| Flag | Blocks | Use Case |
-|------|--------|----------|
-| `ender_chest` | **Ender chest access** | **Prevent team swapping** |
-| `shulker_box` | **Shulker box opening** | **Prevent team swapping** |
-| `trapped_chest` | Trapped chest access | Block storage access |
-| `open` | Opening inventory (E key) | Lock inventory |
-| `hotbar_switch` | Switching hotbar slots (1-9 keys) | Lock selected item |
-| `item_move` | Moving items in inventory | Lock inventory state |
-| `crafting` | Crafting table usage | Block crafting |
+| Flag | Blocks | Critical? |
+|------|--------|-----------|
+| `ender_chest` | **Ender chest access** | **⚠️ YES - Team swapping** |
+| `shulker_box` | **Shulker box opening** | **⚠️ YES - Team swapping** |
+| `trapped_chest` | Trapped chest access | |
+| `open` | Opening inventory (E key) | |
+| `hotbar_switch` | Switching hotbar slots (1-9 keys) | |
+| `item_move` | Moving items in inventory | |
+| `crafting` | Crafting table usage | |
 
-> **Critical:** `ender_chest` and `shulker_box` should be set to `"deny"` during match preparation and battles to prevent players from swapping Pokémon teams stored in those containers!
+> **Critical:** Set `ender_chest` and `shulker_box` to `true` during match preparation and battles to prevent team swapping!
 
 ### Example: Block Team Swapping
 
@@ -478,14 +378,8 @@ Control inventory access and item movement.
 {
   "match_preparation": {
     "inventory": {
-      "ender_chest": {
-        "state": "deny",
-        "message": "&cYou cannot use ender chests during match preparation!"
-      },
-      "shulker_box": {
-        "state": "deny",
-        "message": "&cYou cannot use shulker boxes during match preparation!"
-      }
+      "ender_chest": true,   // Block ender chest
+      "shulker_box": true    // Block shulker box
     }
   }
 }
@@ -502,50 +396,27 @@ Only block team changes and queue dodging:
 ```json5
 {
   "queue": {
-    "movement": {
-      "teleport": { "state": "deny" }
-    },
-    "system": {
-      "pc_access": { "state": "deny" },
-      "commands": { "state": "deny" }
-    }
+    "movement": { "teleport": true },
+    "system": { "pc_access": true, "commands": true }
   },
   "match_preparation": {
-    "movement": {
-      "teleport": { "state": "deny" }
-    },
-    "system": {
-      "pc_access": { "state": "deny" },
-      "commands": { "state": "deny" }
-    },
-    "inventory": {
-      "ender_chest": { "state": "deny" },
-      "shulker_box": { "state": "deny" }
-    }
+    "movement": { "teleport": true },
+    "system": { "pc_access": true, "commands": true },
+    "inventory": { "ender_chest": true, "shulker_box": true }
   },
   "battle": {
-    "movement": {
-      "teleport": { "state": "deny" },
-      "ender_pearl": { "state": "deny" },
-      "chorus_fruit": { "state": "deny" }
-    },
-    "system": {
-      "pc_access": { "state": "deny" },
-      "commands": { "state": "deny" }
-    },
-    "combat": {
-      "pvp": { "state": "deny" },
-      "pve": { "state": "deny" }
-    }
+    "movement": { "teleport": true, "ender_pearl": true, "chorus_fruit": true },
+    "system": { "pc_access": true, "commands": true },
+    "combat": { "pvp": true, "pve": true }
   }
 }
 ```
 
-### 2. Progressive Restrictions (Recommended)
+### 2. Progressive Restrictions (Recommended - Default)
 
 Gradually increase restrictions through game states:
 
-- **Queue:** PC + teleport only
+- **Queue:** PC + teleport + commands only
 - **Match Preparation:** + inventory items (ender chest, shulker box)
 - **Battle:** Full restrictions (all interactions blocked)
 
@@ -553,9 +424,9 @@ This is the **default configuration** generated by CobbleRanked.
 
 ### 3. Ultra-Strict Mode
 
-Block everything in all states for maximum control:
+Block everything in all states:
 
-Set ALL flags to `"deny"` in queue, match_preparation, and battle sections.
+Set ALL flags to `true` in queue, match_preparation, and battle sections.
 
 ### 4. PvP Prevention Mode
 
@@ -564,15 +435,33 @@ Allow gameplay but prevent all player combat:
 ```json5
 {
   "queue": {
-    "combat": {
-      "pvp": { "state": "deny" }
-    },
-    "entity": {
-      "damage": { "state": "deny" }
-    }
+    "combat": { "pvp": true },
+    "entity": { "damage": true }
   }
 }
 ```
+
+---
+
+## Error Messages
+
+All error messages are managed in language files, **not** in the restrictions config.
+
+**Example language file (`ja-Jp.json5`):**
+```json5
+{
+  "listener_cannot_use_items": "&cランクマッチ中はアイテムを使用できません！",
+  "listener_cannot_use_ender_pearl": "&cエンダーパールを使用できません！",
+  "listener_cannot_use_chorus_fruit": "&cコーラスフルーツを使用できません！",
+  "listener_cannot_access_pc": "&cPCにアクセスできません！"
+}
+```
+
+**Supported languages:**
+- Japanese (`ja-Jp.json5`)
+- English (`en-Us.json5`)
+- Portuguese (`pt-Br.json5`)
+- Russian (`ru-Ru.json5`)
 
 ---
 
@@ -594,43 +483,65 @@ After editing `restrictions.json5`, reload the configuration:
 
 **Problem:** Players can use /home or /tp despite restrictions
 
-**Solution 1:** Check `command_blacklist` in `config.json5`:
+**Solution 1:** Check `blockedCommands` in `config.json5`:
 ```json5
 {
-  "competitive": {
-    "command_blacklist": ["tp", "teleport", "home", "spawn", "warp"]
-  }
+  "blockedCommands": ["tp", "teleport", "home", "spawn", "warp"]
 }
 ```
 
-**Solution 2:** Set `movement.teleport` to `"deny"` in all three states
+**Solution 2:** Set `movement.teleport` to `true` in all three states
+
+**Solution 3:** Set `system.commands` to `true`
 
 ### Players Can Swap Teams
 
 **Problem:** Players change Pokémon team during match preparation
 
-**Solution:** Set these flags to `"deny"` in `match_preparation` and `battle`:
-- `system.pc_access`
-- `inventory.ender_chest`
-- `inventory.shulker_box`
+**Solution:** Set these flags to `true` in `match_preparation` and `battle`:
+```json5
+{
+  "system": { "pc_access": true },
+  "inventory": {
+    "ender_chest": true,
+    "shulker_box": true
+  }
+}
+```
 
 ### Players Can Escape Arena
 
 **Problem:** Players throw ender pearls or eat chorus fruit to escape battle arena
 
-**Solution:** Set these flags to `"deny"` in `battle`:
+**Solution:** Set these flags to `true` in `battle`:
 ```json5
 {
-  "battle": {
-    "item": {
-      "use_ender_pearl": { "state": "deny" },
-      "use_chorus_fruit": { "state": "deny" }
-    },
-    "movement": {
-      "ender_pearl": { "state": "deny" },
-      "chorus_fruit": { "state": "deny" }
-    }
+  "item": {
+    "use_ender_pearl": true,
+    "use_chorus_fruit": true
+  },
+  "movement": {
+    "ender_pearl": true,
+    "chorus_fruit": true
   }
+}
+```
+
+### Players Can Use /pc Command
+
+**Problem:** Players can open PC with `/pc` command
+
+**Solution:** Verify `/pc` is in `blockedCommands`:
+```json5
+{
+  "blockedCommands": ["tp", "warp", "spawn", "warps", "ranked", "home", "kit", "pc"]
+}
+```
+
+And set `system.commands` to `true`:
+```json5
+{
+  "system": { "commands": true }
 }
 ```
 
@@ -646,42 +557,85 @@ After editing `restrictions.json5`, reload the configuration:
 
 ---
 
-## Technical Details
+## Complete Example
 
-### Event Handlers
+**Compact, production-ready configuration:**
 
-CobbleRanked uses Fabric's event callback system to enforce restrictions:
-
-| Event | Blocked Actions |
-|-------|----------------|
-| `UseItemCallback` | Item usage, ender pearls, chorus fruit |
-| `UseBlockCallback` | Block interactions, containers, doors |
-| `UseEntityCallback` | Entity interactions, trading, breeding |
-| `AttackEntityCallback` | PvP, PvE, entity damage |
-| `PCLinkManager` Mixin | Cobblemon PC access |
-| `CommandDispatcher` Mixin | Command execution |
-
-### Performance
-
-- **UUID-based lookups:** O(1) hash map access
-- **Config flag checks:** O(1) data class field access
-- **Event overhead:** ~1-2 microseconds per event
-- **No region queries:** Player-based restrictions only (faster than WorldGuard/YAWP)
-
-### Comparison to YAWP
-
-| Feature | YAWP | CobbleRanked |
-|---------|------|--------------|
-| Total Flags | 60+ | 51 |
-| Flag States | 4 (ALLOWED/DENIED/DISABLED/UNDEFINED) | 3 (allow/deny/inherit) |
-| Custom Messages | ✅ Yes | ✅ Yes |
-| Region Support | ✅ Yes | ❌ No (player-based only) |
-| Performance | ~5-10µs/event | ~1-2µs/event (5x faster) |
-| Ender Pearl Block | ✅ Yes | ✅ Yes |
-| Chorus Fruit Block | ❌ No | ✅ Yes |
-| PC Access Block | ❌ No | ✅ Yes (Cobblemon-specific) |
-
-**See:** [FLAG_COMPARISON.md](../../../FLAG_COMPARISON.md) for detailed analysis
+```json5
+{
+  "queue": {
+    "item": {
+      "use": false, "drop": false, "pickup": false, "consume_food": false,
+      "use_potion": false, "use_tool": false, "change_armor": false,
+      "use_bucket": false, "use_flint_and_steel": false,
+      "use_ender_pearl": false, "use_chorus_fruit": false
+    },
+    "block": {
+      "break": false, "place": false, "interact": false, "door_interact": false,
+      "container_access": false, "button_press": false, "lever_use": false,
+      "crop_trample": false, "pressure_plate": false
+    },
+    "entity": {
+      "interact": false, "damage": false, "mount": false, "villager_trade": false,
+      "animal_breeding": false, "pet_interact": false, "npc_interact": false,
+      "leash_entity": false
+    },
+    "combat": {
+      "pvp": false, "pve": false, "projectile_launch": false,
+      "explosion_damage": false, "fire_damage": false
+    },
+    "movement": {
+      "teleport": true,   // BLOCK
+      "respawn": false, "portal_use": false, "flight": false,
+      "ender_pearl": false, "chorus_fruit": false
+    },
+    "system": {
+      "pc_access": true,  // BLOCK
+      "commands": true,   // BLOCK
+      "chat_commands": false, "gui_open": false, "chat": false
+    },
+    "inventory": {
+      "ender_chest": false, "shulker_box": false, "trapped_chest": false,
+      "open": false, "hotbar_switch": false, "item_move": false, "crafting": false
+    }
+  },
+  "match_preparation": {
+    "item": { /* same as queue */ },
+    "block": { /* same as queue */ },
+    "entity": { /* same as queue */ },
+    "combat": { /* same as queue */ },
+    "movement": { "teleport": true /* ... */ },
+    "system": { "pc_access": true, "commands": true /* ... */ },
+    "inventory": {
+      "ender_chest": true,   // BLOCK
+      "shulker_box": true,   // BLOCK
+      "trapped_chest": true,
+      "open": false, "hotbar_switch": false, "item_move": false, "crafting": false
+    }
+  },
+  "battle": {
+    "item": {
+      "use": true, "drop": true, "pickup": true, "consume_food": true,
+      "use_potion": true, "use_tool": true, "change_armor": true,
+      "use_bucket": true, "use_flint_and_steel": true,
+      "use_ender_pearl": true,   // BLOCK
+      "use_chorus_fruit": true   // BLOCK
+    },
+    "block": { /* all true */ },
+    "entity": { /* all true */ },
+    "combat": { "pvp": true, "pve": true /* ... */ },
+    "movement": {
+      "teleport": true,
+      "respawn": false,  // Allow respawn
+      "portal_use": true, "flight": false,
+      "ender_pearl": true,    // BLOCK
+      "chorus_fruit": true    // BLOCK
+    },
+    "system": { "pc_access": true, "commands": true, "gui_open": true /* ... */ },
+    "inventory": { /* all true except chat_commands and chat */ }
+  }
+}
+```
 
 ---
 
@@ -690,8 +644,10 @@ CobbleRanked uses Fabric's event callback system to enforce restrictions:
 - [Main Configuration](config.md) - Main config.json5 reference
 - [Commands](../getting-started/commands.md) - Admin commands for managing restrictions
 - [Troubleshooting](../support/troubleshooting.md) - Common issues and solutions
+- [Configuration Examples](../../../config-examples/restrictions_compact_format.json5) - Compact format example
 
 ---
 
 **Last Updated:** 2025-11-15
 **Mod Version:** 1.0.0+
+**Format:** Boolean (true=deny, false=inherit)
