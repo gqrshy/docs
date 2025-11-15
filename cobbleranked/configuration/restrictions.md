@@ -479,81 +479,9 @@ After editing `restrictions.json5`, reload the configuration:
 
 ## Troubleshooting
 
-### Players Can Still Teleport
+For common restriction issues (teleportation, team swapping, arena escapes, /pc command, etc.), see:
 
-**Problem:** Players can use /home or /tp despite restrictions
-
-**Solution 1:** Check `blockedCommands` in `config.json5`:
-```json5
-{
-  "blockedCommands": ["tp", "teleport", "home", "spawn", "warp"]
-}
-```
-
-**Solution 2:** Set `movement.teleport` to `true` in all three states
-
-**Solution 3:** Set `system.commands` to `true`
-
-### Players Can Swap Teams
-
-**Problem:** Players change Pokémon team during match preparation
-
-**Solution:** Set these flags to `true` in `match_preparation` and `battle`:
-```json5
-{
-  "system": { "pc_access": true },
-  "inventory": {
-    "ender_chest": true,
-    "shulker_box": true
-  }
-}
-```
-
-### Players Can Escape Arena
-
-**Problem:** Players throw ender pearls or eat chorus fruit to escape battle arena
-
-**Solution:** Set these flags to `true` in `battle`:
-```json5
-{
-  "item": {
-    "use_ender_pearl": true,
-    "use_chorus_fruit": true
-  },
-  "movement": {
-    "ender_pearl": true,
-    "chorus_fruit": true
-  }
-}
-```
-
-### Players Can Use /pc Command
-
-**Problem:** Players can open PC with `/pc` command
-
-**Solution:** Verify `/pc` is in `blockedCommands`:
-```json5
-{
-  "blockedCommands": ["tp", "warp", "spawn", "warps", "ranked", "home", "kit", "pc"]
-}
-```
-
-And set `system.commands` to `true`:
-```json5
-{
-  "system": { "commands": true }
-}
-```
-
-### Configuration Not Loading
-
-**Problem:** Changes to `restrictions.json5` don't take effect
-
-**Solution:**
-1. Check server logs for JSON parsing errors
-2. Verify JSON5 syntax (trailing commas are OK)
-3. Run `/rankedarena reload`
-4. Restart server if reload doesn't work
+**[Restriction System Troubleshooting](../support/faq.md#restriction-system-troubleshooting)** in the FAQ
 
 ---
 

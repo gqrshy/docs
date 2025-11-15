@@ -875,6 +875,131 @@ This is expected behavior. Use lower ranks or check total players:
 
 ---
 
+## Restriction System Troubleshooting
+
+<details>
+<summary><strong>Players Can Still Teleport</strong></summary>
+
+**Problem:** Players can use /home or /tp despite restrictions
+
+**Solution 1:** Check `blockedCommands` in `config.json5`:
+```json5
+{
+  "blockedCommands": ["tp", "teleport", "home", "spawn", "warp"]
+}
+```
+
+**Solution 2:** Set `movement.teleport` to `true` in all three states (queue, match_preparation, battle)
+
+**Solution 3:** Set `system.commands` to `true` to activate the command blacklist
+
+</details>
+
+<details>
+<summary><strong>Players Can Swap Teams</strong></summary>
+
+**Problem:** Players change Pokémon team during match preparation
+
+**Solution:** Set these flags to `true` in `match_preparation` and `battle` sections of `restrictions.json5`:
+```json5
+{
+  "system": { "pc_access": true },
+  "inventory": {
+    "ender_chest": true,
+    "shulker_box": true
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>Players Can Escape Arena</strong></summary>
+
+**Problem:** Players throw ender pearls or eat chorus fruit to escape battle arena
+
+**Solution:** Set these flags to `true` in `battle` section:
+```json5
+{
+  "item": {
+    "use_ender_pearl": true,
+    "use_chorus_fruit": true
+  },
+  "movement": {
+    "ender_pearl": true,
+    "chorus_fruit": true
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>Players Can Use /pc Command</strong></summary>
+
+**Problem:** Players can open PC with `/pc` command
+
+**Solution:** Verify `/pc` is in `blockedCommands` in `config.json5`:
+```json5
+{
+  "blockedCommands": ["tp", "warp", "spawn", "warps", "ranked", "home", "kit", "pc"]
+}
+```
+
+And set `system.commands` to `true` in `restrictions.json5`:
+```json5
+{
+  "queue": {
+    "system": { "commands": true }
+  },
+  "match_preparation": {
+    "system": { "commands": true }
+  },
+  "battle": {
+    "system": { "commands": true }
+  }
+}
+```
+
+**Note:** `/pc` is included in the default configuration since version 1.0.0-hotfix12. If using an older version:
+1. Update to the latest CobbleRanked version
+2. Delete `config/cobbleranked/config.json5`
+3. Restart server to regenerate with `/pc` included
+
+Or manually add `"pc"` to the `blockedCommands` list.
+
+</details>
+
+<details>
+<summary><strong>Restriction Configuration Not Loading</strong></summary>
+
+**Problem:** Changes to `restrictions.json5` don't take effect
+
+**Solution:**
+1. Check server logs for JSON parsing errors
+2. Verify JSON5 syntax (trailing commas are OK, but check brackets and quotes)
+3. Run `/rankedarena reload`
+4. Restart server if reload doesn't work
+
+**Common syntax errors:**
+```json5
+// ❌ Wrong: Missing comma
+{
+  "teleport": true
+  "respawn": false
+}
+
+// ✅ Correct:
+{
+  "teleport": true,
+  "respawn": false
+}
+```
+
+</details>
+
+---
+
 ## Other
 
 <details>
