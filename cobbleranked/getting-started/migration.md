@@ -35,8 +35,8 @@ mysqldump -u cobbleranked -p cobbleranked > cobbleranked_backup.sql
 /rankedadmin version
 ```
 
-**3. Read changelog:**
-- Check GitHub releases for breaking changes
+**3. Review update notes:**
+- Check Discord announcements for breaking changes
 - Note deprecated features
 - Review new configuration options
 
@@ -764,8 +764,8 @@ Edit `config.json5`:
 
 ### Before Migration
 
-**1. Read changelog thoroughly**
-- Check GitHub releases
+**1. Review update notes thoroughly**
+- Check Discord announcements
 - Note breaking changes
 - Review new features
 
@@ -858,9 +858,9 @@ Edit `config.json5`:
 
 ### Do I need to migrate?
 
-**Only if updating to new major version** (e.g., v2.0 → v2.1).
+**Only if updating to new major version with breaking changes.**
 
-**Minor updates** (e.g., v2.1.0 → v2.1.1) don't require migration.
+**Minor updates** typically don't require migration.
 
 ### Will I lose player data?
 

@@ -230,18 +230,6 @@ Decay: -1 flee per 24 hours
 
 ---
 
-## Changelog
-
-**v1.0.1** (2024-11-08)
-- ✨ MongoDB support (local + Atlas cloud)
-- ✨ Text Placeholder API integration (top 100 ranks, Fabric native)
-- 🐛 SQLite leaderboard initialization fix
-- 🐛 Pokemon form label blacklist fix
-
-[Full Changelog](CHANGELOG-1.0.1.md)
-
----
-
 ## Support
 
 - **Questions:** [Discord](https://discord.gg/VVVvBTqqyP) #feedback

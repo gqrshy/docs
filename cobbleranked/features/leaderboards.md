@@ -117,6 +117,8 @@ Each format has its own leaderboard:
 3. PlayerZ - 1589 Elo
 ```
 
+![Singles vs Doubles Leaderboard GUI](../../images/leaderboard.png)
+
 **Key points:**
 - Different players may dominate each format
 - Player can be #1 in both formats

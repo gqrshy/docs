@@ -15,12 +15,15 @@ Cross-server mode allows players on different servers to compete in a unified ra
 - Better matchmaking (larger player pool)
 
 **Architecture:**
-```
-[Lobby/Main Servers] → [Velocity Proxy] → [Battle Server]
-         ↓                                        ↓
-    [MySQL + Redis] ← ← ← ← ← ← ← ← ← ← ← ← ← ← 
-    (Shared Data)
-```
+
+![Cross-server architecture diagram](../../images/Slide1.jpg)
+
+**Flow:**
+1. Players queue from lobby/main servers
+2. Velocity proxy routes traffic between servers
+3. MySQL stores persistent data (Elo, stats, seasons)
+4. Redis handles real-time matchmaking queue
+5. Battle server manages all ranked battles
 
 ---
 

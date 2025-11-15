@@ -18,7 +18,7 @@ Place all of these in your `mods` folder:
 
 **Target:** Minecraft 1.21.1 (Fabric server)
 
-> **[📸 INSERT: Screenshot of mods folder with all dependencies]**
+![Mods folder with all dependencies](../../images/dependancies.png)
 
 ---
 
@@ -59,7 +59,7 @@ server/
 ```
 If GUI opens → Installation successful! ✅
 
-> **[📸 INSERT: Screenshot of /ranked GUI showing main menu]**
+![Ranked GUI main menu](../../images/rankedmenu.png)
 
 ---
 
@@ -94,7 +94,11 @@ Teleport players to battle coordinates instead of current location.
 
 **Saved:** Position (x, y, z), facing (yaw, pitch), dimension
 
-> **[📸 INSERT: Screenshot showing arena setup with coordinates displayed]**
+**Command execution:**
+![Arena setup command](../../images/setarenacommand.png)
+
+**Command output:**
+![Arena setup output](../../images/setarenaoutput.png)
 
 <details>
 <summary><strong>Multiple Arenas (Optional)</strong></summary>
