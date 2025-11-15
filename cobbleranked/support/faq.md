@@ -1000,6 +1000,330 @@ Or manually add `"pc"` to the `blockedCommands` list.
 
 ---
 
+## Arena Setup
+
+<details>
+<summary><strong>How do I set up arenas?</strong></summary>
+
+1. Stand at first corner: `/rankedadmin setArena arena1 pos1`
+2. Stand at opposite corner: `/rankedadmin setArena arena1 pos2`
+3. Set exit point: `/rankedadmin setexit`
+4. Test: `/rankedadmin teleportArena arena1`
+
+**Both pos1 and pos2 must be in the same world.**
+
+</details>
+
+<details>
+<summary><strong>Can arenas be selected randomly?</strong></summary>
+
+Yes! In `config/cobbleranked/arenas.json5`:
+
+```json5
+{
+  "selection_mode": "random"  // or "sequential"
+}
+```
+
+- **random**: Pick random arena each match
+- **sequential**: Always use first available arena
+
+</details>
+
+<details>
+<summary><strong>Arena shows as "in use" but no battle</strong></summary>
+
+Arena may be stuck. Fix:
+
+1. `/rankedadmin arena status` - Check all arenas
+2. `/rankedadmin reload` - Reset arena states
+3. If still stuck, restart server
+
+</details>
+
+---
+
+## Format-Specific Features
+
+<details>
+<summary><strong>Can I ban Tera Orb in singles but allow in doubles?</strong></summary>
+
+Yes! Use format-specific inventory bans.
+
+**singles.json5:**
+```json5
+{
+  "banned_inventory_items": ["mega_showdown:tera_orb"]
+}
+```
+
+**doubles.json5:**
+```json5
+{
+  "banned_inventory_items": []  // Allow Tera Orb
+}
+```
+
+Players with banned items can't queue for that format.
+
+</details>
+
+<details>
+<summary><strong>How do I find item IDs for banning?</strong></summary>
+
+1. Hold item in-game
+2. Press F3+H (advanced tooltips)
+3. Check tooltip for ID (e.g., `mega_showdown:tera_orb`)
+4. Add to `banned_inventory_items` in format blacklist
+
+</details>
+
+<details>
+<summary><strong>Different Elo for singles and doubles?</strong></summary>
+
+Yes, formats have separate Elo ratings:
+- Singles: Your singles Elo
+- Doubles: Your doubles Elo
+- Triples: Your triples Elo
+- Multi: Your multi Elo
+
+All tracked independently in database.
+
+</details>
+
+---
+
+## Custom Music
+
+<details>
+<summary><strong>How do I add custom battle music?</strong></summary>
+
+1. Create resource pack with `.ogg` files
+2. Add `sounds.json` mapping
+3. Configure music IDs in `config.json5`
+4. Players load resource pack
+
+**Minimal setup:**
+```json5
+{
+  "music": {
+    "enabled": true,
+    "queueMusic": "cobbleranked:queue_music",
+    "battleMusic": [{
+      "minElo": 0,
+      "maxElo": 9999,
+      "music": "cobbleranked:battle_music"
+    }]
+  }
+}
+```
+
+[Full Guide](../features/custom-music.md)
+
+</details>
+
+<details>
+<summary><strong>Music not playing for players</strong></summary>
+
+Check:
+1. `music.enabled: true` in config
+2. Players have resource pack loaded
+3. Sound IDs match between config and `sounds.json`
+4. OGG files in correct path: `assets/cobbleranked/sounds/`
+
+</details>
+
+---
+
+## Cross-Server Setup
+
+<details>
+<summary><strong>Do I need cross-server mode?</strong></summary>
+
+**No.** Single-server mode works perfectly for most servers.
+
+Only use cross-server if:
+- You have 2+ Minecraft servers
+- Want shared rankings across servers
+- Have dedicated battle server
+
+**Requirements:** Velocity proxy, MySQL/MongoDB, Redis
+
+</details>
+
+<details>
+<summary><strong>Players not transferring to battle server</strong></summary>
+
+1. Check Velocity `velocity.toml` has server names
+2. Verify ProxyCommand Reloaded plugin installed
+3. Test manual transfer: `/server battle`
+4. Check logs for transfer errors
+
+</details>
+
+<details>
+<summary><strong>Stats not syncing across servers</strong></summary>
+
+1. Verify all servers use same MySQL database
+2. Check Redis running: `redis-cli ping` → `PONG`
+3. Confirm `cross_server.enabled: true` on all servers
+4. Check database credentials match
+
+</details>
+
+---
+
+## GUI & Commands
+
+<details>
+<summary><strong>How do I customize GUI items?</strong></summary>
+
+Edit `config/cobbleranked/gui/gui-<language>.json5`:
+
+```json5
+{
+  "gui_ranked": {
+    "items": {
+      "queue_singles": {
+        "item": "minecraft:diamond_sword",  // Change item
+        "name": "&a&lQueue Singles",        // Change name
+        "slot": 11                           // Change position
+      }
+    }
+  }
+}
+```
+
+Save and run `/rankedadmin reload`.
+
+</details>
+
+<details>
+<summary><strong>GUI changes not showing</strong></summary>
+
+1. Check JSON5 syntax (commas, brackets)
+2. Run `/rankedadmin reload`
+3. Close and reopen GUI
+4. Check logs for config errors
+
+</details>
+
+<details>
+<summary><strong>What commands are available?</strong></summary>
+
+**Players:**
+- `/ranked` - Open ranked menu
+- `/season` - Show season info
+
+**Admins:**
+- `/rankedadmin setArena <name> <pos1|pos2>` - Set arena
+- `/rankedadmin setelo <amount> <player> <format>` - Set Elo
+- `/rankedadmin season create <days> <name>` - New season
+- `/rankedadmin reload` - Reload configs
+
+[Full Command List](../getting-started/commands.md)
+
+</details>
+
+---
+
+## Turn Timer & Matchmaking
+
+<details>
+<summary><strong>How do I enable turn timer?</strong></summary>
+
+In `config.json5`:
+
+```json5
+{
+  "turnTimer": {
+    "enabled": true,
+    "defaultTimeSeconds": 60
+  }
+}
+```
+
+Or format-specific:
+```json5
+{
+  "format_timers": {
+    "SINGLES": {
+      "turn_timeout_seconds": 90
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>Matchmaking takes too long</strong></summary>
+
+**Solutions:**
+1. Increase Elo range (happens automatically after 30s)
+2. Enable cross-server mode (larger player pool)
+3. Check if arenas available: `/rankedadmin arena status`
+4. Verify Redis working (cross-server only)
+
+**Wait time increases range:**
+- 0-30s: ±200 Elo
+- After 30s: Expands gradually to ±600 Elo
+
+</details>
+
+<details>
+<summary><strong>Players matched with wrong Elo</strong></summary>
+
+This is normal for long waits. System expands range to find matches.
+
+To limit range, reduce `matchmaking.max_elo_range_multiplier` in config.
+
+</details>
+
+---
+
+## Leaderboards & Stats
+
+<details>
+<summary><strong>Leaderboard not updating</strong></summary>
+
+Leaderboards cache for 60 seconds. Wait and check again.
+
+Force refresh:
+1. Close and reopen GUI
+2. Run `/rankedadmin reload`
+3. Wait 60 seconds for cache expiry
+
+</details>
+
+<details>
+<summary><strong>Player missing from leaderboard</strong></summary>
+
+Check:
+1. Player has minimum battles (default: 5)
+2. Player's Elo > 0
+3. Player hasn't been reset this season
+
+</details>
+
+<details>
+<summary><strong>How do I reset all stats?</strong></summary>
+
+Create new season:
+```
+/rankedadmin season create 30 "Season 2"
+```
+
+This:
+- Ends current season
+- Archives old stats
+- Resets Elo to default (1000)
+- Clears leaderboards
+
+</details>
+
+---
+
 ## Other
 
 <details>
@@ -1015,6 +1339,18 @@ Rank placeholders available for top 100:
 ```
 
 **Details:** [Text Placeholder API Integration](../integration/placeholders.md)
+
+</details>
+
+<details>
+<summary><strong>Can I use this with Showdown moves mod?</strong></summary>
+
+Yes! CobbleRanked works with:
+- Mega Showdown
+- Custom move mods
+- Custom Pokemon addons
+
+Just configure blacklists for any overpowered additions.
 
 </details>
 
