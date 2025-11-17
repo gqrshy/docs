@@ -113,6 +113,8 @@ Allow limited quantities instead of complete bans:
 }
 ```
 
+> **[📸 IMAGE NEEDED: 禁止技（Fissure、Baton Passなど）使用時のエラーメッセージ画面]**
+
 **Move Names:** Lowercase snake_case (spaces → underscores)
 
 <details>

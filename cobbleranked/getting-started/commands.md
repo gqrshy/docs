@@ -10,9 +10,13 @@ All commands available in CobbleRanked.
 
 Opens the ranked GUI for queue, stats, and leaderboards.
 
+> **[📸 IMAGE NEEDED: /rankedコマンド実行時のGUI表示例]**
+
 ### `/season`
 
 Shows current season info (name, status, time remaining).
+
+> **[📸 IMAGE NEEDED: /seasonコマンド実行結果（シーズン名、開始日、終了日、残り時間の表示）]**
 
 ## Admin Commands
 
@@ -34,6 +38,8 @@ Shows current season info (name, status, time remaining).
 **`/rankedadmin teleportArena <arena>`** - Teleport to arena center
 
 **`/rankedadmin arena status`** - Show all arenas and their in-use status
+
+> **[📸 IMAGE NEEDED: /rankedadmin arena statusコマンド実行結果（アリーナ一覧と使用状況）]**
 
 **`/rankedadmin arena enable <arena>`** - Enable an arena
 
