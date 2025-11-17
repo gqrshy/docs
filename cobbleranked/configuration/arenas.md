@@ -192,6 +192,8 @@ West (90°)—+— East (-90° or 270°)
  90° = Looking straight down
 ```
 
+> **[📸 IMAGE NEEDED: Yaw/Pitch方向の視覚的図解（プレイヤーの向きと角度の関係、コンパス表示）]**
+
 **Recommendation:** Use `0.0` pitch for normal battles.
 
 ## Advanced Configuration

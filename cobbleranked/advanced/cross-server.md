@@ -4,6 +4,8 @@ Run CobbleRanked across multiple servers with shared rankings.
 
 ## Architecture
 
+> **[📸 IMAGE NEEDED: クロスサーバーアーキテクチャ図（Velocityプロキシ、複数のロビー/メインサーバー、バトルサーバー、共有DB/Redis構成）]**
+
 **Servers:**
 - **Battle Server** - Hosts all ranked battles
 - **Lobby/Main Servers** - Players queue here, transfer to battle server

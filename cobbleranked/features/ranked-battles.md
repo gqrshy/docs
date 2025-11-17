@@ -6,6 +6,8 @@ Learn how ranked battles work in CobbleRanked.
 
 Ranked battles are competitive Pokemon battles where players compete for Elo rating and leaderboard positions. CobbleRanked manages the entire battle flow from queue to results.
 
+> **[📸 IMAGE NEEDED: バトルフローチャート（キュー参加→マッチング→検証→テレポート→バトル→結果処理→報酬の流れ）]**
+
 ## Battle Flow
 
 ### 1. Queue Phase
