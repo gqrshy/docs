@@ -1,5 +1,9 @@
 # Quick Start Guide
 
+---
+**CobbleRanked** > **Getting Started** > **Quick Start**
+---
+
 Get your ranked battles up and running in under 5 minutes!
 
 ## Overview
@@ -337,4 +341,26 @@ Use this checklist when setting up on a new server:
 
 ---
 
-**Having issues?** Check the [Troubleshooting Guide](../support/troubleshooting.md) for solutions.
+## Next Steps
+
+### For New Admins
+1. **[Learn all commands](commands.md)** - Master admin command reference
+2. **[Configure rewards](../configuration/rewards.md)** - Set up prizes for top players
+3. **[Customize messages](../configuration/gui.md#language-customization)** - Personalize player-facing text
+
+### For Competitive Setup
+1. **[Advanced blacklist](../configuration/blacklist.md)** - Configure Smogon OU or VGC format
+2. **[Elo system tuning](../features/elo-system.md)** - Understand rating calculations
+3. **[Season management](../features/seasons.md)** - Configure competitive periods
+
+### For Scaling Up
+1. **[Cross-server setup](../advanced/cross-server.md)** - Share rankings across multiple servers
+2. **[Database optimization](../advanced/database.md)** - MySQL or MongoDB for large player bases
+3. **[PlaceholderAPI integration](../integration/placeholders.md)** - Display rankings in holograms
+
+---
+
+## Related Pages
+- [Installation Guide](installation.md) - Full installation reference
+- [Commands](commands.md) - Complete command list
+- [Troubleshooting](../support/troubleshooting.md) - Common problems and solutions

@@ -1,5 +1,9 @@
 # Turn Timer
 
+---
+**CobbleRanked** > **Features** > **Turn Timer**
+---
+
 Enforce time limits on battle turns to prevent stalling.
 
 ## Overview
@@ -59,3 +63,24 @@ Different time limits per format:
 **Timer not appearing:** Check `turnTimer.enabled` is `true`.
 
 **Wrong time limit:** Format-specific settings override default.
+
+---
+
+## Next Steps
+
+### For Configuration
+1. **[Main Configuration](../configuration/config.md#turn-timer)** - Full timer settings reference
+2. **[Format-Specific Timers](#format-specific-timers)** - Different times per format
+3. **[Battle Flow](ranked-battles.md#battle-phase)** - Understand turn mechanics
+
+### For Competitive Play
+1. **[Tournament Settings](#tips)** - Recommended timer values
+2. **[Casual vs Competitive](#tips)** - Adjust for your audience
+3. **[Testing Turn Timer](../getting-started/quick-start.md#step-4-test-the-system)** - Verify it works
+
+---
+
+## Related Pages
+- [Main Configuration](../configuration/config.md) - All timer settings
+- [Ranked Battles](ranked-battles.md) - Battle mechanics
+- [FAQ](../support/faq.md#turn-timer--matchmaking) - Common questions

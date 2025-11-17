@@ -1,5 +1,9 @@
 # Troubleshooting
 
+---
+**CobbleRanked** > **Support** > **Troubleshooting**
+---
+
 Common issues and their solutions for CobbleRanked.
 
 ## Installation Issues
@@ -705,4 +709,26 @@ When asking for help, include:
 
 ---
 
-**Next:** Check [FAQ](faq.md) for frequently asked questions.
+## Next Steps
+
+### For Installation Issues
+1. **[Installation Guide](../getting-started/installation.md)** - Complete setup instructions
+2. **[Dependency Check](#installation-issues)** - Verify all mods installed
+3. **[Configuration Files](#configuration-files-not-generating)** - Generate configs
+
+### For Battle Issues
+1. **[Quick Start Guide](../getting-started/quick-start.md)** - Test basic battle flow
+2. **[Arena Configuration](../configuration/arenas.md)** - Set up battle locations
+3. **[Commands Reference](../getting-started/commands.md)** - Admin troubleshooting commands
+
+### For Cross-Server Issues
+1. **[Cross-Server Setup Guide](../advanced/cross-server.md)** - Full setup instructions
+2. **[Database Configuration](../advanced/database.md)** - MySQL/MongoDB/Redis
+3. **[FAQ Cross-Server](faq.md#cross-server)** - Common cross-server questions
+
+---
+
+## Related Pages
+- [FAQ](faq.md) - Frequently asked questions
+- [Commands Reference](../getting-started/commands.md) - Debugging commands
+- [Main Documentation](../README.md) - Feature overview

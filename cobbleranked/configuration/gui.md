@@ -1,6 +1,10 @@
-# GUI Customization
+# GUI & Language Customization
 
-Customize CobbleRanked GUI appearance and layout.
+---
+**CobbleRanked** > **Configuration** > **GUI & Languages**
+---
+
+Customize CobbleRanked interface appearance, layout, and messaging.
 
 ## GUI Files
 
@@ -169,3 +173,399 @@ Example:
 **Colors not working:**
 - Use `&` not `§` for color codes
 - Ensure `&r` to reset formatting
+
+---
+
+## Language Customization
+
+### Overview
+
+CobbleRanked includes 4 built-in languages:
+- **English** (`en-Us.json5`) - Default
+- **Japanese** (`ja-Jp.json5`)
+- **Portuguese** (`pt-Br.json5`)
+- **Russian** (`ru-Ru.json5`)
+
+**Files:** `config/cobbleranked/language/`
+
+All messages, notifications, and text are fully customizable via JSON5 language files.
+
+### Select Language
+
+Edit `config/cobbleranked/config.json5`:
+
+```json5
+{
+  "language": "en-Us"  // Change to: en-Us, ja-Jp, pt-Br, ru-Ru
+}
+```
+
+Then reload:
+```bash
+/rankedadmin reload
+```
+
+---
+
+## Language File Structure
+
+### File Format
+
+Language files use JSON5 format with key-value pairs:
+
+```json5
+{
+  "message_key": "Message content with {placeholder}",
+  "another_key": "Another message",
+  "color_example": "&aGreen &cRed &eYellow text"
+}
+```
+
+### Example: en-Us.json5
+
+```json5
+{
+  // Queue messages
+  "joined-queue": "&aYou have joined the ranked match queue.",
+  "left-queue": "&cYou have left the ranked match queue.",
+  "remaingFila": "&cSearching for a match... &7(&e{remaining}&7) &7(Position: &e{posicao}&7)",
+
+  // Battle messages
+  "match-winner": "&aVictory!!",
+  "match-winner-subtitle": "&aYou gained &f{gain} &aELO points.",
+  "match-loser": "&cDefeat!!",
+  "match-loser-subtitle": "&cYou lost &f{lose} &aELO points.",
+
+  // Validation messages
+  "pokemon-blacklist": "&cYou are using a Pokémon that is on the blacklist.",
+  "no-pokemon-ability": "&cYour Pokémon has an ability that is not allowed in ranked."
+}
+```
+
+---
+
+## Message Categories
+
+### Queue Messages
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| `joined-queue` | Joined queue notification | "You have joined the ranked match queue." |
+| `left-queue` | Left queue notification | "You have left the ranked match queue." |
+| `remaingFila` | Queue waiting status | "Searching for a match... (30s) (Position: 1)" |
+| `match-found` | Match found title | "Match Found!" |
+| `prepare-queue-cancel` | Match cancelled message | "Match was canceled. (A player disconnected)" |
+
+### Battle Messages
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| `battle-start-title` | Battle starting title | "Battle Starting!" |
+| `battle-countdown` | Countdown number | "3" |
+| `match-started` | Match start notification | "Match Started" |
+| `match-winner` | Victory title | "Victory!!" |
+| `match-winner-subtitle` | Victory subtitle with Elo gain | "You gained 25 ELO points." |
+| `match-loser` | Defeat title | "Defeat!!" |
+| `match-loser-subtitle` | Defeat subtitle with Elo loss | "You lost 18 ELO points." |
+
+### Validation Messages
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| `pokemon-blacklist` | Banned Pokemon error | "You are using a Pokémon that is on the blacklist." |
+| `no-pokemon-ability` | Banned ability error | "Your Pokémon has an ability that is not allowed in ranked." |
+| `blocked-item-move` | Banned move error | "You have a Pokémon with moves that are blocked in ranked." |
+| `no-pokemon-item` | Banned item error | "Your Pokémon has an item equipped that is not allowed in ranked." |
+| `limit-pokemon` | Team size error | "You need to have 6 Pokémon to join the ranked match." |
+
+### Admin Messages
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| `ranked-reload-adm` | Config reload success | "Settings reloaded successfully!" |
+| `set-elo-adm` | Elo set command | "Elo 1500 set successfully for player Steve" |
+| `arena-not-found` | Arena not found error | "Arena volcano_arena not found" |
+| `noPermCommand` | Permission denied | "You do not have permission to use this command." |
+
+---
+
+## Message Placeholders
+
+Many messages support placeholders that are dynamically replaced:
+
+### Player & Match Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{player}` | Player name | "match-finished": "{player} has won!" |
+| `{player1}` | First player name | "ranked-started": "{player1} vs {player2}" |
+| `{player2}` | Second player name | "prepare-queue-subtitle": "{player1} vs {player2}" |
+| `{winner}` | Winner name | "match-finished": "{winner} has won!" |
+| `{loser}` | Loser name | "match-finished": "{winner} defeated {loser}!" |
+
+### Elo & Stats Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{gain}` | Elo gained | "match-winner-subtitle": "You gained {gain} ELO" |
+| `{lose}` | Elo lost | "match-loser-subtitle": "You lost {lose} ELO" |
+| `{elo}` | Elo rating | "elo-up": "You ranked up to {elo}." |
+| `{wins}` | Win count | "Your wins: {wins}" |
+| `{losses}` | Loss count | "Your losses: {losses}" |
+
+### Queue & System Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{remaining}` | Time remaining | "remaingFila": "Searching... ({remaining})" |
+| `{posicao}` | Queue position | "remaingFila": "Position: {posicao}" |
+| `{time}` | Time value | "match-started-subtitle": "Duration is {time}m" |
+| `{limit}` | Team size limit | "limit-pokemon": "You need {limit} Pokémon" |
+| `{arena}` | Arena name | "arena-not-found": "Arena {arena} not found" |
+
+### Pokemon Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{pokemon}` | Pokemon name | "pokemon_switched": "Selected {pokemon}" |
+| `{level}` | Pokemon level | "Level: {level}" |
+| `{current}` | Current HP | "HP: {current}/{max}" |
+| `{max}` | Maximum HP | "HP: {current}/{max}" |
+| `{label}` | Pokemon category | "team_selection_label_limit_item": "{label}: {current}/{limit}" |
+
+### Example with Placeholders
+
+```json5
+{
+  "match-finished": "&8* &f{winner} &chas just won a ranked match against &f{loser}.",
+  "elo-up": "&aYou ranked up to &f{elo}.",
+  "remaingFila": "&cSearching for a match... &7(&e{remaining}&7) &7(Position: &e{posicao}&7)"
+}
+```
+
+**Result:**
+- `{winner}` → "Steve"
+- `{loser}` → "Alex"
+- Output: "* Steve has just won a ranked match against Alex."
+
+---
+
+## Color Codes Reference
+
+### Colors
+
+| Code | Color | Example |
+|------|-------|---------|
+| `&0` | Black | `&0Black text` |
+| `&1` | Dark Blue | `&1Dark Blue` |
+| `&2` | Dark Green | `&2Dark Green` |
+| `&3` | Dark Aqua | `&3Dark Aqua` |
+| `&4` | Dark Red | `&4Dark Red` |
+| `&5` | Dark Purple | `&5Dark Purple` |
+| `&6` | Gold | `&6Gold` |
+| `&7` | Gray | `&7Gray` |
+| `&8` | Dark Gray | `&8Dark Gray` |
+| `&9` | Blue | `&9Blue` |
+| `&a` | Green | `&aGreen` |
+| `&b` | Aqua | `&bAqua` |
+| `&c` | Red | `&cRed` |
+| `&d` | Light Purple | `&dLight Purple` |
+| `&e` | Yellow | `&eYellow` |
+| `&f` | White | `&fWhite` |
+
+### Formatting
+
+| Code | Format | Example |
+|------|--------|---------|
+| `&l` | Bold | `&l&aBOLD GREEN` |
+| `&m` | Strikethrough | `&mStrikethrough` |
+| `&n` | Underline | `&nUnderline` |
+| `&o` | Italic | `&oItalic` |
+| `&r` | Reset | `&aGreen&r Normal` |
+
+### Examples
+
+```json5
+{
+  "match-winner": "&a&lVictory!!",              // Bold green
+  "match-loser": "&c&lDefeat!!",                // Bold red
+  "elo-up": "&aYou ranked up to &f{elo}&a.",    // Green with white Elo
+  "battle-start-title": "&e&lBattle Starting!"  // Bold yellow
+}
+```
+
+---
+
+## Creating Custom Language
+
+### Step 1: Copy Existing Language
+
+```bash
+cd config/cobbleranked/language/
+cp en-Us.json5 es-Es.json5  # Spanish example
+```
+
+### Step 2: Translate Messages
+
+Edit `es-Es.json5`:
+
+```json5
+{
+  "joined-queue": "&aTe has unido a la cola de partidas clasificatorias.",
+  "left-queue": "&cHas salido de la cola de partidas clasificatorias.",
+  "match-winner": "&a¡¡Victoria!!",
+  "match-loser": "&c¡¡Derrota!!",
+  "pokemon-blacklist": "&cEstás usando un Pokémon que está en la lista negra.",
+  // ... translate all keys
+}
+```
+
+**Important:**
+- Keep all keys the same (only translate values)
+- Preserve placeholders (e.g., `{player}`, `{elo}`)
+- Use same color codes or customize
+
+### Step 3: Select Your Language
+
+Edit `config.json5`:
+
+```json5
+{
+  "language": "es-Es"
+}
+```
+
+### Step 4: Reload
+
+```bash
+/rankedadmin reload
+```
+
+---
+
+## Language Testing
+
+### 1. Reload Configuration
+
+```bash
+/rankedadmin reload
+```
+
+### 2. Test Common Messages
+
+- Join queue: `/ranked` → Queue button
+- Battle messages: Complete a battle
+- Validation: Try banned Pokemon/moves
+- Admin: `/rankedadmin reload`
+
+### 3. Check Console
+
+Look for errors in `logs/latest.log`:
+
+```
+[CobbleRanked] Message configurations for language es-Es loaded successfully!
+```
+
+If errors occur:
+- Check JSON5 syntax
+- Verify file name matches config setting
+- Look for missing keys
+
+---
+
+## Language Troubleshooting
+
+### Language not loading
+
+**Symptoms:** Still shows English after changing language
+
+**Solutions:**
+1. Check `language` setting in `config.json5`
+2. Verify file name matches exactly (case-sensitive)
+3. Reload: `/rankedadmin reload`
+4. Check console for errors
+
+### Missing messages
+
+**Symptoms:** Some messages show key instead of text
+
+**Solutions:**
+1. Ensure all keys from `en-Us.json5` exist in your file
+2. Copy missing keys from English file
+3. Reload configuration
+
+### Placeholders not replacing
+
+**Symptoms:** Message shows `{player}` instead of player name
+
+**Solutions:**
+1. Verify placeholder spelling (case-sensitive)
+2. Check placeholder is used in correct message
+3. Use correct placeholder for message type
+
+---
+
+## Best Practices
+
+### Language Files
+
+**✅ DO:**
+- Keep all language files in sync (same keys)
+- Test messages in-game after changes
+- Use consistent color scheme across messages
+- Preserve placeholder formatting
+- Use comments for organization
+
+**❌ DON'T:**
+- Remove or rename keys (will cause errors)
+- Forget to escape special characters
+- Use placeholder names that don't exist
+- Mix different quote styles inconsistently
+
+### Special Characters
+
+#### Apostrophes
+
+Use `''` (double apostrophe) to escape single quotes:
+
+```json5
+{
+  "lead_selection_gui_opponent_pokemon": "&7Opponent''s Pokemon"
+}
+```
+
+#### Backslashes
+
+Use `\\` to escape backslashes:
+
+```json5
+{
+  "permission-message": "&cYou don\\t have permission"
+}
+```
+
+---
+
+## Next Steps
+
+### For GUI Customization
+1. **[Color Codes Reference](#color-codes-reference)** - Full color and formatting guide
+2. **[Placeholder Usage](#placeholders)** - Dynamic content in GUIs
+3. **[Testing Changes](#applying-changes)** - Reload and verify modifications
+
+### For Language Customization
+1. **[Creating Custom Language](#creating-custom-language)** - Add your own language
+2. **[Message Categories](#message-categories)** - Understand all message types
+3. **[Special Characters](#special-characters)** - Handle apostrophes and escaping
+
+### For Advanced Usage
+1. **[GUI Layout Guide](#gui-layout)** - Slot positioning system
+2. **[Testing Tools](#language-testing)** - Validate language files
+3. **[Best Practices](#best-practices)** - Professional customization tips
+
+---
+
+## Related Pages
+- [Quick Start](../getting-started/quick-start.md) - See GUI in action
+- [Main Configuration](config.md) - Language settings
+- [Troubleshooting](../support/troubleshooting.md#gui-issues) - GUI-related problems

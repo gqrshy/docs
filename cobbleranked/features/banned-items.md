@@ -1,5 +1,9 @@
 # Banned Inventory Items
 
+---
+**CobbleRanked** > **Features** > **Banned Items**
+---
+
 Prevent players with specific items from joining ranked queues.
 
 ## Overview
@@ -51,3 +55,24 @@ When a player tries to queue with banned items:
 - Ban items that provide unfair advantages
 - Keep the list minimal - only truly problematic items
 - Communicate banned items to players via server rules
+
+---
+
+## Next Steps
+
+### For Configuration
+1. **[Finding Item IDs](#finding-item-ids)** - Identify items to ban
+2. **[Blacklist Configuration](../configuration/blacklist.md)** - Pokemon/move restrictions
+3. **[Battle Formats](ranked-battles.md#pre-battle-validation)** - How validation works
+
+### For Mod Integration
+1. **[Mega Showdown Items](#common-banned-items)** - Common gimmick items
+2. **[Custom Mods](../support/faq.md#can-i-use-this-with-showdown-moves-mod)** - Compatibility
+3. **[Testing](../getting-started/quick-start.md#step-4-test-the-system)** - Verify bans work
+
+---
+
+## Related Pages
+- [Blacklist Configuration](../configuration/blacklist.md) - Pokemon and move restrictions
+- [Battle Validation](ranked-battles.md#pre-battle-validation) - How checks work
+- [FAQ](../support/faq.md#format-specific-features) - Format-specific bans

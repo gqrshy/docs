@@ -238,4 +238,26 @@ Decay: -1 flee per 24 hours
 
 ---
 
-**Ready to start?** → [Installation Guide](getting-started/installation.md)
+## Next Steps
+
+### For New Server Admins
+1. **[Install CobbleRanked](getting-started/installation.md)** - Get up and running in 5 minutes
+2. **[Quick Start Guide](getting-started/quick-start.md)** - Configure your first arena and restrictions
+3. **[Commands Reference](getting-started/commands.md)** - Learn essential admin commands
+
+### For Experienced Admins
+1. **[Main Configuration](configuration/config.md)** - Fine-tune Elo, seasons, and matchmaking
+2. **[Blacklist Setup](configuration/blacklist.md)** - Configure competitive rulesets (Smogon, VGC)
+3. **[Cross-Server Setup](advanced/cross-server.md)** - Scale across multiple servers
+
+### For Competitive Servers
+1. **[Elo System](features/elo-system.md)** - Understand rating calculations and modes
+2. **[Season Management](features/seasons.md)** - Configure competitive seasons and rewards
+3. **[Rewards System](configuration/rewards.md)** - Set up season-end and milestone rewards
+
+---
+
+## Related Pages
+- [Glossary](GLOSSARY.md) - Technical terms and concepts
+- [FAQ](support/faq.md) - Common questions and answers
+- [Troubleshooting](support/troubleshooting.md) - Problem solving guide

@@ -1,5 +1,9 @@
 # Placeholder API
 
+---
+**CobbleRanked** > **Integration** > **Placeholders**
+---
+
 CobbleRanked integrates with [Text Placeholder API](https://placeholders.pb4.eu/) to display ranked statistics in holograms, signs, and other Fabric mods that support placeholders.
 
 ---
@@ -405,3 +409,29 @@ PlaceholderService.clearCache()
 | `%cobbleranked_top_doubles_<rank>_games%` | Doubles games played |
 
 **Rank range:** 1-100 for all placeholders
+
+---
+
+## Next Steps
+
+### For Display Setup
+1. **[Testing Placeholders](#testing-placeholders)** - Verify placeholders work
+2. **[Hologram Integration](#fabric-hologram-mods)** - Display leaderboards
+3. **[Cache Management](#cache-behavior)** - Understand caching
+
+### For Advanced Usage
+1. **[API for Developers](#api-for-developers)** - Programmatic access
+2. **[Performance Optimization](#performance-considerations)** - Best practices
+3. **[Hybrid Server Setup](#hybrid-servers-arclight)** - PlaceholderAPI support
+
+### For Competitive Servers
+1. **[Leaderboards](../features/leaderboards.md)** - In-game leaderboard display
+2. **[Format-Specific Placeholders](#singles-format-only)** - Singles vs Doubles
+3. **[Top 100 Rankings](#supported-ranks)** - Full ranking support
+
+---
+
+## Related Pages
+- [Leaderboards](../features/leaderboards.md) - In-game ranking display
+- [Commands Reference](../getting-started/commands.md) - Testing commands
+- [Troubleshooting](../support/faq.md#placeholder-api-troubleshooting) - Common issues

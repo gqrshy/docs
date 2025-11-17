@@ -1,5 +1,9 @@
 # Cross-Server Setup
 
+---
+**CobbleRanked** > **Advanced** > **Cross-Server**
+---
+
 Run CobbleRanked across multiple servers with shared rankings.
 
 ## Architecture
@@ -160,3 +164,29 @@ Increase for high traffic:
   }
 }
 ```
+
+---
+
+## Next Steps
+
+### For Setup
+1. **[Velocity Proxy Setup](#1-velocity-proxy-setup)** - Configure proxy
+2. **[Database Setup](#3-database-setup)** - MySQL or MongoDB
+3. **[Redis Setup](#4-redis-setup)** - Real-time communication
+
+### For Configuration
+1. **[Battle Server Config](#battle-server)** - Set up main battle server
+2. **[Lobby Server Config](#lobbymain-servers)** - Configure queue servers
+3. **[Key Differences Table](#key-differences)** - Understand server roles
+
+### For Troubleshooting
+1. **[Testing Checklist](#testing)** - Verify cross-server works
+2. **[Common Issues](#troubleshooting)** - Fix transfer and sync problems
+3. **[FAQ Cross-Server](../support/faq.md#cross-server)** - Frequently asked questions
+
+---
+
+## Related Pages
+- [Database Configuration](database.md) - MySQL/MongoDB/Redis setup
+- [Installation Guide](../getting-started/installation.md#cross-server-setup-advanced) - Prerequisites
+- [Troubleshooting](../support/troubleshooting.md#cross-server-issues) - Cross-server problems

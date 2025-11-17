@@ -1,5 +1,9 @@
 # Custom Background Music
 
+---
+**CobbleRanked** > **Features** > **Custom Music**
+---
+
 Play custom music during ranked battles.
 
 ## Overview
@@ -149,3 +153,24 @@ Place in `.minecraft/resourcepacks/` or use server resource pack.
 **Wrong music playing:**
 - Verify Elo ranges in config don't overlap
 - Check player's current Elo matches expected range
+
+---
+
+## Next Steps
+
+### For Setup
+1. **[Creating Resource Pack](#creating-music-resource-pack)** - Step-by-step guide
+2. **[Audio Conversion](#4-convert-audio-to-ogg)** - Convert MP3 to OGG
+3. **[Testing Music](#testing)** - Verify playback works
+
+### For Advanced Usage
+1. **[Elo-Based Music](#configuration)** - Different tracks per rank
+2. **[Phase-Based Music](#music-phases)** - Queue/Selection/Battle tracks
+3. **[Server Resource Packs](#5-install-resource-pack)** - Auto-download for players
+
+---
+
+## Related Pages
+- [Main Configuration](../configuration/config.md) - Music settings
+- [Troubleshooting](../support/troubleshooting.md#music-errors-cobblemon-16x) - Music issues
+- [FAQ](../support/faq.md#custom-music) - Common music questions

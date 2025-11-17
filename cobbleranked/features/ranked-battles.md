@@ -1,5 +1,9 @@
 # Ranked Battles
 
+---
+**CobbleRanked** > **Features** > **Ranked Battles**
+---
+
 Learn how ranked battles work in CobbleRanked.
 
 ## Overview
@@ -161,44 +165,172 @@ Players receive messages about:
 
 ## Battle Formats
 
-CobbleRanked supports three battle formats with independent rankings:
+CobbleRanked supports multiple battle formats with independent rankings for Singles, Doubles, Triples, Multi, and Random Battle formats.
 
-### Singles (1v1)
+Each battle format has:
+- **Separate Elo ratings**
+- **Independent leaderboards**
+- **Format-specific stats** (wins, losses, matches)
+- **Separate queues**
 
-**Format:** `GEN_9_SINGLES`
-- One Pokemon active per side
-- Classic 1v1 battle
-- Most common competitive format
+**Winning in Singles doesn't affect your Doubles Elo.**
 
-**Team requirements:**
-- 6 Pokemon in party
-- Lead Pokemon selection
+### Available Formats
 
-### Doubles (2v2)
+#### Competitive Formats
 
-**Format:** `GEN_9_DOUBLES`
-- Two Pokemon active per side
-- Similar to VGC official format
-- More strategic depth
+| Format | Description | Team Size | Party Size | Ranked |
+|--------|-------------|-----------|------------|--------|
+| **SINGLES** | 1v1 battles | 3-6 Pokemon | 1 player | ✅ |
+| **DOUBLES** | 2v2 battles | 4-6 Pokemon | 1 player | ✅ |
+| **TRIPLES** | 3v3 battles | 5-6 Pokemon | 1 player | ✅ |
+| **MULTI** | 2v2 team battles | 1-3 Pokemon each | 2 players | ✅ |
 
-**Team requirements:**
-- 6 Pokemon in party
-- Lead pair selection
+#### Random Battle Formats
 
-## Independent Rankings
+| Format | Description | Team Size | Generation | Ranked |
+|--------|-------------|-----------|------------|--------|
+| **RANDOM_SINGLES** | Random 1v1 | 6 Pokemon (auto) | Pool-based | ✅ |
+| **RANDOM_DOUBLES** | Random 2v2 | 6 Pokemon (auto) | Pool-based | ✅ |
+| **RANDOM_3V3** | Quick random | 3 Pokemon (auto) | Pool-based | ✅ |
 
-Each format has separate:
-- Elo rating
-- Win/loss record
-- Leaderboard position
-- Statistics
+### Singles
+
+Traditional 1v1 Pokemon battles.
+
+**Rules:**
+- Bring 3-6 Pokemon
+- 1v1 format
+- Select lead Pokemon before battle
+
+**Example:** Player A vs Player B (solo)
+
+### Doubles
+
+1 player controls 2 Pokemon simultaneously.
+
+**Rules:**
+- Bring 4-6 Pokemon
+- Both Pokemon on field at once
+- Select 2 leads before battle
+
+**Example:** Player A (2 Pokemon) vs Player B (2 Pokemon)
+
+### Multi (2v2 Singles)
+
+Team battles - 2 players vs 2 players.
+
+**Rules:**
+- Each player brings 1-3 Pokemon
+- Partners must be in same party
+- Both players select leads
+
+**Example:** Party (Player A + Player B) vs Party (Player C + Player D)
+
+#### How to Queue for Multi
+
+1. Form party with partner
+2. Both players open `/ranked` GUI
+3. Select "Multi" format
+4. Both must click queue
+
+**Matchmaking:** System pairs two parties with similar combined Elo.
+
+### Format Selection
+
+Players choose format before queuing:
+
+1. Open `/ranked` GUI
+2. Click format selection (Singles/Doubles/Multi)
+3. Click "Join Queue"
+
+### Independent Stats
+
+Each format tracks separately:
+
+| Stat | Per Format |
+|------|-----------|
+| Elo Rating | ✅ |
+| Wins | ✅ |
+| Losses | ✅ |
+| Win Streak | ✅ |
+| Total Matches | ✅ |
 
 **Example:**
+- Singles: 1500 Elo, 50 wins, 30 losses
+- Doubles: 1000 Elo, 5 wins, 5 losses
+- Multi: 1200 Elo, 20 wins, 15 losses
+
+### Format Leaderboards
+
+Each format has a separate leaderboard.
+
+**Access:**
+1. `/ranked` GUI
+2. Click "Leaderboards"
+3. Select format
+
+**Display:**
+- Top players by Elo
+- Format-specific rankings
+- Filter by Singles/Doubles/Multi
+
+### Format-Specific Rewards
+
+Season and milestone rewards can be format-specific.
+
+**Example:**
+```json5
+{
+  "season_rewards": {
+    "singles": { /* Singles rewards */ },
+    "doubles": { /* Doubles rewards */ }
+  }
+}
 ```
-Player A Stats:
-  Singles: 1200 Elo, 15W-5L
-  Doubles: 1000 Elo, 0W-0L (never played)
+
+Players can earn rewards in **all formats**.
+
+See [Rewards System](../configuration/rewards.md) for configuration.
+
+### Team Size Configuration
+
+Configure team size limits per format in `config/cobbleranked/config.json5`:
+
+```json5
+{
+  "ranked_match": {
+    "singles": {
+      "min_team_size": 3,
+      "max_team_size": 6
+    },
+    "doubles": {
+      "min_team_size": 4,
+      "max_team_size": 6
+    },
+    "multi": {
+      "min_team_size": 1,
+      "max_team_size": 3
+    }
+  }
+}
 ```
+
+### Format Troubleshooting
+
+**Can't queue for Multi?**
+- Verify party formed (2 players)
+- Both players must have enough Pokemon
+- Check both selected same format
+
+**Stats not tracking correctly?**
+- Verify playing correct format
+- Check format in leaderboard
+- Stats are format-independent
+
+**Matchmaking slow for specific format?**
+- Doubles/Multi have smaller player pools
+- See [Dynamic Matchmaking](dynamic-matchmaking.md)
 
 ## Disconnect Handling
 
@@ -441,4 +573,26 @@ Commands after battle:
 
 ---
 
-**Next:** Learn about [Elo Rating System](elo-system.md) to understand rating calculations.
+## Next Steps
+
+### For Understanding Battle Flow
+1. **[Elo Rating System](elo-system.md)** - Learn how ratings are calculated
+2. **[Dynamic Matchmaking](elo-system.md#dynamic-matchmaking)** - Understand queue expansion
+3. **[Disconnect Penalties](disconnect-penalties.md)** - Flee count system explained
+
+### For Configuration
+1. **[Blacklist Setup](../configuration/blacklist.md)** - Configure Pokemon restrictions
+2. **[Battle Clauses](../configuration/config.md#battle-clauses)** - Enable competitive rules
+3. **[Team Size Requirements](../configuration/config.md#ranked-match)** - Customize team sizes
+
+### For Competitive Play
+1. **[Season System](seasons.md)** - Competitive periods and rotation
+2. **[Leaderboards](leaderboards.md)** - Rankings and top players
+3. **[Rewards](../configuration/rewards.md)** - Prize configuration
+
+---
+
+## Related Pages
+- [Quick Start Guide](../getting-started/quick-start.md) - Your first ranked battle
+- [Commands Reference](../getting-started/commands.md) - Battle management commands
+- [Troubleshooting](../support/troubleshooting.md#battle-issues) - Common battle problems

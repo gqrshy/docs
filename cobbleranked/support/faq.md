@@ -1,5 +1,9 @@
 # Frequently Asked Questions (FAQ)
 
+---
+**CobbleRanked** > **Support** > **FAQ**
+---
+
 Common questions and answers about CobbleRanked.
 
 ---
@@ -1365,3 +1369,29 @@ Just configure blacklists for any overpowered additions.
    - Steps to reproduce
 
 </details>
+
+---
+
+## Next Steps
+
+### For New Admins
+1. **[Installation Guide](../getting-started/installation.md)** - Get CobbleRanked installed
+2. **[Quick Start](../getting-started/quick-start.md)** - Set up your first battle
+3. **[Commands Reference](../getting-started/commands.md)** - Learn essential commands
+
+### For Troubleshooting
+1. **[Troubleshooting Guide](troubleshooting.md)** - Detailed problem-solving
+2. **[Common Issues](#installation--setup)** - Quick answers
+3. **[Getting Help](#need-support)** - Discord and support channels
+
+### For Advanced Configuration
+1. **[Main Configuration](../configuration/config.md)** - Detailed settings
+2. **[Blacklist Setup](../configuration/blacklist.md)** - Competitive restrictions
+3. **[Cross-Server Setup](../advanced/cross-server.md)** - Multi-server guide
+
+---
+
+## Related Pages
+- [Troubleshooting Guide](troubleshooting.md) - Detailed problem-solving
+- [Installation Guide](../getting-started/installation.md) - Setup instructions
+- [Main Documentation](../README.md) - Full feature overview

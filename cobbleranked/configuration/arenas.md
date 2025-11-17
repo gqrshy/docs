@@ -1,5 +1,9 @@
 # Arena Configuration
 
+---
+**CobbleRanked** > **Configuration** > **Arenas**
+---
+
 Learn how to set up battle arenas for ranked matches.
 
 ## File Location
@@ -378,8 +382,21 @@ Teleporting across dimensions:
 
 ---
 
-## See Also
+## Next Steps
 
-- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
-- [Rewards System](rewards.md) - Season and milestone rewards
-- [Commands](../getting-started/commands.md) - Arena management commands
+### For Arena Setup
+1. **[Quick Start Arena Guide](../getting-started/quick-start.md#step-1-create-a-battle-arena)** - Create your first arena
+2. **[Arena Commands](../getting-started/commands.md#arena-management)** - Master arena management
+3. **[WorldGuard Integration](#worldguard-integration)** - Protect arenas from griefing
+
+### For Advanced Configuration
+1. **[Cross-Dimensional Arenas](#cross-dimensional-arenas)** - Set up Nether/End arenas
+2. **[Multiple Arenas](#multi-arena-setup)** - Create variety with random selection
+3. **[Arena Troubleshooting](../support/faq.md#arena-setup)** - Common arena issues
+
+---
+
+## Related Pages
+- [Battle Flow](../features/ranked-battles.md#teleportation) - How arena teleportation works
+- [Commands Reference](../getting-started/commands.md) - Arena management commands
+- [Troubleshooting](../support/troubleshooting.md#arena-issues) - Arena-related problems

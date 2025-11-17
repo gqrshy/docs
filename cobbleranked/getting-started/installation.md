@@ -1,5 +1,9 @@
 # Installation Guide
 
+---
+**CobbleRanked** > **Getting Started** > **Installation**
+---
+
 Complete guide to install CobbleRanked on your Minecraft server.
 
 ---
@@ -267,4 +271,26 @@ config/cobbleranked/
 
 ---
 
-**Questions?** → [FAQ](../support/faq.md) | [Discord](https://discord.gg/VVVvBTqqyP)
+## Next Steps
+
+### For Casual Servers
+1. **[Set arenas](../configuration/arenas.md)** - Configure battle locations
+2. **[Configure rewards](../configuration/rewards.md)** - Set up top 3 season prizes
+3. **[Customize GUI](../configuration/gui.md)** - Personalize the interface
+
+### For Competitive Servers
+1. **[Configure blacklist](../configuration/blacklist.md)** - Apply Smogon/VGC rules
+2. **[Adjust Elo system](../configuration/config.md#elo-system)** - Fine-tune ratings
+3. **[Set level scaling](../configuration/config.md#ranked-match)** - Force Level 50
+
+### For Cross-Server Networks
+1. **[Complete cross-server setup](../advanced/cross-server.md)** - Full multi-server guide
+2. **[Configure Velocity](../advanced/cross-server.md#velocity-proxy-setup)** - Server routing
+3. **[Set up database](../advanced/database.md)** - MySQL/MongoDB + Redis
+
+---
+
+## Related Pages
+- [Quick Start Guide](quick-start.md) - Get your first battle running
+- [Commands Reference](commands.md) - Essential admin commands
+- [FAQ](../support/faq.md) - Common installation questions

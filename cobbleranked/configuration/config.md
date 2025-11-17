@@ -1,5 +1,9 @@
 # Main Configuration
 
+---
+**CobbleRanked** > **Configuration** > **Main Config**
+---
+
 Complete reference for `config/cobbleranked/config.json5`.
 
 ---
@@ -239,9 +243,26 @@ Reloads all configuration files without server restart.
 
 ---
 
-## See Also
+## Next Steps
 
-- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
-- [Cross-Server Setup](../advanced/cross-server.md) - Multi-server configuration
-- [Rewards](rewards.md) - Season and milestone rewards
-- [Commands](../getting-started/commands.md) - Admin commands
+### For Fine-Tuning
+1. **[Elo System Details](../features/elo-system.md)** - Deep dive into rating calculations
+2. **[Matchmaking Guide](../features/elo-system.md#dynamic-matchmaking)** - Optimize queue times
+3. **[Season Management](../features/seasons.md)** - Configure competitive periods
+
+### For Competitive Setup
+1. **[Blacklist Configuration](blacklist.md)** - Apply Smogon/VGC restrictions
+2. **[Battle Clauses](../features/ranked-battles.md#battle-clauses)** - Enable competitive rules
+3. **[Rewards System](rewards.md)** - Configure prizes
+
+### For Scaling
+1. **[Cross-Server Setup](../advanced/cross-server.md)** - Multi-server configuration
+2. **[Database Optimization](../advanced/database.md)** - MySQL/MongoDB setup
+3. **[Connection Pooling](../advanced/database.md#connection-pool)** - Performance tuning
+
+---
+
+## Related Pages
+- [Blacklist Configuration](blacklist.md) - Pokemon/move restrictions
+- [Rewards Configuration](rewards.md) - Season and milestone rewards
+- [Commands Reference](../getting-started/commands.md) - Admin commands

@@ -1,5 +1,9 @@
 # Rewards System
 
+---
+**CobbleRanked** > **Configuration** > **Rewards**
+---
+
 Configure season-end and milestone rewards for ranked players.
 
 ---
@@ -247,4 +251,26 @@ After editing `rewards.json5`:
 
 ---
 
-**Related:** [Season Management](../features/seasons.md) · [Commands](../getting-started/commands.md) · [Configuration](config.md)
+## Next Steps
+
+### For Setting Up Rewards
+1. **[Season Management](../features/seasons.md)** - Understand season rotation and timing
+2. **[Commands Reference](../getting-started/commands.md)** - Test reward commands manually
+3. **[Color Codes](gui.md#color-codes-reference)** - Format reward display names
+
+### For Advanced Rewards
+1. **[Economy Integration](#economy-requires-economy-plugin)** - Give currency rewards
+2. **[Permission Rewards](#permissions-requires-luckperms)** - Grant ranks to top players
+3. **[Format-Specific Rewards](#format-specific-rewards)** - Separate Singles/Doubles prizes
+
+### For Troubleshooting
+1. **[Reward Issues](../support/troubleshooting.md#reward-issues)** - Common problems
+2. **[FAQ Rewards Section](../support/faq.md#rewards)** - Frequently asked questions
+3. **[Testing Rewards](#reloading)** - Verify configuration works
+
+---
+
+## Related Pages
+- [Season Management](../features/seasons.md) - Season rotation and timing
+- [GUI Customization](gui.md) - Customize reward display
+- [Main Configuration](config.md) - Season duration settings

@@ -1,5 +1,9 @@
 # Migration Guide
 
+---
+**CobbleRanked** > **Getting Started** > **Migration**
+---
+
 Update CobbleRanked to the latest version.
 
 ## Before Migrating
@@ -145,3 +149,24 @@ mysql -u ranked -p cobbleranked < cobbleranked_backup.sql
 **Where to ask:**
 - [Discord](https://discord.gg/cobbleranked) - #support channel
 - [GitHub Issues](https://github.com/gqrshy/cobbleranked/issues)
+
+---
+
+## Next Steps
+
+### After Successful Migration
+1. **[Verify configuration](../configuration/config.md)** - Check all settings migrated correctly
+2. **[Test battles](quick-start.md#step-4-test-the-system)** - Run a test match to ensure everything works
+3. **[Review new features](../README.md#features)** - Check what's new in the latest version
+
+### If Migration Failed
+1. **[Check troubleshooting guide](../support/troubleshooting.md)** - Common migration issues
+2. **[Restore from backup](#rollback-if-needed)** - Use the rollback procedure above
+3. **[Get support](../support/faq.md#getting-help)** - Ask for help with logs
+
+---
+
+## Related Pages
+- [Installation Guide](installation.md) - Fresh installation reference
+- [Database Guide](../advanced/database.md) - Database migration details
+- [Troubleshooting](../support/troubleshooting.md) - Common issues and solutions

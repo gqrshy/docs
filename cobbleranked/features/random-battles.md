@@ -1,5 +1,9 @@
 # Random Battles
 
+---
+**CobbleRanked** > **Features** > **Random Battles**
+---
+
 Auto-generated teams for players who want to battle without team building.
 
 ## Overview
@@ -84,3 +88,24 @@ Create JSON5 files for each tier (e.g., `random_ou.json5`, `random_ubers.json5`)
 **Missing Pokemon:** Verify species names match Cobblemon's Pokemon registry.
 
 **Battles failing:** Ensure all Pokemon have 4 moves and valid abilities.
+
+---
+
+## Next Steps
+
+### For Setup
+1. **[Creating Pokemon Pools](#creating-pokemon-pools)** - Build your first pool
+2. **[Pool Parameters](#pool-parameters)** - Understand all options
+3. **[Testing Pools](#troubleshooting)** - Verify teams generate correctly
+
+### For Competitive Pools
+1. **[Tier Organization](#tips)** - Create OU/Ubers/LC pools
+2. **[EV Spreads](#tips)** - Role-based distributions
+3. **[Balance Testing](#tips)** - Ensure fair matchups
+
+---
+
+## Related Pages
+- [Main Configuration](../configuration/config.md) - Random battles settings
+- [Battle Formats](ranked-battles.md) - Format types
+- [Troubleshooting](../support/troubleshooting.md) - Common issues

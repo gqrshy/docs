@@ -1,5 +1,9 @@
 # Season Management
 
+---
+**CobbleRanked** > **Features** > **Seasons**
+---
+
 Time-based competitive periods with automatic rotation and rewards.
 
 ---
@@ -164,4 +168,26 @@ Only ONE server should manage seasons (battle server).
 
 ---
 
-**Related:** [Rewards System](../configuration/rewards.md) · [Cross-Server Setup](../advanced/cross-server.md) · [Configuration](../configuration/config.md)
+## Next Steps
+
+### For Season Configuration
+1. **[Rewards System](../configuration/rewards.md)** - Configure season-end prizes
+2. **[Season Duration](../configuration/config.md#ranked-match)** - Adjust season length
+3. **[Manual Commands](#manual-commands)** - Control season rotation
+
+### For Competitive Servers
+1. **[Leaderboards](leaderboards.md)** - Track season rankings
+2. **[Elo System](elo-system.md)** - Understand rating progression
+3. **[Cross-Server Seasons](../advanced/cross-server.md#key-differences)** - Multi-server coordination
+
+### For Troubleshooting
+1. **[Season Issues](../support/troubleshooting.md#season-not-rotating)** - Common problems
+2. **[FAQ Seasons](../support/faq.md#manually-end-season)** - Frequently asked questions
+3. **[Battle Server Singleton](#cross-server-behavior)** - Prevent duplicate rotations
+
+---
+
+## Related Pages
+- [Rewards Configuration](../configuration/rewards.md) - Season prizes and milestones
+- [Cross-Server Setup](../advanced/cross-server.md) - Multi-server season management
+- [Commands Reference](../getting-started/commands.md#season-management) - Season commands

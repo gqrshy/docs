@@ -1,5 +1,9 @@
 # Disconnect Penalties
 
+---
+**CobbleRanked** > **Features** > **Disconnect Penalties**
+---
+
 Prevent abuse by penalizing players who disconnect during ranked battles.
 
 ---
@@ -130,4 +134,26 @@ Automatically reduces flee count over time to forgive past disconnects.
 
 ---
 
-**Related:** [Season Management](seasons.md) · [Battle Formats](battle-formats.md) · [Configuration](../configuration/config.md)
+## Next Steps
+
+### For Configuration
+1. **[Penalty Presets](#presets)** - Lenient or strict configurations
+2. **[Flee Decay Setup](#flee-decay)** - Forgive old disconnects
+3. **[Main Configuration](../configuration/config.md#competitive)** - Full settings reference
+
+### For Player Management
+1. **[Admin Commands](#admin-commands)** - Check and reset flee counts
+2. **[Battle Flow](ranked-battles.md#disconnect-handling)** - How disconnects are handled
+3. **[Elo System](elo-system.md)** - Elo penalties for fleeing
+
+### For Troubleshooting
+1. **[FAQ Penalties](../support/faq.md#disconnect-penalties)** - Common questions
+2. **[Troubleshooting Guide](../support/troubleshooting.md#disconnect-during-battle)** - Fix issues
+3. **[Cross-Server Behavior](../configuration/config.md#competitive)** - Prevent duplicate penalties
+
+---
+
+## Related Pages
+- [Ranked Battles](ranked-battles.md) - Disconnect handling in battles
+- [Configuration Guide](../configuration/config.md) - Penalty settings
+- [Commands Reference](../getting-started/commands.md#player-elo-management) - Flee management

@@ -1,5 +1,9 @@
 # Commands
 
+---
+**CobbleRanked** > **Getting Started** > **Commands**
+---
+
 All commands available in CobbleRanked.
 
 ## Player Commands
@@ -101,3 +105,24 @@ With LuckPerms installed, you can use these permission nodes:
 - `cobbleranked.command.admin.season` - Season management
 
 **Note:** Permission system defaults to OP level 2 checks if LuckPerms is not installed.
+
+---
+
+## Next Steps
+
+### For New Admins
+1. **[Quick Start Guide](quick-start.md)** - Practice commands with your first setup
+2. **[Arena Configuration](../configuration/arenas.md)** - Use arena commands effectively
+3. **[Season Management](../features/seasons.md)** - Understand season rotation commands
+
+### For Player Management
+1. **[Elo System](../features/elo-system.md)** - Learn when to adjust player Elo
+2. **[Disconnect Penalties](../features/disconnect-penalties.md)** - Manage flee counts
+3. **[Rewards System](../configuration/rewards.md)** - Configure command-based rewards
+
+---
+
+## Related Pages
+- [Main Configuration](../configuration/config.md) - Settings that commands interact with
+- [Quick Start](quick-start.md) - Practical command usage examples
+- [FAQ](../support/faq.md) - Common command questions

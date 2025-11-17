@@ -1,5 +1,9 @@
 # Leaderboards
 
+---
+**CobbleRanked** > **Features** > **Leaderboards**
+---
+
 View top-ranked players by Elo rating.
 
 ## Features
@@ -83,3 +87,29 @@ Leaderboards reset automatically when a new season starts. To manually reset:
 **Player missing from leaderboard:**
 - Verify player has played at least `min_battles` matches
 - Check player's Elo is above 0
+
+---
+
+## Next Steps
+
+### For Display
+1. **[PlaceholderAPI Integration](../integration/placeholders.md)** - Show leaderboards in holograms
+2. **[GUI Customization](../configuration/gui.md)** - Customize leaderboard interface
+3. **[Viewing Commands](../getting-started/commands.md#player-commands)** - Access leaderboards
+
+### For Understanding Rankings
+1. **[Elo System](elo-system.md)** - How ratings determine ranks
+2. **[Battle Formats](ranked-battles.md#format-specific-rewards)** - Format-specific leaderboards
+3. **[Season System](seasons.md)** - Leaderboard resets
+
+### For Competitive Servers
+1. **[Rewards Configuration](../configuration/rewards.md)** - Prize top-ranked players
+2. **[Cross-Server Leaderboards](../advanced/cross-server.md)** - Network-wide rankings
+3. **[Database Optimization](../advanced/database.md)** - Performance for large player bases
+
+---
+
+## Related Pages
+- [Elo System](elo-system.md) - Rating calculations
+- [Seasons](seasons.md) - Competitive periods and resets
+- [Placeholder API](../integration/placeholders.md) - Display rankings externally
