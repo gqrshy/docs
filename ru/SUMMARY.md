@@ -1,0 +1,33 @@
+# Содержание
+
+* [Главная](README.md)
+* [Условия использования](terms.md)
+* [Контакты и поддержка](contact.md)
+
+## Моды
+
+* [CobbleRanked](cobbleranked/README.md)
+  * [Глоссарий](cobbleranked/GLOSSARY.md)
+  * [Установка](cobbleranked/getting-started/installation.md)
+  * [Быстрый старт](cobbleranked/getting-started/quick-start.md)
+  * [Руководство по миграции](cobbleranked/getting-started/migration.md)
+  * [Команды](cobbleranked/getting-started/commands.md)
+  * [Основная конфигурация](cobbleranked/configuration/config.md)
+  * [Черный список и ограничения](cobbleranked/configuration/blacklist.md)
+  * [Настройка арен](cobbleranked/configuration/arenas.md)
+  * [Интерфейс и языки](cobbleranked/configuration/gui.md)
+  * [Награды](cobbleranked/configuration/rewards.md)
+  * [Рейтинговые сражения](cobbleranked/features/ranked-battles.md)
+  * [Случайные сражения](cobbleranked/features/random-battles.md)
+  * [Рейтинг Эло и подбор противников](cobbleranked/features/elo-system.md)
+  * [Таблицы лидеров](cobbleranked/features/leaderboards.md)
+  * [Сезоны](cobbleranked/features/seasons.md)
+  * [Таймер хода](cobbleranked/features/turn-timer.md)
+  * [Запрещенные предметы](cobbleranked/features/banned-items.md)
+  * [Штрафы за отключение](cobbleranked/features/disconnect-penalties.md)
+  * [Пользовательская музыка](cobbleranked/features/custom-music.md)
+  * [Placeholder API](cobbleranked/integration/placeholders.md)
+  * [Настройка кросс-сервера](cobbleranked/advanced/cross-server.md)
+  * [База данных и Redis](cobbleranked/advanced/database.md)
+  * [Часто задаваемые вопросы](cobbleranked/support/faq.md)
+  * [Устранение неполадок](cobbleranked/support/troubleshooting.md)

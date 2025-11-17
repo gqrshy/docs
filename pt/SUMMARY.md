@@ -1,0 +1,33 @@
+# Índice
+
+* [Início](README.md)
+* [Termos e Condições](terms.md)
+* [Contato e Suporte](contact.md)
+
+## Mods
+
+* [CobbleRanked](cobbleranked/README.md)
+  * [Glossário](cobbleranked/GLOSSARY.md)
+  * [Instalação](cobbleranked/getting-started/installation.md)
+  * [Início Rápido](cobbleranked/getting-started/quick-start.md)
+  * [Guia de Migração](cobbleranked/getting-started/migration.md)
+  * [Comandos](cobbleranked/getting-started/commands.md)
+  * [Configuração Principal](cobbleranked/configuration/config.md)
+  * [Lista Negra e Restrições](cobbleranked/configuration/blacklist.md)
+  * [Configuração de Arena](cobbleranked/configuration/arenas.md)
+  * [GUI e Idiomas](cobbleranked/configuration/gui.md)
+  * [Recompensas](cobbleranked/configuration/rewards.md)
+  * [Batalhas Ranqueadas](cobbleranked/features/ranked-battles.md)
+  * [Batalhas Aleatórias](cobbleranked/features/random-battles.md)
+  * [Elo e Matchmaking](cobbleranked/features/elo-system.md)
+  * [Tabelas de Classificação](cobbleranked/features/leaderboards.md)
+  * [Temporadas](cobbleranked/features/seasons.md)
+  * [Temporizador de Turno](cobbleranked/features/turn-timer.md)
+  * [Itens Banidos](cobbleranked/features/banned-items.md)
+  * [Penalidades de Desconexão](cobbleranked/features/disconnect-penalties.md)
+  * [Música Personalizada](cobbleranked/features/custom-music.md)
+  * [Placeholder API](cobbleranked/integration/placeholders.md)
+  * [Configuração Multi-Servidor](cobbleranked/advanced/cross-server.md)
+  * [Banco de Dados e Redis](cobbleranked/advanced/database.md)
+  * [FAQ](cobbleranked/support/faq.md)
+  * [Solução de Problemas](cobbleranked/support/troubleshooting.md)
