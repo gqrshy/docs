@@ -1,0 +1,33 @@
+# 目次
+
+* [ホーム](README.md)
+* [利用規約](terms.md)
+* [お問い合わせ・サポート](contact.md)
+
+## Mod
+
+* [CobbleRanked](cobbleranked/README.md)
+  * [用語集](cobbleranked/GLOSSARY.md)
+  * [インストール](cobbleranked/getting-started/installation.md)
+  * [クイックスタート](cobbleranked/getting-started/quick-start.md)
+  * [移行ガイド](cobbleranked/getting-started/migration.md)
+  * [コマンド](cobbleranked/getting-started/commands.md)
+  * [メイン設定](cobbleranked/configuration/config.md)
+  * [ブラックリスト・制限](cobbleranked/configuration/blacklist.md)
+  * [アリーナ設定](cobbleranked/configuration/arenas.md)
+  * [GUI・言語](cobbleranked/configuration/gui.md)
+  * [報酬](cobbleranked/configuration/rewards.md)
+  * [ランクバトル](cobbleranked/features/ranked-battles.md)
+  * [ランダムバトル](cobbleranked/features/random-battles.md)
+  * [イロ・マッチメイキング](cobbleranked/features/elo-system.md)
+  * [リーダーボード](cobbleranked/features/leaderboards.md)
+  * [シーズン](cobbleranked/features/seasons.md)
+  * [ターンタイマー](cobbleranked/features/turn-timer.md)
+  * [禁止アイテム](cobbleranked/features/banned-items.md)
+  * [切断ペナルティ](cobbleranked/features/disconnect-penalties.md)
+  * [カスタム音楽](cobbleranked/features/custom-music.md)
+  * [Placeholder API](cobbleranked/integration/placeholders.md)
+  * [クロスサーバー設定](cobbleranked/advanced/cross-server.md)
+  * [データベース・Redis](cobbleranked/advanced/database.md)
+  * [FAQ](cobbleranked/support/faq.md)
+  * [トラブルシューティング](cobbleranked/support/troubleshooting.md)
