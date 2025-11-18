@@ -28,7 +28,7 @@
 * [Leaderboards](features/leaderboards.md)
 * [Disconnect Penalties](features/disconnect-penalties.md)
 * [Dynamic Matchmaking](features/dynamic-matchmaking.md)
-* [Banned Inventory Items](features/banned-items.md)
+* [Inventory Restrictions](features/inventory-restrictions.md)
 * [Custom Music Pack](features/custom-music.md)
 
 ## Advanced
@@ -36,6 +36,10 @@
 * [Cross-Server Setup](advanced/cross-server.md)
 * [Database Configuration](advanced/database.md)
 * [Redis Integration](advanced/redis.md)
+
+## Integration
+
+* [Placeholder API](integration/placeholders.md)
 
 ## Support
 

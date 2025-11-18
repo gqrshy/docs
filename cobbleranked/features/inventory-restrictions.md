@@ -1,10 +1,17 @@
-# Banned Inventory Items
+# Inventory Restrictions
 
-Prevent players with specific items from joining ranked queues.
+Prevent players with specific items in their inventory from joining ranked queues.
 
 ## Overview
 
-Players cannot queue if they have banned items in their inventory. Useful for blocking battle gimmick items like Tera Orbs or Dynamax Bands.
+The inventory restriction system checks players' inventories before allowing them to join ranked queues. This is useful for blocking battle gimmick items or other items that could provide unfair advantages.
+
+**Common Use Cases:**
+- Block battle gimmick items (Tera Orbs, Dynamax Bands)
+- Prevent usage of special items during battles
+- Enforce fair competition rules
+
+**Note:** This is different from the [Blacklist System](../configuration/blacklist.md), which restricts Pokemon, moves, abilities, and held items on Pokemon.
 
 ## Configuration
 

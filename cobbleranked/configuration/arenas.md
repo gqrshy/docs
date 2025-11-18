@@ -98,6 +98,9 @@ Output shows:
 
 ### JSON5 Structure
 
+<details>
+<summary><strong>Click to view full arenas.json5 structure</strong></summary>
+
 ```json5
 {
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -126,6 +129,8 @@ Output shows:
   ]
 }
 ```
+
+</details>
 
 ### Field Reference
 
@@ -303,7 +308,10 @@ Minimal configuration for testing:
 
 ### Multi-Arena Setup
 
-Production server with variety:
+<details>
+<summary><strong>Click to view production multi-arena example</strong></summary>
+
+Production server with variety across multiple dimensions:
 
 ```json5
 {
@@ -356,6 +364,8 @@ Production server with variety:
   ]
 }
 ```
+
+</details>
 
 ## Performance Considerations
 

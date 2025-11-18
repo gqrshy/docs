@@ -1,334 +1,143 @@
 # Ranked Battles
 
-Learn how ranked battles work in CobbleRanked.
+Competitive Pokemon battles with Elo ratings, matchmaking, and rewards.
+
+---
 
 ## Overview
 
-Ranked battles are competitive Pokemon battles where players compete for Elo rating and leaderboard positions. CobbleRanked manages the entire battle flow from queue to results.
+Ranked battles are the core feature of CobbleRanked - competitive Pokemon battles where players queue up, get matched by skill, battle, and earn/lose Elo points based on results.
 
-> **[📸 IMAGE NEEDED: バトルフローチャート（キュー参加→マッチング→検証→テレポート→バトル→結果処理→報酬の流れ）]**
+**Quick Start:**
+1. Build your competitive team
+2. Open GUI: `/ranked`
+3. Select battle format (Singles, Doubles, etc.)
+4. Join queue and wait for opponent
+5. Battle and earn rewards!
+
+---
 
 ## Battle Flow
 
-### 1. Queue Phase
+### 1. Queue & Matchmaking
 
-**Player joins queue:**
-1. Opens ranked GUI (`/ranked`)
-2. Selects battle format (Singles or Doubles)
-3. Clicks queue button
-4. Enters matchmaking pool
+**Join Queue:**
+```bash
+/ranked  # Opens GUI → Select format → Click "Join Queue"
+```
 
-**Queue status:**
-- In queue: Searching for opponent
-- Wait time displayed
-- Can leave queue anytime
-
-### 2. Matchmaking
-
-**Automated pairing:**
-- Players matched by Elo range
-- Same battle format required
+**Matchmaking Process:**
+- System pairs players with similar Elo ratings
+- Initial range: ±200 Elo
 - Range expands over time if no match found
+- Maximum range: ±600 Elo after 2.5 minutes
 
-**Matchmaking criteria:**
-1. **Same format:** Both players queued for same format (Singles or Doubles)
-2. **Elo range:** Within configured range (default ±200, expands over time)
-3. **Valid party:** Both players have valid Pokemon teams
+**See Also:** [Dynamic Matchmaking](dynamic-matchmaking.md)
 
-**Example:**
-```
-Player A: 1000 Elo, Singles queue
-Player B: 1050 Elo, Singles queue
-Result: Match found! (within 200 Elo range)
-```
+---
 
-### 3. Pre-Battle Validation
+### 2. Team Validation
 
-Before battle starts, both teams are validated:
+Before battle starts, your team is validated:
 
-**Validation checks:**
-- ✅ Team size matches requirements (default: 6)
-- ✅ No banned Pokemon (blacklist)
-- ✅ No banned moves
-- ✅ No banned abilities
-- ✅ No banned items
-- ✅ Special format requirements (if enabled)
+**✅ Validation Checks:**
+- Team size (default: 3-6 Pokemon depending on format)
+- No banned Pokemon ([Blacklist System](../configuration/blacklist.md))
+- No banned moves
+- No banned abilities
+- No banned held items
+- No banned inventory items ([Inventory Restrictions](../features/banned-items.md))
 
-**If validation fails:**
-- Player removed from queue
-- Error message displayed with reason
-- Other player returns to queue
+**If validation fails:** You're removed from queue with an error message explaining the issue.
 
-### 4. Teleportation
+---
 
-**Arena selection:**
-1. Random arena selected from configuration
-2. Both players teleport simultaneously
-3. Previous location saved for return
+### 3. Battle Start
 
-**Teleport features:**
-- Works across dimensions (Overworld, Nether, End, custom)
-- Preserves inventory and effects
-- Instant teleportation (no loading screen)
+**Teleportation:**
+- Both players teleport to a random arena
+- Previous location saved for return
+- Works across dimensions
 
-### 5. Battle Start
+**Battle Settings:**
+- Level scaling applied (if configured)
+- Turn timer active ([Turn Timer](turn-timer.md))
+- Battle format enforced (Singles/Doubles/etc.)
+- Competitive clauses enabled
 
-**Battle initialization:**
-1. Players face each other
-2. Battle GUI appears
-3. Pokemon teams loaded
-4. Battle begins!
+**See Also:** [Arena Setup](../configuration/arenas.md)
 
-**Battle settings:**
-- Level cap enforced (if configured)
-- Turn limit active (default: 100 turns)
-- Battle format applied
-- Clauses enabled
+---
 
-### 6. Battle Phase
+### 4. During Battle
 
-**During battle:**
-- Standard Cobblemon battle mechanics
+Standard Cobblemon battle mechanics:
 - Turn-based combat
 - Move selection
-- Switch mechanics
-- Item usage (if allowed)
+- Pokemon switching
+- Mega Evolution, Terastallization (if enabled)
 
-**Special mechanics:**
-- Terastallization (if enabled)
-- Mega Evolution (if enabled)
-- Z-Moves (if enabled)
-- Dynamax (if enabled)
+**Special Features:**
+- Turn limit (default: 100 turns)
+- Disconnect detection
+- Battle time tracking
 
-**Battle tracking:**
-- Turn counter
-- Battle time
-- Format recorded
-- Player actions logged
+---
 
-### 7. Battle End
+### 5. Battle End & Results
 
-**Possible outcomes:**
+**Possible Outcomes:**
+| Outcome | Elo Change | Notes |
+|---------|------------|-------|
+| **Victory** | +Elo (varies) | Gain based on opponent's rating |
+| **Defeat** | -Elo (varies) | Loss based on opponent's rating |
+| **Draw** | No change | Turn limit reached |
+| **Disconnect** | Flee penalty | Counts as loss, flee count +1 |
 
-| Outcome | Description | Elo Change |
-|---------|-------------|------------|
-| **Victory** | All opponent Pokemon fainted | Winner gains, loser loses |
-| **Defeat** | All your Pokemon fainted | Loser loses, winner gains |
-| **Forfeit** | Player manually forfeited | Counts as loss |
-| **Disconnect** | Player disconnected during battle | Flee count +1, counts as loss |
-| **Draw** | Turn limit reached | No Elo change |
+**Post-Battle:**
+- Elo calculated and applied ([Elo System](elo-system.md))
+- Stats updated (wins/losses/winrate)
+- Rewards distributed (if milestone reached)
+- Teleport back to previous location
 
-### 8. Results Processing
-
-**After battle ends:**
-
-1. **Elo calculation:**
-   - Winner gains Elo
-   - Loser loses Elo
-   - Amount based on Elo system configuration
-
-2. **Stats update:**
-   - Wins/losses incremented
-   - Win rate recalculated
-   - Flee count updated (if disconnect)
-   - Format-specific stats updated
-
-3. **Database save:**
-   - Player stats persisted
-   - Battle history recorded
-   - Leaderboard updated
-
-4. **Return teleport:**
-   - Players return to previous location
-   - Inventory restored
-   - Effects preserved
-
-### 9. Rewards
-
-**Post-battle rewards:**
-
-**Milestone rewards** (if configured):
-- 10 wins
-- 25 wins
-- 50 wins
-- 100 wins
-
-**Notification:**
-Players receive messages about:
-- Elo change
-- New rank position
-- Milestone rewards (if unlocked)
+---
 
 ## Battle Formats
 
-CobbleRanked supports three battle formats with independent rankings:
+CobbleRanked supports multiple battle formats with independent rankings:
 
-### Singles (1v1)
+| Format | Description | Team Size | Active Pokemon |
+|--------|-------------|-----------|----------------|
+| **Singles** | 1v1 battle | 3 | 1 per side |
+| **Doubles** | 2v2 battle | 4 | 2 per side |
+| **Triples** | 3v3 battle | 3 | 3 per side |
+| **Multi** | 2v2 team battle (4 players total) | 2 per player | 1 per player |
 
-**Format:** `GEN_9_SINGLES`
-- One Pokemon active per side
-- Classic 1v1 battle
-- Most common competitive format
+**Random Battle Formats:**
+- **Random Singles** - Auto-generated 6v6 teams
+- **Random Doubles** - Auto-generated 6v6 doubles
+- **Random 3v3** - Quick 3v3 with random teams
 
-**Team requirements:**
-- 6 Pokemon in party
-- Lead Pokemon selection
+**Each format has:**
+- Independent Elo rating
+- Separate leaderboard
+- Format-specific stats
+- Unique matchmaking queue
 
-### Doubles (2v2)
+**See Also:** [Battle Formats](battle-formats.md)
 
-**Format:** `GEN_9_DOUBLES`
-- Two Pokemon active per side
-- Similar to VGC official format
-- More strategic depth
-
-**Team requirements:**
-- 6 Pokemon in party
-- Lead pair selection
-
-## Independent Rankings
-
-Each format has separate:
-- Elo rating
-- Win/loss record
-- Leaderboard position
-- Statistics
-
-**Example:**
-```
-Player A Stats:
-  Singles: 1200 Elo, 15W-5L
-  Doubles: 1000 Elo, 0W-0L (never played)
-```
-
-## Disconnect Handling
-
-### Intentional Disconnect (Rage Quit)
-
-**Detection:**
-- Player closes game during battle
-- Client disconnects from server
-- No forfeit button used
-
-**Penalty:**
-- Flee count +1
-- Counts as loss
-- Elo penalty applied
-- Opponent wins automatically
-
-**Flee count tracking:**
-- Visible in player stats
-- Never decreases automatically
-- Admin can reset: `/rankedadmin flee reset <player>`
-
-### Unintentional Disconnect (Crash/Internet)
-
-**Same penalty:**
-- CobbleRanked cannot distinguish intentional vs unintentional
-- All disconnects treated the same
-- Prevents abuse
-
-**Protection:**
-- Admin can manually reset flee count for legitimate crashes
-- Elo can be manually adjusted: `/rankedadmin elo add <player> <amount>`
-
-### Connection Issues
-
-**Before battle starts:**
-- Player removed from queue
-- No penalty
-- Can rejoin queue
-
-**During battle:**
-- Treated as disconnect
-- Flee count incremented
-- Opponent wins
-
-## Draw Conditions
-
-### Turn Limit Reached
-
-**Trigger:** Battle reaches max turns (default: 100)
-
-**Result:**
-- Battle ends in draw
-- No Elo change for either player
-- Does not count as win or loss
-- No flee count penalty
-
-**Configuration:**
-```json5
-"battle": {
-  "maxTurns": 100  // Increase for longer battles
-}
-```
-
-### Both Players Disconnect
-
-**Rare scenario:** Both players disconnect simultaneously
-
-**Result:**
-- Battle canceled
-- No Elo change
-- No stats update
-- No penalty
-
-## Special Cases
-
-### Invalid Team Mid-Battle
-
-**Scenario:** Team becomes invalid during battle (e.g., banned Pokemon obtained via hack)
-
-**Result:**
-- Battle ends immediately
-- Invalid team player loses
-- Opponent wins
-- Severe warning issued
-
-### Arena Issues
-
-**Scenario:** Arena world unloads or becomes invalid during battle
-
-**Result:**
-- Battle continues (battle instance is separate)
-- Return teleport uses fallback location (spawn)
-- Error logged for admin review
-
-### Server Crash
-
-**Scenario:** Server crashes during battle
-
-**Result:**
-- Battle canceled on restart
-- No Elo change
-- No stats update
-- Players return to previous location
-
-## Battle Statistics
-
-### Tracked Per Format
-
-- **Total battles:** Wins + losses
-- **Win rate:** Wins / (wins + losses) * 100%
-- **Current Elo:** Real-time rating
-- **Peak Elo:** Highest Elo reached (future feature)
-- **Flee count:** Disconnect penalties
-
-### Global Statistics
-
-- **Total battles:** Sum across all formats
-- **Favorite format:** Most played
-- **Best format:** Highest Elo
-- **Overall win rate:** Combined win rate
+---
 
 ## Competitive Features
 
 ### Level Scaling
 
-**Force level cap:**
+**Force all Pokemon to same level:**
 ```json5
-"battle": {
-  "levelMatch": 70,        // All Pokemon become level 70
-  "forceLevelCap": true    // Enforce scaling
+{
+  "battle": {
+    "levelMatch": 70  // All Pokemon → Level 70
+  }
 }
 ```
 
@@ -337,108 +146,168 @@ Player A Stats:
 - No grinding advantage
 - Skill-based battles
 
+---
+
 ### Original Trainer Requirement
 
 **Prevent traded teams:**
 ```json5
-"competitive": {
-  "requireOriginalTrainer": true  // Must be OT
+{
+  "competitive": {
+    "requireOriginalTrainer": true
+  }
 }
 ```
 
 **Effect:**
-- Player must be original trainer of all Pokemon
-- Prevents buying/trading for perfect teams
-- Encourages legitimate catching/breeding
-
-### Team Size Enforcement
-
-**Fixed party size:**
-```json5
-"competitive": {
-  "teamSize": 6  // Must have exactly 6 Pokemon
-}
-```
-
-**Rationale:**
-- Standard competitive format
-- Prevents unfair advantages
-- Consistent with official tournaments
-
-## Battle Commands
-
-### During Battle
-
-No special commands required - use standard Cobblemon battle UI:
-- Click moves to attack
-- Click Pokemon to switch
-- Use items (if allowed)
-- Forfeit button to surrender
-
-### Pre-Battle
-
-Commands before battle starts:
-
-```bash
-/ranked              # Open GUI
-/queue join singles  # Join queue
-/queue leave         # Leave queue
-```
-
-### Post-Battle
-
-Commands after battle:
-
-```bash
-/stats               # View your stats
-/leaderboard        # Check leaderboard
-/elo                # Check your Elo
-```
-
-## Troubleshooting
-
-### Battle not starting
-
-**Symptom:** Matched but battle doesn't begin
-
-**Causes:**
-- Invalid Pokemon team
-- Blacklist violation
-- Arena configuration error
-
-**Solution:**
-1. Check blacklist validation message
-2. Verify arena exists: `/rankedadmin arena list`
-3. Check console for errors
-
-### Elo not updating
-
-**Symptom:** Battle ends but Elo unchanged
-
-**Causes:**
-- Draw (turn limit)
-- Database connection error
-- Elo system configuration error
-
-**Solution:**
-1. Check if battle ended in draw
-2. Verify database connection
-3. Check console for errors
-
-### Return teleport failed
-
-**Symptom:** Player stuck in arena after battle
-
-**Causes:**
-- Previous world unloaded
-- Coordinates invalid
-- Dimension error
-
-**Solution:**
-1. Manually teleport player: `/tp <player> <x> <y> <z>`
-2. Check `logs/latest.log` for teleport errors
-3. Verify arena configuration
+- Players must be OT (Original Trainer) of all Pokemon
+- Prevents buying/trading perfect teams
+- Encourages catching/breeding
 
 ---
 
-**Next:** Learn about [Elo Rating System](elo-system.md) to understand rating calculations.
+### Disconnect Penalties
+
+**Rage quit detection:**
+- Player disconnects during battle → Flee count +1
+- Counts as loss with Elo penalty
+- Opponent wins automatically
+
+**Flee count visible in player stats**
+
+**Admin can reset:**
+```bash
+/rankedarena setflee <player> 0
+```
+
+**See Also:** [Disconnect Penalties](disconnect-penalties.md)
+
+---
+
+## Reward System
+
+### Milestone Rewards
+
+Earn rewards at win milestones:
+- 10 wins
+- 25 wins
+- 50 wins
+- 100 wins
+
+**Configuration:** `config/cobbleranked/rewards.json5`
+
+### Season Rewards
+
+Top players receive exclusive rewards at season end:
+- Top 1
+- Top 3
+- Top 5
+- Top 10
+- Top 25
+
+**See Also:** [Rewards System](../configuration/rewards.md) · [Season Management](seasons.md)
+
+---
+
+## Commands
+
+### Player Commands
+
+```bash
+/ranked          # Open ranked GUI
+/season          # View current season
+```
+
+### Admin Commands
+
+```bash
+/rankedarena setelo <amount> <player> <format>    # Set player Elo
+/rankedarena addelo <amount> <player> <format>    # Add Elo
+/rankedarena removeelo <amount> <player> <format> # Remove Elo
+/rankedarena setflee <player> <amount>            # Set flee count
+/rankedarena closeRanked                          # Toggle system on/off
+```
+
+**See Also:** [Commands & Permissions](../getting-started/commands.md)
+
+---
+
+## Leaderboards
+
+**View Leaderboards:**
+```bash
+/ranked  # GUI → Click "Leaderboard" button
+```
+
+**Features:**
+- Format-specific leaderboards (Singles, Doubles, etc.)
+- Top 100 players displayed
+- Pagination support
+- Real-time updates
+
+**See Also:** [Leaderboards](leaderboards.md)
+
+---
+
+## Cross-Server Battles
+
+**Multi-server setup supported:**
+- Main/lobby servers for queueing
+- Dedicated battle server for fights
+- MySQL for shared player data
+- Redis for real-time matchmaking
+
+**Configuration:** `config/cobbleranked/config.json5`
+```json5
+{
+  "cross_server": {
+    "enabled": true,
+    "server_id": "main1",
+    "battle_server": "battle"
+  }
+}
+```
+
+**See Also:** [Cross-Server Setup](../advanced/cross-server.md)
+
+---
+
+## Related Documentation
+
+**Core Systems:**
+- [Elo Rating System](elo-system.md) - How ratings are calculated
+- [Dynamic Matchmaking](dynamic-matchmaking.md) - Player pairing system
+- [Battle Formats](battle-formats.md) - Available formats
+- [Season Management](seasons.md) - Competitive seasons
+
+**Configuration:**
+- [Blacklist System](../configuration/blacklist.md) - Ban Pokemon/moves/abilities
+- [Arena Setup](../configuration/arenas.md) - Configure battle arenas
+- [Rewards System](../configuration/rewards.md) - Milestone & season rewards
+- [Main Configuration](../configuration/config.md) - All settings
+
+**Advanced:**
+- [Cross-Server Setup](../advanced/cross-server.md) - Multi-server configuration
+- [Database Configuration](../advanced/database.md) - MySQL/SQLite setup
+- [Redis Integration](../advanced/redis.md) - Real-time synchronization
+
+---
+
+## Troubleshooting
+
+**Battle not starting?**
+- Check team validation message
+- Verify arena exists: `/rankedarena arena list`
+- Check console for errors
+
+**Elo not updating?**
+- Check if battle ended in draw (turn limit)
+- Verify database connection
+- Check `logs/latest.log` for errors
+
+**Can't find opponent?**
+- Wait longer for Elo range to expand
+- Check queue size: Look for other players in queue
+- Try different battle format
+
+**See Also:** [FAQ & Troubleshooting](../support/faq.md)

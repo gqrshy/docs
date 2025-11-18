@@ -1,135 +1,135 @@
 # Placeholder API
 
-CobbleRanked integrates with [Text Placeholder API](https://placeholders.pb4.eu/) to display ranked statistics in holograms, signs, and other Fabric mods that support placeholders.
+CobbleRanked provides two types of placeholders for displaying ranked statistics:
+
+1. **Leaderboard Placeholders** - Display top player stats in holograms, signs, and other mods
+2. **Message Placeholders** - Used internally in language files for dynamic text
 
 ---
 
-## Overview
+## Leaderboard Placeholders
 
-Placeholders allow you to display real-time ranked statistics anywhere that supports the Text Placeholder API format (`%placeholder%`).
+### Overview
 
-**Common use cases:**
-- Leaderboard holograms (Fabric-based hologram mods)
-- Scoreboard displays (Fabric scoreboard mods)
-- Chat formatting (compatible Fabric chat mods)
+Leaderboard placeholders integrate with [Text Placeholder API](https://placeholders.pb4.eu/) (Fabric mod) to display real-time ranked statistics.
+
+**Common Use Cases:**
+- Leaderboard holograms (Fabric hologram mods)
+- Scoreboard displays
 - Custom displays via Text Placeholder API
 
-**Note:** This uses **Text Placeholder API** (Fabric mod), not PlaceholderAPI (Bukkit/Spigot plugin). For hybrid servers (Arclight), both APIs are supported.
+**Platform Support:**
+- ✅ Fabric servers (via Text Placeholder API)
+- ✅ Hybrid servers (Arclight) - supports both Text Placeholder API and PlaceholderAPI
 
 **Performance:**
-- All placeholders are cached for 60 seconds
-- Database queries are minimized
-- Safe for high-traffic servers
+- 60-second cache (reduces database queries by ~98%)
+- <0.1% CPU impact
+- ~1KB memory per 100 cached placeholders
 
 ---
 
-## Placeholder Formats
+### Supported Formats
 
-### All Formats Combined
+#### All Formats Combined
 
-Display top players across **both** Singles and Doubles formats combined (ranked by total Elo).
+Display top players across **SINGLES**, **DOUBLES**, **TRIPLES**, and **MULTI** formats combined.
 
 **Syntax:**
 ```
 %cobbleranked_top_<rank>_<field>%
 ```
 
+**Available Fields:**
+| Field | Description | Example Output |
+|-------|-------------|----------------|
+| `name` | Player username | `"Notch"` |
+| `elo` | Total Elo (all formats) | `"1650"` |
+| `wins` | Total wins (all formats) | `"42"` |
+| `losses` | Total losses | `"15"` |
+| `winrate` | Win percentage | `"73.7%"` |
+| `games` | Total games played | `"57"` |
+
 **Examples:**
 ```
 %cobbleranked_top_1_name%      → "Notch"
 %cobbleranked_top_1_elo%       → "1650"
 %cobbleranked_top_2_wins%      → "42"
-%cobbleranked_top_3_winrate%   → "75.5"
+%cobbleranked_top_3_winrate%   → "75.5%"
 %cobbleranked_top_5_games%     → "128"
 ```
 
 ---
 
-### Singles Format Only
+#### Format-Specific Placeholders
 
-Display top players in **Singles** format only.
+Display top players for a specific battle format only.
 
-**Syntax:**
+**SINGLES Format:**
 ```
 %cobbleranked_top_singles_<rank>_<field>%
 ```
 
-**Examples:**
-```
-%cobbleranked_top_singles_1_name%    → "Steve"
-%cobbleranked_top_singles_1_elo%     → "1580"
-%cobbleranked_top_singles_2_wins%    → "35"
-%cobbleranked_top_singles_3_losses%  → "12"
-%cobbleranked_top_singles_5_winrate% → "80.0"
-```
-
----
-
-### Doubles Format Only
-
-Display top players in **Doubles** format only.
-
-**Syntax:**
+**DOUBLES Format:**
 ```
 %cobbleranked_top_doubles_<rank>_<field>%
 ```
 
-**Examples:**
+**TRIPLES Format:**
 ```
-%cobbleranked_top_doubles_1_name%    → "Alex"
-%cobbleranked_top_doubles_1_elo%     → "1720"
-%cobbleranked_top_doubles_2_wins%    → "48"
-%cobbleranked_top_doubles_3_losses%  → "8"
-%cobbleranked_top_doubles_5_games%   → "100"
+%cobbleranked_top_triples_<rank>_<field>%
+```
+
+**MULTI Format:**
+```
+%cobbleranked_top_multi_<rank>_<field>%
+```
+
+**Random Battle Formats:**
+```
+%cobbleranked_top_random_singles_<rank>_<field>%
+%cobbleranked_top_random_doubles_<rank>_<field>%
+%cobbleranked_top_random_3v3_<rank>_<field>%
+```
+
+**Example Usage:**
+```
+%cobbleranked_top_singles_1_name%     → "Steve"
+%cobbleranked_top_doubles_1_elo%      → "1720"
+%cobbleranked_top_triples_3_winrate%  → "80.0%"
+%cobbleranked_top_multi_5_games%      → "100"
 ```
 
 ---
 
-## Available Fields
+### Rank Range
 
-| Field | Description | Example Output |
-|-------|-------------|----------------|
-| `name` | Player username | `"Notch"` |
-| `elo` | Current Elo rating | `"1650"` |
-| `wins` | Total wins in format | `"42"` |
-| `losses` | Total losses in format | `"15"` |
-| `winrate` | Win percentage (1 decimal) | `"73.7"` |
-| `games` | Total games played | `"57"` |
+**Supported Ranks:** 1-100
 
-**Notes:**
-- All numeric fields return plain numbers (no formatting)
-- `winrate` is calculated as: `(wins / games) * 100`
-- Empty ranks return `"N/A"` for all fields
+Query any rank from 1st place to 100th place.
 
----
-
-## Supported Ranks
-
-**Range:** 1-100
-
-You can query any rank from 1st place to 100th place.
-
-**Examples:**
-```
-%cobbleranked_top_1_name%     → 1st place
-%cobbleranked_top_10_name%    → 10th place
-%cobbleranked_top_100_elo%    → 100th place
-```
-
-**Out of range:**
+**Out of Range Behavior:**
 - Rank < 1: Returns `"N/A"`
 - Rank > 100: Returns `"N/A"`
-- No player at rank: Returns `"N/A"` (or "-" for numeric fields)
+- No player at rank: Returns fallback values
+
+**Fallback Values:**
+| Field | Fallback Value |
+|-------|----------------|
+| `name` | `"N/A"` |
+| `elo` | `"-"` |
+| `wins` | `"0"` |
+| `losses` | `"0"` |
+| `winrate` | `"0.0%"` |
+| `games` | `"0"` |
 
 ---
 
-## Testing Placeholders
+### Testing Placeholders
 
-### Command Line Testing
+Use `/rankedplaceholder` commands to test before deploying:
 
-Use the `/rankedplaceholder` commands to test placeholders before deploying them.
-
-#### Test a Placeholder
+#### Test a Specific Placeholder
 
 ```bash
 /rankedplaceholder test %cobbleranked_top_1_name%
@@ -142,18 +142,13 @@ Input: %cobbleranked_top_1_name%
 Result: Notch
 ```
 
-#### List All Placeholders
+#### List All Available Placeholders
 
 ```bash
 /rankedplaceholder list
 ```
 
-**Output shows:**
-- All available formats (All, Singles, Doubles)
-- All available fields (name, elo, wins, losses, winrate, games)
-- Syntax examples for each format
-- Rank range information
-- Cache TTL info
+Shows all formats, fields, syntax examples, and rank range.
 
 #### Clear Cache
 
@@ -161,41 +156,36 @@ Result: Notch
 /rankedplaceholder clear
 ```
 
-Force immediate cache refresh (normally refreshes every 60 seconds automatically).
+Forces immediate cache refresh (normally auto-refreshes every 60 seconds).
 
 ---
 
-## Integration Examples
+### Integration Examples
 
-### Fabric Hologram Mods
+#### Fabric Hologram Mods
 
-CobbleRanked placeholders work with any Fabric hologram mod that supports Text Placeholder API.
+Any Fabric hologram mod that supports Text Placeholder API will work.
 
-**Example placeholder usage:**
-
+**Example Hologram Configuration:**
 ```
-%cobbleranked_top_1_name% - Top player name
-%cobbleranked_top_1_elo% - Top player Elo
-%cobbleranked_top_singles_1_name% - Top Singles player
-%cobbleranked_top_doubles_1_elo% - Top Doubles Elo
+Line 1: &6&l◆ Top Ranked Players ◆
+Line 2:
+Line 3: &e1st: &f%cobbleranked_top_1_name%
+Line 4: &7Elo: &a%cobbleranked_top_1_elo% &7| WR: &6%cobbleranked_top_1_winrate%
+Line 5:
+Line 6: &e2nd: &f%cobbleranked_top_2_name%
+Line 7: &7Elo: &a%cobbleranked_top_2_elo% &7| WR: &6%cobbleranked_top_2_winrate%
 ```
 
-**Recommended Fabric hologram mods:**
-- Check [Text Placeholder API's wiki](https://placeholders.pb4.eu/) for compatible hologram mods
-- Most Fabric hologram mods with placeholder support will work
+**Find compatible mods:** Check [Text Placeholder API wiki](https://placeholders.pb4.eu/)
 
----
+#### Hybrid Servers (Arclight)
 
-### Hybrid Servers (Arclight)
+For hybrid Fabric+Bukkit servers, CobbleRanked supports **both**:
+- Text Placeholder API (Fabric side)
+- PlaceholderAPI (Bukkit side)
 
-For hybrid Fabric+Bukkit servers (like Arclight), CobbleRanked supports **both**:
-- **Text Placeholder API** (Fabric side)
-- **PlaceholderAPI** (Bukkit/Spigot side)
-
-**Bukkit/Spigot plugin examples (Arclight only):**
-
-#### DecentHolograms (Bukkit plugin)
-
+**DecentHolograms Example (Bukkit plugin):**
 ```yaml
 # plugins/DecentHolograms/holograms/ranked_top.yml
 ranked_top:
@@ -210,124 +200,115 @@ ranked_top:
     - ""
     - "&e1st: &f%cobbleranked_top_1_name%"
     - "&7Elo: &a%cobbleranked_top_1_elo% &7| WR: &6%cobbleranked_top_1_winrate%%"
-    - ""
-    - "&e2nd: &f%cobbleranked_top_2_name%"
-    - "&7Elo: &a%cobbleranked_top_2_elo% &7| WR: &6%cobbleranked_top_2_winrate%%"
 ```
 
-#### LuckPerms Chat Prefix (Bukkit plugin)
-
-```bash
-# Set champion prefix for top player
-/lp group champion meta addprefix "&6[#1] "
-/lp user <top_player> parent set champion
-```
-
-**Note:** These Bukkit/Spigot examples only work on **hybrid servers** (Arclight). Pure Fabric servers should use Fabric-compatible mods only.
+> **Note:** Bukkit/Spigot plugin examples only work on **hybrid servers** (Arclight). Pure Fabric servers must use Fabric-compatible mods.
 
 ---
 
-## Placeholder Resolution Logic
-
-### How Rankings Are Calculated
-
-1. **All Formats (`%cobbleranked_top_<rank>_<field>%`):**
-   - Combines Singles and Doubles stats
-   - Ranked by **total Elo** (Singles Elo + Doubles Elo)
-   - Example: Player with 1500 Singles + 1600 Doubles = 3100 total
-
-2. **Singles Only (`%cobbleranked_top_singles_<rank>_<field>%`):**
-   - Only considers Singles format stats
-   - Ranked by Singles Elo only
-
-3. **Doubles Only (`%cobbleranked_top_doubles_<rank>_<field>%`):**
-   - Only considers Doubles format stats
-   - Ranked by Doubles Elo only
-
 ### Cache Behavior
 
-**Cache TTL:** 60 seconds
+**Cache Duration:** 60 seconds
 
-- First query: Database lookup
-- Subsequent queries (within 60s): Cache hit
-- After 60s: Cache expires, next query refreshes from database
+- **First Query:** Database lookup (slow)
+- **Subsequent Queries (within 60s):** Cache hit (instant)
+- **After 60s:** Cache expires, next query refreshes
 
-**Manual cache clear:**
+**Manual Cache Clear:**
 ```bash
 /rankedplaceholder clear
 ```
 
-**Automatic cache clear:**
-- Player wins/loses a match → Cache invalidated for that player
+**Automatic Cache Invalidation:**
+- Player wins/loses match → Cache invalidated for that player
 - Season rotation → Full cache clear
 
-### Empty Rank Handling
+**Performance Impact:**
+- **Without cache:** ~1000 database queries/minute
+- **With cache:** ~17 queries/minute (60s TTL)
+- **CPU:** <0.1%
+- **Memory:** ~1KB per 100 cached entries
 
-When a rank has no player (e.g., only 5 players on server but querying rank 10):
+---
 
-| Field | Fallback Value |
-|-------|----------------|
-| `name` | `"N/A"` |
-| `elo` | `"-"` |
-| `wins` | `"0"` |
-| `losses` | `"0"` |
-| `winrate` | `"0.0"` |
-| `games` | `"0"` |
+## Message Placeholders
 
-**Example:**
+Message placeholders are used in [language files](../configuration/languages.md) to dynamically insert values into text.
+
+### Player & Queue Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{player}` | Player name | `"match-finished": "{player} has won!"` |
+| `{player1}` | First player name | `"ranked-started": "{player1} vs {player2}"` |
+| `{player2}` | Second player name | `"prepare-queue-subtitle": "{player1} vs {player2}"` |
+| `{remaining}` | Time remaining | `"remaingFila": "Searching... ({remaining})"` |
+| `{posicao}` | Queue position | `"remaingFila": "Position: {posicao}"` |
+
+### Battle Result Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{gain}` | Elo points gained | `"match-winner-subtitle": "You gained {gain} ELO"` |
+| `{lose}` | Elo points lost | `"match-loser-subtitle": "You lost {lose} ELO"` |
+| `{elo}` | Current Elo rating | `"elo-up": "You ranked up to {elo}."` |
+| `{winner}` | Winner name | `"match-finished": "{winner} has won!"` |
+| `{loser}` | Loser name | `"match-finished": "{winner} defeated {loser}!"` |
+
+### System Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{time}` | Match duration | `"match-started-subtitle": "Duration is {time}m"` |
+| `{limit}` | Team size limit | `"limit-pokemon": "You need {limit} Pokémon"` |
+| `{arena}` | Arena name | `"arena-not-found": "Arena {arena} not found"` |
+| `{pokemon}` | Pokemon name | `"pokemon_switched": "Selected {pokemon}"` |
+| `{format}` | Battle format name | `"format_selector_selected": "▶ {format}"` |
+| `{error}` | Error details | `"pokemon-label-limit": "Exceeded limit: {error}"` |
+
+### Timer Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{seconds}` | Seconds remaining | `"battle_timer_critical": "Time remaining: {seconds}s"` |
+| `{minutes}` | Minutes remaining | `"battle_timer_normal": "{minutes}m {seconds}s"` |
+| `{type}` | Selection type | `"selection_timeout_critical": "{type} Selection"` |
+
+### Pokemon & Team Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{level}` | Pokemon level | `"team_selection_pokemon_level": "Level: {level}"` |
+| `{current}` | Current HP | `"team_selection_pokemon_hp": "HP: {current}/{max}"` |
+| `{max}` | Maximum HP | `"team_selection_pokemon_hp": "HP: {current}/{max}"` |
+| `{label}` | Pokemon label/category | `"team_selection_label_limit_item": "{label}: {current}/{limit}"` |
+| `{color}` | Color code | `"team_selection_label_limit_item": "{color}• {label}"` |
+| `{index}` | List item number | `"validation_error_list_item": "{index}. {pokemon}"` |
+
+### Season Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{season}` | Season name | `"season_current": "Current Season: {season}"` |
+| `{season_id}` | Season ID number | `"season_info": "Season #{season_id}"` |
+| `{days}` | Days remaining | `"season_ending_soon": "{days} days remaining"` |
+
+**Usage Example:**
+```json5
+{
+  "match-finished": "&8* &f{winner} &chas just won a ranked match against &f{loser}.",
+  "elo-up": "&aYou ranked up to &f{elo}.",
+  "remaingFila": "&cSearching for a match... &7(&e{remaining}&7) &7(Position: &e{posicao}&7)"
+}
 ```
-%cobbleranked_top_100_name%   → "N/A" (if < 100 players)
-%cobbleranked_top_100_elo%    → "-"
-```
+
+**See Also:** [Language Files Documentation](../configuration/languages.md) for complete message customization.
 
 ---
 
-## See Also
+## Developer API
 
-- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
-- [Commands Reference](../getting-started/commands.md) - Placeholder testing commands
-- [Configuration Guide](../configuration/config.md) - Cache settings
-
----
-
-## Performance Considerations
-
-### Cache Impact
-
-**Database queries saved:**
-- Without cache: ~1000 queries/minute (20 holograms × 50 viewers)
-- With cache: ~17 queries/minute (60-second TTL)
-
-**CPU impact:** Negligible (<0.1% CPU usage)
-
-**Memory usage:** ~1KB per 100 cached placeholders
-
-### Best Practices
-
-1. **Use cache-friendly update intervals:**
-   - Set hologram refresh to 60+ seconds
-   - Avoid sub-second refresh rates
-
-2. **Limit leaderboard size:**
-   - Display top 10 instead of top 100
-   - Reduces database load
-
-3. **Use format-specific placeholders when possible:**
-   ```
-   Singles-only server:
-   ✅ %cobbleranked_top_singles_1_name%
-   ❌ %cobbleranked_top_1_name%
-   ```
-
-4. **Avoid querying all 100 ranks:**
-   - Query only ranks you display
-   - Each rank query = 1 cache entry
-
----
-
-## API for Developers
-
-If you're developing a plugin that needs to access ranked data:
+For plugin/mod developers who need to access ranked data programmatically:
 
 ### Kotlin/Java Example
 
@@ -335,10 +316,10 @@ If you're developing a plugin that needs to access ranked data:
 import com.gashi.cobbleranked.CobbleRankedMod
 import com.gashi.cobbleranked.enums.BattleFormat
 
-// Get top 10 players (all formats)
+// Get top 10 players (all formats combined)
 val topPlayers = CobbleRankedMod.playerRankService.getTopPlayers(10)
 
-// Get top 10 players (Singles only)
+// Get top 10 players (Singles format only)
 val topSingles = CobbleRankedMod.playerRankService.getTopPlayersByFormat(
     format = BattleFormat.SINGLES,
     limit = 10
@@ -350,8 +331,8 @@ val stats = CobbleRankedMod.playerRankService.getFormatStats(
     format = BattleFormat.SINGLES
 )
 
-println("Player Elo: ${stats?.rankedInfo?.elo ?: 1000}")
-println("Wins: ${stats?.rankedInfo?.wins ?: 0}")
+println("Player Elo: ${stats?.eloPoints?.toInt() ?: 1000}")
+println("Wins: ${stats?.totalWins ?: 0}")
 ```
 
 ### Direct Placeholder Resolution
@@ -363,6 +344,11 @@ import com.gashi.cobbleranked.placeholder.PlaceholderService
 val playerName = PlaceholderService.resolve("%cobbleranked_top_1_name%")
 println("Top player: $playerName")
 
+// Replace all placeholders in text
+val text = "Top player is %cobbleranked_top_1_name% with %cobbleranked_top_1_elo% Elo"
+val resolved = PlaceholderService.replaceAll(text)
+println(resolved) // "Top player is Notch with 1650 Elo"
+
 // Clear cache programmatically
 PlaceholderService.clearCache()
 ```
@@ -371,37 +357,96 @@ PlaceholderService.clearCache()
 
 ## Complete Placeholder Reference
 
-### All Formats Combined
+### Leaderboard Placeholders (All Formats)
 
-| Placeholder | Description |
-|------------|-------------|
-| `%cobbleranked_top_<rank>_name%` | Player username |
-| `%cobbleranked_top_<rank>_elo%` | Total Elo (Singles + Doubles) |
-| `%cobbleranked_top_<rank>_wins%` | Total wins (Singles + Doubles) |
-| `%cobbleranked_top_<rank>_losses%` | Total losses (Singles + Doubles) |
-| `%cobbleranked_top_<rank>_winrate%` | Overall win percentage |
-| `%cobbleranked_top_<rank>_games%` | Total games played |
+```
+%cobbleranked_top_<rank>_name%
+%cobbleranked_top_<rank>_elo%
+%cobbleranked_top_<rank>_wins%
+%cobbleranked_top_<rank>_losses%
+%cobbleranked_top_<rank>_winrate%
+%cobbleranked_top_<rank>_games%
+```
 
-### Singles Format
+### Format-Specific Leaderboards
 
-| Placeholder | Description |
-|------------|-------------|
-| `%cobbleranked_top_singles_<rank>_name%` | Player username |
-| `%cobbleranked_top_singles_<rank>_elo%` | Singles Elo |
-| `%cobbleranked_top_singles_<rank>_wins%` | Singles wins |
-| `%cobbleranked_top_singles_<rank>_losses%` | Singles losses |
-| `%cobbleranked_top_singles_<rank>_winrate%` | Singles win percentage |
-| `%cobbleranked_top_singles_<rank>_games%` | Singles games played |
+**Singles:**
+```
+%cobbleranked_top_singles_<rank>_name%
+%cobbleranked_top_singles_<rank>_elo%
+%cobbleranked_top_singles_<rank>_wins%
+%cobbleranked_top_singles_<rank>_losses%
+%cobbleranked_top_singles_<rank>_winrate%
+%cobbleranked_top_singles_<rank>_games%
+```
 
-### Doubles Format
+**Doubles:**
+```
+%cobbleranked_top_doubles_<rank>_name%
+%cobbleranked_top_doubles_<rank>_elo%
+%cobbleranked_top_doubles_<rank>_wins%
+%cobbleranked_top_doubles_<rank>_losses%
+%cobbleranked_top_doubles_<rank>_winrate%
+%cobbleranked_top_doubles_<rank>_games%
+```
 
-| Placeholder | Description |
-|------------|-------------|
-| `%cobbleranked_top_doubles_<rank>_name%` | Player username |
-| `%cobbleranked_top_doubles_<rank>_elo%` | Doubles Elo |
-| `%cobbleranked_top_doubles_<rank>_wins%` | Doubles wins |
-| `%cobbleranked_top_doubles_<rank>_losses%` | Doubles losses |
-| `%cobbleranked_top_doubles_<rank>_winrate%` | Doubles win percentage |
-| `%cobbleranked_top_doubles_<rank>_games%` | Doubles games played |
+**Triples:**
+```
+%cobbleranked_top_triples_<rank>_name%
+%cobbleranked_top_triples_<rank>_elo%
+%cobbleranked_top_triples_<rank>_wins%
+%cobbleranked_top_triples_<rank>_losses%
+%cobbleranked_top_triples_<rank>_winrate%
+%cobbleranked_top_triples_<rank>_games%
+```
 
-**Rank range:** 1-100 for all placeholders
+**Multi (2v2):**
+```
+%cobbleranked_top_multi_<rank>_name%
+%cobbleranked_top_multi_<rank>_elo%
+%cobbleranked_top_multi_<rank>_wins%
+%cobbleranked_top_multi_<rank>_losses%
+%cobbleranked_top_multi_<rank>_winrate%
+%cobbleranked_top_multi_<rank>_games%
+```
+
+**Rank Range:** 1-100 for all placeholders
+
+---
+
+## Best Practices
+
+### Performance Optimization
+
+1. **Use format-specific placeholders when possible:**
+   ```
+   Singles-only server:
+   ✅ %cobbleranked_top_singles_1_name%
+   ❌ %cobbleranked_top_1_name%
+   ```
+
+2. **Limit leaderboard size:**
+   - Display top 10 instead of top 100
+   - Reduces database load
+
+3. **Set hologram refresh to 60+ seconds:**
+   - Aligns with cache TTL
+   - Avoids unnecessary queries
+
+4. **Avoid querying all 100 ranks:**
+   - Only query ranks you display
+   - Each rank = 1 cache entry
+
+### Cache Management
+
+- **Default TTL:** 60 seconds (auto-refresh)
+- **Manual clear:** Use `/rankedplaceholder clear` after database edits
+- **Automatic clear:** Season rotation automatically clears cache
+
+---
+
+## See Also
+
+- [Language Files](../configuration/languages.md) - Message placeholder customization
+- [Commands Reference](../getting-started/commands.md) - Placeholder testing commands
+- [FAQ & Troubleshooting](../support/faq.md) - Common placeholder issues

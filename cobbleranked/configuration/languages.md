@@ -122,54 +122,17 @@ Language files use JSON5 format with key-value pairs:
 
 ## Placeholders
 
-Many messages support placeholders that are dynamically replaced:
+Language files support dynamic placeholders that are replaced with actual values at runtime.
 
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{player}` | Player name | "match-finished": "{player} has won!" |
-| `{player1}` | First player name | "ranked-started": "{player1} vs {player2}" |
-| `{player2}` | Second player name | "prepare-queue-subtitle": "{player1} vs {player2}" |
-| `{gain}` | Elo gained | "match-winner-subtitle": "You gained {gain} ELO" |
-| `{lose}` | Elo lost | "match-loser-subtitle": "You lost {lose} ELO" |
-| `{elo}` | Elo rating | "elo-up": "You ranked up to {elo}." |
-| `{winner}` | Winner name | "match-finished": "{winner} has won!" |
-| `{loser}` | Loser name | "match-finished": "{winner} defeated {loser}!" |
-| `{remaining}` | Time remaining | "remaingFila": "Searching... ({remaining})" |
-| `{posicao}` | Queue position | "remaingFila": "Position: {posicao}" |
-| `{time}` | Time value | "match-started-subtitle": "Duration is {time}m" |
-| `{limit}` | Team size limit | "limit-pokemon": "You need {limit} Pokémon" |
-| `{arena}` | Arena name | "arena-not-found": "Arena {arena} not found" |
-| `{pokemon}` | Pokemon name | "pokemon_switched": "Selected {pokemon}" |
-| `{error}` | Error details | "pokemon-label-limit": "Exceeded limit: {error}" |
+**Common placeholders include:**
+- `{player}`, `{player1}`, `{player2}` - Player names
+- `{gain}`, `{lose}`, `{elo}` - Elo ratings
+- `{winner}`, `{loser}` - Battle results
+- `{remaining}`, `{posicao}` - Queue information
+- `{pokemon}`, `{level}`, `{format}` - Pokemon and battle info
+- `{season}`, `{arena}`, `{time}` - System information
 
-### Timer & Battle Placeholders
-
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{seconds}` | Seconds remaining | "battle_timer_critical": "Time remaining: {seconds}s" |
-| `{minutes}` | Minutes remaining | "battle_timer_normal": "{minutes}m {seconds}s" |
-| `{type}` | Selection type (Team/Lead) | "selection_timeout_critical": "{type} Selection" |
-
-### Pokemon & Team Placeholders
-
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{level}` | Pokemon level | "team_selection_pokemon_level": "Level: {level}" |
-| `{current}` | Current HP | "team_selection_pokemon_hp": "HP: {current}/{max}" |
-| `{max}` | Maximum HP | "team_selection_pokemon_hp": "HP: {current}/{max}" |
-| `{label}` | Pokemon label/category | "team_selection_label_limit_item": "{label}: {current}/{limit}" |
-| `{color}` | Color code | "team_selection_label_limit_item": "{color}• {label}" |
-
-### Format & System Placeholders
-
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{format}` | Battle format name | "format_selector_selected": "▶ {format}" |
-| `{index}` | List item number | "validation_error_list_item": "{index}. {pokemon}" |
-| `{remaining}` | Amount remaining | "milestone_progress_needed": "{remaining} more needed" |
-
-### Example with Placeholders
-
+**Example Usage:**
 ```json5
 {
   "match-finished": "&8* &f{winner} &chas just won a ranked match against &f{loser}.",
@@ -178,10 +141,13 @@ Many messages support placeholders that are dynamically replaced:
 }
 ```
 
-**Result:**
-- `{winner}` → "Steve"
-- `{loser}` → "Alex"
-- Output: "* Steve has just won a ranked match against Alex."
+**For a complete list of all placeholders and their usage, see:**
+- [Placeholder API Documentation](../integration/placeholders.md#message-placeholders)
+
+**Important Rules:**
+- Placeholders are **case-sensitive** (use `{player}`, not `{Player}`)
+- Always preserve placeholders when translating messages
+- Test placeholders in-game after editing
 
 ---
 
