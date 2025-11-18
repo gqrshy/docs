@@ -70,6 +70,9 @@ Automatically reduces flee count over time to forgive past disconnects.
 
 ---
 
+<details>
+<summary><strong>Presets</strong></summary>
+
 ## Presets
 
 ### Lenient (Casual)
@@ -105,6 +108,8 @@ Automatically reduces flee count over time to forgive past disconnects.
 }
 ```
 
+</details>
+
 ---
 
 ## Admin Commands
@@ -113,20 +118,6 @@ Automatically reduces flee count over time to forgive past disconnects.
 |---------|-------------|
 | `/rankedadmin getflee <player> <format>` | Check player's flee count |
 | `/rankedadmin resetflee <player> <format>` | Reset flee count to 0 |
-
----
-
-## Troubleshooting
-
-**Penalties not working?**
-- Check tier configuration syntax
-- Verify `preventDuplicatePenalty: true` in cross-server mode
-- Restart server after config changes
-
-**Flee count not decaying?**
-- Ensure `enabled: true`
-- Decay applies when player logs in
-- Check server time/date is correct
 
 ---
 

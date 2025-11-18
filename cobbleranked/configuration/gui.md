@@ -154,18 +154,3 @@ Example:
 > **[📸 IMAGE NEEDED: カスタマイズ前後のGUI比較画像（デフォルトとカスタムアイテム/配置の違い）]**
 
 **Note:** Config reloads automatically detect language from `config.json5`.
-
-## Troubleshooting
-
-**GUI not updating:**
-- Check JSON5 syntax (use [JSONLint](https://jsonlint.com/))
-- Verify file encoding is UTF-8
-- Run `/rankedadmin reload`
-
-**Items not showing:**
-- Check slot numbers (0-53 range)
-- Verify item IDs are valid
-
-**Colors not working:**
-- Use `&` not `§` for color codes
-- Ensure `&r` to reset formatting

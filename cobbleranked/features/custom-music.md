@@ -134,18 +134,3 @@ Place in `.minecraft/resourcepacks/` or use server resource pack.
 2. Load resource pack
 3. Join queue: `/ranked`
 4. Music should play automatically
-
-## Troubleshooting
-
-**No music playing:**
-- Check `music.enabled: true` in config
-- Verify resource pack is loaded
-- Check sound IDs match between config and sounds.json
-
-**Music stuttering:**
-- Lower file size (use lower bitrate OGG)
-- Check network connection (for server resource packs)
-
-**Wrong music playing:**
-- Verify Elo ranges in config don't overlap
-- Check player's current Elo matches expected range

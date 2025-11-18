@@ -44,7 +44,8 @@ Automatically expands Elo range as players wait in queue for faster matches.
 
 ---
 
-## Example Timeline
+<details>
+<summary><strong>Example Timeline</strong></summary>
 
 **Player with 1500 Elo:**
 
@@ -57,7 +58,12 @@ Automatically expands Elo range as players wait in queue for faster matches.
 | 600s | ±314 | 1186 | 1814 |
 | 2000s+ | ±600 (max) | 900 | 2100 |
 
+</details>
+
 ---
+
+<details>
+<summary><strong>Presets</strong></summary>
 
 ## Presets
 
@@ -91,23 +97,7 @@ Automatically expands Elo range as players wait in queue for faster matches.
 }
 ```
 
----
-
-## Troubleshooting
-
-**Queue times too long?**
-- Decrease `expansion_delay`
-- Decrease `expansion_rate`
-- Increase `initial_range`
-
-**Matches too unbalanced?**
-- Decrease `initial_range`
-- Increase `expansion_delay`
-- Decrease `max_multiplier`
-
-**Expansion not working?**
-- Check `enabled: true`
-- Reload config: `/rankedadmin reload`
+</details>
 
 ---
 

@@ -129,7 +129,8 @@ Each phase uses the same restriction categories below.
 - Only battle UI allowed
 - All other actions blocked
 
-## Common Examples
+<details>
+<summary><strong>Common Examples</strong></summary>
 
 ### Allow Teleportation During Queue
 
@@ -161,6 +162,8 @@ Each phase uses the same restriction categories below.
   }
 }
 ```
+
+</details>
 
 ## Troubleshooting
 

@@ -177,22 +177,4 @@ See [Rewards System](../configuration/rewards.md) for configuration.
 
 ---
 
-## Troubleshooting
-
-**Can't queue for Multi?**
-- Verify party formed (2 players)
-- Both players must have enough Pokemon
-- Check both selected same format
-
-**Stats not tracking correctly?**
-- Verify playing correct format
-- Check format in leaderboard
-- Stats are format-independent
-
-**Matchmaking slow for specific format?**
-- Doubles/Multi have smaller player pools
-- See [Dynamic Matchmaking](dynamic-matchmaking.md)
-
----
-
 **Related:** [Dynamic Matchmaking](dynamic-matchmaking.md) · [Elo System](elo-system.md) · [Rewards](../configuration/rewards.md)

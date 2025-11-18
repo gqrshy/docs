@@ -213,7 +213,8 @@ Allow limited quantities instead of complete bans:
 
 ---
 
-## Pre-made Configurations
+<details>
+<summary><strong>Pre-made Configurations</strong></summary>
 
 ### Smogon OU
 
@@ -265,9 +266,12 @@ Only ban unfair moves:
 }
 ```
 
+</details>
+
 ---
 
-## Advanced Examples
+<details>
+<summary><strong>Advanced Examples</strong></summary>
 
 ### Mix Limits + Bans
 
@@ -310,6 +314,8 @@ Recommended blacklist:
 }
 ```
 
+</details>
+
 ---
 
 ## Validation Flow
@@ -339,27 +345,6 @@ When player joins queue:
 ```
 
 > **[📸 INSERT: Screenshot of validation error message]**
-
----
-
-## Troubleshooting
-
-### Config Not Applying
-- Run `/rankedadmin reload`
-- Check JSON5 syntax (missing commas, brackets)
-
-### Items Not Banned
-- Use `cobblemon:item_name` format (not display name)
-- Verify with `F3 + H`
-
-### Pokemon Still Allowed
-- Check spelling (case-insensitive but typos matter)
-- Verify label exists for that Pokemon
-- Check form syntax (`:mega` vs `:mega_x`)
-
-### More Help
-- [FAQ - Blacklist Section](../support/faq.md#blacklist-configuration)
-- [Discord](https://discord.gg/VVVvBTqqyP) #feedback
 
 ---
 

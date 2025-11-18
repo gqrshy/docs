@@ -2,6 +2,8 @@
 
 Get your ranked battles up and running in under 5 minutes!
 
+> **Prerequisites:** Make sure you've completed the [Installation](installation.md) guide before proceeding.
+
 ## Overview
 
 This guide will help you:
@@ -14,44 +16,62 @@ This guide will help you:
 
 ## Step 1: Create a Battle Arena
 
+> **Detailed guide:** [Arena Setup](../configuration/arenas.md)
+
 Arenas are locations where ranked battles take place.
 
 ### Create an Arena
 
 1. **Build your arena** in-game (or use an existing location)
-2. **Stand at the spawn point** where you want players to teleport
+2. **Stand at the first spawn point** where you want Player 1 to teleport when battle starts
 
 > **[📸 IMAGE NEEDED: プレイヤーがアリーナ作成位置に立っている様子（座標とYaw/Pitch表示）]**
 
 3. **Run the command:**
-   ```
-   /rankedadmin arena set <arena_name>
-   ```
-   Example:
-   ```
-   /rankedadmin arena set main_arena
+   ```bash
+   /rankedadmin setArena main_arena pos1
    ```
 
-4. **Verify creation:**
-   ```
-   /rankedadmin arena list
+4. **Move to second spawn point** and run:
+   ```bash
+   /rankedadmin setArena main_arena pos2
    ```
 
-### Multiple Arenas (Optional)
+5. **Verify creation:**
+   ```bash
+   /rankedadmin arena status
+   ```
+
+**Note:** For MULTI mode (4-player battles), you need to set `pos3` and `pos4` as well.
+
+<details>
+<summary><strong>Multiple Arenas (Optional)</strong></summary>
 
 Create multiple arenas for variety:
 
 ```bash
-/rankedadmin arena set volcano_arena
-/rankedadmin arena set ice_arena
-/rankedadmin arena set forest_arena
+# First arena
+/rankedadmin setArena volcano_arena pos1
+/rankedadmin setArena volcano_arena pos2
+
+# Second arena
+/rankedadmin setArena ice_arena pos1
+/rankedadmin setArena ice_arena pos2
+
+# Third arena
+/rankedadmin setArena forest_arena pos1
+/rankedadmin setArena forest_arena pos2
 ```
 
 > **[📸 IMAGE NEEDED: 複数のアリーナが配置されたマップ全体図（火山、氷、森など）]**
 
 CobbleRanked will randomly select from available arenas.
 
+</details>
+
 ## Step 2: Configure Pokemon Restrictions
+
+> **Detailed guide:** [Blacklist System](../configuration/blacklist.md)
 
 By default, **all Pokemon are allowed**. Let's ban some overpowered Pokemon:
 
@@ -136,20 +156,17 @@ Choose a competitive format:
 
 ## Step 3: Start the First Season
 
+> **Detailed guide:** [Season Management](../features/seasons.md)
+
 Seasons automatically rotate based on your configuration.
 
 ### Check Current Season
 
-```
+```bash
 /rankedadmin season info
 ```
 
-You should see:
-```
-Current Season: Season 1
-Started: 2025-10-26
-Ends: 2025-11-25 (30 days)
-```
+> **[📸 IMAGE NEEDED: /rankedadmin season infoコマンド実行結果の画面]**
 
 ### Customize Season Duration
 
@@ -168,21 +185,20 @@ Reload:
 
 ## Step 4: Test the System
 
+> **Detailed guide:** [Battle Formats](../features/battle-formats.md)
+
 Let's run through a complete battle flow!
 
 ### Join the Queue
 
 1. **Open ranked GUI:**
-   ```
+   ```bash
    /ranked
    ```
-   Or use the in-game GUI item (if configured)
 
 > **[📸 IMAGE NEEDED: ランクメニューGUIのメイン画面（Singles/Doublesフォーマット選択）]**
 
-2. **Select battle format:**
-   - Singles (1v1)
-   - Doubles (2v2)
+2. **Select battle format** (Singles, Doubles, Triples, MULTI, etc.)
 
 3. **Join the queue** by clicking the queue button
 
@@ -206,9 +222,14 @@ Let's run through a complete battle flow!
 
 ## Step 5: Set Up Rewards (Optional)
 
+> **Detailed guide:** [Rewards System](../configuration/rewards.md)
+
 Reward your top players with items or commands!
 
 ### Edit Rewards Configuration
+
+<details>
+<summary><strong>Example Rewards Configuration</strong></summary>
 
 Open `config/cobbleranked/rewards.json5`:
 
@@ -218,15 +239,15 @@ Open `config/cobbleranked/rewards.json5`:
     "first_place": {
       "enabled": true,
       "commands": [
-        "give %player% minecraft:diamond 64",
-        "give %player% cobblemon:master_ball 5"
+        "give {player} minecraft:diamond 64",
+        "give {player} cobblemon:master_ball 5"
       ]
     },
     "second_place": {
       "enabled": true,
       "commands": [
-        "give %player% minecraft:diamond 32",
-        "give %player% cobblemon:master_ball 3"
+        "give {player} minecraft:diamond 32",
+        "give {player} cobblemon:master_ball 3"
       ]
     }
   },
@@ -234,70 +255,21 @@ Open `config/cobbleranked/rewards.json5`:
     "10_wins": {
       "enabled": true,
       "commands": [
-        "give %player% minecraft:emerald 10"
+        "give {player} minecraft:emerald 10"
       ]
     }
   }
 }
 ```
 
-Reload:
-```
+**Reload:**
+```bash
 /rankedadmin reload
 ```
 
+</details>
+
 > **[📸 IMAGE NEEDED: リワード収集GUI（シーズン報酬とマイルストーン報酬の表示）]**
-
-## Verification Checklist
-
-Before going live, verify:
-
-- [ ] At least one arena is configured
-- [ ] Blacklist is configured (if desired)
-- [ ] Season is active
-- [ ] Rewards are configured (optional)
-- [ ] Two players can queue and battle successfully
-- [ ] Elo is updating correctly
-- [ ] Leaderboard displays rankings
-
-## Common Issues
-
-### No arenas configured
-
-**Symptom:** Players can't start battles
-
-**Fix:**
-```
-/rankedadmin arena set main_arena
-```
-
-### Players can use banned Pokemon
-
-**Symptom:** Mewtwo allowed despite being in blacklist
-
-**Fix:**
-1. Check `blacklist.json5` syntax (no trailing commas!)
-2. Reload: `/rankedadmin reload`
-3. Test with `/ranked` GUI validation
-
-### Elo not updating
-
-**Symptom:** Elo stays at 1000 after battles
-
-**Fix:**
-1. Check console for errors
-2. Verify database connection
-3. Check `config.json5` → `eloSystem.mode` (should be `LEGACY` or `POKEMON_SHOWDOWN`)
-
-### Season already ended
-
-**Symptom:** "Season has ended" message
-
-**Fix:**
-```
-/rankedadmin season rotate
-```
-This will create a new season and clear reward flags.
 
 ## Next Steps
 
@@ -307,33 +279,6 @@ Now that you're up and running:
 - **Configure Elo system** - [Elo Rating System](../features/elo-system.md)
 - **Set up cross-server** - [Cross-Server Setup](../advanced/cross-server.md)
 - **Learn all commands** - [Commands Reference](commands.md)
-
-## Testing Checklist
-
-Use this checklist when setting up on a new server:
-
-### Basic Functionality
-- [ ] `/ranked` GUI opens
-- [ ] Format selection works
-- [ ] Queue system accepts players
-- [ ] Matchmaking pairs players
-- [ ] Battle starts correctly
-- [ ] Players teleport to arena
-- [ ] Battle ends normally
-- [ ] Elo updates after battle
-
-### Configuration
-- [ ] Blacklist blocks banned Pokemon
-- [ ] Banned moves are prevented
-- [ ] Arena teleportation works
-- [ ] Language files display correctly
-- [ ] GUI items render properly
-
-### Database
-- [ ] Player stats persist after restart
-- [ ] Leaderboard displays correctly
-- [ ] Season data is saved
-- [ ] Reward flags work
 
 ---
 

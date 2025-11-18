@@ -120,34 +120,8 @@ Shows real-time Redis commands (useful for debugging).
 
 ---
 
-## Troubleshooting
-
-### Connection refused
-
-**Solutions:**
-1. Check Redis running: `systemctl status redis-server`
-2. Check bind address: `grep bind /etc/redis/redis.conf`
-3. Check firewall: `telnet REDIS_IP 6379`
-
-### Wrong password
-
-```
-(error) NOAUTH Authentication required
-```
-
-**Solution:** Provide password in config or remove `requirepass` from redis.conf
-
-### Queue not syncing
-
-**Symptoms:** Players on different servers can't match
-
-**Solutions:**
-1. Verify all servers use same Redis host/port
-2. Check all servers use same `database` number
-3. Test Redis connection from each server
-4. Check server logs for Redis errors
-
----
+<details>
+<summary><strong>Advanced</strong></summary>
 
 ## Advanced
 
@@ -173,6 +147,8 @@ Redis is extremely fast. No tuning needed for typical usage.
 - Check Redis server resources (CPU, RAM)
 - Use dedicated Redis server (not on Minecraft server)
 - Monitor: `redis-cli INFO`
+
+</details>
 
 ---
 
