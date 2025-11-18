@@ -54,8 +54,3 @@ Different time limits per format:
 - **Tournaments:** 60 seconds for faster matches
 - **Casual:** 120+ seconds for new players
 
-## Troubleshooting
-
-**Timer not appearing:** Check `turnTimer.enabled` is `true`.
-
-**Wrong time limit:** Format-specific settings override default.

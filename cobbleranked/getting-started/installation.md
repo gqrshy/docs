@@ -65,7 +65,8 @@ If GUI opens → Installation successful! ✅
 
 ## Initial Setup (Optional)
 
-### Language Configuration
+<details>
+<summary><strong>Language Configuration</strong></summary>
 
 Default: English (`en-Us`)
 
@@ -81,15 +82,26 @@ Edit `config/cobbleranked/config.json5`:
 
 **Affects:** GUI text, messages, validation errors
 
+</details>
+
 ### Arena Setup (Recommended)
 
-Teleport players to battle coordinates instead of current location.
+Teleport players to battle coordinates when battles start.
 
-**Step 1:** Stand at desired battle spawn point
-**Step 2:** Run command:
+**Step 1:** Stand at the position where you want players to teleport **when the battle starts**
+**Step 2:** Run command for each spawn position:
 
-```
-/rankedadmin arena set main_arena
+```bash
+# For SINGLES, DOUBLES, TRIPLES (2 positions needed)
+/rankedadmin setArena main_arena pos1
+# Move to second spawn point, then:
+/rankedadmin setArena main_arena pos2
+
+# For MULTI mode (4 positions needed - 2 teams of 2)
+/rankedadmin setArena multi_arena pos1
+/rankedadmin setArena multi_arena pos2
+/rankedadmin setArena multi_arena pos3
+/rankedadmin setArena multi_arena pos4
 ```
 
 **Saved:** Position (x, y, z), facing (yaw, pitch), dimension
@@ -146,11 +158,8 @@ Edit `config/cobbleranked/blacklist.json5`:
 **Required for:** Multi-server networks sharing rankings
 
 **Architecture:**
-```
-[Lobby Servers] → [Velocity Proxy] → [Battle Server]
-        ↓                                   ↓
-     [MySQL/MongoDB + Redis] ← ← ← ← ← ← ←
-```
+
+![Cross-Server Architecture](../../images/crossserver.png)
 
 ### Requirements
 
@@ -165,15 +174,62 @@ Edit `config/cobbleranked/blacklist.json5`:
 - MongoDB: Cloud-ready (Atlas), better for 5+ servers
 
 **2. Install Redis:**
+
+<details>
+<summary><strong>Ubuntu/Debian/Linux</strong></summary>
+
 ```bash
-# Ubuntu/Debian
 sudo apt install redis-server
 sudo systemctl start redis-server
+sudo systemctl enable redis-server
 ```
+
+</details>
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+**Option 1: Using WSL2 (Recommended)**
+```bash
+# Install WSL2 first (if not already installed)
+wsl --install
+
+# Inside WSL2:
+sudo apt update
+sudo apt install redis-server
+sudo service redis-server start
+```
+
+**Option 2: Using Memurai (Redis-compatible)**
+1. Download Memurai from [https://www.memurai.com/](https://www.memurai.com/)
+2. Run the installer
+3. Start Memurai service from Windows Services
+
+**Option 3: Using Docker Desktop**
+```bash
+docker run -d -p 6379:6379 --name redis redis:latest
+```
+
+**Test Connection:**
+```bash
+# Using redis-cli (if available)
+redis-cli ping
+# Should return: PONG
+
+# Or use telnet
+telnet localhost 6379
+# Then type: PING
+```
+
+</details>
 
 **3. Configure Servers:**
 
-**Battle Server** (`config.json5`):
+<details>
+<summary><strong>Battle Server Configuration</strong></summary>
+
+Edit `config/cobbleranked/config.json5`:
+
 ```json5
 {
   "cross_server": {
@@ -198,7 +254,13 @@ sudo systemctl start redis-server
 }
 ```
 
-**Lobby Servers** (`config.json5`):
+</details>
+
+<details>
+<summary><strong>Lobby Server Configuration</strong></summary>
+
+Edit `config/cobbleranked/config.json5`:
+
 ```json5
 {
   "cross_server": {
@@ -211,7 +273,7 @@ sudo systemctl start redis-server
 }
 ```
 
-> **[📸 INSERT: Diagram showing cross-server architecture with Velocity]**
+</details>
 
 **Full Guide:** [Cross-Server Setup](../advanced/cross-server.md)
 
@@ -244,7 +306,31 @@ config/cobbleranked/
     └── ru-Ru.json5        # Russian messages
 ```
 
-**All files:** JSON5 format (allows comments `//`)
+**All files use JSON5 format** (allows comments `//`)
+
+<details>
+<summary><strong>What is JSON5?</strong></summary>
+
+JSON5 is a more human-friendly variant of JSON that allows:
+
+- **Comments:** Use `//` for single-line or `/* */` for multi-line comments
+- **Trailing commas:** Last item in arrays/objects can have a comma
+- **Unquoted keys:** Object keys don't need quotes (in most cases)
+
+**Example:**
+```json5
+{
+  // This is a comment
+  "language": "en-Us",  // Trailing comma is OK
+  max_players: 100      // Unquoted key works
+}
+```
+
+**Validation:** Use [https://json5.org/](https://json5.org/) to validate syntax
+
+**More info:** See [FAQ](../support/faq.md#json5-configuration)
+
+</details>
 
 ---
 

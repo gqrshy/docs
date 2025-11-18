@@ -84,7 +84,8 @@ Automatically unlock when players reach achievements (wins, matches, Elo).
 
 ---
 
-## Quick Examples
+<details>
+<summary><strong>Quick Examples</strong></summary>
 
 ### Top 3 Season Rewards
 ```json5
@@ -148,9 +149,12 @@ Automatically unlock when players reach achievements (wins, matches, Elo).
 }
 ```
 
+</details>
+
 ---
 
-## Command Examples
+<details>
+<summary><strong>Command Examples</strong></summary>
 
 ### Give Items
 ```json5
@@ -177,28 +181,7 @@ Automatically unlock when players reach achievements (wins, matches, Elo).
 ]
 ```
 
----
-
-## Color Codes
-
-| Code | Color | Code | Format |
-|------|-------|------|--------|
-| `&0` | Black | `&l` | Bold |
-| `&1` | Dark Blue | `&m` | Strikethrough |
-| `&2` | Dark Green | `&n` | Underline |
-| `&3` | Dark Aqua | `&o` | Italic |
-| `&4` | Dark Red | `&r` | Reset |
-| `&5` | Dark Purple |
-| `&6` | Gold |
-| `&7` | Gray |
-| `&8` | Dark Gray |
-| `&9` | Blue |
-| `&a` | Green |
-| `&b` | Aqua |
-| `&c` | Red |
-| `&d` | Light Purple |
-| `&e` | Yellow |
-| `&f` | White |
+</details>
 
 ---
 
@@ -226,24 +209,6 @@ After editing `rewards.json5`:
 ```
 /rankedadmin reload
 ```
-
----
-
-## Troubleshooting
-
-**Rewards not appearing?**
-- Check `rank_range` syntax
-- Verify season ended: `/rankedadmin season info`
-- Reload config: `/rankedadmin reload`
-
-**Commands not executing?**
-- Test command manually first
-- Check `{player}` placeholder spelling
-- Verify required plugins installed
-
-**Color codes not working?**
-- Use `&` not `§`
-- Check JSON escaping
 
 ---
 

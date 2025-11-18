@@ -175,22 +175,4 @@ Inactive players lose Elo to prevent ladder stagnation.
 
 ---
 
-## Troubleshooting
-
-**Elo not changing?**
-- Check battle completed (not draw)
-- Verify Elo mode is set
-- Check database connection
-
-**Changes too fast/slow?**
-- Adjust K-factor (`kFactor: 32` → higher/lower)
-- Check if still provisional (first 10 matches)
-
-**Everyone stuck at 1000?**
-- Verify battles completing
-- Check database saving
-- Reload config
-
----
-
 **Related:** [Dynamic Matchmaking](dynamic-matchmaking.md) · [Battle Formats](battle-formats.md) · [Configuration](../configuration/config.md)

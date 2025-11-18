@@ -4,25 +4,18 @@ View top-ranked players by Elo rating.
 
 ## Features
 
-- Format-specific (Singles, Doubles separate)
+- Format-specific (Singles, Doubles, Triples, MULTI)
 - Real-time updates after battles
 - Top 10 players displayed
-- Access via GUI or command
+- Access via GUI
 
 ## Viewing Leaderboards
-
-### Via Command
-
-```bash
-/leaderboard singles
-/leaderboard doubles
-```
 
 ### Via GUI
 
 1. Open ranked menu: `/ranked`
 2. Click "Leaderboard" button
-3. Select format (Singles/Doubles)
+3. Select format (Singles/Doubles/Triples/MULTI)
 
 ## Leaderboard Display
 
@@ -68,18 +61,8 @@ In cross-server mode, leaderboards show all players across the network (shared d
 
 ## Resetting Leaderboards
 
-Leaderboards reset automatically when a new season starts. To manually reset:
+Leaderboards reset automatically when a new season starts. To manually create a new season:
 
 ```bash
-/rankedarena season create <days> <name>
+/rankedadmin season create <days> <name>
 ```
-
-## Troubleshooting
-
-**Leaderboard not updating:**
-- Wait up to 60 seconds for cache refresh
-- Check player has minimum battles (default: 5)
-
-**Player missing from leaderboard:**
-- Verify player has played at least `min_battles` matches
-- Check player's Elo is above 0

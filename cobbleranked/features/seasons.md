@@ -147,21 +147,4 @@ Only ONE server should manage seasons (battle server).
 
 ---
 
-## Troubleshooting
-
-**Season not rotating?**
-- Check battle server is running
-- Verify `reset_days` is set
-- Check server logs for errors
-
-**Multiple seasons created?**
-- Verify only one battle server (`battle_server: ""`)
-- Check server logs for duplicate warnings
-
-**Players not getting rewards?**
-- Verify season ended: `/rankedadmin seasoninfo`
-- Check [Rewards Configuration](../configuration/rewards.md)
-
----
-
 **Related:** [Rewards System](../configuration/rewards.md) · [Cross-Server Setup](../advanced/cross-server.md) · [Configuration](../configuration/config.md)
