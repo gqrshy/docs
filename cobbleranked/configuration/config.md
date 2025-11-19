@@ -35,7 +35,9 @@ Complete reference for `config/cobbleranked/config.json5`.
 
 ## Cross-Server
 
-Enable cross-server mode with MySQL and Redis.
+Enable cross-server mode with MySQL/MongoDB and Redis.
+
+**Note:** When `cross_server.enabled` is `false` (single-server mode), SQLite is automatically used as the database. You cannot configure the database type in single-server mode.
 
 ```json5
 {
@@ -45,7 +47,7 @@ Enable cross-server mode with MySQL and Redis.
     "battle_server": "battle1",  // Empty = this IS battle server
     
     "database": {
-      "type": "MYSQL",           // MYSQL or SQLITE
+      "type": "MYSQL",           // MYSQL or MONGODB
       "host": "localhost",
       "port": 3306,
       "database": "cobbleranked",

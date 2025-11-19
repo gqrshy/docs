@@ -164,6 +164,8 @@ Common dimension identifiers:
 | Singles (1v1) | 20x20 blocks |
 | Doubles (2v2) | 25x25 blocks |
 
+**Note:** Design your arena with enough space for spectating players and aesthetic elements.
+
 ## Spawn Point Positioning
 
 ### Player Placement
@@ -173,33 +175,64 @@ When creating an arena, players spawn at:
 - **Facing direction** based on `yaw` value
 - **Head tilt** based on `pitch` value
 
-### Yaw (Facing Direction)
+### Understanding Yaw and Pitch
+
+**Yaw** controls the horizontal direction (left-right rotation):
+- Think of it as a compass direction
+- `0°` = South, `90°` = West, `180°` = North, `270°` or `-90°` = East
+
+**Pitch** controls the vertical angle (up-down tilt):
+- Think of it as looking up or down
+- `-90°` = Looking straight up at the sky
+- `0°` = Looking straight ahead (horizontal)
+- `90°` = Looking straight down at the ground
+
+### Yaw (Horizontal Direction)
+
+Visual guide using Minecraft compass directions:
 
 ```
-     North (180°)
+        North
+       (180°)
+          ↑
           |
-West (90°)—+— East (-90° or 270°)
+West ←────┼────→ East
+(90°)     |    (270° or -90°)
           |
-     South (0°)
+          ↓
+       South
+        (0°)
 ```
 
-**Examples:**
-- `0.0` - Facing south
-- `90.0` - Facing west
-- `180.0` - Facing north
-- `-90.0` or `270.0` - Facing east
+**Common Values:**
+- `0.0` → Player faces **South** ⬇️
+- `90.0` → Player faces **West** ⬅️
+- `180.0` → Player faces **North** ⬆️
+- `270.0` or `-90.0` → Player faces **East** ➡️
 
-### Pitch (Head Tilt)
+**Tip:** To find the right yaw value, stand where you want players to spawn, face the direction you want them to look, and press **F3**. Look for "Facing: [direction] (X: yaw)" in the debug screen.
+
+### Pitch (Vertical Angle)
 
 ```
--90° = Looking straight up
-  0° = Looking straight ahead
- 90° = Looking straight down
+     -90° ↑  (Looking straight up)
+          |
+          |
+       0° →  (Looking straight ahead - RECOMMENDED)
+          |
+          |
+      90° ↓  (Looking straight down)
 ```
 
-> **[📸 IMAGE NEEDED: Yaw/Pitch方向の視覚的図解（プレイヤーの向きと角度の関係、コンパス表示）]**
+**Common Values:**
+- `-90.0` → Looking straight **up** (useful for sky arenas)
+- `0.0` → Looking **straight ahead** (default for battles) ✅
+- `45.0` → Looking **slightly down**
+- `90.0` → Looking straight **down** (bird's eye view)
 
-**Recommendation:** Use `0.0` pitch for normal battles.
+**Recommendation:** Use `0.0` pitch for normal battles to provide a natural perspective.
+
+> **[📸 IMAGE NEEDED: Screenshot showing F3 debug screen with Yaw/Pitch values highlighted]**
 
 ## Advanced Configuration
 
