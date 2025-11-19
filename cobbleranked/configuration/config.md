@@ -96,6 +96,9 @@ Battle mechanics and team requirements.
 }
 ```
 
+<details>
+<summary><strong>Battle Clauses (Click to expand)</strong></summary>
+
 ### Battle Clauses
 
 ```json5
@@ -111,6 +114,8 @@ Battle mechanics and team requirements.
   }
 }
 ```
+
+</details>
 
 ---
 
@@ -207,6 +212,9 @@ Flee penalties and season management.
 
 ---
 
+<details>
+<summary><strong>Connection Pool (Advanced - cross-server only)</strong></summary>
+
 ## Connection Pool
 
 MySQL connection pool settings (cross-server only).
@@ -226,6 +234,8 @@ MySQL connection pool settings (cross-server only).
 - 2-3 servers: `maximum_pool_size: 10`
 - 4-6 servers: `maximum_pool_size: 15`
 - 7+ servers: `maximum_pool_size: 20`
+
+</details>
 
 ---
 

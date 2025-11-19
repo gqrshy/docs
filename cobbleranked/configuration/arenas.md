@@ -175,6 +175,9 @@ When creating an arena, players spawn at:
 - **Facing direction** based on `yaw` value
 - **Head tilt** based on `pitch` value
 
+<details>
+<summary><strong>Understanding Yaw and Pitch (Click to expand)</strong></summary>
+
 ### Understanding Yaw and Pitch
 
 **Yaw** controls the horizontal direction (left-right rotation):
@@ -234,9 +237,12 @@ West ←────┼────→ East
 
 > **[📸 IMAGE NEEDED: Screenshot showing F3 debug screen with Yaw/Pitch values highlighted]**
 
+</details>
+
 ## Advanced Configuration
 
-### Manual JSON5 Editing
+<details>
+<summary><strong>Manual JSON5 Editing</strong></summary>
 
 You can manually edit `arenas.json5` for bulk changes:
 
@@ -271,6 +277,11 @@ You can manually edit `arenas.json5` for bulk changes:
 /rankedadmin reload
 ```
 
+</details>
+
+<details>
+<summary><strong>WorldGuard Integration</strong></summary>
+
 ### WorldGuard Integration
 
 Protect arenas from griefing:
@@ -291,6 +302,11 @@ Protect arenas from griefing:
 /region flag main_arena mob-spawning deny
 ```
 
+</details>
+
+<details>
+<summary><strong>Arena Selection Logic</strong></summary>
+
 ### Arena Selection Logic
 
 How CobbleRanked chooses arenas:
@@ -302,6 +318,11 @@ How CobbleRanked chooses arenas:
 5. **Start battle** immediately
 
 **Weighting:** All arenas have equal probability (no weighting system).
+
+</details>
+
+<details>
+<summary><strong>Return System</strong></summary>
 
 ## Return System
 
@@ -316,6 +337,8 @@ After battle ends:
 - Player was in Nether at `(100, 64, 200)`
 - Battle teleports to Overworld arena
 - After battle, returns to Nether `(100, 64, 200)`
+
+</details>
 
 ## Examples
 
@@ -400,6 +423,9 @@ Production server with variety across multiple dimensions:
 
 </details>
 
+<details>
+<summary><strong>Performance Considerations</strong></summary>
+
 ## Performance Considerations
 
 ### Number of Arenas
@@ -418,6 +444,8 @@ Teleporting across dimensions:
 - **TPS impact:** Negligible on modern servers
 
 **Best Practice:** Pre-load arena chunks using chunk loaders.
+
+</details>
 
 ---
 

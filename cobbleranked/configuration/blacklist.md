@@ -133,6 +133,9 @@ Allow limited quantities instead of complete bans:
 }
 ```
 
+<details>
+<summary><strong>Form Syntax Reference</strong></summary>
+
 **Form Syntax:**
 - No form (`mewtwo`) = **All forms** banned
 - With form (`mewtwo:mega_x`) = **Only that form** banned
@@ -141,6 +144,8 @@ Allow limited quantities instead of complete bans:
 - Mega: `:mega`, `:mega_x`, `:mega_y`
 - Regional: `:alola`, `:galar`, `:hisui`
 - Other: `:primal`, `:origin`, `:10` (Zygarde 10%)
+
+</details>
 
 ---
 
@@ -218,11 +223,15 @@ Allow limited quantities instead of complete bans:
 
 </details>
 
-**Find Ability Names:**
+<details>
+<summary><strong>How to Find Ability Names</strong></summary>
+
 1. Press `F3 + H` in-game
 2. Open Pokemon summary
 3. Hover over ability icon
 4. Internal name shown in tooltip
+
+</details>
 
 ---
 
@@ -243,12 +252,16 @@ Allow limited quantities instead of complete bans:
 
 **Item Format:** `cobblemon:item_name` (required!)
 
-**Find Item IDs:**
+<details>
+<summary><strong>How to Find Item IDs</strong></summary>
+
 1. Press `F3 + H`
 2. Hover over item in inventory
 3. ID appears at bottom of tooltip
 
 > **[📸 INSERT: Screenshot showing F3+H tooltip with item ID]**
+
+</details>
 
 <details>
 <summary><strong>Commonly Banned Items</strong></summary>
@@ -405,6 +418,9 @@ Recommended blacklist:
 
 ---
 
+<details>
+<summary><strong>Validation Flow (Technical Details)</strong></summary>
+
 ## Validation Flow
 
 When player joins queue:
@@ -432,6 +448,8 @@ When player joins queue:
 ```
 
 > **[📸 INSERT: Screenshot of validation error message]**
+
+</details>
 
 ---
 
