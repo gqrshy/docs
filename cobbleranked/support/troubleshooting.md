@@ -329,11 +329,11 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Ensure no syntax errors
    - Use online validator
 
-### Language not changing
+### Language not loading
 
 **Symptoms:**
 - Changed language in config
-- Still shows English
+- Still shows English after reload
 
 **Solutions:**
 
@@ -361,6 +361,66 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    grep -i "language" logs/latest.log
    ```
    Should see: "Message configurations for language ja-Jp loaded successfully!"
+
+### Missing language messages
+
+**Symptoms:**
+- Some messages show key instead of text (e.g., `match-winner` instead of "Victory!")
+
+**Solutions:**
+
+1. **Ensure all keys exist:**
+   - Check your language file has all keys from `en-Us.json5`
+   - Copy missing keys from English reference file
+
+2. **Verify JSON5 syntax:**
+   - Use validator: https://json5.org
+   - Check for missing commas or brackets
+
+3. **Reload configuration:**
+   ```bash
+   /rankedadmin reload
+   ```
+
+### Placeholders not replacing
+
+**Symptoms:**
+- Messages show `{player}` instead of actual player name
+- Elo shows as `{elo}` instead of number
+
+**Solutions:**
+
+1. **Verify placeholder spelling:**
+   - Use exact spelling: `{player}` not `{Player}`
+   - Case-sensitive!
+
+2. **Check placeholder in correct message:**
+   - Not all placeholders work in all messages
+   - See [Language File Documentation](../configuration/languages.md#placeholders)
+
+3. **Test with different message:**
+   - Try a known working placeholder to verify system works
+
+### Color codes not working
+
+**Symptoms:**
+- Shows `&a` instead of green color
+- Colors display as raw text
+
+**Solutions:**
+
+1. **Use correct symbol:**
+   - Use `&` not `§` for color codes
+   - Example: `&aGreen` not `§aGreen`
+
+2. **Check Minecraft version:**
+   - Ensure version supports color codes (all modern versions do)
+   - Verify client can display colors
+
+3. **Verify JSON5 escaping:**
+   - Don't escape `&` in JSON5
+   - Example: `"message": "&aGreen"` (correct)
+   - NOT: `"message": "\\&aGreen"` (wrong)
 
 ---
 
