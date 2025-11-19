@@ -37,18 +37,70 @@ Most efficient way to ban multiple Pokemon:
 
 **Available Labels:**
 
-| Label | Count | Examples |
-|-------|-------|----------|
-| `legendary` | ~60 | Mewtwo, Lugia, Rayquaza, Dialga |
-| `mythical` | ~20 | Mew, Celebi, Jirachi, Victini |
-| `restricted` | ~40 | Box legendaries (VGC restricted) |
-| `ultra_beast` | 11 | Nihilego, Buzzwole, Xurkitree |
-| `paradox` | 16 | Iron Treads, Great Tusk, Flutter Mane |
-| `starter` | ~30 | Bulbasaur line, Charmander line, etc. |
-| `fossil` | ~15 | Omanyte, Kabuto, Aerodactyl |
-| `baby` | ~20 | Pichu, Cleffa, Igglybuff |
-| `powerhouse` | ~12 | 600 BST Pokemon (Dragonite, Garchomp) |
-| `gen1` - `gen9` | Varies | Filter by generation |
+<details>
+<summary><strong>legendary</strong> - Major legendary Pokemon</summary>
+
+Articuno, Zapdos, Moltres, Mewtwo, Raikou, Entei, Suicune, Lugia, Ho-Oh, Regirock, Regice, Registeel, Latias, Latios, Kyogre, Groudon, Rayquaza, Uxie, Mesprit, Azelf, Dialga, Palkia, Heatran, Regigigas, Giratina, Cresselia, Cobalion, Terrakion, Virizion, Tornadus, Thundurus, Reshiram, Zekrom, Landorus, Kyurem, Xerneas, Yveltal, Zygarde, Type: Null, Silvally, Tapu Koko, Tapu Lele, Tapu Bulu, Tapu Fini, Cosmog, Cosmoem, Solgaleo, Lunala, Nihilego, Buzzwole, Pheromosa, Xurkitree, Celesteela, Kartana, Guzzlord, Necrozma, Zacian, Zamazenta, Eternatus, Kubfu, Urshifu, Regieleki, Regidrago, Glastrier, Spectrier, Calyrex, Enamorus, Wo-Chien, Chien-Pao, Ting-Lu, Chi-Yu, Koraidon, Miraidon, Walking Wake, Iron Leaves, Okidogi, Munkidori, Fezandipiti, Ogerpon, Terapagos, Pecharunt
+
+</details>
+
+<details>
+<summary><strong>mythical</strong> - Mythical Pokemon (event-exclusive)</summary>
+
+Mew, Celebi, Jirachi, Deoxys, Phione, Manaphy, Darkrai, Shaymin, Arceus, Victini, Keldeo, Meloetta, Genesect, Diancie, Hoopa, Volcanion, Magearna, Marshadow, Zeraora, Meltan, Melmetal, Zarude
+
+</details>
+
+<details>
+<summary><strong>restricted</strong> - VGC restricted Pokemon (box legendaries)</summary>
+
+Mewtwo, Lugia, Ho-Oh, Kyogre, Groudon, Rayquaza, Dialga, Palkia, Giratina, Reshiram, Zekrom, Kyurem, Xerneas, Yveltal, Zygarde, Cosmog, Cosmoem, Solgaleo, Lunala, Necrozma, Zacian, Zamazenta, Eternatus, Calyrex, Koraidon, Miraidon, Terapagos
+
+</details>
+
+<details>
+<summary><strong>ultra_beast</strong> - Ultra Beasts from Gen 7</summary>
+
+Nihilego, Buzzwole, Pheromosa, Xurkitree, Celesteela, Kartana, Guzzlord, Poipole, Naganadel, Stakataka, Blacephalon
+
+</details>
+
+<details>
+<summary><strong>paradox</strong> - Paradox Pokemon from Scarlet/Violet</summary>
+
+Great Tusk, Scream Tail, Brute Bonnet, Flutter Mane, Slither Wing, Sandy Shocks, Iron Treads, Iron Bundle, Iron Hands, Iron Jugulis, Iron Moth, Iron Thorns, Roaring Moon, Iron Valiant, Walking Wake, Iron Leaves, Gouging Fire, Raging Bolt, Iron Boulder, Iron Crown
+
+</details>
+
+<details>
+<summary><strong>starter</strong> - Starter Pokemon (all evolutions)</summary>
+
+Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Chikorita, Bayleef, Meganium, Cyndaquil, Quilava, Typhlosion, Totodile, Croconaw, Feraligatr, Treecko, Grovyle, Sceptile, Torchic, Combusken, Blaziken, Mudkip, Marshtomp, Swampert, Turtwig, Grotle, Torterra, Chimchar, Monferno, Infernape, Piplup, Prinplup, Empoleon, Snivy, Servine, Serperior, Tepig, Pignite, Emboar, Oshawott, Dewott, Samurott, Chespin, Quilladin, Chesnaught, Fennekin, Braixen, Delphox, Froakie, Frogadier, Greninja, Rowlet, Dartrix, Decidueye, Litten, Torracat, Incineroar, Popplio, Brionne, Primarina, Grookey, Thwackey, Rillaboom, Scorbunny, Raboot, Cinderace, Sobble, Drizzile, Inteleon, Sprigatito, Floragato, Meowscarada, Fuecoco, Crocalor, Skeledirge, Quaxly, Quaxwell, Quaquaval
+
+</details>
+
+<details>
+<summary><strong>fossil</strong> - Fossil Pokemon</summary>
+
+Omanyte, Omastar, Kabuto, Kabutops, Aerodactyl, Lileep, Cradily, Anorith, Armaldo, Cranidos, Rampardos, Shieldon, Bastiodon, Tirtouga, Carracosta, Archen, Archeops, Tyrunt, Tyrantrum, Amaura, Aurorus, Dracozolt, Arctozolt, Dracovish, Arctovish
+
+</details>
+
+<details>
+<summary><strong>baby</strong> - Baby Pokemon</summary>
+
+Pichu, Cleffa, Igglybuff, Togepi, Tyrogue, Smoochum, Elekid, Magby, Azurill, Wynaut, Budew, Chingling, Bonsly, Mime Jr., Happiny, Munchlax, Riolu, Mantyke, Toxel
+
+</details>
+
+<details>
+<summary><strong>powerhouse</strong> - 600 BST Pokemon (pseudo-legendaries)</summary>
+
+Dragonite, Tyranitar, Salamence, Metagross, Garchomp, Hydreigon, Goodra, Kommo-o, Dragapult, Baxcalibur
+
+</details>
+
+**Note:** `gen1` through `gen9` labels contain all Pokemon from their respective generations and are too numerous to list here.
 
 > **[📸 INSERT: Screenshot showing validation error when trying to use banned legendary]**
 
@@ -81,6 +133,9 @@ Allow limited quantities instead of complete bans:
 }
 ```
 
+<details>
+<summary><strong>Form Syntax Reference</strong></summary>
+
 **Form Syntax:**
 - No form (`mewtwo`) = **All forms** banned
 - With form (`mewtwo:mega_x`) = **Only that form** banned
@@ -89,6 +144,8 @@ Allow limited quantities instead of complete bans:
 - Mega: `:mega`, `:mega_x`, `:mega_y`
 - Regional: `:alola`, `:galar`, `:hisui`
 - Other: `:primal`, `:origin`, `:10` (Zygarde 10%)
+
+</details>
 
 ---
 
@@ -166,11 +223,15 @@ Allow limited quantities instead of complete bans:
 
 </details>
 
-**Find Ability Names:**
+<details>
+<summary><strong>How to Find Ability Names</strong></summary>
+
 1. Press `F3 + H` in-game
 2. Open Pokemon summary
 3. Hover over ability icon
 4. Internal name shown in tooltip
+
+</details>
 
 ---
 
@@ -191,12 +252,16 @@ Allow limited quantities instead of complete bans:
 
 **Item Format:** `cobblemon:item_name` (required!)
 
-**Find Item IDs:**
+<details>
+<summary><strong>How to Find Item IDs</strong></summary>
+
 1. Press `F3 + H`
 2. Hover over item in inventory
 3. ID appears at bottom of tooltip
 
 > **[📸 INSERT: Screenshot showing F3+H tooltip with item ID]**
+
+</details>
 
 <details>
 <summary><strong>Commonly Banned Items</strong></summary>
@@ -218,24 +283,59 @@ Allow limited quantities instead of complete bans:
 
 ### Smogon OU
 
-Competitive standard format:
+Competitive standard format (Singles 6v6 at Level 100):
 
 ```json5
 {
-  "black_list_labels": ["legendary", "mythical", "restricted", "ultra_beast", "paradox"],
-  "black_list_moves": [
-    "baton_pass", "last_respects", "shed_tail",
-    "fissure", "sheer_cold", "horn_drill", "guillotine"
+  // Ban only Ubers-tier Pokemon (restricted legendaries)
+  // NOTE: Ultra Beasts, Paradox Pokemon, and some legendaries (Landorus-T, Heatran, etc.) are LEGAL in OU
+  "black_list_labels": ["restricted"],  // Ubers only (Mewtwo, Zacian, Calyrex, etc.)
+
+  "black_list_pokemon": [
+    // Additional Ubers bans not covered by "restricted" label
+    "blaziken",          // Speed Boost Blaziken is Ubers
+    "flutter_mane",      // Paradox Pokemon banned in OU
+    "chi_yu",            // Ruinous Pokemon banned
+    "annihilape"         // Banned in Gen 9 OU
   ],
-  "black_list_ability": ["moody", "shadow_tag", "arena_trap"],
+
+  "black_list_moves": [
+    // OHKO moves
+    "fissure", "sheer_cold", "horn_drill", "guillotine",
+
+    // Smogon OU banned moves
+    "baton_pass",        // Banned when passing stat boosts
+    "last_respects",     // Gen 9 OU ban
+    "shed_tail"          // Gen 9 OU ban
+  ],
+
+  "black_list_ability": [
+    "moody",             // Random stat boosts (Smogon OU ban)
+    "shadow_tag",        // Prevents switching (Smogon OU ban)
+    "arena_trap"         // Traps grounded Pokemon (Smogon OU ban)
+  ],
+
   "black_list_items_pokemon": [
-    "cobblemon:bright_powder",
-    "cobblemon:lax_incense"
+    "cobblemon:bright_powder",  // Evasion boost
+    "cobblemon:lax_incense"     // Evasion boost
   ]
 }
 ```
 
-**Also set:** `levelMatch: 50` in `config.json5`
+**Also set in `config.json5`:**
+- `levelMatch: 100` (Smogon uses Level 100, not 50!)
+- `species_clause: true`
+- `sleep_clause: true`
+- `evasion_clause: true`
+- `ohko_clause: true`
+
+**Important Notes:**
+- **Level 100:** Smogon OU uses Level 100 (Showdown's default), NOT Level 50
+- **Legendaries:** NOT all legendaries are banned! Only Ubers-tier (restricted label)
+  - ✅ LEGAL: Landorus-T, Heatran, Tapu Koko, Raging Bolt, Iron Valiant, etc.
+  - ❌ BANNED: Mewtwo, Zacian, Calyrex, Koraidon, Miraidon, etc.
+- **Ultra Beasts:** Most are LEGAL (Kartana, Celesteela, etc.)
+- **Paradox Pokemon:** Most are LEGAL (Iron Hands, Great Tusk, etc.), but some banned individually
 
 ### VGC Series 1
 
@@ -318,6 +418,9 @@ Recommended blacklist:
 
 ---
 
+<details>
+<summary><strong>Validation Flow (Technical Details)</strong></summary>
+
 ## Validation Flow
 
 When player joins queue:
@@ -345,6 +448,8 @@ When player joins queue:
 ```
 
 > **[📸 INSERT: Screenshot of validation error message]**
+
+</details>
 
 ---
 

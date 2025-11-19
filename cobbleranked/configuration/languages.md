@@ -157,24 +157,24 @@ Use Minecraft color codes for colored text:
 
 ### Colors
 
-| Code | Color | Example |
-|------|-------|---------|
-| `&0` | Black | `&0Black text` |
-| `&1` | Dark Blue | `&1Dark Blue` |
-| `&2` | Dark Green | `&2Dark Green` |
-| `&3` | Dark Aqua | `&3Dark Aqua` |
-| `&4` | Dark Red | `&4Dark Red` |
-| `&5` | Dark Purple | `&5Dark Purple` |
-| `&6` | Gold | `&6Gold` |
-| `&7` | Gray | `&7Gray` |
-| `&8` | Dark Gray | `&8Dark Gray` |
-| `&9` | Blue | `&9Blue` |
-| `&a` | Green | `&aGreen` |
-| `&b` | Aqua | `&bAqua` |
-| `&c` | Red | `&cRed` |
-| `&d` | Light Purple | `&dLight Purple` |
-| `&e` | Yellow | `&eYellow` |
-| `&f` | White | `&fWhite` |
+| Code | Color | Preview | Example |
+|------|-------|---------|---------|
+| `&0` | Black | <span style="color: #000000; background: #CCCCCC; padding: 2px 8px;">████</span> | `&0Black text` |
+| `&1` | Dark Blue | <span style="color: #0000AA;">████</span> | `&1Dark Blue` |
+| `&2` | Dark Green | <span style="color: #00AA00;">████</span> | `&2Dark Green` |
+| `&3` | Dark Aqua | <span style="color: #00AAAA;">████</span> | `&3Dark Aqua` |
+| `&4` | Dark Red | <span style="color: #AA0000;">████</span> | `&4Dark Red` |
+| `&5` | Dark Purple | <span style="color: #AA00AA;">████</span> | `&5Dark Purple` |
+| `&6` | Gold | <span style="color: #FFAA00;">████</span> | `&6Gold` |
+| `&7` | Gray | <span style="color: #AAAAAA;">████</span> | `&7Gray` |
+| `&8` | Dark Gray | <span style="color: #555555;">████</span> | `&8Dark Gray` |
+| `&9` | Blue | <span style="color: #5555FF;">████</span> | `&9Blue` |
+| `&a` | Green | <span style="color: #55FF55;">████</span> | `&aGreen` |
+| `&b` | Aqua | <span style="color: #55FFFF;">████</span> | `&bAqua` |
+| `&c` | Red | <span style="color: #FF5555;">████</span> | `&cRed` |
+| `&d` | Light Purple | <span style="color: #FF55FF;">████</span> | `&dLight Purple` |
+| `&e` | Yellow | <span style="color: #FFFF55;">████</span> | `&eYellow` |
+| `&f` | White | <span style="color: #FFFFFF; background: #333333; padding: 2px 8px;">████</span> | `&fWhite` |
 
 ### Formatting
 
@@ -245,6 +245,9 @@ Edit `config.json5`:
 ```
 
 ---
+
+<details>
+<summary><strong>Complete Message List (Click to expand)</strong></summary>
 
 ## Complete Message List
 
@@ -387,6 +390,8 @@ Edit `config.json5`:
 }
 ```
 
+</details>
+
 ---
 
 ## Escaping Special Characters
@@ -473,42 +478,11 @@ When CobbleRanked updates with new features:
 
 ## Troubleshooting
 
-### Language not loading
-
-**Symptoms:** Still shows English after changing language
-
-**Solutions:**
-1. Check `language` setting in `config.json5`
-2. Verify file name matches exactly (case-sensitive)
-3. Reload: `/rankedadmin reload`
-4. Check console for errors
-
-### Missing messages
-
-**Symptoms:** Some messages show key instead of text
-
-**Solutions:**
-1. Ensure all keys from `en-Us.json5` exist in your file
-2. Copy missing keys from English file
-3. Reload configuration
-
-### Placeholders not replacing
-
-**Symptoms:** Message shows `{player}` instead of player name
-
-**Solutions:**
-1. Verify placeholder spelling (case-sensitive)
-2. Check placeholder is used in correct message
-3. Use correct placeholder for message type
-
-### Color codes not working
-
-**Symptoms:** Shows `&a` instead of green color
-
-**Solutions:**
-1. Use `&` not `§` for color codes
-2. Check Minecraft version supports colors
-3. Verify JSON5 syntax (proper escaping)
+Having issues with language files? See the [Troubleshooting Guide](../support/troubleshooting.md#language-not-loading) for solutions to:
+- Language not loading
+- Missing messages
+- Placeholders not replacing
+- Color codes not working
 
 ---
 
