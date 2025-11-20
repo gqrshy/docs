@@ -102,8 +102,6 @@ Dragonite, Tyranitar, Salamence, Metagross, Garchomp, Hydreigon, Goodra, Kommo-o
 
 **Note:** `gen1` through `gen9` labels contain all Pokemon from their respective generations and are too numerous to list here.
 
-> **[📸 INSERT: Screenshot showing validation error when trying to use banned legendary]**
-
 ### Quantity Limits
 
 Allow limited quantities instead of complete bans:
@@ -169,8 +167,6 @@ Allow limited quantities instead of complete bans:
   ]
 }
 ```
-
-> **[📸 IMAGE NEEDED: 禁止技（Fissure、Baton Passなど）使用時のエラーメッセージ画面]**
 
 **Move Names:** Lowercase snake_case (spaces → underscores)
 
@@ -258,8 +254,6 @@ Allow limited quantities instead of complete bans:
 1. Press `F3 + H`
 2. Hover over item in inventory
 3. ID appears at bottom of tooltip
-
-> **[📸 INSERT: Screenshot showing F3+H tooltip with item ID]**
 
 </details>
 
@@ -446,8 +440,6 @@ When player joins queue:
 
 ✅ All pass → Join queue
 ```
-
-> **[📸 INSERT: Screenshot of validation error message]**
 
 </details>
 

@@ -4,8 +4,6 @@ A competitive ranked battle system for Cobblemon servers with Elo-based matchmak
 
 <img src="https://img.shields.io/badge/Minecraft-1.21.1-green" alt="Minecraft 1.21.1"> <img src="https://img.shields.io/badge/Cobblemon-1.7.0-blue" alt="Cobblemon 1.7.0"> <img src="https://img.shields.io/badge/Fabric-0.17.2-orange" alt="Fabric">
 
-> **[📸 INSERT: Main GUI screenshot showing queue, leaderboard, and stats options]**
-
 ---
 
 ## Features
@@ -23,8 +21,6 @@ A competitive ranked battle system for Cobblemon servers with Elo-based matchmak
 - **Custom Rewards** - Season-end (rank-based) + milestones (wins/Elo)
 - **Battle Arenas** - Teleport to designated coordinates with custom facing
 - **4 Languages** - English, Japanese, Portuguese, Russian
-
-> **[📸 INSERT: Side-by-side comparison of Singles vs Doubles leaderboard]**
 
 ---
 
@@ -72,8 +68,6 @@ Loss: -16 Elo
 - Runs daily at UTC 9:00
 
 </details>
-
-> **[📸 INSERT: Chart showing K-factor effect on Elo gains/losses]**
 
 ---
 
