@@ -8,13 +8,13 @@ Customize all in-game messages and translate CobbleRanked to any language.
 
 ## Overview
 
-CobbleRanked includes 4 built-in languages:
+CobbleRanked includes 2 built-in languages:
 - **English** (`en-Us.json5`) - Default
 - **Japanese** (`ja-Jp.json5`)
-- **Portuguese** (`pt-Br.json5`)
-- **Russian** (`ru-Ru.json5`)
 
 All messages, notifications, and GUI text are fully customizable via JSON5 language files.
+
+> **Note:** Portuguese (pt-Br) and Russian (ru-Ru) language support has been discontinued as of version 1.0. Only English and Japanese are officially maintained.
 
 ## Quick Start
 
@@ -24,7 +24,7 @@ Edit `config/cobbleranked/config.json5`:
 
 ```json5
 {
-  "language": "en-Us"  // Change to: en-Us, ja-Jp, pt-Br, ru-Ru
+  "language": "en-Us"  // Change to: en-Us or ja-Jp
 }
 ```
 

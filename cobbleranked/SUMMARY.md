@@ -29,6 +29,7 @@
 * [Disconnect Penalties](features/disconnect-penalties.md)
 * [Dynamic Matchmaking](features/dynamic-matchmaking.md)
 * [Inventory Restrictions](features/inventory-restrictions.md)
+* [Casual Missions](features/casual-missions.md)
 * [Custom Music Pack](features/custom-music.md)
 
 ## Advanced

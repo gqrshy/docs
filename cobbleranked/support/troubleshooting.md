@@ -343,7 +343,9 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
      "language": "ja-Jp"  // Must match file name exactly
    }
    ```
-   Available: `en-Us`, `ja-Jp`, `pt-Br`, `ru-Ru`
+   Available: `en-Us`, `ja-Jp`
+
+   > **Note:** `pt-Br` and `ru-Ru` have been discontinued as of v1.0
 
 2. **Check file exists:**
    ```bash
@@ -724,6 +726,177 @@ See [Database Guide](../advanced/database.md) for setup.
    rm config/cobbleranked/ranked.db
    ```
    **Warning:** All player data will be lost!
+
+---
+
+## Casual Missions Issues
+
+### Missions Not Resetting
+
+**Symptoms:**
+- Daily missions not resetting at configured time
+- Weekly missions not resetting on configured day
+
+**Solutions:**
+
+1. **Check timezone configuration:**
+   ```json5
+   {
+     "reset_settings": {
+       "daily_reset_timezone": "UTC"  // Verify this matches your server timezone
+     }
+   }
+   ```
+
+2. **Check reset time:**
+   ```json5
+   {
+     "reset_settings": {
+       "daily_reset_time": "00:00",  // 24-hour format
+       "weekly_reset_day": "MONDAY"
+     }
+   }
+   ```
+
+3. **Check server logs:**
+   ```bash
+   grep -i "mission" logs/latest.log | grep -i "reset"
+   ```
+   Should see:
+   ```
+   [CobbleRanked] Daily missions reset at 00:00 UTC
+   [CobbleRanked] Weekly missions reset on MONDAY at 00:00 UTC
+   ```
+
+4. **Verify server time:**
+   ```bash
+   date
+   ```
+   Ensure server time is correct
+
+### Progress Not Tracking
+
+**Symptoms:**
+- Completed matches but mission progress not updating
+- Progress stuck at same number
+
+**Solutions:**
+
+1. **Verify mission is active:**
+   - Open `/casual` menu
+   - Check mission list
+   - Ensure mission not already completed
+
+2. **Check mission type:**
+   - WIN_STREAK resets on any loss
+   - POKEMON_DEFEATED counts across ALL matches (cumulative)
+   - GENERATION_USAGE requires Pokemon from specified generation in active team
+   - FORMAT_PARTICIPATION must match the format you played
+
+3. **Check format:**
+   - Format-specific missions only count matches in that format
+   - Example: "Singles Specialist" only counts Singles matches
+
+4. **Reload GUI:**
+   - Close and reopen `/casual` menu
+   - Progress may need to refresh
+
+5. **Check console:**
+   ```bash
+   grep -i "casual" logs/latest.log | tail -20
+   ```
+
+### Rewards Not Received
+
+**Symptoms:**
+- Claimed reward but items not in inventory
+- Click claim button nothing happens
+
+**Solutions:**
+
+1. **Check inventory space:**
+   - Full inventory causes items to drop at your location
+   - Look around for dropped items
+   - Clear inventory and claim again
+
+2. **Check pending rewards:**
+   ```bash
+   /casual
+   ```
+   Look for "Pending Rewards" section
+
+3. **Verify reward commands:**
+   - Check `casual_missions.json5` for correct commands
+   - Test command manually:
+     ```bash
+     /give YourName cobblemon:exp_candy_m 2
+     ```
+
+4. **Check console errors:**
+   ```bash
+   grep -i "reward" logs/latest.log | grep -i "error"
+   ```
+
+5. **Check already claimed:**
+   - Milestone rewards are one-time only
+   - Can't claim same milestone twice
+
+### Mission Not Completing
+
+**Symptoms:**
+- Progress reached target value
+- Mission still shows as incomplete
+
+**Solutions:**
+
+1. **Check exact requirements:**
+   - WIN_STREAK: Must win consecutively (no losses between)
+   - POKEMON_TYPE_USAGE: Pokemon must be in active team (not just party)
+   - EVOLUTION_STAGE: Check evolution stage is correct (FIRST/MIDDLE/FINAL/SINGLE)
+
+2. **Check progress value:**
+   - Some missions count unique matches, not cumulative
+   - GENERATION_USAGE counts matches where you used Gen X Pokemon, not total Pokemon used
+
+3. **Claim reward:**
+   - Mission completes but requires manual claim
+   - Click the mission item in GUI
+
+4. **Check mission configuration:**
+   ```json5
+   {
+     "target_value": 3,  // Must reach exactly this value
+     "type": "MATCH_COUNT"
+   }
+   ```
+
+### Pending Rewards Not Appearing
+
+**Symptoms:**
+- Completed mission while offline
+- No rewards when logging in
+
+**Solutions:**
+
+1. **Check database:**
+   - Pending rewards stored in database
+   - Verify database connection working
+
+2. **Check console on login:**
+   ```bash
+   grep -i "pending" logs/latest.log
+   ```
+   Should see: `[CobbleRanked] You have X pending rewards!`
+
+3. **Open casual menu:**
+   ```bash
+   /casual
+   ```
+   Pending rewards should show automatically
+
+4. **Check reward data:**
+   - May be corrupted if server crashed during reward creation
+   - Check console for errors
 
 ---
 

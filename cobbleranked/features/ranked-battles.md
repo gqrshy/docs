@@ -295,19 +295,10 @@ Top players receive exclusive rewards at season end:
 
 ## Troubleshooting
 
-**Battle not starting?**
-- Check team validation message
-- Verify arena exists: `/rankedarena arena list`
-- Check console for errors
+Having issues with ranked battles? See the [Troubleshooting Guide](../support/troubleshooting.md) for solutions to common problems:
 
-**Elo not updating?**
-- Check if battle ended in draw (turn limit)
-- Verify database connection
-- Check `logs/latest.log` for errors
-
-**Can't find opponent?**
-- Wait longer for Elo range to expand
-- Check queue size: Look for other players in queue
-- Try different battle format
-
-**See Also:** [FAQ & Troubleshooting](../support/faq.md)
+- Battle not starting
+- Elo not updating
+- Can't find opponent
+- Queue issues
+- Arena problems
