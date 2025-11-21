@@ -116,8 +116,7 @@ Automatically reduces flee count over time to forgive past disconnects.
 
 | Command | Description |
 |---------|-------------|
-| `/rankedadmin getflee <player> <format>` | Check player's flee count |
-| `/rankedadmin resetflee <player> <format>` | Reset flee count to 0 |
+| `/rankedadmin setflee <player> <amount>` | Set flee count (use 0 to clear penalty) |
 
 ---
 

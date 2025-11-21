@@ -30,7 +30,7 @@ All commands available in CobbleRanked.
 
 | Command | Parameters | Description |
 |---------|------------|-------------|
-| `/rankedadmin setArena <name> <pos>` | `<name>` Arena name<br>`<pos>` Position (pos1, pos2, pos3, pos4) | Set arena spawn position at current location |
+| `/rankedadmin setArena <name> <pos>` | `<name>` Arena name<br>`<pos>` Position (pos1, pos2) | Set arena spawn position at current location |
 | `/rankedadmin setexit` | None | Set player exit location after battles (teleport to this location after battle ends) |
 | `/rankedadmin teleportArena <arena>` | `<arena>` Arena name | Teleport to arena center |
 | `/rankedadmin arena status` | None | Show all arenas and their in-use status |
@@ -39,15 +39,9 @@ All commands available in CobbleRanked.
 
 **Examples:**
 ```bash
-# Create arena with 2 spawn points (for Singles/Doubles/Triples)
+# Create arena with 2 spawn points
 /rankedadmin setArena main_arena pos1
 /rankedadmin setArena main_arena pos2
-
-# Create arena with 4 spawn points (for MULTI mode)
-/rankedadmin setArena multi_arena pos1
-/rankedadmin setArena multi_arena pos2
-/rankedadmin setArena multi_arena pos3
-/rankedadmin setArena multi_arena pos4
 
 # Check arena status
 /rankedadmin arena status
@@ -63,12 +57,12 @@ All commands available in CobbleRanked.
 | `/rankedadmin addelo <amount> <player> <format>` | `<amount>` Elo to add<br>`<player>` Player name<br>`<format>` Battle format | Add Elo points to player |
 | `/rankedadmin removeelo <amount> <player> <format>` | `<amount>` Elo to remove<br>`<player>` Player name<br>`<format>` Battle format | Remove Elo points from player |
 | `/rankedadmin setflee <player> <amount>` | `<player>` Player name<br>`<amount>` Flee count | Set flee count (use 0 to clear penalty) |
-| `/rankedadmin getflee <player> <format>` | `<player>` Player name<br>`<format>` Battle format | Check player's flee count |
-| `/rankedadmin resetflee <player> <format>` | `<player>` Player name<br>`<format>` Battle format | Reset flee count to 0 |
 
 **Valid Formats:**
-- `SINGLES` - 1v1 battles
-- `DOUBLES` - 2v2 battles
+- `SINGLES` - 1v1 battles (default)
+- `DOUBLES` - 2v2 battles (default)
+
+Additional formats can be enabled in config:
 - `TRIPLES` - 3v3 battles
 - `MULTI` - Team battles (2v2 players)
 
@@ -130,7 +124,7 @@ All commands have smart tab completion:
 
 - **Arena names** - Auto-complete from configured arenas
 - **Player names** - Show online players
-- **Formats** - Suggest valid options (SINGLES, DOUBLES, TRIPLES, MULTI)
+- **Formats** - Suggest valid options (SINGLES, DOUBLES)
 - **Elo amounts** - Suggest common values (1000, 1200, 1500)
 - **Season durations** - Suggest common periods (7, 14, 30 days)
 
