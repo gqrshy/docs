@@ -79,7 +79,9 @@ Battle mechanics and team requirements.
     "reset_days": 30,            // Season length
     "levelMatch": 70,            // Force Pokemon level (0 = disabled)
     "turn_limit": 100,           // Max turns per battle
-    
+
+    "enabled_formats": ["SINGLES", "DOUBLES"],  // Available formats in GUI
+
     "singles": {
       "min_team_size": 3,
       "max_team_size": 6
@@ -95,6 +97,20 @@ Battle mechanics and team requirements.
   }
 }
 ```
+
+### Enabling Additional Formats
+
+To enable TRIPLES or MULTI in the ranked GUI:
+
+```json5
+{
+  "ranked_match": {
+    "enabled_formats": ["SINGLES", "DOUBLES", "TRIPLES", "MULTI"]
+  }
+}
+```
+
+**Note:** MULTI mode requires arenas with 4 spawn points (pos1-pos4).
 
 <details>
 <summary><strong>Battle Clauses (Click to expand)</strong></summary>
