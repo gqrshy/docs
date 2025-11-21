@@ -30,7 +30,7 @@ All commands available in CobbleRanked.
 
 | Command | Parameters | Description |
 |---------|------------|-------------|
-| `/rankedadmin setArena <name> <pos>` | `<name>` Arena name<br>`<pos>` Position (pos1, pos2) | Set arena spawn position at current location |
+| `/rankedadmin setArena <name> <pos>` | `<name>` Arena name<br>`<pos>` Position (pos1, pos2, pos3, pos4) | Set arena spawn position at current location |
 | `/rankedadmin setexit` | None | Set player exit location after battles (teleport to this location after battle ends) |
 | `/rankedadmin teleportArena <arena>` | `<arena>` Arena name | Teleport to arena center |
 | `/rankedadmin arena status` | None | Show all arenas and their in-use status |
@@ -39,9 +39,15 @@ All commands available in CobbleRanked.
 
 **Examples:**
 ```bash
-# Create arena with 2 spawn points
+# Create arena with 2 spawn points (Singles/Doubles/Triples)
 /rankedadmin setArena main_arena pos1
 /rankedadmin setArena main_arena pos2
+
+# Create arena with 4 spawn points (MULTI mode - required for 2v2)
+/rankedadmin setArena multi_arena pos1
+/rankedadmin setArena multi_arena pos2
+/rankedadmin setArena multi_arena pos3
+/rankedadmin setArena multi_arena pos4
 
 # Check arena status
 /rankedadmin arena status
