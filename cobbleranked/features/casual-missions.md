@@ -414,6 +414,5 @@ Having issues with missions? See the [Troubleshooting Guide](../support/troubles
 
 ## See Also
 
-- [Casual Battles Overview](../features/casual-battles.md) - Main casual battle system
 - [Rewards System](../configuration/rewards.md) - Other reward configurations
 - [Commands Reference](../getting-started/commands.md) - All available commands

@@ -243,7 +243,7 @@ You can import Pokemon data from Showdown's random battle sets:
 ### Reload Pools
 
 ```
-/rankedarena randombattle reload
+/rankedadmin randombattle reload
 ```
 
 Reloads all pool configurations from disk.
@@ -251,7 +251,7 @@ Reloads all pool configurations from disk.
 ### List Pools
 
 ```
-/rankedarena randombattle list
+/rankedadmin randombattle list
 ```
 
 Shows all available random battle pools and their status.
@@ -259,7 +259,7 @@ Shows all available random battle pools and their status.
 ### Test Generation
 
 ```
-/rankedarena randombattle generate <pool> [player]
+/rankedadmin randombattle generate <pool> [player]
 ```
 
 Generates a random team from specified pool for testing.
@@ -409,6 +409,6 @@ Test pools with:
 ---
 
 **See Also:**
-- [Battle Formats](../features/formats.md)
-- [Configuration Guide](../configuration/README.md)
-- [Admin Commands](../commands/admin.md)
+- [Battle Formats](../cobbleranked/features/battle-formats.md)
+- [Configuration Guide](../cobbleranked/configuration/README.md)
+- [Admin Commands](../cobbleranked/getting-started/commands.md)

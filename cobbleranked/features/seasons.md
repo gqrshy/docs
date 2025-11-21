@@ -87,11 +87,11 @@ Season Start → Competition → Season End → Rewards → New Season
 
 | Duration | Use Case | Command Example |
 |----------|----------|-----------------|
-| 7 days | Weekly competitions | `/rankedarena season create 7 "Weekly Cup"` |
-| 14 days | Bi-weekly tournaments | `/rankedarena season create 14` |
+| 7 days | Weekly competitions | `/rankedadmin season create 7 "Weekly Cup"` |
+| 14 days | Bi-weekly tournaments | `/rankedadmin season create 14` |
 | **30 days** | **Monthly (recommended)** | Default |
-| 60 days | Long-term seasons | `/rankedarena season create 60` |
-| 90 days | Quarterly competitions | `/rankedarena season create 90` |
+| 60 days | Long-term seasons | `/rankedadmin season create 60` |
+| 90 days | Quarterly competitions | `/rankedadmin season create 90` |
 
 ---
 
@@ -122,7 +122,7 @@ Seasons rotate automatically when the configured duration expires.
 
 **Current Season:**
 ```bash
-/rankedarena season info
+/rankedadmin season info
 ```
 
 **Output:**
@@ -141,13 +141,13 @@ Seasons rotate automatically when the configured duration expires.
 
 **Season History:**
 ```bash
-/rankedarena season history [limit]
+/rankedadmin season history [limit]
 ```
 
 **Examples:**
 ```bash
-/rankedarena season history        # Show last 10 seasons
-/rankedarena season history 5      # Show last 5 seasons
+/rankedadmin season history        # Show last 10 seasons
+/rankedadmin season history 5      # Show last 5 seasons
 ```
 
 ---
@@ -156,17 +156,17 @@ Seasons rotate automatically when the configured duration expires.
 
 **Syntax:**
 ```bash
-/rankedarena season create <days> [name]
+/rankedadmin season create <days> [name]
 ```
 
 **Examples:**
 ```bash
 # Auto-generated name (YYYY-MM format)
-/rankedarena season create 30
+/rankedadmin season create 30
 
 # Custom name
-/rankedarena season create 30 "Summer Championship 2025"
-/rankedarena season create 14 "Weekly Tournament #52"
+/rankedadmin season create 30 "Summer Championship 2025"
+/rankedadmin season create 14 "Weekly Tournament #52"
 ```
 
 **Behavior:**
@@ -183,7 +183,7 @@ Seasons rotate automatically when the configured duration expires.
 
 **Immediate Rotation:**
 ```bash
-/rankedarena season rotate
+/rankedadmin season rotate
 ```
 
 **Effect:**
@@ -197,7 +197,7 @@ Seasons rotate automatically when the configured duration expires.
 
 **Mark Season as Ended:**
 ```bash
-/rankedarena season end
+/rankedadmin season end
 ```
 
 **Effect:**
@@ -212,14 +212,14 @@ Seasons rotate automatically when the configured duration expires.
 
 **Set End Time:**
 ```bash
-/rankedarena season setend <minutes>
+/rankedadmin season setend <minutes>
 ```
 
 **Examples:**
 ```bash
-/rankedarena season setend 60      # End in 1 hour
-/rankedarena season setend 1440    # End in 1 day (24 hours)
-/rankedarena season setend 10080   # End in 1 week (7 days)
+/rankedadmin season setend 60      # End in 1 hour
+/rankedadmin season setend 1440    # End in 1 day (24 hours)
+/rankedadmin season setend 10080   # End in 1 week (7 days)
 ```
 
 **Use Cases:**
@@ -233,12 +233,12 @@ Seasons rotate automatically when the configured duration expires.
 
 **Change Season Name:**
 ```bash
-/rankedarena season rename <new_name>
+/rankedadmin season rename <new_name>
 ```
 
 **Example:**
 ```bash
-/rankedarena season rename "Winter Championship 2025"
+/rankedadmin season rename "Winter Championship 2025"
 ```
 
 **Effect:**
@@ -414,12 +414,12 @@ exclusive season rewards!
 
 **Override on Create:**
 ```bash
-/rankedarena season create 30 "Summer Championship"
+/rankedadmin season create 30 "Summer Championship"
 ```
 
 **Rename Current Season:**
 ```bash
-/rankedarena season rename "Spring Tournament 2025"
+/rankedadmin season rename "Spring Tournament 2025"
 ```
 
 ---
@@ -491,7 +491,7 @@ CREATE TABLE seasons (
 
 **Command:**
 ```bash
-/rankedarena season history [limit]
+/rankedadmin season history [limit]
 ```
 
 **Output:**
@@ -518,14 +518,14 @@ CREATE TABLE seasons (
 **Quick Rotation Test:**
 ```bash
 # 1. Set season to end in 5 minutes
-/rankedarena season setend 5
+/rankedadmin season setend 5
 
-# 2. Wait 5 minutes (or use /rankedarena season rotate for immediate test)
+# 2. Wait 5 minutes (or use /rankedadmin season rotate for immediate test)
 # 3. Check logs for rotation process
 tail -f logs/latest.log | grep Season
 
 # 4. Verify new season created
-/rankedarena season info
+/rankedadmin season info
 ```
 
 ### Check Season State
