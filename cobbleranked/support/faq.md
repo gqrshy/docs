@@ -1135,6 +1135,49 @@ Check:
 
 ---
 
+## Random Battles
+
+<details>
+<summary><strong>"Pool not found" error</strong></summary>
+
+**Cause:** Pool file not loaded or `enabled: false`
+
+**Fix:** Check `config/cobbleranked/randombattle/pools/` and ensure `enabled: true` in the pool file.
+
+</details>
+
+<details>
+<summary><strong>"Unknown species" error</strong></summary>
+
+**Cause:** Pokemon species not recognized by Cobblemon
+
+**Fix:** Use exact Cobblemon species names (lowercase). Check with `/pokespawn <species>` command.
+
+</details>
+
+<details>
+<summary><strong>"Unknown move" error</strong></summary>
+
+**Cause:** Move name doesn't match Cobblemon's internal names
+
+**Fix:** Use Cobblemon move names. Check in-game move list or Pokemon summary.
+
+</details>
+
+<details>
+<summary><strong>Teams feel unbalanced</strong></summary>
+
+**Cause:** Poor level scaling or role distribution in pool configuration
+
+**Fix:**
+1. Adjust Pokemon levels (weaker Pokemon = higher levels)
+2. Ensure varied roles (30% attackers, 25% wallbreakers, 20% support, etc.)
+3. Test with `/rankedadmin randombattle generate <pool>`
+
+</details>
+
+---
+
 ## Cross-Server Setup
 
 <details>

@@ -12,10 +12,6 @@ All commands available in CobbleRanked.
 | `/season` | Shows current season info (name, status, time remaining) |
 | `/casual` | Opens casual battle/missions GUI |
 
-> **[📸 IMAGE NEEDED: /rankedコマンド実行時のGUI表示例]**
-
-> **[📸 IMAGE NEEDED: /seasonコマンド実行結果（シーズン名、開始日、終了日、残り時間の表示）]**
-
 ---
 
 ## Admin Commands
@@ -56,8 +52,6 @@ All commands available in CobbleRanked.
 # Check arena status
 /rankedadmin arena status
 ```
-
-> **[📸 IMAGE NEEDED: /rankedadmin arena statusコマンド実行結果（アリーナ一覧と使用状況）]**
 
 ---
 

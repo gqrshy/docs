@@ -281,38 +281,6 @@ Customize mission GUI appearance in `config/cobbleranked/gui/casual_missions_gui
 
 ---
 
-## Database Tables
-
-### casual_mission_progress
-Tracks mission progress for each player.
-
-**Columns:**
-- `player_uuid` - Player UUID
-- `mission_id` - Mission identifier
-- `mission_type` - Mission type (DAILY/WEEKLY/MILESTONE)
-- `current_progress` - Current progress value
-- `is_completed` - Completion status
-- `last_updated` - Last progress update timestamp
-
-### casual_milestone_claims
-Records claimed milestone rewards.
-
-**Columns:**
-- `player_uuid` - Player UUID
-- `milestone_id` - Milestone identifier
-- `claimed_at` - Claim timestamp
-
-### pending_rewards
-Stores unclaimed rewards for offline players.
-
-**Columns:**
-- `player_uuid` - Player UUID
-- `reward_type` - Type of reward
-- `reward_data` - Reward details (JSON)
-- `created_at` - When reward was earned
-
----
-
 ## Commands
 
 ### Player Commands
@@ -402,13 +370,7 @@ Create a mission requiring both Fire and Water types:
 
 ## Troubleshooting
 
-Having issues with missions? See the [Troubleshooting Guide](../support/troubleshooting.md#casual-missions-issues) for solutions to common problems:
-
-- Missions not resetting
-- Progress not tracking
-- Rewards not received
-- Mission not completing
-- Pending rewards not appearing
+Having issues with missions? See the [FAQ](../support/faq.md) for solutions.
 
 ---
 

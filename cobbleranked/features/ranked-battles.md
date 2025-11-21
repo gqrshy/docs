@@ -295,10 +295,4 @@ Top players receive exclusive rewards at season end:
 
 ## Troubleshooting
 
-Having issues with ranked battles? See the [Troubleshooting Guide](../support/troubleshooting.md) for solutions to common problems:
-
-- Battle not starting
-- Elo not updating
-- Can't find opponent
-- Queue issues
-- Arena problems
+Having issues with ranked battles? See the [FAQ](../support/faq.md) for solutions.

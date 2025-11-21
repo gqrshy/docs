@@ -90,8 +90,6 @@ Slots are numbered 0-53 (6 rows × 9 columns):
 45 46 47 48 49 50 51 52 53
 ```
 
-> **[📸 IMAGE NEEDED: GUIスロット番号レイアウト図（0-53のマッピング表示、視覚的なグリッド）]**
-
 ## Placeholders
 
 Use placeholders for dynamic content:
@@ -113,8 +111,6 @@ Example:
   "Wins: &a{wins} &7| Losses: &c{losses}"
 ]
 ```
-
-> **[📸 IMAGE NEEDED: プレースホルダーが適用されたGUIアイテムの例（実際のElo値や勝敗数が表示されているツールチップ）]**
 
 ## Common Customizations
 
@@ -150,7 +146,5 @@ Example:
 1. Edit GUI file
 2. Run `/rankedadmin reload`
 3. Reopen GUI to see changes
-
-> **[📸 IMAGE NEEDED: カスタマイズ前後のGUI比較画像（デフォルトとカスタムアイテム/配置の違い）]**
 
 **Note:** Config reloads automatically detect language from `config.json5`.

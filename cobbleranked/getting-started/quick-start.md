@@ -25,8 +25,6 @@ Arenas are locations where ranked battles take place.
 1. **Build your arena** in-game (or use an existing location)
 2. **Stand at the first spawn point** where you want Player 1 to teleport when battle starts
 
-> **[📸 IMAGE NEEDED: プレイヤーがアリーナ作成位置に立っている様子（座標とYaw/Pitch表示）]**
-
 3. **Run the command:**
    ```bash
    /rankedadmin setArena main_arena pos1
@@ -63,8 +61,6 @@ Create multiple arenas for variety:
 /rankedadmin setArena forest_arena pos2
 ```
 
-> **[📸 IMAGE NEEDED: 複数のアリーナが配置されたマップ全体図（火山、氷、森など）]**
-
 CobbleRanked will randomly select from available arenas.
 
 </details>
@@ -93,8 +89,6 @@ By default, **all Pokemon are allowed**. Let's ban some overpowered Pokemon:
    ```
    /rankedadmin reload
    ```
-
-> **[📸 IMAGE NEEDED: リロードコマンド実行後の成功メッセージ画面]**
 
 ### Quick Presets
 
@@ -166,8 +160,6 @@ Seasons automatically rotate based on your configuration.
 /rankedadmin season info
 ```
 
-> **[📸 IMAGE NEEDED: /rankedadmin season infoコマンド実行結果の画面]**
-
 ### Customize Season Duration
 
 Edit `config/cobbleranked/config.json5`:
@@ -196,8 +188,6 @@ Let's run through a complete battle flow!
    /ranked
    ```
 
-> **[📸 IMAGE NEEDED: ランクメニューGUIのメイン画面（Singles/Doublesフォーマット選択）]**
-
 2. **Select battle format** (Singles, Doubles, Triples, MULTI, etc.)
 
 3. **Join the queue** by clicking the queue button
@@ -209,16 +199,12 @@ Let's run through a complete battle flow!
 3. **Both players teleport** to a random arena
 4. **Battle begins automatically**
 
-> **[📸 IMAGE NEEDED: バトル開始時の対戦シーン（両プレイヤーがアリーナに配置された状態）]**
-
 ### After the Battle
 
 - **Winner gains Elo** (default: 10-30 points)
 - **Loser loses Elo** (default: 10-30 points)
 - **Stats update** (wins, losses, win rate)
 - **Check leaderboard:** `/ranked` → Leaderboard
-
-> **[📸 IMAGE NEEDED: リーダーボード表示画面（トッププレイヤーとEloランキング）]**
 
 ## Step 5: Set Up Rewards (Optional)
 
@@ -268,8 +254,6 @@ Open `config/cobbleranked/rewards.json5`:
 ```
 
 </details>
-
-> **[📸 IMAGE NEEDED: リワード収集GUI（シーズン報酬とマイルストーン報酬の表示）]**
 
 ## Next Steps
 

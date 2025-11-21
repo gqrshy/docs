@@ -81,8 +81,6 @@ cobbleranked_music/
             └── battle_high.ogg
 ```
 
-> **[📸 IMAGE NEEDED: リソースパックのフォルダ構造（実際のファイルエクスプローラー画面、各ファイルの配置）]**
-
 ### 2. pack.mcmeta
 
 ```json
