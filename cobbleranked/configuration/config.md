@@ -98,7 +98,8 @@ Battle mechanics and team requirements.
 }
 ```
 
-### Enabling Additional Formats
+<details>
+<summary><strong>Enabling Additional Formats</strong></summary>
 
 To enable TRIPLES or MULTI in the ranked GUI:
 
@@ -111,6 +112,8 @@ To enable TRIPLES or MULTI in the ranked GUI:
 ```
 
 **Note:** MULTI mode requires arenas with 4 spawn points (pos1-pos4).
+
+</details>
 
 <details>
 <summary><strong>Battle Clauses (Click to expand)</strong></summary>
