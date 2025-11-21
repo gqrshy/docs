@@ -978,7 +978,7 @@ Or manually add `"pc"` to the `blockedCommands` list.
 **Solution:**
 1. Check server logs for JSON parsing errors
 2. Verify JSON5 syntax (trailing commas are OK, but check brackets and quotes)
-3. Run `/rankedarena reload`
+3. Run `/rankedadmin reload`
 4. Restart server if reload doesn't work
 
 **Common syntax errors:**
@@ -1130,6 +1130,49 @@ Check:
 2. Players have resource pack loaded
 3. Sound IDs match between config and `sounds.json`
 4. OGG files in correct path: `assets/cobbleranked/sounds/`
+
+</details>
+
+---
+
+## Random Battles
+
+<details>
+<summary><strong>"Pool not found" error</strong></summary>
+
+**Cause:** Pool file not loaded or `enabled: false`
+
+**Fix:** Check `config/cobbleranked/randombattle/pools/` and ensure `enabled: true` in the pool file.
+
+</details>
+
+<details>
+<summary><strong>"Unknown species" error</strong></summary>
+
+**Cause:** Pokemon species not recognized by Cobblemon
+
+**Fix:** Use exact Cobblemon species names (lowercase). Check with `/pokespawn <species>` command.
+
+</details>
+
+<details>
+<summary><strong>"Unknown move" error</strong></summary>
+
+**Cause:** Move name doesn't match Cobblemon's internal names
+
+**Fix:** Use Cobblemon move names. Check in-game move list or Pokemon summary.
+
+</details>
+
+<details>
+<summary><strong>Teams feel unbalanced</strong></summary>
+
+**Cause:** Poor level scaling or role distribution in pool configuration
+
+**Fix:**
+1. Adjust Pokemon levels (weaker Pokemon = higher levels)
+2. Ensure varied roles (30% attackers, 25% wallbreakers, 20% support, etc.)
+3. Test with `/rankedadmin randombattle generate <pool>`
 
 </details>
 
@@ -1319,6 +1362,65 @@ This:
 - Archives old stats
 - Resets Elo to default (1000)
 - Clears leaderboards
+
+</details>
+
+---
+
+## Advanced Competitive Settings
+
+<details>
+<summary><strong>What does syncLocalQueue do?</strong></summary>
+
+`competitive.syncLocalQueue: true` (default)
+
+Synchronizes matchmaking queue with the local server cache. Keep this enabled for consistent queue behavior.
+
+**When to disable:** Only if experiencing queue synchronization issues in single-server mode (rare).
+
+</details>
+
+<details>
+<summary><strong>What does preventDuplicatePenalty do?</strong></summary>
+
+`competitive.preventDuplicatePenalty: true` (default)
+
+Prevents double-penalizing a player who disconnects. If a player disconnects and the flee penalty is already applied, this prevents applying it again.
+
+**Recommended:** Always keep enabled.
+
+</details>
+
+<details>
+<summary><strong>What does asyncSeasonManager do?</strong></summary>
+
+`competitive.asyncSeasonManager: true` (default)
+
+Runs season management tasks (rotation checks, reward distribution) asynchronously to prevent server lag.
+
+**When to disable:** Only for debugging season-related issues where you need synchronous execution.
+
+</details>
+
+<details>
+<summary><strong>What does cleanupResources do?</strong></summary>
+
+`competitive.cleanupResources: true` (default)
+
+Automatically cleans up battle resources (arenas, player states) after matches end. Prevents memory leaks and stuck arena states.
+
+**Recommended:** Always keep enabled unless debugging arena issues.
+
+</details>
+
+<details>
+<summary><strong>What does pendingMatchTimeout do?</strong></summary>
+
+`competitive.pendingMatchTimeout: 5` (default, in minutes)
+
+Time limit for pending match states. If a match doesn't start within this time, it's automatically cancelled and players are returned to queue.
+
+**Increase if:** Players report being kicked from queue prematurely.
 
 </details>
 

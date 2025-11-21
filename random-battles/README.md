@@ -243,7 +243,7 @@ You can import Pokemon data from Showdown's random battle sets:
 ### Reload Pools
 
 ```
-/rankedarena randombattle reload
+/rankedadmin randombattle reload
 ```
 
 Reloads all pool configurations from disk.
@@ -251,7 +251,7 @@ Reloads all pool configurations from disk.
 ### List Pools
 
 ```
-/rankedarena randombattle list
+/rankedadmin randombattle list
 ```
 
 Shows all available random battle pools and their status.
@@ -259,7 +259,7 @@ Shows all available random battle pools and their status.
 ### Test Generation
 
 ```
-/rankedarena randombattle generate <pool> [player]
+/rankedadmin randombattle generate <pool> [player]
 ```
 
 Generates a random team from specified pool for testing.
@@ -365,50 +365,12 @@ Test pools with:
 
 ## Troubleshooting
 
-### "Pool not found"
-
-**Cause:** Pool file not loaded or `enabled: false`
-**Fix:** Check `config/cobbleranked/randombattle/pools/` and ensure `enabled: true`
-
-### "Unknown species: pikachu"
-
-**Cause:** Pokemon species not recognized by Cobblemon
-**Fix:** Use exact Cobblemon species names (lowercase, check `/pokespawn` command)
-
-### "Unknown move: Ice Beam"
-
-**Cause:** Move name doesn't match Cobblemon
-**Fix:** Use Cobblemon move names (check in-game move list)
-
-### Teams feel unbalanced
-
-**Cause:** Poor level scaling or role distribution
-**Fix:** Adjust Pokemon levels and ensure varied roles
-
----
-
-## Future Enhancements
-
-### Planned Features
-
-- [ ] Web-based pool editor
-- [ ] Auto-import from Showdown GitHub
-- [ ] Multiple sets per Pokemon (weighted random)
-- [ ] Seasonal pool rotations
-- [ ] Community voting for pool Pokemon
-- [ ] Replay system for best random battles
-
-### Possible Variations
-
-- **Random Doubles** - 2v2 format with leadCount=2
-- **Random Triples** - 3v3 format (if Cobblemon supports it)
-- **Random Battle Royale** - Free-for-all with 4 players
-- **Inverse Random** - Type effectiveness inverted
-- **Random LC (Little Cup)** - Pre-evolved Pokemon only
+Having issues with random battles? See the [FAQ](../cobbleranked/support/faq.md#random-battles) for solutions.
 
 ---
 
 **See Also:**
-- [Battle Formats](../features/formats.md)
-- [Configuration Guide](../configuration/README.md)
-- [Admin Commands](../commands/admin.md)
+- [Battle Formats](../cobbleranked/features/battle-formats.md)
+- [Configuration Guide](../cobbleranked/configuration/README.md)
+- [Admin Commands](../cobbleranked/getting-started/commands.md)
+- [FAQ & Troubleshooting](../cobbleranked/support/faq.md)

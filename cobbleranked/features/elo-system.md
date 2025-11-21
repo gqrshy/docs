@@ -37,8 +37,6 @@ Elo rating determines:
 - Losing to lower-ranked = big loss, small gain potential
 - Total Elo in system stays constant (zero-sum)
 
-> **[📸 IMAGE NEEDED: Elo変動の計算例を示す図解（対戦前後のElo変化、期待勝率と実際の結果）]**
-
 ---
 
 ## Calculation Modes
@@ -65,8 +63,6 @@ Uses K-factor system (similar to Chess/Pokemon Showdown).
 **K-Factor:**
 - New players (< 10 matches): K = 64 (rating changes faster)
 - Established players: K = 32 (stable)
-
-> **[📸 IMAGE NEEDED: K因子の違いによるElo変化のグラフ（K=16, 32, 64での変化率比較）]**
 
 ### Legacy (Simple)
 
@@ -119,8 +115,6 @@ Most accurate system used by Chess.com and Lichess. Tracks **rating uncertainty 
 - Beating uncertain players (high RD): smaller gain
 - Beating confident players (low RD): larger gain
 
-> **[📸 IMAGE NEEDED: RD（Rating Deviation）変化の視覚化（試合数に応じたRD減少グラフ、不活動時の増加）]**
-
 **When to use:**
 - ✅ Large competitive server (100+ active players)
 - ✅ Want fair ratings for returning players
@@ -168,8 +162,6 @@ Inactive players lose Elo to prevent ladder stagnation.
 ```
 
 **Example:** 10 days inactive = -20 Elo
-
-> **[📸 IMAGE NEEDED: Elo減衰システムの動作例（不活動日数とElo減少の関係グラフ）]**
 
 **Note:** Glicko-2 mode uses RD decay instead (rating stays, uncertainty increases).
 

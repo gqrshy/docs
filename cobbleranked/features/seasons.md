@@ -87,11 +87,11 @@ Season Start → Competition → Season End → Rewards → New Season
 
 | Duration | Use Case | Command Example |
 |----------|----------|-----------------|
-| 7 days | Weekly competitions | `/rankedarena season create 7 "Weekly Cup"` |
-| 14 days | Bi-weekly tournaments | `/rankedarena season create 14` |
+| 7 days | Weekly competitions | `/rankedadmin season create 7 "Weekly Cup"` |
+| 14 days | Bi-weekly tournaments | `/rankedadmin season create 14` |
 | **30 days** | **Monthly (recommended)** | Default |
-| 60 days | Long-term seasons | `/rankedarena season create 60` |
-| 90 days | Quarterly competitions | `/rankedarena season create 90` |
+| 60 days | Long-term seasons | `/rankedadmin season create 60` |
+| 90 days | Quarterly competitions | `/rankedadmin season create 90` |
 
 ---
 
@@ -122,7 +122,7 @@ Seasons rotate automatically when the configured duration expires.
 
 **Current Season:**
 ```bash
-/rankedarena season info
+/rankedadmin season info
 ```
 
 **Output:**
@@ -141,13 +141,13 @@ Seasons rotate automatically when the configured duration expires.
 
 **Season History:**
 ```bash
-/rankedarena season history [limit]
+/rankedadmin season history [limit]
 ```
 
 **Examples:**
 ```bash
-/rankedarena season history        # Show last 10 seasons
-/rankedarena season history 5      # Show last 5 seasons
+/rankedadmin season history        # Show last 10 seasons
+/rankedadmin season history 5      # Show last 5 seasons
 ```
 
 ---
@@ -156,17 +156,17 @@ Seasons rotate automatically when the configured duration expires.
 
 **Syntax:**
 ```bash
-/rankedarena season create <days> [name]
+/rankedadmin season create <days> [name]
 ```
 
 **Examples:**
 ```bash
 # Auto-generated name (YYYY-MM format)
-/rankedarena season create 30
+/rankedadmin season create 30
 
 # Custom name
-/rankedarena season create 30 "Summer Championship 2025"
-/rankedarena season create 14 "Weekly Tournament #52"
+/rankedadmin season create 30 "Summer Championship 2025"
+/rankedadmin season create 14 "Weekly Tournament #52"
 ```
 
 **Behavior:**
@@ -183,7 +183,7 @@ Seasons rotate automatically when the configured duration expires.
 
 **Immediate Rotation:**
 ```bash
-/rankedarena season rotate
+/rankedadmin season rotate
 ```
 
 **Effect:**
@@ -197,7 +197,7 @@ Seasons rotate automatically when the configured duration expires.
 
 **Mark Season as Ended:**
 ```bash
-/rankedarena season end
+/rankedadmin season end
 ```
 
 **Effect:**
@@ -212,14 +212,14 @@ Seasons rotate automatically when the configured duration expires.
 
 **Set End Time:**
 ```bash
-/rankedarena season setend <minutes>
+/rankedadmin season setend <minutes>
 ```
 
 **Examples:**
 ```bash
-/rankedarena season setend 60      # End in 1 hour
-/rankedarena season setend 1440    # End in 1 day (24 hours)
-/rankedarena season setend 10080   # End in 1 week (7 days)
+/rankedadmin season setend 60      # End in 1 hour
+/rankedadmin season setend 1440    # End in 1 day (24 hours)
+/rankedadmin season setend 10080   # End in 1 week (7 days)
 ```
 
 **Use Cases:**
@@ -233,12 +233,12 @@ Seasons rotate automatically when the configured duration expires.
 
 **Change Season Name:**
 ```bash
-/rankedarena season rename <new_name>
+/rankedadmin season rename <new_name>
 ```
 
 **Example:**
 ```bash
-/rankedarena season rename "Winter Championship 2025"
+/rankedadmin season rename "Winter Championship 2025"
 ```
 
 **Effect:**
@@ -414,12 +414,12 @@ exclusive season rewards!
 
 **Override on Create:**
 ```bash
-/rankedarena season create 30 "Summer Championship"
+/rankedadmin season create 30 "Summer Championship"
 ```
 
 **Rename Current Season:**
 ```bash
-/rankedarena season rename "Spring Tournament 2025"
+/rankedadmin season rename "Spring Tournament 2025"
 ```
 
 ---
@@ -470,93 +470,9 @@ exclusive season rewards!
 
 ---
 
-## Season History
+## Troubleshooting
 
-### Database Storage
-
-**Table:** `seasons`
-
-**Schema:**
-```sql
-CREATE TABLE seasons (
-    season_id INT AUTO_INCREMENT PRIMARY KEY,
-    season_name VARCHAR(255) NOT NULL,
-    start_date VARCHAR(50) NOT NULL,
-    end_date VARCHAR(50) NOT NULL,
-    is_active BOOLEAN DEFAULT TRUE
-);
-```
-
-### View History
-
-**Command:**
-```bash
-/rankedarena season history [limit]
-```
-
-**Output:**
-```
-╔═══════════════════════════════════════════════════════╗
-║               Season History (Last 5)                  ║
-╠═══════════════════════════════════════════════════════╣
-║ ID │ Name        │ Start Date │ End Date   │ Status   ║
-╟────┼─────────────┼────────────┼────────────┼──────────╢
-║ 5  │ 2025-01     │ 2025-01-01 │ 2025-01-31 │ Active   ║
-║ 4  │ 2024-12     │ 2024-12-01 │ 2024-12-31 │ Ended    ║
-║ 3  │ 2024-11     │ 2024-11-01 │ 2024-11-30 │ Ended    ║
-║ 2  │ 2024-10     │ 2024-10-01 │ 2024-10-31 │ Ended    ║
-║ 1  │ 2024-09     │ 2024-09-01 │ 2024-09-30 │ Ended    ║
-╚═══════════════════════════════════════════════════════╝
-```
-
----
-
-## Testing & Debugging
-
-### Test Season Rotation
-
-**Quick Rotation Test:**
-```bash
-# 1. Set season to end in 5 minutes
-/rankedarena season setend 5
-
-# 2. Wait 5 minutes (or use /rankedarena season rotate for immediate test)
-# 3. Check logs for rotation process
-tail -f logs/latest.log | grep Season
-
-# 4. Verify new season created
-/rankedarena season info
-```
-
-### Check Season State
-
-**Redis Cache (Cross-Server):**
-```bash
-redis-cli
-> HGETALL ranked:current_season
-```
-
-**Database:**
-```sql
-SELECT * FROM seasons ORDER BY season_id DESC LIMIT 5;
-```
-
-### Common Issues
-
-**Season Not Rotating:**
-- Check battle server configuration (must have `battle_server: ""`)
-- Verify automatic checks are running (look for "[Season]" logs every 10 minutes)
-- Ensure `reset_days` is configured correctly
-
-**Rewards Not Distributed:**
-- Check rewards configuration: `config/cobbleranked/rewards.json5`
-- Verify top players exist in database: `SELECT * FROM format_stats`
-- Check logs for reward distribution errors
-
-**Cross-Server Season Info Not Syncing:**
-- Verify Redis connection on all servers
-- Check Redis cache: `HGETALL ranked:current_season`
-- Ensure battle server is publishing season updates
+Having issues with seasons? See the [FAQ](../support/faq.md) for solutions.
 
 ---
 

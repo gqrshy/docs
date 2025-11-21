@@ -17,6 +17,7 @@
 * [Rewards System](configuration/rewards.md)
 * [Language Files](configuration/languages.md)
 * [GUI Customization](configuration/gui.md)
+* [Player Restrictions](configuration/restrictions.md)
 
 ## Features
 
@@ -31,6 +32,7 @@
 * [Inventory Restrictions](features/inventory-restrictions.md)
 * [Casual Missions](features/casual-missions.md)
 * [Custom Music Pack](features/custom-music.md)
+* [Random Battles](../random-battles/README.md)
 
 ## Advanced
 

@@ -235,8 +235,6 @@ West ←────┼────→ East
 
 **Recommendation:** Use `0.0` pitch for normal battles to provide a natural perspective.
 
-> **[📸 IMAGE NEEDED: Screenshot showing F3 debug screen with Yaw/Pitch values highlighted]**
-
 </details>
 
 ## Advanced Configuration

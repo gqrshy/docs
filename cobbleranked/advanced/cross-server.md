@@ -4,8 +4,6 @@ Run CobbleRanked across multiple servers with shared rankings.
 
 ## Architecture
 
-> **[📸 IMAGE NEEDED: クロスサーバーアーキテクチャ図（Velocityプロキシ、複数のロビー/メインサーバー、バトルサーバー、共有DB/Redis構成）]**
-
 **Servers:**
 - **Battle Server** - Hosts all ranked battles
 - **Lobby/Main Servers** - Players queue here, transfer to battle server
@@ -130,17 +128,7 @@ docker run -d -p 6379:6379 redis:alpine
 
 ## Troubleshooting
 
-**Players not transferring:**
-- Check Velocity `velocity.toml` has correct server names
-- Verify ProxyCommand Reloaded is installed
-
-**Stats not syncing:**
-- Check MySQL/MongoDB connection on all servers
-- Verify Redis is running: `redis-cli ping` → `PONG`
-
-**Duplicate battle servers:**
-- Only one server should have `battle_server: ""`
-- Check logs for `SEVERE` errors about duplicate battle servers
+Having issues with cross-server setup? See the [FAQ](../support/faq.md#cross-server) for solutions to common problems.
 
 ## Advanced
 

@@ -177,7 +177,7 @@ CobbleRanked supports multiple battle formats with independent rankings:
 
 **Admin can reset:**
 ```bash
-/rankedarena setflee <player> 0
+/rankedadmin setflee <player> 0
 ```
 
 **See Also:** [Disconnect Penalties](disconnect-penalties.md)
@@ -221,11 +221,11 @@ Top players receive exclusive rewards at season end:
 ### Admin Commands
 
 ```bash
-/rankedarena setelo <amount> <player> <format>    # Set player Elo
-/rankedarena addelo <amount> <player> <format>    # Add Elo
-/rankedarena removeelo <amount> <player> <format> # Remove Elo
-/rankedarena setflee <player> <amount>            # Set flee count
-/rankedarena closeRanked                          # Toggle system on/off
+/rankedadmin setelo <amount> <player> <format>    # Set player Elo
+/rankedadmin addelo <amount> <player> <format>    # Add Elo
+/rankedadmin removeelo <amount> <player> <format> # Remove Elo
+/rankedadmin setflee <player> <amount>            # Set flee count
+/rankedadmin closeRanked                          # Toggle system on/off
 ```
 
 **See Also:** [Commands & Permissions](../getting-started/commands.md)
@@ -295,10 +295,4 @@ Top players receive exclusive rewards at season end:
 
 ## Troubleshooting
 
-Having issues with ranked battles? See the [Troubleshooting Guide](../support/troubleshooting.md) for solutions to common problems:
-
-- Battle not starting
-- Elo not updating
-- Can't find opponent
-- Queue issues
-- Arena problems
+Having issues with ranked battles? See the [FAQ](../support/faq.md) for solutions.

@@ -10,10 +10,7 @@ All commands available in CobbleRanked.
 |---------|-------------|
 | `/ranked` | Opens the ranked GUI for queue, stats, and leaderboards |
 | `/season` | Shows current season info (name, status, time remaining) |
-
-> **[📸 IMAGE NEEDED: /rankedコマンド実行時のGUI表示例]**
-
-> **[📸 IMAGE NEEDED: /seasonコマンド実行結果（シーズン名、開始日、終了日、残り時間の表示）]**
+| `/casual` | Opens casual battle/missions GUI |
 
 ---
 
@@ -55,8 +52,6 @@ All commands available in CobbleRanked.
 # Check arena status
 /rankedadmin arena status
 ```
-
-> **[📸 IMAGE NEEDED: /rankedadmin arena statusコマンド実行結果（アリーナ一覧と使用状況）]**
 
 ---
 
@@ -114,6 +109,26 @@ All commands available in CobbleRanked.
 # End season in 24 hours
 /rankedadmin season setend 1440
 ```
+
+---
+
+### Random Battle Management
+
+| Command | Parameters | Description |
+|---------|------------|-------------|
+| `/rankedadmin randombattle reload` | None | Reload all random battle pool configurations |
+| `/rankedadmin randombattle list` | None | Show all available pools and their status |
+| `/rankedadmin randombattle generate <pool> [player]` | `<pool>` Pool name<br>`[player]` Target player (optional) | Generate a random team for testing |
+
+---
+
+### Placeholder Commands
+
+| Command | Description |
+|---------|-------------|
+| `/rankedplaceholder test <placeholder>` | Test a placeholder (e.g., `%cobbleranked_top_1_name%`) |
+| `/rankedplaceholder list` | List all available placeholders |
+| `/rankedplaceholder clear` | Clear placeholder cache |
 
 ---
 

@@ -32,8 +32,6 @@ Example:
 3. PlayerC - 1689 Elo (28W - 14L)
 ```
 
-> **[📸 IMAGE NEEDED: リーダーボード表示画面（トップ10プレイヤーのランキング、Elo、勝敗記録が表示されたGUI）]**
-
 ## Ranking Criteria
 
 Players are ranked by:
