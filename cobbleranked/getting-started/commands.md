@@ -63,6 +63,8 @@ All commands available in CobbleRanked.
 | `/rankedadmin addelo <amount> <player> <format>` | `<amount>` Elo to add<br>`<player>` Player name<br>`<format>` Battle format | Add Elo points to player |
 | `/rankedadmin removeelo <amount> <player> <format>` | `<amount>` Elo to remove<br>`<player>` Player name<br>`<format>` Battle format | Remove Elo points from player |
 | `/rankedadmin setflee <player> <amount>` | `<player>` Player name<br>`<amount>` Flee count | Set flee count (use 0 to clear penalty) |
+| `/rankedadmin getflee <player> <format>` | `<player>` Player name<br>`<format>` Battle format | Check player's flee count |
+| `/rankedadmin resetflee <player> <format>` | `<player>` Player name<br>`<format>` Battle format | Reset flee count to 0 |
 
 **Valid Formats:**
 - `SINGLES` - 1v1 battles
@@ -109,16 +111,6 @@ All commands available in CobbleRanked.
 # End season in 24 hours
 /rankedadmin season setend 1440
 ```
-
----
-
-### Random Battle Management
-
-| Command | Parameters | Description |
-|---------|------------|-------------|
-| `/rankedadmin randombattle reload` | None | Reload all random battle pool configurations |
-| `/rankedadmin randombattle list` | None | Show all available pools and their status |
-| `/rankedadmin randombattle generate <pool> [player]` | `<pool>` Pool name<br>`[player]` Target player (optional) | Generate a random team for testing |
 
 ---
 
