@@ -1,5 +1,7 @@
 # Random Battles Mode
 
+> **Note:** This feature is currently in development and not yet available. The documentation below describes the planned functionality.
+
 A highly engaging battle mode where both players receive fully built, random teams from a curated Pokémon pool — similar to Showdown's most popular casual format.
 
 ## What is Random Battles?

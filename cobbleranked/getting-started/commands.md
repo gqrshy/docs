@@ -124,7 +124,7 @@ All commands have smart tab completion:
 
 - **Arena names** - Auto-complete from configured arenas
 - **Player names** - Show online players
-- **Formats** - Suggest valid options (SINGLES, DOUBLES)
+- **Formats** - Suggest SINGLES, DOUBLES (TRIPLES, MULTI can be typed manually if enabled in config)
 - **Elo amounts** - Suggest common values (1000, 1200, 1500)
 - **Season durations** - Suggest common periods (7, 14, 30 days)
 
