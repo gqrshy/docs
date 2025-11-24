@@ -126,7 +126,7 @@ Allow limited quantities instead of complete bans:
     "mewtwo",            // All forms banned
     "rayquaza:mega",     // Only Mega Rayquaza
     "charizard:mega_x",  // Only Mega Charizard X
-    "weezing:galar"      // Only Galarian Weezing
+    "weezing:galarian"   // Only Galarian Weezing
   ]
 }
 ```
@@ -136,12 +136,42 @@ Allow limited quantities instead of complete bans:
 
 **Form Syntax:**
 - No form (`mewtwo`) = **All forms** banned
-- With form (`mewtwo:mega_x`) = **Only that form** banned
+- With form (`kyurem:white-fusion`) = **Only that form** banned
+
+**Supported syntax:**
+- **Aspect names** (recommended): `kyurem:white-fusion`, `charizard:mega_x`, `weezing:galarian`
+- **Form names** (also works): `kyurem:White`, `charizard:Mega-X`, `weezing:Galar`
+
+Both syntaxes work! Use aspect names for consistency with game data.
 
 **Common Forms:**
-- Mega: `:mega`, `:mega_x`, `:mega_y`
-- Regional: `:alola`, `:galar`, `:hisui`
-- Other: `:primal`, `:origin`, `:10` (Zygarde 10%)
+
+| Pokemon | Aspect Name | Form Name | Example |
+|---------|------------|-----------|---------|
+| Mega Rayquaza | `:mega` | `:Mega` | `rayquaza:mega` |
+| Mega Charizard X | `:mega_x` | `:Mega-X` | `charizard:mega_x` |
+| Mega Charizard Y | `:mega_y` | `:Mega-Y` | `charizard:mega_y` |
+| White Kyurem | `:white-fusion` | `:White` | `kyurem:white-fusion` |
+| Black Kyurem | `:black-fusion` | `:Black` | `kyurem:black-fusion` |
+| Galarian Weezing | `:galarian` | `:Galar` | `weezing:galarian` |
+| Alolan Raichu | `:alolan` | `:Alola` | `raichu:alolan` |
+| Hisuian Typhlosion | `:hisuian` | `:Hisui` | `typhlosion:hisuian` |
+| Primal Kyogre | `:primal` | `:Primal` | `kyogre:primal` |
+| Origin Giratina | `:origin` | `:Origin` | `giratina:origin` |
+| Zygarde 10% | `:10` | `:10` | `zygarde:10` |
+
+**MegaShowdown Compatibility:**
+
+If using MegaShowdown mod, the aspect-based syntax is fully supported:
+```json5
+{
+  "black_list_pokemon": [
+    "kyurem:white-fusion",   // White Kyurem (MegaShowdown)
+    "kyurem:black-fusion",   // Black Kyurem (MegaShowdown)
+    "rayquaza:mega"          // Mega Rayquaza (MegaShowdown)
+  ]
+}
+```
 
 </details>
 
