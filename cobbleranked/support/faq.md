@@ -88,6 +88,297 @@ Save and run `/rankedadmin reload`.
 
 ---
 
+## Pokemon Form Reference
+
+<details>
+<summary><strong>How do I ban specific Pokemon forms (e.g., White Kyurem only)?</strong></summary>
+
+Use the form syntax: `species:form_name` in blacklist configuration.
+
+**Example - Ban only White Kyurem:**
+```json5
+{
+  "black_list_pokemon": [
+    "Kyurem:white-fusion"  // Only White Kyurem banned
+  ]
+}
+```
+
+**Common Form Examples:**
+
+| Pokemon | Form Name | Blacklist Syntax |
+|---------|-----------|------------------|
+| White Kyurem | white-fusion | `Kyurem:white-fusion` |
+| Black Kyurem | black-fusion | `Kyurem:black-fusion` |
+| Ice Rider Calyrex | ice-rider | `Calyrex:ice-rider` |
+| Shadow Rider Calyrex | shadow-rider | `Calyrex:shadow-rider` |
+| Heat Rotom | heat | `Rotom:heat` |
+| Wash Rotom | wash | `Rotom:wash` |
+| Frost Rotom | frost | `Rotom:frost` |
+| Fan Rotom | fan | `Rotom:fan` |
+| Mow Rotom | mow | `Rotom:mow` |
+| Attack Deoxys | attack | `Deoxys:attack` |
+| Defense Deoxys | defense | `Deoxys:defense` |
+| Speed Deoxys | speed | `Deoxys:speed` |
+
+**Tips:**
+- No form specified (`Kyurem`) bans **all forms** (normal, white, black)
+- Form specified (`Kyurem:white-fusion`) bans **only that form**
+
+</details>
+
+<details>
+<summary><strong>Complete Pokemon Form List</strong></summary>
+
+### Legendary Forms
+
+**Kyurem (646)**
+- Normal: `Kyurem`
+- White: `Kyurem:white-fusion`
+- Black: `Kyurem:black-fusion`
+
+**Calyrex (898)**
+- Normal: `Calyrex`
+- Ice Rider: `Calyrex:ice-rider`
+- Shadow Rider: `Calyrex:shadow-rider`
+
+**Necrozma (800)**
+- Normal: `Necrozma`
+- Dusk Mane: `Necrozma:dusk-mane`
+- Dawn Wings: `Necrozma:dawn-wings`
+- Ultra: `Necrozma:ultra`
+
+**Zygarde (718)**
+- 10% Form: `Zygarde:formid=10`
+- 50% Form: `Zygarde` (default)
+- Complete Form: `Zygarde:formid=100`
+
+**Giratina (487)**
+- Altered: `Giratina` (default)
+- Origin: `Giratina:origin`
+
+**Shaymin (492)**
+- Land: `Shaymin` (default)
+- Sky: `Shaymin:sky`
+
+**Tornadus/Thundurus/Landorus**
+- Incarnate: `Tornadus` (default)
+- Therian: `Tornadus:therian`
+
+**Hoopa (720)**
+- Confined: `Hoopa` (default)
+- Unbound: `Hoopa:unbound`
+
+---
+
+### Mega Evolutions
+
+**Gen 1 Starters**
+- `Venusaur:mega`
+- `Charizard:mega_x`
+- `Charizard:mega_y`
+- `Blastoise:mega`
+
+**Mewtwo**
+- `Mewtwo:mega_x`
+- `Mewtwo:mega_y`
+
+**Pseudo-Legendaries**
+- `Garchomp:mega`
+- `Salamence:mega`
+- `Metagross:mega`
+- `Tyranitar:mega`
+
+**Popular Megas**
+- `Lucario:mega`
+- `Gengar:mega`
+- `Alakazam:mega`
+- `Kangaskhan:mega`
+- `Rayquaza:mega`
+
+---
+
+### Rotom Forms (479)
+
+- Heat (Oven): `Rotom:heat`
+- Wash (Washing Machine): `Rotom:wash`
+- Frost (Refrigerator): `Rotom:frost`
+- Fan (Electric Fan): `Rotom:fan`
+- Mow (Lawn Mower): `Rotom:mow`
+
+---
+
+### Deoxys Forms (386)
+
+- Normal: `Deoxys` (default)
+- Attack: `Deoxys:attack`
+- Defense: `Deoxys:defense`
+- Speed: `Deoxys:speed`
+
+---
+
+### Lycanroc Forms (745)
+
+- Midday: `Lycanroc` (default)
+- Midnight: `Lycanroc:midnight`
+- Dusk: `Lycanroc:dusk`
+
+---
+
+### Oricorio Forms (741)
+
+- Baile (Fire/Flying): `Oricorio` (default)
+- Pom-Pom (Electric/Flying): `Oricorio:pom-pom`
+- Pa'u (Psychic/Flying): `Oricorio:pau`
+- Sensu (Ghost/Flying): `Oricorio:sensu`
+
+---
+
+### Regional Forms
+
+**Alolan Forms**
+- `Meowth:alola`
+- `Persian:alola`
+- `Raichu:alola`
+- `Vulpix:alola`
+- `Ninetales:alola`
+- `Sandshrew:alola`
+- `Sandslash:alola`
+- `Diglett:alola`
+- `Dugtrio:alola`
+- `Geodude:alola`
+- `Graveler:alola`
+- `Golem:alola`
+- `Grimer:alola`
+- `Muk:alola`
+- `Exeggutor:alola`
+- `Marowak:alola`
+
+**Galarian Forms**
+- `Meowth:galar`
+- `Ponyta:galar`
+- `Rapidash:galar`
+- `Slowpoke:galar`
+- `Slowbro:galar`
+- `Slowking:galar`
+- `Farfetchd:galar`
+- `Weezing:galar`
+- `Mr. Mime:galar`
+- `Articuno:galar`
+- `Zapdos:galar`
+- `Moltres:galar`
+- `Corsola:galar`
+- `Zigzagoon:galar`
+- `Linoone:galar`
+- `Darumaka:galar`
+- `Darmanitan:galar`
+- `Yamask:galar`
+- `Stunfisk:galar`
+
+**Hisuian Forms**
+- `Growlithe:hisui`
+- `Arcanine:hisui`
+- `Voltorb:hisui`
+- `Electrode:hisui`
+- `Typhlosion:hisui`
+- `Qwilfish:hisui`
+- `Sneasel:hisui`
+- `Samurott:hisui`
+- `Lilligant:hisui`
+- `Zorua:hisui`
+- `Zoroark:hisui`
+- `Braviary:hisui`
+- `Sliggoo:hisui`
+- `Goodra:hisui`
+- `Avalugg:hisui`
+- `Decidueye:hisui`
+
+**Paldean Forms**
+- `Tauros:paldea-combat`
+- `Tauros:paldea-blaze`
+- `Tauros:paldea-aqua`
+- `Wooper:paldea`
+
+---
+
+### Practical Blacklist Examples
+
+**Example 1: Ban all Kyurem forms**
+```json5
+{
+  "black_list_pokemon": ["Kyurem"]
+}
+```
+
+**Example 2: Ban only fusion forms, allow normal Kyurem**
+```json5
+{
+  "black_list_pokemon": [
+    "Kyurem:white-fusion",
+    "Kyurem:black-fusion"
+  ]
+}
+```
+
+**Example 3: Ban all Mega Evolutions but allow normal forms**
+```json5
+{
+  "black_list_pokemon": [
+    "Charizard:mega_x",
+    "Charizard:mega_y",
+    "Mewtwo:mega_x",
+    "Mewtwo:mega_y",
+    "Rayquaza:mega"
+  ]
+}
+```
+
+**Example 4: Ban all Alolan forms**
+```json5
+{
+  "black_list_pokemon": [
+    "Raichu:alola",
+    "Vulpix:alola",
+    "Ninetales:alola",
+    "Sandshrew:alola",
+    "Sandslash:alola",
+    "Exeggutor:alola",
+    "Marowak:alola",
+    "Grimer:alola",
+    "Muk:alola"
+  ]
+}
+```
+
+**Example 5: Competitive VGC Series 2 (Restricted Legendaries)**
+```json5
+{
+  "black_list_pokemon": [
+    "Kyurem:white-fusion",
+    "Kyurem:black-fusion",
+    "Calyrex:ice-rider",
+    "Calyrex:shadow-rider",
+    "Necrozma:ultra"
+  ],
+  "restricted_label_limits": {
+    "restricted": 2  // Allow max 2 restricted legendaries
+  }
+}
+```
+
+---
+
+**Finding Form Names:**
+
+1. **Check Cobblemon Wiki** - Most reliable source
+2. **Use `/pokespawn <species> form=<form_name>`** - Test in-game
+3. **Press F3+H and hover over Pokemon** - Shows internal form data
+4. **Check server logs** - Form names appear when Pokemon spawn
+
+</details>
+
+---
+
 ## Blacklist Configuration
 
 <details>

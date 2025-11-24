@@ -272,6 +272,208 @@ Allow limited quantities instead of complete bans:
 
 ---
 
+## Healing Item Restrictions
+
+Control healing item usage during battles (added in v1.0.7+).
+
+### Configuration Location
+
+**Per-Format Config Files:**
+- `config/cobbleranked/blacklist/singles.json5`
+- `config/cobbleranked/blacklist/doubles.json5`
+- `config/cobbleranked/blacklist/triples.json5`
+- `config/cobbleranked/blacklist/multi.json5`
+
+Each format has independent healing item restrictions!
+
+### Basic Example
+
+```json5
+{
+  "consumables": {
+    // Block ALL healing items (recommended for competitive)
+    "block_all_healing_items": true,
+
+    // Block ALL status cure items
+    "block_status_healing_items": true,
+
+    // Block ALL revival items
+    "block_revival_items": true
+  }
+}
+```
+
+**Result:** Players cannot use Potions, Full Restores, Revives, Antidotes, etc. during battle
+
+### Advanced Example (Selective Blocking)
+
+```json5
+{
+  "consumables": {
+    // Allow healing items, but block specific ones
+    "block_all_healing_items": false,
+    "blocked_healing_items": [
+      "cobblemon:max_potion",
+      "cobblemon:full_restore"
+    ],
+
+    // Allow status cures
+    "block_status_healing_items": false,
+    "blocked_status_healing_items": [],
+
+    // Block all revival items
+    "block_revival_items": true,
+    "blocked_revival_items": [
+      "cobblemon:revive",
+      "cobblemon:max_revive"
+    ]
+  }
+}
+```
+
+**Result:** Players can use Potions/Super Potions/Hyper Potions, but NOT Max Potions or Full Restores
+
+### Item Categories
+
+| Category | Block All Flag | Individual List | Common Items |
+|----------|---------------|-----------------|--------------|
+| **Healing** | `block_all_healing_items` | `blocked_healing_items` | Potion, Super Potion, Hyper Potion, Max Potion, Full Restore |
+| **Status Cure** | `block_status_healing_items` | `blocked_status_healing_items` | Antidote, Paralyze Heal, Awakening, Burn Heal, Ice Heal, Full Heal |
+| **Revival** | `block_revival_items` | `blocked_revival_items` | Revive, Max Revive |
+
+### Configuration Modes
+
+**Mode 1: Block All (Recommended for Competitive)**
+```json5
+{
+  "block_all_healing_items": true,
+  "blocked_healing_items": []  // Ignored when block_all = true
+}
+```
+
+**Mode 2: Selective Blocking (Casual/Custom Rules)**
+```json5
+{
+  "block_all_healing_items": false,
+  "blocked_healing_items": [
+    "cobblemon:max_potion",
+    "cobblemon:full_restore"
+  ]
+}
+```
+
+### Per-Format Examples
+
+**Singles (Competitive):** No items allowed
+```json5
+// config/cobbleranked/blacklist/singles.json5
+{
+  "consumables": {
+    "block_all_healing_items": true,
+    "block_status_healing_items": true,
+    "block_revival_items": true
+  }
+}
+```
+
+**Doubles (VGC-Style):** No items allowed
+```json5
+// config/cobbleranked/blacklist/doubles.json5
+{
+  "consumables": {
+    "block_all_healing_items": true,
+    "block_status_healing_items": true,
+    "block_revival_items": true
+  }
+}
+```
+
+**Casual Format:** Allow basic items only
+```json5
+// config/cobbleranked/blacklist/casual.json5
+{
+  "consumables": {
+    "block_all_healing_items": false,
+    "blocked_healing_items": [
+      "cobblemon:max_potion",
+      "cobblemon:full_restore"
+    ],
+
+    "block_status_healing_items": false,
+    "blocked_status_healing_items": [
+      "cobblemon:full_heal"
+    ],
+
+    "block_revival_items": true  // No revives
+  }
+}
+```
+
+### Finding Item IDs
+
+1. **Press F3+H** (advanced tooltips)
+2. **Hover over item** in inventory
+3. **Check tooltip** for ID (e.g., `cobblemon:potion`)
+4. **Add to list** with full namespace: `"cobblemon:potion"`
+
+### Default Values
+
+All blacklist files ship with competitive defaults:
+
+```json5
+{
+  "consumables": {
+    "block_all_healing_items": true,
+    "blocked_healing_items": [
+      "cobblemon:potion",
+      "cobblemon:super_potion",
+      "cobblemon:hyper_potion",
+      "cobblemon:max_potion",
+      "cobblemon:full_restore"
+    ],
+
+    "block_status_healing_items": true,
+    "blocked_status_healing_items": [
+      "cobblemon:antidote",
+      "cobblemon:paralyze_heal",
+      "cobblemon:awakening",
+      "cobblemon:burn_heal",
+      "cobblemon:ice_heal",
+      "cobblemon:full_heal"
+    ],
+
+    "block_revival_items": true,
+    "blocked_revival_items": [
+      "cobblemon:revive",
+      "cobblemon:max_revive"
+    ]
+  }
+}
+```
+
+**To allow ALL items:** Set all `block_all_*` flags to `false` and clear the lists
+
+### Technical Details
+
+**When are items blocked?**
+- During queue (team validation)
+- During match preparation (ready screen)
+- During battle (item usage listener)
+
+**What happens when player tries to use blocked item?**
+1. Item usage is cancelled
+2. Player receives error message
+3. Item remains in inventory (not consumed)
+4. Battle continues normally
+
+**Log output:**
+```
+[ItemUsageListener] ✅ BLOCKED healing item usage on Pikachu
+(owned by GASHI) during COMPETITIVE SINGLES battle
+```
+
+---
+
 <details>
 <summary><strong>Pre-made Configurations</strong></summary>
 

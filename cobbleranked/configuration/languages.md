@@ -14,6 +14,12 @@ CobbleRanked includes 2 built-in languages:
 
 All messages, notifications, and GUI text are fully customizable via JSON5 language files.
 
+**Language File Statistics (v1.0.8+):**
+- **673 language keys** total
+- **37 organized categories** (Queue, Battle, Validation, Admin, etc.)
+- **Fully documented** with comments and sections
+- **100% customizable** - all text can be modified
+
 > **Note:** Portuguese (pt-Br) and Russian (ru-Ru) language support has been discontinued as of version 1.0. Only English and Japanese are officially maintained.
 
 ## Quick Start
@@ -116,7 +122,22 @@ Language files use JSON5 format with key-value pairs:
 | `ranked-reload-adm` | Config reload success | "Settings reloaded successfully!" |
 | `set-elo-adm` | Elo set command | "Elo 1500 set successfully for player Steve" |
 | `arena-not-found` | Arena not found error | "Arena volcano_arena not found" |
-| `noPermCommand` | Permission denied | "You do not have permission to use this command." |
+| `noPermCommand` | Permission denied (legacy) | "You do not have permission to use this command." |
+| `no_permission` | Permission denied (new) | "You don't have permission to use this command" |
+
+### Match Result Messages (v1.0.7+)
+
+| Key | Description | Example | When Used |
+|-----|-------------|---------|-----------|
+| `match_result_broadcast` | Public match result | "{winner} defeated {loser} in a ranked match!" | When `announce_match_results: true` |
+| `match_result_private` | Private match result | "" (empty by default) | When `announce_match_results: false` |
+| `match_result_forfeit_opponent` | Opponent forfeited | "You Win! {player} forfeited the match." | Opponent disconnects during battle |
+| `match_result_forfeit_self` | You forfeited | "You forfeited! You lost the match." | You disconnect during battle |
+
+**Placeholders:**
+- `{winner}` - Winner's username
+- `{loser}` - Loser's username
+- `{player}` - Opponent's username (in forfeit messages)
 
 ---
 

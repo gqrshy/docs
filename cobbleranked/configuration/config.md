@@ -20,6 +20,7 @@ Complete reference for `config/cobbleranked/config.json5`.
 | [Matchmaking](#matchmaking) | Dynamic Elo ranges |
 | [Elo System](#elo-system) | Rating calculation |
 | [Competitive](#competitive) | Flee penalties, season management |
+| [Battle Configuration](#battle-configuration) | Format timers, match announcements |
 
 ---
 
@@ -209,6 +210,115 @@ Flee penalties and season management.
 ```
 
 **See:** [Disconnect Penalties](../features/disconnect-penalties.md)
+
+---
+
+## Battle Configuration
+
+Battle settings including timers, announcements, and sounds.
+
+```json5
+{
+  "battle": {
+    // Format-specific battle time limits (in minutes)
+    "format_timers": {
+      "SINGLES": {
+        "battle_time_limit_minutes": 15
+      },
+      "DOUBLES": {
+        "battle_time_limit_minutes": 20
+      },
+      "TRIPLES": {
+        "battle_time_limit_minutes": 25
+      },
+      "MULTI": {
+        "battle_time_limit_minutes": 20
+      }
+    },
+
+    // Match result announcements
+    "announce_match_results": false,  // Broadcast results to all players
+
+    // Battle sounds
+    "sounds": {
+      "enabled": true,
+      "battle_start_sound": "cobbleranked:battle_start",
+      "victory_sound": "cobbleranked:victory",
+      "defeat_sound": "cobbleranked:defeat"
+    }
+  }
+}
+```
+
+### Match Result Announcements
+
+**`announce_match_results`** - Control match result visibility after battles
+
+| Value | Behavior |
+|-------|----------|
+| `true` | Broadcast results to **all players** on the server |
+| `false` | Show results **only to battle participants** (default) |
+
+**Related Language Keys:**
+- `match_result_broadcast` - Used when `true`
+- `match_result_private` - Used when `false`
+
+**See:** [Language Files](languages.md#match-result-messages-v107) for message customization
+
+### Format-Specific Battle Timers
+
+**`format_timers`** - Independent time limits per battle format (in minutes)
+
+| Format | Default | Description |
+|--------|---------|-------------|
+| `SINGLES` | 15 | 1v1 battles |
+| `DOUBLES` | 20 | 2v2 battles |
+| `TRIPLES` | 25 | 3v3 battles |
+| `MULTI` | 20 | 2v2 team battles |
+
+**Timeout Behavior:**
+1. Battle ends immediately
+2. Player with most remaining Pokemon wins
+3. Tie: Player with higher total HP wins
+4. Still tied: Draw (no Elo change)
+
+<details>
+<summary><strong>Timer Customization Examples</strong></summary>
+
+**Fast-paced singles:**
+```json5
+{
+  "format_timers": {
+    "SINGLES": {
+      "battle_time_limit_minutes": 10
+    }
+  }
+}
+```
+
+**Competitive doubles with extra time:**
+```json5
+{
+  "format_timers": {
+    "DOUBLES": {
+      "battle_time_limit_minutes": 30
+    }
+  }
+}
+```
+
+**Disable timers (not recommended):**
+```json5
+{
+  "format_timers": {
+    "SINGLES": {
+      "battle_time_limit_minutes": 0  // No time limit
+    }
+  }
+}
+```
+
+</details>
 
 ---
 
