@@ -32,13 +32,11 @@ config/cobbleranked/
 ├── gui/
 │   ├── gui-enUs.json5   # English GUI
 │   ├── gui-jaJp.json5   # Japanese GUI
-│   ├── gui-ptBr.json5   # Portuguese GUI
-│   └── gui-ruRu.json5   # Russian GUI
+│   └── gui-frFr.json5   # French GUI
 └── language/
     ├── en-Us.json5      # English messages
     ├── ja-Jp.json5      # Japanese messages
-    ├── pt-Br.json5      # Portuguese messages
-    └── ru-Ru.json5      # Russian messages
+    └── fr-Fr.json5      # French messages
 ```
 
 ## First-Time Setup

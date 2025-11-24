@@ -74,7 +74,7 @@ Edit `config/cobbleranked/config.json5`:
 
 ```json5
 {
-  "language": "ja-Jp"  // en-Us | ja-Jp | pt-Br | ru-Ru
+  "language": "ja-Jp"  // en-Us | ja-Jp | fr-Fr
 }
 ```
 
@@ -297,13 +297,11 @@ config/cobbleranked/
 ├── gui/
 │   ├── gui-enUs.json5     # English interface
 │   ├── gui-jaJp.json5     # Japanese interface
-│   ├── gui-ptBr.json5     # Portuguese interface
-│   └── gui-ruRu.json5     # Russian interface
+│   └── gui-frFr.json5     # French interface
 └── language/
     ├── en-Us.json5        # English messages
     ├── ja-Jp.json5        # Japanese messages
-    ├── pt-Br.json5        # Portuguese messages
-    └── ru-Ru.json5        # Russian messages
+    └── fr-Fr.json5        # French messages
 ```
 
 **All files use JSON5 format** (allows comments `//`)

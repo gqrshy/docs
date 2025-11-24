@@ -20,7 +20,7 @@ A competitive ranked battle system for Cobblemon servers with Elo-based matchmak
 - **Blacklist** - 10 label categories + specific Pokemon/moves/abilities/items
 - **Custom Rewards** - Season-end (rank-based) + milestones (wins/Elo)
 - **Battle Arenas** - Teleport to designated coordinates with custom facing
-- **4 Languages** - English, Japanese, Portuguese, Russian
+- **3 Languages** - English, Japanese, French
 
 ---
 

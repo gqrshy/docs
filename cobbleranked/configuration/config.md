@@ -28,7 +28,7 @@ Complete reference for `config/cobbleranked/config.json5`.
 
 ```json5
 {
-  "language": "en-Us"  // en-Us, ja-Jp, pt-Br, ru-Ru
+  "language": "en-Us"  // en-Us, ja-Jp, fr-Fr
 }
 ```
 

@@ -68,7 +68,7 @@ Edit `config/cobbleranked/config.json5`:
 
 ```json5
 {
-  "language": "ja-Jp"  // en-Us, ja-Jp, pt-Br, ru-Ru
+  "language": "ja-Jp"  // en-Us, ja-Jp, fr-Fr
 }
 ```
 

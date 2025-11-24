@@ -20,7 +20,7 @@ All messages, notifications, and GUI text are fully customizable via JSON5 langu
 - **Fully documented** with comments and sections
 - **100% customizable** - all text can be modified
 
-> **Note:** Portuguese (pt-Br) and Russian (ru-Ru) language support has been discontinued as of version 1.0. Only English and Japanese are officially maintained.
+> **Note:** Officially supported languages are English (en-Us), Japanese (ja-Jp), and French (fr-Fr). Portuguese (pt-Br) and Russian (ru-Ru) support was discontinued as of v1.0.
 
 ## Quick Start
 

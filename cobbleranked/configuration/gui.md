@@ -12,11 +12,13 @@ CobbleRanked uses language-specific GUI files:
 gui/
 ├── gui-enUs.json5    # English
 ├── gui-jaJp.json5    # Japanese
-├── gui-ptBr.json5    # Portuguese
-└── gui-ruRu.json5    # Russian
+└── gui-frFr.json5    # French (v1.0.13+)
 ```
 
 Each file contains **all** GUI definitions for that language.
+
+**Which file is used?**
+The active GUI file is determined by the `language` setting in `config/cobbleranked/config.json5`.
 
 ## Available GUIs
 
@@ -34,16 +36,20 @@ Each file contains **all** GUI definitions for that language.
 ```json5
 {
   "gui_ranked": {
-    "title": "Ranked Battles",
-    "rows": 3,
+    "title": "&cRanked Menu",
+    "size": 4,  // Number of rows (1-6)
     "items": {
-      "queue_singles": {
-        "item": "minecraft:iron_sword",  // Change item
-        "name": "Queue Singles",           // Change name
-        "slot": 11,                        // Change position
+      "singles_queue": {
+        "slot": 11,                            // Position (1-indexed)
+        "id": "cobblemon:poke_ball",           // Item ID
+        "display": "&bSingles Battle",         // Display name
         "lore": [
-          "Click to join singles queue"
-        ]
+          "",
+          "&71v1 Ranked Match",
+          "&aClick to join queue",
+          ""
+        ],
+        "custom_model_data": 0  // Custom model data (resource packs)
       }
     }
   }
@@ -54,12 +60,13 @@ Each file contains **all** GUI definitions for that language.
 
 | Field | Description | Required |
 |-------|-------------|----------|
-| `item` | Item ID (e.g., `minecraft:diamond`) | Yes |
-| `name` | Display name (supports color codes) | Yes |
-| `slot` | Inventory slot (0-53) | Yes |
+| `id` | Item ID (e.g., `minecraft:diamond`, `cobblemon:poke_ball`) | Yes |
+| `display` | Display name (supports color codes) | Yes |
+| `slot` | Inventory slot (0-53, 1-indexed in config) | Yes |
 | `lore` | Array of lore lines | No |
 | `amount` | Item stack size (1-64) | No |
 | `glow` | Add enchantment glow | No |
+| `custom_model_data` | Custom model data value for resource packs | No |
 
 ### Color Codes
 
@@ -114,6 +121,51 @@ Example:
 
 ## Common Customizations
 
+### Use Custom Models (Resource Packs)
+
+You can use `custom_model_data` to display custom textures from resource packs:
+
+```json5
+{
+  "singles_queue": {
+    "slot": 11,
+    "id": "minecraft:paper",           // Base item
+    "display": "&bSingles Battle",
+    "custom_model_data": 1001,         // Your custom model ID
+    "lore": [
+      "&71v1 Ranked Match",
+      "&aClick to join"
+    ]
+  }
+}
+```
+
+**How it works:**
+1. Create a resource pack with custom models
+2. Define models in `assets/minecraft/models/item/paper.json`:
+   ```json
+   {
+     "parent": "item/generated",
+     "textures": {
+       "layer0": "minecraft:item/paper"
+     },
+     "overrides": [
+       {
+         "predicate": { "custom_model_data": 1001 },
+         "model": "cobbleranked:item/singles_icon"
+       }
+     ]
+   }
+   ```
+3. Set `custom_model_data: 1001` in GUI config
+4. Players with the resource pack will see your custom texture!
+
+**Common use cases:**
+- Custom battle format icons
+- Animated button textures
+- Themed GUI elements
+- Server branding
+
 ### Change Queue Button Position
 
 ```json5
@@ -126,9 +178,10 @@ Example:
 
 ```json5
 "decoration": {
-  "item": "minecraft:black_stained_glass_pane",
-  "name": " ",
-  "slot": 0
+  "id": "minecraft:black_stained_glass_pane",
+  "display": " ",
+  "slot": 0,
+  "custom_model_data": 0
 }
 ```
 
@@ -137,7 +190,7 @@ Example:
 ```json5
 "gui_top_ranked": {
   "title": "&6&lTop Players",
-  "rows": 6
+  "size": 6  // 6 rows
 }
 ```
 

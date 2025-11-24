@@ -343,9 +343,9 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
      "language": "ja-Jp"  // Must match file name exactly
    }
    ```
-   Available: `en-Us`, `ja-Jp`
+   Available: `en-Us`, `ja-Jp`, `fr-Fr`
 
-   > **Note:** `pt-Br` and `ru-Ru` have been discontinued as of v1.0
+   > **Note:** `pt-Br` and `ru-Ru` support has been discontinued as of v1.0
 
 2. **Check file exists:**
    ```bash
