@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(git branch:*)",
+      "Bash(xargs basename:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
