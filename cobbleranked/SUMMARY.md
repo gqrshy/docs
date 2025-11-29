@@ -42,6 +42,7 @@
 
 ## Integration
 
+* [LuckPerms Integration](integration/luckperms.md)
 * [Placeholder API](integration/placeholders.md)
 
 ## Support
