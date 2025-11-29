@@ -660,6 +660,156 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 
 ---
 
+## LuckPerms Integration Issues
+
+### Rank tags not showing in chat
+
+**Symptoms:**
+- Players have ranks but tags don't appear in chat
+
+**Solutions:**
+
+1. **Check if LuckPerms is loaded:**
+
+   ```bash
+   /lp info
+   ```
+
+   If this command doesn't work, LuckPerms isn't installed correctly.
+
+2. **Verify CobbleRanked detects LuckPerms:**
+   Check server logs for:
+
+   ```log
+   [CobbleRanked] LuckPerms integration enabled (mod version)
+   ```
+
+   or
+
+   ```log
+   [CobbleRanked] LuckPerms integration enabled (Bukkit plugin version)
+   ```
+
+3. **Check sync mode:**
+   Make sure `syncMode` in `config/cobbleranked/luckperms.json5` is set to `"suffix"`, `"prefix"`, or `"all"` (not `"group"`).
+
+4. **Install a chat formatting plugin:**
+   LuckPerms doesn't format chat by default. Install one of these:
+   - **Fabric:** [Styled Chat](https://modrinth.com/mod/styled-chat)
+   - **Bukkit/Arclight:** [LuckPerms default](https://luckperms.net/wiki/Prefixes,-Suffixes-&-Meta) or [EssentialsX Chat](https://essentialsx.net/)
+
+5. **Check player's actual LuckPerms data:**
+
+   ```bash
+   /lp user <playername> info
+   ```
+
+   Look for the prefix/suffix under "Meta". If it's not there, CobbleRanked hasn't synced yet.
+
+6. **Force a rank update:**
+
+   ```bash
+   /rankedadmin reload
+   ```
+
+   Then have the player win a ranked battle.
+
+### Unicode symbols showing as boxes/question marks
+
+**Symptoms:**
+- Custom Unicode symbols display as � or ▯
+
+**Solutions:**
+
+1. **Ensure proper file encoding:**
+   - Save `config/cobbleranked/luckperms.json5` with UTF-8 encoding (not ANSI)
+   - Use a proper text editor (VS Code, Notepad++, Sublime Text)
+
+2. **Test with simple Unicode first:**
+
+   ```json5
+   "suffix": " ★"  // Basic star symbol
+   ```
+
+   If this doesn't work, your client doesn't support Unicode.
+
+3. **For custom resource pack symbols:**
+   - Verify players have the resource pack enabled
+   - Check `server.properties` resource pack URL
+   - Ensure resource pack uses correct Unicode mappings
+
+4. **Client compatibility:**
+   - Minecraft Java Edition supports all Unicode
+   - Bedrock Edition (via Geyser) may have issues with some symbols
+
+### Ranks not updating after battles
+
+**Symptoms:**
+- Player wins battles but rank tag doesn't change
+
+**Solutions:**
+
+1. **Verify player actually changed rank tiers:**
+   Check their Elo with `/ranked` - you need to cross tier thresholds (1000, 1500, 2000, etc.)
+
+2. **Check server logs for errors:**
+   Look for LuckPerms-related errors:
+
+   ```log
+   [ERROR] [CobbleRanked] Failed to sync LuckPerms rank
+   ```
+
+3. **Ensure removeOnRankLoss is configured:**
+
+   ```json5
+   "removeOnRankLoss": true
+   ```
+
+4. **Check LuckPerms permissions:**
+   CobbleRanked needs permission to modify user data. Ensure the server's LuckPerms configuration allows this.
+
+5. **Reload configuration:**
+
+   ```bash
+   /rankedadmin reload
+   ```
+
+   Then have the player win another ranked battle to trigger a rank update.
+
+### Multiple rank tags stacking
+
+**Symptoms:**
+- Player has multiple rank tags like `PlayerName [Bronze] [Silver]`
+
+**Solutions:**
+
+1. **Enable automatic removal:**
+
+   ```json5
+   "removeOnRankLoss": true
+   ```
+
+2. **Manually remove old tags:**
+
+   ```bash
+   /lp user <playername> meta clear
+   /rankedadmin reload
+   ```
+
+3. **Check weight values:**
+   Ensure each tier has a unique, increasing weight:
+
+   ```json5
+   "BRONZE": { "weight": 100 },
+   "SILVER": { "weight": 101 },
+   "GOLD": { "weight": 102 }
+   ```
+
+4. **Verify you're not manually assigning tags:**
+   Don't use `/lp user <player> meta addsuffix` manually - let CobbleRanked manage it automatically.
+
+---
+
 ## Database Issues
 
 ### Database connection failed (MySQL)

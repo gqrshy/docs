@@ -74,9 +74,17 @@ When a player drops to a lower rank tier, should we remove their old tag?
 ### `updateInterval`
 **Default:** `0` (instant)
 
-⚠️ **Status:** Not yet implemented - currently reserved for future use.
+Controls how often rank updates are synced with LuckPerms, in seconds.
 
-This setting is intended to control how often ranks are synced with LuckPerms, in seconds. Currently, all rank updates are applied immediately regardless of this value.
+- `0` - Update immediately when rank changes (default, no batching)
+- `60` - Batch updates and flush every 60 seconds (reduces LuckPerms database writes)
+
+**Benefits of batching:**
+- Reduces database write load if you have many concurrent battles
+- Updates are automatically flushed when players disconnect or server stops
+- No data loss - all pending updates are saved before shutdown
+
+**Example:** Set to `60` if you have 50+ concurrent battles and want to reduce LuckPerms database writes.
 
 </details>
 
@@ -477,28 +485,52 @@ suffix {
 </details>
 
 <details>
-<summary><strong>🔄 Format-Specific Rank Groups (Coming Soon)</strong></summary>
+<summary><strong>🔄 Format-Specific Rank Tags (Custom Mappings)</strong></summary>
 
-⚠️ **Status:** Not yet implemented - currently reserved for future use.
+**Status:** ✅ Fully implemented in v1.0.23+
 
-This feature is planned to allow different groups for Singles vs Doubles players using `customMappings`. Once implemented, the configuration will look like:
+This feature allows different rank tags for Singles vs Doubles vs Triples formats using `customMappings`. For example, you can give a player different suffixes for being Master rank in Singles vs Doubles.
+
+**Example configuration:**
 
 ```json5
 "customMappings": {
   "SINGLES:MASTER": {
     "group": "singles_master",
-    "suffix": " &d[Singles Master]&r",
+    "suffix": " &d[1v1 Master]&r",
     "weight": 200
   },
   "DOUBLES:MASTER": {
     "group": "doubles_master",
-    "suffix": " &5[Doubles Master]&r",
+    "suffix": " &5[2v2 Master]&r",
     "weight": 201
+  },
+  "TRIPLES:DIAMOND": {
+    "suffix": " &3[3v3 Diamond]&r",
+    "weight": 104
   }
 }
 ```
 
-**Note:** This feature is not currently functional. All players currently use the standard `tierMappings` regardless of battle format.
+**Key format:** `"FORMAT_NAME:TIER_KEY"`
+- `FORMAT_NAME`: SINGLES, DOUBLES, TRIPLES, MULTI (must be uppercase)
+- `TIER_KEY`: The rank tier key from your `config.json5` (case-insensitive)
+
+**How it works:**
+1. When a player's rank changes in a specific format (e.g., Singles), CobbleRanked checks for a custom mapping first
+2. If `"SINGLES:MASTER"` exists in customMappings, it uses that configuration
+3. If not found, it falls back to the regular `tierMappings["MASTER"]`
+4. This allows you to override specific format+tier combinations while keeping defaults for others
+
+**Use cases:**
+- Show which format a player excels in (e.g., "1v1 Master" vs "2v2 Master")
+- Grant format-specific permissions (e.g., only Singles Champions can access certain features)
+- Create prestige tags for multi-format top players
+
+**Important notes:**
+- Custom mappings override tier mappings only for the specific format+tier combination
+- If a player is Master in both Singles and Doubles with different custom mappings, only the most recently updated one will display (unless you set `removeOnRankLoss: false`)
+- Weights determine priority when multiple prefixes/suffixes exist
 
 </details>
 
@@ -506,145 +538,7 @@ This feature is planned to allow different groups for Singles vs Doubles players
 
 ## Troubleshooting
 
-<details>
-<summary><strong>❌ Rank tags not showing in chat</strong></summary>
-
-**Problem:** Players have ranks but tags don't appear in chat.
-
-**Solutions:**
-
-1. **Check if LuckPerms is loaded:**
-   ```
-   /lp info
-   ```
-   If this command doesn't work, LuckPerms isn't installed correctly.
-
-2. **Verify CobbleRanked detects LuckPerms:**
-   Check server logs for:
-   ```
-   [CobbleRanked] LuckPerms integration enabled (mod version)
-   ```
-   or
-   ```
-   [CobbleRanked] LuckPerms integration enabled (Bukkit plugin version)
-   ```
-
-3. **Check sync mode:**
-   Make sure `syncMode` in `luckperms.json5` is set to `"suffix"`, `"prefix"`, or `"all"` (not `"group"`).
-
-4. **Install a chat formatting plugin:**
-   LuckPerms doesn't format chat by default. Install one of these:
-   - **Fabric:** [Styled Chat](https://modrinth.com/mod/styled-chat)
-   - **Bukkit/Arclight:** [LuckPerms default](https://luckperms.net/wiki/Prefixes,-Suffixes-&-Meta) or [EssentialsX Chat](https://essentialsx.net/)
-
-5. **Check player's actual LuckPerms data:**
-   ```
-   /lp user <playername> info
-   ```
-   Look for the prefix/suffix under "Meta". If it's not there, CobbleRanked hasn't synced yet.
-
-6. **Force a rank update:**
-   ```
-   /rankedadmin reload
-   ```
-   Then have the player win a ranked battle.
-
-</details>
-
-<details>
-<summary><strong>⚠️ Unicode symbols showing as boxes/question marks</strong></summary>
-
-**Problem:** Custom Unicode symbols display as � or ▯.
-
-**Solutions:**
-
-1. **Ensure proper file encoding:**
-   - Save `luckperms.json5` with UTF-8 encoding (not ANSI)
-   - Use a proper text editor (VS Code, Notepad++, Sublime Text)
-
-2. **Test with simple Unicode first:**
-   ```json5
-   "suffix": " ★"  // Basic star symbol
-   ```
-   If this doesn't work, your client doesn't support Unicode.
-
-3. **For custom resource pack symbols:**
-   - Verify players have the resource pack enabled
-   - Check `server.properties` resource pack URL
-   - Ensure resource pack uses correct Unicode mappings
-
-4. **Client compatibility:**
-   - Minecraft Java Edition supports all Unicode
-   - Bedrock Edition (via Geyser) may have issues with some symbols
-
-</details>
-
-<details>
-<summary><strong>🔧 Ranks not updating after battles</strong></summary>
-
-**Problem:** Player wins battles but rank tag doesn't change.
-
-**Solutions:**
-
-1. **Verify player actually changed rank tiers:**
-   Check their Elo with `/ranked` - you need to cross tier thresholds (1000, 1500, 2000, etc.)
-
-2. **Check server logs for errors:**
-   Look for LuckPerms-related errors:
-
-   ```log
-   [ERROR] [CobbleRanked] Failed to sync LuckPerms rank
-   ```
-
-3. **Ensure removeOnRankLoss is configured:**
-
-   ```json5
-   "removeOnRankLoss": true
-   ```
-
-4. **Check LuckPerms permissions:**
-   CobbleRanked needs permission to modify user data. Ensure the server's LuckPerms configuration allows this.
-
-5. **Reload configuration:**
-
-   ```bash
-   /rankedadmin reload
-   ```
-
-   Then have the player win another ranked battle to trigger a rank update.
-
-</details>
-
-<details>
-<summary><strong>💥 Multiple rank tags stacking</strong></summary>
-
-**Problem:** Player has multiple rank tags like `PlayerName [Bronze] [Silver]`.
-
-**Solutions:**
-
-1. **Enable automatic removal:**
-   ```json5
-   "removeOnRankLoss": true
-   ```
-
-2. **Manually remove old tags:**
-   ```
-   /lp user <playername> meta clear
-   /rankedadmin reload
-   ```
-
-3. **Check weight values:**
-   Ensure each tier has a unique, increasing weight:
-   ```json5
-   "BRONZE": { "weight": 100 },
-   "SILVER": { "weight": 101 },
-   "GOLD": { "weight": 102 }
-   ```
-
-4. **Verify you're not manually assigning tags:**
-   Don't use `/lp user <player> meta addsuffix` manually - let CobbleRanked manage it automatically.
-
-</details>
+Having issues with LuckPerms integration? See the [LuckPerms Integration section](../support/troubleshooting.md#luckperms-integration-issues) in the Troubleshooting guide for solutions to common problems.
 
 ---
 
@@ -708,22 +602,29 @@ It depends on your `removeOnRankLoss` setting:
 <details>
 <summary><strong>Can I have different tags for Singles vs Doubles ranks?</strong></summary>
 
-⚠️ **Status:** Not yet - this feature is planned but not currently implemented.
+**Yes!** This is fully supported via `customMappings` (added in v1.0.23+).
 
-Once the `customMappings` feature is available, you'll be able to configure format-specific rank tags like this:
+Configure format-specific rank tags like this:
 
 ```json5
 "customMappings": {
   "SINGLES:MASTER": {
-    "suffix": " &d[1v1 Master]&r"
+    "suffix": " &d[1v1 Master]&r",
+    "weight": 200
   },
   "DOUBLES:MASTER": {
-    "suffix": " &5[2v2 Master]&r"
+    "suffix": " &5[2v2 Master]&r",
+    "weight": 201
   }
 }
 ```
 
-**Current behavior:** All players use the same rank tags from `tierMappings` regardless of which battle format they achieved their rank in.
+**How it works:**
+- When a player ranks up in Singles, they get the `SINGLES:MASTER` tag
+- When a player ranks up in Doubles, they get the `DOUBLES:MASTER` tag
+- If no custom mapping exists, the default `tierMappings` is used
+
+**See the "Format-Specific Rank Tags" section above for full documentation.**
 
 </details>
 
@@ -819,6 +720,7 @@ Type in chat to see how it looks. Then remove it:
   "enabled": true,
   "syncMode": "all",
   "removeOnRankLoss": true,
+  "updateInterval": 60,  // Batch updates every 60 seconds (optional)
   "tierMappings": {
     "BRONZE": {
       "group": "rank_bronze",
@@ -842,11 +744,18 @@ Type in chat to see how it looks. Then remove it:
         "special_tag": "competitive"
       }
     }
+  },
+  "customMappings": {
+    "SINGLES:MASTER": {
+      "group": "singles_champion",
+      "suffix": " &d[1v1 Master]&r",
+      "weight": 200
+    }
   }
 }
 ```
 
-**Note:** `customMappings` and `updateInterval` have been removed from this example as they are not yet implemented.
+**Note:** Both `customMappings` and `updateInterval` are now fully implemented (v1.0.23+).
 
 Then grant permissions to groups:
 ```
