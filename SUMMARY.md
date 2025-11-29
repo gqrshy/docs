@@ -29,6 +29,7 @@
   * [Banned Items](cobbleranked/features/banned-items.md)
   * [Disconnect Penalties](cobbleranked/features/disconnect-penalties.md)
   * [Custom Music](cobbleranked/features/custom-music.md)
+  * [LuckPerms Integration](cobbleranked/integration/luckperms.md)
   * [Placeholder API](cobbleranked/integration/placeholders.md)
   * [Cross-Server Setup](cobbleranked/advanced/cross-server.md)
   * [Database Configuration](cobbleranked/advanced/database.md)
