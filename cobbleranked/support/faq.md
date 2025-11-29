@@ -719,7 +719,7 @@ Admin commands require OP:
 /op YourUsername
 ```
 
-Or grant `cobbleranked.admin` via permissions plugin
+Or grant `cobbleranked.admin` via [LuckPerms](../integration/luckperms.md#permission-nodes)
 
 </details>
 
@@ -830,7 +830,7 @@ Or grant `cobbleranked.admin` via permissions plugin
 /op YourUsername
 ```
 
-Or grant `cobbleranked.admin` via LuckPerms/PermissionsEx
+Or grant `cobbleranked.admin` via [LuckPerms](../integration/luckperms.md#permission-nodes)
 
 </details>
 

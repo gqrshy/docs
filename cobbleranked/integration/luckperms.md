@@ -34,8 +34,7 @@ Download and install LuckPerms for your server platform:
 {
   "enabled": true,
   "syncMode": "suffix",
-  "removeOnRankLoss": true,
-  "updateInterval": 0
+  "removeOnRankLoss": true
 }
 ```
 
@@ -75,13 +74,9 @@ When a player drops to a lower rank tier, should we remove their old tag?
 ### `updateInterval`
 **Default:** `0` (instant)
 
-How often to sync ranks with LuckPerms, in seconds.
+⚠️ **Status:** Not yet implemented - currently reserved for future use.
 
-- `0` - Update immediately after every battle
-- `60` - Update every minute (reduces database load)
-- `300` - Update every 5 minutes (for very large servers)
-
-**Recommendation:** Keep at `0` unless you have performance issues.
+This setting is intended to control how often ranks are synced with LuckPerms, in seconds. Currently, all rank updates are applied immediately regardless of this value.
 
 </details>
 
@@ -261,6 +256,59 @@ Players need to install your resource pack to see the custom symbols. You can:
 
 ---
 
+## Permission Nodes
+
+CobbleRanked provides fine-grained permission nodes when LuckPerms is installed, allowing you to control exactly which commands each player or group can use.
+
+<details>
+<summary><strong>📋 Available Permission Nodes</strong></summary>
+
+### Player Commands
+
+| Permission Node | Command | Description |
+|-----------------|---------|-------------|
+| `cobbleranked.command.ranked` | `/ranked` | Access to ranked GUI and queue |
+| `cobbleranked.command.season` | `/season` | View current season information |
+| `cobbleranked.command.casual` | `/casual` | Access to casual battles and missions |
+
+### Admin Commands
+
+| Permission Node | Command | Description |
+|-----------------|---------|-------------|
+| `cobbleranked.command.admin.*` | All admin commands | Full admin access |
+| `cobbleranked.command.admin.reload` | `/rankedadmin reload` | Reload configuration files |
+| `cobbleranked.command.admin.arena` | `/rankedadmin setArena ...` | Arena management commands |
+| `cobbleranked.command.admin.elo` | `/rankedadmin setelo ...` | Elo manipulation commands |
+| `cobbleranked.command.admin.season` | `/rankedadmin season ...` | Season management commands |
+
+### Assigning Permissions
+
+**Grant all admin permissions to a group:**
+
+```
+/lp group admin permission set cobbleranked.command.admin.* true
+```
+
+**Grant specific permission to a player:**
+
+```
+/lp user PlayerName permission set cobbleranked.command.ranked true
+```
+
+**Revoke a permission:**
+
+```
+/lp user PlayerName permission unset cobbleranked.command.season
+```
+
+</details>
+
+### Fallback Behavior
+
+**Important:** If LuckPerms is not installed, CobbleRanked falls back to Minecraft's default OP level 2 checks for admin commands. Player commands remain available to everyone.
+
+---
+
 ## LuckPerms Group Management
 
 <details>
@@ -319,7 +367,7 @@ Grant special abilities to Master tier players:
 
 ### Group Weight System
 
-The `weight` value determines which group takes priority if a player has multiple groups:
+The `weight` value determines which group takes priority when LuckPerms selects which prefix/suffix to display:
 
 ```json5
 "BRONZE": { "weight": 100 },  // Lowest priority
@@ -330,14 +378,110 @@ The `weight` value determines which group takes priority if a player has multipl
 "MASTER": { "weight": 105 }    // Highest priority
 ```
 
-Higher weight = higher priority in LuckPerms prefix/suffix resolution.
+**How it works:**
+- Higher weight = higher priority in LuckPerms prefix/suffix resolution
+- By default, LuckPerms displays only the prefix/suffix with the **highest** weight
+- When CobbleRanked assigns a new rank, it uses this weight for the LuckPerms meta node
+
+**Important:** LuckPerms' `meta-formatting` setting controls how prefixes/suffixes are selected. The default is `format = ["highest"]`, which means only the highest-weight prefix/suffix will be displayed. If you want to display multiple rank tags (e.g., `[Master] PlayerName [Gold]`), you need to modify LuckPerms' configuration - see the next section.
 
 </details>
 
 <details>
-<summary><strong>🔄 Format-Specific Rank Groups</strong></summary>
+<summary><strong>📚 Displaying Multiple Rank Tags (Advanced)</strong></summary>
 
-Want different groups for Singles vs Doubles players? Use `customMappings`:
+By default, LuckPerms only displays the **highest-weight** prefix or suffix. If you want to show multiple rank tags at once (e.g., showing both Singles and Doubles rank), you need to modify LuckPerms' configuration.
+
+### Step 1: Edit LuckPerms Configuration
+
+Open `config/luckperms/luckperms.conf` and find the `meta-formatting` section:
+
+```
+meta-formatting {
+  prefix {
+    format = [
+      "highest"
+    ]
+    duplicates = "first-only"
+    start-spacer = ""
+    middle-spacer = " "
+    end-spacer = ""
+  }
+  suffix {
+    format = [
+      "highest"
+    ]
+    duplicates = "first-only"
+    start-spacer = ""
+    middle-spacer = " "
+    end-spacer = ""
+  }
+}
+```
+
+### Step 2: Enable Prefix/Suffix Stacking
+
+To display multiple tags, change the `format` option. For example, to show all suffixes:
+
+```
+suffix {
+  format = [
+    "highest",
+    "lowest"
+  ]
+  duplicates = "retain-all"
+  middle-spacer = " "
+}
+```
+
+**Options:**
+- `"highest"` - Highest weight prefix/suffix
+- `"lowest"` - Lowest weight prefix/suffix
+- `"highest_own"` - Highest weight directly assigned (not inherited)
+- `"highest_inherited"` - Highest weight inherited from groups
+- `"highest_on_track_<trackname>"` - Highest on a specific track
+- `"highest_from_group_<groupname>"` - Highest from specific group
+
+### Step 3: Restart LuckPerms
+
+```
+/lp reload
+```
+
+### Example: Show Both Prefix and Suffix
+
+**LuckPerms Config:**
+```
+prefix {
+  format = ["highest"]
+}
+suffix {
+  format = ["highest", "lowest"]
+  middle-spacer = " "
+}
+```
+
+**CobbleRanked Config:**
+```json5
+"MASTER": {
+  "prefix": "&d[Master] &r",
+  "suffix": " &d⚔&r",
+  "weight": 105
+}
+```
+
+**Result:** `[Master] PlayerName ⚔`
+
+**Learn more:** [LuckPerms Prefix & Suffix Stacking Guide](https://luckperms.net/wiki/Prefix-&-Suffix-Stacking)
+
+</details>
+
+<details>
+<summary><strong>🔄 Format-Specific Rank Groups (Coming Soon)</strong></summary>
+
+⚠️ **Status:** Not yet implemented - currently reserved for future use.
+
+This feature is planned to allow different groups for Singles vs Doubles players using `customMappings`. Once implemented, the configuration will look like:
 
 ```json5
 "customMappings": {
@@ -354,13 +498,7 @@ Want different groups for Singles vs Doubles players? Use `customMappings`:
 }
 ```
 
-**Format names:**
-- `SINGLES` - Singles battles
-- `DOUBLES` - Doubles battles
-- `TRIPLES` - Triples battles
-- `MULTI` - Multi battles
-
-Players will get format-specific groups when they reach Master in that format!
+**Note:** This feature is not currently functional. All players currently use the standard `tierMappings` regardless of battle format.
 
 </details>
 
@@ -448,27 +586,32 @@ Players will get format-specific groups when they reach Master in that format!
 
 **Solutions:**
 
-1. **Check `updateInterval`:**
-   ```json5
-   "updateInterval": 0  // Should be 0 for instant updates
-   ```
-
-2. **Verify player actually changed rank tiers:**
+1. **Verify player actually changed rank tiers:**
    Check their Elo with `/ranked` - you need to cross tier thresholds (1000, 1500, 2000, etc.)
 
-3. **Check server logs for errors:**
+2. **Check server logs for errors:**
    Look for LuckPerms-related errors:
-   ```
+
+   ```log
    [ERROR] [CobbleRanked] Failed to sync LuckPerms rank
    ```
 
-4. **Ensure removeOnRankLoss is configured:**
+3. **Ensure removeOnRankLoss is configured:**
+
    ```json5
    "removeOnRankLoss": true
    ```
 
-5. **Check LuckPerms permissions:**
+4. **Check LuckPerms permissions:**
    CobbleRanked needs permission to modify user data. Ensure the server's LuckPerms configuration allows this.
+
+5. **Reload configuration:**
+
+   ```bash
+   /rankedadmin reload
+   ```
+
+   Then have the player win another ranked battle to trigger a rank update.
 
 </details>
 
@@ -498,8 +641,8 @@ Players will get format-specific groups when they reach Master in that format!
    "GOLD": { "weight": 102 }
    ```
 
-4. **Verify you're not manually assigning groups:**
-   Don't use `/lp user add suffix` manually - let CobbleRanked manage it.
+4. **Verify you're not manually assigning tags:**
+   Don't use `/lp user <player> meta addsuffix` manually - let CobbleRanked manage it automatically.
 
 </details>
 
@@ -565,7 +708,9 @@ It depends on your `removeOnRankLoss` setting:
 <details>
 <summary><strong>Can I have different tags for Singles vs Doubles ranks?</strong></summary>
 
-Yes! Use `customMappings`:
+⚠️ **Status:** Not yet - this feature is planned but not currently implemented.
+
+Once the `customMappings` feature is available, you'll be able to configure format-specific rank tags like this:
 
 ```json5
 "customMappings": {
@@ -578,7 +723,7 @@ Yes! Use `customMappings`:
 }
 ```
 
-Players can have multiple tags if they're high rank in multiple formats!
+**Current behavior:** All players use the same rank tags from `tierMappings` regardless of which battle format they achieved their rank in.
 
 </details>
 
@@ -628,7 +773,6 @@ Type in chat to see how it looks. Then remove it:
   "enabled": true,
   "syncMode": "suffix",
   "removeOnRankLoss": true,
-  "updateInterval": 0,
   "tierMappings": {
     "BRONZE": {
       "suffix": " &6[Bronze]&r",
@@ -675,7 +819,6 @@ Type in chat to see how it looks. Then remove it:
   "enabled": true,
   "syncMode": "all",
   "removeOnRankLoss": true,
-  "updateInterval": 0,
   "tierMappings": {
     "BRONZE": {
       "group": "rank_bronze",
@@ -699,16 +842,11 @@ Type in chat to see how it looks. Then remove it:
         "special_tag": "competitive"
       }
     }
-  },
-  "customMappings": {
-    "SINGLES:MASTER": {
-      "group": "singles_champion",
-      "suffix": " &d[Singles Champ]&r",
-      "weight": 200
-    }
   }
 }
 ```
+
+**Note:** `customMappings` and `updateInterval` have been removed from this example as they are not yet implemented.
 
 Then grant permissions to groups:
 ```

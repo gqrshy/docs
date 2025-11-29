@@ -482,7 +482,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 4. **Check required plugins:**
    - Economy commands require economy plugin (EssentialsX, etc.)
-   - Permission commands require LuckPerms/PermissionsEx
+   - Permission commands require [LuckPerms](../integration/luckperms.md)
 
 5. **Check console errors:**
    ```bash

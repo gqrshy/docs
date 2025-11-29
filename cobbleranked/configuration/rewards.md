@@ -162,14 +162,18 @@ Automatically unlock when players reach achievements (wins, matches, Elo).
 ```
 
 ### Economy (requires economy plugin)
+
 ```json5
 "commands": ["eco give {player} 1000"]
 ```
 
-### Permissions (requires LuckPerms)
+### Permissions
+
 ```json5
 "commands": ["lp user {player} permission set ranked.legend true"]
 ```
+
+**Note:** Requires [LuckPerms](../integration/luckperms.md) to be installed.
 
 ### Multiple Commands
 ```json5

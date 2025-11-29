@@ -144,18 +144,8 @@ All commands have smart tab completion:
 
 ---
 
-## Permission Nodes
+## Permissions
 
-With LuckPerms installed, you can use these permission nodes:
+Admin commands require **OP level 2** by default.
 
-| Permission Node | Description |
-|-----------------|-------------|
-| `cobbleranked.command.ranked` | `/ranked` command |
-| `cobbleranked.command.season` | `/season` command |
-| `cobbleranked.command.admin.*` | All admin commands |
-| `cobbleranked.command.admin.reload` | Reload command |
-| `cobbleranked.command.admin.arena` | Arena commands |
-| `cobbleranked.command.admin.elo` | Elo management |
-| `cobbleranked.command.admin.season` | Season management |
-
-**Note:** Permission system defaults to OP level 2 checks if LuckPerms is not installed.
+For fine-grained permission control with LuckPerms, see the [LuckPerms Integration](../integration/luckperms.md#permission-nodes) guide.
