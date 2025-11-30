@@ -1,12 +1,16 @@
 # Troubleshooting
 
-Common issues and their solutions for CobbleRanked.
+Common issues and their solutions for CobbleRanked. Click on any issue below to expand the solution.
+
+---
 
 ## Installation Issues
 
-### Mod not loading
+<details>
+<summary><strong>Mod not loading</strong></summary>
 
 **Symptoms:**
+
 - No CobbleRanked messages in console
 - `/ranked` command doesn't work
 - Mod doesn't appear in mod list
@@ -14,10 +18,12 @@ Common issues and their solutions for CobbleRanked.
 **Solutions:**
 
 1. **Verify Fabric Loader installed:**
+
    ```bash
    # Check mods folder
    ls mods/ | grep fabric
    ```
+
    Should see `fabric-loader-*.jar`
 
 2. **Check dependencies:**
@@ -26,18 +32,24 @@ Common issues and their solutions for CobbleRanked.
    - Fabric Language Kotlin (`fabric-language-kotlin-*.jar`)
 
 3. **Check server logs:**
+
    ```bash
    cat logs/latest.log | grep CobbleRanked
    ```
+
    Look for errors during mod loading
 
-4. **Ver Minecraft version:**
+4. **Verify Minecraft version:**
    - CobbleRanked requires Minecraft 1.21.1
    - Check `server.properties` for correct version
 
-### Configuration files not generating
+</details>
+
+<details>
+<summary><strong>Configuration files not generating</strong></summary>
 
 **Symptoms:**
+
 - No `config/cobbleranked/` folder
 - Missing configuration files
 
@@ -48,30 +60,40 @@ Common issues and their solutions for CobbleRanked.
    - Wait for "Done!" message
 
 2. **Check file permissions:**
+
    ```bash
    ls -la config/
    ```
+
    Ensure server can write to `config/` folder
 
 3. **Manually create folder:**
+
    ```bash
    mkdir -p config/cobbleranked
    ```
+
    Then restart server
 
 4. **Check for errors:**
+
    ```bash
    grep -i "error" logs/latest.log | grep -i "cobbleranked"
    ```
 
-### Music errors (Cobblemon 1.6.x)
+</details>
+
+<details>
+<summary><strong>Music errors (Cobblemon 1.6.x)</strong></summary>
 
 **Symptoms:**
+
 - Errors like `ClassNotFoundException: net.minecraft.core.registries.BuiltInRegistries`
 - Errors like `ClassNotFoundException: net.minecraft.sounds.SoundEvent`
 - Warning: `[MusicUtil] Custom music DISABLED (not supported in 1.6.x)`
 
 **Cause:**
+
 Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to compatibility issues with Fabric's runtime class obfuscation.
 
 **Solutions:**
@@ -82,7 +104,8 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Music silently skips without errors
 
 2. **Expected log message:**
-   ```
+
+   ```log
    [MusicUtil] Detected Cobblemon V1_6_X - Custom music DISABLED (not supported in 1.6.x)
    ```
 
@@ -91,19 +114,24 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - All other features work identically between versions
 
 **What still works on 1.6.x:**
+
 - ✅ Ranked battles
 - ✅ Matchmaking and Elo
 - ✅ All GUIs and commands
 - ✅ Cross-server support
 - ❌ Custom background music only
 
+</details>
+
 ---
 
 ## Queue & Matchmaking Issues
 
-### Can't join queue
+<details>
+<summary><strong>Can't join queue</strong></summary>
 
 **Symptoms:**
+
 - Click queue button, nothing happens
 - Error message when joining
 
@@ -130,9 +158,13 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Error: "Ranked match is not open"
    - Solution: Contact admin to open: `/rankedadmin open`
 
-### Queue taking forever
+</details>
+
+<details>
+<summary><strong>Queue taking forever</strong></summary>
 
 **Symptoms:**
+
 - In queue for 5+ minutes
 - No match found
 
@@ -154,9 +186,13 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - If cross-server enabled, verify Redis connection
    - Check other servers have players
 
-### Match found but battle doesn't start
+</details>
+
+<details>
+<summary><strong>Match found but battle doesn't start</strong></summary>
 
 **Symptoms:**
+
 - "Match Found!" message
 - No teleport to arena
 - Stuck in queue
@@ -164,9 +200,11 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 **Solutions:**
 
 1. **Check arenas configured:**
+
    ```bash
    /rankedadmin arena list
    ```
+
    If no arenas: `/rankedadmin arena set main_arena`
 
 2. **Check arena world loaded:**
@@ -174,22 +212,28 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Try teleporting manually: `/rankedadmin arena tp arena_name`
 
 3. **Check console errors:**
+
    ```bash
    tail -f logs/latest.log
    ```
+
    Look for arena-related errors
 
 4. **Verify both players valid:**
    - Other player might have disconnected
    - Other player might have blacklist violation
 
+</details>
+
 ---
 
 ## Battle Issues
 
-### Battle not starting after teleport
+<details>
+<summary><strong>Battle not starting after teleport</strong></summary>
 
 **Symptoms:**
+
 - Teleported to arena
 - No battle GUI appears
 - Standing in arena doing nothing
@@ -212,9 +256,13 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Not officially supported, but may help diagnose
    - Report bug in Discord #feedback if persistent
 
-### Elo not updating after battle
+</details>
+
+<details>
+<summary><strong>Elo not updating after battle</strong></summary>
 
 **Symptoms:**
+
 - Battle completed (win/loss)
 - Elo stayed the same
 
@@ -226,6 +274,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Solution: Increase turn limit in config
 
 2. **Check Elo system enabled:**
+
    ```json5
    {
      "eloSystem": {
@@ -239,36 +288,48 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - MySQL: Test connection with `mysql -u user -p -h host database`
 
 4. **Check console for errors:**
+
    ```bash
    grep -i "elo" logs/latest.log | grep -i "error"
    ```
 
-### Disconnect during battle
+</details>
+
+<details>
+<summary><strong>Disconnect during battle</strong></summary>
 
 **Symptoms:**
+
 - Player disconnected mid-battle
 - What happens?
 
 **Behavior:**
+
 - Disconnected player **counts as loss**
 - Opponent **counts as win**
 - Flee count incremented for disconnected player
 - Full Elo penalty applied
 
 **Solutions:**
+
 - Intentional: None (this is intended behavior)
 - Unintentional (crash/internet): Admin can reset flee count
+
   ```bash
   /rankedadmin flee reset PlayerName
   ```
+
+</details>
 
 ---
 
 ## Configuration Issues
 
-### Config not reloading
+<details>
+<summary><strong>Config not reloading</strong></summary>
 
 **Symptoms:**
+
 - Changed `config.json5`
 - Ran `/rankedadmin reload`
 - Changes not applied
@@ -289,19 +350,25 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Stop server, restart, test again
 
 4. **Check console for errors:**
+
    ```bash
    grep -i "error" logs/latest.log | tail -20
    ```
 
-### Blacklist not working
+</details>
+
+<details>
+<summary><strong>Blacklist not working</strong></summary>
 
 **Symptoms:**
+
 - Added Pokemon to blacklist
 - Players can still use them
 
 **Solutions:**
 
 1. **Check spelling:**
+
    ```json5
    {
      "black_list_pokemon": [
@@ -311,6 +378,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    ```
 
 2. **Check reloaded:**
+
    ```bash
    /rankedadmin reload
    ```
@@ -321,6 +389,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 4. **Check line endings:**
    - Use LF not CRLF
+
    ```bash
    dos2unix config/cobbleranked/blacklist.json5
    ```
@@ -329,44 +398,59 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Ensure no syntax errors
    - Use online validator
 
-### Language not loading
+</details>
+
+<details>
+<summary><strong>Language not loading</strong></summary>
 
 **Symptoms:**
+
 - Changed language in config
 - Still shows English after reload
 
 **Solutions:**
 
 1. **Check language code:**
+
    ```json5
    {
      "language": "ja-Jp"  // Must match file name exactly
    }
    ```
+
    Available: `en-Us`, `ja-Jp`, `fr-Fr`
 
    > **Note:** `pt-Br` and `ru-Ru` support has been discontinued as of v1.0
 
 2. **Check file exists:**
+
    ```bash
    ls config/cobbleranked/language/
    ```
+
    Should see `ja-Jp.json5`
 
 3. **Reload config:**
+
    ```bash
    /rankedadmin reload
    ```
 
 4. **Check console:**
+
    ```bash
    grep -i "language" logs/latest.log
    ```
+
    Should see: "Message configurations for language ja-Jp loaded successfully!"
 
-### Missing language messages
+</details>
+
+<details>
+<summary><strong>Missing language messages</strong></summary>
 
 **Symptoms:**
+
 - Some messages show key instead of text (e.g., `match-winner` instead of "Victory!")
 
 **Solutions:**
@@ -380,13 +464,18 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Check for missing commas or brackets
 
 3. **Reload configuration:**
+
    ```bash
    /rankedadmin reload
    ```
 
-### Placeholders not replacing
+</details>
+
+<details>
+<summary><strong>Placeholders not replacing</strong></summary>
 
 **Symptoms:**
+
 - Messages show `{player}` instead of actual player name
 - Elo shows as `{elo}` instead of number
 
@@ -403,9 +492,13 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 3. **Test with different message:**
    - Try a known working placeholder to verify system works
 
-### Color codes not working
+</details>
+
+<details>
+<summary><strong>Color codes not working</strong></summary>
 
 **Symptoms:**
+
 - Shows `&a` instead of green color
 - Colors display as raw text
 
@@ -424,13 +517,17 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Example: `"message": "&aGreen"` (correct)
    - NOT: `"message": "\\&aGreen"` (wrong)
 
+</details>
+
 ---
 
 ## Reward Issues
 
-### Rewards not appearing in GUI
+<details>
+<summary><strong>Rewards not appearing in GUI</strong></summary>
 
 **Symptoms:**
+
 - Reached milestone (e.g., 10 wins)
 - No reward item in GUI
 
@@ -449,19 +546,25 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Doubles milestones only for Doubles players
 
 4. **Reload rewards:**
+
    ```bash
    /rankedadmin reload
    ```
 
-### Reward commands not executing
+</details>
+
+<details>
+<summary><strong>Reward commands not executing</strong></summary>
 
 **Symptoms:**
+
 - Claimed reward
 - Items not received
 
 **Solutions:**
 
 1. **Check command syntax:**
+
    ```json5
    {
      "commands": [
@@ -469,15 +572,18 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
      ]
    }
    ```
+
    NOT: `"give PlayerName diamond 64"` (wrong)
 
 2. **Check placeholder:**
    - Must use `{player}` not `{username}` or `%player%`
 
 3. **Test command manually:**
+
    ```bash
    /give YourName minecraft:diamond 64
    ```
+
    If manual works, issue is with placeholder
 
 4. **Check required plugins:**
@@ -485,17 +591,22 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - Permission commands require [LuckPerms](../integration/luckperms.md)
 
 5. **Check console errors:**
+
    ```bash
    grep -i "reward" logs/latest.log | grep -i "error"
    ```
+
+</details>
 
 ---
 
 ## Cross-Server Issues
 
-### Players can't see each other across servers
+<details>
+<summary><strong>Players can't see each other across servers</strong></summary>
 
 **Symptoms:**
+
 - Multi-server setup
 - Players on Server A can't match with Server B
 
@@ -503,15 +614,18 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 1. **Check MySQL connection:**
    - All servers must connect to same MySQL database
+
    ```bash
    mysql -u username -p -h host database
    ```
 
 2. **Check Redis connection:**
    - Required for real-time queue sync
+
    ```bash
    redis-cli -h host -p port PING
    ```
+
    Should respond: `PONG`
 
 3. **Check battle_server setting:**
@@ -519,6 +633,7 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
    - All others should point to battle server
 
 4. **Check cross_server enabled:**
+
    ```json5
    {
      "cross_server": {
@@ -529,40 +644,53 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 
-### Multiple battle servers detected
+</details>
+
+<details>
+<summary><strong>Multiple battle servers detected</strong></summary>
 
 **Symptoms:**
+
 - Console error: "CRITICAL ERROR: Multiple Battle Servers Detected!"
 
 **Problem:**
+
 - Multiple servers have `battle_server: ""` (empty string)
 - Causes duplicate season management, duplicate rewards
 
 **Solution:**
+
 1. Check all server configs
 2. Only ONE server should have `battle_server: ""`
 3. All others: `battle_server: "actual_battle_server_name"`
 4. Restart all servers
 
+</details>
+
 ---
 
 ## Performance Issues
 
-### Server lag during battles
+<details>
+<summary><strong>Server lag during battles</strong></summary>
 
 **Symptoms:**
+
 - TPS drops during battles
 - Players experience lag
 
 **Solutions:**
 
 1. **Check server resources:**
+
    ```bash
    top
    ```
+
    CPU and RAM usage
 
 2. **Reduce turn limit:**
+
    ```json5
    {
      "battle": {
@@ -579,9 +707,13 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
    - Disable other plugins temporarily to diagnose
    - CobbleRanked alone has minimal performance impact
 
-### Database growing too large
+</details>
+
+<details>
+<summary><strong>Database growing too large</strong></summary>
 
 **Symptoms:**
+
 - `ranked.db` file very large (> 100MB)
 
 **Solutions:**
@@ -593,6 +725,7 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 
 2. **Check for duplicates:**
    - Shouldn't happen, but check database
+
    ```bash
    sqlite3 config/cobbleranked/ranked.db "SELECT COUNT(*) FROM player_ranked_stats;"
    ```
@@ -601,28 +734,36 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
    - Better for large player bases (1000+ players)
    - See [Database Guide](../advanced/database.md)
 
+</details>
+
 ---
 
 ## GUI Issues
 
-### GUI not opening
+<details>
+<summary><strong>GUI not opening</strong></summary>
 
 **Symptoms:**
+
 - `/ranked` command runs
 - No GUI appears
 
 **Solutions:**
 
 1. **Check permission:**
+
    ```bash
    /lp user YourName permission check cobbleranked.gui
    ```
+
    Should return: `true`
 
 2. **Check GUI files exist:**
+
    ```bash
    ls config/cobbleranked/gui/
    ```
+
    Should see `gui-*.json5` files
 
 3. **Check language setting:**
@@ -631,18 +772,24 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
    - Japanese: `gui-jaJp.json5`
 
 4. **Check console errors:**
+
    ```bash
    grep -i "gui" logs/latest.log | grep -i "error"
    ```
 
-### GUI items not rendering
+</details>
+
+<details>
+<summary><strong>GUI items not rendering</strong></summary>
 
 **Symptoms:**
+
 - GUI opens but items wrong/missing
 
 **Solutions:**
 
 1. **Check item IDs:**
+
    ```json5
    {
      "item": "minecraft:diamond"  // Must be valid item ID
@@ -654,17 +801,22 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
    - Set to `0` if not using custom models
 
 3. **Reload GUI:**
+
    ```bash
    /rankedadmin reload
    ```
+
+</details>
 
 ---
 
 ## LuckPerms Integration Issues
 
-### Rank tags not showing in chat
+<details>
+<summary><strong>Rank tags not showing in chat</strong></summary>
 
 **Symptoms:**
+
 - Players have ranks but tags don't appear in chat
 
 **Solutions:**
@@ -714,9 +866,13 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 
    Then have the player win a ranked battle.
 
-### Unicode symbols showing as boxes/question marks
+</details>
+
+<details>
+<summary><strong>Unicode symbols showing as boxes/question marks</strong></summary>
 
 **Symptoms:**
+
 - Custom Unicode symbols display as � or ▯
 
 **Solutions:**
@@ -742,9 +898,13 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
    - Minecraft Java Edition supports all Unicode
    - Bedrock Edition (via Geyser) may have issues with some symbols
 
-### Ranks not updating after battles
+</details>
+
+<details>
+<summary><strong>Ranks not updating after battles</strong></summary>
 
 **Symptoms:**
+
 - Player wins battles but rank tag doesn't change
 
 **Solutions:**
@@ -776,9 +936,13 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 
    Then have the player win another ranked battle to trigger a rank update.
 
-### Multiple rank tags stacking
+</details>
+
+<details>
+<summary><strong>Multiple rank tags stacking</strong></summary>
 
 **Symptoms:**
+
 - Player has multiple rank tags like `PlayerName [Bronze] [Silver]`
 
 **Solutions:**
@@ -808,23 +972,29 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 4. **Verify you're not manually assigning tags:**
    Don't use `/lp user <player> meta addsuffix` manually - let CobbleRanked manage it automatically.
 
+</details>
+
 ---
 
 ## Database Issues
 
-### Database connection failed (MySQL)
+<details>
+<summary><strong>Database connection failed (MySQL)</strong></summary>
 
 **Symptoms:**
+
 - Console error: "Failed to connect to MySQL database"
 
 **Solutions:**
 
 1. **Check MySQL running:**
+
    ```bash
    systemctl status mysql
    ```
 
 2. **Check credentials:**
+
    ```json5
    {
      "cross_server": {
@@ -839,6 +1009,7 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
    ```
 
 3. **Test connection manually:**
+
    ```bash
    mysql -u username -p -h host database
    ```
@@ -849,47 +1020,61 @@ See [Cross-Server Setup](../advanced/cross-server.md) for detailed guide.
 
 See [Database Guide](../advanced/database.md) for setup.
 
-### Database corrupted (SQLite)
+</details>
+
+<details>
+<summary><strong>Database corrupted (SQLite)</strong></summary>
 
 **Symptoms:**
+
 - Console error: "database disk image is malformed"
 
 **Solutions:**
 
 1. **Backup database:**
+
    ```bash
    cp config/cobbleranked/ranked.db config/cobbleranked/ranked.db.backup
    ```
 
 2. **Try repair:**
+
    ```bash
    sqlite3 config/cobbleranked/ranked.db "PRAGMA integrity_check;"
    ```
 
 3. **If repair fails, restore from backup:**
+
    ```bash
    cp config/cobbleranked/ranked.db.backup config/cobbleranked/ranked.db
    ```
 
 4. **If no backup, reset database:**
+
    ```bash
    rm config/cobbleranked/ranked.db
    ```
+
    **Warning:** All player data will be lost!
+
+</details>
 
 ---
 
 ## Casual Missions Issues
 
-### Missions Not Resetting
+<details>
+<summary><strong>Missions Not Resetting</strong></summary>
 
 **Symptoms:**
+
 - Daily missions not resetting at configured time
 - Weekly missions not resetting on configured day
 
 **Solutions:**
 
 1. **Check timezone configuration:**
+
    ```json5
    {
      "reset_settings": {
@@ -899,6 +1084,7 @@ See [Database Guide](../advanced/database.md) for setup.
    ```
 
 2. **Check reset time:**
+
    ```json5
    {
      "reset_settings": {
@@ -909,24 +1095,33 @@ See [Database Guide](../advanced/database.md) for setup.
    ```
 
 3. **Check server logs:**
+
    ```bash
    grep -i "mission" logs/latest.log | grep -i "reset"
    ```
+
    Should see:
+
    ```
    [CobbleRanked] Daily missions reset at 00:00 UTC
    [CobbleRanked] Weekly missions reset on MONDAY at 00:00 UTC
    ```
 
 4. **Verify server time:**
+
    ```bash
    date
    ```
+
    Ensure server time is correct
 
-### Progress Not Tracking
+</details>
+
+<details>
+<summary><strong>Progress Not Tracking</strong></summary>
 
 **Symptoms:**
+
 - Completed matches but mission progress not updating
 - Progress stuck at same number
 
@@ -952,13 +1147,18 @@ See [Database Guide](../advanced/database.md) for setup.
    - Progress may need to refresh
 
 5. **Check console:**
+
    ```bash
    grep -i "casual" logs/latest.log | tail -20
    ```
 
-### Rewards Not Received
+</details>
+
+<details>
+<summary><strong>Rewards Not Received</strong></summary>
 
 **Symptoms:**
+
 - Claimed reward but items not in inventory
 - Click claim button nothing happens
 
@@ -970,19 +1170,23 @@ See [Database Guide](../advanced/database.md) for setup.
    - Clear inventory and claim again
 
 2. **Check pending rewards:**
+
    ```bash
    /casual
    ```
+
    Look for "Pending Rewards" section
 
 3. **Verify reward commands:**
    - Check `casual_missions.json5` for correct commands
    - Test command manually:
+
      ```bash
      /give YourName cobblemon:exp_candy_m 2
      ```
 
 4. **Check console errors:**
+
    ```bash
    grep -i "reward" logs/latest.log | grep -i "error"
    ```
@@ -991,9 +1195,13 @@ See [Database Guide](../advanced/database.md) for setup.
    - Milestone rewards are one-time only
    - Can't claim same milestone twice
 
-### Mission Not Completing
+</details>
+
+<details>
+<summary><strong>Mission Not Completing</strong></summary>
 
 **Symptoms:**
+
 - Progress reached target value
 - Mission still shows as incomplete
 
@@ -1013,6 +1221,7 @@ See [Database Guide](../advanced/database.md) for setup.
    - Click the mission item in GUI
 
 4. **Check mission configuration:**
+
    ```json5
    {
      "target_value": 3,  // Must reach exactly this value
@@ -1020,9 +1229,13 @@ See [Database Guide](../advanced/database.md) for setup.
    }
    ```
 
-### Pending Rewards Not Appearing
+</details>
+
+<details>
+<summary><strong>Pending Rewards Not Appearing</strong></summary>
 
 **Symptoms:**
+
 - Completed mission while offline
 - No rewards when logging in
 
@@ -1033,26 +1246,33 @@ See [Database Guide](../advanced/database.md) for setup.
    - Verify database connection working
 
 2. **Check console on login:**
+
    ```bash
    grep -i "pending" logs/latest.log
    ```
+
    Should see: `[CobbleRanked] You have X pending rewards!`
 
 3. **Open casual menu:**
+
    ```bash
    /casual
    ```
+
    Pending rewards should show automatically
 
 4. **Check reward data:**
    - May be corrupted if server crashed during reward creation
    - Check console for errors
 
+</details>
+
 ---
 
 ## Getting Help
 
-### Information to Provide
+<details>
+<summary><strong>Information to Provide</strong></summary>
 
 When asking for help, include:
 
@@ -1060,6 +1280,7 @@ When asking for help, include:
    - Check mod JAR file name
 
 2. **Cobblemon version:**
+
    ```bash
    ls mods/ | grep cobblemon
    ```
@@ -1068,6 +1289,7 @@ When asking for help, include:
    - Check `server.properties`
 
 4. **Error messages:**
+
    ```bash
    tail -100 logs/latest.log
    ```
@@ -1079,12 +1301,17 @@ When asking for help, include:
 6. **Steps to reproduce:**
    - What were you doing when issue occurred?
 
-### Where to Get Help
+</details>
+
+<details>
+<summary><strong>Where to Get Help</strong></summary>
 
 - **Discord Server:** [Join for Support](https://discord.gg/VVVvBTqqyP) (#feedback channel)
 - **Documentation:** [FAQ](faq.md)
 - **Email:** garshy.gaming@gmail.com
 - **Discord DM:** @gashicha
+
+</details>
 
 ---
 

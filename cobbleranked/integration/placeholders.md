@@ -1,4 +1,4 @@
-# Placeholder API
+# PlaceholderAPI Integration
 
 CobbleRanked provides two types of placeholders for displaying ranked statistics:
 
@@ -235,70 +235,98 @@ ranked_top:
 
 Message placeholders are used in [language files](../configuration/languages.md) to dynamically insert values into text.
 
-### Player & Queue Placeholders
+### Arena Placeholders
 
 | Placeholder | Description | Example Usage |
 |-------------|-------------|---------------|
-| `{player}` | Player name | `"match-finished": "{player} has won!"` |
-| `{player1}` | First player name | `"ranked-started": "{player1} vs {player2}"` |
-| `{player2}` | Second player name | `"prepare-queue-subtitle": "{player1} vs {player2}"` |
-| `{remaining}` | Time remaining | `"remaingFila": "Searching... ({remaining})"` |
-| `{posicao}` | Queue position | `"remaingFila": "Position: {posicao}"` |
+| `{arena_name}` | Arena identifier | `"teleporting": "Teleporting to {arena_name}"` |
+| `{arena_location_x}` | Arena X coordinate | `"arena_coords": "X: {arena_location_x}"` |
+| `{arena_location_y}` | Arena Y coordinate | `"arena_coords": "Y: {arena_location_y}"` |
+| `{arena_location_z}` | Arena Z coordinate | `"arena_coords": "Z: {arena_location_z}"` |
 
-### Battle Result Placeholders
-
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{gain}` | Elo points gained | `"match-winner-subtitle": "You gained {gain} ELO"` |
-| `{lose}` | Elo points lost | `"match-loser-subtitle": "You lost {lose} ELO"` |
-| `{elo}` | Current Elo rating | `"elo-up": "You ranked up to {elo}."` |
-| `{winner}` | Winner name | `"match-finished": "{winner} has won!"` |
-| `{loser}` | Loser name | `"match-finished": "{winner} defeated {loser}!"` |
-
-### System Placeholders
+### Battle Placeholders
 
 | Placeholder | Description | Example Usage |
 |-------------|-------------|---------------|
-| `{time}` | Match duration | `"match-started-subtitle": "Duration is {time}m"` |
-| `{limit}` | Team size limit | `"limit-pokemon": "You need {limit} Pokémon"` |
-| `{arena}` | Arena name | `"arena-not-found": "Arena {arena} not found"` |
-| `{pokemon}` | Pokemon name | `"pokemon_switched": "Selected {pokemon}"` |
-| `{format}` | Battle format name | `"format_selector_selected": "▶ {format}"` |
-| `{error}` | Error details | `"pokemon-label-limit": "Exceeded limit: {error}"` |
+| `{battle_format}` | Battle format (SINGLES, DOUBLES, etc.) | `"battle_starting": "Starting {battle_format} battle"` |
+| `{battle_elo_change}` | Elo gained or lost | `"battle_result": "Elo change: {battle_elo_change}"` |
 
-### Timer Placeholders
+### Player Placeholders
 
 | Placeholder | Description | Example Usage |
 |-------------|-------------|---------------|
-| `{seconds}` | Seconds remaining | `"battle_timer_critical": "Time remaining: {seconds}s"` |
-| `{minutes}` | Minutes remaining | `"battle_timer_normal": "{minutes}m {seconds}s"` |
-| `{type}` | Selection type | `"selection_timeout_critical": "{type} Selection"` |
+| `{player_name}` | Current player name | `"welcome": "Welcome, {player_name}!"` |
+| `{opponent_name}` | Opponent player name | `"match_found": "Opponent: {opponent_name}"` |
+| `{winner}` | Winner name (legacy, still supported) | `"match_finished": "{winner} won!"` |
+| `{loser}` | Loser name (legacy, still supported) | `"match_finished": "{winner} defeated {loser}"` |
 
-### Pokemon & Team Placeholders
+### Stats Placeholders
 
 | Placeholder | Description | Example Usage |
 |-------------|-------------|---------------|
-| `{level}` | Pokemon level | `"team_selection_pokemon_level": "Level: {level}"` |
-| `{current}` | Current HP | `"team_selection_pokemon_hp": "HP: {current}/{max}"` |
-| `{max}` | Maximum HP | `"team_selection_pokemon_hp": "HP: {current}/{max}"` |
-| `{label}` | Pokemon label/category | `"team_selection_label_limit_item": "{label}: {current}/{limit}"` |
-| `{color}` | Color code | `"team_selection_label_limit_item": "{color}• {label}"` |
-| `{index}` | List item number | `"validation_error_list_item": "{index}. {pokemon}"` |
+| `{stats_elo}` | Player's current Elo rating | `"rank_display": "Your Elo: {stats_elo}"` |
+| `{stats_rank}` | Player's rank tier (Bronze, Silver, etc.) | `"rank_up": "You are now {stats_rank}!"` |
+| `{stats_wins}` | Total wins | `"profile": "Wins: {stats_wins}"` |
+| `{stats_losses}` | Total losses | `"profile": "Losses: {stats_losses}"` |
+| `{stats_winrate}` | Win percentage | `"profile": "Win Rate: {stats_winrate}%"` |
 
 ### Season Placeholders
 
 | Placeholder | Description | Example Usage |
 |-------------|-------------|---------------|
-| `{season}` | Season name | `"season_current": "Current Season: {season}"` |
-| `{season_id}` | Season ID number | `"season_info": "Season #{season_id}"` |
-| `{days}` | Days remaining | `"season_ending_soon": "{days} days remaining"` |
+| `{season_name}` | Current season name | `"season_info": "Season: {season_name}"` |
+| `{season_id}` | Season ID number | `"season_number": "Season #{season_id}"` |
+| `{season_remaining_days}` | Days until season ends | `"season_ending": "{season_remaining_days} days left"` |
+
+### Timer Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{timer_seconds}` | Battle turn timer seconds | `"turn_timer": "Time left: {timer_seconds}s"` |
+| `{penalty_seconds}` | Penalty cooldown seconds | `"penalty_active": "Cooldown: {penalty_seconds}s"` |
+| `{cooldown_seconds}` | Action cooldown seconds | `"cooldown": "Wait {cooldown_seconds}s"` |
+
+### Mission Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{mission_name}` | Mission display name | `"mission_complete": "Completed: {mission_name}"` |
+| `{mission_type}` | Mission type (DAILY, WEEKLY) | `"mission_info": "Type: {mission_type}"` |
+| `{mission_progress}` | Current progress | `"mission_status": "{mission_progress}/{mission_target}"` |
+| `{mission_target}` | Target value | `"mission_status": "{mission_progress}/{mission_target}"` |
+
+### GUI Placeholders
+
+| Placeholder | Description | Example Usage |
+|-------------|-------------|---------------|
+| `{gui_selected_count}` | Number of items selected | `"selection": "Selected: {gui_selected_count}"` |
+| `{gui_selection_limit}` | Maximum selectable items | `"selection": "{gui_selected_count}/{gui_selection_limit}"` |
+
+### Legacy Placeholders (Still Supported)
+
+These placeholders are maintained for backward compatibility:
+
+| Old Placeholder | New Placeholder | Status |
+|-----------------|-----------------|--------|
+| `{arena}` | `{arena_name}` | ⚠️ Deprecated, use `{arena_name}` |
+| `{format}` | `{battle_format}` | ⚠️ Deprecated, use `{battle_format}` |
+| `{player}` | `{player_name}` | ⚠️ Deprecated, use `{player_name}` |
+| `{opponent}` | `{opponent_name}` | ⚠️ Deprecated, use `{opponent_name}` |
+| `{elo}` | `{stats_elo}` | ⚠️ Deprecated, use `{stats_elo}` |
+| `{rank}` | `{stats_rank}` | ⚠️ Deprecated, use `{stats_rank}` |
+| `{season}` | `{season_name}` | ⚠️ Deprecated, use `{season_name}` |
+| `{days}` | `{season_remaining_days}` | ⚠️ Deprecated, use `{season_remaining_days}` |
 
 **Usage Example:**
+
 ```json5
 {
-  "match-finished": "&8* &f{winner} &chas just won a ranked match against &f{loser}.",
-  "elo-up": "&aYou ranked up to &f{elo}.",
-  "remaingFila": "&cSearching for a match... &7(&e{remaining}&7) &7(Position: &e{posicao}&7)"
+  "match_found": "&aMatch found! &7Opponent: &f{opponent_name}",
+  "battle_starting": "&eStarting {battle_format} battle in {arena_name}",
+  "battle_result": "&aYou gained {battle_elo_change} Elo! &7New rating: {stats_elo}",
+  "season_ending": "&cSeason '{season_name}' ends in {season_remaining_days} days",
+  "mission_progress": "&e{mission_name}: &7{mission_progress}/{mission_target}",
+  "team_selection": "&7Selected: &a{gui_selected_count}&7/&e{gui_selection_limit}"
 }
 ```
 
