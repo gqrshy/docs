@@ -1,8 +1,10 @@
 # Player Restrictions
 
-Control what players can do during ranked matches.
+Control what players can do during ranked and casual matches.
 
-**File:** `config/cobbleranked/restrictions.json5`
+**File:** `config/cobbleranked/restrictions.json5` (auto-generated on first run)
+
+---
 
 ## Configuration Structure
 
@@ -165,6 +167,11 @@ Each phase uses the same restriction categories below.
 
 </details>
 
-## Troubleshooting
+---
 
-See [FAQ - Restrictions](../support/faq.md#restriction-system-troubleshooting)
+## See Also
+
+- [Inventory Restrictions](../features/inventory-restrictions.md) - Pokemon/item restrictions
+- [Blacklist System](blacklist.md) - Pokemon and move bans
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

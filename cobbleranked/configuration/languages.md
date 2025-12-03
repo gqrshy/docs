@@ -2,6 +2,8 @@
 
 Customize all in-game messages and translate CobbleRanked to any language.
 
+---
+
 ## File Location
 
 `config/cobbleranked/language/`
@@ -482,14 +484,14 @@ When CobbleRanked updates with new features:
 
 ### Best Practices
 
-**✅ DO:**
+**DO:**
 - Keep all language files in sync (same keys)
 - Test messages in-game after changes
 - Use consistent color scheme across messages
 - Preserve placeholder formatting
 - Use comments for organization
 
-**❌ DON'T:**
+**DON'T:**
 - Remove or rename keys (will cause errors)
 - Forget to escape special characters
 - Use placeholder names that don't exist
@@ -507,4 +509,9 @@ Having issues with language files? See the [Troubleshooting Guide](../support/tr
 
 ---
 
-**Next:** Learn about [GUI Customization](gui.md) for visual elements.
+## See Also
+
+- [GUI Customization](gui.md) - Visual elements
+- [Placeholder API](../integration/placeholders.md) - Message placeholders
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

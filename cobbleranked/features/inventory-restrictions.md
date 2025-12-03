@@ -2,6 +2,8 @@
 
 Prevent players with specific items in their inventory from joining ranked queues.
 
+---
+
 ## Overview
 
 The inventory restriction system checks players' inventories before allowing them to join ranked queues. This is useful for blocking battle gimmick items or other items that could provide unfair advantages.
@@ -47,7 +49,7 @@ The inventory restriction system checks players' inventories before allowing the
 
 When a player tries to queue with banned items:
 
-> ⚠ Cannot join queue - Banned items in inventory:
+> Cannot join queue - Banned items in inventory:
 > • mega_showdown:tera_orb
 > • mega_showdown:dynamax_band
 >
@@ -58,3 +60,12 @@ When a player tries to queue with banned items:
 - Ban items that provide unfair advantages
 - Keep the list minimal - only truly problematic items
 - Communicate banned items to players via server rules
+
+---
+
+## See Also
+
+- [Blacklist System](../configuration/blacklist.md) - Pokemon/move restrictions
+- [Player Restrictions](../configuration/restrictions.md) - Action restrictions
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

@@ -1,6 +1,8 @@
 # Configuration Guide
 
-Welcome to the CobbleRanked configuration documentation. This guide will help you set up and customize your ranked battles system.
+CobbleRanked configuration documentation for setting up and customizing your ranked battles system.
+
+---
 
 ## Quick Links
 
@@ -14,10 +16,10 @@ Welcome to the CobbleRanked configuration documentation. This guide will help yo
 ## Configuration Format
 
 CobbleRanked uses **JSON5 format** for all configuration files. JSON5 is:
-- ✅ Easy to read and edit
-- ✅ Supports comments (`//` or `/* */`)
-- ✅ Allows trailing commas
-- ✅ More flexible than standard JSON
+- Easy to read and edit
+- Supports comments (`//` or `/* */`)
+- Allows trailing commas
+- More flexible than standard JSON
 
 ## Configuration Files Location
 
@@ -71,7 +73,7 @@ config/cobbleranked/
 
 ### JSON5 Features
 
-✅ **Comments:**
+**Comments:**
 ```json5
 {
   // This is a comment
@@ -83,7 +85,7 @@ config/cobbleranked/
 }
 ```
 
-✅ **Trailing commas:**
+**Trailing commas:**
 ```json5
 {
   "black_list_pokemon": [
@@ -107,8 +109,9 @@ Use the `/rankedadmin reload` command to reload configuration without restarting
 - **Examples**: Each JSON5 file includes comments explaining options
 - **Support**: Ask in our [Discord Server](https://discord.gg/VVVvBTqqyP) (#feedback channel)
 
-## Next Steps
+---
 
-- [Configure blacklist](blacklist.md) - Start by setting up Pokemon bans
-- [Set up arenas](arenas.md) - Create battle locations
-- [Customize rewards](rewards.md) - Configure season rankings
+## See Also
+
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

@@ -1,6 +1,6 @@
 # Migration Guide
 
-**Status:** 🚧 Planned for future implementation
+**Status:** Planned for future implementation
 
 ---
 
@@ -21,8 +21,10 @@ Detailed migration guides will be added as major version updates are released.
 
 For now, please refer to:
 - [Main Configuration](../configuration/config.md) - Current configuration reference
-- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
 
 ---
 
-**Have questions?** Contact support or open an issue on GitHub.
+## See Also
+
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

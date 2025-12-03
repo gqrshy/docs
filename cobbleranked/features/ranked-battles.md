@@ -40,13 +40,13 @@ Ranked battles are the core feature of CobbleRanked - competitive Pokemon battle
 
 Before battle starts, your team is validated:
 
-**✅ Validation Checks:**
+**Validation Checks:**
 - Team size (default: 3-6 Pokemon depending on format)
 - No banned Pokemon ([Blacklist System](../configuration/blacklist.md))
 - No banned moves
 - No banned abilities
 - No banned held items
-- No banned inventory items ([Inventory Restrictions](../features/banned-items.md))
+- No banned inventory items ([Inventory Restrictions](inventory-restrictions.md))
 
 **If validation fails:** You're removed from queue with an error message explaining the issue.
 
@@ -293,6 +293,7 @@ Top players receive exclusive rewards at season end:
 
 ---
 
-## Troubleshooting
+## See Also
 
-Having issues with ranked battles? See the [FAQ](../support/faq.md) for solutions.
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

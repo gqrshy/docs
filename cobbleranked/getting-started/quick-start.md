@@ -1,8 +1,10 @@
 # Quick Start Guide
 
-Get your ranked battles up and running in under 5 minutes!
+Get your ranked battles up and running in under 5 minutes.
 
 > **Prerequisites:** Make sure you've completed the [Installation](installation.md) guide before proceeding.
+
+---
 
 ## Overview
 
@@ -266,4 +268,8 @@ Now that you're up and running:
 
 ---
 
-**Having issues?** Check the [Troubleshooting Guide](../support/troubleshooting.md) for solutions.
+## See Also
+
+- [Commands Reference](commands.md) - All available commands
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

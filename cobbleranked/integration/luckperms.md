@@ -1,6 +1,8 @@
 # LuckPerms Integration
 
-CobbleRanked can automatically sync your players' ranks with LuckPerms, giving them custom prefixes, suffixes, and groups based on their Elo rating. This guide will show you how to set it up step-by-step.
+CobbleRanked can automatically sync your players' ranks with LuckPerms, giving them custom prefixes, suffixes, and groups based on their Elo rating.
+
+---
 
 ## What is LuckPerms?
 
@@ -47,7 +49,7 @@ Restart your server and you're done! Players will automatically get rank tags wh
 ## Configuration Guide
 
 <details>
-<summary><strong>📝 Understanding Sync Modes</strong></summary>
+<summary><strong>Understanding Sync Modes</strong></summary>
 
 CobbleRanked supports 4 sync modes:
 
@@ -61,7 +63,7 @@ CobbleRanked supports 4 sync modes:
 </details>
 
 <details>
-<summary><strong>⚙️ Basic Settings Explained</strong></summary>
+<summary><strong>Basic Settings Explained</strong></summary>
 
 ### `removeOnRankLoss`
 **Default:** `true`
@@ -93,7 +95,7 @@ Controls how often rank updates are synced with LuckPerms, in seconds.
 ## Setting Up Rank Prefixes and Suffixes
 
 <details>
-<summary><strong>🎨 Customizing Rank Tags (Click to expand)</strong></summary>
+<summary><strong>Customizing Rank Tags</strong></summary>
 
 ### Default Rank Tags
 
@@ -136,7 +138,7 @@ Open `config/cobbleranked/luckperms.json5` and edit the `tierMappings` section:
 </details>
 
 <details>
-<summary><strong>✨ Using Unicode Custom Rank Symbols</strong></summary>
+<summary><strong>Using Unicode Custom Rank Symbols</strong></summary>
 
 Want fancy rank symbols instead of text? You can use Unicode characters or custom resource pack symbols!
 
@@ -269,7 +271,7 @@ Players need to install your resource pack to see the custom symbols. You can:
 CobbleRanked provides fine-grained permission nodes when LuckPerms is installed, allowing you to control exactly which commands each player or group can use.
 
 <details>
-<summary><strong>📋 Available Permission Nodes</strong></summary>
+<summary><strong>Available Permission Nodes</strong></summary>
 
 ### Player Commands
 
@@ -320,7 +322,7 @@ CobbleRanked provides fine-grained permission nodes when LuckPerms is installed,
 ## LuckPerms Group Management
 
 <details>
-<summary><strong>👥 Assigning LuckPerms Groups by Rank</strong></summary>
+<summary><strong>Assigning LuckPerms Groups by Rank</strong></summary>
 
 You can automatically assign players to LuckPerms groups based on their rank tier.
 
@@ -396,7 +398,7 @@ The `weight` value determines which group takes priority when LuckPerms selects 
 </details>
 
 <details>
-<summary><strong>📚 Displaying Multiple Rank Tags (Advanced)</strong></summary>
+<summary><strong>Displaying Multiple Rank Tags (Advanced)</strong></summary>
 
 By default, LuckPerms only displays the **highest-weight** prefix or suffix. If you want to show multiple rank tags at once (e.g., showing both Singles and Doubles rank), you need to modify LuckPerms' configuration.
 
@@ -485,9 +487,9 @@ suffix {
 </details>
 
 <details>
-<summary><strong>🔄 Format-Specific Rank Tags (Custom Mappings)</strong></summary>
+<summary><strong>Format-Specific Rank Tags (Custom Mappings)</strong></summary>
 
-**Status:** ✅ Fully implemented in v1.0.23+
+**Status:** Fully implemented in v1.0.23+
 
 This feature allows different rank tags for Singles vs Doubles vs Triples formats using `customMappings`. For example, you can give a player different suffixes for being Master rank in Singles vs Doubles.
 
@@ -665,7 +667,7 @@ Type in chat to see how it looks. Then remove it:
 ## Advanced Examples
 
 <details>
-<summary><strong>📦 Complete Configuration Examples</strong></summary>
+<summary><strong>Complete Configuration Examples</strong></summary>
 
 ### Example 1: Simple Colored Tags
 
@@ -768,21 +770,10 @@ Then grant permissions to groups:
 
 ---
 
-## Related Documentation
+## See Also
 
-- [Configuration Overview](../configuration/README.md)
 - [Placeholder API](placeholders.md) - Use rank data in other plugins
-- [Seasons](../features/seasons.md) - Seasonal rank resets
 - [Elo System](../features/elo-system.md) - How Elo ratings work
-
----
-
-## Need More Help?
-
-- **Discord:** Join our [support server](https://discord.gg/gashi)
-- **GitHub:** [Report issues](https://github.com/GashiStudios/CobbleRanked/issues)
-- **Email:** gashistudios.llc@gmail.com
-
----
-
-*Last updated: 2025-11-30*
+- [Seasons](../features/seasons.md) - Seasonal rank resets
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

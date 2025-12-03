@@ -1,6 +1,14 @@
 # Dynamic Matchmaking
 
-Automatically expands Elo range as players wait in queue for faster matches.
+Intelligent matchmaking system that balances match quality with queue times.
+
+---
+
+## Features
+
+- **Dynamic Elo Range** - Automatically expands Elo range as wait time increases
+- **Recent Opponent Avoidance** - Prevents repeated matches against the same players
+- **Immediate Match Threshold** - Instant matching for very close Elo ratings
 
 ---
 
@@ -101,4 +109,92 @@ Automatically expands Elo range as players wait in queue for faster matches.
 
 ---
 
-**Related:** [Elo System](elo-system.md) · [Battle Formats](battle-formats.md) · [Cross-Server](../advanced/cross-server.md)
+## Recent Opponent Avoidance
+
+Prevents players from being matched against the same opponents repeatedly, ensuring variety in matchmaking.
+
+### How It Works
+
+1. **After a match** → Opponent added to "recent opponents" list
+2. **Searching for match** → Recent opponents excluded from potential matches
+3. **Time passes** → Opponents automatically removed from list
+
+### Configuration
+
+Add to `config/cobbleranked/config.json5`:
+
+```json5
+{
+  "matchmaking": {
+    // ... other settings ...
+
+    "recent_opponent_avoidance": {
+      "enabled": true,
+      "max_tracked_opponents": 5,    // Avoid last N opponents
+      "expiry_seconds": 600          // Reset after 10 minutes
+    }
+  }
+}
+```
+
+### Settings
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `enabled` | `true` | Enable recent opponent avoidance |
+| `max_tracked_opponents` | `5` | Number of recent opponents to avoid |
+| `expiry_seconds` | `600` | Time (seconds) before opponent can be matched again |
+
+### Examples
+
+<details>
+<summary><strong>Configuration Presets</strong></summary>
+
+**Strict Avoidance (Competitive)**
+```json5
+{
+  "recent_opponent_avoidance": {
+    "enabled": true,
+    "max_tracked_opponents": 10,
+    "expiry_seconds": 1800  // 30 minutes
+  }
+}
+```
+
+**Relaxed (Small Server)**
+```json5
+{
+  "recent_opponent_avoidance": {
+    "enabled": true,
+    "max_tracked_opponents": 3,
+    "expiry_seconds": 300  // 5 minutes
+  }
+}
+```
+
+**Disabled**
+```json5
+{
+  "recent_opponent_avoidance": {
+    "enabled": false
+  }
+}
+```
+
+</details>
+
+### Notes
+
+- Thread-safe implementation for concurrent queue processing
+- Per-format tracking (Singles opponents don't affect Doubles matching)
+- Works with cross-server matchmaking
+
+---
+
+## See Also
+
+- [Elo System](elo-system.md) - Rating calculations
+- [Battle Formats](battle-formats.md) - Available formats
+- [Cross-Server](../advanced/cross-server.md) - Multi-server setup
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

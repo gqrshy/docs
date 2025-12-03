@@ -119,7 +119,7 @@ Most accurate system used by Chess.com and Lichess. Tracks **rating uncertainty 
 - ✅ Large competitive server (100+ active players)
 - ✅ Want fair ratings for returning players
 - ✅ Need to account for rating confidence
-- ❌ Small casual server (use Pokemon Showdown instead)
+- ❌ Not recommended for small casual servers (use Pokemon Showdown instead)
 
 ---
 
@@ -167,4 +167,10 @@ Inactive players lose Elo to prevent ladder stagnation.
 
 ---
 
-**Related:** [Dynamic Matchmaking](dynamic-matchmaking.md) · [Battle Formats](battle-formats.md) · [Configuration](../configuration/config.md)
+## See Also
+
+- [Dynamic Matchmaking](dynamic-matchmaking.md) - Player pairing system
+- [Battle Formats](battle-formats.md) - Available formats
+- [Configuration](../configuration/config.md) - Full settings
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

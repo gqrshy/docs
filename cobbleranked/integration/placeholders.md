@@ -1,9 +1,10 @@
 # PlaceholderAPI Integration
 
-CobbleRanked provides two types of placeholders for displaying ranked statistics:
+CobbleRanked provides three types of placeholders:
 
 1. **Leaderboard Placeholders** - Display top player stats in holograms, signs, and other mods
-2. **Message Placeholders** - Used internally in language files for dynamic text
+2. **Season Placeholders** - Display current season information (NEW in v1.1.0)
+3. **Message Placeholders** - Used internally in language files for dynamic text
 
 ---
 
@@ -19,8 +20,8 @@ Leaderboard placeholders integrate with [Text Placeholder API](https://placehold
 - Custom displays via Text Placeholder API
 
 **Platform Support:**
-- ✅ Fabric servers (via Text Placeholder API)
-- ✅ Hybrid servers (Arclight) - supports both Text Placeholder API and PlaceholderAPI
+- Fabric servers (via Text Placeholder API)
+- Hybrid servers (Arclight) - supports both Text Placeholder API and PlaceholderAPI
 
 **Performance:**
 - 60-second cache (reduces database queries by ~98%)
@@ -237,98 +238,214 @@ Message placeholders are used in [language files](../configuration/languages.md)
 
 ### Arena Placeholders
 
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{arena_name}` | Arena identifier | `"teleporting": "Teleporting to {arena_name}"` |
-| `{arena_location_x}` | Arena X coordinate | `"arena_coords": "X: {arena_location_x}"` |
-| `{arena_location_y}` | Arena Y coordinate | `"arena_coords": "Y: {arena_location_y}"` |
-| `{arena_location_z}` | Arena Z coordinate | `"arena_coords": "Z: {arena_location_z}"` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{arena_name}` | Arena identifier |
+| `{arena_location_x}` | Arena X coordinate |
+| `{arena_location_y}` | Arena Y coordinate |
+| `{arena_location_z}` | Arena Z coordinate |
+| `{arena_center_x}` | Arena center X coordinate |
+| `{arena_center_y}` | Arena center Y coordinate |
+| `{arena_center_z}` | Arena center Z coordinate |
+| `{arena_world}` | Arena world name |
+| `{arena_pitch}` | Arena spawn pitch |
+| `{arena_yaw}` | Arena spawn yaw |
+| `{arena_position}` | Position identifier (pos1, pos2, etc.) |
+| `{arena_status}` | Arena status (available/in-use) |
+| `{arena_field_radius}` | Battle field radius |
+| `{arena_exit_pos}` | Exit position coordinates |
+| `{arena_count}` | Total arena count |
+| `{arena_available_count}` | Available arena count |
+| `{arena_in_use_count}` | In-use arena count |
 
 ### Battle Placeholders
 
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{battle_format}` | Battle format (SINGLES, DOUBLES, etc.) | `"battle_starting": "Starting {battle_format} battle"` |
-| `{battle_elo_change}` | Elo gained or lost | `"battle_result": "Elo change: {battle_elo_change}"` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{battle_format}` | Battle format (SINGLES, DOUBLES, etc.) |
+| `{battle_elo_change}` | Elo gained or lost |
+| `{format_name}` | Localized format name |
+| `{match_countdown_seconds}` | Match start countdown |
 
 ### Player Placeholders
 
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{player_name}` | Current player name | `"welcome": "Welcome, {player_name}!"` |
-| `{opponent_name}` | Opponent player name | `"match_found": "Opponent: {opponent_name}"` |
-| `{winner}` | Winner name (legacy, still supported) | `"match_finished": "{winner} won!"` |
-| `{loser}` | Loser name (legacy, still supported) | `"match_finished": "{winner} defeated {loser}"` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{player_name}` | Current player name |
+| `{opponent_name}` | Opponent player name |
+| `{winner}` | Winner name |
+| `{loser}` | Loser name |
 
 ### Stats Placeholders
 
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{stats_elo}` | Player's current Elo rating | `"rank_display": "Your Elo: {stats_elo}"` |
-| `{stats_rank}` | Player's rank tier (Bronze, Silver, etc.) | `"rank_up": "You are now {stats_rank}!"` |
-| `{stats_wins}` | Total wins | `"profile": "Wins: {stats_wins}"` |
-| `{stats_losses}` | Total losses | `"profile": "Losses: {stats_losses}"` |
-| `{stats_winrate}` | Win percentage | `"profile": "Win Rate: {stats_winrate}%"` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{stats_elo}` | Player's current Elo rating |
+| `{stats_rank}` | Player's rank tier (Bronze, Silver, etc.) |
+| `{stats_wins}` | Total wins |
+| `{stats_losses}` | Total losses |
+| `{stats_winrate}` | Win percentage |
+| `{stats_total_games}` | Total games played |
+| `{stats_win_streak}` | Current win streak |
 
 ### Season Placeholders
 
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{season_name}` | Current season name | `"season_info": "Season: {season_name}"` |
-| `{season_id}` | Season ID number | `"season_number": "Season #{season_id}"` |
-| `{season_remaining_days}` | Days until season ends | `"season_ending": "{season_remaining_days} days left"` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{season_name}` | Current season name |
+| `{season_id}` | Season ID number |
+| `{season_remaining_days}` | Days until season ends |
+| `{season_remaining_time}` | Formatted remaining time |
+| `{season_start_date}` | Season start date |
+| `{season_end_date}` | Season end date |
+| `{season_duration_days}` | Total season duration |
+| `{season_status}` | Season status (active/ended) |
+| `{season_name_old}` | Previous season name |
+| `{season_name_new}` | New season name |
+| `{season_end_minutes}` | Minutes until season ends |
+| `{season_history_index}` | History entry index |
+| `{season_history_limit}` | History display limit |
 
 ### Timer Placeholders
 
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{timer_seconds}` | Battle turn timer seconds | `"turn_timer": "Time left: {timer_seconds}s"` |
-| `{penalty_seconds}` | Penalty cooldown seconds | `"penalty_active": "Cooldown: {penalty_seconds}s"` |
-| `{cooldown_seconds}` | Action cooldown seconds | `"cooldown": "Wait {cooldown_seconds}s"` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{timer_seconds}` | Timer in seconds |
+| `{timer_minutes}` | Timer in minutes |
+| `{penalty_seconds}` | Penalty cooldown seconds |
+| `{penalty_minutes}` | Penalty cooldown minutes |
+| `{cooldown_seconds}` | Action cooldown seconds |
+
+### Queue Placeholders
+
+| Placeholder | Description |
+|-------------|-------------|
+| `{queue_size}` | Players in queue |
+| `{queue_waiting_count}` | Players waiting |
+| `{queue_search_seconds}` | Search time elapsed |
+| `{queue_type}` | Queue type (ranked/casual) |
 
 ### Mission Placeholders
 
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{mission_name}` | Mission display name | `"mission_complete": "Completed: {mission_name}"` |
-| `{mission_type}` | Mission type (DAILY, WEEKLY) | `"mission_info": "Type: {mission_type}"` |
-| `{mission_progress}` | Current progress | `"mission_status": "{mission_progress}/{mission_target}"` |
-| `{mission_target}` | Target value | `"mission_status": "{mission_progress}/{mission_target}"` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{mission_name}` | Mission display name |
+| `{mission_type}` | Mission type (DAILY, WEEKLY) |
+| `{mission_current}` | Current progress value |
+| `{mission_required}` | Required target value |
+| `{mission_target}` | Target value (alias) |
+| `{mission_ready_count}` | Claimable missions count |
+| `{mission_rewards_count}` | Pending rewards count |
+| `{progress_percent}` | Progress percentage |
+
+### Reward Placeholders
+
+| Placeholder | Description |
+|-------------|-------------|
+| `{reward_name}` | Reward name |
+| `{reward_display_name}` | Reward display name |
+| `{reward_rank}` | Required rank for reward |
+| `{reward_player_rank}` | Player's current rank |
+| `{reward_count}` | Pending reward count |
+| `{reward_current_count}` | Current reward count |
+| `{reward_daily_max}` | Daily reward limit |
+| `{reward_current_progress}` | Current progress |
+| `{reward_required_progress}` | Required progress |
+| `{reward_remaining}` | Remaining to goal |
+| `{reward_requirement_text}` | Requirement description |
+
+### Pokemon Placeholders
+
+| Placeholder | Description |
+|-------------|-------------|
+| `{pokemon_name}` | Pokemon name |
+| `{pokemon_species}` | Pokemon species |
+| `{pokemon_level}` | Pokemon level |
+| `{pokemon_ability}` | Pokemon ability |
+| `{pokemon_moves}` | Pokemon moves list |
+| `{pokemon_move}` | Single move name |
+| `{pokemon_held_item}` | Held item name |
+| `{pokemon_hp_current}` | Current HP |
+| `{pokemon_hp_max}` | Maximum HP |
+| `{pokemon_current_hp}` | Current HP (alias) |
+| `{pokemon_max_hp}` | Maximum HP (alias) |
+| `{pokemon_dex_number}` | Pokedex number |
+| `{pokemon_label}` | Pokemon label |
+| `{pokemon_labels}` | All Pokemon labels |
 
 ### GUI Placeholders
 
-| Placeholder | Description | Example Usage |
-|-------------|-------------|---------------|
-| `{gui_selected_count}` | Number of items selected | `"selection": "Selected: {gui_selected_count}"` |
-| `{gui_selection_limit}` | Maximum selectable items | `"selection": "{gui_selected_count}/{gui_selection_limit}"` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{gui_selected_count}` | Number of items selected |
+| `{gui_selection_limit}` | Maximum selectable items |
+| `{gui_max_selection}` | Max selection (alias) |
+| `{gui_page_number}` | Current page number |
+| `{gui_progress_bar}` | Visual progress bar |
+| `{gui_color}` | Dynamic color code |
+| `{gui_sort_mode}` | Current sort mode |
+| `{gui_separator}` | Separator line |
+
+### Leaderboard Placeholders
+
+| Placeholder | Description |
+|-------------|-------------|
+| `{leaderboard_rank}` | Player's leaderboard rank |
+| `{lead_position}` | Lead Pokemon position |
+
+### Validation Placeholders
+
+| Placeholder | Description |
+|-------------|-------------|
+| `{validation_valid_count}` | Valid Pokemon count |
+| `{validation_total_count}` | Total Pokemon count |
+| `{validation_required_count}` | Required Pokemon count |
+| `{validation_current_count}` | Current Pokemon count |
+| `{validation_error_count}` | Number of errors |
+| `{validation_error_index}` | Error index number |
+| `{validation_error}` | Error message |
+| `{validation_more_count}` | Additional errors count |
+| `{validation_duplicate_count}` | Duplicate count |
+| `{item_clause_limit}` | Item clause limit |
+
+### Battle Camera Placeholders
+
+| Placeholder | Description |
+|-------------|-------------|
+| `{camera_radius}` | Camera orbit radius |
+| `{camera_height}` | Camera height offset |
+| `{camera_speed}` | Camera rotation speed |
+| `{camera_battles_completed}` | ML training battles done |
+| `{camera_battles_remaining}` | ML battles remaining |
+| `{camera_min_battles}` | Min battles for ML mode |
+| `{camera_training_examples}` | ML training examples count |
+
+### Other Placeholders
+
+| Placeholder | Description |
+|-------------|-------------|
+| `{blacklist_category}` | Blacklist category name |
+| `{banned_items_list}` | List of banned items |
+| `{flee_count}` | Player's flee count |
+| `{elo_amount}` | Elo amount for admin commands |
+| `{error_message}` | Error message text |
+| `{my_alive}` | Your alive Pokemon count |
+| `{opponent_alive}` | Opponent's alive count |
+| `{my_hp}` | Your total HP |
+| `{opponent_hp}` | Opponent's total HP |
 
 ### Legacy Placeholders (Still Supported)
 
-These placeholders are maintained for backward compatibility:
-
 | Old Placeholder | New Placeholder | Status |
 |-----------------|-----------------|--------|
-| `{arena}` | `{arena_name}` | ⚠️ Deprecated, use `{arena_name}` |
-| `{format}` | `{battle_format}` | ⚠️ Deprecated, use `{battle_format}` |
-| `{player}` | `{player_name}` | ⚠️ Deprecated, use `{player_name}` |
-| `{opponent}` | `{opponent_name}` | ⚠️ Deprecated, use `{opponent_name}` |
-| `{elo}` | `{stats_elo}` | ⚠️ Deprecated, use `{stats_elo}` |
-| `{rank}` | `{stats_rank}` | ⚠️ Deprecated, use `{stats_rank}` |
-| `{season}` | `{season_name}` | ⚠️ Deprecated, use `{season_name}` |
-| `{days}` | `{season_remaining_days}` | ⚠️ Deprecated, use `{season_remaining_days}` |
-
-**Usage Example:**
-
-```json5
-{
-  "match_found": "&aMatch found! &7Opponent: &f{opponent_name}",
-  "battle_starting": "&eStarting {battle_format} battle in {arena_name}",
-  "battle_result": "&aYou gained {battle_elo_change} Elo! &7New rating: {stats_elo}",
-  "season_ending": "&cSeason '{season_name}' ends in {season_remaining_days} days",
-  "mission_progress": "&e{mission_name}: &7{mission_progress}/{mission_target}",
-  "team_selection": "&7Selected: &a{gui_selected_count}&7/&e{gui_selection_limit}"
-}
-```
+| `{arena}` | `{arena_name}` | ⚠️ Deprecated |
+| `{format}` | `{battle_format}` | ⚠️ Deprecated |
+| `{player}` | `{player_name}` | ⚠️ Deprecated |
+| `{opponent}` | `{opponent_name}` | ⚠️ Deprecated |
+| `{elo}` | `{stats_elo}` | ⚠️ Deprecated |
+| `{rank}` | `{stats_rank}` | ⚠️ Deprecated |
+| `{season}` | `{season_name}` | ⚠️ Deprecated |
+| `{days}` | `{season_remaining_days}` | ⚠️ Deprecated |
 
 **See Also:** [Language Files Documentation](../configuration/languages.md) for complete message customization.
 
@@ -442,6 +559,45 @@ PlaceholderService.clearCache()
 
 ---
 
+### Season Placeholders
+
+Display current season information in holograms and displays.
+
+**Syntax:**
+```
+%cobbleranked_season_<field>%
+```
+
+**Available Fields:**
+
+| Placeholder | Description | Example Output |
+|-------------|-------------|----------------|
+| `%cobbleranked_season_name%` | Current season name | `"Season 1"` |
+| `%cobbleranked_season_remaining%` | Formatted remaining time | `"5d 12h 30m"` |
+| `%cobbleranked_season_remaining_days%` | Days remaining | `"5"` |
+| `%cobbleranked_season_remaining_hours%` | Hours remaining | `"12"` |
+| `%cobbleranked_season_remaining_minutes%` | Minutes remaining | `"30"` |
+| `%cobbleranked_season_remaining_short%` | Short format (most significant unit) | `"5d"` or `"12h"` |
+| `%cobbleranked_season_end_date%` | End date formatted | `"2024-12-31 23:59:59"` |
+| `%cobbleranked_season_status%` | Season status | `"active"` or `"ended"` |
+
+**Example Usage:**
+```
+Season: %cobbleranked_season_name%
+Ends in: %cobbleranked_season_remaining%
+Status: %cobbleranked_season_status%
+```
+
+**Fallback Values (no active season):**
+
+| Placeholder | Fallback |
+|-------------|----------|
+| `season_name` | `"No Season"` |
+| `season_remaining*` | `"-"` or `"0"` |
+| `season_status` | `"none"` |
+
+---
+
 ## Best Practices
 
 ### Performance Optimization
@@ -449,8 +605,8 @@ PlaceholderService.clearCache()
 1. **Use format-specific placeholders when possible:**
    ```
    Singles-only server:
-   ✅ %cobbleranked_top_singles_1_name%
-   ❌ %cobbleranked_top_1_name%
+   ✅ GOOD: %cobbleranked_top_singles_1_name%
+   ❌ AVOID: %cobbleranked_top_1_name%
    ```
 
 2. **Limit leaderboard size:**
@@ -477,4 +633,5 @@ PlaceholderService.clearCache()
 
 - [Language Files](../configuration/languages.md) - Message placeholder customization
 - [Commands Reference](../getting-started/commands.md) - Placeholder testing commands
-- [FAQ & Troubleshooting](../support/faq.md) - Common placeholder issues
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

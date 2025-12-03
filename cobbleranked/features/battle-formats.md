@@ -101,11 +101,11 @@ Each format tracks separately:
 
 | Stat | Per Format |
 |------|-----------|
-| Elo Rating | ✅ |
-| Wins | ✅ |
-| Losses | ✅ |
-| Win Streak | ✅ |
-| Total Matches | ✅ |
+| Elo Rating | Yes |
+| Wins | Yes |
+| Losses | Yes |
+| Win Streak | Yes |
+| Total Matches | Yes |
 
 **Example:**
 - Singles: 1500 Elo, 50 wins, 30 losses
@@ -177,4 +177,10 @@ See [Rewards System](../configuration/rewards.md) for configuration.
 
 ---
 
-**Related:** [Dynamic Matchmaking](dynamic-matchmaking.md) · [Elo System](elo-system.md) · [Rewards](../configuration/rewards.md)
+## See Also
+
+- [Dynamic Matchmaking](dynamic-matchmaking.md) - Player pairing system
+- [Elo System](elo-system.md) - Rating calculation
+- [Rewards](../configuration/rewards.md) - Format-specific rewards
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

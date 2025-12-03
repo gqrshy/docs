@@ -2,6 +2,8 @@
 
 Customize CobbleRanked GUI appearance and layout.
 
+---
+
 ## GUI Files
 
 **Location:** `config/cobbleranked/gui/`
@@ -201,3 +203,12 @@ You can use `custom_model_data` to display custom textures from resource packs:
 3. Reopen GUI to see changes
 
 **Note:** Config reloads automatically detect language from `config.json5`.
+
+---
+
+## See Also
+
+- [Language Files](languages.md) - Message customization
+- [Placeholder API](../integration/placeholders.md) - GUI placeholders
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

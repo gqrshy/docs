@@ -2,6 +2,8 @@
 
 Play custom music during ranked battles.
 
+---
+
 ## Overview
 
 Uses Cobblemon's `BattleMusicPacket` API to send music to players. No client-side mods required (only music resource pack).
@@ -132,3 +134,11 @@ Place in `.minecraft/resourcepacks/` or use server resource pack.
 2. Load resource pack
 3. Join queue: `/ranked`
 4. Music should play automatically
+
+---
+
+## See Also
+
+- [Configuration](../configuration/config.md) - Full settings
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

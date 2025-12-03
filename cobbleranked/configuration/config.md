@@ -122,20 +122,57 @@ Battle mechanics and team requirements.
 
 ## Matchmaking
 
-Dynamic Elo range expansion.
+Format-specific dynamic Elo range expansion.
 
 ```json5
 {
   "matchmaking": {
-    "enabled": true,
-    "initial_range": 200,        // Starting ±Elo
-    "expansion_delay": 30,       // Seconds before expanding
-    "expansion_rate": 5,         // Seconds per +1 Elo
-    "max_multiplier": 3.0,       // Max ±600 (200 × 3.0)
-    "immediate_match_range": 100  // Instant match if ±100
+    "format_rules": {
+      "SINGLES": {
+        "enabled": true,
+        "initialRange": 200,
+        "expansionDelay": 30,
+        "expansionRate": 5,
+        "maxMultiplier": 3.0,
+        "immediateMatchRange": 100
+      },
+      "DOUBLES": {
+        "enabled": true,
+        "initialRange": 200,
+        "expansionDelay": 30,
+        "expansionRate": 5,
+        "maxMultiplier": 3.0,
+        "immediateMatchRange": 100
+      },
+      "TRIPLES": {
+        "enabled": true,
+        "initialRange": 250,
+        "expansionDelay": 25,
+        "expansionRate": 8,
+        "maxMultiplier": 4.0,
+        "immediateMatchRange": 150
+      },
+      "MULTI": {
+        "enabled": true,
+        "initialRange": 300,
+        "expansionDelay": 20,
+        "expansionRate": 10,
+        "maxMultiplier": 5.0,
+        "immediateMatchRange": 200
+      }
+    }
   }
 }
 ```
+
+| Setting | Description |
+|---------|-------------|
+| `enabled` | Enable matchmaking for this format |
+| `initialRange` | Starting Elo range (±X from player's rating) |
+| `expansionDelay` | Seconds before range starts expanding |
+| `expansionRate` | Elo range increase per second after delay |
+| `maxMultiplier` | Maximum expansion (X × initialRange) |
+| `immediateMatchRange` | Instant match if within this range |
 
 **See:** [Dynamic Matchmaking](../features/dynamic-matchmaking.md)
 
@@ -215,40 +252,62 @@ Flee penalties and season management.
 
 ## Battle Configuration
 
-Battle settings including timers, announcements, and sounds.
+Format-specific battle rules, timers, and settings.
 
 ```json5
 {
   "battle": {
-    // Format-specific battle time limits (in minutes)
-    "format_timers": {
+    // Format-specific rules
+    "format_rules": {
       "SINGLES": {
-        "battle_time_limit_minutes": 15
+        "enabled": true,
+        "team_size": 3,
+        "turn_timeout_seconds": 90,
+        "match_duration_minutes": 15
       },
       "DOUBLES": {
-        "battle_time_limit_minutes": 20
+        "enabled": true,
+        "team_size": 4,
+        "turn_timeout_seconds": 120,
+        "match_duration_minutes": 20
       },
       "TRIPLES": {
-        "battle_time_limit_minutes": 25
+        "enabled": true,
+        "team_size": 6,
+        "turn_timeout_seconds": 150,
+        "match_duration_minutes": 25
       },
       "MULTI": {
-        "battle_time_limit_minutes": 20
+        "enabled": true,
+        "team_size": 3,
+        "turn_timeout_seconds": 120,
+        "match_duration_minutes": 20
       }
     },
 
+    // Force Pokemon level (0 = use original levels)
+    "levelMatch": 70,
+
     // Match result announcements
-    "announce_match_results": false,  // Broadcast results to all players
+    "announce_match_results": false,
 
     // Battle sounds
     "sounds": {
-      "enabled": true,
-      "battle_start_sound": "cobbleranked:battle_start",
-      "victory_sound": "cobbleranked:victory",
-      "defeat_sound": "cobbleranked:defeat"
+      "match_found": {"sound": "minecraft:entity.ender_dragon.ambient", "volume": 0.8, "pitch": 1.0},
+      "turn_timer_30_percent": {"sound": "minecraft:block.note_block.harp", "volume": 2.0, "pitch": 1.5}
     }
   }
 }
 ```
+
+### Format Rules
+
+| Setting | Description |
+|---------|-------------|
+| `enabled` | Enable this battle format |
+| `team_size` | Number of Pokemon players select |
+| `turn_timeout_seconds` | Time limit per turn |
+| `match_duration_minutes` | Maximum match duration |
 
 ### Match Result Announcements
 
@@ -265,16 +324,59 @@ Battle settings including timers, announcements, and sounds.
 
 **See:** [Language Files](languages.md#match-result-messages-v107) for message customization
 
-### Format-Specific Battle Timers
+### Sound Configuration
 
-**`format_timers`** - Independent time limits per battle format (in minutes)
+Battle and GUI sounds can be customized via the `sounds.json5` file.
 
-| Format | Default | Description |
-|--------|---------|-------------|
-| `SINGLES` | 15 | 1v1 battles |
-| `DOUBLES` | 20 | 2v2 battles |
-| `TRIPLES` | 25 | 3v3 battles |
-| `MULTI` | 20 | 2v2 team battles |
+**File:** `config/cobbleranked/sounds.json5` (auto-generated on first run)
+
+```json5
+{
+  "enabled": true,
+
+  "battle": {
+    "battle_start": "cobbleranked:battle_start",
+    "victory": "cobbleranked:victory",
+    "defeat": "cobbleranked:defeat",
+    "turn_start": "minecraft:block.note_block.pling"
+  },
+
+  "gui": {
+    "button_click": "minecraft:ui.button.click",
+    "queue_join": "minecraft:entity.experience_orb.pickup",
+    "queue_leave": "minecraft:block.note_block.bass",
+    "match_found": "minecraft:entity.player.levelup"
+  },
+
+  "notifications": {
+    "mission_complete": "minecraft:entity.player.levelup",
+    "reward_claim": "minecraft:entity.item.pickup"
+  }
+}
+```
+
+| Category | Sound | Description |
+|----------|-------|-------------|
+| `battle.battle_start` | Battle begins | Plays when match starts |
+| `battle.victory` | Player wins | Plays on victory |
+| `battle.defeat` | Player loses | Plays on defeat |
+| `gui.button_click` | GUI interaction | Plays on button clicks |
+| `gui.match_found` | Opponent found | Plays when matched |
+| `notifications.mission_complete` | Mission done | Plays on mission completion |
+
+**Sound IDs:**
+- Use Minecraft sound IDs (e.g., `minecraft:entity.player.levelup`)
+- Use custom resource pack sounds (e.g., `cobbleranked:custom_sound`)
+- Set to empty string `""` to disable a specific sound
+
+### Format Default Values
+
+| Format | Team Size | Turn Timeout | Match Duration |
+|--------|-----------|--------------|----------------|
+| `SINGLES` | 3 | 90s | 15 min |
+| `DOUBLES` | 4 | 120s | 20 min |
+| `TRIPLES` | 6 | 150s | 25 min |
+| `MULTI` | 3 | 120s | 20 min |
 
 **Timeout Behavior:**
 1. Battle ends immediately
@@ -288,9 +390,14 @@ Battle settings including timers, announcements, and sounds.
 **Fast-paced singles:**
 ```json5
 {
-  "format_timers": {
-    "SINGLES": {
-      "battle_time_limit_minutes": 10
+  "battle": {
+    "format_rules": {
+      "SINGLES": {
+        "enabled": true,
+        "team_size": 3,
+        "turn_timeout_seconds": 60,
+        "match_duration_minutes": 10
+      }
     }
   }
 }
@@ -299,20 +406,27 @@ Battle settings including timers, announcements, and sounds.
 **Competitive doubles with extra time:**
 ```json5
 {
-  "format_timers": {
-    "DOUBLES": {
-      "battle_time_limit_minutes": 30
+  "battle": {
+    "format_rules": {
+      "DOUBLES": {
+        "enabled": true,
+        "team_size": 4,
+        "turn_timeout_seconds": 180,
+        "match_duration_minutes": 30
+      }
     }
   }
 }
 ```
 
-**Disable timers (not recommended):**
+**Disable a format:**
 ```json5
 {
-  "format_timers": {
-    "SINGLES": {
-      "battle_time_limit_minutes": 0  // No time limit
+  "battle": {
+    "format_rules": {
+      "TRIPLES": {
+        "enabled": false
+      }
     }
   }
 }
@@ -363,7 +477,8 @@ Reloads all configuration files without server restart.
 
 ## See Also
 
-- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
 - [Cross-Server Setup](../advanced/cross-server.md) - Multi-server configuration
 - [Rewards](rewards.md) - Season and milestone rewards
 - [Commands](../getting-started/commands.md) - Admin commands
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

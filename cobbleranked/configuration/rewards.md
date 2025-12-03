@@ -216,4 +216,9 @@ After editing `rewards.json5`:
 
 ---
 
-**Related:** [Season Management](../features/seasons.md) · [Commands](../getting-started/commands.md) · [Configuration](config.md)
+## See Also
+
+- [Season Management](../features/seasons.md) - Season configuration
+- [Commands](../getting-started/commands.md) - Admin commands
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

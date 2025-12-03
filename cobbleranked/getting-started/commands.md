@@ -2,6 +2,8 @@
 
 All commands available in CobbleRanked.
 
+---
+
 ## Player Commands
 
 **Permission:** None required
@@ -10,7 +12,10 @@ All commands available in CobbleRanked.
 |---------|-------------|
 | `/ranked` | Opens the ranked GUI for queue, stats, and leaderboards |
 | `/season` | Shows current season info (name, status, time remaining) |
-| `/casual` | Opens casual battle/missions GUI |
+| `/casual` | Opens casual battle GUI |
+| `/casual missions` | Opens missions GUI directly |
+| `/battlecamera toggle` | Toggle battle camera ON/OFF |
+| `/battlecamera status` | Show current camera settings |
 
 ---
 
@@ -23,6 +28,7 @@ All commands available in CobbleRanked.
 | Command | Description |
 |---------|-------------|
 | `/rankedadmin reload` | Reload all configs (excludes cross-server database settings) |
+| `/battlecamera ml` | Toggle ML-enhanced camera mode (requires OP) |
 
 ---
 
@@ -36,6 +42,7 @@ All commands available in CobbleRanked.
 | `/rankedadmin arena status` | None | Show all arenas and their in-use status |
 | `/rankedadmin arena enable <arena>` | `<arena>` Arena name | Enable an arena |
 | `/rankedadmin arena disable <arena>` | `<arena>` Arena name | Disable an arena |
+| `/rankedadmin arena setcenter <arena> [radius]` | `<arena>` Arena name<br>`[radius]` Field radius 1-50 (optional) | Set battle camera center point at current location |
 
 **Examples:**
 ```bash
@@ -48,6 +55,10 @@ All commands available in CobbleRanked.
 /rankedadmin setArena multi_arena pos2
 /rankedadmin setArena multi_arena pos3
 /rankedadmin setArena multi_arena pos4
+
+# Set battle camera center point (for dynamic camera)
+/rankedadmin arena setcenter main_arena
+/rankedadmin arena setcenter main_arena 15
 
 # Check arena status
 /rankedadmin arena status
@@ -149,3 +160,11 @@ All commands have smart tab completion:
 Admin commands require **OP level 2** by default.
 
 For fine-grained permission control with LuckPerms, see the [LuckPerms Integration](../integration/luckperms.md#permission-nodes) guide.
+
+---
+
+## See Also
+
+- [LuckPerms Integration](../integration/luckperms.md) - Fine-grained permissions
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving
