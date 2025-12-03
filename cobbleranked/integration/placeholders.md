@@ -1,9 +1,10 @@
 # PlaceholderAPI Integration
 
-CobbleRanked provides two types of placeholders for displaying ranked statistics:
+CobbleRanked provides three types of placeholders:
 
 1. **Leaderboard Placeholders** - Display top player stats in holograms, signs, and other mods
-2. **Message Placeholders** - Used internally in language files for dynamic text
+2. **Season Placeholders** - Display current season information (NEW in v1.1.0)
+3. **Message Placeholders** - Used internally in language files for dynamic text
 
 ---
 
@@ -439,6 +440,45 @@ PlaceholderService.clearCache()
 ```
 
 **Rank Range:** 1-100 for all placeholders
+
+---
+
+### Season Placeholders
+
+Display current season information in holograms and displays.
+
+**Syntax:**
+```
+%cobbleranked_season_<field>%
+```
+
+**Available Fields:**
+
+| Placeholder | Description | Example Output |
+|-------------|-------------|----------------|
+| `%cobbleranked_season_name%` | Current season name | `"Season 1"` |
+| `%cobbleranked_season_remaining%` | Formatted remaining time | `"5d 12h 30m"` |
+| `%cobbleranked_season_remaining_days%` | Days remaining | `"5"` |
+| `%cobbleranked_season_remaining_hours%` | Hours remaining | `"12"` |
+| `%cobbleranked_season_remaining_minutes%` | Minutes remaining | `"30"` |
+| `%cobbleranked_season_remaining_short%` | Short format (most significant unit) | `"5d"` or `"12h"` |
+| `%cobbleranked_season_end_date%` | End date formatted | `"2024-12-31 23:59:59"` |
+| `%cobbleranked_season_status%` | Season status | `"active"` or `"ended"` |
+
+**Example Usage:**
+```
+Season: %cobbleranked_season_name%
+Ends in: %cobbleranked_season_remaining%
+Status: %cobbleranked_season_status%
+```
+
+**Fallback Values (no active season):**
+
+| Placeholder | Fallback |
+|-------------|----------|
+| `season_name` | `"No Season"` |
+| `season_remaining*` | `"-"` or `"0"` |
+| `season_status` | `"none"` |
 
 ---
 
