@@ -42,6 +42,7 @@ All commands available in CobbleRanked.
 | `/rankedadmin arena status` | None | Show all arenas and their in-use status |
 | `/rankedadmin arena enable <arena>` | `<arena>` Arena name | Enable an arena |
 | `/rankedadmin arena disable <arena>` | `<arena>` Arena name | Disable an arena |
+| `/rankedadmin arena setcenter <arena> [radius]` | `<arena>` Arena name<br>`[radius]` Field radius 1-50 (optional) | Set battle camera center point at current location |
 
 **Examples:**
 ```bash
@@ -54,6 +55,10 @@ All commands available in CobbleRanked.
 /rankedadmin setArena multi_arena pos2
 /rankedadmin setArena multi_arena pos3
 /rankedadmin setArena multi_arena pos4
+
+# Set battle camera center point (for dynamic camera)
+/rankedadmin arena setcenter main_arena
+/rankedadmin arena setcenter main_arena 15
 
 # Check arena status
 /rankedadmin arena status
