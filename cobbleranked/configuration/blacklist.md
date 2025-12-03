@@ -653,24 +653,24 @@ When player joins queue:
 
 ```
 1. Check label blacklist
-   FAIL: "Blacklisted Pokemon: Mewtwo (legendary)"
+   ❌ FAIL: "Blacklisted Pokemon: Mewtwo (legendary)"
 
 2. Check name/form blacklist
-   FAIL: "Blacklisted Pokemon: Mewtwo"
+   ❌ FAIL: "Blacklisted Pokemon: Mewtwo"
 
 3. Check label limits
-   FAIL: "Too many legendary: 2/1"
+   ❌ FAIL: "Too many legendary: 2/1"
 
 4. Check moves
-   FAIL: "Blacklisted move: Fissure"
+   ❌ FAIL: "Blacklisted move: Fissure"
 
 5. Check abilities
-   FAIL: "Blacklisted ability: Moody"
+   ❌ FAIL: "Blacklisted ability: Moody"
 
 6. Check held items
-   FAIL: "Blacklisted item: cobblemon:bright_powder"
+   ❌ FAIL: "Blacklisted item: cobblemon:bright_powder"
 
-PASS: All pass → Join queue
+✅ PASS: All pass → Join queue
 ```
 
 </details>

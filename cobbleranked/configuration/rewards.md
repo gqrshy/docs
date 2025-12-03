@@ -44,11 +44,11 @@ Automatically unlock when players reach achievements (wins, matches, Elo).
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `rank_range` | Yes | Rank requirement (`"1"`, `"2-3"`, `"4-10"`) |
-| `display` | Yes | Display name (supports `&` color codes) |
-| `item` | Yes | Minecraft item ID |
-| `commands` | Yes | Commands to execute when claimed |
-| `lore` | No | Item lore (array) |
+| `rank_range` | ✅ | Rank requirement (`"1"`, `"2-3"`, `"4-10"`) |
+| `display` | ✅ | Display name (supports `&` color codes) |
+| `item` | ✅ | Minecraft item ID |
+| `commands` | ✅ | Commands to execute when claimed |
+| `lore` | ❌ | Item lore (array) |
 
 **Placeholder:** `{player}` = player username
 

@@ -220,13 +220,13 @@ mongorestore --db cobbleranked /backup/20251108/cobbleranked
 
 | Feature | SQLite | MySQL | MongoDB |
 |---------|--------|-------|---------|
-| **Setup** | Zero config | Install required | Install required |
-| **Cross-server** | No | Yes | Yes |
-| **Scaling** | Limited | Vertical only | Horizontal |
-| **Cloud** | No | Requires VPS | Atlas free tier |
-| **Performance** | Fast (small) | Fast (medium) | Fast (large) |
-| **Schema changes** | Manual | Manual | Automatic |
-| **Backup** | Simple file copy | mysqldump | mongodump/Atlas |
+| **Setup** | ✅ Zero config | ⚠️ Install required | ⚠️ Install required |
+| **Cross-server** | ❌ | ✅ | ✅ |
+| **Scaling** | ⚠️ Limited | ⚠️ Vertical only | ✅ Horizontal |
+| **Cloud** | ❌ | ⚠️ Requires VPS | ✅ Atlas free tier |
+| **Performance** | ✅ Fast (small) | ✅ Fast (medium) | ✅ Fast (large) |
+| **Schema changes** | ⚠️ Manual | ⚠️ Manual | ✅ Automatic |
+| **Backup** | ✅ Simple file copy | ✅ mysqldump | ✅ mongodump/Atlas |
 
 **Recommendation:**
 - **Single-server**: SQLite (easiest)

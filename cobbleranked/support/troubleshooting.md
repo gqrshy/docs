@@ -115,11 +115,11 @@ Custom background music is **intentionally disabled** on Cobblemon 1.6.x due to 
 
 **What still works on 1.6.x:**
 
-- Ranked battles
-- Matchmaking and Elo
-- All GUIs and commands
-- Cross-server support
-- Custom background music (disabled)
+- ✅ Ranked battles
+- ✅ Matchmaking and Elo
+- ✅ All GUIs and commands
+- ✅ Cross-server support
+- ❌ Custom background music (disabled)
 
 </details>
 

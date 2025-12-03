@@ -116,10 +116,10 @@ Most accurate system used by Chess.com and Lichess. Tracks **rating uncertainty 
 - Beating confident players (low RD): larger gain
 
 **When to use:**
-- Large competitive server (100+ active players)
-- Want fair ratings for returning players
-- Need to account for rating confidence
-- Not recommended for small casual servers (use Pokemon Showdown instead)
+- ✅ Large competitive server (100+ active players)
+- ✅ Want fair ratings for returning players
+- ✅ Need to account for rating confidence
+- ❌ Not recommended for small casual servers (use Pokemon Showdown instead)
 
 ---
 

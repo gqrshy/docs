@@ -308,14 +308,14 @@ These placeholders are maintained for backward compatibility:
 
 | Old Placeholder | New Placeholder | Status |
 |-----------------|-----------------|--------|
-| `{arena}` | `{arena_name}` | Deprecated |
-| `{format}` | `{battle_format}` | Deprecated |
-| `{player}` | `{player_name}` | Deprecated |
-| `{opponent}` | `{opponent_name}` | Deprecated |
-| `{elo}` | `{stats_elo}` | Deprecated |
-| `{rank}` | `{stats_rank}` | Deprecated |
-| `{season}` | `{season_name}` | Deprecated |
-| `{days}` | `{season_remaining_days}` | Deprecated |
+| `{arena}` | `{arena_name}` | ⚠️ Deprecated |
+| `{format}` | `{battle_format}` | ⚠️ Deprecated |
+| `{player}` | `{player_name}` | ⚠️ Deprecated |
+| `{opponent}` | `{opponent_name}` | ⚠️ Deprecated |
+| `{elo}` | `{stats_elo}` | ⚠️ Deprecated |
+| `{rank}` | `{stats_rank}` | ⚠️ Deprecated |
+| `{season}` | `{season_name}` | ⚠️ Deprecated |
+| `{days}` | `{season_remaining_days}` | ⚠️ Deprecated |
 
 **Usage Example:**
 
@@ -449,8 +449,8 @@ PlaceholderService.clearCache()
 1. **Use format-specific placeholders when possible:**
    ```
    Singles-only server:
-   GOOD: %cobbleranked_top_singles_1_name%
-   AVOID: %cobbleranked_top_1_name%
+   ✅ GOOD: %cobbleranked_top_singles_1_name%
+   ❌ AVOID: %cobbleranked_top_1_name%
    ```
 
 2. **Limit leaderboard size:**

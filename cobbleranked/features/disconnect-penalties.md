@@ -18,9 +18,9 @@ When a player disconnects during a ranked battle:
 
 | Flee Count | Queue Ban | Tier |
 |------------|-----------|------|
-| 1-5 | 5 minutes | Warning |
-| 6-10 | 15 minutes | Serious |
-| 11+ | 30 minutes | Severe |
+| 1-5 | 5 minutes | ⚠️ Warning |
+| 6-10 | 15 minutes | ⚠️ Serious |
+| 11+ | 30 minutes | ❌ Severe |
 
 ---
 

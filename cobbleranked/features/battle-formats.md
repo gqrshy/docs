@@ -22,18 +22,18 @@ Each battle format has:
 
 | Format | Description | Team Size | Party Size | Ranked |
 |--------|-------------|-----------|------------|--------|
-| **SINGLES** | 1v1 battles | 3-6 Pokemon | 1 player | Yes |
-| **DOUBLES** | 2v2 battles | 4-6 Pokemon | 1 player | Yes |
-| **TRIPLES** | 3v3 battles | 5-6 Pokemon | 1 player | Yes |
-| **MULTI** | 2v2 team battles | 1-3 Pokemon each | 2 players | Yes |
+| **SINGLES** | 1v1 battles | 3-6 Pokemon | 1 player | ✅ |
+| **DOUBLES** | 2v2 battles | 4-6 Pokemon | 1 player | ✅ |
+| **TRIPLES** | 3v3 battles | 5-6 Pokemon | 1 player | ✅ |
+| **MULTI** | 2v2 team battles | 1-3 Pokemon each | 2 players | ✅ |
 
 ### Random Battle Formats
 
 | Format | Description | Team Size | Generation | Ranked |
 |--------|-------------|-----------|------------|--------|
-| **RANDOM_SINGLES** | Random 1v1 | 6 Pokemon (auto) | Pool-based | Yes |
-| **RANDOM_DOUBLES** | Random 2v2 | 6 Pokemon (auto) | Pool-based | Yes |
-| **RANDOM_3V3** | Quick random | 3 Pokemon (auto) | Pool-based | Yes |
+| **RANDOM_SINGLES** | Random 1v1 | 6 Pokemon (auto) | Pool-based | ✅ |
+| **RANDOM_DOUBLES** | Random 2v2 | 6 Pokemon (auto) | Pool-based | ✅ |
+| **RANDOM_3V3** | Quick random | 3 Pokemon (auto) | Pool-based | ✅ |
 
 ---
 
