@@ -145,30 +145,136 @@ Language files use JSON5 format with key-value pairs:
 
 ## Placeholders
 
-Language files support dynamic placeholders that are replaced with actual values at runtime.
+Language files support dynamic placeholders that are replaced with actual values at runtime. CobbleRanked uses a consistent naming convention with prefixes.
 
-**Common placeholders include:**
-- `{player}`, `{player1}`, `{player2}` - Player names
-- `{gain}`, `{lose}`, `{elo}` - Elo ratings
-- `{winner}`, `{loser}` - Battle results
-- `{remaining}`, `{posicao}` - Queue information
-- `{pokemon}`, `{level}`, `{format}` - Pokemon and battle info
-- `{season}`, `{arena}`, `{time}` - System information
+### Stats Placeholders
 
-**Example Usage:**
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{stats_elo}` | Player's Elo rating | `1500` |
+| `{stats_wins}` | Total wins | `42` |
+| `{stats_losses}` | Total losses | `15` |
+| `{stats_winrate}` | Win percentage | `73` |
+| `{stats_total_games}` | Total games played | `57` |
+| `{stats_win_streak}` | Current win streak | `5` |
+| `{stats_rank}` | Player's rank tier | `Silver` |
+
+### Player Placeholders
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{player_name}` | Current player name | `Steve` |
+| `{opponent_name}` | Opponent player name | `Alex` |
+| `{winner}` | Winner's name | `Steve` |
+| `{loser}` | Loser's name | `Alex` |
+
+### Battle Placeholders
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{battle_format}` | Battle format display name | `Singles` |
+| `{battle_elo_change}` | Elo points gained/lost | `+25` |
+| `{format_name}` | Localized format name | `Singles Battle` |
+| `{match_countdown_seconds}` | Match start countdown | `3` |
+
+### Arena Placeholders
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{arena_name}` | Arena identifier | `volcano_arena` |
+| `{arena_location_x}` | Arena X coordinate | `100` |
+| `{arena_location_y}` | Arena Y coordinate | `64` |
+| `{arena_location_z}` | Arena Z coordinate | `200` |
+| `{arena_world}` | Arena world name | `world` |
+| `{arena_status}` | Arena status | `available` |
+| `{arena_count}` | Total arena count | `5` |
+
+### Season Placeholders
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{season_name}` | Current season name | `Season 1` |
+| `{season_id}` | Season ID number | `1` |
+| `{season_remaining_days}` | Days until season ends | `15` |
+| `{season_remaining_time}` | Formatted remaining time | `15d 6h` |
+| `{season_status}` | Season status | `active` |
+
+### Queue Placeholders
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{queue_size}` | Players in queue | `3` |
+| `{queue_waiting_count}` | Players waiting | `2` |
+| `{queue_search_seconds}` | Search time elapsed | `30` |
+
+### Timer Placeholders
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{timer_seconds}` | Timer in seconds | `90` |
+| `{timer_minutes}` | Timer in minutes | `1` |
+| `{penalty_seconds}` | Penalty cooldown seconds | `300` |
+| `{cooldown_seconds}` | Action cooldown seconds | `5` |
+
+### Reward Placeholders
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{reward_name}` | Reward name | `Gold Trophy` |
+| `{reward_display_name}` | Reward display name | `§6Gold Trophy` |
+| `{reward_rank}` | Required rank for reward | `Gold` |
+| `{reward_count}` | Pending reward count | `3` |
+
+### Pokemon Placeholders
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{pokemon_name}` | Pokemon name | `Pikachu` |
+| `{pokemon_species}` | Pokemon species | `Pikachu` |
+| `{pokemon_level}` | Pokemon level | `50` |
+| `{pokemon_ability}` | Pokemon ability | `Static` |
+
+### Validation Placeholders
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{validation_valid_count}` | Valid Pokemon count | `5` |
+| `{validation_total_count}` | Total Pokemon count | `6` |
+| `{validation_error_count}` | Number of errors | `2` |
+| `{validation_error}` | Error message | `Banned ability` |
+
+### Example Usage
+
 ```json5
 {
-  "match-finished": "&8* &f{winner} &chas just won a ranked match against &f{loser}.",
-  "elo-up": "&aYou ranked up to &f{elo}.",
-  "remaingFila": "&cSearching for a match... &7(&e{remaining}&7) &7(Position: &e{posicao}&7)"
+  "match-winner-subtitle": "&aYou gained &f{battle_elo_change} &aELO points.",
+  "player_info_elo": " &8▸ &7Elo: &e{stats_elo}",
+  "player_info_record": " &8▸ &7W/L: &a{stats_wins}&f/&c{stats_losses} &7({stats_winrate}%)",
+  "arena_set_success": "&aArena &f{arena_name} &aset at ({arena_location_x}, {arena_location_y}, {arena_location_z})"
 }
 ```
 
-**For a complete list of all placeholders and their usage, see:**
+### Legacy Placeholders (Deprecated)
+
+> ⚠️ **Note:** These placeholders still work for backward compatibility but may be removed in future versions.
+
+| Legacy | New Replacement |
+|--------|-----------------|
+| `{player}` | `{player_name}` |
+| `{elo}` | `{stats_elo}` |
+| `{gain}`, `{lose}` | `{battle_elo_change}` |
+| `{wins}` | `{stats_wins}` |
+| `{losses}` | `{stats_losses}` |
+| `{format}` | `{battle_format}` |
+| `{season}` | `{season_name}` |
+| `{arena}` | `{arena_name}` |
+| `{remaining}` | `{queue_search_seconds}` |
+
+**For a complete list of all placeholders, see:**
 - [Placeholder API Documentation](../integration/placeholders.md#message-placeholders)
 
 **Important Rules:**
-- Placeholders are **case-sensitive** (use `{player}`, not `{Player}`)
+- Placeholders are **case-sensitive** (use `{player_name}`, not `{Player_Name}`)
 - Always preserve placeholders when translating messages
 - Test placeholders in-game after editing
 
