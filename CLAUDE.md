@@ -208,6 +208,56 @@ Troubleshooting ページ (`support/troubleshooting.md`) では、**すべての
 
 ## コード・設定例の書き方
 
+### 基本方針
+
+設定例は**拡張性を示しつつ、詳細はドロップダウンで隠す**。
+
+- 基本的な設定例は本文に表示
+- 全オプションや詳細な設定はドロップダウンに格納
+- 「ここまでカスタマイズできる」ことを見せつつ、読み飛ばせるようにする
+
+```markdown
+## Configuration
+
+基本設定：
+
+```json5
+{
+  "enabled": true,
+  "mode": "POKEMON_SHOWDOWN"
+}
+```
+
+<details>
+<summary><strong>全オプション（詳細設定）</strong></summary>
+
+```json5
+{
+  "enabled": true,
+  "mode": "POKEMON_SHOWDOWN",
+  "pokemonShowdown": {
+    "initialElo": 1000,
+    "floorElo": 1000,
+    "kFactor": 32,
+    "provisionalMatches": 10,
+    "provisionalKFactor": 64,
+    "decay": {
+      "enabled": true,
+      "runAtUtcHour": 9,
+      "slowDecayReduction": 2
+    }
+  }
+}
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `initialElo` | `1000` | Starting Elo for new players |
+| ... | ... | ... |
+
+</details>
+```
+
 ### JSON5 設定ファイル
 
 言語タグは `json5` を使用：
@@ -250,6 +300,15 @@ Edit `config/cobbleranked/config.json5`
 
 ## 表の使い方
 
+**表は積極的に活用する。** 文章で説明するより、表で一覧化した方が圧倒的に読みやすい。
+
+### 表を使うべき場面
+
+- 設定オプションの一覧
+- コマンドの一覧
+- 機能の比較
+- やりたいこと → 方法 の対応
+
 ### 設定オプションの説明
 
 ```markdown
@@ -257,6 +316,16 @@ Edit `config/cobbleranked/config.json5`
 |---------|---------|-------------|
 | `enabled` | `true` | Enable the feature |
 | `timeout` | `30` | Timeout in seconds |
+```
+
+### コマンド一覧
+
+```markdown
+| やりたいこと | コマンド |
+|--------------|----------|
+| アリーナ設定 | `/rankedadmin setArena name pos1` |
+| 設定リロード | `/rankedadmin reload` |
+| Elo リセット | `/rankedadmin setelo 1000 player singles` |
 ```
 
 ### 比較表
@@ -274,6 +343,7 @@ Edit `config/cobbleranked/config.json5`
 - **推奨項目** は太字で強調
 - Default/Recommended 列があると親切
 - 列数は5以下に抑える
+- 文章で3行以上になりそうなら表を検討する
 
 ---
 
@@ -386,6 +456,38 @@ Good: "以下のコマンドでアリーナを設定する："
 
 ---
 
+## 読みやすさのガイドライン
+
+### 文字数の目安
+
+長い文章は読まれない。できるだけ簡潔に書くことを意識する。
+
+| 要素 | 目安 | 備考 |
+|------|------|------|
+| セクション本文 | 300文字程度 | 大きな機能は例外 |
+| 箇条書き1項目 | 1-2行 | 長くなるなら分割 |
+| 表のセル | 短く | 文章を詰め込まない |
+| ドロップダウン内 | 制限なし | 詳細を知りたい人向け |
+
+**注意:** これは厳格なルールではなく、「意識してほしい目安」。
+
+- 機能の規模や複雑さによっては超えても問題ない
+- ただし、超える場合は「本当に必要か」を考える
+- 長くなりそうなら、表やドロップダウンで整理できないか検討
+
+### 情報の整理方法
+
+長くなりそうな場合の対処法：
+
+| 状況 | 対処法 |
+|------|--------|
+| 設定項目が多い | 表にまとめる |
+| 手順が長い | 番号付きリストにする |
+| 詳細な説明が必要 | ドロップダウンに隠す |
+| 複数パターンある | 表で比較する |
+
+---
+
 ## ページ末尾のパターン
 
 ### 標準パターン
@@ -482,3 +584,6 @@ docs/cobbleranked/
 4. **ドロップダウン形式** - FAQ/Troubleshooting は `<details>` で整理
 5. **具体的な例を示す** - コピペで使える設定例やコマンド
 6. **See Also で誘導** - 関連ページ、FAQ、Troubleshooting へのリンク必須
+7. **表を積極活用** - 文章より表の方が読みやすい
+8. **簡潔に書く** - 300文字を目安に、長くなるなら整理を検討
+9. **詳細は隠す** - 基本情報は見せ、詳細設定はドロップダウンに
