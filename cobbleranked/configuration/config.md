@@ -265,6 +265,51 @@ Battle settings including timers, announcements, and sounds.
 
 **See:** [Language Files](languages.md#match-result-messages-v107) for message customization
 
+### Sound Configuration
+
+Battle and GUI sounds can be customized via the `sounds.json5` file.
+
+**File:** `config/cobbleranked/sounds.json5` (auto-generated on first run)
+
+```json5
+{
+  "enabled": true,
+
+  "battle": {
+    "battle_start": "cobbleranked:battle_start",
+    "victory": "cobbleranked:victory",
+    "defeat": "cobbleranked:defeat",
+    "turn_start": "minecraft:block.note_block.pling"
+  },
+
+  "gui": {
+    "button_click": "minecraft:ui.button.click",
+    "queue_join": "minecraft:entity.experience_orb.pickup",
+    "queue_leave": "minecraft:block.note_block.bass",
+    "match_found": "minecraft:entity.player.levelup"
+  },
+
+  "notifications": {
+    "mission_complete": "minecraft:entity.player.levelup",
+    "reward_claim": "minecraft:entity.item.pickup"
+  }
+}
+```
+
+| Category | Sound | Description |
+|----------|-------|-------------|
+| `battle.battle_start` | Battle begins | Plays when match starts |
+| `battle.victory` | Player wins | Plays on victory |
+| `battle.defeat` | Player loses | Plays on defeat |
+| `gui.button_click` | GUI interaction | Plays on button clicks |
+| `gui.match_found` | Opponent found | Plays when matched |
+| `notifications.mission_complete` | Mission done | Plays on mission completion |
+
+**Sound IDs:**
+- Use Minecraft sound IDs (e.g., `minecraft:entity.player.levelup`)
+- Use custom resource pack sounds (e.g., `cobbleranked:custom_sound`)
+- Set to empty string `""` to disable a specific sound
+
 ### Format-Specific Battle Timers
 
 **`format_timers`** - Independent time limits per battle format (in minutes)

@@ -10,7 +10,10 @@ All commands available in CobbleRanked.
 |---------|-------------|
 | `/ranked` | Opens the ranked GUI for queue, stats, and leaderboards |
 | `/season` | Shows current season info (name, status, time remaining) |
-| `/casual` | Opens casual battle/missions GUI |
+| `/casual` | Opens casual battle GUI |
+| `/casual missions` | Opens missions GUI directly |
+| `/battlecamera toggle` | Toggle battle camera ON/OFF |
+| `/battlecamera status` | Show current camera settings |
 
 ---
 
@@ -23,6 +26,7 @@ All commands available in CobbleRanked.
 | Command | Description |
 |---------|-------------|
 | `/rankedadmin reload` | Reload all configs (excludes cross-server database settings) |
+| `/battlecamera ml` | Toggle ML-enhanced camera mode (requires OP) |
 
 ---
 

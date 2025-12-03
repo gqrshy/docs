@@ -1,12 +1,65 @@
-# Casual Missions
+# Casual Battles
 
-Complete mission and reward system for casual battles with daily, weekly, and milestone challenges.
+Casual battle mode for non-ranked Pokemon battles with an integrated mission system.
 
 ---
 
 ## Overview
 
-The Casual Mission System provides players with daily and weekly objectives to earn rewards while playing casual battles. Complete missions to earn items, experience candies, and exclusive titles.
+Casual Battles provide a relaxed alternative to ranked matches. Unlike ranked battles, casual matches do not affect Elo ratings, making them perfect for practice, testing new teams, or playing without competitive pressure.
+
+**Key Features:**
+- No Elo gain/loss - play without competitive stress
+- Daily & weekly missions with rewards
+- Milestone rewards for long-term achievements
+- Same battle formats as ranked (Singles, Doubles, etc.)
+- Separate queue from ranked matches
+
+---
+
+## How to Play
+
+### Starting a Casual Battle
+
+```bash
+/casual
+```
+
+This opens the Casual Battle GUI where you can:
+- Queue for casual matches (select format)
+- View your casual battle stats
+- Access the missions menu
+
+### Viewing Missions
+
+```bash
+/casual missions
+```
+
+Opens the missions GUI directly to view:
+- Active daily missions
+- Active weekly missions
+- Available milestone rewards
+- Progress for each mission
+
+---
+
+## Casual vs Ranked
+
+| Feature | Casual | Ranked |
+|---------|--------|--------|
+| Elo Changes | No | Yes |
+| Missions | Yes | No |
+| Leaderboard | No | Yes |
+| Season Rewards | No | Yes |
+| Blacklist Rules | Same | Same |
+| Battle Formats | All | All |
+
+---
+
+## Mission System
+
+The mission system provides daily and weekly objectives to earn rewards while playing casual battles.
 
 **Key Features:**
 - Daily missions (reset at configured time)
@@ -285,15 +338,16 @@ Customize mission GUI appearance in `config/cobbleranked/gui/casual_missions_gui
 
 ### Player Commands
 
-```bash
-/casual                  # Open casual battle menu
-```
+| Command | Description |
+|---------|-------------|
+| `/casual` | Open casual battle menu |
+| `/casual missions` | Open missions GUI directly |
 
 **Permissions:** None (available to all players)
 
 ### Admin Commands
 
-No admin commands specific to missions. Configure via files.
+No admin commands specific to casual battles. Configure via files.
 
 ---
 
@@ -376,5 +430,8 @@ Having issues with missions? See the [FAQ](../support/faq.md) for solutions.
 
 ## See Also
 
+- [Ranked Battles](ranked-battles.md) - Competitive ranked mode
 - [Rewards System](../configuration/rewards.md) - Other reward configurations
 - [Commands Reference](../getting-started/commands.md) - All available commands
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving
