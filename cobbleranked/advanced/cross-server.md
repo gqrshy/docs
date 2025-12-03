@@ -2,6 +2,8 @@
 
 Run CobbleRanked across multiple servers with shared rankings.
 
+---
+
 ## Architecture
 
 **Servers:**
@@ -116,7 +118,7 @@ docker run -d -p 6379:6379 redis:alpine
 |---------|---------------|------------|
 | `server_id` | `"battle"` | `"main1"`, `"lobby"`, etc. |
 | `battle_server` | `""` (empty) | `"battle"` |
-| Global features | ✅ Manages | ❌ Read-only |
+| Global features | Manages | Read-only |
 
 ## Testing
 
@@ -125,10 +127,6 @@ docker run -d -p 6379:6379 redis:alpine
 3. Accept match when found
 4. Verify transfer to battle server
 5. Check stats sync after battle
-
-## Troubleshooting
-
-Having issues with cross-server setup? See the [FAQ](../support/faq.md#cross-server) for solutions to common problems.
 
 ## Advanced
 
@@ -148,3 +146,12 @@ Increase for high traffic:
   }
 }
 ```
+
+---
+
+## See Also
+
+- [Database Configuration](database.md) - Database setup details
+- [Redis Configuration](redis.md) - Redis setup details
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

@@ -208,10 +208,10 @@ West ←────┼────→ East
 ```
 
 **Common Values:**
-- `0.0` → Player faces **South** ⬇️
-- `90.0` → Player faces **West** ⬅️
-- `180.0` → Player faces **North** ⬆️
-- `270.0` or `-90.0` → Player faces **East** ➡️
+- `0.0` → Player faces **South**
+- `90.0` → Player faces **West**
+- `180.0` → Player faces **North**
+- `270.0` or `-90.0` → Player faces **East**
 
 **Tip:** To find the right yaw value, stand where you want players to spawn, face the direction you want them to look, and press **F3**. Look for "Facing: [direction] (X: yaw)" in the debug screen.
 
@@ -229,7 +229,7 @@ West ←────┼────→ East
 
 **Common Values:**
 - `-90.0` → Looking straight **up** (useful for sky arenas)
-- `0.0` → Looking **straight ahead** (default for battles) ✅
+- `0.0` → Looking **straight ahead** (default for battles, recommended)
 - `45.0` → Looking **slightly down**
 - `90.0` → Looking straight **down** (bird's eye view)
 
@@ -449,6 +449,7 @@ Teleporting across dimensions:
 
 ## See Also
 
-- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
 - [Rewards System](rewards.md) - Season and milestone rewards
 - [Commands](../getting-started/commands.md) - Arena management commands
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

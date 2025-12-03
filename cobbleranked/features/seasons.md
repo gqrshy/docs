@@ -9,11 +9,11 @@ Competitive time-based periods with automatic rotation, rewards, and cross-serve
 Seasons are competitive periods where players compete for leaderboard positions and earn exclusive rewards.
 
 **Key Features:**
-- ⏰ Automatic rotation based on duration
-- 🏆 Top player rewards (customizable per format)
-- 📊 Season history tracking
-- 🌐 Cross-server synchronization (Redis)
-- ⚙️ Manual admin controls
+- Automatic rotation based on duration
+- Top player rewards (customizable per format)
+- Season history tracking
+- Cross-server synchronization (Redis)
+- Manual admin controls
 
 **Default Duration:** 30 days (configurable)
 
@@ -48,13 +48,13 @@ Season Start → Competition → Season End → Rewards → New Season
 
 ### What's Preserved
 
-**✅ Preserved Across Seasons:**
+**Preserved Across Seasons:**
 - Elo ratings (unless configured to reset)
 - Win/loss records (unless configured to reset)
 - Flee count
 - Player UUID associations
 
-**❌ Reset Each Season:**
+**Reset Each Season:**
 - Milestone reward claim flags
 - Season reward eligibility
 - Season-specific leaderboard rankings
@@ -331,7 +331,7 @@ exclusive season rewards!
 
 ### Battle Server Singleton
 
-**⚠️ Critical:** Only ONE server should manage seasons globally.
+**Critical:** Only ONE server should manage seasons globally.
 
 **Battle Server Configuration:**
 ```json5
@@ -521,13 +521,13 @@ Having issues with seasons? See the [FAQ](../support/faq.md) for solutions.
 
 ### Admin Guidelines
 
-**✅ DO:**
+**DO:**
 - Use default auto-rotation for hands-off management
 - Configure meaningful season names for events
 - Test rotation on staging server before production
 - Monitor logs during season rotation
 
-**❌ DON'T:**
+**DON'T:**
 - Run multiple battle servers without singleton check
 - Manually edit database during rotation
 - Force rotate during active battles
@@ -540,4 +540,5 @@ Having issues with seasons? See the [FAQ](../support/faq.md) for solutions.
 - [Rewards System](../configuration/rewards.md) - Configure season rewards
 - [Cross-Server Setup](../advanced/cross-server.md) - Multi-server configuration
 - [Commands Reference](../getting-started/commands.md) - All season commands
-- [FAQ & Troubleshooting](../support/faq.md) - Common season issues
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

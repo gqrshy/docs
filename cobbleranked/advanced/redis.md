@@ -2,6 +2,8 @@
 
 Configure Redis for cross-server real-time synchronization.
 
+---
+
 ## Overview
 
 Redis provides real-time communication between CobbleRanked servers for:
@@ -152,4 +154,9 @@ Redis is extremely fast. No tuning needed for typical usage.
 
 ---
 
-See [Cross-Server Setup](cross-server.md) for complete guide.
+## See Also
+
+- [Cross-Server Setup](cross-server.md) - Complete guide
+- [Database Configuration](database.md) - Database setup
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

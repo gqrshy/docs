@@ -408,7 +408,8 @@ Reloads all configuration files without server restart.
 
 ## See Also
 
-- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
 - [Cross-Server Setup](../advanced/cross-server.md) - Multi-server configuration
 - [Rewards](rewards.md) - Season and milestone rewards
 - [Commands](../getting-started/commands.md) - Admin commands
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

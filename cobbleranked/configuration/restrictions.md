@@ -4,6 +4,8 @@ Control what players can do during ranked and casual matches.
 
 **File:** `config/cobbleranked/restrictions.json5` (auto-generated on first run)
 
+---
+
 ## Configuration Structure
 
 ```json5

@@ -558,8 +558,8 @@ Competitive standard format (Singles 6v6 at Level 100):
 **Important Notes:**
 - **Level 100:** Smogon OU uses Level 100 (Showdown's default), NOT Level 50
 - **Legendaries:** NOT all legendaries are banned! Only Ubers-tier (restricted label)
-  - ✅ LEGAL: Landorus-T, Heatran, Tapu Koko, Raging Bolt, Iron Valiant, etc.
-  - ❌ BANNED: Mewtwo, Zacian, Calyrex, Koraidon, Miraidon, etc.
+  - **LEGAL:** Landorus-T, Heatran, Tapu Koko, Raging Bolt, Iron Valiant, etc.
+  - **BANNED:** Mewtwo, Zacian, Calyrex, Koraidon, Miraidon, etc.
 - **Ultra Beasts:** Most are LEGAL (Kartana, Celesteela, etc.)
 - **Paradox Pokemon:** Most are LEGAL (Iron Hands, Great Tusk, etc.), but some banned individually
 
@@ -653,31 +653,33 @@ When player joins queue:
 
 ```
 1. Check label blacklist
-   ❌ "Blacklisted Pokemon: Mewtwo (legendary)"
+   FAIL: "Blacklisted Pokemon: Mewtwo (legendary)"
 
 2. Check name/form blacklist
-   ❌ "Blacklisted Pokemon: Mewtwo"
+   FAIL: "Blacklisted Pokemon: Mewtwo"
 
 3. Check label limits
-   ❌ "Too many legendary: 2/1"
+   FAIL: "Too many legendary: 2/1"
 
 4. Check moves
-   ❌ "Blacklisted move: Fissure"
+   FAIL: "Blacklisted move: Fissure"
 
 5. Check abilities
-   ❌ "Blacklisted ability: Moody"
+   FAIL: "Blacklisted ability: Moody"
 
 6. Check held items
-   ❌ "Blacklisted item: cobblemon:bright_powder"
+   FAIL: "Blacklisted item: cobblemon:bright_powder"
 
-✅ All pass → Join queue
+PASS: All pass → Join queue
 ```
 
 </details>
 
 ---
 
-**Related:**
+## See Also
+
 - [Main Config](config.md) - Season, Elo, clauses
 - [Battle Formats](../features/battle-formats.md) - Format details
-- [Commands](../getting-started/commands.md) - `/rankedadmin` reference
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

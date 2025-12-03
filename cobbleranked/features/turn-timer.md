@@ -2,6 +2,8 @@
 
 Enforce time limits on battle turns to prevent stalling.
 
+---
+
 ## Overview
 
 Players have limited time to select a move each turn. If time runs out, a random legal move is chosen automatically.
@@ -53,4 +55,13 @@ Different time limits per format:
 - **Doubles:** 90-120 seconds (more complex decisions)
 - **Tournaments:** 60 seconds for faster matches
 - **Casual:** 120+ seconds for new players
+
+---
+
+## See Also
+
+- [Battle Formats](battle-formats.md) - Available formats
+- [Configuration](../configuration/config.md) - Full settings
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving
 

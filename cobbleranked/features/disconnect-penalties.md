@@ -18,9 +18,9 @@ When a player disconnects during a ranked battle:
 
 | Flee Count | Queue Ban | Tier |
 |------------|-----------|------|
-| 1-5 | 5 minutes | ⚠️ Warning |
-| 6-10 | 15 minutes | 🔶 Serious |
-| 11+ | 30 minutes | 🔴 Severe |
+| 1-5 | 5 minutes | Warning |
+| 6-10 | 15 minutes | Serious |
+| 11+ | 30 minutes | Severe |
 
 ---
 
@@ -121,4 +121,10 @@ Automatically reduces flee count over time to forgive past disconnects.
 
 ---
 
-**Related:** [Season Management](seasons.md) · [Battle Formats](battle-formats.md) · [Configuration](../configuration/config.md)
+## See Also
+
+- [Season Management](seasons.md) - Season configuration
+- [Battle Formats](battle-formats.md) - Available formats
+- [Configuration](../configuration/config.md) - Full settings
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

@@ -19,8 +19,8 @@ Leaderboard placeholders integrate with [Text Placeholder API](https://placehold
 - Custom displays via Text Placeholder API
 
 **Platform Support:**
-- ✅ Fabric servers (via Text Placeholder API)
-- ✅ Hybrid servers (Arclight) - supports both Text Placeholder API and PlaceholderAPI
+- Fabric servers (via Text Placeholder API)
+- Hybrid servers (Arclight) - supports both Text Placeholder API and PlaceholderAPI
 
 **Performance:**
 - 60-second cache (reduces database queries by ~98%)
@@ -308,14 +308,14 @@ These placeholders are maintained for backward compatibility:
 
 | Old Placeholder | New Placeholder | Status |
 |-----------------|-----------------|--------|
-| `{arena}` | `{arena_name}` | ⚠️ Deprecated, use `{arena_name}` |
-| `{format}` | `{battle_format}` | ⚠️ Deprecated, use `{battle_format}` |
-| `{player}` | `{player_name}` | ⚠️ Deprecated, use `{player_name}` |
-| `{opponent}` | `{opponent_name}` | ⚠️ Deprecated, use `{opponent_name}` |
-| `{elo}` | `{stats_elo}` | ⚠️ Deprecated, use `{stats_elo}` |
-| `{rank}` | `{stats_rank}` | ⚠️ Deprecated, use `{stats_rank}` |
-| `{season}` | `{season_name}` | ⚠️ Deprecated, use `{season_name}` |
-| `{days}` | `{season_remaining_days}` | ⚠️ Deprecated, use `{season_remaining_days}` |
+| `{arena}` | `{arena_name}` | Deprecated |
+| `{format}` | `{battle_format}` | Deprecated |
+| `{player}` | `{player_name}` | Deprecated |
+| `{opponent}` | `{opponent_name}` | Deprecated |
+| `{elo}` | `{stats_elo}` | Deprecated |
+| `{rank}` | `{stats_rank}` | Deprecated |
+| `{season}` | `{season_name}` | Deprecated |
+| `{days}` | `{season_remaining_days}` | Deprecated |
 
 **Usage Example:**
 
@@ -449,8 +449,8 @@ PlaceholderService.clearCache()
 1. **Use format-specific placeholders when possible:**
    ```
    Singles-only server:
-   ✅ %cobbleranked_top_singles_1_name%
-   ❌ %cobbleranked_top_1_name%
+   GOOD: %cobbleranked_top_singles_1_name%
+   AVOID: %cobbleranked_top_1_name%
    ```
 
 2. **Limit leaderboard size:**
@@ -477,4 +477,5 @@ PlaceholderService.clearCache()
 
 - [Language Files](../configuration/languages.md) - Message placeholder customization
 - [Commands Reference](../getting-started/commands.md) - Placeholder testing commands
-- [FAQ & Troubleshooting](../support/faq.md) - Common placeholder issues
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

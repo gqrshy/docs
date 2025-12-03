@@ -2,6 +2,8 @@
 
 View top-ranked players by Elo rating.
 
+---
+
 ## Features
 
 - Format-specific (Singles, Doubles, Triples, MULTI)
@@ -64,3 +66,12 @@ Leaderboards reset automatically when a new season starts. To manually create a 
 ```bash
 /rankedadmin season create <days> <name>
 ```
+
+---
+
+## See Also
+
+- [Season Management](seasons.md) - Season configuration
+- [Placeholder API](../integration/placeholders.md) - Leaderboard placeholders
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

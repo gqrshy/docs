@@ -2,6 +2,8 @@
 
 Advanced database configuration for CobbleRanked.
 
+---
+
 ## Overview
 
 CobbleRanked supports three database systems:
@@ -97,11 +99,11 @@ CobbleRanked automatically creates these tables:
 - Large player bases with high write throughput
 
 **Advantages over MySQL:**
-- ✅ Easier horizontal scaling (sharding)
-- ✅ Native JSON document storage
-- ✅ Cloud-ready (MongoDB Atlas)
-- ✅ Automatic schema flexibility
-- ✅ Better performance for high write loads
+- Easier horizontal scaling (sharding)
+- Native JSON document storage
+- Cloud-ready (MongoDB Atlas)
+- Automatic schema flexibility
+- Better performance for high write loads
 
 ### Setup
 
@@ -218,13 +220,13 @@ mongorestore --db cobbleranked /backup/20251108/cobbleranked
 
 | Feature | SQLite | MySQL | MongoDB |
 |---------|--------|-------|---------|
-| **Setup** | ✅ Zero config | ⚠️ Install required | ⚠️ Install required |
-| **Cross-server** | ❌ No | ✅ Yes | ✅ Yes |
-| **Scaling** | ❌ Limited | ⚠️ Vertical only | ✅ Horizontal |
-| **Cloud** | ❌ No | ⚠️ Requires VPS | ✅ Atlas free tier |
-| **Performance** | ✅ Fast (small) | ✅ Fast (medium) | ✅ Fast (large) |
-| **Schema changes** | ⚠️ Manual | ⚠️ Manual | ✅ Automatic |
-| **Backup** | ✅ Simple file copy | ⚠️ mysqldump | ✅ mongodump/Atlas |
+| **Setup** | Zero config | Install required | Install required |
+| **Cross-server** | No | Yes | Yes |
+| **Scaling** | Limited | Vertical only | Horizontal |
+| **Cloud** | No | Requires VPS | Atlas free tier |
+| **Performance** | Fast (small) | Fast (medium) | Fast (large) |
+| **Schema changes** | Manual | Manual | Automatic |
+| **Backup** | Simple file copy | mysqldump | mongodump/Atlas |
 
 **Recommendation:**
 - **Single-server**: SQLite (easiest)
@@ -234,4 +236,9 @@ mongorestore --db cobbleranked /backup/20251108/cobbleranked
 
 ---
 
-See [Cross-Server Setup](cross-server.md) for detailed MySQL/MongoDB configuration.
+## See Also
+
+- [Cross-Server Setup](cross-server.md) - MySQL/MongoDB configuration
+- [Redis Configuration](redis.md) - Redis setup
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

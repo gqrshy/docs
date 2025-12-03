@@ -2,6 +2,8 @@
 
 All commands available in CobbleRanked.
 
+---
+
 ## Player Commands
 
 **Permission:** None required
@@ -153,3 +155,11 @@ All commands have smart tab completion:
 Admin commands require **OP level 2** by default.
 
 For fine-grained permission control with LuckPerms, see the [LuckPerms Integration](../integration/luckperms.md#permission-nodes) guide.
+
+---
+
+## See Also
+
+- [LuckPerms Integration](../integration/luckperms.md) - Fine-grained permissions
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving

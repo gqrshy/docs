@@ -775,9 +775,9 @@ Or grant `cobbleranked.admin` via [LuckPerms](../integration/luckperms.md#permis
 
 **Fix:**
 1. Check all dependencies are in `mods/`:
-   - Fabric API ✅
-   - Cobblemon ✅
-   - Fabric Language Kotlin ✅
+   - Fabric API
+   - Cobblemon
+   - Fabric Language Kotlin
 2. Review `logs/latest.log` for:
    - Missing dependency errors
    - Version mismatches
@@ -1274,13 +1274,13 @@ Or manually add `"pc"` to the `blockedCommands` list.
 
 **Common syntax errors:**
 ```json5
-// ❌ Wrong: Missing comma
+// Wrong: Missing comma
 {
   "teleport": true
   "respawn": false
 }
 
-// ✅ Correct:
+// Correct:
 {
   "teleport": true,
   "respawn": false

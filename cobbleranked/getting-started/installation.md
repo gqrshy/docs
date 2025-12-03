@@ -57,7 +57,7 @@ server/
 ```
 /ranked
 ```
-If GUI opens → Installation successful! ✅
+If GUI opens → Installation successful
 
 ![Ranked GUI main menu](../../images/rankedmenu.png)
 
@@ -281,7 +281,8 @@ Edit `config/cobbleranked/config.json5`:
 
 ## See Also
 
-- [FAQ & Troubleshooting](../support/faq.md) - Common issues and solutions
+- [FAQ](../support/faq.md) - Common questions
+- [Troubleshooting](../support/troubleshooting.md) - Problem solving
 
 ---
 
