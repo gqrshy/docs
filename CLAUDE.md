@@ -85,7 +85,20 @@
 
 ### Troubleshooting ページの構成
 
-Troubleshooting ページ (`support/troubleshooting.md`) には、機能ごとにセクションを設け、各問題をドロップダウン形式で記載する：
+Troubleshooting ページ (`support/troubleshooting.md`) では、**すべての問題をドロップダウン形式で記載する**。
+
+これにより：
+- ページが長くなっても見やすさを維持
+- ユーザーが必要な問題だけを展開して確認できる
+- 関連する問題を機能ごとにグループ化できる
+
+#### 構成ルール
+
+1. **機能ごとにセクション（H2）を設ける**
+2. **各問題は必ず `<details>` で囲む**
+3. **セクション間は `---` で区切る**
+
+#### テンプレート
 
 ```markdown
 ## [機能名] Issues
@@ -106,7 +119,36 @@ Troubleshooting ページ (`support/troubleshooting.md`) には、機能ごと�
    説明...
 
 </details>
+
+<details>
+<summary><strong>別の問題</strong></summary>
+
+**Symptoms:**
+- 症状...
+
+**Solutions:**
+- 解決策...
+
+</details>
+
+---
+
+## [別の機能名] Issues
+
+<details>
+<summary><strong>問題</strong></summary>
+
+...
+
+</details>
 ```
+
+#### 重要なポイント
+
+- 問題のタイトルは `<strong>` で太字にする
+- Symptoms（症状）と Solutions（解決策）を明確に分ける
+- コードブロックやコマンド例も `<details>` 内に含める
+- 1つのセクションに問題が多い場合でも、すべてドロップダウンにする
 
 ### 新しい機能のドキュメントを書く場合
 
