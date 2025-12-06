@@ -10,8 +10,8 @@ All commands available in CobbleRanked.
 
 | Command | Description |
 |---------|-------------|
-| `/ranked` | Opens the ranked GUI for queue, stats, and leaderboards |
-| `/season` | Shows current season info (name, status, time remaining) |
+| `/ranked` | Opens the ranked battle GUI |
+| `/season` | Shows current season info |
 | `/casual` | Opens casual battle GUI |
 | `/casual missions` | Opens missions GUI directly |
 | `/battlecamera toggle` | Toggle battle camera ON/OFF |
@@ -21,46 +21,58 @@ All commands available in CobbleRanked.
 
 ## Admin Commands
 
-**Permission:** OP level 2 required
+**Permission:** OP level 2 or `cobbleranked.admin.*`
 
-### System Management
+### System
 
 | Command | Description |
 |---------|-------------|
-| `/rankedadmin reload` | Reload all configs (excludes cross-server database settings) |
-| `/battlecamera ml` | Toggle ML-enhanced camera mode (requires OP) |
+| `/rankedadmin reload` | Reload all configurations |
+| `/battlecamera ml` | Toggle ML-enhanced camera mode |
 
 ---
 
 ### Arena Management
 
-| Command | Parameters | Description |
-|---------|------------|-------------|
-| `/rankedadmin setArena <name> <pos>` | `<name>` Arena name<br>`<pos>` Position (pos1, pos2, pos3, pos4) | Set arena spawn position at current location |
-| `/rankedadmin setexit` | None | Set player exit location after battles (teleport to this location after battle ends) |
-| `/rankedadmin teleportArena <arena>` | `<arena>` Arena name | Teleport to arena center |
-| `/rankedadmin arena status` | None | Show all arenas and their in-use status |
-| `/rankedadmin arena enable <arena>` | `<arena>` Arena name | Enable an arena |
-| `/rankedadmin arena disable <arena>` | `<arena>` Arena name | Disable an arena |
-| `/rankedadmin arena setcenter <arena> [radius]` | `<arena>` Arena name<br>`[radius]` Field radius 1-50 (optional) | Set battle camera center point at current location |
+| Command | Description |
+|---------|-------------|
+| `/rankedadmin setArena <name> <pos>` | Set arena spawn position |
+| `/rankedadmin setexit` | Set global exit location |
+| `/rankedadmin teleportArena <arena>` | Teleport to arena's pos1 |
+| `/rankedadmin arena status` | Show all arenas and status |
+| `/rankedadmin arena enable <arena>` | Enable an arena |
+| `/rankedadmin arena disable <arena>` | Disable an arena |
+| `/rankedadmin arena setcenter <arena> [radius]` | Set battle camera center |
+
+**Position Values:**
+
+| Position | Description |
+|----------|-------------|
+| `pos1` | Player 1 spawn (Team 1) |
+| `pos2` | Player 2 spawn (Team 2) |
+| `pos3` | Player 3 spawn (Team 1 - MULTI only) |
+| `pos4` | Player 4 spawn (Team 2 - MULTI only) |
+
+> 📝 **Note:** pos3/pos4 are required for MULTI format (4-player battles). Without them, players are auto-positioned using offset fallback.
 
 **Examples:**
+
 ```bash
-# Create arena with 2 spawn points (for Singles/Doubles/Triples)
+# Basic arena (Singles/Doubles/Triples)
 /rankedadmin setArena main_arena pos1
 /rankedadmin setArena main_arena pos2
 
-# Create arena with 4 spawn points (for MULTI mode)
+# MULTI format arena (4-player)
 /rankedadmin setArena multi_arena pos1
 /rankedadmin setArena multi_arena pos2
 /rankedadmin setArena multi_arena pos3
 /rankedadmin setArena multi_arena pos4
 
-# Set battle camera center point (for dynamic camera)
+# Battle camera center
 /rankedadmin arena setcenter main_arena
 /rankedadmin arena setcenter main_arena 15
 
-# Check arena status
+# Check status
 /rankedadmin arena status
 ```
 
@@ -68,26 +80,24 @@ All commands available in CobbleRanked.
 
 ### Player Elo Management
 
-| Command | Parameters | Description |
-|---------|------------|-------------|
-| `/rankedadmin setelo <amount> <player> <format>` | `<amount>` New Elo value<br>`<player>` Player name<br>`<format>` Battle format | Set player's Elo to specific value |
-| `/rankedadmin addelo <amount> <player> <format>` | `<amount>` Elo to add<br>`<player>` Player name<br>`<format>` Battle format | Add Elo points to player |
-| `/rankedadmin removeelo <amount> <player> <format>` | `<amount>` Elo to remove<br>`<player>` Player name<br>`<format>` Battle format | Remove Elo points from player |
-| `/rankedadmin setflee <player> <amount>` | `<player>` Player name<br>`<amount>` Flee count | Set flee count (use 0 to clear penalty) |
+| Command | Description |
+|---------|-------------|
+| `/rankedadmin setelo <amount> <player> <format>` | Set player's Elo |
+| `/rankedadmin addelo <amount> <player> <format>` | Add Elo to player |
+| `/rankedadmin removeelo <amount> <player> <format>` | Remove Elo from player |
+| `/rankedadmin setflee <player> <amount>` | Set flee count (0 clears penalty) |
 
-**Valid Formats:**
-- `SINGLES` - 1v1 battles
-- `DOUBLES` - 2v2 battles
-- `TRIPLES` - 3v3 battles
-- `MULTI` - Team battles (2v2 players)
+**Valid Formats:** `SINGLES`, `DOUBLES`, `TRIPLES`, `MULTI`
 
 **Examples:**
+
 ```bash
-# Set player Elo to 1500 for Singles
+# Set Elo
 /rankedadmin setelo 1500 Player123 SINGLES
 
-# Add 100 Elo points
+# Add/Remove Elo
 /rankedadmin addelo 100 Player123 DOUBLES
+/rankedadmin removeelo 50 Player123 SINGLES
 
 # Clear flee penalty
 /rankedadmin setflee Player123 0
@@ -97,39 +107,35 @@ All commands available in CobbleRanked.
 
 ### Season Management
 
-**Battle server only** - These commands only work on the server configured as battle server (`cross_server.battle_server: ""`).
+> ⚠️ **Battle Server Only:** Season management commands only work on the battle server in cross-server setups.
 
-| Command | Parameters | Description |
-|---------|------------|-------------|
-| `/rankedadmin season info` | None | Show current season details (name, start/end dates, duration) |
-| `/rankedadmin season history [limit]` | `[limit]` Number of seasons (default: 5) | Show past seasons |
-| `/rankedadmin season create <days> <name>` | `<days>` Season duration<br>`<name>` Season name | Create new season (automatically ends current season) |
-| `/rankedadmin season rotate` | None | Force season rotation (start next season immediately) |
-| `/rankedadmin season end` | None | End current season immediately |
-| `/rankedadmin season setend <minutes>` | `<minutes>` Minutes from now | Set season end time |
-| `/rankedadmin season rename <name>` | `<name>` New season name | Rename current season |
+| Command | Description |
+|---------|-------------|
+| `/rankedadmin season info` | Show current season details |
+| `/rankedadmin season history [limit]` | Show past seasons (default: 5) |
+| `/rankedadmin season create <days> <name>` | Create new season |
+| `/rankedadmin season rotate` | Force season rotation |
+| `/rankedadmin season end` | End current season |
+| `/rankedadmin season setend <minutes>` | Set season end time |
+| `/rankedadmin season rename <name>` | Rename current season |
 
 **Examples:**
+
 ```bash
-# Create a 30-day season
+# View season info
+/rankedadmin season info
+/rankedadmin season history 10
+
+# Create new season
 /rankedadmin season create 30 "Season 2 - Summer Cup"
 
-# Rotate to next season immediately
+# Modify season
+/rankedadmin season rename "Winter Championship"
+/rankedadmin season setend 1440  # End in 24 hours
+
+# Force rotation
 /rankedadmin season rotate
-
-# End season in 24 hours
-/rankedadmin season setend 1440
 ```
-
----
-
-### Random Battle Management
-
-| Command | Parameters | Description |
-|---------|------------|-------------|
-| `/rankedadmin randombattle reload` | None | Reload all random battle pool configurations |
-| `/rankedadmin randombattle list` | None | Show all available pools and their status |
-| `/rankedadmin randombattle generate <pool> [player]` | `<pool>` Pool name<br>`[player]` Target player (optional) | Generate a random team for testing |
 
 ---
 
@@ -137,9 +143,28 @@ All commands available in CobbleRanked.
 
 | Command | Description |
 |---------|-------------|
-| `/rankedplaceholder test <placeholder>` | Test a placeholder (e.g., `%cobbleranked_top_1_name%`) |
+| `/rankedplaceholder test <placeholder>` | Test a placeholder |
 | `/rankedplaceholder list` | List all available placeholders |
 | `/rankedplaceholder clear` | Clear placeholder cache |
+
+**Placeholder Reference:**
+
+| Category | Example | Description |
+|----------|---------|-------------|
+| **Player Stats** | `%cobbleranked_singles_elo%` | Player's Elo |
+| | `%cobbleranked_singles_rank%` | Leaderboard position |
+| | `%cobbleranked_singles_wins%` | Total wins |
+| | `%cobbleranked_singles_tier%` | Tier name (Gold, etc.) |
+| **Leaderboard** | `%cobbleranked_top_singles_1_name%` | #1 player name |
+| | `%cobbleranked_top_singles_1_elo%` | #1 player Elo |
+| | `%cobbleranked_top_doubles_1_name%` | #1 Doubles player |
+| **Season** | `%cobbleranked_season_name%` | Season name |
+| | `%cobbleranked_season_remaining%` | Time remaining |
+| | `%cobbleranked_season_status%` | "active" or "ended" |
+
+> 📝 **Note:** Replace `singles` with `doubles`, `triples`, or `multi` for other formats.
+
+See [Placeholder API](../integration/placeholders.md) for complete list.
 
 ---
 
@@ -149,22 +174,27 @@ All commands have smart tab completion:
 
 - **Arena names** - Auto-complete from configured arenas
 - **Player names** - Show online players
-- **Formats** - Suggest valid options (SINGLES, DOUBLES, TRIPLES, MULTI)
-- **Elo amounts** - Suggest common values (1000, 1200, 1500)
-- **Season durations** - Suggest common periods (7, 14, 30 days)
+- **Formats** - `SINGLES`, `DOUBLES`, `TRIPLES`, `MULTI`
+- **Positions** - `pos1`, `pos2`, `pos3`, `pos4`
 
 ---
 
 ## Permissions
 
-Admin commands require **OP level 2** by default.
+| Permission | Description |
+|------------|-------------|
+| Default | Player commands require no permission |
+| OP Level 2 | Admin commands require OP level 2 |
+| `cobbleranked.admin.*` | Alternative to OP for admin access |
 
-For fine-grained permission control with LuckPerms, see the [LuckPerms Integration](../integration/luckperms.md#permission-nodes) guide.
+For fine-grained permission control, see [LuckPerms Integration](../integration/luckperms.md).
 
 ---
 
 ## See Also
 
-- [LuckPerms Integration](../integration/luckperms.md) - Fine-grained permissions
+- [Arena Setup](../configuration/arenas.md) - Detailed arena configuration
+- [LuckPerms Integration](../integration/luckperms.md) - Permission setup
+- [Placeholder API](../integration/placeholders.md) - Full placeholder list
 - [FAQ](../support/faq.md) - Common questions
 - [Troubleshooting](../support/troubleshooting.md) - Problem solving

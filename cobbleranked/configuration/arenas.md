@@ -2,149 +2,323 @@
 
 Learn how to set up battle arenas for ranked matches.
 
-## File Location
-
-`config/cobbleranked/arenas.json5`
+---
 
 ## Overview
 
-Arenas are physical locations where ranked battles take place. When a match is found, both players are teleported to a randomly selected arena.
+Arenas are physical locations where ranked battles take place. When a match is found, players are teleported to a randomly selected arena.
 
 **Key Features:**
+
 - Multiple arenas supported
 - Random arena selection
 - Cross-dimensional support (Overworld, Nether, End, custom dimensions)
 - Automatic teleportation
 - Return to previous location after battle
+- Battle camera support (optional)
+
+---
 
 ## Quick Start
 
 ### Create Your First Arena
 
 1. **Build your arena** in-game (or use an existing location)
-2. **Stand at the spawn point** where you want players to appear
-3. **Run the command:**
+
+2. **Stand at Player 1's spawn point** and run:
+
+   ```text
+   /rankedadmin setArena main_arena pos1
    ```
-   /rankedadmin arena set main_arena
+
+3. **Move to Player 2's spawn point** (facing Player 1) and run:
+
+   ```text
+   /rankedadmin setArena main_arena pos2
+   ```
+
+4. **Verify creation:**
+
+   ```text
+   /rankedadmin arena status
    ```
 
 That's it! Your arena is now configured.
 
-### Verify Arena
+---
 
-List all configured arenas:
-```
-/rankedadmin arena list
+## Arena Commands
+
+| Command | Description |
+|---------|-------------|
+| `/rankedadmin setArena <name> pos1` | Set Player 1 spawn (Team 1) |
+| `/rankedadmin setArena <name> pos2` | Set Player 2 spawn (Team 2) |
+| `/rankedadmin setArena <name> pos3` | Set Player 3 spawn (Team 1 - MULTI) |
+| `/rankedadmin setArena <name> pos4` | Set Player 4 spawn (Team 2 - MULTI) |
+| `/rankedadmin arena status` | Show all arenas and their status |
+| `/rankedadmin arena enable <name>` | Enable an arena |
+| `/rankedadmin arena disable <name>` | Disable an arena (keeps config) |
+| `/rankedadmin arena setcenter <name>` | Set battle camera center point |
+| `/rankedadmin teleportArena <name>` | Teleport to arena's pos1 |
+| `/rankedadmin setexit` | Set global exit location |
+
+---
+
+## MULTI Format Setup (4-Player Battles)
+
+For MULTI format, set all 4 spawn positions:
+
+```bash
+# Team 1: pos1 + pos3 (facing Team 2)
+/rankedadmin setArena multi_arena pos1
+/rankedadmin setArena multi_arena pos3
+
+# Team 2: pos2 + pos4 (facing Team 1)
+/rankedadmin setArena multi_arena pos2
+/rankedadmin setArena multi_arena pos4
 ```
 
-Output:
-```
-Configured Arenas (1):
-  1. main_arena (world: minecraft:overworld, x: 100, y: 64, z: 200)
+**Position Layout:**
+
+```text
+      Team 1                    Team 2
+  ┌─────────────┐          ┌─────────────┐
+  │ pos1   pos3 │  ←─────→ │ pos2   pos4 │
+  └─────────────┘  facing  └─────────────┘
 ```
 
-## Arena Management
+> 📝 **Note:** If pos3/pos4 are not set, teammates are auto-positioned 2 blocks from pos1/pos2 (fallback mode).
 
-### Add Multiple Arenas
+---
+
+## Adding Multiple Arenas
 
 CobbleRanked randomly selects from available arenas for variety:
 
 ```bash
-/rankedadmin arena set volcano_arena
-/rankedadmin arena set ice_arena
-/rankedadmin arena set forest_arena
-/rankedadmin arena set desert_arena
+# Basic arenas (Singles/Doubles/Triples)
+/rankedadmin setArena volcano_arena pos1
+/rankedadmin setArena volcano_arena pos2
+
+/rankedadmin setArena ice_arena pos1
+/rankedadmin setArena ice_arena pos2
+
+# MULTI-ready arena (4-player)
+/rankedadmin setArena tournament_arena pos1
+/rankedadmin setArena tournament_arena pos2
+/rankedadmin setArena tournament_arena pos3
+/rankedadmin setArena tournament_arena pos4
 ```
 
 **Recommendation:** Create at least 3-5 arenas for variety.
 
-### Remove an Arena
+---
 
-Delete an arena configuration:
+## Battle Camera Setup (Optional)
 
+For the battle camera feature, set where the camera should focus during battles:
+
+1. **Stand at the center of your arena**
+
+2. **Run:**
+
+   ```text
+   /rankedadmin arena setcenter main_arena
+   ```
+
+3. **Optionally set a custom radius:**
+
+   ```text
+   /rankedadmin arena setcenter main_arena 12
+   ```
+
+See [Battle Camera](../features/battle-camera.md) for detailed configuration.
+
+---
+
+## Exit Location
+
+Set where players return if their original position is unavailable:
+
+```text
+/rankedadmin setexit
 ```
-/rankedadmin arena remove old_arena
+
+This sets the global exit location at your current position. Players will be teleported here if their original pre-battle location cannot be restored.
+
+---
+
+## Enable/Disable Arenas
+
+Temporarily disable an arena without deleting it:
+
+```bash
+# Disable arena
+/rankedadmin arena disable main_arena
+
+# Enable arena
+/rankedadmin arena enable main_arena
 ```
 
-**Warning:** This does not delete the physical build, only removes it from rotation.
+Disabled arenas are skipped during random selection.
 
-### Teleport to Arena
+---
 
-Preview an arena location:
+## File Location
 
-```
-/rankedadmin arena tp main_arena
-```
-
-Useful for:
-- Testing spawn points
-- Showing off arenas to players
-- Quick travel for admins
-
-### List All Arenas
-
-View all configured arenas:
-
-```
-/rankedadmin arena list
-```
-
-Output shows:
-- Arena name
-- World/dimension
-- Coordinates (x, y, z)
-
-## File Format
-
-### JSON5 Structure
+`config/cobbleranked/arenas.json5`
 
 <details>
-<summary><strong>Click to view full arenas.json5 structure</strong></summary>
+<summary><strong>Manual JSON5 Editing</strong></summary>
+
+You can manually edit the arenas file for bulk changes:
 
 ```json5
 {
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //  BATTLE ARENAS
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
   "arenas": [
     {
       "name": "main_arena",
-      "world": "minecraft:overworld",
-      "x": 100.5,
-      "y": 64.0,
-      "z": 200.5,
-      "yaw": 180.0,        // Player facing direction (0-360)
-      "pitch": 0.0         // Player head tilt (-90 to 90)
-    },
-    {
-      "name": "nether_arena",
-      "world": "minecraft:the_nether",
-      "x": 50.5,
-      "y": 80.0,
-      "z": -150.5,
-      "yaw": 0.0,
-      "pitch": 0.0
+      "displayName": "Main Arena",
+      "enabled": true,
+      "priority": 0,
+      "pos1": {
+        "x": 100.5,
+        "y": 64.0,
+        "z": 200.5,
+        "yaw": 180.0,
+        "pitch": 0.0,
+        "world": "minecraft:overworld"
+      },
+      "pos2": {
+        "x": 120.5,
+        "y": 64.0,
+        "z": 200.5,
+        "yaw": 0.0,
+        "pitch": 0.0,
+        "world": "minecraft:overworld"
+      },
+      // pos3/pos4 for MULTI format (optional)
+      "pos3": {
+        "x": 102.5,
+        "y": 64.0,
+        "z": 200.5,
+        "yaw": 180.0,
+        "pitch": 0.0,
+        "world": "minecraft:overworld"
+      },
+      "pos4": {
+        "x": 122.5,
+        "y": 64.0,
+        "z": 200.5,
+        "yaw": 0.0,
+        "pitch": 0.0,
+        "world": "minecraft:overworld"
+      },
+      "fieldEffectCenter": {
+        "x": 110.5,
+        "y": 64.0,
+        "z": 200.5,
+        "world": "minecraft:overworld"
+      },
+      "fieldEffectRadius": 8
     }
-  ]
+  ],
+  "exitLocation": {
+    "x": 0.0,
+    "y": 64.0,
+    "z": 0.0,
+    "yaw": 0.0,
+    "pitch": 0.0,
+    "world": "minecraft:overworld"
+  }
 }
+```
+
+**After editing:**
+
+```text
+/rankedadmin reload
 ```
 
 </details>
 
-### Field Reference
+---
+
+## Field Reference
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | String | Unique arena identifier |
+| `displayName` | String | Display name (optional) |
+| `enabled` | Boolean | Whether arena is active |
+| `priority` | Number | Selection priority (higher = more likely) |
+| `pos1` | Object | Player 1 spawn (Team 1) |
+| `pos2` | Object | Player 2 spawn (Team 2) |
+| `pos3` | Object | Player 3 spawn (Team 1 - MULTI, optional) |
+| `pos4` | Object | Player 4 spawn (Team 2 - MULTI, optional) |
+| `fieldEffectCenter` | Object | Battle camera center (optional) |
+| `fieldEffectRadius` | Number | Battle camera radius (default: 8) |
+
+### Position Object
 
 | Field | Type | Description | Example |
 |-------|------|-------------|---------|
-| `name` | String | Unique arena identifier | `"main_arena"` |
-| `world` | String | Minecraft dimension ID | `"minecraft:overworld"` |
 | `x` | Number | X coordinate | `100.5` |
-| `y` | Number | Y coordinate (height) | `64.0` |
+| `y` | Number | Y coordinate | `64.0` |
 | `z` | Number | Z coordinate | `200.5` |
-| `yaw` | Number | Player facing direction (0-360) | `180.0` |
-| `pitch` | Number | Player head tilt (-90 to 90) | `0.0` |
+| `yaw` | Number | Horizontal rotation (0-360) | `180.0` |
+| `pitch` | Number | Vertical rotation (-90 to 90) | `0.0` |
+| `world` | String | Dimension ID | `"minecraft:overworld"` |
 
-### Dimension IDs
+---
+
+## Arena Design Guidelines
+
+### Size Recommendations
+
+| Battle Format | Recommended Size |
+|---------------|------------------|
+| Singles (1v1) | 20x20 blocks |
+| Doubles (2v2) | 25x25 blocks |
+| Triples (3v3) | 30x30 blocks |
+| Multi (4 players) | 30x30 blocks |
+
+### Player Facing
+
+When setting positions, players automatically face each other:
+
+- **pos1** player faces toward pos2
+- **pos2** player faces toward pos1
+
+<details>
+<summary><strong>Understanding Yaw and Pitch</strong></summary>
+
+**Yaw** controls horizontal direction:
+
+```text
+        North
+       (180°)
+          ↑
+West ←────┼────→ East
+(90°)     |    (270°)
+          ↓
+       South
+        (0°)
+```
+
+**Pitch** controls vertical angle:
+
+- `-90°` = Looking up
+- `0°` = Looking straight ahead (recommended)
+- `90°` = Looking down
+
+**Tip:** Press **F3** in Minecraft to see your current yaw/pitch values.
+
+</details>
+
+---
+
+## Dimension IDs
 
 Common dimension identifiers:
 
@@ -155,301 +329,12 @@ Common dimension identifiers:
 | End | `minecraft:the_end` |
 | Custom | `modname:dimension_name` |
 
-## Arena Design Guidelines
-
-### Size Recommendations
-
-| Battle Format | Recommended Size |
-|---------------|------------------|
-| Singles (1v1) | 20x20 blocks |
-| Doubles (2v2) | 25x25 blocks |
-
-**Note:** Design your arena with enough space for spectating players and aesthetic elements.
-
-## Spawn Point Positioning
-
-### Player Placement
-
-When creating an arena, players spawn at:
-- **Exact coordinates** specified in config
-- **Facing direction** based on `yaw` value
-- **Head tilt** based on `pitch` value
-
-<details>
-<summary><strong>Understanding Yaw and Pitch (Click to expand)</strong></summary>
-
-### Understanding Yaw and Pitch
-
-**Yaw** controls the horizontal direction (left-right rotation):
-- Think of it as a compass direction
-- `0°` = South, `90°` = West, `180°` = North, `270°` or `-90°` = East
-
-**Pitch** controls the vertical angle (up-down tilt):
-- Think of it as looking up or down
-- `-90°` = Looking straight up at the sky
-- `0°` = Looking straight ahead (horizontal)
-- `90°` = Looking straight down at the ground
-
-### Yaw (Horizontal Direction)
-
-Visual guide using Minecraft compass directions:
-
-```
-        North
-       (180°)
-          ↑
-          |
-West ←────┼────→ East
-(90°)     |    (270° or -90°)
-          |
-          ↓
-       South
-        (0°)
-```
-
-**Common Values:**
-- `0.0` → Player faces **South**
-- `90.0` → Player faces **West**
-- `180.0` → Player faces **North**
-- `270.0` or `-90.0` → Player faces **East**
-
-**Tip:** To find the right yaw value, stand where you want players to spawn, face the direction you want them to look, and press **F3**. Look for "Facing: [direction] (X: yaw)" in the debug screen.
-
-### Pitch (Vertical Angle)
-
-```
-     -90° ↑  (Looking straight up)
-          |
-          |
-       0° →  (Looking straight ahead - RECOMMENDED)
-          |
-          |
-      90° ↓  (Looking straight down)
-```
-
-**Common Values:**
-- `-90.0` → Looking straight **up** (useful for sky arenas)
-- `0.0` → Looking **straight ahead** (default for battles, recommended)
-- `45.0` → Looking **slightly down**
-- `90.0` → Looking straight **down** (bird's eye view)
-
-**Recommendation:** Use `0.0` pitch for normal battles to provide a natural perspective.
-
-</details>
-
-## Advanced Configuration
-
-<details>
-<summary><strong>Manual JSON5 Editing</strong></summary>
-
-You can manually edit `arenas.json5` for bulk changes:
-
-```json5
-{
-  "arenas": [
-    {
-      "name": "arena_1",
-      "world": "minecraft:overworld",
-      "x": 100.5,
-      "y": 64.0,
-      "z": 200.5,
-      "yaw": 180.0,
-      "pitch": 0.0
-    },
-    // Copy and modify for multiple arenas
-    {
-      "name": "arena_2",
-      "world": "minecraft:overworld",
-      "x": 300.5,
-      "y": 64.0,
-      "z": 200.5,
-      "yaw": 180.0,
-      "pitch": 0.0
-    }
-  ]
-}
-```
-
-**After editing:**
-```
-/rankedadmin reload
-```
-
-</details>
-
-<details>
-<summary><strong>WorldGuard Integration</strong></summary>
-
-### WorldGuard Integration
-
-Protect arenas from griefing:
-
-```bash
-# Create region
-//pos1
-//pos2
-/region define main_arena
-
-# Prevent block breaking/placing
-/region flag main_arena build deny
-
-# Prevent PvP (battle uses Cobblemon, not PvP)
-/region flag main_arena pvp deny
-
-# Prevent mob spawning
-/region flag main_arena mob-spawning deny
-```
-
-</details>
-
-<details>
-<summary><strong>Arena Selection Logic</strong></summary>
-
-### Arena Selection Logic
-
-How CobbleRanked chooses arenas:
-
-1. **Load all arenas** from `arenas.json5`
-2. **Filter valid arenas** (world exists, coordinates valid)
-3. **Random selection** from valid arenas
-4. **Teleport both players** to selected arena
-5. **Start battle** immediately
-
-**Weighting:** All arenas have equal probability (no weighting system).
-
-</details>
-
-<details>
-<summary><strong>Return System</strong></summary>
-
-## Return System
-
-After battle ends:
-
-1. **Battle concludes** (win/loss/draw/flee)
-2. **Players return** to their previous location
-3. **Previous location:** Where they were when battle started
-4. **Dimension preserved:** Returns to correct world
-
-**Example:**
-- Player was in Nether at `(100, 64, 200)`
-- Battle teleports to Overworld arena
-- After battle, returns to Nether `(100, 64, 200)`
-
-</details>
-
-## Examples
-
-### Single Arena Setup
-
-Minimal configuration for testing:
-
-```json5
-{
-  "arenas": [
-    {
-      "name": "test_arena",
-      "world": "minecraft:overworld",
-      "x": 0.5,
-      "y": 100.0,
-      "z": 0.5,
-      "yaw": 0.0,
-      "pitch": 0.0
-    }
-  ]
-}
-```
-
-### Multi-Arena Setup
-
-<details>
-<summary><strong>Click to view production multi-arena example</strong></summary>
-
-Production server with variety across multiple dimensions:
-
-```json5
-{
-  "arenas": [
-    {
-      "name": "volcano_arena",
-      "world": "minecraft:overworld",
-      "x": 1000.5,
-      "y": 64.0,
-      "z": 1000.5,
-      "yaw": 180.0,
-      "pitch": 0.0
-    },
-    {
-      "name": "ice_arena",
-      "world": "minecraft:overworld",
-      "x": -500.5,
-      "y": 70.0,
-      "z": -500.5,
-      "yaw": 90.0,
-      "pitch": 0.0
-    },
-    {
-      "name": "forest_arena",
-      "world": "minecraft:overworld",
-      "x": 200.5,
-      "y": 65.0,
-      "z": 800.5,
-      "yaw": 0.0,
-      "pitch": 0.0
-    },
-    {
-      "name": "nether_arena",
-      "world": "minecraft:the_nether",
-      "x": 50.5,
-      "y": 80.0,
-      "z": 50.5,
-      "yaw": 180.0,
-      "pitch": 0.0
-    },
-    {
-      "name": "end_arena",
-      "world": "minecraft:the_end",
-      "x": 0.5,
-      "y": 50.0,
-      "z": 0.5,
-      "yaw": 0.0,
-      "pitch": 0.0
-    }
-  ]
-}
-```
-
-</details>
-
-<details>
-<summary><strong>Performance Considerations</strong></summary>
-
-## Performance Considerations
-
-### Number of Arenas
-
-- **1-5 arenas:** Negligible performance impact
-- **5-20 arenas:** No noticeable impact
-- **20+ arenas:** Minimal impact (arena selection is O(n) random)
-
-**Recommendation:** 5-10 arenas is ideal for variety without overwhelming.
-
-### Cross-Dimensional Arenas
-
-Teleporting across dimensions:
-- **Chunk loading:** May cause brief delay (< 1 second)
-- **Render distance:** Players may see chunks loading
-- **TPS impact:** Negligible on modern servers
-
-**Best Practice:** Pre-load arena chunks using chunk loaders.
-
-</details>
-
 ---
 
 ## See Also
 
-- [Rewards System](rewards.md) - Season and milestone rewards
-- [Commands](../getting-started/commands.md) - Arena management commands
+- [Quick Start](../getting-started/quick-start.md) - Initial setup guide
+- [Battle Camera](../features/battle-camera.md) - Camera configuration
+- [Commands](../getting-started/commands.md) - Full command reference
 - [FAQ](../support/faq.md) - Common questions
 - [Troubleshooting](../support/troubleshooting.md) - Problem solving

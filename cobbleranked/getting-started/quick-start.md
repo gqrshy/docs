@@ -9,6 +9,7 @@ Get your ranked battles up and running in under 5 minutes.
 ## Overview
 
 This guide will help you:
+
 1. Configure your first battle arena
 2. Set up Pokemon restrictions
 3. Start your first season
@@ -16,33 +17,66 @@ This guide will help you:
 
 **Time required:** ~5 minutes
 
-## Step 1: Create a Battle Arena
+---
 
-> **Detailed guide:** [Arena Setup](../configuration/arenas.md)
+## Step 1: Create a Battle Arena
 
 Arenas are locations where ranked battles take place.
 
-### Create an Arena
+### Set Player Spawn Points
 
 1. **Build your arena** in-game (or use an existing location)
-2. **Stand at the first spawn point** where you want Player 1 to teleport when battle starts
 
-3. **Run the command:**
-   ```bash
+2. **Stand at Player 1's spawn point** and run:
+
+   ```text
    /rankedadmin setArena main_arena pos1
    ```
 
-4. **Move to second spawn point** and run:
-   ```bash
+3. **Move to Player 2's spawn point** (facing Player 1) and run:
+
+   ```text
    /rankedadmin setArena main_arena pos2
    ```
 
-5. **Verify creation:**
-   ```bash
+4. **Verify creation:**
+
+   ```text
    /rankedadmin arena status
    ```
 
-**Note:** For MULTI mode (4-player battles), you need to set `pos3` and `pos4` as well.
+<details>
+<summary><strong>MULTI Format Setup (4-Player Battles)</strong></summary>
+
+For MULTI format, set 4 spawn positions:
+
+```bash
+# Team 1 positions
+/rankedadmin setArena multi_arena pos1  # Player 1
+/rankedadmin setArena multi_arena pos3  # Player 2 (teammate)
+
+# Team 2 positions
+/rankedadmin setArena multi_arena pos2  # Player 3
+/rankedadmin setArena multi_arena pos4  # Player 4 (teammate)
+```
+
+> 📝 **Note:** If pos3/pos4 are not set, players will be auto-positioned 2 blocks apart from pos1/pos2 (fallback mode).
+
+</details>
+
+### Set Battle Camera Center (Optional)
+
+For the battle camera feature, set the camera focus point:
+
+1. **Stand at the center of your arena**
+
+2. **Run:**
+
+   ```text
+   /rankedadmin arena setcenter main_arena
+   ```
+
+See [Battle Camera](../features/battle-camera.md) for detailed configuration.
 
 <details>
 <summary><strong>Multiple Arenas (Optional)</strong></summary>
@@ -63,13 +97,13 @@ Create multiple arenas for variety:
 /rankedadmin setArena forest_arena pos2
 ```
 
-CobbleRanked will randomly select from available arenas.
+CobbleRanked randomly selects from available arenas.
 
 </details>
 
-## Step 2: Configure Pokemon Restrictions
+---
 
-> **Detailed guide:** [Blacklist System](../configuration/blacklist.md)
+## Step 2: Configure Pokemon Restrictions
 
 By default, **all Pokemon are allowed**. Let's ban some overpowered Pokemon:
 
@@ -78,6 +112,7 @@ By default, **all Pokemon are allowed**. Let's ban some overpowered Pokemon:
 1. **Open the file:** `config/cobbleranked/blacklist.json5`
 
 2. **Ban legendary Pokemon:**
+
    ```json5
    {
      "black_list_labels": [
@@ -88,7 +123,8 @@ By default, **all Pokemon are allowed**. Let's ban some overpowered Pokemon:
    ```
 
 3. **Save and reload:**
-   ```
+
+   ```text
    /rankedadmin reload
    ```
 
@@ -97,7 +133,7 @@ By default, **all Pokemon are allowed**. Let's ban some overpowered Pokemon:
 Choose a competitive format:
 
 <details>
-<summary><b>VGC-Style (Legendaries Allowed)</b></summary>
+<summary><strong>VGC-Style (Legendaries Allowed)</strong></summary>
 
 ```json5
 {
@@ -113,10 +149,11 @@ Choose a competitive format:
   ]
 }
 ```
+
 </details>
 
 <details>
-<summary><b>Smogon OU (No Ubers)</b></summary>
+<summary><strong>Smogon OU (No Ubers)</strong></summary>
 
 ```json5
 {
@@ -135,10 +172,11 @@ Choose a competitive format:
   ]
 }
 ```
+
 </details>
 
 <details>
-<summary><b>Little Cup (First Stage Only)</b></summary>
+<summary><strong>Little Cup (First Stage Only)</strong></summary>
 
 ```json5
 {
@@ -148,17 +186,18 @@ Choose a competitive format:
   }
 }
 ```
+
 </details>
 
-## Step 3: Start the First Season
+---
 
-> **Detailed guide:** [Season Management](../features/seasons.md)
+## Step 3: Start the First Season
 
 Seasons automatically rotate based on your configuration.
 
 ### Check Current Season
 
-```bash
+```text
 /rankedadmin season info
 ```
 
@@ -173,48 +212,109 @@ Edit `config/cobbleranked/config.json5`:
 ```
 
 Reload:
-```
+
+```text
 /rankedadmin reload
 ```
 
+---
+
 ## Step 4: Test the System
 
-> **Detailed guide:** [Battle Formats](../features/battle-formats.md)
-
 Let's run through a complete battle flow!
+
+### Available Battle Formats
+
+| Format | Players | Description |
+|--------|---------|-------------|
+| **Singles** | 1v1 | Traditional Pokemon battle |
+| **Doubles** | 1v1 | Each player controls 2 Pokemon |
+| **Triples** | 1v1 | Each player controls 3 Pokemon |
+| **Multi** | 2v2 | Team battle (4 players total) |
 
 ### Join the Queue
 
 1. **Open ranked GUI:**
-   ```bash
+
+   ```text
    /ranked
    ```
 
-2. **Select battle format** (Singles, Doubles, Triples, MULTI, etc.)
+2. **Select battle format** (Singles, Doubles, Triples, or Multi)
 
 3. **Join the queue** by clicking the queue button
 
-### Start a Battle (2 Players Needed)
+### Start a Battle (2+ Players Needed)
 
 1. **Second player** joins the same format queue
-2. **Matchmaking triggers** when two players are in queue
+2. **Matchmaking triggers** when players are matched
 3. **Both players teleport** to a random arena
 4. **Battle begins automatically**
 
 ### After the Battle
 
-- **Winner gains Elo** (default: 10-30 points)
-- **Loser loses Elo** (default: 10-30 points)
+- **Winner gains Elo** (based on rating difference)
+- **Loser loses Elo** (based on rating difference)
 - **Stats update** (wins, losses, win rate)
 - **Check leaderboard:** `/ranked` → Leaderboard
 
-## Step 5: Set Up Rewards (Optional)
+---
 
-> **Detailed guide:** [Rewards System](../configuration/rewards.md)
+## Step 5: Configure Battle Settings (Optional)
+
+### Format-Specific Rules
+
+Edit `config/cobbleranked/config.json5`:
+
+```json5
+"battle": {
+  "format_rules": {
+    "SINGLES": {
+      "enabled": true,
+      "team_size": 3,
+      "turn_timeout_seconds": 90,
+      "match_duration_minutes": 15
+    },
+    "DOUBLES": {
+      "enabled": true,
+      "team_size": 4,
+      "turn_timeout_seconds": 120,
+      "match_duration_minutes": 20
+    }
+  },
+  // Force all Pokemon to this level (0 = use original levels)
+  "levelMatch": 70
+}
+```
+
+### Elo System
+
+CobbleRanked uses **Pokemon Showdown-style Elo** by default (starting at 1000).
+
+<details>
+<summary><strong>Change Elo Mode</strong></summary>
+
+```json5
+"eloSystem": {
+  // Options: "LEGACY", "POKEMON_SHOWDOWN", "GLICKO2"
+  "mode": "POKEMON_SHOWDOWN",
+
+  "pokemonShowdown": {
+    "initialElo": 1000,
+    "floorElo": 1000
+  }
+}
+```
+
+See [Elo Rating System](../features/elo-system.md) for detailed configuration.
+
+</details>
+
+---
+
+## Step 6: Set Up Rewards (Optional)
 
 Reward your top players with items or commands!
-
-### Edit Rewards Configuration
 
 <details>
 <summary><strong>Example Rewards Configuration</strong></summary>
@@ -250,21 +350,38 @@ Open `config/cobbleranked/rewards.json5`:
 }
 ```
 
-**Reload:**
-```bash
+Reload:
+
+```text
 /rankedadmin reload
 ```
 
 </details>
 
+---
+
+## Command Summary
+
+| Task | Command |
+|------|---------|
+| Set arena position | `/rankedadmin setArena <name> pos1\|pos2` |
+| Set camera center | `/rankedadmin arena setcenter <name>` |
+| Check arena status | `/rankedadmin arena status` |
+| Reload config | `/rankedadmin reload` |
+| Season info | `/rankedadmin season info` |
+| Open ranked GUI | `/ranked` |
+
+---
+
 ## Next Steps
 
 Now that you're up and running:
 
-- **Customize language** - [Language Files](../configuration/languages.md)
-- **Configure Elo system** - [Elo Rating System](../features/elo-system.md)
-- **Set up cross-server** - [Cross-Server Setup](../advanced/cross-server.md)
-- **Learn all commands** - [Commands Reference](commands.md)
+- **[Arena Setup](../configuration/arenas.md)** - Advanced arena configuration
+- **[Blacklist System](../configuration/blacklist.md)** - Detailed Pokemon restrictions
+- **[Battle Formats](../features/battle-formats.md)** - Format-specific settings
+- **[Elo Rating System](../features/elo-system.md)** - Configure rating system
+- **[Commands Reference](commands.md)** - All available commands
 
 ---
 

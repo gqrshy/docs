@@ -87,31 +87,13 @@ When player has no data or error occurs:
 
 Display top player statistics for holograms, signs, and displays. **No player context required.**
 
-### All Formats Combined
-
-**Syntax:**
-
-```text
-%cobbleranked_top_<rank>_<field>%
-```
-
-**Examples:**
-
-```text
-%cobbleranked_top_1_name%       → "Notch"
-%cobbleranked_top_1_elo%        → "1850"
-%cobbleranked_top_1_wins%       → "156"
-%cobbleranked_top_2_winrate%    → "82.5%"
-%cobbleranked_top_10_games%     → "200"
-```
-
-### Format-Specific Leaderboards
-
 **Syntax:**
 
 ```text
 %cobbleranked_top_<format>_<rank>_<field>%
 ```
+
+### Examples by Format
 
 **Singles:**
 
@@ -126,6 +108,7 @@ Display top player statistics for holograms, signs, and displays. **No player co
 ```text
 %cobbleranked_top_doubles_1_name%     → "Alex"
 %cobbleranked_top_doubles_1_elo%      → "1680"
+%cobbleranked_top_doubles_5_wins%     → "42"
 ```
 
 **Triples:**
@@ -243,7 +226,7 @@ Any Fabric mod supporting Text Placeholder API can use the same placeholders:
 
 ```text
 %cobbleranked_singles_elo%
-%cobbleranked_top_1_name%
+%cobbleranked_top_singles_1_name%
 %cobbleranked_season_name%
 ```
 
@@ -351,24 +334,22 @@ Result: 1523
 <details>
 <summary><strong>All Leaderboard Placeholders</strong></summary>
 
-**Combined (All Formats):**
+**Syntax:** `%cobbleranked_top_<format>_<rank>_<field>%`
+
+**Formats:** `singles`, `doubles`, `triples`, `multi`
+
+**Fields:** `name`, `elo`, `wins`, `losses`, `winrate`, `games`
+
+**Rank Range:** 1-100
+
+**Examples:**
 
 ```text
-%cobbleranked_top_<1-100>_name%
-%cobbleranked_top_<1-100>_elo%
-%cobbleranked_top_<1-100>_wins%
-%cobbleranked_top_<1-100>_losses%
-%cobbleranked_top_<1-100>_winrate%
-%cobbleranked_top_<1-100>_games%
-```
-
-**Format-Specific:**
-
-```text
-%cobbleranked_top_singles_<1-100>_<field>%
-%cobbleranked_top_doubles_<1-100>_<field>%
-%cobbleranked_top_triples_<1-100>_<field>%
-%cobbleranked_top_multi_<1-100>_<field>%
+%cobbleranked_top_singles_1_name%
+%cobbleranked_top_singles_1_elo%
+%cobbleranked_top_doubles_5_winrate%
+%cobbleranked_top_triples_10_wins%
+%cobbleranked_top_multi_3_games%
 ```
 
 </details>

@@ -113,10 +113,7 @@ CobbleRanked supports multiple battle formats with independent rankings:
 | **Triples** | 3v3 battle | 3 | 3 per side |
 | **Multi** | 2v2 team battle (4 players total) | 2 per player | 1 per player |
 
-**Random Battle Formats:**
-- **Random Singles** - Auto-generated 6v6 teams
-- **Random Doubles** - Auto-generated 6v6 doubles
-- **Random 3v3** - Quick 3v3 with random teams
+> 📝 **Note:** Random Battles are planned for v1.3.0. See [Random Battles](random-battles.md).
 
 **Each format has:**
 - Independent Elo rating

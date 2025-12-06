@@ -33,7 +33,7 @@
 * [Battle Camera](features/battle-camera.md)
 * [Casual Battles](features/casual-missions.md)
 * [Custom Music Pack](features/custom-music.md)
-* [Random Battles](../random-battles/README.md)
+* [Random Battles](features/random-battles.md)
 
 ## Advanced
 
