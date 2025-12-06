@@ -22,18 +22,18 @@
 ## Features
 
 * [Ranked Battles](features/ranked-battles.md)
+* [Casual Battles](features/casual-battles.md)
+* [Random Battles](features/random-battles.md)
+* [Battle Formats](features/battle-formats.md)
 * [Elo Rating System](features/elo-system.md)
 * [Season Management](features/seasons.md)
-* [Battle Formats](features/battle-formats.md)
-* [Turn Timer System](features/turn-timer.md)
 * [Leaderboards](features/leaderboards.md)
-* [Disconnect Penalties](features/disconnect-penalties.md)
 * [Dynamic Matchmaking](features/dynamic-matchmaking.md)
-* [Inventory Restrictions](features/inventory-restrictions.md)
+* [Turn Timer System](features/turn-timer.md)
 * [Battle Camera](features/battle-camera.md)
-* [Casual Battles](features/casual-missions.md)
+* [Disconnect Penalties](features/disconnect-penalties.md)
+* [Inventory Restrictions](features/inventory-restrictions.md)
 * [Custom Music Pack](features/custom-music.md)
-* [Random Battles](features/random-battles.md)
 
 ## Advanced
 
