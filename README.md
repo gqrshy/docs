@@ -20,10 +20,9 @@ A comprehensive competitive ranked battle system for Cobblemon servers.
 
 **[View Documentation →](cobbleranked/)**
 
-**Download:**
-- Join our [Discord Server](https://discord.gg/VVVvBTqqyP) for latest releases
-- Modrinth _(coming soon)_
-- CurseForge _(coming soon)_
+**Purchase:** [Polymart](https://polymart.org/product/8733/cobbleranked)
+
+**Community:** [Discord Server](https://discord.gg/VVVvBTqqyP)
 
 ---
 
@@ -39,4 +38,4 @@ Your support helps with continued development, server infrastructure, and new fe
 
 **Powered by Cobblemon** • All mods are made with appreciation for the amazing Cobblemon community.
 
-_Last updated: October 27, 2025_
+_Last updated: December 6, 2025_

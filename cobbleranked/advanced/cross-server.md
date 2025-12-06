@@ -29,7 +29,7 @@ Install on **all** servers (lobby, main, battle):
 - [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite)
 - [Placeholder API](https://modrinth.com/mod/placeholder-api) (2.4.2+1.21+)
 - [Cobblemon](https://modrinth.com/mod/cobblemon) (1.6.1+)
-- [CobbleRanked](https://modrinth.com/mod/cobbleranked)
+- [CobbleRanked](https://polymart.org/product/8733/cobbleranked)
 
 ### 3. Database Setup
 

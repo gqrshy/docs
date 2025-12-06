@@ -14,7 +14,7 @@ Place all of these in your `mods` folder:
 | Fabric API | 0.116.6+ | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) |
 | Cobblemon | 1.7.0+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
 | Fabric Language Kotlin | 1.13.6+ | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin) |
-| **CobbleRanked** | Latest | [Discord](https://discord.gg/VVVvBTqqyP) |
+| **CobbleRanked** | Latest | [Polymart](https://polymart.org/product/8733/cobbleranked) |
 
 **Target:** Minecraft 1.21.1 (Fabric server)
 

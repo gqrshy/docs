@@ -20,11 +20,11 @@ A competitive ranked battle system for Cobblemon servers.
 </details>
 
 <details>
-<summary><strong>Where can I download it?</strong></summary>
+<summary><strong>Where can I purchase it?</strong></summary>
 
-**Official:** [Discord](https://discord.gg/VVVvBTqqyP) (currently the only distribution channel)
+**Official:** [Polymart](https://polymart.org/product/8733/cobbleranked)
 
-Modrinth/CurseForge coming soon.
+CobbleRanked is a premium mod available exclusively on Polymart.
 
 </details>
 

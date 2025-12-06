@@ -25,7 +25,7 @@ Random Battles will provide a unique competitive experience where players battle
 For updates on Random Battles development:
 
 - Join our [Discord](https://discord.gg/VVVvBTqqyP)
-- Check the [Modrinth page](https://modrinth.com/mod/cobbleranked) for release notes
+- Check the [Polymart page](https://polymart.org/product/8733/cobbleranked) for release notes
 
 ---
 
