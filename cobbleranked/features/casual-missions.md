@@ -1,46 +1,111 @@
 # Casual Battles
 
-Casual battle mode for non-ranked Pokemon battles with an integrated mission system.
+Non-competitive Pokemon battles with no Elo changes, integrated mission system, and separate rewards.
+
+---
+
+<details>
+<summary><strong>Default casual_battles.json5 (Full Configuration)</strong></summary>
+
+```json5
+{
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  CASUAL BATTLES CONFIGURATION
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  "enabled": false,
+
+  "battle": {
+    "level_match": 50,
+    "team_size": 3,
+    "turn_timeout_seconds": 60,
+    "match_duration_minutes": 10,
+    "allow_held_items": true,
+    "allow_duplicates": true
+  },
+
+  "queue": {
+    "separate_queue": true,
+    "match_by_elo": false,
+    "max_wait_time": 120,
+    "min_players_for_match": 2
+  },
+
+  "rewards": {
+    "enabled": true,
+    "victory_commands": [
+      "give {player} cobblemon:exp_candy_s 1"
+    ],
+    "defeat_commands": [
+      "give {player} cobblemon:potion 1"
+    ],
+    "participation_commands": [],
+    "daily_limit": -1,
+    "cooldown_minutes": 0,
+    "announce_rewards": false
+  },
+
+  "statistics": {
+    "track_wins": true,
+    "track_losses": true,
+    "track_winrate": true,
+    "show_in_stats_command": true,
+    "separate_from_ranked": true,
+    "reset_with_season": false
+  },
+
+  "missions": {
+    "enabled": true,
+    "daily_reset_time": "00:00",
+    "daily_reset_timezone": "UTC",
+    "weekly_reset_day": "MONDAY",
+    "weekly_reset_time": "00:00",
+    "weekly_reset_timezone": "UTC",
+    "auto_claim": false,
+    "announce_completion": true
+  },
+
+  "music": {
+    "queue_music": [
+      {"music": "cobbleranked:music.queue.bw_10", "volume": 0.5, "pitch": 1.0}
+    ],
+    "team_selection_music": [
+      {"music": "cobbleranked:music.selection.team_selection_music", "volume": 1.0, "pitch": 1.0}
+    ],
+    "battle_music": [
+      {"music": "cobbleranked:music.battle.normal.xy_trainer", "volume": 0.5, "pitch": 1.0}
+    ]
+  },
+
+  "sounds": {
+    "match_found": {"sound": "minecraft:entity.experience_orb.pickup", "volume": 0.8, "pitch": 1.0},
+    "ready_countdown": {"sound": "minecraft:entity.experience_orb.pickup", "volume": 0.7, "pitch": 0.7},
+    "turn_timer_warning": {"sound": "minecraft:block.note_block.harp", "volume": 2.0, "pitch": 1.5}
+  }
+}
+```
+
+</details>
+
+---
+
+## File Location
+
+`config/cobbleranked/casual/casual_battles.json5`
 
 ---
 
 ## Overview
 
-Casual Battles provide a relaxed alternative to ranked matches. Unlike ranked battles, casual matches do not affect Elo ratings, making them perfect for practice, testing new teams, or playing without competitive pressure.
+Casual Battles provide a relaxed alternative to ranked matches. Players can practice, test teams, and enjoy battles without competitive pressure.
 
 **Key Features:**
-- No Elo gain/loss - play without competitive stress
+- No Elo gain/loss
+- Separate queue from ranked
 - Daily & weekly missions with rewards
-- Milestone rewards for long-term achievements
-- Same battle formats as ranked (Singles, Doubles, etc.)
-- Separate queue from ranked matches
-
----
-
-## How to Play
-
-### Starting a Casual Battle
-
-```bash
-/casual
-```
-
-This opens the Casual Battle GUI where you can:
-- Queue for casual matches (select format)
-- View your casual battle stats
-- Access the missions menu
-
-### Viewing Missions
-
-```bash
-/casual missions
-```
-
-Opens the missions GUI directly to view:
-- Active daily missions
-- Active weekly missions
-- Available milestone rewards
-- Progress for each mission
+- Match rewards (victory/defeat)
+- Separate statistics tracking
+- Custom music and sounds
 
 ---
 
@@ -48,94 +113,246 @@ Opens the missions GUI directly to view:
 
 | Feature | Casual | Ranked |
 |---------|--------|--------|
-| Elo Changes | No | Yes |
-| Missions | Yes | No |
-| Leaderboard | No | Yes |
-| Season Rewards | No | Yes |
+| Elo Changes | ❌ No | ✅ Yes |
+| Mission System | ✅ Yes | ❌ No |
+| Match Rewards | ✅ Yes | ❌ No |
+| Leaderboard | ❌ No | ✅ Yes |
+| Season Rewards | ❌ No | ✅ Yes |
 | Blacklist Rules | Same | Same |
-| Battle Formats | All | All |
+| Separate Stats | ✅ Yes | ✅ Yes |
+
+---
+
+## Enabling Casual Battles
+
+Set `enabled` to `true` in `casual_battles.json5`:
+
+```json5
+{
+  "enabled": true
+}
+```
+
+Then reload:
+```
+/rankedadmin reload
+```
+
+---
+
+## Battle Settings
+
+Configure battle rules for casual mode:
+
+```json5
+"battle": {
+  "level_match": 50,
+  "team_size": 3,
+  "turn_timeout_seconds": 60,
+  "match_duration_minutes": 10,
+  "allow_held_items": true,
+  "allow_duplicates": true
+}
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `level_match` | `50` | Force all Pokemon to this level (0 = original levels) |
+| `team_size` | `3` | Number of Pokemon per team |
+| `turn_timeout_seconds` | `60` | Turn timer in seconds (0 = disabled) |
+| `match_duration_minutes` | `10` | Match time limit (0 = unlimited) |
+| `allow_held_items` | `true` | Allow Pokemon to hold items |
+| `allow_duplicates` | `true` | Allow duplicate Pokemon species |
+
+---
+
+## Queue Settings
+
+Configure matchmaking behavior:
+
+```json5
+"queue": {
+  "separate_queue": true,
+  "match_by_elo": false,
+  "max_wait_time": 120,
+  "min_players_for_match": 2
+}
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `separate_queue` | `true` | Use separate queue from ranked |
+| `match_by_elo` | `false` | Match by Elo similarity (false = random) |
+| `max_wait_time` | `120` | Maximum queue wait time in seconds |
+| `min_players_for_match` | `2` | Minimum players to start a match |
+
+---
+
+## Match Rewards
+
+Configure rewards given after each casual match:
+
+```json5
+"rewards": {
+  "enabled": true,
+  "victory_commands": [
+    "give {player} cobblemon:exp_candy_s 1"
+  ],
+  "defeat_commands": [
+    "give {player} cobblemon:potion 1"
+  ],
+  "participation_commands": [],
+  "daily_limit": -1,
+  "cooldown_minutes": 0,
+  "announce_rewards": false
+}
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `enabled` | `true` | Enable match rewards |
+| `victory_commands` | 1x Exp Candy S | Commands executed on victory |
+| `defeat_commands` | 1x Potion | Commands executed on defeat |
+| `participation_commands` | none | Commands for both players |
+| `daily_limit` | `-1` | Daily reward limit (-1 = unlimited) |
+| `cooldown_minutes` | `0` | Cooldown between rewards |
+| `announce_rewards` | `false` | Announce rewards in chat |
+
+**Placeholder:** `{player}` = player username
+
+---
+
+## Statistics Tracking
+
+Configure casual battle statistics:
+
+```json5
+"statistics": {
+  "track_wins": true,
+  "track_losses": true,
+  "track_winrate": true,
+  "show_in_stats_command": true,
+  "separate_from_ranked": true,
+  "reset_with_season": false
+}
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `track_wins` | `true` | Track win count |
+| `track_losses` | `true` | Track loss count |
+| `track_winrate` | `true` | Calculate win rate |
+| `show_in_stats_command` | `true` | Show in `/stats` command |
+| `separate_from_ranked` | `true` | Keep stats separate from ranked |
+| `reset_with_season` | `false` | Reset when ranked season resets |
+
+---
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `/casual` | Open casual battle menu |
+| `/casual missions` | Open missions GUI directly |
 
 ---
 
 ## Mission System
 
-The mission system provides daily and weekly objectives to earn rewards while playing casual battles.
+The mission system provides daily and weekly objectives to earn rewards.
 
-**Key Features:**
-- Daily missions (reset at configured time)
-- Weekly missions (reset on configured day)
-- Milestone rewards for long-term achievements
-- Automatic progress tracking
-- Pending rewards for offline players
+### Mission Settings
+
+```json5
+"missions": {
+  "enabled": true,
+  "daily_reset_time": "00:00",
+  "daily_reset_timezone": "UTC",
+  "weekly_reset_day": "MONDAY",
+  "weekly_reset_time": "00:00",
+  "weekly_reset_timezone": "UTC",
+  "auto_claim": false,
+  "announce_completion": true
+}
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `enabled` | `true` | Enable mission system |
+| `daily_reset_time` | `"00:00"` | Daily reset time (24h format) |
+| `daily_reset_timezone` | `"UTC"` | Timezone for daily reset |
+| `weekly_reset_day` | `"MONDAY"` | Day to reset weekly missions |
+| `weekly_reset_time` | `"00:00"` | Weekly reset time |
+| `auto_claim` | `false` | Auto-claim rewards on completion |
+| `announce_completion` | `true` | Announce completion in chat |
+
+**Weekly Reset Days:** `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`
+
+### Mission Configuration File
+
+Mission definitions are in a separate file: `config/cobbleranked/casual/casual_missions.json5`
 
 ---
 
 ## Mission Types
 
-### MATCH_COUNT
-Play a specific number of matches.
+| Type | Description | Example |
+|------|-------------|---------|
+| `MATCH_COUNT` | Play matches | "Play 3 casual matches" |
+| `WIN_COUNT` | Win matches | "Win 2 matches" |
+| `POKEMON_TYPE_USAGE` | Use specific type Pokemon | "Use Fire Pokemon in 5 matches" |
+| `FORMAT_PARTICIPATION` | Play specific format | "Play 10 Singles matches" |
+| `POKEMON_DEFEATED` | Defeat Pokemon count | "Defeat 30 Pokemon total" |
+| `WIN_STREAK` | Consecutive wins | "Win 3 matches in a row" |
+| `GENERATION_USAGE` | Use specific gen Pokemon | "Use Gen 1 Pokemon in 2 matches" |
+| `EVOLUTION_STAGE` | Use evolution stages | "Use fully evolved Pokemon in 5 matches" |
 
-**Example:** "Play 3 casual matches"
+<details>
+<summary><strong>Mission Configuration Example</strong></summary>
 
-### WIN_COUNT
-Win a specific number of matches.
+```json5
+{
+  "daily_missions": [
+    {
+      "id": "daily_matches_3",
+      "display_name": "§6Daily Challenge",
+      "description": ["§7Play 3 casual matches", "§7Any format counts!"],
+      "type": "MATCH_COUNT",
+      "target_value": 3,
+      "rewards": ["give {player} cobblemon:exp_candy_m 2"],
+      "parameters": {}
+    }
+  ],
+  "weekly_missions": [
+    {
+      "id": "weekly_fire_usage",
+      "display_name": "§5Fire Master",
+      "description": ["§7Use Fire-type Pokemon", "§7in 5 matches"],
+      "type": "POKEMON_TYPE_USAGE",
+      "target_value": 5,
+      "rewards": ["give {player} cobblemon:fire_stone 2"],
+      "parameters": {
+        "pokemon_types": ["fire"]
+      }
+    }
+  ],
+  "milestone_rewards": [
+    {
+      "id": "milestone_100_matches",
+      "display_name": "§6§lVeteran",
+      "description": ["§7Complete 100 total matches"],
+      "type": "MATCH_COUNT",
+      "target_value": 100,
+      "rewards": [
+        "give {player} minecraft:diamond 32",
+        "give {player} cobblemon:exp_candy_xl 15"
+      ]
+    }
+  ]
+}
+```
 
-**Example:** "Win 2 matches"
-
-### POKEMON_TYPE_USAGE
-Use Pokemon of specific types in matches.
-
-**Example:** "Use Fire-type Pokemon in 5 matches"
-
-**Supported Types:** normal, fire, water, grass, electric, ice, fighting, poison, ground, flying, psychic, bug, rock, ghost, dragon, dark, steel, fairy
-
-### FORMAT_PARTICIPATION
-Play matches in a specific format.
-
-**Example:** "Play 10 Singles matches"
-
-**Supported Formats:** SINGLES, DOUBLES, TRIPLES, MULTI
-
-### POKEMON_DEFEATED
-Defeat a cumulative number of Pokemon.
-
-**Example:** "Defeat 30 Pokemon total"
-
-**Note:** Counts all defeated Pokemon across all matches.
-
-### WIN_STREAK
-Achieve consecutive wins.
-
-**Example:** "Win 3 matches in a row"
-
-**Note:** Resets when you lose a match.
-
-### GENERATION_USAGE
-Use Pokemon from specific generations.
-
-**Example:** "Use Gen 1 Pokemon in 2 matches"
-
-**Generations:**
-- 1 = Kanto
-- 2 = Johto
-- 3 = Hoenn
-- 4 = Sinnoh
-- 5 = Unova
-- 6 = Kalos
-- 7 = Alola
-- 8 = Galar
-- 9 = Paldea
-
-### EVOLUTION_STAGE
-Use Pokemon at specific evolution stages.
-
-**Example:** "Use fully evolved Pokemon in 5 matches"
-
-**Stages:**
-- `FIRST` - Basic/unevolved Pokemon (e.g., Bulbasaur, Pikachu)
-- `MIDDLE` - Middle evolution (e.g., Ivysaur, Charmeleon)
-- `FINAL` - Final evolution (e.g., Venusaur, Charizard)
-- `SINGLE` - Pokemon with no evolutions (e.g., Ditto, Unown)
+</details>
 
 ---
 
@@ -143,295 +360,71 @@ Use Pokemon at specific evolution stages.
 
 ### Daily Missions
 
-Reset daily at configured time (default: 00:00 UTC).
-
 | Mission | Type | Goal | Rewards |
 |---------|------|------|---------|
 | Daily Challenge | MATCH_COUNT | Play 3 matches | 2x Exp Candy M |
 | Daily Victor | WIN_COUNT | Win 2 matches | 1x Exp Candy L |
-| Singles Starter | FORMAT_PARTICIPATION | Play 1 Singles match | 3x Potion |
-| Pokemon Hunter | POKEMON_DEFEATED | Defeat 5 Pokemon | 3x Exp Candy S |
-| Kanto Nostalgia | GENERATION_USAGE | Use Gen 1 Pokemon in 2 matches | Old Amber + Helix Fossil |
 
 ### Weekly Missions
 
-Reset weekly on configured day (default: Monday 00:00 UTC).
-
 | Mission | Type | Goal | Rewards |
 |---------|------|------|---------|
-| Weekly Warrior | MATCH_COUNT | Play 15 matches | 10x Exp Candy M |
-| Victory Streak | WIN_COUNT | Win 10 matches | 5x Exp Candy L |
-| Fire Master | POKEMON_TYPE_USAGE | Use Fire Pokemon in 5 matches | Charcoal + 5x Exp Candy M |
-| Water Expert | POKEMON_TYPE_USAGE | Use Water Pokemon in 5 matches | Mystic Water + 5x Exp Candy M |
-| Singles Specialist | FORMAT_PARTICIPATION | Play 10 Singles matches | Choice Band |
-| Doubles Expert | FORMAT_PARTICIPATION | Play 10 Doubles matches | Choice Scarf |
-| Mass Defeat | POKEMON_DEFEATED | Defeat 30 Pokemon | 10x Exp Candy L |
-| Win Streak Master | WIN_STREAK | Win 3 matches in a row | Lucky Egg |
-| Final Form Focus | EVOLUTION_STAGE | Use fully evolved Pokemon in 5 matches | 5x Rare Candy |
-| Unevolved Challenge | EVOLUTION_STAGE | Use unevolved Pokemon in 3 matches | Eviolite |
-| Modern Era | GENERATION_USAGE | Use Gen 8-9 Pokemon in 5 matches | 5x Exp Candy XL |
+| Weekly Warrior | MATCH_COUNT | Play 15 matches | 3x Exp Candy XL |
+| Weekly Champion | WIN_COUNT | Win 10 matches | 5x Rare Candy |
+| Fire Master | POKEMON_TYPE_USAGE | Use Fire Pokemon 5x | 2x Fire Stone |
+| Singles Specialist | FORMAT_PARTICIPATION | Play 10 Singles | 2x Exp Candy XL |
 
 ---
 
-## Milestone Rewards
+## Music & Sounds
 
-One-time rewards earned based on cumulative stats. Cannot be claimed again once received.
-
-| Milestone | Requirement | Rewards |
-|-----------|-------------|---------|
-| Newcomer | 10 total matches | 16x Iron Ingot + 5x Exp Candy M |
-| Regular | 50 total matches | 32x Gold Ingot + 10x Exp Candy L |
-| Veteran | 100 total matches | 32x Diamond + 15x Exp Candy XL |
-| Winner | 25 total wins | 32x Emerald + 10x Rare Candy |
-| Champion | 50 total wins | 1x Nether Star + 20x Rare Candy |
-| Casual Legend | 100 total wins | 1x Beacon + 50x Rare Candy + Title |
-
----
-
-## How to Use
-
-### For Players
-
-**Open Mission Menu:**
-```bash
-/casual
-```
-Click "Missions" button to view:
-- Active daily missions
-- Active weekly missions
-- Available milestone rewards
-- Progress for each mission
-
-**Claim Rewards:**
-- Click completed missions to claim rewards
-- Rewards are added to your inventory immediately
-- If inventory is full, items drop at your location
-
-**Check Progress:**
-- Mission progress updates in real-time
-- Green checkmark = Completed
-- Yellow bar = In progress
-- Gray = Not started
-
-### For Server Admins
-
-**Configure Missions:**
-
-Edit `config/cobbleranked/casual_missions.json5`:
-
-<details>
-<summary><strong>Click to view example configuration</strong></summary>
+Casual battles can use different music from ranked:
 
 ```json5
-{
-  "daily_missions": {
-    "daily_matches_3": {
-      "type": "MATCH_COUNT",
-      "target_value": 3,
-      "display_name": "§6Daily Challenge",
-      "description": [
-        "§7Play 3 casual matches",
-        "§7Any format counts!"
-      ],
-      "rewards": [
-        "give {player} cobblemon:exp_candy_m 2"
-      ],
-      "parameters": {}
-    }
-  },
-  "weekly_missions": {
-    "weekly_fire_usage": {
-      "type": "POKEMON_TYPE_USAGE",
-      "target_value": 5,
-      "display_name": "§6Fire Master",
-      "description": [
-        "§7Use Fire-type Pokemon",
-        "§7in 5 matches"
-      ],
-      "rewards": [
-        "give {player} cobblemon:charcoal 1",
-        "give {player} cobblemon:exp_candy_m 5"
-      ],
-      "parameters": {
-        "types": ["fire"]
-      }
-    }
-  },
-  "milestone_rewards": {
-    "milestone_100_matches": {
-      "type": "MATCH_COUNT",
-      "target_value": 100,
-      "display_name": "§6§lVeteran",
-      "description": [
-        "§7Complete 100 total matches"
-      ],
-      "rewards": [
-        "give {player} minecraft:diamond 32",
-        "give {player} cobblemon:exp_candy_xl 15"
-      ]
-    }
-  },
-  "reset_settings": {
-    "daily_reset_time": "00:00",
-    "daily_reset_timezone": "UTC",
-    "weekly_reset_day": "MONDAY",
-    "weekly_reset_time": "00:00",
-    "auto_claim": false,
-    "announce_completion": true
-  }
+"music": {
+  "queue_music": [
+    {"music": "cobbleranked:music.queue.bw_10", "volume": 0.5, "pitch": 1.0}
+  ],
+  "team_selection_music": [
+    {"music": "cobbleranked:music.selection.team_selection_music", "volume": 1.0, "pitch": 1.0}
+  ],
+  "battle_music": [
+    {"music": "cobbleranked:music.battle.normal.xy_trainer", "volume": 0.5, "pitch": 1.0}
+  ]
+},
+
+"sounds": {
+  "match_found": {"sound": "minecraft:entity.experience_orb.pickup", "volume": 0.8, "pitch": 1.0},
+  "ready_countdown": {"sound": "minecraft:entity.experience_orb.pickup", "volume": 0.7, "pitch": 0.7},
+  "turn_timer_warning": {"sound": "minecraft:block.note_block.harp", "volume": 2.0, "pitch": 1.5}
 }
 ```
 
-</details>
-
-**Reset Settings:**
-
-| Setting | Description | Default |
-|---------|-------------|---------|
-| `daily_reset_time` | Time to reset daily missions (24h format) | `"00:00"` |
-| `daily_reset_timezone` | Timezone for daily reset | `"UTC"` |
-| `weekly_reset_day` | Day to reset weekly missions | `"MONDAY"` |
-| `weekly_reset_time` | Time to reset weekly missions | `"00:00"` |
-| `auto_claim` | Auto-claim rewards (true) or manual (false) | `false` |
-| `announce_completion` | Announce mission completion in chat | `true` |
-
-**Weekly Reset Days:**
-`MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`
-
-**Supported Timezones:**
-`UTC`, `America/New_York`, `Europe/London`, `Asia/Tokyo`, etc. (Java timezone IDs)
-
----
-
-## Pending Rewards System
-
-When players complete missions while offline or when the server restarts, rewards are saved as "pending" and delivered on next login.
-
-**Features:**
-- Rewards persist across server restarts
-- Automatic notification on login
-- View pending rewards in `/casual` menu
-- Database-backed (SQLite/MySQL/MongoDB)
-
-**Player Experience:**
-```
-[CobbleRanked] You have 3 pending rewards!
-[CobbleRanked] Use /casual to claim them.
-```
+> 📝 **Note:** Unlike ranked, casual battles don't have Elo-based music tiers. Music is randomly selected from the list.
 
 ---
 
 ## GUI Customization
 
-Customize mission GUI appearance in `config/cobbleranked/gui/casual_missions_gui.json5`.
+Customize the casual GUI in `config/cobbleranked/gui/casual_gui.json5`.
 
-**Configurable Elements:**
-- Background pattern
-- Mission item icons
-- Progress bar colors
-- Button positions
-- Text formatting
+See [GUI Customization](../configuration/gui.md) for details.
 
 ---
 
-## Commands
+## Blacklist Configuration
 
-### Player Commands
+Casual battles can have separate blacklist rules in `config/cobbleranked/blacklist/casual.json5`.
 
-| Command | Description |
-|---------|-------------|
-| `/casual` | Open casual battle menu |
-| `/casual missions` | Open missions GUI directly |
-
-**Permissions:** None (available to all players)
-
-### Admin Commands
-
-No admin commands specific to casual battles. Configure via files.
-
----
-
-## Configuration Examples
-
-### Custom Daily Mission
-
-Create a mission to use Dragon-type Pokemon:
-
-```json5
-"daily_dragon_master": {
-  "type": "POKEMON_TYPE_USAGE",
-  "target_value": 3,
-  "display_name": "§5Dragon Tamer",
-  "description": [
-    "§7Use Dragon-type Pokemon",
-    "§7in 3 matches"
-  ],
-  "rewards": [
-    "give {player} cobblemon:dragon_fang 1",
-    "give {player} cobblemon:exp_candy_l 3"
-  ],
-  "parameters": {
-    "types": ["dragon"]
-  }
-}
-```
-
-### Custom Milestone
-
-Create a milestone for 200 wins:
-
-```json5
-"milestone_200_wins": {
-  "type": "WIN_COUNT",
-  "target_value": 200,
-  "display_name": "§6§lGrandmaster",
-  "description": [
-    "§7Win 200 total matches"
-  ],
-  "rewards": [
-    "give {player} minecraft:nether_star 5",
-    "give {player} cobblemon:rare_candy 100",
-    "lp user {player} permission set ranked.title.grandmaster true"
-  ]
-}
-```
-
-### Multiple Type Mission
-
-Create a mission requiring both Fire and Water types:
-
-```json5
-"weekly_fire_water_combo": {
-  "type": "POKEMON_TYPE_USAGE",
-  "target_value": 10,
-  "display_name": "§6Elemental Balance",
-  "description": [
-    "§7Use Fire or Water Pokemon",
-    "§7in 10 matches"
-  ],
-  "rewards": [
-    "give {player} cobblemon:charcoal 1",
-    "give {player} cobblemon:mystic_water 1",
-    "give {player} cobblemon:exp_candy_xl 5"
-  ],
-  "parameters": {
-    "types": ["fire", "water"]
-  }
-}
-```
-
----
-
-## Troubleshooting
-
-Having issues with missions? See the [FAQ](../support/faq.md) for solutions.
+See [Blacklist System](../configuration/blacklist.md) for details.
 
 ---
 
 ## See Also
 
 - [Ranked Battles](ranked-battles.md) - Competitive ranked mode
-- [Rewards System](../configuration/rewards.md) - Other reward configurations
-- [Commands Reference](../getting-started/commands.md) - All available commands
+- [Rewards System](../configuration/rewards.md) - Ranked rewards configuration
+- [Custom Music](custom-music.md) - Music pack setup
+- [Commands Reference](../getting-started/commands.md) - All commands
 - [FAQ](../support/faq.md) - Common questions
 - [Troubleshooting](../support/troubleshooting.md) - Problem solving

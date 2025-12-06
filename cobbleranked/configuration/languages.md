@@ -1,521 +1,538 @@
 # Language Files
 
-Customize all in-game messages and translate CobbleRanked to any language.
+Customize all CobbleRanked messages by editing language files.
+
+**Location:** `config/cobbleranked/language/`
 
 ---
 
-## File Location
+## Available Languages
 
-`config/cobbleranked/language/`
+| Language | File | Status |
+|----------|------|--------|
+| English | `en-Us.json5` | ✅ Complete |
+| Japanese | `ja-Jp.json5` | ✅ Complete |
+| French | `fr-Fr.json5` | ✅ Complete |
 
-## Overview
-
-CobbleRanked includes 2 built-in languages:
-- **English** (`en-Us.json5`) - Default
-- **Japanese** (`ja-Jp.json5`)
-
-All messages, notifications, and GUI text are fully customizable via JSON5 language files.
-
-**Language File Statistics (v1.0.8+):**
-- **673 language keys** total
-- **37 organized categories** (Queue, Battle, Validation, Admin, etc.)
-- **Fully documented** with comments and sections
-- **100% customizable** - all text can be modified
-
-> **Note:** Officially supported languages are English (en-Us), Japanese (ja-Jp), and French (fr-Fr). Portuguese (pt-Br) and Russian (ru-Ru) support was discontinued as of v1.0.
-
-## Quick Start
-
-### 1. Select Language
-
-Edit `config/cobbleranked/config.json5`:
+Set the active language in `config.json5`:
 
 ```json5
 {
-  "language": "en-Us"  // Change to: en-Us or ja-Jp
+  "language": "en-Us"  // Options: en-Us, ja-Jp, fr-Fr
 }
 ```
 
-### 2. Reload Configuration
-
-```bash
-/rankedadmin reload
-```
-
-That's it! All messages will now use your selected language.
-
----
-
-## Language File Structure
-
-### File Format
-
-Language files use JSON5 format with key-value pairs:
-
-```json5
-{
-  "message_key": "Message content with {placeholder}",
-  "another_key": "Another message",
-  "color_example": "&aGreen &cRed &eYellow text"
-}
-```
-
-### Example: en-Us.json5
-
-```json5
-{
-  // Queue messages
-  "joined-queue": "&aYou have joined the ranked match queue.",
-  "left-queue": "&cYou have left the ranked match queue.",
-  "remaingFila": "&cSearching for a match... &7(&e{remaining}&7) &7(Position: &e{posicao}&7)",
-
-  // Battle messages
-  "match-winner": "&aVictory!!",
-  "match-winner-subtitle": "&aYou gained &f{gain} &aELO points.",
-  "match-loser": "&cDefeat!!",
-  "match-loser-subtitle": "&cYou lost &f{lose} &aELO points.",
-
-  // Validation messages
-  "pokemon-blacklist": "&cYou are using a Pokémon that is on the blacklist.",
-  "no-pokemon-ability": "&cYour Pokémon has an ability that is not allowed in ranked."
-}
-```
-
----
-
-## Message Categories
-
-### Queue Messages
-
-| Key | Description | Example |
-|-----|-------------|---------|
-| `joined-queue` | Joined queue notification | "You have joined the ranked match queue." |
-| `left-queue` | Left queue notification | "You have left the ranked match queue." |
-| `remaingFila` | Queue waiting status | "Searching for a match... (30s) (Position: 1)" |
-| `match-found` | Match found title | "Match Found!" |
-| `prepare-queue-cancel` | Match cancelled message | "Match was canceled. (A player disconnected)" |
-
-### Battle Messages
-
-| Key | Description | Example |
-|-----|-------------|---------|
-| `battle-start-title` | Battle starting title | "Battle Starting!" |
-| `battle-countdown` | Countdown number | "3" |
-| `match-started` | Match start notification | "Match Started" |
-| `match-winner` | Victory title | "Victory!!" |
-| `match-winner-subtitle` | Victory subtitle with Elo gain | "You gained 25 ELO points." |
-| `match-loser` | Defeat title | "Defeat!!" |
-| `match-loser-subtitle` | Defeat subtitle with Elo loss | "You lost 18 ELO points." |
-
-### Validation Messages
-
-| Key | Description | Example |
-|-----|-------------|---------|
-| `pokemon-blacklist` | Banned Pokemon error | "You are using a Pokémon that is on the blacklist." |
-| `no-pokemon-ability` | Banned ability error | "Your Pokémon has an ability that is not allowed in ranked." |
-| `blocked-item-move` | Banned move error | "You have a Pokémon with moves that are blocked in ranked." |
-| `no-pokemon-item` | Banned item error | "Your Pokémon has an item equipped that is not allowed in ranked." |
-| `limit-pokemon` | Team size error | "You need to have 6 Pokémon to join the ranked match." |
-
-### Admin Messages
-
-| Key | Description | Example |
-|-----|-------------|---------|
-| `ranked-reload-adm` | Config reload success | "Settings reloaded successfully!" |
-| `set-elo-adm` | Elo set command | "Elo 1500 set successfully for player Steve" |
-| `arena-not-found` | Arena not found error | "Arena volcano_arena not found" |
-| `noPermCommand` | Permission denied (legacy) | "You do not have permission to use this command." |
-| `no_permission` | Permission denied (new) | "You don't have permission to use this command" |
-
-### Match Result Messages (v1.0.7+)
-
-| Key | Description | Example | When Used |
-|-----|-------------|---------|-----------|
-| `match_result_broadcast` | Public match result | "{winner} defeated {loser} in a ranked match!" | When `announce_match_results: true` |
-| `match_result_private` | Private match result | "" (empty by default) | When `announce_match_results: false` |
-| `match_result_forfeit_opponent` | Opponent forfeited | "You Win! {player} forfeited the match." | Opponent disconnects during battle |
-| `match_result_forfeit_self` | You forfeited | "You forfeited! You lost the match." | You disconnect during battle |
-
-**Placeholders:**
-- `{winner}` - Winner's username
-- `{loser}` - Loser's username
-- `{player}` - Opponent's username (in forfeit messages)
+Reload after changing: `/rankedadmin reload`
 
 ---
 
 ## Placeholders
 
-Language files support dynamic placeholders that are replaced with actual values at runtime. CobbleRanked uses a consistent naming convention with prefixes.
+Messages use `{placeholder}` syntax for dynamic values:
 
-### Stats Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{stats_elo}` | Player's Elo rating | `1500` |
-| `{stats_wins}` | Total wins | `42` |
-| `{stats_losses}` | Total losses | `15` |
-| `{stats_winrate}` | Win percentage | `73` |
-| `{stats_total_games}` | Total games played | `57` |
-| `{stats_win_streak}` | Current win streak | `5` |
-| `{stats_rank}` | Player's rank tier | `Silver` |
-
-### Player Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{player_name}` | Current player name | `Steve` |
-| `{opponent_name}` | Opponent player name | `Alex` |
-| `{winner}` | Winner's name | `Steve` |
-| `{loser}` | Loser's name | `Alex` |
-
-### Battle Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{battle_format}` | Battle format display name | `Singles` |
-| `{battle_elo_change}` | Elo points gained/lost | `+25` |
-| `{format_name}` | Localized format name | `Singles Battle` |
-| `{match_countdown_seconds}` | Match start countdown | `3` |
-
-### Arena Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{arena_name}` | Arena identifier | `volcano_arena` |
-| `{arena_location_x}` | Arena X coordinate | `100` |
-| `{arena_location_y}` | Arena Y coordinate | `64` |
-| `{arena_location_z}` | Arena Z coordinate | `200` |
-| `{arena_world}` | Arena world name | `world` |
-| `{arena_status}` | Arena status | `available` |
-| `{arena_count}` | Total arena count | `5` |
-
-### Season Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{season_name}` | Current season name | `Season 1` |
-| `{season_id}` | Season ID number | `1` |
-| `{season_remaining_days}` | Days until season ends | `15` |
-| `{season_remaining_time}` | Formatted remaining time | `15d 6h` |
-| `{season_status}` | Season status | `active` |
-
-### Queue Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{queue_size}` | Players in queue | `3` |
-| `{queue_waiting_count}` | Players waiting | `2` |
-| `{queue_search_seconds}` | Search time elapsed | `30` |
-
-### Timer Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{timer_seconds}` | Timer in seconds | `90` |
-| `{timer_minutes}` | Timer in minutes | `1` |
-| `{penalty_seconds}` | Penalty cooldown seconds | `300` |
-| `{cooldown_seconds}` | Action cooldown seconds | `5` |
-
-### Reward Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{reward_name}` | Reward name | `Gold Trophy` |
-| `{reward_display_name}` | Reward display name | `§6Gold Trophy` |
-| `{reward_rank}` | Required rank for reward | `Gold` |
-| `{reward_count}` | Pending reward count | `3` |
-
-### Pokemon Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{pokemon_name}` | Pokemon name | `Pikachu` |
-| `{pokemon_species}` | Pokemon species | `Pikachu` |
-| `{pokemon_level}` | Pokemon level | `50` |
-| `{pokemon_ability}` | Pokemon ability | `Static` |
-
-### Validation Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{validation_valid_count}` | Valid Pokemon count | `5` |
-| `{validation_total_count}` | Total Pokemon count | `6` |
-| `{validation_error_count}` | Number of errors | `2` |
-| `{validation_error}` | Error message | `Banned ability` |
-
-### Example Usage
-
-```json5
-{
-  "match-winner-subtitle": "&aYou gained &f{battle_elo_change} &aELO points.",
-  "player_info_elo": " &8▸ &7Elo: &e{stats_elo}",
-  "player_info_record": " &8▸ &7W/L: &a{stats_wins}&f/&c{stats_losses} &7({stats_winrate}%)",
-  "arena_set_success": "&aArena &f{arena_name} &aset at ({arena_location_x}, {arena_location_y}, {arena_location_z})"
-}
-```
-
-### Legacy Placeholders (Deprecated)
-
-> ⚠️ **Note:** These placeholders still work for backward compatibility but may be removed in future versions.
-
-| Legacy | New Replacement |
-|--------|-----------------|
-| `{player}` | `{player_name}` |
-| `{elo}` | `{stats_elo}` |
-| `{gain}`, `{lose}` | `{battle_elo_change}` |
-| `{wins}` | `{stats_wins}` |
-| `{losses}` | `{stats_losses}` |
-| `{format}` | `{battle_format}` |
-| `{season}` | `{season_name}` |
-| `{arena}` | `{arena_name}` |
-| `{remaining}` | `{queue_search_seconds}` |
-
-**For a complete list of all placeholders, see:**
-- [Placeholder API Documentation](../integration/placeholders.md#message-placeholders)
-
-**Important Rules:**
-- Placeholders are **case-sensitive** (use `{player_name}`, not `{Player_Name}`)
-- Always preserve placeholders when translating messages
-- Test placeholders in-game after editing
+| Placeholder | Description |
+|-------------|-------------|
+| `{player_name}` | Player's name |
+| `{battle_format}` | Singles, Doubles, etc. |
+| `{stats_elo}` | Player's Elo rating |
+| `{stats_wins}` | Win count |
+| `{stats_losses}` | Loss count |
+| `{stats_winrate}` | Win rate percentage |
+| `{timer_seconds}` | Countdown seconds |
+| `{timer_minutes}` | Countdown minutes |
+| `{season_name}` | Current season name |
+| `{season_remaining_time}` | Time until season ends |
+| `{pokemon_name}` | Pokemon name |
+| `{pokemon_ability}` | Pokemon ability |
+| `{pokemon_move}` | Pokemon move |
 
 ---
 
 ## Color Codes
 
-Use Minecraft color codes for colored text:
-
-### Colors
-
-| Code | Color | Preview | Example |
-|------|-------|---------|---------|
-| `&0` | Black | <span style="color: #000000; background: #CCCCCC; padding: 2px 8px;">████</span> | `&0Black text` |
-| `&1` | Dark Blue | <span style="color: #0000AA;">████</span> | `&1Dark Blue` |
-| `&2` | Dark Green | <span style="color: #00AA00;">████</span> | `&2Dark Green` |
-| `&3` | Dark Aqua | <span style="color: #00AAAA;">████</span> | `&3Dark Aqua` |
-| `&4` | Dark Red | <span style="color: #AA0000;">████</span> | `&4Dark Red` |
-| `&5` | Dark Purple | <span style="color: #AA00AA;">████</span> | `&5Dark Purple` |
-| `&6` | Gold | <span style="color: #FFAA00;">████</span> | `&6Gold` |
-| `&7` | Gray | <span style="color: #AAAAAA;">████</span> | `&7Gray` |
-| `&8` | Dark Gray | <span style="color: #555555;">████</span> | `&8Dark Gray` |
-| `&9` | Blue | <span style="color: #5555FF;">████</span> | `&9Blue` |
-| `&a` | Green | <span style="color: #55FF55;">████</span> | `&aGreen` |
-| `&b` | Aqua | <span style="color: #55FFFF;">████</span> | `&bAqua` |
-| `&c` | Red | <span style="color: #FF5555;">████</span> | `&cRed` |
-| `&d` | Light Purple | <span style="color: #FF55FF;">████</span> | `&dLight Purple` |
-| `&e` | Yellow | <span style="color: #FFFF55;">████</span> | `&eYellow` |
-| `&f` | White | <span style="color: #FFFFFF; background: #333333; padding: 2px 8px;">████</span> | `&fWhite` |
-
-### Formatting
-
-| Code | Format | Example |
-|------|--------|---------|
-| `&l` | Bold | `&l&aBOLD GREEN` |
-| `&m` | Strikethrough | `&mStrikethrough` |
-| `&n` | Underline | `&nUnderline` |
-| `&o` | Italic | `&oItalic` |
-| `&r` | Reset | `&aGreen&r Normal` |
-
-### Examples
-
-```json5
-{
-  "match-winner": "&a&lVictory!!",              // Bold green
-  "match-loser": "&c&lDefeat!!",                // Bold red
-  "elo-up": "&aYou ranked up to &f{elo}&a.",    // Green with white Elo
-  "battle-start-title": "&e&lBattle Starting!"  // Bold yellow
-}
-```
+| Code | Color | Code | Color |
+|------|-------|------|-------|
+| `&0` | Black | `&8` | Dark Gray |
+| `&1` | Dark Blue | `&9` | Blue |
+| `&2` | Dark Green | `&a` | Green |
+| `&3` | Dark Aqua | `&b` | Aqua |
+| `&4` | Dark Red | `&c` | Red |
+| `&5` | Dark Purple | `&d` | Light Purple |
+| `&6` | Gold | `&e` | Yellow |
+| `&7` | Gray | `&f` | White |
+| `&l` | **Bold** | `&o` | *Italic* |
+| `&n` | Underline | `&m` | ~~Strikethrough~~ |
+| `&r` | Reset | | |
 
 ---
 
-## Creating a Custom Language
-
-### Step 1: Copy Existing Language
-
-```bash
-cd config/cobbleranked/language/
-cp en-Us.json5 es-Es.json5  # Spanish example
-```
-
-### Step 2: Translate Messages
-
-Edit `es-Es.json5`:
-
-```json5
-{
-  "joined-queue": "&aTe has unido a la cola de partidas clasificatorias.",
-  "left-queue": "&cHas salido de la cola de partidas clasificatorias.",
-  "match-winner": "&a¡¡Victoria!!",
-  "match-loser": "&c¡¡Derrota!!",
-  "pokemon-blacklist": "&cEstás usando un Pokémon que está en la lista negra.",
-  // ... translate all keys
-}
-```
-
-**Important:**
-- Keep all keys the same (only translate values)
-- Preserve placeholders (e.g., `{player}`, `{elo}`)
-- Use same color codes or customize
-
-### Step 3: Select Your Language
-
-Edit `config.json5`:
-
-```json5
-{
-  "language": "es-Es"
-}
-```
-
-### Step 4: Reload
-
-```bash
-/rankedadmin reload
-```
-
----
+## Full Language Files
 
 <details>
-<summary><strong>Complete Message List (Click to expand)</strong></summary>
-
-## Complete Message List
-
-### Queue & Matchmaking
+<summary><strong>English (en-Us.json5) - Complete File</strong></summary>
 
 ```json5
 {
-  "joined-queue": "Joined ranked match queue notification",
-  "left-queue": "Left ranked match queue notification",
-  "enterFila": "Entered queue notification (duplicate)",
-  "remaingFila": "Queue waiting status with time and position",
-  "queue_time_format": "Time format for queue (e.g., '30s')",
-  "prepare-queue": "Match found title",
-  "prepare-queue-subtitle": "Match found subtitle with player names",
-  "prepare-queue-cancel": "Match cancelled notification",
-  "match-found": "Match found announcement",
-  "match-found-subtitle": "Transfer to battle server message"
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  LANGUAGE FILE (en-Us)
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  // ===== MESSAGE PREFIXES =====
+  "prefix": "&8[&6Ranked&8]&r ",
+  "prefix_error": "&c✗ ",
+  "prefix_success": "&a✓ ",
+  "prefix_warning": "&e⚠ ",
+
+  // ===== FORMAT NAMES =====
+  "format_name_doubles": "Doubles",
+  "format_name_multi": "Multi",
+  "format_name_random_3v3": "Random 3v3",
+  "format_name_random_doubles": "Random Doubles",
+  "format_name_random_singles": "Random Singles",
+  "format_name_singles": "Singles",
+  "format_name_triples": "Triples",
+  "format_selector_selected": "&a&l★ {battle_format}",
+  "format_selector_unselected": "&7  {battle_format}",
+
+  // ===== PLAYER INFO =====
+  "player_info_click_refresh": "&7Click to refresh stats",
+  "player_info_elo": "&7Elo: &f{stats_elo}",
+  "player_info_format_header": "&e&l{battle_format}",
+  "player_info_record": "&7W/L: &a{stats_wins}&7/&c{stats_losses} &7(&e{stats_winrate}%&7)",
+  "player_info_refresh_cooldown": "&cPlease wait {cooldown_seconds} seconds before refreshing again.",
+  "player_info_refreshed": "&aStats refreshed!",
+  "player_info_season_header": "&6&lSeason Info",
+  "player_info_season_name": "&7Season: &f{season_name}",
+  "player_info_season_remaining": "&7Remaining: &e{season_remaining_time}",
+  "player_info_title": "&a&l{player_name}'s Stats",
+
+  // ===== GUI COMMON =====
+  "gui_back_button": "&c&lBack",
+  "gui_back_button_lore": "&7Return to main menu",
+  "gui_blacklist_click_to_switch": "&7Click to switch",
+  "gui_blacklist_formats_header": "&eFormat:",
+  "gui_blacklist_formats_separator": "&7&m━━━━━━━━━━━━",
+  "gui_blacklist_title": "&6&l{format_name} Blacklist - {blacklist_category}",
+  "gui_empty_slot": "&7Empty Slot",
+  "gui_empty_slot_decoration": "&8-",
+  "gui_empty_slot_locked": "&c&lLocked",
+  "gui_error": "&c&lError",
+  "gui_lead_selection_title": "&7Select Lead Pokemon",
+  "gui_loading": "&e&lLoading...",
+  "gui_loading_lore": "&7Please wait...",
+  "gui_match_ready_title": "&a&lMatch Ready",
+  "gui_new_reward_title": "&6&lRewards - {format_name}",
+  "gui_next_page": "&aNext Page »",
+  "gui_next_page_lore": "&7Go to page {gui_page_number}",
+  "gui_prev_page": "&c« Previous Page",
+  "gui_prev_page_lore": "&7Go to page {gui_page_number}",
+  "gui_pyramid_leaderboard_title": "&6&lRanking - {format_name}",
+  "gui_ranked_leaderboard_button": "&aTop Players",
+  "gui_ranked_leaderboard_lore_1": "&7Click to see the &astrongest",
+  "gui_ranked_leaderboard_lore_2": "&7players in the ranked",
+  "gui_ranked_queue_button": "&6Join Queue",
+  "gui_ranked_queue_lore_1": "&7Click to join the",
+  "gui_ranked_queue_lore_2": "&7ranked matchmaking queue",
+  "gui_ranked_rewards_button": "&eRewards",
+  "gui_ranked_rewards_lore_1": "&7View your season",
+  "gui_ranked_rewards_lore_2": "&7and milestone rewards",
+  "gui_team_selection_title_format": "&7Select Pokemon - {battle_format}",
+
+  // ===== RANKED GUI =====
+  "ranked_gui_already_in_queue": "&cYou are already in the queue!",
+  "ranked_gui_flee_penalty": "&cYou have a flee penalty! Remaining time: &e{penalty_seconds} seconds",
+  "ranked_gui_joined_queue": "&aYou joined the {battle_format} queue!",
+  "ranked_gui_left_queue": "&cYou left the queue.",
+  "ranked_gui_match_cooldown": "&cPlease wait &e{cooldown_seconds} &cseconds before joining the queue again!",
+
+  // ===== QUEUE SYSTEM =====
+  "queue_error_banned_items": "&c&l✗ Cannot queue with banned items: &r{banned_items_list}",
+  "queue_error_banned_items_hint": "&7Remove these items from your inventory and try again.",
+  "queue_error_empty_party": "&cYou need at least one Pokemon to queue!",
+  "queue_error_insufficient_pokemon": "&c&l✗ Not enough Pokemon! Need {validation_required_count} for {battle_format} format. Current: {validation_current_count}",
+  "queue_status_actionbar": "&aSearching... &7({queue_search_seconds}s) &8| &eQueue: &f{queue_size} &8| &bWaiting: &f{queue_waiting_count}",
+  "queue_join_announcement": "&8[&6Ranked&8] &e{player_name} &7joined the &a{battle_format} &7queue! &8(&f{queue_count} &7in queue)",
+
+  // ===== VALIDATION SYSTEM =====
+  "validation_error_title": "&c✗ Team Validation Error",
+  "validation_reason_blacklisted_ability": "&7Banned ability: &c{pokemon_ability}",
+  "validation_reason_blacklisted_item": "&7Banned held item: &c{pokemon_held_item}",
+  "validation_reason_blacklisted_move": "&7Banned move: &c{pokemon_move}",
+  "validation_reason_blacklisted_species": "Individually blacklisted",
+  "validation_reason_duplicate_item": "&7Item Clause violation: &c{pokemon_held_item} &7used {validation_duplicate_count} times (max: {item_clause_limit})",
+  "validation_summary_valid": "&a✓ All Pokemon available",
+  "validation_summary_invalid": "&c✓ {validation_error_count} Pokemon unavailable",
+
+  // ===== TEAM SELECTION =====
+  "team_selection_confirm": "&a&lConfirm",
+  "team_selection_cancel": "&c&lCancel",
+  "team_selection_pokemon_selected": "&a&l✓ Selected",
+  "team_selection_pokemon_shiny": "&6✦ Shiny",
+  "team_selection_ready_message": "&aReady! Waiting for opponent...",
+  "team_selection_timeout_auto_select": "&e&lTime's up! Pokemon were automatically selected.",
+  "team_selection_timer_display": "{gui_color}⏱ Time Remaining: {timer_seconds}s",
+
+  // ===== LEAD SELECTION =====
+  "lead_selection_confirm": "&a&lConfirm",
+  "lead_selection_cancel": "&c&lCancel",
+  "lead_selection_selected_single": "&a&l✓ Lead Pokemon",
+  "lead_selection_selected_multi": "&a&l✓ Lead Pokemon #{lead_position}",
+  "lead_selection_timeout_auto_select": "&e&lTime's up! Lead Pokemon were automatically selected.",
+
+  // ===== MATCH SYSTEM =====
+  "match_found_title": "&a&lMatch Found!",
+  "match_countdown": "&c{match_countdown_seconds}",
+  "match_countdown_subtitle": "&eBattle starting...",
+  "match_ready_accept": "&a&lAccept Match",
+  "match_ready_decline": "&c&lDecline Match",
+  "match_ready_canceled_title": "&cMatch Canceled",
+  "match_ready_timeout_warning": "&eMatch was canceled because you did not click the ready button. Repeated AFKs will result in queue penalties.",
+  "match_result_broadcast": "&a{winner} &7defeated &c{loser} &7in a ranked match!",
+
+  // ===== BATTLE RESULTS =====
+  "battle_start_title": "&a&lBattle Start",
+  "battle_start_subtitle": "&7Time limit: &e{timer_minutes} minutes",
+  "battle_result_victory": "&a&lVICTORY!",
+  "battle_result_victory_title": "&a&lVictory!",
+  "battle_result_defeat": "&c&lDEFEAT...",
+  "battle_result_defeat_title": "&c&lDefeat...",
+  "battle_result_elo_change": "  &eElo Change: {battle_elo_change}",
+  "battle_result_draw_message": "&e&lDRAW! &7No Elo change",
+  "battle_timer_30s_warning": "&c&l✗ 30 SECONDS REMAINING!",
+  "battle_item_usage_blocked": "&c&lThis item cannot be used during battle!",
+
+  // ===== TURN TIMER =====
+  "turn_timer_normal": "&f⏱ {timer_seconds}s &7- Select Move/Switch",
+  "turn_timer_warning": "&e&l⏱ {timer_seconds}s &e- Select Move/Switch",
+  "turn_timer_critical": "&c&l⏱ {timer_seconds}s &c- Select Move/Switch",
+  "turn_timeout_title": "&c&lTime Out",
+  "turn_timeout_subtitle": "&7Move was auto-selected",
+
+  // ===== LEADERBOARD =====
+  "leaderboard_rank_1st": "&6&l🏆 1st &r&6{player_name}",
+  "leaderboard_rank_2nd": "&e&l🥈 2nd &r&e{player_name}",
+  "leaderboard_rank_3rd": "&c&l🥉 3rd &r&c{player_name}",
+  "leaderboard_rank_4_10": "&b#{leaderboard_rank} &f{player_name}",
+  "leaderboard_rank_11_25": "&7#{leaderboard_rank} &f{player_name}",
+  "leaderboard_your_rank": "&e&lYour Rank: &f#{leaderboard_rank}",
+
+  // ===== RANK NAMES =====
+  "rank_bronze": "&6Bronze",
+  "rank_silver": "&7Silver",
+  "rank_gold": "&eGold",
+  "rank_platinum": "&bPlatinum",
+  "rank_diamond": "&3Diamond",
+  "rank_master": "&5Master",
+
+  // ===== SEASON SYSTEM =====
+  "season_ended_announcement": "{prefix}&eThe ranked season has ended!",
+  "season_ending_soon": "{prefix}&e{season_name} ends in &c{season_remaining_days} &edays!",
+  "season_collect_rewards": "&aCollect your rewards with &e/ranked",
+  "season_reward_pending": "&e&lUnclaimed Season Rewards! &7You have {reward_count} rewards waiting.",
+
+  // ===== CASUAL BATTLES =====
+  "casual_joined_queue": "&aJoined casual queue for &e{battle_format}&a!",
+  "casual_left_queue": "&aYou left the casual queue.",
+  "casual_info_title": "&b&lCasual Battles Info",
+  "casual_info_desc_1": "&7Casual battles are friendly matches",
+  "casual_info_desc_2": "&7that don't affect your Elo rating.",
+
+  // ===== BLACKLIST SYSTEM =====
+  "blacklist_category_pokemon": "&fPokemon",
+  "blacklist_category_moves": "&fMoves",
+  "blacklist_category_abilities": "&fAbilities",
+  "blacklist_category_items": "&fItems",
+  "blacklist_category_consumables": "&fConsumables",
+
+  // ===== ADMIN COMMANDS =====
+  "admin_config_reload_success": "{prefix}Configuration reloaded successfully!",
+  "admin_arena_position_set": "{prefix}Arena &e{arena_name} &aposition &e{arena_position} &aset to your current location!",
+  "admin_elo_set": "{prefix}Set &e{player_name}&a's &e{battle_format} &aElo to &e{elo_amount}",
+  "admin_elo_add": "{prefix}Added &e{elo_amount} &aElo to &e{player_name}&a's &e{battle_format}",
+  "admin_elo_remove": "{prefix}Removed &e{elo_amount} &aElo from &e{player_name}&a's &e{battle_format}",
+  "no_permission": "&cYou don't have permission to use this command",
+
+  // ===== LISTENER MESSAGES =====
+  "listener_cannot_access_pc": "&cYou cannot access PC during ranked matches or while in queue!",
+  "listener_cannot_teleport": "&cYou cannot teleport during ranked matches or while in queue!",
+  "listener_cannot_use_commands": "&cYou cannot use commands during ranked matches or while in queue!",
+  "listener_cannot_pvp": "&cYou cannot attack other players during ranked matches!",
+
+  // ===== BATTLE CAMERA SYSTEM =====
+  "camera_toggle_enabled": "&aBattle Camera: &eENABLED",
+  "camera_toggle_disabled": "&cBattle Camera: &eDISABLED",
+  "camera_ml_enabled": "&aML Camera Enhancement: &eENABLED",
+  "camera_ml_disabled": "&cML Camera Enhancement: &eDISABLED"
+
+  // ... (800+ total keys in full file)
 }
 ```
 
-### Battle Start
+</details>
+
+<details>
+<summary><strong>Japanese (ja-Jp.json5) - Complete File</strong></summary>
 
 ```json5
 {
-  "battle-start-title": "Battle starting title screen",
-  "battle-start-subtitle": "Battle starting subtitle with player names",
-  "battle-countdown": "Countdown number (3, 2, 1)",
-  "battle-countdown-subtitle": "Countdown subtitle text",
-  "match-starting-title": "Match starting title",
-  "match-starting-subtitle": "Match starting subtitle",
-  "match-started": "Match started title",
-  "match-started-subtitle": "Match duration information",
-  "ranked-started": "Server-wide match start announcement"
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  言語ファイル (ja-Jp)
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  // ===== メッセージプレフィックス =====
+  "prefix": "&8[&6ランク戦&8]&r ",
+  "prefix_error": "&c[✗]&r ",
+  "prefix_success": "&a[✓]&r ",
+  "prefix_warning": "&e[!]&r ",
+
+  // ===== フォーマット名 =====
+  "format_name_doubles": "ダブルス",
+  "format_name_multi": "マルチ",
+  "format_name_random_3v3": "ランダム3v3",
+  "format_name_random_doubles": "ランダムダブルス",
+  "format_name_random_singles": "ランダムシングルス",
+  "format_name_singles": "シングルス",
+  "format_name_triples": "トリプルス",
+  "format_selector_selected": "&a&l▶ {battle_format}",
+  "format_selector_unselected": "&7  {battle_format}",
+
+  // ===== プレイヤー情報 =====
+  "player_info_click_refresh": "&7クリックして更新",
+  "player_info_elo": "&7Elo: &f{stats_elo}",
+  "player_info_format_header": "&e&l{battle_format}",
+  "player_info_record": "&7勝敗: &a{stats_wins}&7勝/&c{stats_losses}&7敗 &7(&e{stats_winrate}%&7)",
+  "player_info_refresh_cooldown": "&c統計の更新は {cooldown_seconds} 秒後に可能です。",
+  "player_info_refreshed": "&a統計を更新しました！",
+  "player_info_season_header": "&6&lシーズン情報",
+  "player_info_season_name": "&7シーズン: &f{season_name}",
+  "player_info_season_remaining": "&7残り時間: &e{season_remaining_time}",
+  "player_info_title": "&a&l{player_name}の統計",
+
+  // ===== GUI共通 =====
+  "gui_back_button": "&c&l戻る",
+  "gui_back_button_lore": "&7メインメニューに戻る",
+  "gui_loading": "&e&l読み込み中...",
+  "gui_next_page": "&a次のページ »",
+  "gui_prev_page": "&c« 前のページ",
+
+  // ===== ランク戦GUI =====
+  "ranked_gui_already_in_queue": "&c既にキューに参加しています！",
+  "ranked_gui_joined_queue": "&a{battle_format}のキューに参加しました！",
+  "ranked_gui_left_queue": "&cキューから退出しました。",
+  "ranked_gui_match_cooldown": "&cキューに再参加するには &e{cooldown_seconds}秒 &cお待ちください！",
+
+  // ===== キューシステム =====
+  "queue_error_banned_items": "&c&l⚠ 禁止アイテムを持っているためキューに参加できません: &r{banned_items_list}",
+  "queue_error_empty_party": "&cキューに参加するには少なくとも1匹のポケモンが必要です！",
+  "queue_status_actionbar": "&aマッチング中... &7({queue_search_seconds}s) &8| &eキュー: &f{queue_size}人 &8| &b待ち: &f{queue_waiting_count}人",
+  "queue_join_announcement": "&8[&6ランクマ&8] &e{player_name} &7が &a{battle_format} &7キューに参加しました！ &8(&f{queue_count}人 &7待機中)",
+
+  // ===== 検証システム =====
+  "validation_error_title": "&c⚠ チーム検証エラー",
+  "validation_reason_blacklisted_ability": "&7禁止特性: &c{pokemon_ability}",
+  "validation_reason_blacklisted_item": "&7禁止持ち物: &c{pokemon_held_item}",
+  "validation_reason_blacklisted_move": "&7禁止技: &c{pokemon_move}",
+  "validation_summary_valid": "&a✓ 全て使用可能",
+  "validation_summary_invalid": "&c✗ {validation_current_count}匹が使用不可",
+
+  // ===== チーム選択 =====
+  "team_selection_confirm": "&a&l確認",
+  "team_selection_cancel": "&c&lキャンセル",
+  "team_selection_pokemon_selected": "&a&l✓ 選択中",
+  "team_selection_pokemon_shiny": "&6✦ 色違い",
+  "team_selection_ready_message": "&a準備完了！相手の準備を待っています...",
+  "team_selection_timeout_auto_select": "&e&l時間切れ！ポケモンが自動選択されました。",
+  "team_selection_timer_display": "{gui_color}⏱ 残り時間: {timer_seconds}秒",
+
+  // ===== マッチシステム =====
+  "match_found_title": "&a&lマッチが見つかりました！",
+  "match_countdown": "&c{match_countdown_seconds}",
+  "match_countdown_subtitle": "&eバトル開始まで...",
+  "match_ready_accept": "&a&lマッチを承諾",
+  "match_ready_decline": "&c&lマッチを拒否",
+  "match_ready_canceled_title": "&cマッチがキャンセルされました",
+
+  // ===== バトル結果 =====
+  "battle_start_title": "&a&lバトル開始",
+  "battle_start_subtitle": "&7制限時間: &e{timer_minutes}分",
+  "battle_result_victory": "&a&l勝利！",
+  "battle_result_victory_title": "&a&l勝利！",
+  "battle_result_defeat": "&c&l敗北...",
+  "battle_result_defeat_title": "&c&l敗北...",
+  "battle_result_elo_change": "  &eElo変動: {battle_elo_change}",
+  "battle_result_draw_message": "&e&l引き分け！ &7Elo変動なし",
+  "battle_timer_30s_warning": "&c&l⚠ 残り30秒！",
+
+  // ===== ターンタイマー =====
+  "turn_timer_normal": "&f⏱ {timer_seconds}秒 &7- 技/交代を選択",
+  "turn_timer_warning": "&e&l⏱ {timer_seconds}秒 &e- 技/交代を選択",
+  "turn_timer_critical": "&c&l⏱ {timer_seconds}秒 &c- 技/交代を選択",
+  "turn_timeout_title": "&c&lタイムアウト",
+  "turn_timeout_subtitle": "&7技が自動選択されました",
+
+  // ===== リーダーボード =====
+  "leaderboard_rank_1st": "&6&l👑 1位 &r&6{player_name}",
+  "leaderboard_rank_2nd": "&e&l🥈 2位 &r&e{player_name}",
+  "leaderboard_rank_3rd": "&c&l🥉 3位 &r&c{player_name}",
+  "leaderboard_rank_4_10": "&b#{leaderboard_rank} &f{player_name}",
+  "leaderboard_your_rank": "&e&lあなたの順位: &f#{leaderboard_rank}",
+
+  // ===== ランク名 =====
+  "rank_bronze": "&6ブロンズ",
+  "rank_silver": "&7シルバー",
+  "rank_gold": "&eゴールド",
+  "rank_platinum": "&bプラチナ",
+  "rank_diamond": "&3ダイヤモンド",
+  "rank_master": "&5マスター",
+
+  // ===== シーズンシステム =====
+  "season_ended_announcement": "{prefix}&eランクマッチシーズンが終了しました！",
+  "season_ending_soon": "{prefix}&eランクマッチシーズン終了まで &c{days} &e日！",
+  "season_collect_rewards": "&a報酬は &e/ranked &aで受け取れます",
+  "season_reward_pending": "&e&l未受取のシーズン報酬があります！ &7{reward_count}件の報酬が待っています。",
+
+  // ===== カジュアルバトル =====
+  "casual_joined_queue": "&a&e{battle_format}&aのカジュアルキューに参加しました！",
+  "casual_left_queue": "&aカジュアルキューから退出しました。",
+  "casual_info_title": "&b&lカジュアルバトル情報",
+  "casual_info_desc_1": "&7カジュアルバトルはフレンドリーマッチです",
+  "casual_info_desc_2": "&7Eloレーティングには影響しません。",
+
+  // ===== ブラックリストシステム =====
+  "blacklist_category_pokemon": "&fポケモン",
+  "blacklist_category_moves": "&fわざ",
+  "blacklist_category_abilities": "&f特性",
+  "blacklist_category_items": "&fアイテム",
+  "blacklist_category_consumables": "&f消費アイテム",
+
+  // ===== 管理コマンド =====
+  "admin_config_reload_success": "{prefix}設定を正常にリロードしました！",
+  "admin_arena_position_set": "{prefix}アリーナ &e{arena_name} &aの位置 &e{arena_position} &aを現在地に設定しました！",
+  "admin_elo_set": "{prefix}&e{player_name}&aの&e{battle_format} &aEloを&e{elo_amount}&aに設定しました",
+  "no_permission": "&cこのコマンドを使用する権限がありません",
+
+  // ===== リスナーメッセージ =====
+  "listener_cannot_access_pc": "&cランクマッチ中またはキュー参加中はPCにアクセスできません！",
+  "listener_cannot_teleport": "&cランクマッチ中またはキュー参加中はテレポートできません！",
+  "listener_cannot_use_commands": "&cランクマッチ中またはキュー参加中はコマンドを使用できません！",
+  "listener_cannot_pvp": "&cランクマッチ中は他のプレイヤーを攻撃できません！",
+
+  // ===== バトルカメラシステム =====
+  "camera_toggle_enabled": "&aバトルカメラ: &e有効",
+  "camera_toggle_disabled": "&cバトルカメラ: &e無効",
+  "camera_ml_enabled": "&aMLカメラ拡張: &e有効",
+  "camera_ml_disabled": "&cMLカメラ拡張: &e無効"
+
+  // ... (800+ total keys in full file)
 }
 ```
 
-### Battle End
+</details>
+
+<details>
+<summary><strong>French (fr-Fr.json5) - Complete File</strong></summary>
 
 ```json5
 {
-  "match-winner": "Victory title screen",
-  "match-winner-subtitle": "Victory subtitle with Elo gain",
-  "match-loser": "Defeat title screen",
-  "match-loser-subtitle": "Defeat subtitle with Elo loss",
-  "match-finished": "Server-wide match end announcement",
-  "elo-up": "Ranked up notification",
-  "elo-down": "Ranked down notification",
-  "battle_demais": "Point reduction for fighting same player too much"
-}
-```
+  // ===== MESSAGE PREFIXES =====
+  "prefix": "&8[&6Ranked&8]&r ",
+  "prefix_error": "&c[✗]&r ",
+  "prefix_success": "&a[✓]&r ",
+  "prefix_warning": "&e[!]&r ",
 
-### Validation & Errors
+  // ===== FORMAT NAMES =====
+  "format_name_doubles": "Doubles",
+  "format_name_multi": "Multi",
+  "format_name_random_3v3": "Aléatoire 3v3",
+  "format_name_random_doubles": "Doubles aléatoires",
+  "format_name_random_singles": "Solo aléatoire",
+  "format_name_singles": "Solo",
+  "format_name_triples": "Triples",
+  "format_selector_selected": "&a&l★ {battle_format}",
+  "format_selector_unselected": "&7  {battle_format}",
 
-```json5
-{
-  "limit-pokemon": "Not enough Pokemon error",
-  "no-pokemon": "No Pokemon in party error",
-  "no-pokemonLife": "Pokemon not alive error",
-  "pokemon-blacklist": "Blacklisted Pokemon error",
-  "pokemon-label-limit": "Pokemon label limit exceeded",
-  "blocked-item-move": "Banned move error",
-  "no-pokemon-move": "Banned move error (duplicate)",
-  "no-pokemon-item": "Banned item error",
-  "no-pokemon-ability": "Banned ability error",
-  "isRanked": "Already in ranked match error",
-  "ranked-closed": "Ranked system closed error",
-  "not-in-match-player": "Player not in match error"
-}
-```
+  // ===== PLAYER INFO =====
+  "player_info_click_refresh": "&7Clique pour rafraîchir les statistiques",
+  "player_info_elo": "&7Elo : &f{elo}",
+  "player_info_record": "&7V/D : &a{wins}&7/&c{losses} &7(&e{winrate}%&7)",
+  "player_info_season_header": "&6&lInformations Saison",
+  "player_info_season_name": "&7Saison : &f{season}",
+  "player_info_title": "&a&lStatistiques de {player}",
 
-### Team/Lead Selection
+  // ===== GUI COMMON =====
+  "gui_back_button": "&c&lRetour",
+  "gui_back_button_lore": "&7Retour au menu principal",
+  "gui_loading": "&e&lChargement...",
+  "gui_next_page": "&aPage suivante »",
+  "gui_prev_page": "&c« Page précédente",
 
-```json5
-{
-  "pokemon_switched": "Pokemon selected as lead",
-  "team_selection_ready": "Ready for team selection",
-  "team_selection_already_ready": "Already ready error",
-  "team_selection_limit_reached": "Pokemon selection limit reached",
-  "lead_selection_ready": "Lead Pokemon selected",
-  "team_selection_gui_ready_button": "Ready button text",
-  "team_selection_gui_click_ready": "Click to ready button text",
-  "team_selection_gui_selected_count": "Selected Pokemon count",
-  "team_selection_gui_not_ready": "Not ready button text",
-  "team_selection_gui_select_exactly": "Selection requirement text",
-  "team_selection_gui_your_pokemon": "Your Pokemon section label",
-  "team_selection_gui_opponent_pokemon": "Opponent Pokemon section label"
-}
-```
+  // ===== RANKED GUI =====
+  "ranked_gui_already_in_queue": "&cVous êtes déjà dans la file !",
+  "ranked_gui_joined_queue": "&aVous avez rejoint la file {battle_format} !",
+  "ranked_gui_left_queue": "&cVous avez quitté la file.",
+  "ranked_gui_match_cooldown": "&cVeuillez attendre &e{seconds} &csecondes avant de rejoindre de nouveau !",
 
-### Admin Commands
+  // ===== QUEUE SYSTEM =====
+  "queue_error_banned_items": "&c&l✗ Impossible de rejoindre la file avec des objets interdits : &r{items}",
+  "queue_error_empty_party": "&cVous devez avoir au moins un Pokémon pour rejoindre la file !",
+  "queue_status_actionbar": "&aRecherche... &7({seconds}s) &8| &eFile : &f{queueSize}",
 
-```json5
-{
-  "ranked-reload-adm": "Config reload success",
-  "ranked-closed-adm": "Ranked system closed by admin",
-  "ranked-open-adm": "Ranked system opened by admin",
-  "set-elo-adm": "Elo set command success",
-  "add-elo-adm": "Elo add command success",
-  "reset-elo-adm": "Elo reset command success",
-  "remove-elo-adm": "Elo remove command success",
-  "arena-not-found": "Arena not found error",
-  "teleport-arena-adm": "Teleport to arena success",
-  "saida-setada-adm": "Exit location set success",
-  "not-set-saida-adm": "Exit location not set error",
-  "posicao-invalida": "Invalid position error",
-  "need-player": "Must be in-game error",
-  "noPermCommand": "No permission error",
-  "permission-message": "No permission message"
-}
-```
+  // ===== VALIDATION =====
+  "validation_error_title": "&c✗ Erreur de validation d'équipe",
+  "validation_reason_blacklisted_ability": "&7Talent interdit : &c{pokemon_ability}",
+  "validation_reason_blacklisted_item": "&7Objet interdit : &c{pokemon_held_item}",
+  "validation_reason_blacklisted_move": "&7Capacité interdite : &c{pokemon_move}",
+  "validation_summary_valid": "&a✓ Tous les Pokémon sont disponibles",
 
-### Rewards
+  // ===== TEAM SELECTION =====
+  "team_selection_confirm": "&a&lConfirmer",
+  "team_selection_cancel": "&c&lAnnuler",
+  "team_selection_pokemon_selected": "&a&l✓ Sélectionné",
+  "team_selection_pokemon_shiny": "&6✦ Chromatique",
+  "team_selection_ready_message": "&aPrêt ! En attente de l'adversaire...",
+  "team_selection_timeout_auto_select": "&e&lTemps écoulé ! Les Pokémon ont été sélectionnés automatiquement.",
 
-```json5
-{
-  "collect_reward": "Reward collected success",
-  "gui_reward_no_points": "Not enough points for reward error"
-}
-```
+  // ===== MATCH SYSTEM =====
+  "match_found_title": "&a&lMatch trouvé !",
+  "match_countdown_subtitle": "&eLe combat commence...",
+  "match_ready_accept": "&a&lAccepter",
+  "match_ready_decline": "&c&lRefuser",
+  "match_ready_canceled_title": "&cMatch annulé",
 
-### Debug & Errors
+  // ===== BATTLE RESULTS =====
+  "battle_start_title": "&a&lDébut du combat",
+  "battle_start_subtitle": "&7Limite de temps : &e{minutes} minutes",
+  "battle_result_victory": "&a&lVICTOIRE !",
+  "battle_result_defeat": "&c&lDÉFAITE...",
+  "battle_result_elo_change": "  &eChangement d'Elo : {battle_elo_change}",
+  "battle_result_draw_message": "&e&lÉGALITÉ ! &7Aucun changement d'Elo",
+  "battle_timer_30s_warning": "&c&l✗ PLUS QUE 30 SECONDES !",
 
-```json5
-{
-  "error1": "Generic error occurred",
-  "erroGui1": "GUI error with value",
-  "debug-util-erro-pos": "Duplicate position error",
-  "debug-util-erro2": "Elo config not found",
-  "debug-util-erro3": "Elo file not found",
-  "debug-util-erro4": "Arena exit not loaded",
-  "debug-util-erro5": "Pokemon not found error",
-  "debug-util-erro6": "Pokemon not found (short)",
-  "debug-util-erro7": "No arena found",
-  "debug-util-erro8": "Arena missing positions",
-  "debug-util-erro9": "Invalid item number in reward",
-  "debug-util-load": "Loaded amount message",
-  "debug-util-language": "GUI language loaded",
-  "debug-util-language1": "Selected language message",
-  "debug-util-language2": "Message config loaded"
+  // ===== LEADERBOARD =====
+  "leaderboard_rank_1st": "&6&l🏆 1er &r&6{player_name}",
+  "leaderboard_rank_2nd": "&e&l🥈 2e &r&e{player_name}",
+  "leaderboard_rank_3rd": "&c&l🥉 3e &r&c{player_name}",
+  "leaderboard_your_rank": "&e&lVotre Rang : &f#{leaderboard_rank}",
+
+  // ===== RANK NAMES =====
+  "rank_bronze": "&6Bronze",
+  "rank_silver": "&7Argent",
+  "rank_gold": "&eOr",
+  "rank_platinum": "&bPlatine",
+  "rank_diamond": "&3Diamant",
+  "rank_master": "&5Maître",
+
+  // ===== SEASON SYSTEM =====
+  "season_ended_announcement": "{prefix}&eLa saison classée est terminée !",
+  "season_ending_soon": "{prefix}&e{season} se termine dans &c{days} &ejours !",
+  "season_collect_rewards": "&aRécupérez vos récompenses avec &e/ranked",
+
+  // ===== ADMIN COMMANDS =====
+  "admin_config_reload_success": "{prefix}Configuration rechargée avec succès !",
+  "admin_arena_position_set": "{prefix}Arène &e{arena_name} &aposition &e{pos} &adéfinie !",
+  "no_permission": "&cVous n'avez pas la permission d'utiliser cette commande"
+
+  // ... (800+ total keys in full file)
 }
 ```
 
@@ -523,101 +540,20 @@ Edit `config.json5`:
 
 ---
 
-## Escaping Special Characters
+## Adding a New Language
 
-### Apostrophes
+1. Copy `en-Us.json5` to a new file (e.g., `de-De.json5`)
+2. Translate all message values (keep keys unchanged)
+3. Set `"language": "de-De"` in `config.json5`
+4. Reload: `/rankedadmin reload`
 
-Use `''` (double apostrophe) to escape single quotes in JSON5:
-
-```json5
-{
-  "lead_selection_gui_opponent_pokemon": "&7Opponent''s Pokemon"
-}
-```
-
-### Backslashes
-
-Use `\\` to escape backslashes:
-
-```json5
-{
-  "permission-message": "&cYou don\\t have permission"
-}
-```
-
----
-
-## Testing Your Language
-
-### 1. Reload Configuration
-
-```bash
-/rankedadmin reload
-```
-
-### 2. Test Common Messages
-
-- Join queue: `/ranked` → Queue button
-- Battle messages: Complete a battle
-- Validation: Try banned Pokemon/moves
-- Admin: `/rankedadmin reload`
-
-### 3. Check Console
-
-Look for errors in `logs/latest.log`:
-
-```
-[CobbleRanked] Message configurations for language es-Es loaded successfully!
-```
-
-If errors occur:
-- Check JSON5 syntax
-- Verify file name matches config setting
-- Look for missing keys
-
----
-
-## Language File Maintenance
-
-### Adding New Messages
-
-When CobbleRanked updates with new features:
-
-1. **Check for new keys** in `en-Us.json5` (reference)
-2. **Add missing keys** to your custom language file
-3. **Translate new messages**
-4. **Reload**: `/rankedadmin reload`
-
-### Best Practices
-
-**DO:**
-- Keep all language files in sync (same keys)
-- Test messages in-game after changes
-- Use consistent color scheme across messages
-- Preserve placeholder formatting
-- Use comments for organization
-
-**DON'T:**
-- Remove or rename keys (will cause errors)
-- Forget to escape special characters
-- Use placeholder names that don't exist
-- Mix different quote styles inconsistently
-
----
-
-## Troubleshooting
-
-Having issues with language files? See the [Troubleshooting Guide](../support/troubleshooting.md#language-not-loading) for solutions to:
-- Language not loading
-- Missing messages
-- Placeholders not replacing
-- Color codes not working
+> 📝 **Note:** The full language files contain 800+ keys. The examples above show the most commonly customized messages. Copy the complete file from `config/cobbleranked/language/` for all keys.
 
 ---
 
 ## See Also
 
-- [GUI Customization](gui.md) - Visual elements
-- [Placeholder API](../integration/placeholders.md) - Message placeholders
+- [GUI Customization](gui.md) - GUI element customization
+- [Placeholder API](../integration/placeholders.md) - External placeholders
 - [FAQ](../support/faq.md) - Common questions
 - [Troubleshooting](../support/troubleshooting.md) - Problem solving

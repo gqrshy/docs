@@ -54,13 +54,9 @@ These files provide detailed customization for specific GUIs.
 
 ## Slot Numbering
 
-> ⚠️ **Important:** Config files use **1-indexed** slot numbers (1-54 for a 6-row chest).
-> This is automatically converted to Minecraft's 0-indexed system internally.
-
-**Example:** `"slot": 5` in config → Minecraft slot 4 (top row, 5th position)
+Slots are numbered 1-54 for a 6-row chest. `"slot": 1` places the item in the first slot (top-left).
 
 ```
-Config (1-indexed):
  1  2  3  4  5  6  7  8  9
 10 11 12 13 14 15 16 17 18
 19 20 21 22 23 24 25 26 27
