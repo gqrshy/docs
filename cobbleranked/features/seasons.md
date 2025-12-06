@@ -1,6 +1,6 @@
-# Season Management
+# Season System
 
-Competitive time-based periods with automatic rotation, rewards, and cross-server synchronization.
+Flexible season scheduling with three modes: scheduled events, yearly recurring seasons, and legacy duration-based rotation.
 
 ---
 
@@ -9,242 +9,495 @@ Competitive time-based periods with automatic rotation, rewards, and cross-serve
 Seasons are competitive periods where players compete for leaderboard positions and earn exclusive rewards.
 
 **Key Features:**
-- Automatic rotation based on duration
-- Top player rewards (customizable per format)
-- Season history tracking
-- Cross-server synchronization (Redis)
-- Manual admin controls
 
-**Default Duration:** 30 days (configurable)
+- ✅ Three scheduling modes (Scheduled, Recurring, Legacy)
+- ✅ IANA timezone support
+- ✅ Priority-based conflict resolution
+- ✅ Off-season configuration
+- ✅ Year-spanning seasons (e.g., Winter: December → February)
+- ✅ Automatic announcements before season start/end
+- ✅ Cross-server synchronization (Redis)
 
 ---
 
-## Season Lifecycle
+## Scheduling Modes
 
-```
-Season Start → Competition → Season End → Rewards → New Season
-    ↓             ↓              ↓           ↓          ↓
-  Day 1       Days 2-29        Day 30      Auto      Day 1
-```
+CobbleRanked supports three season scheduling modes:
 
-### During Season
+| Mode | Use Case | Best For |
+|------|----------|----------|
+| **Scheduled Seasons** | One-time events with specific dates | Holiday events, tournaments |
+| **Recurring Seasons** | Yearly repeating seasons | Spring/Summer/Fall/Winter |
+| **Legacy Mode** | Traditional duration-based rotation | Simple setups, backward compatibility |
 
-- Players compete in ranked battles
-- Elo changes based on match results
-- Leaderboards update in real-time
-- Stats accumulate across all formats
+### Mode Selection
 
-### Season End
+The system automatically selects the appropriate mode:
 
-**Automated Process:**
-1. Battle server detects season end (checks every 10 minutes)
-2. Distribute rewards to top 25 players per format
-3. Create pending rewards for offline players
-4. Mark old season as ended in database
-5. Create new season automatically
-6. Broadcast rotation to all servers (cross-server)
-7. Online players receive rewards immediately
-8. Offline players receive rewards on next login
-
-### What's Preserved
-
-**Preserved Across Seasons:**
-- Elo ratings (unless configured to reset)
-- Win/loss records (unless configured to reset)
-- Flee count
-- Player UUID associations
-
-**Reset Each Season:**
-- Milestone reward claim flags
-- Season reward eligibility
-- Season-specific leaderboard rankings
+1. If `legacy_mode.enabled = true` → Uses Legacy Mode
+2. Otherwise → Evaluates Scheduled and Recurring seasons by priority
 
 ---
 
 ## Configuration
 
-### Basic Settings
+**File:** `config/cobbleranked/seasons.json5`
 
-**File:** `config/cobbleranked/config.json5`
+### Basic Structure
 
 ```json5
 {
-  "ranked_match": {
-    "reset_days": 30,  // Season duration in days
-    "seasonReset": {
-      "resetElo": false,         // Reset Elo to initial value
-      "resetWinsLosses": false   // Reset win/loss counts
-    }
+  "settings": {
+    "timezone": "Asia/Tokyo",
+    "fallback_behavior": "OFF_SEASON",
+    "off_season": { ... },
+    "check_interval_minutes": 5,
+    "announce_before_start_hours": [24, 6, 1],
+    "announce_before_end_hours": [24, 6, 1]
   },
-  "seasonAnnouncement": {
-    "defaultSeasonName": "",  // Leave empty for auto-generated names (YYYY-MM format)
-    "announceBeforeEnd": [7, 3, 1]  // Days before end to announce
+  "scheduled_seasons": [ ... ],
+  "recurring_seasons": [ ... ],
+  "legacy_mode": { ... }
+}
+```
+
+<details>
+<summary><strong>Complete Default Configuration</strong></summary>
+
+```json5
+{
+  "settings": {
+    // IANA timezone format (NOT abbreviations like "JST" or "EST")
+    // Examples: "Asia/Tokyo", "America/New_York", "Europe/London", "UTC"
+    "timezone": "Asia/Tokyo",
+
+    // What happens when no scheduled/recurring season is active?
+    // "OFF_SEASON"      - Enter off-season state
+    // "EXTEND_PREVIOUS" - Keep previous season active
+    // "INSTANT_START"   - Start next scheduled season immediately
+    "fallback_behavior": "OFF_SEASON",
+
+    "off_season": {
+      "enabled": true,
+      "allow_ranked": false,           // Allow ranked battles during off-season
+      "announcement_key": "season_off_season_active"
+    },
+
+    // How often to check for season transitions (in minutes)
+    "check_interval_minutes": 5,
+
+    // Hours before season start/end to send announcements
+    "announce_before_start_hours": [24, 6, 1],
+    "announce_before_end_hours": [24, 6, 1]
+  },
+
+  "scheduled_seasons": [
+    // Example: Christmas Event
+    // {
+    //   "id": "christmas_2025",
+    //   "name": "Christmas Ranked 2025",
+    //   "start": "2025-12-25 09:00:00",
+    //   "end": "2025-12-31 23:59:59",
+    //   "priority": 100,
+    //   "enabled": true
+    // }
+  ],
+
+  "recurring_seasons": [
+    {
+      "id": "spring",
+      "name": "Spring Season {year}",
+      "start_month": 3, "start_day": 1, "start_time": "00:00:00",
+      "end_month": 5, "end_day": 31, "end_time": "23:59:59",
+      "crosses_year": false,
+      "priority": 50,
+      "enabled": true
+    },
+    {
+      "id": "summer",
+      "name": "Summer Season {year}",
+      "start_month": 6, "start_day": 1, "start_time": "00:00:00",
+      "end_month": 8, "end_day": 31, "end_time": "23:59:59",
+      "crosses_year": false,
+      "priority": 50,
+      "enabled": true
+    },
+    {
+      "id": "autumn",
+      "name": "Autumn Season {year}",
+      "start_month": 9, "start_day": 1, "start_time": "00:00:00",
+      "end_month": 11, "end_day": 30, "end_time": "23:59:59",
+      "crosses_year": false,
+      "priority": 50,
+      "enabled": true
+    },
+    {
+      "id": "winter",
+      "name": "Winter Season {year}",
+      "start_month": 12, "start_day": 1, "start_time": "00:00:00",
+      "end_month": 2, "end_day": 28, "end_time": "23:59:59",
+      "crosses_year": true,    // December → February spans year boundary
+      "priority": 50,
+      "enabled": true
+    }
+  ],
+
+  "legacy_mode": {
+    "enabled": false,
+    "reset_days": 30,
+    "default_season_name": ""   // Empty = auto-generate "YYYY-MM" format
   }
 }
 ```
 
-### Common Durations
-
-| Duration | Use Case | Command Example |
-|----------|----------|-----------------|
-| 7 days | Weekly competitions | `/rankedadmin season create 7 "Weekly Cup"` |
-| 14 days | Bi-weekly tournaments | `/rankedadmin season create 14` |
-| **30 days** | **Monthly (recommended)** | Default |
-| 60 days | Long-term seasons | `/rankedadmin season create 60` |
-| 90 days | Quarterly competitions | `/rankedadmin season create 90` |
+</details>
 
 ---
 
-## Automatic Rotation
+## Scheduled Seasons
 
-Seasons rotate automatically when the configured duration expires.
+One-time events with specific start and end dates. Ideal for holiday events, tournaments, and special occasions.
 
-### How It Works
+### Scheduled Season Configuration
 
-**Check Interval:** Every 10 minutes (battle server only)
+```json5
+{
+  "scheduled_seasons": [
+    {
+      "id": "christmas_2025",             // Unique identifier
+      "name": "Christmas Ranked 2025",     // Display name
+      "start": "2025-12-25 09:00:00",      // Start date/time
+      "end": "2025-12-31 23:59:59",        // End date/time
+      "priority": 100,                     // Higher = takes precedence
+      "enabled": true                      // Set false to disable
+    },
+    {
+      "id": "new_year_2026",
+      "name": "New Year Tournament 2026",
+      "start": "2026-01-01 00:00:00",
+      "end": "2026-01-07 23:59:59",
+      "priority": 100,
+      "enabled": true
+    }
+  ]
+}
+```
 
-**Rotation Process:**
-1. **Check:** `if (current_time >= season_end_time)`
-2. **Distribute Rewards:** Top 25 players per format receive season rewards
-3. **End Season:** Mark old season as inactive in database
-4. **Reset Stats:** Apply Elo/wins/losses reset if configured
-5. **Create New Season:** Generate new season with configured duration
-6. **Notify Players:** Broadcast season change to all online players
-7. **Redis Sync:** Update season cache for cross-server synchronization
+### Scheduled Season Fields
 
-**Automatic:** No admin intervention required (unless manual control desired)
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | String | Unique identifier for database tracking |
+| `name` | String | Display name (supports `{year}`, `{month}`, `{day}` placeholders) |
+| `start` | String | Start date/time in `YYYY-MM-DD HH:mm:ss` format |
+| `end` | String | End date/time in `YYYY-MM-DD HH:mm:ss` format |
+| `priority` | Integer | Conflict resolution priority (default: 100) |
+| `enabled` | Boolean | Enable/disable without removing |
+
+### Use Cases
+
+- **Holiday Events:** Christmas, New Year, Halloween
+- **Anniversary Events:** Server anniversary celebration
+- **Limited-Time Tournaments:** Weekend tournaments, beta events
+- **Special Collaborations:** Community events
+
+---
+
+## Recurring Seasons
+
+Yearly repeating seasons that automatically adjust for the current year. Ideal for seasonal content like Spring/Summer/Fall/Winter.
+
+### Recurring Season Configuration
+
+```json5
+{
+  "recurring_seasons": [
+    {
+      "id": "spring",
+      "name": "Spring Season {year}",      // {year} replaced with current year
+      "start_month": 3,                    // March
+      "start_day": 1,
+      "start_time": "00:00:00",
+      "end_month": 5,                      // May
+      "end_day": 31,
+      "end_time": "23:59:59",
+      "crosses_year": false,               // Does NOT span year boundary
+      "priority": 50,
+      "enabled": true
+    }
+  ]
+}
+```
+
+### Recurring Season Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | String | Unique identifier |
+| `name` | String | Display name (supports `{year}` placeholder) |
+| `start_month` | Integer | Start month (1-12) |
+| `start_day` | Integer | Start day (1-31, auto-clamped) |
+| `start_time` | String | Start time in `HH:mm:ss` format |
+| `end_month` | Integer | End month (1-12) |
+| `end_day` | Integer | End day (1-31, auto-clamped for leap years) |
+| `end_time` | String | End time in `HH:mm:ss` format |
+| `crosses_year` | Boolean | Set `true` for seasons spanning December → January |
+| `priority` | Integer | Conflict resolution priority (default: 50) |
+| `enabled` | Boolean | Enable/disable without removing |
+
+### Year-Spanning Seasons
+
+For seasons that cross the year boundary (e.g., Winter: December → February), set `crosses_year: true`:
+
+```json5
+{
+  "id": "winter",
+  "name": "Winter Season {year}",
+  "start_month": 12,
+  "start_day": 1,
+  "end_month": 2,
+  "end_day": 28,
+  "crosses_year": true,    // ⚠️ Required for December → February
+  "priority": 50,
+  "enabled": true
+}
+```
+
+**How it works:**
+
+- If current date is December 2025, season runs Dec 1, 2025 → Feb 28, 2026
+- If current date is January/February 2026, still matches the same Winter 2025 season
+
+> 📝 **Note:** Leap years are automatically handled. February 28 is the safe default; February 29 will be used when applicable.
+
+---
+
+## Legacy Mode
+
+Traditional duration-based seasons for simple setups and backward compatibility.
+
+### Legacy Mode Configuration
+
+```json5
+{
+  "legacy_mode": {
+    "enabled": true,                    // Enable legacy mode
+    "reset_days": 30,                   // Season duration in days
+    "default_season_name": ""           // Empty = auto-generate "YYYY-MM"
+  }
+}
+```
+
+**When Legacy Mode is Enabled:**
+
+- `scheduled_seasons` and `recurring_seasons` are **ignored**
+- Seasons automatically rotate every `reset_days` days
+- New season starts immediately when previous ends
+
+### Common Durations
+
+| Duration | Use Case |
+|----------|----------|
+| 7 days | Weekly tournaments |
+| 14 days | Bi-weekly competitions |
+| **30 days** | Monthly (recommended) |
+| 90 days | Quarterly seasons |
+
+---
+
+## Settings
+
+### Timezone Configuration
+
+All schedule times are interpreted in the configured timezone.
+
+```json5
+{
+  "settings": {
+    "timezone": "Asia/Tokyo"
+  }
+}
+```
+
+**IANA Timezone Format:**
+
+| Region | Timezone |
+|--------|----------|
+| Japan | `Asia/Tokyo` |
+| US Eastern | `America/New_York` |
+| US Pacific | `America/Los_Angeles` |
+| UK | `Europe/London` |
+| Central Europe | `Europe/Paris` |
+| UTC | `UTC` |
+
+> ⚠️ **Warning:** Do NOT use timezone abbreviations like `JST`, `EST`, or `PST`. These are ambiguous and may cause errors.
+
+Full list: [IANA Time Zone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+### Fallback Behavior
+
+What happens when no scheduled or recurring season is active?
+
+```json5
+{
+  "settings": {
+    "fallback_behavior": "OFF_SEASON"
+  }
+}
+```
+
+| Behavior | Description |
+|----------|-------------|
+| `OFF_SEASON` | Enter off-season state (may disable ranked battles) |
+| `EXTEND_PREVIOUS` | Keep the previous season active until next starts |
+| `INSTANT_START` | Immediately start the next scheduled season |
+
+### Off-Season Configuration
+
+When `fallback_behavior = "OFF_SEASON"`:
+
+```json5
+{
+  "settings": {
+    "off_season": {
+      "enabled": true,
+      "allow_ranked": false,
+      "announcement_key": "season_off_season_active"
+    }
+  }
+}
+```
+
+| Setting | Description |
+|---------|-------------|
+| `enabled` | Enable off-season mode |
+| `allow_ranked` | Allow ranked battles during off-season |
+| `announcement_key` | Language key for off-season announcement |
+
+### Check Interval
+
+How often the server checks for season transitions:
+
+```json5
+{
+  "settings": {
+    "check_interval_minutes": 5
+  }
+}
+```
+
+- Lower values = more responsive, slightly higher server load
+- Recommended: 1-10 minutes
+
+### Announcements
+
+Configure advance warnings before season start/end:
+
+```json5
+{
+  "settings": {
+    "announce_before_start_hours": [24, 6, 1],
+    "announce_before_end_hours": [24, 6, 1]
+  }
+}
+```
+
+This sends announcements at 24 hours, 6 hours, and 1 hour before the event.
+
+---
+
+## Priority System
+
+When multiple seasons overlap, priority determines which is active:
+
+```json5
+{
+  "scheduled_seasons": [
+    {"id": "christmas", "priority": 100, ...},   // Higher priority
+    {"id": "winter_event", "priority": 50, ...}  // Lower priority
+  ]
+}
+```
+
+**Priority Rules:**
+
+1. Higher priority takes precedence
+2. Scheduled seasons are evaluated before recurring seasons
+3. If equal priority and overlap, first defined wins
+
+**Recommended Priority Values:**
+
+| Priority | Use Case |
+|----------|----------|
+| 100+ | Special events (holidays, tournaments) |
+| 50 | Regular recurring seasons |
+| 1-49 | Fallback/default seasons |
 
 ---
 
 ## Admin Commands
 
-### View Season Information
+### View Schedule Information
 
-**Current Season:**
 ```bash
-/rankedadmin season info
+/rankedadmin season schedule
 ```
 
-**Output:**
-```
-╔══════════════════════════════════════╗
-║      Current Season Information      ║
-╠══════════════════════════════════════╣
-║ Season ID: 5                         ║
-║ Name: 2025-01                        ║
-║ Status: Active                       ║
-║ Started: 2025-01-01 00:00:00         ║
-║ Ends: 2025-01-31 00:00:00            ║
-║ Time Remaining: 12 days, 5 hours     ║
-╚══════════════════════════════════════╝
-```
+Shows current schedule status including:
 
-**Season History:**
+- Active season (name, type, end time)
+- Off-season status
+- Next scheduled season
+- Fallback behavior
+
+### Reload Schedule Configuration
+
 ```bash
-/rankedadmin season history [limit]
+/rankedadmin season schedule reload
 ```
 
-**Examples:**
+Reloads `seasons.json5` without server restart. Also validates configuration and reports any issues.
+
+### View Upcoming Seasons
+
 ```bash
-/rankedadmin season history        # Show last 10 seasons
-/rankedadmin season history 5      # Show last 5 seasons
+/rankedadmin season schedule upcoming [days]
 ```
 
----
-
-### Create New Season
-
-**Syntax:**
-```bash
-/rankedadmin season create <days> [name]
-```
-
-**Examples:**
-```bash
-# Auto-generated name (YYYY-MM format)
-/rankedadmin season create 30
-
-# Custom name
-/rankedadmin season create 30 "Summer Championship 2025"
-/rankedadmin season create 14 "Weekly Tournament #52"
-```
-
-**Behavior:**
-- Ends current season immediately
-- Distributes rewards to top players
-- Creates new season with specified duration
-- Announces to all online players
-
-**Permission:** OP level 2 required
-
----
-
-### Force Season Rotation
-
-**Immediate Rotation:**
-```bash
-/rankedadmin season rotate
-```
-
-**Effect:**
-- Ends current season now (ignoring remaining time)
-- Follows full rotation process (rewards, reset, create new)
-- Use case: Manual season end for events/tournaments
-
----
-
-### End Current Season
-
-**Mark Season as Ended:**
-```bash
-/rankedadmin season end
-```
-
-**Effect:**
-- Sets season end date to current time
-- Does NOT immediately rotate
-- Next automatic check (within 10 minutes) will trigger rotation
-- Use case: Schedule season end without immediate rotation
-
----
-
-### Adjust Season End Time
-
-**Set End Time:**
-```bash
-/rankedadmin season setend <minutes>
-```
-
-**Examples:**
-```bash
-/rankedadmin season setend 60      # End in 1 hour
-/rankedadmin season setend 1440    # End in 1 day (24 hours)
-/rankedadmin season setend 10080   # End in 1 week (7 days)
-```
-
-**Use Cases:**
-- Testing season rotation
-- Extending/shortening current season
-- Synchronizing season end with server events
-
----
-
-### Rename Current Season
-
-**Change Season Name:**
-```bash
-/rankedadmin season rename <new_name>
-```
+| Argument | Default | Description |
+|----------|---------|-------------|
+| `days` | 90 | Number of days to look ahead |
 
 **Example:**
+
 ```bash
-/rankedadmin season rename "Winter Championship 2025"
+/rankedadmin season schedule upcoming 365
 ```
 
-**Effect:**
-- Updates season name in database
-- Updates Redis cache (cross-server)
-- Announces to all online players
+### Validate Configuration
+
+```bash
+/rankedadmin season schedule validate
+```
+
+Checks for configuration issues:
+
+- Invalid timezone
+- Overlapping seasons with same priority
+- Invalid date ranges
+- Invalid month/day values
+
+### Other Season Commands
+
+| Command | Description |
+|---------|-------------|
+| `/rankedadmin season info` | Current season details |
+| `/rankedadmin season history [limit]` | Past seasons |
+| `/rankedadmin season create <days> [name]` | Create new season |
+| `/rankedadmin season rotate` | Force immediate rotation |
+| `/rankedadmin season end` | Mark current season as ended |
+| `/rankedadmin season setend <minutes>` | Adjust end time |
+| `/rankedadmin season rename <name>` | Rename current season |
 
 ---
 
@@ -252,78 +505,44 @@ Seasons rotate automatically when the configured duration expires.
 
 ### View Current Season
 
-**Command:**
 ```bash
 /season
 ```
 
-**Output:**
-```
-═══════════════════════════════════
-       Current Season: 2025-01
-═══════════════════════════════════
-Status: Active
-Time Remaining: 12 days, 5 hours
-═══════════════════════════════════
-Compete in ranked battles to earn
-exclusive season rewards!
-```
-
-**Permission:** None (all players)
+Shows current season information including name, status, and time remaining.
 
 ---
 
-## Reward System Integration
+## Season Lifecycle
 
-### Season Rewards
+### During Season
 
-**Configuration:** `config/cobbleranked/rewards.json5`
+Players compete in ranked battles:
 
-**Example:**
-```json5
-{
-  "seasonRankRewards": {
-    "singles": [
-      {
-        "id": "season_top1_singles",
-        "displayName": "&6&l🏆 Champion Reward",
-        "minRank": 1,
-        "maxRank": 1,
-        "commands": [
-          "give {player} minecraft:diamond 64",
-          "lp user {player} permission set ranked.champion true"
-        ]
-      },
-      {
-        "id": "season_top3_singles",
-        "displayName": "&e&l🥇 Top 3 Reward",
-        "minRank": 1,
-        "maxRank": 3,
-        "commands": [
-          "give {player} minecraft:gold_ingot 32"
-        ]
-      }
-    ],
-    "doubles": [
-      // Similar structure for Doubles format
-    ]
-  }
-}
-```
+- Elo changes based on match results
+- Leaderboards update in real-time
+- Stats accumulate across all formats
 
-### Reward Distribution
+### Season End
 
-**Automatic:**
-- Top 25 players per format receive rewards at season end
-- Online players: Rewards execute immediately
-- Offline players: Rewards stored as "pending" in database
-- Next login: Pending rewards automatically distributed
+**Automated Process:**
 
-**Manual Check:**
-```bash
-/ranked
-# Opens GUI → Click "Rewards" button → View pending season rewards
-```
+1. Detect season end (based on schedule)
+2. Distribute rewards to top players per format
+3. Create pending rewards for offline players
+4. Mark season as ended in database
+5. Transition to next season (or off-season)
+6. Broadcast to all servers (cross-server)
+
+### What Resets
+
+| Data | Default Behavior |
+|------|------------------|
+| Milestone claim flags | Reset |
+| Season reward eligibility | Reset |
+| Season leaderboard | Reset |
+| Elo ratings | Preserved (configurable) |
+| Win/loss records | Preserved (configurable) |
 
 ---
 
@@ -331,207 +550,103 @@ exclusive season rewards!
 
 ### Battle Server Singleton
 
-**Critical:** Only ONE server should manage seasons globally.
+> ⚠️ **Critical:** Only ONE server should manage seasons.
 
 **Battle Server Configuration:**
+
 ```json5
 {
   "cross_server": {
     "enabled": true,
     "server_id": "battle",
-    "battle_server": ""  // Empty string = this is the battle server
+    "battle_server": ""   // Empty = this is the battle server
   }
 }
 ```
 
-**Other Servers (Main/Lobby):**
+**Other Servers:**
+
 ```json5
 {
   "cross_server": {
     "enabled": true,
     "server_id": "main1",
-    "battle_server": "battle"  // Points to battle server
+    "battle_server": "battle"
   }
 }
 ```
 
-### How Cross-Server Works
+### Synchronization
 
-**Battle Server:**
-- Manages season lifecycle (create, rotate, end)
-- Distributes rewards to database
-- Publishes season changes to Redis
-- Runs automatic rotation checks every 10 minutes
+Season data is synchronized across servers:
 
-**Main/Lobby Servers:**
-- Read season info from Redis cache (60s TTL)
-- Display season info to players via `/season` command
-- Distribute pending rewards to local online players
-- Listen for `SEASON_ROTATED` Redis messages
-
-**Redis Synchronization:**
-- Season info cached with 60-second TTL
-- Key: `ranked:current_season`
-- Fields: `season_id`, `season_name`, `start_date`, `end_date`, `is_active`
-- Broadcasts: `SEASON_ROTATED` message on rotation
-
-**Why Singleton?**
-- Multiple battle servers would cause duplicate rotations
-- Redis heartbeat detects duplicate battle servers
-- SEVERE errors emitted if multiple battle servers detected
+- Season info cached in Redis with 60s TTL
+- `SEASON_ROTATED` message broadcast on transitions
+- All servers display consistent season information
 
 ---
 
-## Season Naming
+## Examples
 
-### Auto-Generated Names
+### Four Seasonal Rotation (Default)
 
-**Format:** `YYYY-MM`
-
-**Examples:**
-- `2025-01` (January 2025)
-- `2025-12` (December 2025)
-
-**Configuration:**
 ```json5
 {
-  "seasonAnnouncement": {
-    "defaultSeasonName": ""  // Empty = auto-generate
-  }
+  "settings": {
+    "timezone": "America/New_York",
+    "fallback_behavior": "OFF_SEASON"
+  },
+  "recurring_seasons": [
+    {"id": "spring", "name": "Spring {year}", "start_month": 3, "start_day": 1, "end_month": 5, "end_day": 31, "priority": 50, "enabled": true},
+    {"id": "summer", "name": "Summer {year}", "start_month": 6, "start_day": 1, "end_month": 8, "end_day": 31, "priority": 50, "enabled": true},
+    {"id": "autumn", "name": "Autumn {year}", "start_month": 9, "start_day": 1, "end_month": 11, "end_day": 30, "priority": 50, "enabled": true},
+    {"id": "winter", "name": "Winter {year}", "start_month": 12, "start_day": 1, "end_month": 2, "end_day": 28, "crosses_year": true, "priority": 50, "enabled": true}
+  ],
+  "legacy_mode": {"enabled": false}
 }
 ```
 
-### Custom Names
+### Monthly Rotation (Legacy)
 
-**Set Default Name:**
 ```json5
 {
-  "seasonAnnouncement": {
-    "defaultSeasonName": "Winter Season"  // All new seasons use this
-  }
-}
-```
-
-**Override on Create:**
-```bash
-/rankedadmin season create 30 "Summer Championship"
-```
-
-**Rename Current Season:**
-```bash
-/rankedadmin season rename "Spring Tournament 2025"
-```
-
----
-
-## Season Announcements
-
-### Automatic Announcements
-
-**End-of-Season Warnings:**
-- Default: 7 days, 3 days, 1 day before end
-- Sent to all online players
-- Only announces once per threshold
-
-**Configuration:**
-```json5
-{
-  "seasonAnnouncement": {
-    "announceBeforeEnd": [7, 3, 1]  // Days before end
-  }
-}
-```
-
-**Customize Announcements:**
-```json5
-{
-  "seasonAnnouncement": {
-    "announceBeforeEnd": [14, 7, 3, 1]  // More frequent warnings
-  }
-}
-```
-
-### Rotation Announcements
-
-**Sent to All Players:**
-- Previous season ended
-- New season started
-- Reminder to collect rewards
-
-**Language Keys:**
-```json5
-{
-  "season_ended_announcement": "&c&l═══════════════════════════",
-  "season_previous": "&7Previous Season: &f{season}",
-  "season_new": "&aNew Season Started: &f{season}",
-  "season_collect_rewards": "&eCollect your season rewards: &f/ranked"
-}
-```
-
----
-
-## Troubleshooting
-
-Having issues with seasons? See the [FAQ](../support/faq.md) for solutions.
-
----
-
-## Best Practices
-
-### Recommended Settings
-
-**Monthly Seasons (Most Common):**
-```json5
-{
-  "ranked_match": {
+  "legacy_mode": {
+    "enabled": true,
     "reset_days": 30,
-    "seasonReset": {
-      "resetElo": false,          // Preserve long-term progression
-      "resetWinsLosses": false    // Keep historical stats
-    }
+    "default_season_name": ""
   }
 }
 ```
 
-**Weekly Tournaments:**
+### Holiday Events Override
+
 ```json5
 {
-  "ranked_match": {
-    "reset_days": 7,
-    "seasonReset": {
-      "resetElo": true,           // Fresh start each week
-      "resetWinsLosses": true     // Reset for fair competition
+  "scheduled_seasons": [
+    {
+      "id": "christmas_2025",
+      "name": "Christmas Championship 2025",
+      "start": "2025-12-20 00:00:00",
+      "end": "2025-12-27 23:59:59",
+      "priority": 100,    // Override recurring Winter season
+      "enabled": true
     }
-  }
+  ],
+  "recurring_seasons": [
+    {
+      "id": "winter",
+      "name": "Winter {year}",
+      "start_month": 12, "start_day": 1,
+      "end_month": 2, "end_day": 28,
+      "crosses_year": true,
+      "priority": 50,     // Lower priority than Christmas event
+      "enabled": true
+    }
+  ]
 }
 ```
 
-**Long-Term Competitive:**
-```json5
-{
-  "ranked_match": {
-    "reset_days": 90,
-    "seasonReset": {
-      "resetElo": false,          // Preserve skill rating
-      "resetWinsLosses": false    // Track all-time stats
-    }
-  }
-}
-```
-
-### Admin Guidelines
-
-**DO:**
-- Use default auto-rotation for hands-off management
-- Configure meaningful season names for events
-- Test rotation on staging server before production
-- Monitor logs during season rotation
-
-**DON'T:**
-- Run multiple battle servers without singleton check
-- Manually edit database during rotation
-- Force rotate during active battles
-- Forget to configure season rewards
+During December 20-27, Christmas Championship takes precedence. Winter season resumes after.
 
 ---
 

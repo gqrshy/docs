@@ -51,35 +51,35 @@ Most efficient way to ban multiple Pokemon:
 **Available Labels:**
 
 <details>
-<summary><strong>legendary</strong> - Major legendary Pokemon</summary>
+<summary><strong>legendary</strong> - Legendary Pokemon (71 total)</summary>
 
-Articuno, Zapdos, Moltres, Mewtwo, Raikou, Entei, Suicune, Lugia, Ho-Oh, Regirock, Regice, Registeel, Latias, Latios, Kyogre, Groudon, Rayquaza, Uxie, Mesprit, Azelf, Dialga, Palkia, Heatran, Regigigas, Giratina, Cresselia, Cobalion, Terrakion, Virizion, Tornadus, Thundurus, Reshiram, Zekrom, Landorus, Kyurem, Xerneas, Yveltal, Zygarde, Type: Null, Silvally, Tapu Koko, Tapu Lele, Tapu Bulu, Tapu Fini, Cosmog, Cosmoem, Solgaleo, Lunala, Nihilego, Buzzwole, Pheromosa, Xurkitree, Celesteela, Kartana, Guzzlord, Necrozma, Zacian, Zamazenta, Eternatus, Kubfu, Urshifu, Regieleki, Regidrago, Glastrier, Spectrier, Calyrex, Enamorus, Wo-Chien, Chien-Pao, Ting-Lu, Chi-Yu, Koraidon, Miraidon, Walking Wake, Iron Leaves, Okidogi, Munkidori, Fezandipiti, Ogerpon, Terapagos, Pecharunt
-
-</details>
-
-<details>
-<summary><strong>mythical</strong> - Mythical Pokemon (event-exclusive)</summary>
-
-Mew, Celebi, Jirachi, Deoxys, Phione, Manaphy, Darkrai, Shaymin, Arceus, Victini, Keldeo, Meloetta, Genesect, Diancie, Hoopa, Volcanion, Magearna, Marshadow, Zeraora, Meltan, Melmetal, Zarude
+Articuno, Zapdos, Moltres, Mewtwo, Raikou, Entei, Suicune, Lugia, Ho-Oh, Regirock, Regice, Registeel, Latias, Latios, Kyogre, Groudon, Rayquaza, Uxie, Mesprit, Azelf, Dialga, Palkia, Heatran, Regigigas, Giratina, Cresselia, Cobalion, Terrakion, Virizion, Tornadus, Thundurus, Reshiram, Zekrom, Landorus, Kyurem, Xerneas, Yveltal, Zygarde, Type: Null, Silvally, Tapu Koko, Tapu Lele, Tapu Bulu, Tapu Fini, Cosmog, Cosmoem, Solgaleo, Lunala, Necrozma, Zacian, Zamazenta, Eternatus, Kubfu, Urshifu, Regieleki, Regidrago, Glastrier, Spectrier, Calyrex, Enamorus, Wo-Chien, Chien-Pao, Ting-Lu, Chi-Yu, Koraidon, Miraidon, Okidogi, Munkidori, Fezandipiti, Ogerpon, Terapagos
 
 </details>
 
 <details>
-<summary><strong>restricted</strong> - VGC restricted Pokemon (box legendaries)</summary>
+<summary><strong>mythical</strong> - Mythical Pokemon (23 total)</summary>
+
+Mew, Celebi, Jirachi, Deoxys, Phione, Manaphy, Darkrai, Shaymin, Arceus, Victini, Keldeo, Meloetta, Genesect, Diancie, Hoopa, Volcanion, Magearna, Marshadow, Zeraora, Meltan, Melmetal, Zarude, Pecharunt
+
+</details>
+
+<details>
+<summary><strong>restricted</strong> - VGC restricted Pokemon (27 total)</summary>
 
 Mewtwo, Lugia, Ho-Oh, Kyogre, Groudon, Rayquaza, Dialga, Palkia, Giratina, Reshiram, Zekrom, Kyurem, Xerneas, Yveltal, Zygarde, Cosmog, Cosmoem, Solgaleo, Lunala, Necrozma, Zacian, Zamazenta, Eternatus, Calyrex, Koraidon, Miraidon, Terapagos
 
 </details>
 
 <details>
-<summary><strong>ultra_beast</strong> - Ultra Beasts from Gen 7</summary>
+<summary><strong>ultra_beast</strong> - Ultra Beasts (11 total)</summary>
 
 Nihilego, Buzzwole, Pheromosa, Xurkitree, Celesteela, Kartana, Guzzlord, Poipole, Naganadel, Stakataka, Blacephalon
 
 </details>
 
 <details>
-<summary><strong>paradox</strong> - Paradox Pokemon from Scarlet/Violet</summary>
+<summary><strong>paradox</strong> - Paradox Pokemon (20 total)</summary>
 
 Great Tusk, Scream Tail, Brute Bonnet, Flutter Mane, Slither Wing, Sandy Shocks, Iron Treads, Iron Bundle, Iron Hands, Iron Jugulis, Iron Moth, Iron Thorns, Roaring Moon, Iron Valiant, Walking Wake, Iron Leaves, Gouging Fire, Raging Bolt, Iron Boulder, Iron Crown
 
@@ -620,6 +620,230 @@ When player joins queue:
    ❌ FAIL: "Not a first-stage Pokemon (Little Cup)"
 
 ✅ PASS: All pass → Join queue
+```
+
+</details>
+
+---
+
+## Pokemon Reference Lists
+
+Complete lists extracted from Cobblemon 1.7.1 and MegaShowdown codebases for blacklist configuration.
+
+<details>
+<summary><strong>Legendary Pokemon by Generation (71 total)</strong></summary>
+
+**Generation 1 (4):**
+`articuno`, `zapdos`, `moltres`, `mewtwo`
+
+**Generation 2 (6):**
+`raikou`, `entei`, `suicune`, `lugia`, `hooh`, `celebi`
+
+**Generation 3 (10):**
+`regirock`, `regice`, `registeel`, `latias`, `latios`, `kyogre`, `groudon`, `rayquaza`
+
+**Generation 4 (14):**
+`uxie`, `mesprit`, `azelf`, `dialga`, `palkia`, `heatran`, `regigigas`, `giratina`, `cresselia`
+
+**Generation 5 (13):**
+`cobalion`, `terrakion`, `virizion`, `tornadus`, `thundurus`, `reshiram`, `zekrom`, `landorus`, `kyurem`
+
+**Generation 6 (3):**
+`xerneas`, `yveltal`, `zygarde`
+
+**Generation 7 (11):**
+`typenull`, `silvally`, `tapukoko`, `tapulele`, `tapubulu`, `tapufini`, `cosmog`, `cosmoem`, `solgaleo`, `lunala`, `necrozma`
+
+**Generation 8 (11):**
+`zacian`, `zamazenta`, `eternatus`, `kubfu`, `urshifu`, `regieleki`, `regidrago`, `glastrier`, `spectrier`, `calyrex`
+
+**Generation 8a (Hisui) (1):**
+`enamorus`
+
+**Generation 9 (11):**
+`wochien`, `chienpao`, `tinglu`, `chiyu`, `koraidon`, `miraidon`, `okidogi`, `munkidori`, `fezandipiti`, `ogerpon`, `terapagos`
+
+</details>
+
+<details>
+<summary><strong>Mythical Pokemon by Generation (23 total)</strong></summary>
+
+**Generation 1 (1):**
+`mew`
+
+**Generation 2 (1):**
+`celebi`
+
+**Generation 3 (2):**
+`jirachi`, `deoxys`
+
+**Generation 4 (5):**
+`phione`, `manaphy`, `darkrai`, `shaymin`, `arceus`
+
+**Generation 5 (4):**
+`victini`, `keldeo`, `meloetta`, `genesect`
+
+**Generation 6 (3):**
+`diancie`, `hoopa`, `volcanion`
+
+**Generation 7 (3):**
+`magearna`, `marshadow`, `zeraora`
+
+**Generation 7b (Let's Go) (2):**
+`meltan`, `melmetal`
+
+**Generation 8 (1):**
+`zarude`
+
+**Generation 9 (1):**
+`pecharunt`
+
+</details>
+
+<details>
+<summary><strong>Ultra Beasts (11 total)</strong></summary>
+
+All from Generation 7:
+`nihilego`, `buzzwole`, `pheromosa`, `xurkitree`, `celesteela`, `kartana`, `guzzlord`, `poipole`, `naganadel`, `stakataka`, `blacephalon`
+
+</details>
+
+<details>
+<summary><strong>Restricted Pokemon - VGC (27 total)</strong></summary>
+
+Box legendaries typically restricted in VGC formats:
+
+`mewtwo`, `lugia`, `hooh`, `kyogre`, `groudon`, `rayquaza`, `dialga`, `palkia`, `giratina`, `reshiram`, `zekrom`, `kyurem`, `xerneas`, `yveltal`, `zygarde`, `cosmog`, `cosmoem`, `solgaleo`, `lunala`, `necrozma`, `zacian`, `zamazenta`, `eternatus`, `calyrex`, `koraidon`, `miraidon`, `terapagos`
+
+</details>
+
+<details>
+<summary><strong>Paradox Pokemon (20 total)</strong></summary>
+
+**Past Paradox (Ancient):**
+`greattusk`, `screentail`, `brutebonnet`, `fluttermane`, `slitherwing`, `sandyshocks`, `roaringmoon`, `walkingwake`, `gougingfire`, `ragingbolt`
+
+**Future Paradox (Futuristic):**
+`irontreads`, `ironbundle`, `ironhands`, `ironjugulis`, `ironmoth`, `ironthorns`, `ironvaliant`, `ironleaves`, `ironboulder`, `ironcrown`
+
+</details>
+
+<details>
+<summary><strong>Pseudo-Legendary Pokemon (powerhouse label)</strong></summary>
+
+Pokemon with 600 base stat total and 3-stage evolution:
+
+**Generation 1:** `dragonite`
+**Generation 2:** `tyranitar`
+**Generation 3:** `salamence`, `metagross`
+**Generation 4:** `garchomp`
+**Generation 5:** `hydreigon`
+**Generation 6:** `goodra`
+**Generation 7:** `kommo-o`
+**Generation 8:** `dragapult`
+**Generation 9:** `baxcalibur`
+
+</details>
+
+<details>
+<summary><strong>Mega Evolution Pokemon (MegaShowdown - 48 forms)</strong></summary>
+
+**Generation 1:**
+`venusaur:mega`, `charizard:mega_x`, `charizard:mega_y`, `blastoise:mega`, `beedrill:mega`, `pidgeot:mega`, `alakazam:mega`, `slowbro:mega`, `gengar:mega`, `kangaskhan:mega`, `pinsir:mega`, `gyarados:mega`, `aerodactyl:mega`, `mewtwo:mega_x`, `mewtwo:mega_y`
+
+**Generation 2:**
+`ampharos:mega`, `steelix:mega`, `scizor:mega`, `heracross:mega`, `houndoom:mega`, `tyranitar:mega`
+
+**Generation 3:**
+`blaziken:mega`, `gardevoir:mega`, `mawile:mega`, `aggron:mega`, `medicham:mega`, `manectric:mega`, `sharpedo:mega`, `camerupt:mega`, `altaria:mega`, `banette:mega`, `absol:mega`, `glalie:mega`, `salamence:mega`, `metagross:mega`, `latias:mega`, `latios:mega`, `rayquaza:mega`, `sceptile:mega`, `swampert:mega`
+
+**Generation 4:**
+`lopunny:mega`, `garchomp:mega`, `lucario:mega`, `abomasnow:mega`, `gallade:mega`
+
+**Generation 6:**
+`diancie:mega`, `audino:mega`, `sableye:mega`
+
+</details>
+
+<details>
+<summary><strong>Primal Reversion Pokemon (MegaShowdown)</strong></summary>
+
+`kyogre:primal`, `groudon:primal`
+
+</details>
+
+<details>
+<summary><strong>Fusion Forms (MegaShowdown)</strong></summary>
+
+**Kyurem Fusions:**
+`kyurem:white-fusion` (White Kyurem)
+`kyurem:black-fusion` (Black Kyurem)
+
+**Necrozma Fusions:**
+`necrozma:dusk-mane` (Dusk Mane Necrozma)
+`necrozma:dawn-wings` (Dawn Wings Necrozma)
+`necrozma:ultra` (Ultra Necrozma)
+
+**Calyrex Fusions:**
+`calyrex:ice-rider` (Ice Rider Calyrex)
+`calyrex:shadow-rider` (Shadow Rider Calyrex)
+
+</details>
+
+<details>
+<summary><strong>Commonly Banned Combinations (Copy-Paste Ready)</strong></summary>
+
+**Ban All Special Pokemon:**
+```json5
+{
+  "black_list_labels": ["legendary", "mythical", "ultra_beast", "paradox"]
+}
+```
+
+**Ban Only Box Legendaries:**
+```json5
+{
+  "black_list_labels": ["restricted", "mythical"]
+}
+```
+
+**Ban Mega Evolution Forms (with MegaShowdown):**
+```json5
+{
+  "black_list_pokemon": [
+    "rayquaza:mega",
+    "mewtwo:mega_x",
+    "mewtwo:mega_y",
+    "gengar:mega",
+    "kangaskhan:mega",
+    "lucario:mega",
+    "salamence:mega",
+    "blaziken:mega"
+  ]
+}
+```
+
+**Ban Primal and Ultra Forms:**
+```json5
+{
+  "black_list_pokemon": [
+    "kyogre:primal",
+    "groudon:primal",
+    "necrozma:ultra"
+  ]
+}
+```
+
+**Ban Specific Fusion Forms:**
+```json5
+{
+  "black_list_pokemon": [
+    "kyurem:white-fusion",
+    "kyurem:black-fusion",
+    "calyrex:ice-rider",
+    "calyrex:shadow-rider"
+  ]
+}
 ```
 
 </details>
