@@ -2,7 +2,20 @@
 
 Restrict Pokemon, moves, abilities, and held items in ranked battles.
 
-**Config File:** `config/cobbleranked/blacklist.json5`
+---
+
+## File Locations
+
+**Format-Specific Configurations:**
+
+| Format | File |
+|--------|------|
+| Singles (1v1) | `config/cobbleranked/blacklist/singles.json5` |
+| Doubles (2v2) | `config/cobbleranked/blacklist/doubles.json5` |
+| Triples (3v3) | `config/cobbleranked/blacklist/triples.json5` |
+| Multi (2v2 Teams) | `config/cobbleranked/blacklist/multi.json5` |
+
+Each format has independent blacklist rules!
 
 ---
 
@@ -80,27 +93,21 @@ Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Warto
 </details>
 
 <details>
-<summary><strong>fossil</strong> - Fossil Pokemon</summary>
+<summary><strong>Other Labels</strong></summary>
 
-Omanyte, Omastar, Kabuto, Kabutops, Aerodactyl, Lileep, Cradily, Anorith, Armaldo, Cranidos, Rampardos, Shieldon, Bastiodon, Tirtouga, Carracosta, Archen, Archeops, Tyrunt, Tyrantrum, Amaura, Aurorus, Dracozolt, Arctozolt, Dracovish, Arctovish
-
-</details>
-
-<details>
-<summary><strong>baby</strong> - Baby Pokemon</summary>
-
-Pichu, Cleffa, Igglybuff, Togepi, Tyrogue, Smoochum, Elekid, Magby, Azurill, Wynaut, Budew, Chingling, Bonsly, Mime Jr., Happiny, Munchlax, Riolu, Mantyke, Toxel
-
-</details>
-
-<details>
-<summary><strong>powerhouse</strong> - 600 BST Pokemon (pseudo-legendaries)</summary>
-
-Dragonite, Tyranitar, Salamence, Metagross, Garchomp, Hydreigon, Goodra, Kommo-o, Dragapult, Baxcalibur
+| Label | Description |
+|-------|-------------|
+| `fossil` | Fossil Pokemon (Omanyte, Kabuto, Aerodactyl, etc.) |
+| `baby` | Baby Pokemon (Pichu, Cleffa, Igglybuff, etc.) |
+| `powerhouse` | Pseudo-legendaries (Dragonite, Tyranitar, Garchomp, etc.) |
+| `fakemon` | Custom/Fakemon from addon mods |
+| `gen1` - `gen9` | All Pokemon from specific generation |
+| `alolan_form` | Alolan regional forms |
+| `galarian_form` | Galarian regional forms |
+| `hisuian_form` | Hisuian regional forms |
+| `paldean_form` | Paldean regional forms |
 
 </details>
-
-**Note:** `gen1` through `gen9` labels contain all Pokemon from their respective generations and are too numerous to list here.
 
 ### Quantity Limits
 
@@ -163,6 +170,7 @@ Both syntaxes work! Use aspect names for consistency with game data.
 **MegaShowdown Compatibility:**
 
 If using MegaShowdown mod, the aspect-based syntax is fully supported:
+
 ```json5
 {
   "black_list_pokemon": [
@@ -198,7 +206,7 @@ If using MegaShowdown mod, the aspect-based syntax is fully supported:
 }
 ```
 
-**Move Names:** Lowercase snake_case (spaces → underscores)
+**Move Names:** Lowercase snake_case (spaces to underscores)
 
 <details>
 <summary><strong>Common Banned Moves Reference</strong></summary>
@@ -212,8 +220,9 @@ If using MegaShowdown mod, the aspect-based syntax is fully supported:
 | Baton Pass | `baton_pass` | Smogon OU ban |
 | Last Respects | `last_respects` | Smogon Gen 9 ban |
 | Shed Tail | `shed_tail` | Smogon Gen 9 ban |
-| Double Team | `double_team` | Evasion (if evasion_clause: false) |
-| Minimize | `minimize` | Evasion (if evasion_clause: false) |
+| Double Team | `double_team` | Evasion |
+| Minimize | `minimize` | Evasion |
+| Dark Void | `dark_void` | VGC ban (Gen 7+) |
 
 </details>
 
@@ -249,16 +258,6 @@ If using MegaShowdown mod, the aspect-based syntax is fully supported:
 
 </details>
 
-<details>
-<summary><strong>How to Find Ability Names</strong></summary>
-
-1. Press `F3 + H` in-game
-2. Open Pokemon summary
-3. Hover over ability icon
-4. Internal name shown in tooltip
-
-</details>
-
 ---
 
 ## Item Restrictions
@@ -276,45 +275,64 @@ If using MegaShowdown mod, the aspect-based syntax is fully supported:
 }
 ```
 
-**Item Format:** `cobblemon:item_name` (required!)
+**Item Format:** `namespace:item_name`
 
-<details>
-<summary><strong>How to Find Item IDs</strong></summary>
+> 📝 **Note:** Supports item tags! Use `#namespace:tag_name` to ban all items with that tag.
 
-1. Press `F3 + H`
-2. Hover over item in inventory
-3. ID appears at bottom of tooltip
+```json5
+{
+  "black_list_items_pokemon": [
+    "#cobblemon:held_items",      // Ban all held items with this tag
+    "cobblemon:choice_band"       // Ban specific item
+  ]
+}
+```
 
-</details>
+### Item Clause (Duplicate Items)
 
-<details>
-<summary><strong>Commonly Banned Items</strong></summary>
+Control how many Pokemon can hold the same item:
 
-| Item | ID | Reason |
-|------|-----|--------|
-| Bright Powder | `cobblemon:bright_powder` | Evasion boost |
-| Lax Incense | `cobblemon:lax_incense` | Evasion boost |
-| Quick Claw | `cobblemon:quick_claw` | RNG priority |
-| Soul Dew | `cobblemon:soul_dew` | Lati@s specific boost |
-| King's Rock | `cobblemon:kings_rock` | Flinch chance |
+```json5
+{
+  "max_duplicate_items": 1  // VGC Item Clause (no two Pokemon may hold same item)
+}
+```
 
-</details>
+| Value | Description |
+|-------|-------------|
+| `0` | Disabled (no restriction) |
+| `1` | VGC/Smogon Item Clause (each item can only be held once) |
+| `2` | Allow up to 2 Pokemon with same item |
+
+---
+
+## Inventory Restrictions
+
+Ban items from player inventory during queue/battle (format-specific):
+
+```json5
+{
+  "banned_inventory_items": [
+    "mega_showdown:tera_orb",     // Ban Terastallization
+    "mega_showdown:mega_bracelet", // Ban Mega Evolution
+    "mega_showdown:dynamax_band",  // Ban Dynamax
+    "mega_showdown:z_ring",        // Ban Z-Moves
+    "mega_showdown:omni_ring"      // Ban all gimmicks
+  ]
+}
+```
+
+**Use Case:** Ban Tera Orb in Singles but allow in Doubles:
+- `singles.json5`: `"banned_inventory_items": ["mega_showdown:tera_orb"]`
+- `doubles.json5`: `"banned_inventory_items": []`
+
+> 📝 **Note:** Supports item tags with `#namespace:tag_name` syntax.
 
 ---
 
 ## Healing Item Restrictions
 
-Control healing item usage during battles (added in v1.0.7+).
-
-### Configuration Location
-
-**Per-Format Config Files:**
-- `config/cobbleranked/blacklist/singles.json5`
-- `config/cobbleranked/blacklist/doubles.json5`
-- `config/cobbleranked/blacklist/triples.json5`
-- `config/cobbleranked/blacklist/multi.json5`
-
-Each format has independent healing item restrictions!
+Control healing item usage during battles.
 
 ### Basic Example
 
@@ -335,7 +353,7 @@ Each format has independent healing item restrictions!
 
 **Result:** Players cannot use Potions, Full Restores, Revives, Antidotes, etc. during battle
 
-### Advanced Example (Selective Blocking)
+### Selective Blocking
 
 ```json5
 {
@@ -361,146 +379,110 @@ Each format has independent healing item restrictions!
 }
 ```
 
-**Result:** Players can use Potions/Super Potions/Hyper Potions, but NOT Max Potions or Full Restores
+> 📝 **Note:** Supports item tags! Use `#cobblemon:healing_items` to ban all items with that tag.
 
 ### Item Categories
 
-| Category | Block All Flag | Individual List | Common Items |
-|----------|---------------|-----------------|--------------|
-| **Healing** | `block_all_healing_items` | `blocked_healing_items` | Potion, Super Potion, Hyper Potion, Max Potion, Full Restore |
-| **Status Cure** | `block_status_healing_items` | `blocked_status_healing_items` | Antidote, Paralyze Heal, Awakening, Burn Heal, Ice Heal, Full Heal |
-| **Revival** | `block_revival_items` | `blocked_revival_items` | Revive, Max Revive |
+| Category | Block All Flag | Individual List |
+|----------|---------------|-----------------|
+| **Healing** | `block_all_healing_items` | `blocked_healing_items` |
+| **Status Cure** | `block_status_healing_items` | `blocked_status_healing_items` |
+| **Revival** | `block_revival_items` | `blocked_revival_items` |
 
-### Configuration Modes
+---
 
-**Mode 1: Block All (Recommended for Competitive)**
+## Special Formats
+
+Enable special battle format rules:
+
 ```json5
 {
-  "block_all_healing_items": true,
-  "blocked_healing_items": []  // Ignored when block_all = true
-}
-```
-
-**Mode 2: Selective Blocking (Casual/Custom Rules)**
-```json5
-{
-  "block_all_healing_items": false,
-  "blocked_healing_items": [
-    "cobblemon:max_potion",
-    "cobblemon:full_restore"
-  ]
-}
-```
-
-### Per-Format Examples
-
-**Singles (Competitive):** No items allowed
-```json5
-// config/cobbleranked/blacklist/singles.json5
-{
-  "consumables": {
-    "block_all_healing_items": true,
-    "block_status_healing_items": true,
-    "block_revival_items": true
+  "special_format": {
+    "enabled": true,
+    "format_type": "little_cup"  // none, baby_cup, little_cup, monotype, shiny_only, dex_range, nfe
   }
 }
 ```
 
-**Doubles (VGC-Style):** No items allowed
+### Available Format Types
+
+| Format | Description | Rules |
+|--------|-------------|-------|
+| `none` | Disabled | No special rules |
+| `baby_cup` | Baby Cup | First-stage Pokemon that can evolve only |
+| `little_cup` | Little Cup | First-stage Pokemon only (official format) |
+| `monotype` | Monotype | All Pokemon must share a type |
+| `shiny_only` | Shiny Only | All Pokemon must be shiny |
+| `dex_range` | Dex Range | Pokemon within specified dex number range |
+| `nfe` | NFE (Not Fully Evolved) | Pokemon that can still evolve |
+
+### Dex Range Configuration
+
 ```json5
-// config/cobbleranked/blacklist/doubles.json5
 {
-  "consumables": {
-    "block_all_healing_items": true,
-    "block_status_healing_items": true,
-    "block_revival_items": true
+  "special_format": {
+    "enabled": true,
+    "format_type": "dex_range",
+    "dex_range_min": 1,
+    "dex_range_max": 151  // Only Gen 1 Pokemon
   }
 }
 ```
 
-**Casual Format:** Allow basic items only
-```json5
-// config/cobbleranked/blacklist/casual.json5
-{
-  "consumables": {
-    "block_all_healing_items": false,
-    "blocked_healing_items": [
-      "cobblemon:max_potion",
-      "cobblemon:full_restore"
-    ],
+<details>
+<summary><strong>Format Rules Details</strong></summary>
 
-    "block_status_healing_items": false,
-    "blocked_status_healing_items": [
-      "cobblemon:full_heal"
-    ],
+### Baby Cup
 
-    "block_revival_items": true  // No revives
-  }
-}
-```
+- Must be first-stage (no pre-evolution)
+- Must be able to evolve
 
-### Finding Item IDs
+**Valid:** Pichu, Bulbasaur, Charmander
+**Invalid:** Pikachu (has pre-evolution), Ditto (cannot evolve)
 
-1. **Press F3+H** (advanced tooltips)
-2. **Hover over item** in inventory
-3. **Check tooltip** for ID (e.g., `cobblemon:potion`)
-4. **Add to list** with full namespace: `"cobblemon:potion"`
+### Little Cup (Official)
 
-### Default Values
+- Must be first-stage (no pre-evolution)
+- Non-evolving Pokemon allowed
 
-All blacklist files ship with competitive defaults:
+**Valid:** Pichu, Bulbasaur, Ditto
+**Invalid:** Pikachu, Ivysaur, Raichu
 
-```json5
-{
-  "consumables": {
-    "block_all_healing_items": true,
-    "blocked_healing_items": [
-      "cobblemon:potion",
-      "cobblemon:super_potion",
-      "cobblemon:hyper_potion",
-      "cobblemon:max_potion",
-      "cobblemon:full_restore"
-    ],
+### Monotype
 
-    "block_status_healing_items": true,
-    "blocked_status_healing_items": [
-      "cobblemon:antidote",
-      "cobblemon:paralyze_heal",
-      "cobblemon:awakening",
-      "cobblemon:burn_heal",
-      "cobblemon:ice_heal",
-      "cobblemon:full_heal"
-    ],
+- All Pokemon must share at least one type
+- Dual-types can overlap (Fire/Flying + Fire/Fighting = Fire team)
 
-    "block_revival_items": true,
-    "blocked_revival_items": [
-      "cobblemon:revive",
-      "cobblemon:max_revive"
-    ]
-  }
-}
-```
+### Shiny Only
 
-**To allow ALL items:** Set all `block_all_*` flags to `false` and clear the lists
+- All Pokemon must be shiny variants
 
-### Technical Details
+### NFE (Not Fully Evolved)
 
-**When are items blocked?**
-- During queue (team validation)
-- During match preparation (ready screen)
-- During battle (item usage listener)
+- Pokemon must be able to evolve
+- Final evolutions are banned
 
-**What happens when player tries to use blocked item?**
-1. Item usage is cancelled
-2. Player receives error message
-3. Item remains in inventory (not consumed)
-4. Battle continues normally
+**Valid:** Pikachu (can evolve to Raichu), Ivysaur
+**Invalid:** Raichu (fully evolved), Venusaur
 
-**Log output:**
-```
-[ItemUsageListener] ✅ BLOCKED healing item usage on Pikachu
-(owned by GASHI) during COMPETITIVE SINGLES battle
-```
+</details>
+
+---
+
+## Field Reference
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `black_list_pokemon` | List | Banned Pokemon names/forms |
+| `black_list_labels` | List | Banned category labels |
+| `restricted_label_limits` | Map | Label quantity limits |
+| `black_list_moves` | List | Banned moves |
+| `black_list_ability` | List | Banned abilities |
+| `black_list_items_pokemon` | List | Banned held items (supports tags) |
+| `max_duplicate_items` | Number | Item clause limit (0 = disabled) |
+| `banned_inventory_items` | List | Banned player inventory items |
+| `special_format` | Object | Special format rules |
+| `consumables` | Object | Healing item restrictions |
 
 ---
 
@@ -544,26 +526,15 @@ Competitive standard format (Singles 6v6 at Level 100):
   "black_list_items_pokemon": [
     "cobblemon:bright_powder",  // Evasion boost
     "cobblemon:lax_incense"     // Evasion boost
-  ]
+  ],
+
+  "max_duplicate_items": 1  // Item Clause
 }
 ```
 
-**Also set in `config.json5`:**
-- `levelMatch: 100` (Smogon uses Level 100, not 50!)
-- `species_clause: true`
-- `sleep_clause: true`
-- `evasion_clause: true`
-- `ohko_clause: true`
+**Also set in `config.json5`:** `levelMatch: 100`
 
-**Important Notes:**
-- **Level 100:** Smogon OU uses Level 100 (Showdown's default), NOT Level 50
-- **Legendaries:** NOT all legendaries are banned! Only Ubers-tier (restricted label)
-  - **LEGAL:** Landorus-T, Heatran, Tapu Koko, Raging Bolt, Iron Valiant, etc.
-  - **BANNED:** Mewtwo, Zacian, Calyrex, Koraidon, Miraidon, etc.
-- **Ultra Beasts:** Most are LEGAL (Kartana, Celesteela, etc.)
-- **Paradox Pokemon:** Most are LEGAL (Iron Hands, Great Tusk, etc.), but some banned individually
-
-### VGC Series 1
+### VGC Series
 
 Official VGC format:
 
@@ -575,11 +546,27 @@ Official VGC format:
   "black_list_labels": ["mythical"],  // Mythicals not allowed
   "black_list_moves": [
     "fissure", "sheer_cold", "horn_drill", "guillotine"
-  ]
+  ],
+  "max_duplicate_items": 1  // Item Clause
 }
 ```
 
-**Also set:** `item_clause: true` + `levelMatch: 50`
+**Also set:** `levelMatch: 50`
+
+### Little Cup
+
+```json5
+{
+  "special_format": {
+    "enabled": true,
+    "format_type": "little_cup"
+  },
+  "black_list_labels": ["legendary", "mythical"],
+  "max_duplicate_items": 1
+}
+```
+
+**Also set:** `levelMatch: 5`
 
 ### Casual (Minimal Bans)
 
@@ -588,55 +575,8 @@ Only ban unfair moves:
 ```json5
 {
   "black_list_labels": [],
-  "black_list_moves": ["fissure", "sheer_cold", "horn_drill", "guillotine"]
-}
-```
-
-</details>
-
----
-
-<details>
-<summary><strong>Advanced Examples</strong></summary>
-
-### Mix Limits + Bans
-
-Allow 1 legendary, but ban specific ones:
-
-```json5
-{
-  "restricted_label_limits": {
-    "legendary": 1       // Max 1 legendary
-  },
-  "black_list_pokemon": [
-    "mewtwo",            // Exception: Mewtwo always banned
-    "rayquaza"           // Exception: Rayquaza always banned
-  ]
-}
-```
-
-**Result:** Can use 1 legendary (Lugia, Dialga, etc.) but NOT Mewtwo or Rayquaza
-
-### Generation Filter
-
-Ban Gen 9 Pokemon only:
-
-```json5
-{
-  "black_list_labels": ["gen9", "paradox"]
-}
-```
-
-### Monotype Support
-
-No additional config needed - players manage teams manually
-
-Recommended blacklist:
-
-```json5
-{
-  "black_list_labels": ["legendary", "mythical"],
-  "black_list_moves": ["baton_pass"]
+  "black_list_moves": ["fissure", "sheer_cold", "horn_drill", "guillotine"],
+  "max_duplicate_items": 0  // No Item Clause
 }
 ```
 
@@ -651,7 +591,7 @@ Recommended blacklist:
 
 When player joins queue:
 
-```
+```text
 1. Check label blacklist
    ❌ FAIL: "Blacklisted Pokemon: Mewtwo (legendary)"
 
@@ -661,14 +601,23 @@ When player joins queue:
 3. Check label limits
    ❌ FAIL: "Too many legendary: 2/1"
 
-4. Check moves
+4. Check duplicate species (species clause)
+   ❌ FAIL: "Duplicate species: Pikachu"
+
+5. Check moves
    ❌ FAIL: "Blacklisted move: Fissure"
 
-5. Check abilities
+6. Check abilities
    ❌ FAIL: "Blacklisted ability: Moody"
 
-6. Check held items
+7. Check held items
    ❌ FAIL: "Blacklisted item: cobblemon:bright_powder"
+
+8. Check duplicate items (item clause)
+   ❌ FAIL: "Duplicate item: Choice Band (2/1)"
+
+9. Check special format rules
+   ❌ FAIL: "Not a first-stage Pokemon (Little Cup)"
 
 ✅ PASS: All pass → Join queue
 ```
@@ -679,7 +628,8 @@ When player joins queue:
 
 ## See Also
 
-- [Main Config](config.md) - Season, Elo, clauses
+- [Main Config](config.md) - Season, Elo settings
 - [Battle Formats](../features/battle-formats.md) - Format details
+- [Inventory Restrictions](../features/inventory-restrictions.md) - Player inventory rules
 - [FAQ](../support/faq.md) - Common questions
 - [Troubleshooting](../support/troubleshooting.md) - Problem solving
