@@ -1,16 +1,17 @@
 # Battle Formats
 
-Independent rankings for Singles, Doubles, and Multi (2v2 Singles) formats.
+Independent rankings for Singles, Doubles, Triples, and Multi formats.
 
 ---
 
 ## Overview
 
 Each battle format has:
-- **Separate Elo ratings**
-- **Independent leaderboards**
-- **Format-specific stats** (wins, losses, matches)
-- **Separate queues**
+
+- **Separate Elo ratings** - Progress independently per format
+- **Independent leaderboards** - Format-specific rankings
+- **Format-specific stats** - Wins, losses, win streaks per format
+- **Separate queues** - Match with players in the same format
 
 **Winning in Singles doesn't affect your Doubles Elo.**
 
@@ -18,16 +19,14 @@ Each battle format has:
 
 ## Available Formats
 
-### Competitive Formats
+| Format | Description | Active Pokemon | Team Size | Players |
+|--------|-------------|----------------|-----------|---------|
+| **SINGLES** | Traditional 1v1 | 1 | 3 | 1v1 |
+| **DOUBLES** | 2v2 with one player | 2 | 4 | 1v1 |
+| **TRIPLES** | 3v3 with one player | 3 | 6 | 1v1 |
+| **MULTI** | Team battles | 1 per player | 3 per player | 2v2 (4 players) |
 
-| Format | Description | Team Size | Party Size | Ranked |
-|--------|-------------|-----------|------------|--------|
-| **SINGLES** | 1v1 battles | 3-6 Pokemon | 1 player | ✅ |
-| **DOUBLES** | 2v2 battles | 4-6 Pokemon | 1 player | ✅ |
-| **TRIPLES** | 3v3 battles | 5-6 Pokemon | 1 player | ✅ |
-| **MULTI** | 2v2 team battles | 1-3 Pokemon each | 2 players | ✅ |
-
-> 📝 **Note:** Random Battles (randomly generated teams) are planned for v1.3.0. See [Random Battles](random-battles.md) for details.
+> 📝 **Note:** Random Battles (auto-generated teams) are planned for v1.3.0. See [Random Battles](random-battles.md) for details.
 
 ---
 
@@ -35,47 +34,76 @@ Each battle format has:
 
 Traditional 1v1 Pokemon battles.
 
-**Rules:**
-- Bring 3-6 Pokemon
-- 1v1 format
-- Select lead Pokemon before battle
+**Battle Setup:**
 
-**Example:** Player A vs Player B (solo)
+- Select **3 Pokemon** from your party
+- Choose **1 lead** to start the battle
+- 2 Pokemon remain as backups
+
+**Example:** Player A vs Player B, each with 3 Pokemon (1 active + 2 backups)
 
 ---
 
 ## Doubles
 
-1 player controls 2 Pokemon simultaneously.
+One player controls 2 Pokemon simultaneously.
 
-**Rules:**
-- Bring 4-6 Pokemon
-- Both Pokemon on field at once
-- Select 2 leads before battle
+**Battle Setup:**
 
-**Example:** Player A (2 Pokemon) vs Player B (2 Pokemon)
+- Select **4 Pokemon** from your party
+- Choose **2 leads** to start on the field
+- 2 Pokemon remain as backups
+
+**Example:** Player A (2 active Pokemon) vs Player B (2 active Pokemon)
 
 ---
 
-## Multi (2v2 Singles)
+## Triples
 
-Team battles - 2 players vs 2 players.
+One player controls 3 Pokemon simultaneously.
 
-**Rules:**
-- Each player brings 1-3 Pokemon
-- Partners must be in same party
-- Both players select leads
+**Battle Setup:**
 
-**Example:** Party (Player A + Player B) vs Party (Player C + Player D)
+- Select **6 Pokemon** from your party
+- All **3 leads** start on the field
+- 3 Pokemon remain as backups
 
-### How to Queue
+**Positioning:**
 
-1. Form party with partner
+- Pokemon are positioned left, center, and right
+- Targeting depends on position (left cannot directly attack far right)
+- Center Pokemon can attack all opponents
+
+**Example:** Player A (3 active Pokemon) vs Player B (3 active Pokemon)
+
+---
+
+## Multi (2v2 Team Battles)
+
+Team battles with 2 players per side (4 players total).
+
+**Battle Setup:**
+
+- Each player selects **3 Pokemon** from their party
+- Each player chooses **1 lead**
+- Partners fight together against opposing team
+
+**Requirements:**
+
+- Form party with partner before queuing
+- Both players must queue together
+- Arenas must have 4 spawn positions (pos1-pos4)
+
+**How to Queue:**
+
+1. Form party with partner (invite them to your party)
 2. Both players open `/ranked` GUI
 3. Select "Multi" format
-4. Both must click queue
+4. Both players click "Join Queue"
 
 **Matchmaking:** System pairs two parties with similar combined Elo.
+
+**Example:** Team 1 (Player A + Player B) vs Team 2 (Player C + Player D)
 
 ---
 
@@ -84,90 +112,161 @@ Team battles - 2 players vs 2 players.
 Players choose format before queuing:
 
 1. Open `/ranked` GUI
-2. Click format selection (Singles/Doubles/Multi)
+2. Click format button (Singles/Doubles/Triples/Multi)
 3. Click "Join Queue"
 
 ---
 
 ## Independent Stats
 
-Each format tracks separately:
+Each format tracks stats separately:
 
 | Stat | Per Format |
 |------|-----------|
-| Elo Rating | Yes |
-| Wins | Yes |
-| Losses | Yes |
-| Win Streak | Yes |
-| Total Matches | Yes |
+| Elo Rating | ✅ |
+| Wins | ✅ |
+| Losses | ✅ |
+| Win Streak | ✅ |
+| Total Matches | ✅ |
+| Leaderboard Position | ✅ |
 
 **Example:**
+
 - Singles: 1500 Elo, 50 wins, 30 losses
-- Doubles: 1000 Elo, 5 wins, 5 losses
-- Multi: 1200 Elo, 20 wins, 15 losses
+- Doubles: 1200 Elo, 20 wins, 15 losses
+- Triples: 1000 Elo, 5 wins, 5 losses
+- Multi: 1100 Elo, 10 wins, 8 losses
 
 ---
 
 ## Leaderboards
 
-Each format has separate leaderboard.
+Each format has its own leaderboard.
 
 **Access:**
+
 1. `/ranked` GUI
 2. Click "Leaderboards"
-3. Select format
-
-**Display:**
-- Top players by Elo
-- Format-specific rankings
-- Filter by Singles/Doubles/Multi
-
----
-
-## Rewards
-
-Season and milestone rewards can be format-specific.
-
-**Example:**
-```json5
-{
-  "season_rewards": {
-    "singles": { /* Singles rewards */ },
-    "doubles": { /* Doubles rewards */ }
-  }
-}
-```
-
-Players can earn rewards in **all formats**.
-
-See [Rewards System](../configuration/rewards.md) for configuration.
+3. Select format tab
 
 ---
 
 ## Configuration
 
-### Team Size Limits
+### Enabling/Disabling Formats
 
 `config/cobbleranked/config.json5`:
 
 ```json5
 {
-  "ranked_match": {
-    "singles": {
-      "min_team_size": 3,
-      "max_team_size": 6
-    },
-    "doubles": {
-      "min_team_size": 4,
-      "max_team_size": 6
-    },
-    "multi": {
-      "min_team_size": 1,
-      "max_team_size": 3
+  "battle": {
+    "format_rules": {
+      "SINGLES": {
+        "enabled": true,
+        "team_size": 3,
+        "turn_timeout_seconds": 90,
+        "match_duration_minutes": 15
+      },
+      "DOUBLES": {
+        "enabled": true,
+        "team_size": 4,
+        "turn_timeout_seconds": 120,
+        "match_duration_minutes": 20
+      },
+      "TRIPLES": {
+        "enabled": true,
+        "team_size": 6,
+        "turn_timeout_seconds": 150,
+        "match_duration_minutes": 25
+      },
+      "MULTI": {
+        "enabled": true,
+        "team_size": 3,
+        "turn_timeout_seconds": 120,
+        "match_duration_minutes": 20
+      }
     }
   }
 }
 ```
+
+| Setting | Description |
+|---------|-------------|
+| `enabled` | Whether format is available for matchmaking |
+| `team_size` | Pokemon count players select from party |
+| `turn_timeout_seconds` | Time limit per turn |
+| `match_duration_minutes` | Maximum match length |
+
+### Format Matchmaking Settings
+
+Each format has separate matchmaking configuration:
+
+```json5
+{
+  "matchmaking": {
+    "format_rules": {
+      "SINGLES": {
+        "enabled": true,
+        "initialRange": 200,
+        "expansionDelay": 30,
+        "expansionRate": 5,
+        "maxMultiplier": 3.0,
+        "immediateMatchRange": 100
+      },
+      "TRIPLES": {
+        "enabled": true,
+        "initialRange": 250,
+        "expansionDelay": 25,
+        "expansionRate": 8,
+        "maxMultiplier": 4.0,
+        "immediateMatchRange": 150
+      },
+      "MULTI": {
+        "enabled": true,
+        "initialRange": 300,
+        "expansionDelay": 20,
+        "expansionRate": 10,
+        "maxMultiplier": 5.0,
+        "immediateMatchRange": 200
+      }
+    }
+  }
+}
+```
+
+| Setting | Description |
+|---------|-------------|
+| `initialRange` | Starting Elo range (±X from player's rating) |
+| `expansionDelay` | Seconds before range expansion starts |
+| `expansionRate` | Elo range increase per second |
+| `maxMultiplier` | Maximum expansion (X × initialRange) |
+| `immediateMatchRange` | Elo range for instant matches |
+
+> 📝 **Note:** Multi format has wider matchmaking ranges because matching 4 players is more difficult than 2.
+
+---
+
+## Arena Requirements
+
+Different formats have different spawn position requirements:
+
+| Format | Required Positions |
+|--------|-------------------|
+| SINGLES | pos1, pos2 |
+| DOUBLES | pos1, pos2 |
+| TRIPLES | pos1, pos2 |
+| MULTI | pos1, pos2, pos3, pos4 |
+
+**Setting up Multi arenas:**
+
+```bash
+/rankedadmin setArena multi_arena pos1  # Team 1 Player 1
+/rankedadmin setArena multi_arena pos2  # Team 2 Player 1
+/rankedadmin setArena multi_arena pos3  # Team 1 Player 2
+/rankedadmin setArena multi_arena pos4  # Team 2 Player 2
+```
+
+See [Arena Configuration](../configuration/arenas.md) for details.
 
 ---
 
@@ -175,6 +274,8 @@ See [Rewards System](../configuration/rewards.md) for configuration.
 
 - [Dynamic Matchmaking](dynamic-matchmaking.md) - Player pairing system
 - [Elo System](elo-system.md) - Rating calculation
+- [Random Battles](random-battles.md) - Upcoming random team battles
+- [Arena Configuration](../configuration/arenas.md) - Battle locations
 - [Rewards](../configuration/rewards.md) - Format-specific rewards
 - [FAQ](../support/faq.md) - Common questions
 - [Troubleshooting](../support/troubleshooting.md) - Problem solving
