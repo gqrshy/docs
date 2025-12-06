@@ -4,7 +4,9 @@
       "Bash(git pull:*)",
       "Bash(git fetch:*)",
       "Bash(git branch:*)",
-      "Bash(xargs basename:*)"
+      "Bash(xargs basename:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

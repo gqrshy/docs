@@ -164,6 +164,17 @@ Season settings, timeouts, and music configuration.
     "season_reset": {
       "reset_elo": true,
       "reset_wins_losses": false
+    },
+
+    // Queue join announcements
+    "queue_announcement": {
+      "enabled": true,
+      "show_player_name": true,
+      "show_format": true,
+      "show_queue_count": true,
+      "show_tier": false,
+      "show_elo": false,
+      "anonymous_text": "???"
     }
   }
 }
@@ -192,6 +203,38 @@ Season settings, timeouts, and music configuration.
 |---------|---------|-------------|
 | `reset_elo` | `true` | Reset Elo on season end |
 | `reset_wins_losses` | `false` | Reset win/loss records |
+
+### Queue Announcements
+
+Broadcast messages when players join the queue:
+
+```json5
+{
+  "ranked_match": {
+    "queue_announcement": {
+      "enabled": true,
+      "show_player_name": true,
+      "show_format": true,
+      "show_queue_count": true,
+      "show_tier": false,
+      "show_elo": false,
+      "anonymous_text": "???"
+    }
+  }
+}
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `enabled` | `true` | Enable queue join announcements |
+| `show_player_name` | `true` | Show player name in announcement |
+| `show_format` | `true` | Show battle format (Singles, Doubles, etc.) |
+| `show_queue_count` | `true` | Show current queue count |
+| `show_tier` | `false` | Show player's rank tier |
+| `show_elo` | `false` | Show player's Elo rating |
+| `anonymous_text` | `"???"` | Text shown when info is hidden |
+
+> 📝 **Note:** Set `show_tier` and `show_elo` to `false` to prevent queue sniping (players avoiding high-rated opponents).
 
 <details>
 <summary><strong>Music Configuration</strong></summary>
