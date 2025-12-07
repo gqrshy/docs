@@ -12,7 +12,7 @@ Common questions and answers about CobbleRanked.
 A competitive ranked battle system for Cobblemon servers.
 
 - Elo-based matchmaking
-- Singles/Doubles battles
+- Singles/Doubles/Triples/Multi battles
 - Season system with rewards
 - Pokemon/move/ability/item restrictions
 - Cross-server support (optional)
@@ -33,7 +33,7 @@ CobbleRanked is a premium mod available exclusively on Polymart.
 
 - Minecraft 1.21.1
 - Fabric Loader 0.17.2+
-- Cobblemon 1.7.0+
+- Cobblemon 1.6.1+ (1.7.0+ recommended)
 - Fabric API 0.116.6+
 - Fabric Language Kotlin 1.13.6+
 
@@ -431,7 +431,7 @@ Move names use **lowercase snake_case** format.
 
 ### Using Commands
 
-```
+```bash
 /give @s <TAB>
 ```
 
@@ -441,7 +441,7 @@ Tab key shows item ID list.
 
 Must use `cobblemon:item_name` format.
 
-```
+```text
 Correct: "cobblemon:bright_powder"
 Wrong: "Bright Powder", "brightpowder"
 ```
@@ -531,9 +531,17 @@ Smogon OU format:
 {
   "language": "en-Us",
   "ranked_match": {
-    "reset_days": 90,
-    "levelMatch": 50,
-    "turn_limit": 100
+    "reset_days": 90
+  },
+  "battle": {
+    "format_rules": {
+      "SINGLES": {
+        "enabled": true,
+        "team_size": 6,
+        "turn_timeout_seconds": 90,
+        "match_duration_minutes": 20
+      }
+    }
   },
   "eloSystem": {
     "mode": "POKEMON_SHOWDOWN"
@@ -541,7 +549,7 @@ Smogon OU format:
 }
 ```
 
-`blacklist.json5`:
+`blacklist/singles.json5`:
 ```json5
 {
   "black_list_labels": ["legendary", "mythical", "restricted", "ultra_beast", "paradox"],
@@ -578,13 +586,19 @@ FLUSH PRIVILEGES;
     "enabled": true,
     "server_id": "battle",
     "battle_server": "",  // Empty = this is battle server
-    "database": {
-      "type": "MYSQL",
+    "database_type": "mysql",
+    "mysql": {
       "host": "localhost",
       "port": 3306,
       "database": "cobbleranked",
       "username": "cobbleranked",
       "password": "your_password"
+    },
+    "redis": {
+      "host": "localhost",
+      "port": 6379,
+      "password": "",
+      "database": 0
     }
   }
 }
@@ -597,13 +611,19 @@ FLUSH PRIVILEGES;
     "enabled": true,
     "server_id": "lobby1",  // Change per server
     "battle_server": "battle",
-    "database": {
-      "type": "MYSQL",
+    "database_type": "mysql",
+    "mysql": {
       "host": "localhost",
       "port": 3306,
       "database": "cobbleranked",
       "username": "cobbleranked",
       "password": "your_password"
+    },
+    "redis": {
+      "host": "localhost",
+      "port": 6379,
+      "password": "",
+      "database": 0
     }
   }
 }
@@ -627,7 +647,7 @@ sudo systemctl enable redis-server
 ### Allow Remote Access
 
 `/etc/redis/redis.conf`:
-```
+```text
 bind 0.0.0.0
 requirepass your_password
 ```
@@ -708,589 +728,6 @@ redis-cli -h localhost -p 6379 PING
 
 ---
 
-## Troubleshooting
-
-<details>
-<summary><strong>Permission errors</strong></summary>
-
-Admin commands require OP:
-
-```
-/op YourUsername
-```
-
-Or grant `cobbleranked.admin` via [LuckPerms](../integration/luckperms.md#permission-nodes)
-
-</details>
-
-<details>
-<summary><strong>Database connection error</strong></summary>
-
-1. Check MySQL is running:
-   ```bash
-   sudo systemctl status mysql
-   ```
-
-2. Verify credentials (username, password)
-
-3. Check database exists:
-   ```bash
-   mysql -u cobbleranked -p -e "SHOW DATABASES;"
-   ```
-
-4. Verify port 3306 is open
-
-</details>
-
-<details>
-<summary><strong>Reset player Elo</strong></summary>
-
-```
-/rankedadmin setelo 1000 PlayerName singles
-/rankedadmin setelo 1000 PlayerName doubles
-```
-
-</details>
-
-<details>
-<summary><strong>Manually end season</strong></summary>
-
-```
-/rankedadmin season end
-/rankedadmin season rotate
-```
-
-**Note:** For cross-server, run on battle server only
-
-</details>
-
----
-
-## Installation Troubleshooting
-
-<details>
-<summary><strong>Mod Not Loading</strong></summary>
-
-**Symptom:** No CobbleRanked messages in console
-
-**Fix:**
-1. Check all dependencies are in `mods/`:
-   - Fabric API
-   - Cobblemon
-   - Fabric Language Kotlin
-2. Review `logs/latest.log` for:
-   - Missing dependency errors
-   - Version mismatches
-   - Mod conflicts
-
-</details>
-
-<details>
-<summary><strong>Config Not Updating</strong></summary>
-
-**Symptom:** Changes don't apply in-game
-
-**Fix:**
-1. Save file (Ctrl+S)
-2. Run `/rankedadmin reload`
-3. Check for JSON5 syntax errors:
-   - Missing commas
-   - Unclosed brackets
-   - Invalid comments
-
-**Note:** Cross-server settings require server restart (cannot reload)
-
-</details>
-
-<details>
-<summary><strong>Database Connection Failed</strong></summary>
-
-**Symptom:** `Failed to connect to MySQL database`
-
-**Fix:**
-1. Verify MySQL is running:
-   ```bash
-   sudo systemctl status mysql
-   ```
-2. Test credentials:
-   ```bash
-   mysql -u cobbleranked -p -h localhost cobbleranked
-   ```
-3. Check firewall (port 3306)
-
-</details>
-
-<details>
-<summary><strong>Permission Denied</strong></summary>
-
-**Symptom:** `You do not have permission to use this command`
-
-**Fix:**
-```
-/op YourUsername
-```
-
-Or grant `cobbleranked.admin` via [LuckPerms](../integration/luckperms.md#permission-nodes)
-
-</details>
-
----
-
-## Configuration Troubleshooting
-
-<details>
-<summary><strong>Config not loading?</strong></summary>
-
-**Symptoms:**
-- Changes not taking effect
-- Default values appearing in-game
-- Missing configuration options
-
-**Solutions:**
-- Check JSON5 syntax (commas, brackets)
-- Look for errors in server console
-- Verify file path: `config/cobbleranked/config.json5`
-
-</details>
-
-<details>
-<summary><strong>Changes not applying?</strong></summary>
-
-**Solutions:**
-- Run `/rankedadmin reload`
-- Restart server if reload fails
-- Verify file was saved after editing
-
-</details>
-
-<details>
-<summary><strong>Cross-server not working?</strong></summary>
-
-**Solutions:**
-- Verify MySQL connection
-- Test Redis: `redis-cli PING`
-- Check all servers use same database
-
-</details>
-
----
-
-## Arena Troubleshooting
-
-<details>
-<summary><strong>Players not teleporting</strong></summary>
-
-**Symptom:** Match found but players stay in place
-
-**Solution:**
-1. Check arena exists: `/rankedadmin arena list`
-2. Verify world is loaded
-3. Check console for errors
-4. Test arena: `/rankedadmin arena tp arena_name`
-
-</details>
-
-<details>
-<summary><strong>Invalid world error</strong></summary>
-
-**Symptom:** `World 'modname:dimension' does not exist`
-
-**Solution:**
-1. Check dimension ID spelling in `arenas.json5`
-2. Ensure dimension mod is installed
-3. Use correct format: `modname:dimension_name` (no spaces)
-
-</details>
-
-<details>
-<summary><strong>Players spawn in wrong location</strong></summary>
-
-**Symptom:** Players spawn in blocks or fall
-
-**Solution:**
-1. Re-create arena: Stand at correct spot, `/rankedadmin arena set arena_name`
-2. Verify Y coordinate is correct (ground level, not underground)
-3. Check `arenas.json5` coordinates manually
-
-</details>
-
-<details>
-<summary><strong>Arena not in rotation</strong></summary>
-
-**Symptom:** Specific arena never selected
-
-**Solution:**
-1. Verify arena in list: `/rankedadmin arena list`
-2. Check world is loaded (cross-dimensional arenas)
-3. Reload config: `/rankedadmin reload`
-
-</details>
-
-<details>
-<summary><strong>Coordinates off-center</strong></summary>
-
-**Symptom:** Players spawn at edge of arena
-
-**Solution:**
-
-Coordinates save with decimals:
-- Stand at exact center
-- Use F3 coordinates
-- Manually edit `arenas.json5` to `.5` decimal (e.g., `100.5` centers on block)
-
-</details>
-
----
-
-## Velocity & Cross-Server Troubleshooting
-
-<details>
-<summary><strong>"If you wish to use IP forwarding, please enable it in your BungeeCord config as well!"</strong></summary>
-
-**Problem:** FabricProxy-Lite secret doesn't match Velocity secret
-
-**Solution:**
-1. Check `velocity.toml` → `[player-info-forwarding]` → `secret`
-2. Check `config/fabricproxy-lite.toml` → `secret` on **all servers**
-3. Make sure they are **exactly the same** (case-sensitive)
-4. Restart all servers
-
-</details>
-
-<details>
-<summary><strong>"Can't connect to server"</strong></summary>
-
-**Problem:** Backend server not reachable from Velocity
-
-**Solution:**
-1. Check server IP/port in `velocity.toml` → `[servers]`
-2. Verify backend servers are running (`/list` in console)
-3. Test connection: `telnet 127.0.0.1 25565`
-4. Check firewall rules
-
-</details>
-
-<details>
-<summary><strong>"Disconnected: You are not authenticated with the proxy"</strong></summary>
-
-**Problem:** Player connecting directly to backend server instead of proxy
-
-**Solution:**
-1. Make sure players connect to proxy port (25577), not backend ports
-2. Set `online-mode=false` in backend `server.properties`
-3. Configure firewall to block direct connections (see Step 5)
-
-</details>
-
-<details>
-<summary><strong>Players stuck after match ready</strong></summary>
-
-**Problem:** CobbleRanked can't transfer players to battle server
-
-**Solution:**
-1. Check `battle_server` name in `config/cobbleranked/config.json5` matches Velocity server name
-2. Verify ProxyCommand plugin is installed on Velocity
-3. Check battle server is online and in Velocity config
-4. Review CobbleRanked logs for transfer errors
-
-</details>
-
-<details>
-<summary><strong>Players can't match</strong></summary>
-
-**Check:**
-- All servers using same MySQL database
-- All servers using same Redis database number
-- Queue format matches (Singles vs Doubles)
-- Verify with: `redis-cli KEYS "*queue*"`
-
-</details>
-
-<details>
-<summary><strong>Stats not syncing</strong></summary>
-
-**Check:**
-- All servers using same MySQL host
-- Check battle server logs for database errors
-- Verify Redis connection on all servers
-
-</details>
-
-<details>
-<summary><strong>Transfer fails</strong></summary>
-
-**Check:**
-- `battle_server` name matches Velocity config
-- Velocity can reach battle server
-- Battle server is online
-
-</details>
-
-<details>
-<summary><strong>Stats not persisting after 60s</strong></summary>
-
-**Check:**
-- Battle server database connection
-- Check logs for: `[Batch] Saved FormatStats`
-
-</details>
-
----
-
-## Placeholder API Troubleshooting
-
-<details>
-<summary><strong>Placeholder Shows Raw Text</strong></summary>
-
-**Problem:**
-```
-Hologram displays: %cobbleranked_top_1_name%
-Instead of: Notch
-```
-
-**Solutions for Fabric servers:**
-
-1. **Check Text Placeholder API is installed:**
-   ```bash
-   /mods list
-   # Should show: text_placeholder_api or placeholder-api
-   ```
-
-2. **Check CobbleRanked is loaded:**
-   ```bash
-   /mods list
-   # Should show: cobbleranked
-   ```
-
-3. **Test placeholder manually:**
-   ```bash
-   /rankedplaceholder test %cobbleranked_top_1_name%
-   ```
-
-4. **Verify hologram mod supports Text Placeholder API:**
-   - Check the hologram mod's documentation
-   - Most Fabric hologram mods support Text Placeholder API
-
-**Solutions for Hybrid servers (Arclight only):**
-
-1. **Check PlaceholderAPI is installed:**
-   ```bash
-   /plugins
-   # Should show: PlaceholderAPI (green)
-   ```
-
-2. **Register with PlaceholderAPI:**
-   ```bash
-   /papi reload
-   /papi parse me %cobbleranked_top_1_name%
-   ```
-
-</details>
-
-<details>
-<summary><strong>Placeholder Returns "N/A"</strong></summary>
-
-**Problem:**
-All placeholders return "N/A" or empty values.
-
-**Possible causes:**
-
-1. **No players have played ranked yet:**
-   - Solution: Play at least 1 ranked match to populate leaderboard
-
-2. **Database not initialized:**
-   ```bash
-   # Check server logs for:
-   [CobbleRanked] Database initialized
-   [CobbleRanked] Loaded X player stats
-   ```
-
-3. **Cache is stale:**
-   ```bash
-   /rankedplaceholder clear
-   ```
-
-4. **Wrong format specified:**
-   ```bash
-   # If no players have played Singles:
-   %cobbleranked_top_singles_1_name% → "N/A"
-
-   # But combined might work:
-   %cobbleranked_top_1_name% → Shows Doubles players
-   ```
-
-</details>
-
-<details>
-<summary><strong>Placeholder Returns Old Data</strong></summary>
-
-**Problem:**
-Placeholder shows outdated stats after a match.
-
-**Solutions:**
-
-1. **Wait for cache to expire (60 seconds):**
-   - Automatic refresh after 1 minute
-
-2. **Manually clear cache:**
-   ```bash
-   /rankedplaceholder clear
-   ```
-
-3. **Check if match results saved:**
-   ```bash
-   # Server logs should show:
-   [BattleResult] Saved stats for <player>
-   ```
-
-</details>
-
-<details>
-<summary><strong>High Rank Returns "N/A" (e.g., rank 50+)</strong></summary>
-
-**Problem:**
-```
-%cobbleranked_top_50_name% → "N/A"
-```
-
-**Cause:**
-Server has fewer than 50 players with ranked stats.
-
-**Solution:**
-This is expected behavior. Use lower ranks or check total players:
-```bash
-/rankedplaceholder test %cobbleranked_top_10_name%
-```
-
-</details>
-
----
-
-## Restriction System Troubleshooting
-
-<details>
-<summary><strong>Players Can Still Teleport</strong></summary>
-
-**Problem:** Players can use /home or /tp despite restrictions
-
-**Solution 1:** Check `blockedCommands` in `config.json5`:
-```json5
-{
-  "blockedCommands": ["tp", "teleport", "home", "spawn", "warp"]
-}
-```
-
-**Solution 2:** Set `movement.teleport` to `true` in all three states (queue, match_preparation, battle)
-
-**Solution 3:** Set `system.commands` to `true` to activate the command blacklist
-
-</details>
-
-<details>
-<summary><strong>Players Can Swap Teams</strong></summary>
-
-**Problem:** Players change Pokémon team during match preparation
-
-**Solution:** Set these flags to `true` in `match_preparation` and `battle` sections of `restrictions.json5`:
-```json5
-{
-  "system": { "pc_access": true },
-  "inventory": {
-    "ender_chest": true,
-    "shulker_box": true
-  }
-}
-```
-
-</details>
-
-<details>
-<summary><strong>Players Can Escape Arena</strong></summary>
-
-**Problem:** Players throw ender pearls or eat chorus fruit to escape battle arena
-
-**Solution:** Set these flags to `true` in `battle` section:
-```json5
-{
-  "item": {
-    "use_ender_pearl": true,
-    "use_chorus_fruit": true
-  },
-  "movement": {
-    "ender_pearl": true,
-    "chorus_fruit": true
-  }
-}
-```
-
-</details>
-
-<details>
-<summary><strong>Players Can Use /pc Command</strong></summary>
-
-**Problem:** Players can open PC with `/pc` command
-
-**Solution:** Verify `/pc` is in `blockedCommands` in `config.json5`:
-```json5
-{
-  "blockedCommands": ["tp", "warp", "spawn", "warps", "ranked", "home", "kit", "pc"]
-}
-```
-
-And set `system.commands` to `true` in `restrictions.json5`:
-```json5
-{
-  "queue": {
-    "system": { "commands": true }
-  },
-  "match_preparation": {
-    "system": { "commands": true }
-  },
-  "battle": {
-    "system": { "commands": true }
-  }
-}
-```
-
-**Note:** `/pc` is included in the default configuration since version 1.0.0-hotfix12. If using an older version:
-1. Update to the latest CobbleRanked version
-2. Delete `config/cobbleranked/config.json5`
-3. Restart server to regenerate with `/pc` included
-
-Or manually add `"pc"` to the `blockedCommands` list.
-
-</details>
-
-<details>
-<summary><strong>Restriction Configuration Not Loading</strong></summary>
-
-**Problem:** Changes to `restrictions.json5` don't take effect
-
-**Solution:**
-1. Check server logs for JSON parsing errors
-2. Verify JSON5 syntax (trailing commas are OK, but check brackets and quotes)
-3. Run `/rankedadmin reload`
-4. Restart server if reload doesn't work
-
-**Common syntax errors:**
-```json5
-// Wrong: Missing comma
-{
-  "teleport": true
-  "respawn": false
-}
-
-// Correct:
-{
-  "teleport": true,
-  "respawn": false
-}
-```
-
-</details>
-
----
-
 ## Arena Setup
 
 <details>
@@ -1302,6 +739,8 @@ Or manually add `"pc"` to the `blockedCommands` list.
 4. Test: `/rankedadmin teleportArena arena1`
 
 **Both pos1 and pos2 must be in the same world.**
+
+**For MULTI format (2v2):** Also set pos3 and pos4 for the second team's players.
 
 </details>
 
@@ -1339,16 +778,16 @@ Arena may be stuck. Fix:
 <details>
 <summary><strong>Can I ban Tera Orb in singles but allow in doubles?</strong></summary>
 
-Yes! Use format-specific inventory bans.
+Yes! Use format-specific blacklist files.
 
-**singles.json5:**
+`blacklist/singles.json5`:
 ```json5
 {
   "banned_inventory_items": ["mega_showdown:tera_orb"]
 }
 ```
 
-**doubles.json5:**
+`blacklist/doubles.json5`:
 ```json5
 {
   "banned_inventory_items": []  // Allow Tera Orb
@@ -1384,6 +823,212 @@ All tracked independently in database.
 
 ---
 
+## Turn Timer & Matchmaking
+
+<details>
+<summary><strong>How do I configure turn timers?</strong></summary>
+
+Turn timers are format-specific. In `config.json5`:
+
+```json5
+{
+  "battle": {
+    "format_rules": {
+      "SINGLES": {
+        "enabled": true,
+        "team_size": 3,
+        "turn_timeout_seconds": 90,
+        "match_duration_minutes": 15
+      },
+      "DOUBLES": {
+        "enabled": true,
+        "team_size": 4,
+        "turn_timeout_seconds": 120,
+        "match_duration_minutes": 20
+      },
+      "TRIPLES": {
+        "enabled": false,
+        "team_size": 6,
+        "turn_timeout_seconds": 150,
+        "match_duration_minutes": 25
+      },
+      "MULTI": {
+        "enabled": false,
+        "team_size": 3,
+        "turn_timeout_seconds": 120,
+        "match_duration_minutes": 20
+      }
+    }
+  }
+}
+```
+
+| Setting | Description |
+|---------|-------------|
+| `turn_timeout_seconds` | Time limit for move selection |
+| `match_duration_minutes` | Total match time limit |
+
+</details>
+
+<details>
+<summary><strong>Matchmaking takes too long</strong></summary>
+
+**Solutions:**
+1. Increase Elo range (happens automatically after expansion delay)
+2. Enable cross-server mode (larger player pool)
+3. Check if arenas available: `/rankedadmin arena status`
+4. Verify Redis working (cross-server only)
+
+**Wait time increases range:**
+- 0-30s: ±200 Elo (default)
+- After 30s: Expands by 5 Elo per second
+- Maximum: ±600 Elo (3x initial range)
+
+See [Dynamic Matchmaking](../features/dynamic-matchmaking.md) for details.
+
+</details>
+
+<details>
+<summary><strong>Players matched with wrong Elo</strong></summary>
+
+This is normal for long waits. System expands range to find matches.
+
+To limit range, reduce `maxMultiplier` in format-specific matchmaking config:
+
+```json5
+{
+  "matchmaking": {
+    "format_rules": {
+      "SINGLES": {
+        "initialRange": 200,
+        "maxMultiplier": 2.0  // Max range = 200 × 2.0 = 400
+      }
+    }
+  }
+}
+```
+
+</details>
+
+---
+
+## Flee Penalty System
+
+<details>
+<summary><strong>How does flee penalty work?</strong></summary>
+
+Players who disconnect or flee during battles receive temporary queue bans.
+
+**Penalty Tiers (default):**
+
+| Flee Count | Penalty Duration |
+|------------|------------------|
+| 1-5 times | 5 minutes |
+| 6-10 times | 15 minutes |
+| 11+ times | 30 minutes |
+
+**Configuration:**
+
+```json5
+{
+  "competitive": {
+    "flee_penalty": {
+      "tiers": [
+        { "flee_min": 1, "flee_max": 5, "penalty_minutes": 5 },
+        { "flee_min": 6, "flee_max": 10, "penalty_minutes": 15 },
+        { "flee_min": 11, "flee_max": 999, "penalty_minutes": 30 }
+      ]
+    },
+    "flee_decay": {
+      "enabled": true,
+      "decay_interval_hours": 24,
+      "decay_amount": 1
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>What is pendingMatchTimeout?</strong></summary>
+
+`competitive.pendingMatchTimeout: 5` (default, in minutes)
+
+Time limit for pending match states. If a match doesn't start within this time, it's automatically cancelled and players are returned to queue.
+
+**Increase if:** Players report being kicked from queue prematurely.
+
+</details>
+
+---
+
+## Player Restrictions
+
+<details>
+<summary><strong>How do I block commands during queue/battle?</strong></summary>
+
+In `config.json5`:
+
+```json5
+{
+  "blockedCommands": ["tp", "warp", "spawn", "warps", "ranked", "home", "kit", "pc"]
+}
+```
+
+These commands are blocked during queue, match preparation, and battle when `block_commands` is enabled.
+
+</details>
+
+<details>
+<summary><strong>How do I configure restrictions per state?</strong></summary>
+
+In `config.json5`:
+
+```json5
+{
+  "restrictions": {
+    "queue": {
+      "block_item_usage": false,
+      "block_block_interaction": false,
+      "block_entity_interaction": false,
+      "block_pc_access": true,
+      "block_commands": true,
+      "block_inventory_access": false
+    },
+    "match_preparation": {
+      "block_item_usage": false,
+      "block_block_interaction": false,
+      "block_entity_interaction": false,
+      "block_pc_access": true,
+      "block_commands": true,
+      "block_inventory_access": true
+    },
+    "battle": {
+      "block_item_usage": true,
+      "block_block_interaction": true,
+      "block_entity_interaction": true,
+      "block_pc_access": true,
+      "block_commands": true,
+      "block_inventory_access": true
+    }
+  }
+}
+```
+
+| Setting | Description |
+|---------|-------------|
+| `block_item_usage` | Block using items (ender pearls, etc.) |
+| `block_block_interaction` | Block placing/breaking blocks |
+| `block_entity_interaction` | Block interacting with entities |
+| `block_pc_access` | Block opening PC |
+| `block_commands` | Block commands in blockedCommands list |
+| `block_inventory_access` | Block inventory access |
+
+</details>
+
+---
+
 ## Custom Music
 
 <details>
@@ -1394,17 +1039,32 @@ All tracked independently in database.
 3. Configure music IDs in `config.json5`
 4. Players load resource pack
 
-**Minimal setup:**
+**Configuration:**
 ```json5
 {
+  "ranked_match": {
+    "queueMusic": [
+      { "music": "cobbleranked:queue_music", "volume": 1.0, "pitch": 1.0 }
+    ],
+    "battleMusic": [
+      {
+        "min_elo": 0,
+        "max_elo": 1500,
+        "musicList": [
+          { "music": "cobbleranked:battle_normal", "volume": 1.0, "pitch": 1.0 }
+        ]
+      },
+      {
+        "min_elo": 1500,
+        "max_elo": 9999,
+        "musicList": [
+          { "music": "cobbleranked:battle_elite", "volume": 1.0, "pitch": 1.0 }
+        ]
+      }
+    ]
+  },
   "music": {
-    "enabled": true,
-    "queueMusic": "cobbleranked:queue_music",
-    "battleMusic": [{
-      "minElo": 0,
-      "maxElo": 9999,
-      "music": "cobbleranked:battle_music"
-    }]
+    "enabled": true
   }
 }
 ```
@@ -1421,44 +1081,6 @@ Check:
 2. Players have resource pack loaded
 3. Sound IDs match between config and `sounds.json`
 4. OGG files in correct path: `assets/cobbleranked/sounds/`
-
-</details>
-
----
-
-## Cross-Server Setup
-
-<details>
-<summary><strong>Do I need cross-server mode?</strong></summary>
-
-**No.** Single-server mode works perfectly for most servers.
-
-Only use cross-server if:
-- You have 2+ Minecraft servers
-- Want shared rankings across servers
-- Have dedicated battle server
-
-**Requirements:** Velocity proxy, MySQL/MongoDB, Redis
-
-</details>
-
-<details>
-<summary><strong>Players not transferring to battle server</strong></summary>
-
-1. Check Velocity `velocity.toml` has server names
-2. Verify ProxyCommand Reloaded plugin installed
-3. Test manual transfer: `/server battle`
-4. Check logs for transfer errors
-
-</details>
-
-<details>
-<summary><strong>Stats not syncing across servers</strong></summary>
-
-1. Verify all servers use same MySQL database
-2. Check Redis running: `redis-cli ping` → `PONG`
-3. Confirm `cross_server.enabled: true` on all servers
-4. Check database credentials match
 
 </details>
 
@@ -1505,69 +1127,24 @@ Save and run `/rankedadmin reload`.
 **Players:**
 - `/ranked` - Open ranked menu
 - `/season` - Show season info
+- `/casual` - Open casual battles menu
 
 **Admins:**
-- `/rankedadmin setArena <name> <pos1|pos2>` - Set arena
+- `/rankedadmin setArena <name> <pos1|pos2|pos3|pos4>` - Set arena
+- `/rankedadmin setexit` - Set exit location
+- `/rankedadmin teleportArena <name>` - Test teleport to arena
+- `/rankedadmin arena status` - Show arena status
 - `/rankedadmin setelo <amount> <player> <format>` - Set Elo
-- `/rankedadmin season create <days> <name>` - New season
+- `/rankedadmin season info` - Show current season
+- `/rankedadmin season create <days> <name>` - Create new season
+- `/rankedadmin season rotate` - Force season rotation
+- `/rankedadmin season end` - End current season
+- `/rankedadmin season schedule info` - Show schedule info
+- `/rankedadmin season schedule reload` - Reload schedule config
+- `/rankedadmin season schedule upcoming` - Show upcoming seasons
 - `/rankedadmin reload` - Reload configs
 
 [Full Command List](../getting-started/commands.md)
-
-</details>
-
----
-
-## Turn Timer & Matchmaking
-
-<details>
-<summary><strong>How do I enable turn timer?</strong></summary>
-
-In `config.json5`:
-
-```json5
-{
-  "turnTimer": {
-    "enabled": true,
-    "defaultTimeSeconds": 60
-  }
-}
-```
-
-Or format-specific:
-```json5
-{
-  "format_timers": {
-    "SINGLES": {
-      "turn_timeout_seconds": 90
-    }
-  }
-}
-```
-
-</details>
-
-<details>
-<summary><strong>Matchmaking takes too long</strong></summary>
-
-**Solutions:**
-1. Increase Elo range (happens automatically after 30s)
-2. Enable cross-server mode (larger player pool)
-3. Check if arenas available: `/rankedadmin arena status`
-4. Verify Redis working (cross-server only)
-
-**Wait time increases range:**
-- 0-30s: ±200 Elo
-- After 30s: Expands gradually to ±600 Elo
-
-</details>
-
-<details>
-<summary><strong>Players matched with wrong Elo</strong></summary>
-
-This is normal for long waits. System expands range to find matches.
-
-To limit range, reduce `matchmaking.max_elo_range_multiplier` in config.
 
 </details>
 
@@ -1601,87 +1178,28 @@ Check:
 <summary><strong>How do I reset all stats?</strong></summary>
 
 Create new season:
-```
+```bash
 /rankedadmin season create 30 "Season 2"
 ```
 
 This:
 - Ends current season
 - Archives old stats
-- Resets Elo to default (1000)
+- Resets Elo to default
 - Clears leaderboards
 
 </details>
 
 ---
 
-## Advanced Competitive Settings
-
-<details>
-<summary><strong>What does syncLocalQueue do?</strong></summary>
-
-`competitive.syncLocalQueue: true` (default)
-
-Synchronizes matchmaking queue with the local server cache. Keep this enabled for consistent queue behavior.
-
-**When to disable:** Only if experiencing queue synchronization issues in single-server mode (rare).
-
-</details>
-
-<details>
-<summary><strong>What does preventDuplicatePenalty do?</strong></summary>
-
-`competitive.preventDuplicatePenalty: true` (default)
-
-Prevents double-penalizing a player who disconnects. If a player disconnects and the flee penalty is already applied, this prevents applying it again.
-
-**Recommended:** Always keep enabled.
-
-</details>
-
-<details>
-<summary><strong>What does asyncSeasonManager do?</strong></summary>
-
-`competitive.asyncSeasonManager: true` (default)
-
-Runs season management tasks (rotation checks, reward distribution) asynchronously to prevent server lag.
-
-**When to disable:** Only for debugging season-related issues where you need synchronous execution.
-
-</details>
-
-<details>
-<summary><strong>What does cleanupResources do?</strong></summary>
-
-`competitive.cleanupResources: true` (default)
-
-Automatically cleans up battle resources (arenas, player states) after matches end. Prevents memory leaks and stuck arena states.
-
-**Recommended:** Always keep enabled unless debugging arena issues.
-
-</details>
-
-<details>
-<summary><strong>What does pendingMatchTimeout do?</strong></summary>
-
-`competitive.pendingMatchTimeout: 5` (default, in minutes)
-
-Time limit for pending match states. If a match doesn't start within this time, it's automatically cancelled and players are returned to queue.
-
-**Increase if:** Players report being kicked from queue prematurely.
-
-</details>
-
----
-
-## Other
+## Placeholders
 
 <details>
 <summary><strong>Text Placeholder API integration</strong></summary>
 
 Rank placeholders available for top 100:
 
-```
+```text
 %cobbleranked_top_1_name%
 %cobbleranked_top_1_elo%
 %cobbleranked_top_singles_1_name%
@@ -1693,7 +1211,47 @@ Rank placeholders available for top 100:
 </details>
 
 <details>
-<summary><strong>Can I use this with Showdown moves mod?</strong></summary>
+<summary><strong>Placeholder shows raw text</strong></summary>
+
+**Problem:**
+```text
+Hologram displays: %cobbleranked_top_1_name%
+Instead of: Notch
+```
+
+**Solutions for Fabric servers:**
+
+1. Check Text Placeholder API is installed
+2. Check CobbleRanked is loaded
+3. Test placeholder manually:
+   ```bash
+   /rankedplaceholder test %cobbleranked_top_1_name%
+   ```
+
+</details>
+
+<details>
+<summary><strong>Placeholder returns "N/A"</strong></summary>
+
+**Possible causes:**
+
+1. **No players have played ranked yet:**
+   - Solution: Play at least 1 ranked match to populate leaderboard
+
+2. **Database not initialized:**
+   - Check server logs for `[CobbleRanked] Database initialized`
+
+3. **Wrong format specified:**
+   - If no players have played Singles: `%cobbleranked_top_singles_1_name%` → "N/A"
+
+</details>
+
+---
+
+## Other
+
+<details>
+<summary><strong>Can I use this with Mega Showdown mod?</strong></summary>
 
 Yes! CobbleRanked works with:
 - Mega Showdown
