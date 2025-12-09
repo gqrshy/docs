@@ -10,15 +10,39 @@ Place all of these in your `mods` folder:
 
 | Mod | Version | Download |
 |-----|---------|----------|
-| Fabric Loader | 0.17.2+ | [fabricmc.net](https://fabricmc.net/use/server/) |
-| Fabric API | 0.116.6+ | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) |
-| Cobblemon | 1.7.0+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
-| Fabric Language Kotlin | 1.13.6+ | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin) |
+| Fabric Loader | 0.16.0+ | [fabricmc.net](https://fabricmc.net/use/server/) |
+| Fabric API | Any | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) |
+| Cobblemon | 1.6.1+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
+| Fabric Language Kotlin | 1.11.0+ | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin) |
 | **CobbleRanked** | Latest | [Polymart](https://polymart.org/product/8733/cobbleranked) |
 
 **Target:** Minecraft 1.21.1 (Fabric server)
 
-![Mods folder with all dependencies](../../images/dependancies.png)
+---
+
+## Optional Mods
+
+These mods are **NOT required** but add extra features:
+
+| Mod | Purpose | When to Install |
+|-----|---------|-----------------|
+| LuckPerms | Rank tags in chat | Only if you want `[Diamond]` prefix/suffix |
+| Placeholder API | External placeholders | Only if using with other mods that need placeholders |
+| mongodb.jar | MongoDB database | Only if using MongoDB instead of SQLite/MySQL |
+
+> ⚠️ **Arclight Users:** Do NOT install LuckPerms Fabric. Use the **LuckPerms Bukkit plugin** instead. CobbleRanked automatically detects and uses the Bukkit version on hybrid servers.
+
+### Minimal Setup Example
+
+For a basic server, you only need:
+
+```
+mods/
+├── fabric-api-x.x.x+1.21.1.jar
+├── fabric-language-kotlin-x.x.x+kotlin.x.x.x.jar
+├── Cobblemon-fabric-x.x.x+1.21.1.jar
+└── CobbleRanked-x.x.x.jar
+```
 
 ---
 
