@@ -1,6 +1,6 @@
 # Battle Formats
 
-Independent rankings for Singles, Doubles, Triples, and Multi formats.
+Independent rankings for Singles, Doubles, and Triples formats.
 
 ---
 
@@ -19,12 +19,11 @@ Each battle format has:
 
 ## Available Formats
 
-| Format | Description | Active Pokemon | Team Size | Players |
-|--------|-------------|----------------|-----------|---------|
-| **SINGLES** | Traditional 1v1 | 1 | 3 | 1v1 |
-| **DOUBLES** | 2v2 with one player | 2 | 4 | 1v1 |
-| **TRIPLES** | 3v3 with one player | 3 | 6 | 1v1 |
-| **MULTI** | Team battles | 1 per player | 3 per player | 2v2 (4 players) |
+| Format | Description | Team Size | Select Count | Turn Timeout |
+|--------|-------------|-----------|--------------|--------------|
+| **SINGLES** | Traditional 1v1 | 3 | 3 | 90s |
+| **DOUBLES** | 2v2 battle | 4 | 4 | 120s |
+| **TRIPLES** | 3v3 battle | 6 | 6 | 150s |
 
 ---
 
@@ -38,7 +37,17 @@ Traditional 1v1 Pokemon battles.
 - Choose **1 lead** to start the battle
 - 2 Pokemon remain as backups
 
-**Example:** Player A vs Player B, each with 3 Pokemon (1 active + 2 backups)
+**Default Settings:**
+
+```yaml
+SINGLES:
+  teamSize: 3
+  selectCount: 3
+  turnTimeoutSeconds: 90
+  matchDurationMinutes: 15
+  levelCap: 100
+  allowShiny: true
+```
 
 ---
 
@@ -52,7 +61,17 @@ One player controls 2 Pokemon simultaneously.
 - Choose **2 leads** to start on the field
 - 2 Pokemon remain as backups
 
-**Example:** Player A (2 active Pokemon) vs Player B (2 active Pokemon)
+**Default Settings:**
+
+```yaml
+DOUBLES:
+  teamSize: 4
+  selectCount: 4
+  turnTimeoutSeconds: 120
+  matchDurationMinutes: 15
+  levelCap: 100
+  allowShiny: true
+```
 
 ---
 
@@ -63,8 +82,8 @@ One player controls 3 Pokemon simultaneously.
 **Battle Setup:**
 
 - Select **6 Pokemon** from your party
-- All **3 leads** start on the field
-- 3 Pokemon remain as backups
+- All **6 Pokemon** available for battle
+- 3 active at a time
 
 **Positioning:**
 
@@ -72,36 +91,17 @@ One player controls 3 Pokemon simultaneously.
 - Targeting depends on position (left cannot directly attack far right)
 - Center Pokemon can attack all opponents
 
-**Example:** Player A (3 active Pokemon) vs Player B (3 active Pokemon)
+**Default Settings:**
 
----
-
-## Multi (2v2 Team Battles)
-
-Team battles with 2 players per side (4 players total).
-
-**Battle Setup:**
-
-- Each player selects **3 Pokemon** from their party
-- Each player chooses **1 lead**
-- Partners fight together against opposing team
-
-**Requirements:**
-
-- Form party with partner before queuing
-- Both players must queue together
-- Arenas must have 4 spawn positions (pos1-pos4)
-
-**How to Queue:**
-
-1. Form party with partner (invite them to your party)
-2. Both players open `/ranked` GUI
-3. Select "Multi" format
-4. Both players click "Join Queue"
-
-**Matchmaking:** System pairs two parties with similar combined Elo.
-
-**Example:** Team 1 (Player A + Player B) vs Team 2 (Player C + Player D)
+```yaml
+TRIPLES:
+  teamSize: 6
+  selectCount: 6
+  turnTimeoutSeconds: 150
+  matchDurationMinutes: 15
+  levelCap: 100
+  allowShiny: true
+```
 
 ---
 
@@ -110,7 +110,7 @@ Team battles with 2 players per side (4 players total).
 Players choose format before queuing:
 
 1. Open `/ranked` GUI
-2. Click format button (Singles/Doubles/Triples/Multi)
+2. Click format button (Singles/Doubles/Triples)
 3. Click "Join Queue"
 
 ---
@@ -133,121 +133,141 @@ Each format tracks stats separately:
 - Singles: 1200 Elo, 50 wins, 30 losses
 - Doubles: 1100 Elo, 20 wins, 15 losses
 - Triples: 1000 Elo, 5 wins, 5 losses
-- Multi: 1050 Elo, 10 wins, 8 losses
 
 ---
 
 ## Configuration
 
-### Enabling/Disabling Formats
-
 Edit `config/cobbleranked/battle.yaml`:
+
+### Enabling/Disabling Formats
 
 ```yaml
 enabledFormats:
   - "SINGLES"
   - "DOUBLES"
-  # - "TRIPLES"   # Uncomment to enable
-  # - "MULTI"     # Uncomment to enable
+  - "TRIPLES"
+```
 
+### Format Settings
+
+```yaml
 formats:
   SINGLES:
     teamSize: 3
     selectCount: 3
     turnTimeoutSeconds: 90
     matchDurationMinutes: 15
+    levelCap: 100
+    allowShiny: true
 
   DOUBLES:
     teamSize: 4
     selectCount: 4
     turnTimeoutSeconds: 120
-    matchDurationMinutes: 20
+    matchDurationMinutes: 15
+    levelCap: 100
+    allowShiny: true
 
   TRIPLES:
     teamSize: 6
     selectCount: 6
     turnTimeoutSeconds: 150
-    matchDurationMinutes: 25
-
-  MULTI:
-    teamSize: 3
-    selectCount: 3
-    turnTimeoutSeconds: 120
-    matchDurationMinutes: 20
+    matchDurationMinutes: 15
+    levelCap: 100
+    allowShiny: true
 ```
 
-| Setting | Description |
-|---------|-------------|
-| `teamSize` | Pokemon count players select from party |
-| `selectCount` | Pokemon actually used in battle |
-| `turnTimeoutSeconds` | Time limit per turn |
-| `matchDurationMinutes` | Maximum match length |
+### Format Config Fields
 
-### Format Matchmaking Settings
+| Field | Default | Description |
+|-------|---------|-------------|
+| `teamSize` | Varies | Pokemon to select from party |
+| `selectCount` | Varies | Pokemon used in battle |
+| `turnTimeoutSeconds` | 90 | Time limit per turn |
+| `matchDurationMinutes` | 15 | Maximum match length |
+| `levelCap` | 100 | Force Pokemon to this level (100 = no cap) |
+| `allowShiny` | true | Allow shiny Pokemon in battles |
 
-Each format has separate matchmaking configuration in `matchmaking.yaml`:
+---
+
+## Timer Settings
+
+Global timer settings in `config/cobbleranked/battle.yaml`:
+
+```yaml
+timers:
+  teamSelectionSeconds: 60    # Time to select team
+  leadSelectionSeconds: 30    # Time to select lead
+  matchReadySeconds: 17       # Time to accept match
+  countdownSeconds: 5         # Pre-battle countdown
+  battleMinutes: 15           # Maximum battle duration
+  battleTimeWarningSeconds:   # Warning sound triggers
+    - 300
+    - 60
+    - 30
+```
+
+---
+
+## Matchmaking per Format
+
+Each format has separate matchmaking settings in `matchmaking.yaml`:
 
 ```yaml
 formatRules:
   SINGLES:
+    enforceEloRange: true
     initialRange: 200
     expansionDelaySeconds: 30
-    expansionRate: 5
+    expansionRate: 50
     maxMultiplier: 3.0
     immediateMatchRange: 100
 
   DOUBLES:
+    enforceEloRange: true
     initialRange: 200
     expansionDelaySeconds: 30
-    expansionRate: 5
+    expansionRate: 50
     maxMultiplier: 3.0
     immediateMatchRange: 100
 
   TRIPLES:
+    enforceEloRange: true
     initialRange: 250
     expansionDelaySeconds: 25
-    expansionRate: 8
+    expansionRate: 80
     maxMultiplier: 4.0
-    immediateMatchRange: 150
-
-  MULTI:
-    initialRange: 300
-    expansionDelaySeconds: 20
-    expansionRate: 10
-    maxMultiplier: 5.0
-    immediateMatchRange: 200
+    immediateMatchRange: 100
 ```
 
-| Setting | Description |
-|---------|-------------|
-| `initialRange` | Starting Elo range (±X from player's rating) |
-| `expansionDelaySeconds` | Seconds before range expansion starts |
-| `expansionRate` | Elo range increase per second |
-| `maxMultiplier` | Maximum expansion (X × initialRange) |
-| `immediateMatchRange` | Elo range for instant matches |
+| Field | Description |
+|-------|-------------|
+| `enforceEloRange` | Enable Elo-based matchmaking |
+| `initialRange` | Starting Elo range (±X) |
+| `expansionDelaySeconds` | Delay before range expands |
+| `expansionRate` | Elo added per expansion cycle |
+| `maxMultiplier` | Max range = initialRange × this |
+| `immediateMatchRange` | Instant match if Elo diff ≤ this |
 
-> 📝 **Note:** Multi format has wider matchmaking ranges because matching 4 players is more difficult than 2.
+> 📝 **Note:** Triples has wider matchmaking range because fewer players queue for it.
 
 ---
 
 ## Arena Requirements
 
-Different formats have different spawn position requirements:
+All formats require 2 spawn positions:
 
-| Format | Required Positions |
-|--------|-------------------|
-| SINGLES | pos1, pos2 |
-| DOUBLES | pos1, pos2 |
-| TRIPLES | pos1, pos2 |
-| MULTI | pos1, pos2, pos3, pos4 |
-
-**Setting up Multi arenas:**
+| Position | Description |
+|----------|-------------|
+| pos1 | Player 1 spawn location |
+| pos2 | Player 2 spawn location |
+| exit | Return location after battle |
 
 ```bash
-/rankedadmin setArena multi_arena pos1  # Team 1 Player 1
-/rankedadmin setArena multi_arena pos2  # Team 2 Player 1
-/rankedadmin setArena multi_arena pos3  # Team 1 Player 2
-/rankedadmin setArena multi_arena pos4  # Team 2 Player 2
+/rankedadmin setArena arena1 pos1
+/rankedadmin setArena arena1 pos2
+/rankedadmin setArena arena1 exit
 ```
 
 See [Arena Configuration](../configuration/arenas.md) for details.
@@ -256,7 +276,7 @@ See [Arena Configuration](../configuration/arenas.md) for details.
 
 ## See Also
 
-- [Matchmaking](../configuration/matchmaking.md) - Matchmaking settings
+- [Dynamic Matchmaking](dynamic-matchmaking.md) - Matchmaking details
 - [Elo System](elo-system.md) - Rating calculation
 - [Arena Configuration](../configuration/arenas.md) - Battle locations
 - [Rewards](../configuration/rewards.md) - Format-specific rewards

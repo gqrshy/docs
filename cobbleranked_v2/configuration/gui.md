@@ -4,24 +4,28 @@ Customize CobbleRanked GUI appearance and layout.
 
 ---
 
-## GUI Files
+## Overview
+
+CobbleRanked uses YAML-based GUI configuration files for full customization of menus, buttons, and layouts.
 
 **Location:** `config/cobbleranked/gui/`
 
-CobbleRanked uses two types of GUI configuration files:
+---
 
-### 1. Language-Specific Main GUI Files
+## GUI Files
+
+### Language-Specific Main GUI Files
 
 ```
 gui/
-├── gui-enUs.yaml    # English (main menu, top ranked, etc.)
+├── gui-enUs.yaml    # English (main menu, leaderboard, etc.)
 ├── gui-jaJp.yaml    # Japanese
 └── gui-frFr.yaml    # French
 ```
 
 These files contain the main menu (`gui_ranked`), leaderboard display (`gui_top_ranked`), and other primary GUIs.
 
-### 2. Specialized GUI Config Files
+### Specialized GUI Config Files
 
 ```
 gui/
@@ -32,9 +36,14 @@ gui/
 └── match_ready_gui.yaml  # Pre-battle ready check
 ```
 
-**Which file is used?**
-- Language-specific files are determined by the `language` setting in `config.yaml`
-- Specialized config files are always loaded regardless of language setting
+| File | Description |
+|------|-------------|
+| `gui-{lang}.yaml` | Main menus (determined by `language` in config) |
+| `reward_gui.yaml` | Season and milestone reward displays |
+| `leaderboard_gui.yaml` | Pyramid-style leaderboard |
+| `blacklist_gui.yaml` | Restricted Pokemon/moves/items viewer |
+| `selection_gui.yaml` | Team and lead selection screens |
+| `match_ready_gui.yaml` | Ready check before battle |
 
 ---
 
@@ -42,21 +51,21 @@ gui/
 
 | GUI | Config File | Description |
 |-----|-------------|-------------|
-| **gui_ranked** | `gui-{lang}.yaml` | Main menu (queue buttons, stats, navigation) |
-| **gui_top_ranked** | `gui-{lang}.yaml` | Legacy leaderboard display |
-| **gui_prepare_combat** | `gui-{lang}.yaml` | Pre-battle team preview |
-| **gui_match_ready** | `match_ready_gui.yaml` | Ready check before battle |
-| Pyramid Leaderboard | `leaderboard_gui.yaml` | Advanced leaderboard with pyramid layout |
+| `gui_ranked` | `gui-{lang}.yaml` | Main menu (queue buttons, stats) |
+| `gui_top_ranked` | `gui-{lang}.yaml` | Legacy leaderboard display |
+| `gui_prepare_combat` | `gui-{lang}.yaml` | Pre-battle team preview |
+| `gui_match_ready` | `match_ready_gui.yaml` | Ready check before battle |
+| Pyramid Leaderboard | `leaderboard_gui.yaml` | Advanced pyramid layout |
 | Rewards | `reward_gui.yaml` | Season & milestone rewards |
-| Blacklist | `blacklist_gui.yaml` | Banned Pokemon/moves/items viewer |
-| Team Selection | `selection_gui.yaml` | Pokemon team selection for battle |
+| Blacklist | `blacklist_gui.yaml` | Banned items viewer |
+| Team Selection | `selection_gui.yaml` | Pokemon team selection |
 | Lead Selection | `selection_gui.yaml` | Lead Pokemon selection |
 
 ---
 
 ## Slot Numbering
 
-Slots are numbered 1-54 for a 6-row chest. `slot: 1` places the item in the first slot (top-left).
+Slots are numbered 1-54 for a 6-row chest (1-indexed):
 
 ```
  1  2  3  4  5  6  7  8  9
@@ -71,7 +80,7 @@ Slots are numbered 1-54 for a 6-row chest. `slot: 1` places the item in the firs
 
 ## Basic Customization
 
-### Change Item Display
+### Item Configuration
 
 ```yaml
 gui_ranked:
@@ -79,9 +88,9 @@ gui_ranked:
   size: 4  # Number of rows (1-6)
   items:
     singles_queue:
-      slot: 11                              # Position (1-indexed)
-      id: "cobblemon:poke_ball"             # Item ID
-      display: "&bSingles Battle"           # Display name
+      slot: 11
+      id: "cobblemon:poke_ball"
+      display: "&bSingles Battle"
       lore:
         - ""
         - "&71v1 Ranked Match"
@@ -89,40 +98,54 @@ gui_ranked:
         - ""
         - "&aClick to join queue"
         - ""
-      customModelData: 0  # Custom model data (resource packs)
+      customModelData: 0
 ```
 
 ### Item Fields
 
 | Field | Description | Required |
 |-------|-------------|----------|
-| `id` | Item ID (e.g., `minecraft:diamond`, `cobblemon:poke_ball`, `PLAYER_SKIN`) | Yes |
-| `display` | Display name (supports color codes and placeholders) | Yes |
-| `slot` | Inventory slot (1-54, 1-indexed) | Yes |
-| `lore` | Array of lore lines (supports color codes and placeholders) | No |
-| `customModelData` | Custom model data value for resource packs | No |
+| `id` | Item ID (Minecraft, Cobblemon, or special) | ✅ |
+| `display` | Display name (supports colors/placeholders) | ✅ |
+| `slot` | Inventory slot (1-54, 1-indexed) | ✅ |
+| `lore` | Array of lore lines | ❌ |
+| `customModelData` | Custom model data for resource packs | ❌ |
 
-**Special Item IDs:**
+### Special Item IDs
 
 | ID | Description |
 |----|-------------|
-| `PLAYER_SKIN` | Displays the player's head with their skin |
+| `PLAYER_SKIN` | Player's head with their skin |
 | `minecraft:*` | Any vanilla Minecraft item |
-| `cobblemon:*` | Any Cobblemon item (Poke Balls, etc.) |
+| `cobblemon:*` | Any Cobblemon item |
 
-### Color Codes
+---
 
-Use `&` for colors:
+## Color Codes
 
-| Code | Color | Code | Style |
+Use `&` prefix for colors and formatting:
+
+| Code | Color | Code | Color |
 |------|-------|------|-------|
-| `&a` | Green | `&l` | Bold |
-| `&b` | Aqua | `&o` | Italic |
-| `&c` | Red | `&n` | Underline |
-| `&e` | Yellow | `&m` | Strikethrough |
-| `&6` | Gold | `&r` | Reset |
+| `&0` | Black | `&8` | Dark Gray |
+| `&1` | Dark Blue | `&9` | Blue |
+| `&2` | Dark Green | `&a` | Green |
+| `&3` | Dark Aqua | `&b` | Aqua |
+| `&4` | Dark Red | `&c` | Red |
+| `&5` | Dark Purple | `&d` | Light Purple |
+| `&6` | Gold | `&e` | Yellow |
+| `&7` | Gray | `&f` | White |
 
-Example:
+| Code | Style |
+|------|-------|
+| `&l` | **Bold** |
+| `&o` | *Italic* |
+| `&n` | Underline |
+| `&m` | ~~Strikethrough~~ |
+| `&r` | Reset |
+
+**Example:**
+
 ```yaml
 display: "&a&lQueue Singles"  # Bold green text
 ```
@@ -131,48 +154,40 @@ display: "&a&lQueue Singles"  # Bold green text
 
 ## Placeholders
 
-Use placeholders for dynamic content in GUI items.
-
-### Stats Placeholders
+### Player Stats
 
 | Placeholder | Description | Example |
 |-------------|-------------|---------|
-| `{stats_elo}` | Player's Elo rating | `1200` |
+| `{player_name}` | Player's name | `Steve` |
+| `{stats_elo}` | Elo rating | `1200` |
 | `{stats_wins}` | Win count | `42` |
 | `{stats_losses}` | Loss count | `15` |
 | `{stats_winrate}` | Win percentage | `73` |
-| `{stats_total_games}` | Total games played | `57` |
-| `{stats_win_streak}` | Current win streak | `5` |
+| `{stats_total_games}` | Total games | `57` |
+| `{stats_win_streak}` | Current streak | `5` |
 
-### Player Placeholders
+### Queue
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{player_name}` | Current player name | `Steve` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{queue_singles}` | Players in Singles queue |
+| `{queue_doubles}` | Players in Doubles queue |
+| `{queue_triples}` | Players in Triples queue |
 
-### Queue Placeholders
+### Format & Season
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{queue_singles}` | Players in Singles queue | `3` |
-| `{queue_doubles}` | Players in Doubles queue | `2` |
-| `{queue_triples}` | Players in Triples queue | `0` |
-| `{queue_multi}` | Players in Multi queue | `4` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{battle_format}` | Format display name |
+| `{format_id}` | Format identifier |
+| `{season_name}` | Current season name |
+| `{season_id}` | Season ID |
 
-### Format & Season Placeholders
+### Leaderboard
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{battle_format}` | Current format display name | `Singles` |
-| `{format_id}` | Format identifier | `SINGLES` |
-| `{season_name}` | Current season name | `Season 1` |
-| `{season_id}` | Season ID number | `1` |
-
-### Leaderboard Placeholders
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{leaderboard_rank}` | Player's leaderboard position | `#5` |
+| Placeholder | Description |
+|-------------|-------------|
+| `{leaderboard_rank}` | Player's position |
 
 ### Example Usage
 
@@ -183,57 +198,27 @@ player_info:
   display: "&7Information about &c{player_name}"
   lore:
     - ""
-    - " &8▸ &7Matches Played: &f{stats_total_games}"
-    - " &8▸ &7Wins/Losses: &a{stats_wins}&f/&c{stats_losses} &7(&f{stats_winrate}&7%)"
-    - " &8▸ &7Win Streak: &b{stats_win_streak}"
+    - " &8▸ &7Matches: &f{stats_total_games}"
+    - " &8▸ &7W/L: &a{stats_wins}&f/&c{stats_losses} &7(&f{stats_winrate}%&7)"
+    - " &8▸ &7Streak: &b{stats_win_streak}"
     - " &8▸ &7Elo: &e{stats_elo}"
     - ""
 ```
 
 ---
 
-## Common Customizations
-
-### Use Custom Models (Resource Packs)
-
-You can use `customModelData` to display custom textures from resource packs:
-
-```yaml
-singles_queue:
-  slot: 11
-  id: "minecraft:paper"           # Base item
-  display: "&bSingles Battle"
-  customModelData: 1001           # Your custom model ID
-  lore:
-    - "&71v1 Ranked Match"
-    - "&aClick to join"
-```
-
-### Add Custom Decoration (Fill)
-
-Specialized GUI configs support fill configurations for decoration:
-
-```yaml
-fill:
-  enabled: true
-  material: "minecraft:black_stained_glass_pane"
-  displayname: " "
-  slots: [1, 2, 3, 7, 8, 9]  # 1-indexed slots to fill
-```
-
----
-
 ## Specialized GUI Configuration
 
-### Leaderboard GUI (`leaderboard_gui.yaml`)
+### Leaderboard GUI
 
-Configure the pyramid-style leaderboard display:
+**File:** `leaderboard_gui.yaml`
+
+Pyramid-style leaderboard with player heads:
 
 ```yaml
 title: "gui_pyramid_leaderboard_title"
 rows: 6
 
-# Pyramid slot layout (1-indexed)
 pyramidSlots:
   rank1: [5]                           # 1st place (top center)
   rank2to4: [13, 14, 15]               # 2nd-4th
@@ -241,7 +226,6 @@ pyramidSlots:
   rank10to16: [29, 30, 31, 32, 33, 34, 35]
   rank17to25: [37, 38, 39, 40, 41, 42, 43, 44, 45]
 
-# Player head display
 playerHead:
   showRankBadge: true
   rankFormat:
@@ -251,11 +235,25 @@ playerHead:
 
 refreshCooldown: 30
 maxPlayers: 25
+
+fill:
+  enabled: true
+  material: "minecraft:black_stained_glass_pane"
+  displayname: " "
 ```
 
-### Selection GUI (`selection_gui.yaml`)
+| Field | Default | Description |
+|-------|---------|-------------|
+| `pyramidSlots` | - | Slot layout for each rank tier |
+| `showRankBadge` | `true` | Show rank number on heads |
+| `refreshCooldown` | `30` | Seconds between cache refresh |
+| `maxPlayers` | `25` | Maximum displayed players |
 
-Configure team and lead selection screens:
+### Selection GUI
+
+**File:** `selection_gui.yaml`
+
+Team and lead selection screens:
 
 ```yaml
 teamSelection:
@@ -279,6 +277,81 @@ pokemonDisplay:
 timeout:
   teamSelection: 60
   leadSelection: 60
+```
+
+| Field | Default | Description |
+|-------|---------|-------------|
+| `showLevel` | `true` | Display Pokemon level |
+| `showAbility` | `true` | Display ability name |
+| `showMoves` | `true` | Display moveset |
+| `showHeldItem` | `true` | Display held item |
+| `timeout.teamSelection` | `60` | Seconds for team selection |
+| `timeout.leadSelection` | `60` | Seconds for lead selection |
+
+### Match Ready GUI
+
+**File:** `match_ready_gui.yaml`
+
+Ready check screen before battle:
+
+```yaml
+title: "gui_match_ready_title"
+rows: 3
+
+acceptButton:
+  slot: 12
+  material: "LIME_CONCRETE"
+  display: "&a&lAccept Match"
+
+declineButton:
+  slot: 14
+  material: "RED_CONCRETE"
+  display: "&c&lDecline Match"
+
+opponentInfo:
+  slot: 5
+  showElo: true
+  showRecord: true
+
+timeout: 17
+```
+
+---
+
+## Fill Configuration
+
+Add decorative background items:
+
+```yaml
+fill:
+  enabled: true
+  material: "minecraft:black_stained_glass_pane"
+  displayname: " "
+  slots: [1, 2, 3, 7, 8, 9]  # 1-indexed slots
+```
+
+| Field | Description |
+|-------|-------------|
+| `enabled` | Enable fill decoration |
+| `material` | Fill item material |
+| `displayname` | Display name (use `" "` for invisible) |
+| `slots` | Specific slots to fill |
+
+---
+
+## Custom Model Data
+
+Use resource pack custom models:
+
+```yaml
+singles_queue:
+  slot: 11
+  id: "minecraft:paper"
+  display: "&bSingles Battle"
+  customModelData: 1001
+  lore:
+    - "&71v1 Ranked Match"
+    - "&aClick to join"
 ```
 
 ---

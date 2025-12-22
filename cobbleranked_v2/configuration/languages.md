@@ -2,7 +2,13 @@
 
 Customize all CobbleRanked messages by editing language files.
 
+---
+
+## Overview
+
 **Location:** `config/cobbleranked/language/`
+
+All in-game messages, GUI text, and notifications can be customized through YAML language files.
 
 ---
 
@@ -14,10 +20,10 @@ Customize all CobbleRanked messages by editing language files.
 | Japanese | `ja-jp.yaml` | ✅ Complete |
 | French | `fr-fr.yaml` | ✅ Complete |
 
-Set the active language in `config.yaml`:
+Set the active language in `config/cobbleranked/config.yaml`:
 
 ```yaml
-language: "en-us"  # Options: en-us, ja-jp, fr-fr
+language: "en-us"
 ```
 
 Reload after changing: `/rankedadmin reload`
@@ -26,23 +32,57 @@ Reload after changing: `/rankedadmin reload`
 
 ## Placeholders
 
-Messages use `{placeholder}` syntax for dynamic values:
+Messages support `{placeholder}` syntax for dynamic values:
 
-| Placeholder | Description |
-|-------------|-------------|
-| `{player_name}` | Player's name |
-| `{battle_format}` | Singles, Doubles, etc. |
-| `{stats_elo}` | Player's Elo rating |
-| `{stats_wins}` | Win count |
-| `{stats_losses}` | Loss count |
-| `{stats_winrate}` | Win rate percentage |
-| `{timer_seconds}` | Countdown seconds |
-| `{timer_minutes}` | Countdown minutes |
-| `{season_name}` | Current season name |
-| `{season_remaining_time}` | Time until season ends |
-| `{pokemon_name}` | Pokemon name |
-| `{pokemon_ability}` | Pokemon ability |
-| `{pokemon_move}` | Pokemon move |
+### Player & Stats
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{player_name}` | Player's name | `Steve` |
+| `{stats_elo}` | Elo rating | `1200` |
+| `{stats_wins}` | Win count | `42` |
+| `{stats_losses}` | Loss count | `15` |
+| `{stats_winrate}` | Win rate percentage | `73` |
+| `{stats_total_games}` | Total games played | `57` |
+| `{stats_win_streak}` | Current win streak | `5` |
+
+### Battle
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{battle_format}` | Format name | `Singles` |
+| `{battle_elo_change}` | Elo gained/lost | `+24` |
+| `{opponent_name}` | Opponent's name | `Alex` |
+
+### Timer
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{timer_seconds}` | Seconds remaining | `30` |
+| `{timer_minutes}` | Minutes remaining | `5` |
+
+### Season
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{season_name}` | Current season | `Season 1` |
+| `{season_id}` | Season ID | `1` |
+| `{season_remaining_time}` | Time until end | `5d 12h` |
+
+### Pokemon
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{pokemon_name}` | Pokemon name | `Charizard` |
+| `{pokemon_ability}` | Ability name | `Blaze` |
+| `{pokemon_move}` | Move name | `Flamethrower` |
+
+### Queue
+
+| Placeholder | Description | Example |
+|-------------|-------------|---------|
+| `{queue_size}` | Players in queue | `3` |
+| `{queue_search_seconds}` | Time searching | `45` |
 
 ---
 
@@ -58,16 +98,43 @@ Messages use `{placeholder}` syntax for dynamic values:
 | `&5` | Dark Purple | `&d` | Light Purple |
 | `&6` | Gold | `&e` | Yellow |
 | `&7` | Gray | `&f` | White |
-| `&l` | **Bold** | `&o` | *Italic* |
-| `&n` | Underline | `&m` | ~~Strikethrough~~ |
-| `&r` | Reset | | |
+
+| Code | Style |
+|------|-------|
+| `&l` | **Bold** |
+| `&o` | *Italic* |
+| `&n` | Underline |
+| `&m` | ~~Strikethrough~~ |
+| `&r` | Reset |
+
+---
+
+## Message Categories
+
+| Category | Description |
+|----------|-------------|
+| `prefix_*` | Message prefixes |
+| `format_*` | Format names |
+| `player_info_*` | Player statistics display |
+| `queue_*` | Queue system messages |
+| `match_*` | Match finding and ready check |
+| `battle_*` | Battle events and results |
+| `turn_timer_*` | Turn timer display |
+| `leaderboard_*` | Leaderboard display |
+| `rank_*` | Rank tier names |
+| `season_*` | Season system |
+| `casual_*` | Casual battle messages |
+| `admin_*` | Admin command responses |
+| `validation_*` | Team validation errors |
+| `gui_*` | GUI text elements |
+| `listener_*` | Restriction messages |
 
 ---
 
 ## Common Message Keys
 
 <details>
-<summary><strong>English (en-us.yaml) - Key Examples</strong></summary>
+<summary><strong>English (en-us.yaml)</strong></summary>
 
 ```yaml
 # ===== MESSAGE PREFIXES =====
@@ -80,7 +147,6 @@ prefix_warning: "&e⚠ "
 format_name_singles: "Singles"
 format_name_doubles: "Doubles"
 format_name_triples: "Triples"
-format_name_multi: "Multi"
 
 # ===== PLAYER INFO =====
 player_info_elo: "&7Elo: &f{stats_elo}"
@@ -133,7 +199,7 @@ no_permission: "&cYou don't have permission to use this command"
 </details>
 
 <details>
-<summary><strong>Japanese (ja-jp.yaml) - Key Examples</strong></summary>
+<summary><strong>Japanese (ja-jp.yaml)</strong></summary>
 
 ```yaml
 # ===== メッセージプレフィックス =====
@@ -146,7 +212,6 @@ prefix_warning: "&e[!]&r "
 format_name_singles: "シングルス"
 format_name_doubles: "ダブルス"
 format_name_triples: "トリプルス"
-format_name_multi: "マルチ"
 
 # ===== プレイヤー情報 =====
 player_info_elo: "&7Elo: &f{stats_elo}"
@@ -194,29 +259,44 @@ no_permission: "&cこのコマンドを使用する権限がありません"
 3. Set `language: "de-de"` in `config.yaml`
 4. Reload: `/rankedadmin reload`
 
-> 📝 **Note:** The full language files contain 800+ keys. The examples above show the most commonly customized messages. Copy the complete file from `config/cobbleranked/language/` for all keys.
+> 📝 **Note:** Language files contain 800+ keys. The examples above show commonly customized messages. Copy the complete file from `config/cobbleranked/language/` for all keys.
 
 ---
 
-## Message Categories
+## Customization Tips
 
-| Category | Description |
-|----------|-------------|
-| `prefix_*` | Message prefixes |
-| `format_*` | Format names |
-| `player_info_*` | Player statistics display |
-| `queue_*` | Queue system messages |
-| `match_*` | Match finding and ready check |
-| `battle_*` | Battle events and results |
-| `turn_timer_*` | Turn timer display |
-| `leaderboard_*` | Leaderboard display |
-| `rank_*` | Rank tier names |
-| `season_*` | Season system |
-| `casual_*` | Casual battle messages |
-| `admin_*` | Admin command responses |
-| `validation_*` | Team validation errors |
-| `gui_*` | GUI text elements |
-| `listener_*` | Restriction messages |
+### Prefixes
+
+Customize message prefixes for consistent styling:
+
+```yaml
+prefix: "&8[&6⚔ Ranked&8]&r "
+prefix_error: "&c&l✗ &r"
+prefix_success: "&a&l✓ &r"
+```
+
+### Rank Names
+
+Match your server's theme:
+
+```yaml
+rank_pokeball: "&7Bronze"
+rank_greatball: "&fSilver"
+rank_ultraball: "&6Gold"
+rank_masterball: "&bDiamond"
+rank_beastball: "&5Champion"
+rank_cherish: "&6&lLegend"
+```
+
+### Battle Messages
+
+Add personality to battle announcements:
+
+```yaml
+battle_result_victory: "&a&l🎉 VICTORY! 🎉"
+battle_result_defeat: "&c&lBetter luck next time..."
+battle_result_elo_change: "&7Elo: &e{battle_elo_change}"
+```
 
 ---
 
