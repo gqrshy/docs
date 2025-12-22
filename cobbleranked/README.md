@@ -1,4 +1,6 @@
-# CobbleRanked
+# CobbleRanked (Legacy)
+
+> ⚠️ **This documentation is outdated.** CobbleRanked v1.x is no longer actively developed. Please refer to [CobbleRanked Reloaded (v2)](../cobbleranked_v2/README.md) for the latest version.
 
 A competitive ranked battle system for Cobblemon servers with Elo-based matchmaking, seasonal rankings, and comprehensive customization.
 
