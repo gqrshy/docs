@@ -10,7 +10,7 @@ After installation, CobbleRanked works with zero configuration. This guide cover
 
 **Default settings:**
 - Rating system: Pokemon Showdown
-- Starting Elo: 1500
+- Starting Elo: 1000
 - Formats: Singles, Doubles
 - Database: SQLite (local)
 
@@ -63,7 +63,7 @@ schedule:
 onSeasonEnd:
   resetElo: false
   softResetElo: true       # Partial reset toward starting Elo
-  softResetFactor: 0.5     # 50% toward 1500
+  softResetFactor: 0.5     # 50% toward starting Elo
   resetWinLoss: true
   resetStreak: true
 ```
@@ -198,7 +198,7 @@ formats:
 ```yaml
 # elo.yaml
 ratingSystem: POKEMON_SHOWDOWN
-startingElo: 1500
+startingElo: 1000
 floorElo: 1000
 ```
 

@@ -97,18 +97,18 @@ onSeasonEnd:
 newElo = currentElo + (startingElo - currentElo) × softResetFactor
 ```
 
-**Example with factor 0.5:**
-- Player at 1800 Elo → resets to 1650
-- Player at 1200 Elo → resets to 1350
-- Player at 1500 Elo → stays at 1500
+**Example with factor 0.5 (startingElo: 1000):**
+- Player at 1600 Elo → resets to 1300
+- Player at 800 Elo → resets to 900
+- Player at 1000 Elo → stays at 1000
 
 **Example calculations:**
 ```
-Current: 1800, Starting: 1500, Factor: 0.5
-New Elo = 1800 + (1500 - 1800) × 0.5 = 1800 - 150 = 1650
+Current: 1600, Starting: 1000, Factor: 0.5
+New Elo = 1600 + (1000 - 1600) × 0.5 = 1600 - 300 = 1300
 
-Current: 1200, Starting: 1500, Factor: 0.5
-New Elo = 1200 + (1500 - 1200) × 0.5 = 1200 + 150 = 1350
+Current: 800, Starting: 1000, Factor: 0.5
+New Elo = 800 + (1000 - 800) × 0.5 = 800 + 100 = 900
 ```
 
 ---

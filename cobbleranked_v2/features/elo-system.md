@@ -32,8 +32,8 @@ E = 1 / (1 + 10^((opponent_elo - your_elo) / 400))
 ```
 
 **Example:**
-- Your Elo: 1500
-- Opponent Elo: 1600
+- Your Elo: 1200
+- Opponent Elo: 1300
 - Expected: 36% win chance
 
 ### Elo Change Formula
@@ -63,12 +63,12 @@ Different K-factors for different skill levels:
 
 **Close match (same Elo):**
 ```
-You: 1500 Elo, K=24
-Opponent: 1500 Elo
+You: 1200 Elo, K=32
+Opponent: 1200 Elo
 Expected: 50%
 
-Win:  1500 + 24 × (1 - 0.5) = 1512 (+12)
-Loss: 1500 + 24 × (0 - 0.5) = 1488 (-12)
+Win:  1200 + 32 × (1 - 0.5) = 1216 (+16)
+Loss: 1200 + 32 × (0 - 0.5) = 1184 (-16)
 ```
 
 **Upset win (lower beats higher):**
@@ -166,9 +166,9 @@ onSeasonEnd:
 New Elo = Current + (Starting - Current) × Factor
 ```
 
-**Example with factor 0.5:**
-- 1800 → 1650 (pulled down toward 1500)
-- 1200 → 1350 (pulled up toward 1500)
+**Example with factor 0.5 (startingElo: 1000):**
+- 1600 → 1300 (pulled down toward 1000)
+- 800 → 900 (pulled up toward 1000)
 
 ---
 
@@ -209,7 +209,7 @@ Full configuration in `elo.yaml`:
 
 ```yaml
 ratingSystem: POKEMON_SHOWDOWN
-startingElo: 1500
+startingElo: 1000
 floorElo: 1000
 
 pokemonShowdown:

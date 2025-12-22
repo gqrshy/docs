@@ -24,29 +24,20 @@ CobbleRanked v2 is a complete rewrite. Configuration files are **not** directly 
 
 | Setting | v1 | v2 |
 |---------|----|----|
-| Starting Elo | 1000 | 1500 |
+| Starting Elo | 1000 | 1000 |
 | Floor Elo | 1000 | 1000 |
 
-### Rank Tiers
+> 📝 **Note:** Elo settings are the same between versions.
 
-| v1 Tier | v2 Tier | Elo Range |
-|---------|---------|-----------|
-| Bronze | Poke Ball | 0 - 1299 |
-| Silver | Great Ball | 1300 - 1499 |
-| Gold | Ultra Ball | 1500 - 1699 |
-| Platinum | Master Ball | 1700 - 1899 |
-| Diamond | Beast Ball | 1900 - 2099 |
-| Master | Cherish Ball | 2100+ |
+### Architecture Changes
 
-### New Features in v2
+v2 features a complete architectural rewrite:
 
-- Lead Selection phase
-- Match Ready confirmation GUI
-- Casual Mode (no Elo)
-- Daily/Weekly Missions
-- Date-based season scheduling
-- Soft Elo reset option
-- Comprehensive player restrictions
+| Aspect | v1 | v2 |
+|--------|----|----|
+| Package Structure | Flat (`command/`, `gui/`, `database/`) | Layered (`core/`, `feature/`, `infrastructure/`) |
+| Config Files | Single `config.json5` | Multiple YAML files |
+| Code Organization | Monolithic | Separation of concerns |
 
 ---
 
@@ -124,7 +115,7 @@ database:
 
 # v2: elo.yaml
 ratingSystem: POKEMON_SHOWDOWN
-startingElo: 1500
+startingElo: 1000
 floorElo: 1000
 ```
 

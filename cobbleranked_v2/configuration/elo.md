@@ -28,7 +28,7 @@ ratingSystem: POKEMON_SHOWDOWN  # or GLICKO2
 ## Basic Settings
 
 ```yaml
-startingElo: 1500   # New player starting rating
+startingElo: 1000   # New player starting rating
 floorElo: 1000      # Minimum possible rating
 ```
 
@@ -64,7 +64,7 @@ K-factor determines how much Elo changes per match:
 
 **Example calculation:**
 ```
-Player A (1500) vs Player B (1500)
+Player A (1200) vs Player B (1200)
 Expected win chance: 50%
 
 If Player A wins:
@@ -194,7 +194,7 @@ rankTiers:
 
 ```yaml
 ratingSystem: POKEMON_SHOWDOWN
-startingElo: 1500
+startingElo: 1000
 floorElo: 1000
 
 pokemonShowdown:
@@ -218,7 +218,7 @@ pokemonShowdown:
 
 ```yaml
 ratingSystem: POKEMON_SHOWDOWN
-startingElo: 1500
+startingElo: 1000
 floorElo: 1000
 
 pokemonShowdown:
@@ -236,7 +236,7 @@ pokemonShowdown:
 
 ```yaml
 ratingSystem: GLICKO2
-startingElo: 1500
+startingElo: 1000
 floorElo: 1000
 
 glicko2:
@@ -261,7 +261,7 @@ glicko2:
 
 ratingSystem: POKEMON_SHOWDOWN
 
-startingElo: 1500
+startingElo: 1000
 floorElo: 1000
 
 pokemonShowdown:

@@ -10,10 +10,11 @@ Common questions about CobbleRanked Reloaded.
 <summary><strong>What's new in v2 compared to v1?</strong></summary>
 
 Major changes include:
-- **Config format:** JSON5 → YAML (modular files)
-- **Starting Elo:** 1000 → 1500
-- **Rank tiers:** Bronze/Silver/Gold → Poke Ball/Great Ball/Ultra Ball/etc.
-- **New features:** Casual mode, daily/weekly missions, lead selection, match ready confirmation, soft Elo reset
+- **Config format:** JSON5 (single file) → YAML (modular files)
+- **Architecture:** Complete rewrite with layered design (core/feature/infrastructure)
+- **Code quality:** Improved maintainability and extensibility
+
+> 📝 **Note:** Core features (Casual mode, missions, lead selection, match ready confirmation) existed in v1 and continue in v2. The Elo system settings (starting Elo: 1000) remain the same.
 
 **See:** [Migration from v1](../getting-started/migration.md)
 
@@ -96,7 +97,7 @@ enabledFormats:
 Edit `config/cobbleranked/elo.yaml`:
 
 ```yaml
-startingElo: 1500  # Change to desired value
+startingElo: 1000  # Change to desired value (default: 1000)
 floorElo: 1000     # Minimum Elo
 ```
 
@@ -188,7 +189,7 @@ onSeasonEnd:
   softResetFactor: 0.5  # 50% toward starting Elo
 ```
 
-Example: 1800 Elo → 1650 (pulled toward 1500)
+Example: 1600 Elo → 1300 (pulled toward 1000)
 
 </details>
 

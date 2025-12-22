@@ -8,18 +8,14 @@ A competitive ranked battle system for Cobblemon servers with Elo-based matchmak
 
 ## What's New in v2
 
-CobbleRanked Reloaded (v2) is a complete rewrite with significant improvements:
+CobbleRanked Reloaded (v2) is a complete rewrite with improved architecture:
 
-| Feature | v1 | v2 |
-|---------|----|----|
+| Aspect | v1 | v2 |
+|--------|----|----|
 | Config Format | JSON5 (single file) | YAML (modular files) |
-| Starting Elo | 1000 | 1500 |
-| Rank Tiers | Bronze → Master | Poke Ball → Cherish Ball |
-| Lead Selection | ❌ | ✅ |
-| Casual Mode | ❌ | ✅ |
-| Daily/Weekly Missions | ❌ | ✅ |
-| Season Scheduling | Days-based | Date-based with soft reset |
-| Player Restrictions | Basic | Comprehensive (queue & arena) |
+| Architecture | Flat package structure | Layered (core/feature/infrastructure) |
+| Code Quality | Monolithic | Clean separation of concerns |
+| Maintainability | Difficult to extend | Modular and extensible |
 
 ---
 
@@ -33,14 +29,11 @@ CobbleRanked Reloaded (v2) is a complete rewrite with significant improvements:
 - **Leaderboards** - Real-time rankings per format
 - **Flee Protection** - Progressive penalty system with decay
 
-### New in v2
+### v2 Improvements
 
-- **Casual Mode** - Practice battles without Elo changes
-- **Daily/Weekly Missions** - Win matches, defeat Pokemon, use specific types
-- **Lead Selection** - Choose your lead Pokemon before battle
-- **Match Ready Confirmation** - Both players must confirm before teleporting
-- **Soft Elo Reset** - Partial reset on season end (configurable factor)
-- **Comprehensive Restrictions** - Block commands, items, interactions during battle
+- **Modular Config** - Separate YAML files for easier management
+- **Cleaner Architecture** - Layered design with separation of concerns
+- **Improved Codebase** - Better maintainability and extensibility
 
 ### Optional Features
 
@@ -63,7 +56,7 @@ CobbleRanked Reloaded (v2) is a complete rewrite with significant improvements:
 
 **Auto-generates:** `config/cobbleranked/` with all YAML config files
 
-**First match:** Players start at 1500 Elo (Pokemon Showdown mode)
+**First match:** Players start at 1000 Elo (Pokemon Showdown mode)
 
 ---
 
