@@ -8,7 +8,7 @@
 
 * [Installation](getting-started/installation.md)
 * [Quick Start](getting-started/quick-start.md)
-* [Commands](getting-started/commands.md)
+* [Commands & Permissions](getting-started/commands.md)
 * [Migration from v1](getting-started/migration.md)
 
 ## Configuration
@@ -20,9 +20,9 @@
 * [Seasons](configuration/seasons.md)
 * [Rewards](configuration/rewards.md)
 * [Missions](configuration/missions.md)
-* [Restrictions](configuration/restrictions.md)
 * [Arenas](configuration/arenas.md)
 * [Blacklist](configuration/blacklist.md)
+* [Restrictions](configuration/restrictions.md)
 * [GUI Customization](configuration/gui.md)
 * [Language Files](configuration/languages.md)
 
@@ -32,11 +32,13 @@
 * [Casual Battles](features/casual-battles.md)
 * [Battle Formats](features/battle-formats.md)
 * [Elo System](features/elo-system.md)
+* [Seasons](features/seasons.md)
 * [Dynamic Matchmaking](features/dynamic-matchmaking.md)
 * [Missions](features/missions.md)
 * [Leaderboards](features/leaderboards.md)
 * [Turn Timer](features/turn-timer.md)
 * [Disconnect Penalties](features/disconnect-penalties.md)
+* [Player Restrictions](features/restrictions.md)
 * [Battle Camera](features/battle-camera.md)
 * [Custom Music](features/custom-music.md)
 
@@ -44,6 +46,7 @@
 
 * [Cross-Server Setup](advanced/cross-server.md)
 * [Database Configuration](advanced/database.md)
+* [Redis Integration](advanced/redis.md)
 
 ## Integration
 
