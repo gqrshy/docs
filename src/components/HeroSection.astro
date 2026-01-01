@@ -7,46 +7,64 @@ import polymartLogo from '../assets/polymart.png';
 <section class="hero-section" id="hero">
 	<!-- Animated Decorative Elements - Left Side -->
 	<div class="deco-grid deco-left" data-parallax="0.02">
-		<div class="deco-box deco-typewriter" data-shuffle style="--delay: 0.1s">
-			<span class="typewriter-text" data-text="LOADING">LOADING</span>
+		<!-- Text Scramble Effect (Sci-fi decode) -->
+		<div class="deco-box deco-scramble" data-shuffle style="--delay: 0.1s">
+			<span class="scramble-text" data-final="SYSTEM">******</span>
 		</div>
-		<div class="deco-box deco-dots" data-shuffle style="--delay: 0.2s">
-			<span></span><span></span><span></span>
+		<!-- Morphing Blob -->
+		<div class="deco-box deco-blob" data-shuffle style="--delay: 0.2s">
+			<div class="blob-shape"></div>
 		</div>
-		<div class="deco-box deco-icon" data-shuffle style="--delay: 0.3s">
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-				<circle cx="12" cy="12" r="10"/>
-				<path d="M12 6v6l4 2"/>
-			</svg>
+		<!-- Neon Flicker Text -->
+		<div class="deco-box deco-neon" data-shuffle style="--delay: 0.3s">
+			<span class="neon-text">ONLINE</span>
 		</div>
-		<div class="deco-box deco-play" data-shuffle style="--delay: 0.4s">
-			<svg viewBox="0 0 24 24" fill="currentColor">
-				<polygon points="5,3 19,12 5,21"/>
-			</svg>
+		<!-- Floating Particles -->
+		<div class="deco-box deco-particles" data-shuffle style="--delay: 0.4s">
+			<span class="particle" style="--x: 20%; --y: 30%; --d: 2s"></span>
+			<span class="particle" style="--x: 70%; --y: 60%; --d: 2.5s"></span>
+			<span class="particle" style="--x: 40%; --y: 80%; --d: 3s"></span>
+			<span class="particle" style="--x: 80%; --y: 20%; --d: 2.2s"></span>
+			<span class="particle" style="--x: 10%; --y: 50%; --d: 2.8s"></span>
 		</div>
-		<div class="deco-box deco-japanese" data-shuffle style="--delay: 0.5s">
+		<!-- Wave Text -->
+		<div class="deco-box deco-wave-text" data-shuffle style="--delay: 0.5s">
+			<span class="wave-char" style="--i: 0">W</span>
+			<span class="wave-char" style="--i: 1">A</span>
+			<span class="wave-char" style="--i: 2">V</span>
+			<span class="wave-char" style="--i: 3">E</span>
+		</div>
+		<!-- Counter Animation -->
+		<div class="deco-box deco-counter" data-shuffle style="--delay: 0.6s">
+			<span class="counter-value" data-target="100">0</span>
+			<span class="counter-label">%</span>
+		</div>
+		<!-- Japanese Characters with Glitch -->
+		<div class="deco-box deco-japanese" data-shuffle style="--delay: 0.7s">
 			<span class="char" data-glitch style="--i: 0">あ</span>
 			<span class="char" data-glitch style="--i: 1">り</span>
 			<span class="char" data-glitch style="--i: 2">が</span>
 			<span class="char" data-glitch style="--i: 3">と</span>
 			<span class="char" data-glitch style="--i: 4">う</span>
 		</div>
-		<div class="deco-box deco-svg-line" data-shuffle style="--delay: 0.6s">
-			<svg viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="2">
-				<path class="draw-line" d="M10,40 Q30,10 50,25 T90,15"/>
-			</svg>
+		<!-- Matrix Rain (mini) -->
+		<div class="deco-box deco-matrix" data-shuffle style="--delay: 0.8s">
+			<div class="matrix-column" style="--col: 0"></div>
+			<div class="matrix-column" style="--col: 1"></div>
+			<div class="matrix-column" style="--col: 2"></div>
+			<div class="matrix-column" style="--col: 3"></div>
+			<div class="matrix-column" style="--col: 4"></div>
 		</div>
-		<div class="deco-box deco-bars" data-shuffle style="--delay: 0.7s">
-			<span></span><span></span><span></span><span></span><span></span>
+		<!-- Magnetic Element -->
+		<div class="deco-box deco-magnetic" data-shuffle data-magnetic style="--delay: 0.9s">
+			<div class="magnetic-core"></div>
 		</div>
-		<div class="deco-box deco-cross" data-shuffle style="--delay: 0.8s">
-			<span></span><span></span>
-		</div>
-		<div class="deco-box deco-typewriter-sm" data-shuffle style="--delay: 0.9s">
-			<span class="typewriter-text" data-text="CURVE">CURVE</span>
-		</div>
-		<div class="deco-box deco-circle-pulse" data-shuffle style="--delay: 1.0s">
-			<span></span>
+		<!-- Orbit Animation -->
+		<div class="deco-box deco-orbit" data-shuffle style="--delay: 1.0s">
+			<div class="orbit-center"></div>
+			<div class="orbit-ring">
+				<span class="orbit-dot"></span>
+			</div>
 		</div>
 	</div>
 
@@ -164,54 +182,68 @@ import polymartLogo from '../assets/polymart.png';
 
 	<!-- Animated Decorative Elements - Right Side -->
 	<div class="deco-grid deco-right" data-parallax="-0.02">
-		<div class="deco-box deco-typewriter" data-shuffle style="--delay: 0.15s">
-			<span class="typewriter-text" data-text="LOADING">LOADING</span>
+		<!-- Text Scramble (different text) -->
+		<div class="deco-box deco-scramble" data-shuffle style="--delay: 0.15s">
+			<span class="scramble-text" data-final="READY">*****</span>
 		</div>
-		<div class="deco-box deco-dots" data-shuffle style="--delay: 0.25s">
-			<span></span><span></span><span></span>
+		<!-- DNA Helix -->
+		<div class="deco-box deco-dna" data-shuffle style="--delay: 0.25s">
+			<div class="dna-strand">
+				<span style="--i: 0"></span>
+				<span style="--i: 1"></span>
+				<span style="--i: 2"></span>
+				<span style="--i: 3"></span>
+				<span style="--i: 4"></span>
+			</div>
 		</div>
-		<div class="deco-box deco-grid-dots" data-shuffle style="--delay: 0.35s">
-			<span></span><span></span><span></span>
-			<span></span><span></span><span></span>
-			<span></span><span></span><span></span>
+		<!-- Glitch Box -->
+		<div class="deco-box deco-glitch-box" data-shuffle style="--delay: 0.35s">
+			<div class="glitch-layer"></div>
+			<div class="glitch-layer"></div>
+			<div class="glitch-layer"></div>
 		</div>
-		<div class="deco-box deco-icon" data-shuffle style="--delay: 0.45s">
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-				<rect x="3" y="3" width="18" height="18" rx="2"/>
-				<path d="M9 9h6v6H9z"/>
+		<!-- Typing Cursor -->
+		<div class="deco-box deco-typing" data-shuffle style="--delay: 0.45s">
+			<span class="typing-text"></span>
+			<span class="typing-cursor">|</span>
+		</div>
+		<!-- Radar Scan -->
+		<div class="deco-box deco-radar" data-shuffle style="--delay: 0.55s">
+			<div class="radar-circle"></div>
+			<div class="radar-sweep"></div>
+			<div class="radar-dot" style="--angle: 45deg; --dist: 60%"></div>
+			<div class="radar-dot" style="--angle: 180deg; --dist: 40%"></div>
+		</div>
+		<!-- Heartbeat Line -->
+		<div class="deco-box deco-heartbeat" data-shuffle style="--delay: 0.65s">
+			<svg viewBox="0 0 100 40" fill="none" stroke="currentColor" stroke-width="2">
+				<path class="heartbeat-line" d="M0,20 L20,20 L25,5 L30,35 L35,15 L40,25 L45,20 L100,20"/>
 			</svg>
 		</div>
-		<div class="deco-box deco-svg-wave" data-shuffle style="--delay: 0.55s">
-			<svg viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2">
-				<path class="draw-line" d="M0,15 Q25,0 50,15 T100,15"/>
-			</svg>
+		<!-- Binary Text -->
+		<div class="deco-box deco-binary" data-shuffle style="--delay: 0.75s">
+			<span class="binary-text">01001</span>
 		</div>
-		<div class="deco-box deco-typewriter" data-shuffle style="--delay: 0.65s">
-			<span class="typewriter-text" data-text="GASHI">GASHI</span>
+		<!-- Ripple Effect -->
+		<div class="deco-box deco-ripple" data-shuffle style="--delay: 0.85s">
+			<span class="ripple-ring" style="--d: 0s"></span>
+			<span class="ripple-ring" style="--d: 0.5s"></span>
+			<span class="ripple-ring" style="--d: 1s"></span>
 		</div>
-		<div class="deco-box deco-spinner" data-shuffle style="--delay: 0.75s">
-			<span></span>
-		</div>
-		<div class="deco-box deco-x-marks" data-shuffle style="--delay: 0.85s">
-			<span class="x-mark" style="--i: 0">×</span>
-			<span class="x-mark" style="--i: 1">×</span>
-			<span class="x-mark" style="--i: 2">×</span>
-			<span class="x-mark" style="--i: 3">×</span>
-		</div>
-		<div class="deco-box deco-diamond" data-shuffle style="--delay: 0.95s">
-			<span></span>
-		</div>
-		<div class="deco-box deco-squares" data-shuffle style="--delay: 1.05s">
+		<!-- Loading Bars (spectrum) -->
+		<div class="deco-box deco-spectrum" data-shuffle style="--delay: 0.95s">
 			<span style="--i: 0"></span>
 			<span style="--i: 1"></span>
 			<span style="--i: 2"></span>
 			<span style="--i: 3"></span>
+			<span style="--i: 4"></span>
+			<span style="--i: 5"></span>
+			<span style="--i: 6"></span>
 		</div>
-		<div class="deco-box deco-typewriter-sm" data-shuffle style="--delay: 1.15s">
-			<span class="typewriter-text" data-text="COBBLEMON">COBBLEMON</span>
-		</div>
-		<div class="deco-box deco-circle-pulse" data-shuffle style="--delay: 1.25s">
-			<span></span>
+		<!-- Bouncing Ball -->
+		<div class="deco-box deco-bounce" data-shuffle style="--delay: 1.05s">
+			<span class="bounce-ball"></span>
+			<span class="bounce-shadow"></span>
 		</div>
 	</div>
 </section>
@@ -489,51 +521,241 @@ import polymartLogo from '../assets/polymart.png';
 		});
 	}
 
-	// ===== X Marks Random Rotation =====
-	function initXMarksAnimation() {
-		const xMarks = document.querySelectorAll('.x-mark');
+	// ===== Text Scramble Effect (Sci-fi decode) =====
+	function initTextScramble() {
+		const scrambleElements = document.querySelectorAll('.scramble-text');
+		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ0123456789@#$%&*';
 
-		setInterval(() => {
-			xMarks.forEach(mark => {
+		scrambleElements.forEach((el, index) => {
+			const finalText = el.dataset.final || el.textContent;
+			let iteration = 0;
+			let isAnimating = false;
+
+			function scramble() {
+				if (isAnimating) return;
+				isAnimating = true;
+				iteration = 0;
+
+				const interval = setInterval(() => {
+					el.textContent = finalText.split('')
+						.map((char, i) => {
+							if (i < iteration) return finalText[i];
+							return chars[Math.floor(Math.random() * chars.length)];
+						})
+						.join('');
+
+					if (iteration >= finalText.length) {
+						clearInterval(interval);
+						isAnimating = false;
+					}
+					iteration += 1/3;
+				}, 30);
+			}
+
+			// Initial scramble
+			setTimeout(() => scramble(), 1000 + index * 500);
+			// Repeat periodically
+			setInterval(() => {
+				if (Math.random() > 0.6) scramble();
+			}, 5000 + Math.random() * 3000);
+		});
+	}
+
+	// ===== Counter Animation =====
+	function initCounters() {
+		const counters = document.querySelectorAll('.counter-value');
+
+		counters.forEach(counter => {
+			const target = parseInt(counter.dataset.target) || 100;
+			let current = 0;
+			let isAnimating = false;
+
+			function animate() {
+				if (isAnimating) return;
+				isAnimating = true;
+				current = 0;
+
+				const increment = target / 50;
+				const interval = setInterval(() => {
+					current += increment;
+					if (current >= target) {
+						current = target;
+						clearInterval(interval);
+						isAnimating = false;
+					}
+					counter.textContent = Math.floor(current);
+				}, 30);
+			}
+
+			// Initial animation
+			setTimeout(animate, 1500);
+			// Repeat
+			setInterval(() => {
 				if (Math.random() > 0.7) {
-					const rotation = Math.random() * 180 - 90;
-					mark.style.transform = `rotate(${rotation}deg)`;
-					setTimeout(() => {
-						mark.style.transform = '';
-					}, 300);
+					current = 0;
+					counter.textContent = '0';
+					setTimeout(animate, 500);
 				}
+			}, 8000);
+		});
+	}
+
+	// ===== Matrix Rain Effect =====
+	function initMatrixRain() {
+		const columns = document.querySelectorAll('.matrix-column');
+		const matrixChars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
+
+		columns.forEach(col => {
+			function rain() {
+				const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+				const span = document.createElement('span');
+				span.textContent = char;
+				span.style.animation = `matrixFall ${1 + Math.random()}s linear forwards`;
+				col.appendChild(span);
+
+				setTimeout(() => span.remove(), 1500);
+			}
+
+			setInterval(rain, 200 + Math.random() * 300);
+		});
+	}
+
+	// ===== Magnetic Hover Effect =====
+	function initMagneticEffect() {
+		const magneticElements = document.querySelectorAll('[data-magnetic]');
+
+		magneticElements.forEach(el => {
+			const core = el.querySelector('.magnetic-core');
+			if (!core) return;
+
+			el.addEventListener('mousemove', (e) => {
+				const rect = el.getBoundingClientRect();
+				const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+				const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+				core.style.transform = `translate(${x}px, ${y}px)`;
 			});
-		}, 1000);
+
+			el.addEventListener('mouseleave', () => {
+				core.style.transform = 'translate(0, 0)';
+			});
+		});
+	}
+
+	// ===== Binary Text Animation =====
+	function initBinaryAnimation() {
+		const binaryTexts = document.querySelectorAll('.binary-text');
+
+		binaryTexts.forEach(el => {
+			setInterval(() => {
+				const length = el.textContent.length;
+				let newText = '';
+				for (let i = 0; i < length; i++) {
+					newText += Math.random() > 0.5 ? '1' : '0';
+				}
+				el.textContent = newText;
+			}, 100);
+		});
+	}
+
+	// ===== Typing Animation =====
+	function initTypingAnimation() {
+		const typingElements = document.querySelectorAll('.typing-text');
+		const phrases = ['HELLO', 'WORLD', 'GASHI', 'CODE', 'PLAY'];
+
+		typingElements.forEach(el => {
+			let phraseIndex = 0;
+			let charIndex = 0;
+			let isDeleting = false;
+
+			function type() {
+				const currentPhrase = phrases[phraseIndex];
+
+				if (isDeleting) {
+					el.textContent = currentPhrase.substring(0, charIndex - 1);
+					charIndex--;
+				} else {
+					el.textContent = currentPhrase.substring(0, charIndex + 1);
+					charIndex++;
+				}
+
+				let delay = isDeleting ? 50 : 150;
+
+				if (!isDeleting && charIndex === currentPhrase.length) {
+					delay = 2000;
+					isDeleting = true;
+				} else if (isDeleting && charIndex === 0) {
+					isDeleting = false;
+					phraseIndex = (phraseIndex + 1) % phrases.length;
+					delay = 500;
+				}
+
+				setTimeout(type, delay);
+			}
+
+			setTimeout(type, 1000);
+		});
+	}
+
+	// ===== Wave Text Animation =====
+	function initWaveText() {
+		const waveChars = document.querySelectorAll('.wave-char');
+
+		waveChars.forEach((char, i) => {
+			setInterval(() => {
+				char.style.transform = `translateY(${Math.sin(Date.now() / 200 + i) * 5}px)`;
+			}, 50);
+		});
+	}
+
+	// ===== Neon Flicker Effect =====
+	function initNeonFlicker() {
+		const neonElements = document.querySelectorAll('.neon-text');
+
+		neonElements.forEach(el => {
+			function flicker() {
+				const flickerSequence = [
+					{ opacity: 1, duration: 50 },
+					{ opacity: 0.4, duration: 50 },
+					{ opacity: 1, duration: 100 },
+					{ opacity: 0.7, duration: 50 },
+					{ opacity: 1, duration: 2000 }
+				];
+
+				let delay = 0;
+				flickerSequence.forEach(step => {
+					setTimeout(() => {
+						el.style.opacity = step.opacity;
+					}, delay);
+					delay += step.duration;
+				});
+			}
+
+			// Random flicker
+			setInterval(() => {
+				if (Math.random() > 0.7) flicker();
+			}, 3000);
+		});
 	}
 
 	// ===== Initialize Everything =====
 	function init() {
-		console.log('[HeroSection] init() called');
 		const lang = window.GashiLang?.get() || 'en';
 		applyHeroTranslations(lang);
 
-		// Always run animations (ignore prefers-reduced-motion)
-		console.log('[HeroSection] Starting animations...');
-		try {
-			initParallax();
-			console.log('[HeroSection] initParallax done');
-			initTypewriters();
-			console.log('[HeroSection] initTypewriters done');
-			initGlitchEffects();
-			console.log('[HeroSection] initGlitchEffects done');
-			initBoxShuffle();
-			console.log('[HeroSection] initBoxShuffle done');
-			initVisibilityToggle();
-			console.log('[HeroSection] initVisibilityToggle done');
-			initRandomHighlight();
-			console.log('[HeroSection] initRandomHighlight done');
-			initGridDotsWave();
-			console.log('[HeroSection] initGridDotsWave done');
-			initXMarksAnimation();
-			console.log('[HeroSection] initXMarksAnimation done');
-		} catch (e) {
-			console.error('[HeroSection] Error:', e);
-		}
+		// Initialize all animations
+		initParallax();
+		initTextScramble();
+		initCounters();
+		initMatrixRain();
+		initMagneticEffect();
+		initBinaryAnimation();
+		initTypingAnimation();
+		initWaveText();
+		initNeonFlicker();
+		initGlitchEffects();
+		initBoxShuffle();
+		initVisibilityToggle();
+		initRandomHighlight();
 	}
 
 	window.addEventListener('langChange', (e) => {
@@ -1047,34 +1269,522 @@ import polymartLogo from '../assets/polymart.png';
 	50% { opacity: 0.8; transform: scale(0.8); }
 }
 
-/* Circle Pulse */
-.deco-circle-pulse {
+/* ===== NEW ANIMATIONS ===== */
+
+/* Text Scramble */
+.deco-scramble {
+	font-family: 'JetBrains Mono', 'Consolas', monospace;
+	font-size: 0.8rem;
+	letter-spacing: 0.15em;
+	color: rgba(124, 58, 237, 0.9);
+}
+
+.scramble-text {
+	display: inline-block;
+	min-width: 60px;
+}
+
+/* Morphing Blob */
+.deco-blob {
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.blob-shape {
+	width: 40px;
+	height: 40px;
+	background: linear-gradient(135deg, rgba(124, 58, 237, 0.6), rgba(167, 139, 250, 0.4));
+	border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+	animation: blobMorph 8s ease-in-out infinite;
+}
+
+@keyframes blobMorph {
+	0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg); }
+	25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+	50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; transform: rotate(180deg); }
+	75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
+}
+
+/* Neon Flicker */
+.deco-neon {
+	background: transparent;
+	border-color: rgba(124, 58, 237, 0.3);
+}
+
+.neon-text {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.75rem;
+	color: #a78bfa;
+	text-shadow:
+		0 0 5px rgba(167, 139, 250, 0.8),
+		0 0 10px rgba(167, 139, 250, 0.6),
+		0 0 20px rgba(124, 58, 237, 0.4);
+	letter-spacing: 0.1em;
+}
+
+/* Floating Particles */
+.deco-particles {
+	width: 70px;
+	height: 70px;
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.particle {
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	background: rgba(167, 139, 250, 0.8);
+	border-radius: 50%;
+	left: var(--x);
+	top: var(--y);
+	animation: particleFloat var(--d) ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+	0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+	25% { transform: translate(5px, -10px) scale(1.2); opacity: 1; }
+	50% { transform: translate(-3px, -5px) scale(0.8); opacity: 0.6; }
+	75% { transform: translate(8px, 3px) scale(1.1); opacity: 0.9; }
+}
+
+/* Wave Text */
+.deco-wave-text {
+	display: flex;
+	gap: 2px;
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+
+.wave-char {
+	display: inline-block;
+	color: rgba(255, 255, 255, 0.7);
+	transition: transform 0.1s ease;
+}
+
+/* Counter Animation */
+.deco-counter {
+	font-family: 'JetBrains Mono', monospace;
+	display: flex;
+	align-items: baseline;
+	gap: 2px;
+}
+
+.counter-value {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: rgba(124, 58, 237, 0.9);
+	min-width: 40px;
+	text-align: right;
+}
+
+.counter-label {
+	font-size: 0.75rem;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+/* Matrix Rain */
+.deco-matrix {
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	display: flex;
+	gap: 2px;
+	overflow: hidden;
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: 8px;
+}
+
+.matrix-column {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	position: relative;
+}
+
+.matrix-column span {
+	position: absolute;
+	font-size: 0.5rem;
+	color: rgba(124, 58, 237, 0.9);
+	text-shadow: 0 0 5px rgba(124, 58, 237, 0.5);
+	top: -10px;
+}
+
+@keyframes matrixFall {
+	0% { top: -10px; opacity: 1; }
+	100% { top: 70px; opacity: 0; }
+}
+
+/* Magnetic Element */
+.deco-magnetic {
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.magnetic-core {
+	width: 24px;
+	height: 24px;
+	background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(167, 139, 250, 0.6));
+	border-radius: 50%;
+	transition: transform 0.15s ease-out;
+	box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+}
+
+/* Orbit Animation */
+.deco-orbit {
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.orbit-center {
+	width: 8px;
+	height: 8px;
+	background: rgba(255, 255, 255, 0.6);
+	border-radius: 50%;
+}
+
+.orbit-ring {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+	animation: orbitSpin 4s linear infinite;
+}
+
+.orbit-dot {
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	background: rgba(124, 58, 237, 0.9);
+	border-radius: 50%;
+	top: -3px;
+	left: 50%;
+	transform: translateX(-50%);
+	box-shadow: 0 0 8px rgba(124, 58, 237, 0.6);
+}
+
+@keyframes orbitSpin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* DNA Helix */
+.deco-dna {
 	width: 50px;
-	height: 50px;
+	height: 70px;
 	padding: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.deco-circle-pulse span {
-	width: 20px;
-	height: 20px;
-	border: 2px solid rgba(124, 58, 237, 0.5);
-	border-radius: 50%;
-	animation: circlePulse 2s ease-out infinite;
+.dna-strand {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	height: 100%;
+	padding: 10px 0;
 }
 
-@keyframes circlePulse {
-	0% {
-		transform: scale(0.8);
-		opacity: 1;
-	}
-	100% {
-		transform: scale(1.8);
-		opacity: 0;
-	}
+.dna-strand span {
+	width: 30px;
+	height: 3px;
+	background: linear-gradient(90deg, rgba(124, 58, 237, 0.8), transparent, rgba(167, 139, 250, 0.8));
+	border-radius: 2px;
+	animation: dnaWave 2s ease-in-out infinite;
+	animation-delay: calc(var(--i) * 0.15s);
 }
+
+@keyframes dnaWave {
+	0%, 100% { transform: scaleX(1) translateX(0); }
+	50% { transform: scaleX(0.6) translateX(5px); }
+}
+
+/* Glitch Box */
+.deco-glitch-box {
+	width: 50px;
+	height: 50px;
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.glitch-layer {
+	position: absolute;
+	inset: 5px;
+	background: rgba(124, 58, 237, 0.3);
+	border: 1px solid rgba(124, 58, 237, 0.5);
+}
+
+.glitch-layer:nth-child(1) {
+	animation: glitchShift1 3s infinite;
+}
+
+.glitch-layer:nth-child(2) {
+	animation: glitchShift2 3s infinite;
+	background: rgba(167, 139, 250, 0.2);
+}
+
+.glitch-layer:nth-child(3) {
+	animation: glitchShift3 3s infinite;
+	background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes glitchShift1 {
+	0%, 90%, 100% { transform: translate(0, 0); }
+	92% { transform: translate(-3px, 2px); }
+	94% { transform: translate(2px, -1px); }
+}
+
+@keyframes glitchShift2 {
+	0%, 90%, 100% { transform: translate(0, 0); }
+	91% { transform: translate(2px, -2px); }
+	93% { transform: translate(-1px, 3px); }
+}
+
+@keyframes glitchShift3 {
+	0%, 90%, 100% { transform: translate(0, 0); }
+	92% { transform: translate(1px, 1px); }
+	95% { transform: translate(-2px, -1px); }
+}
+
+/* Typing Cursor */
+.deco-typing {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.75rem;
+	display: flex;
+	align-items: center;
+	min-width: 80px;
+}
+
+.typing-text {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.typing-cursor {
+	color: rgba(124, 58, 237, 0.9);
+	animation: cursorBlink 0.8s step-end infinite;
+}
+
+@keyframes cursorBlink {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0; }
+}
+
+/* Radar Scan */
+.deco-radar {
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.radar-circle {
+	width: 50px;
+	height: 50px;
+	border: 1px solid rgba(124, 58, 237, 0.3);
+	border-radius: 50%;
+	position: absolute;
+}
+
+.radar-circle::before,
+.radar-circle::after {
+	content: '';
+	position: absolute;
+	border: 1px solid rgba(124, 58, 237, 0.2);
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.radar-circle::before {
+	width: 70%;
+	height: 70%;
+}
+
+.radar-circle::after {
+	width: 40%;
+	height: 40%;
+}
+
+.radar-sweep {
+	position: absolute;
+	width: 50%;
+	height: 2px;
+	background: linear-gradient(90deg, rgba(124, 58, 237, 0.8), transparent);
+	transform-origin: left center;
+	animation: radarSweep 3s linear infinite;
+}
+
+@keyframes radarSweep {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+.radar-dot {
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	background: rgba(124, 58, 237, 0.9);
+	border-radius: 50%;
+	transform: rotate(var(--angle)) translateX(calc(var(--dist) * 0.25));
+	animation: radarBlink 2s ease-in-out infinite;
+	box-shadow: 0 0 6px rgba(124, 58, 237, 0.6);
+}
+
+@keyframes radarBlink {
+	0%, 100% { opacity: 0.3; }
+	50% { opacity: 1; }
+}
+
+/* Heartbeat Line */
+.deco-heartbeat {
+	width: 80px;
+	height: 40px;
+	padding: 0.5rem;
+}
+
+.deco-heartbeat svg {
+	width: 100%;
+	height: 100%;
+}
+
+.heartbeat-line {
+	stroke: rgba(124, 58, 237, 0.8);
+	stroke-dasharray: 200;
+	stroke-dashoffset: 200;
+	animation: heartbeatDraw 2s linear infinite;
+}
+
+@keyframes heartbeatDraw {
+	0% { stroke-dashoffset: 200; }
+	100% { stroke-dashoffset: 0; }
+}
+
+/* Binary Text */
+.deco-binary {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.7rem;
+	letter-spacing: 0.2em;
+}
+
+.binary-text {
+	color: rgba(124, 58, 237, 0.7);
+}
+
+/* Ripple Effect */
+.deco-ripple {
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ripple-ring {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border: 2px solid rgba(124, 58, 237, 0.6);
+	border-radius: 50%;
+	animation: rippleExpand 2s ease-out infinite;
+	animation-delay: var(--d);
+}
+
+@keyframes rippleExpand {
+	0% { width: 10px; height: 10px; opacity: 1; }
+	100% { width: 50px; height: 50px; opacity: 0; }
+}
+
+/* Spectrum Bars */
+.deco-spectrum {
+	display: flex;
+	align-items: flex-end;
+	gap: 3px;
+	height: 50px;
+	padding: 0.75rem;
+}
+
+.deco-spectrum span {
+	width: 4px;
+	background: linear-gradient(to top, rgba(124, 58, 237, 0.4), rgba(167, 139, 250, 0.9));
+	border-radius: 2px;
+	animation: spectrumBounce 0.8s ease-in-out infinite;
+	animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes spectrumBounce {
+	0%, 100% { height: 10px; }
+	50% { height: 30px; }
+}
+
+/* Bouncing Ball */
+.deco-bounce {
+	width: 50px;
+	height: 60px;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	padding-bottom: 8px;
+}
+
+.bounce-ball {
+	width: 16px;
+	height: 16px;
+	background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(167, 139, 250, 0.7));
+	border-radius: 50%;
+	animation: ballBounce 1s ease-in-out infinite;
+	box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+}
+
+.bounce-shadow {
+	width: 16px;
+	height: 4px;
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: 50%;
+	animation: shadowScale 1s ease-in-out infinite;
+	margin-top: auto;
+}
+
+@keyframes ballBounce {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-30px); }
+}
+
+@keyframes shadowScale {
+	0%, 100% { transform: scaleX(1); opacity: 0.5; }
+	50% { transform: scaleX(0.5); opacity: 0.2; }
+}
+
+/* ===== END NEW ANIMATIONS ===== */
 
 /* Animations */
 @keyframes pulse {
