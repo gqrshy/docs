@@ -182,6 +182,12 @@ const { title, description, headings = [] } = Astro.props;
 			scroll-padding-top: 80px;
 		}
 
+		/* Hide caret during View Transitions */
+		::view-transition-old(*),
+		::view-transition-new(*) {
+			caret-color: transparent;
+		}
+
 		body {
 			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 			background: var(--color-bg-dark);
