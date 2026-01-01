@@ -13,7 +13,7 @@
 
 	if (hasVisited) {
 		loadingScreen.style.display = 'none';
-		document.body.classList.add('revealed');
+		document.body.classList.add('page-revealed');
 		return;
 	}
 
@@ -22,35 +22,73 @@
 	// Start reveal animation after brief delay
 	setTimeout(() => {
 		loadingScreen.classList.add('reveal');
-		document.body.classList.add('revealing');
 
-		// Remove loading screen after animation
+		// After swipe completes, fade in content
+		setTimeout(() => {
+			document.body.classList.add('page-revealing');
+		}, 350);
+
+		// Remove loading screen and finalize
 		setTimeout(() => {
 			loadingScreen.style.display = 'none';
-			document.body.classList.remove('revealing');
-			document.body.classList.add('revealed');
-		}, 800);
-	}, 400);
+			document.body.classList.remove('page-revealing');
+			document.body.classList.add('page-revealed');
+		}, 1100);
+	}, 200);
 })();
 </script>
 
 <style is:global>
-/* Initial state - hide content until revealed */
-body:not(.revealed):not(.revealing) .hero-section,
-body:not(.revealed):not(.revealing) .custom-nav {
-	opacity: 0;
+/* Hide ALL content until revealed */
+body:not(.page-revealed):not(.page-revealing) > *:not(#loading-screen) {
+	opacity: 0 !important;
+	visibility: hidden !important;
 }
 
-/* Revealing state - fade in content */
-body.revealing .hero-section,
-body.revealing .custom-nav {
-	animation: contentFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+/* Revealing state - staggered fade in */
+body.page-revealing > main,
+body.page-revealing > nav,
+body.page-revealing > footer,
+body.page-revealing .custom-nav,
+body.page-revealing .hero-section,
+body.page-revealing .products-section,
+body.page-revealing .showcase-section,
+body.page-revealing .testimonials-section,
+body.page-revealing .language-switcher {
+	opacity: 1 !important;
+	visibility: visible !important;
+	animation: revealFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes contentFadeIn {
+body.page-revealing .custom-nav {
+	animation-delay: 0s;
+}
+
+body.page-revealing .hero-section {
+	animation-delay: 0.05s;
+}
+
+body.page-revealing .products-section {
+	animation-delay: 0.1s;
+}
+
+body.page-revealing .showcase-section {
+	animation-delay: 0.15s;
+}
+
+body.page-revealing .testimonials-section {
+	animation-delay: 0.2s;
+}
+
+body.page-revealing > footer,
+body.page-revealing .language-switcher {
+	animation-delay: 0.25s;
+}
+
+@keyframes revealFadeIn {
 	from {
 		opacity: 0;
-		transform: translateY(20px);
+		transform: translateY(25px);
 	}
 	to {
 		opacity: 1;
@@ -58,10 +96,10 @@ body.revealing .custom-nav {
 	}
 }
 
-/* Revealed state */
-body.revealed .hero-section,
-body.revealed .custom-nav {
-	opacity: 1;
+/* Revealed state - everything visible */
+body.page-revealed > * {
+	opacity: 1 !important;
+	visibility: visible !important;
 }
 </style>
 
@@ -74,6 +112,7 @@ body.revealed .custom-nav {
 	height: 100%;
 	z-index: 99999;
 	pointer-events: none;
+	overflow: hidden;
 }
 
 .swipe-overlay {
@@ -82,15 +121,9 @@ body.revealed .custom-nav {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(
-		to top,
-		#0f0a1a 0%,
-		#1a1033 40%,
-		#251845 70%,
-		rgba(124, 58, 237, 0.3) 100%
-	);
+	background: #0f0a1a;
 	transform: translateY(0);
-	transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+	transition: transform 0.65s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 /* Reveal animation - swipe up */
@@ -98,24 +131,44 @@ body.revealed .custom-nav {
 	transform: translateY(-100%);
 }
 
-/* Subtle gradient glow at the edge */
-.swipe-overlay::after {
+/* Glowing edge line */
+.swipe-overlay::before {
 	content: '';
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	height: 4px;
+	height: 2px;
 	background: linear-gradient(
 		90deg,
 		transparent 0%,
-		rgba(167, 139, 250, 0.8) 20%,
-		rgba(124, 58, 237, 1) 50%,
-		rgba(167, 139, 250, 0.8) 80%,
+		rgba(124, 58, 237, 0.5) 10%,
+		rgba(167, 139, 250, 1) 30%,
+		rgba(236, 72, 153, 0.8) 50%,
+		rgba(167, 139, 250, 1) 70%,
+		rgba(124, 58, 237, 0.5) 90%,
 		transparent 100%
 	);
 	box-shadow:
-		0 0 30px rgba(124, 58, 237, 0.8),
-		0 0 60px rgba(124, 58, 237, 0.4);
+		0 0 15px rgba(167, 139, 250, 0.9),
+		0 0 30px rgba(124, 58, 237, 0.7),
+		0 0 50px rgba(124, 58, 237, 0.4);
+}
+
+/* Subtle glow underneath */
+.swipe-overlay::after {
+	content: '';
+	position: absolute;
+	bottom: -40px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 60%;
+	height: 80px;
+	background: radial-gradient(
+		ellipse at center,
+		rgba(124, 58, 237, 0.5) 0%,
+		transparent 70%
+	);
+	filter: blur(15px);
 }
 </style>
