@@ -70,6 +70,7 @@ const { title, description, headings = [] } = Astro.props;
 			</div>
 			<div class="footer-bottom">
 				<p>&copy; 2026 GashiStudios. All rights reserved.</p>
+				<p class="footer-disclaimer">Not affiliated with Microsoft, Mojang AB, or Minecraft.</p>
 			</div>
 		</footer>
 	</div>
@@ -412,6 +413,12 @@ const { title, description, headings = [] } = Astro.props;
 		.doc-footer .footer-bottom p {
 			color: rgba(255, 255, 255, 0.4);
 			font-size: 0.85rem;
+		}
+
+		.doc-footer .footer-disclaimer {
+			margin-top: 0.5rem;
+			font-size: 0.75rem;
+			color: rgba(255, 255, 255, 0.3);
 		}
 
 		/* Responsive */
