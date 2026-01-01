@@ -1,11 +1,11 @@
 ---
-// Products section showcasing mods
+// Products section showcasing mods - i18n support
 ---
 
 <section id="products" class="products-section">
 	<div class="products-container">
-		<h2 class="section-title">Our Products</h2>
-		<p class="section-subtitle">Cobblemon向けのMod/ライブラリ</p>
+		<h2 class="section-title" data-i18n="productsTitle">Our Products</h2>
+		<p class="section-subtitle" data-i18n="productsSubtitle">Mods and libraries for Cobblemon</p>
 
 		<div class="products-grid">
 			<a href="/cobbleranked/" class="product-card featured">
@@ -14,7 +14,7 @@
 				</div>
 				<div class="product-info">
 					<h3>CobbleRanked</h3>
-					<p>ELOベースのランク戦システム。シーズン制、リーダーボード、リワード機能を搭載。</p>
+					<p data-i18n="cobblerankedDesc">ELO-based ranked battle system with seasons, leaderboards, and rewards.</p>
 					<span class="product-tag">Featured</span>
 				</div>
 			</a>
@@ -27,7 +27,7 @@
 				</div>
 				<div class="product-info">
 					<h3>GashiLibs</h3>
-					<p>データベース接続、Redis、設定ユーティリティを提供する共有ライブラリ。</p>
+					<p data-i18n="gashilibsDesc">Shared library providing database connections, Redis, and config utilities.</p>
 					<span class="product-tag library">Library</span>
 				</div>
 			</a>
@@ -40,13 +40,51 @@
 				</div>
 				<div class="product-info">
 					<h3>MailLib</h3>
-					<p>プレイヤーへのリワードやアイテムを配信するゲーム内メールボックスシステム。</p>
+					<p data-i18n="maillibDesc">In-game mailbox system for delivering rewards and items to players.</p>
 					<span class="product-tag library">Library</span>
 				</div>
 			</a>
 		</div>
 	</div>
 </section>
+
+<script is:inline>
+(function() {
+	const translations = {
+		en: {
+			productsTitle: "Our Products",
+			productsSubtitle: "Mods and libraries for Cobblemon",
+			cobblerankedDesc: "ELO-based ranked battle system with seasons, leaderboards, and rewards.",
+			gashilibsDesc: "Shared library providing database connections, Redis, and config utilities.",
+			maillibDesc: "In-game mailbox system for delivering rewards and items to players."
+		},
+		ja: {
+			productsTitle: "製品一覧",
+			productsSubtitle: "Cobblemon向けのMod/ライブラリ",
+			cobblerankedDesc: "ELOベースのランク戦システム。シーズン制、リーダーボード、リワード機能を搭載。",
+			gashilibsDesc: "データベース接続、Redis、設定ユーティリティを提供する共有ライブラリ。",
+			maillibDesc: "プレイヤーへのリワードやアイテムを配信するゲーム内メールボックスシステム。"
+		}
+	};
+
+	function getBrowserLang() {
+		const lang = navigator.language || navigator.userLanguage;
+		return lang.startsWith('ja') ? 'ja' : 'en';
+	}
+
+	function applyTranslations(lang) {
+		const t = translations[lang] || translations.en;
+		document.querySelectorAll('[data-i18n]').forEach(el => {
+			const key = el.getAttribute('data-i18n');
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
+		});
+	}
+
+	applyTranslations(getBrowserLang());
+})();
+</script>
 
 <style>
 .products-section {
@@ -104,8 +142,8 @@
 
 .product-icon {
 	flex-shrink: 0;
-	width: 64px;
-	height: 64px;
+	width: 80px;
+	height: 80px;
 	border-radius: 12px;
 	overflow: hidden;
 	display: flex;
@@ -125,8 +163,8 @@
 }
 
 .product-icon.library svg {
-	width: 32px;
-	height: 32px;
+	width: 36px;
+	height: 36px;
 }
 
 .product-info h3 {
