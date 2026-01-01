@@ -25,23 +25,9 @@
 					<span data-i18n="viewDocs">View Documents</span>
 				</a>
 			</div>
-			<div class="hero-stats">
-				<div class="stat">
-					<span class="stat-number">13</span>
-					<span class="stat-label" data-i18n="statMinecraft">Years in Minecraft</span>
-				</div>
-				<div class="stat">
-					<span class="stat-number">5+</span>
-					<span class="stat-label" data-i18n="statMods">Released Mods</span>
-				</div>
-				<div class="stat">
-					<span class="stat-number">3</span>
-					<span class="stat-label">GitHub Repos</span>
-				</div>
-			</div>
 		</div>
 		<div class="hero-image">
-			<img src="/cobbleranked.png" alt="GashiStudios" />
+			<img src="/cobblemon.png" alt="GashiStudios" />
 		</div>
 	</div>
 </section>
@@ -53,17 +39,13 @@
 			greeting: "Hey there, I'm",
 			description: "Minecraft mod/plugin developer.<br>Creating competitive systems and tools for Cobblemon.<br>Contact via Discord <code>@gashicha</code>.",
 			joinDiscord: "Join Discord",
-			viewDocs: "View Documents",
-			statMinecraft: "Years in Minecraft",
-			statMods: "Released Mods"
+			viewDocs: "View Documents"
 		},
 		ja: {
 			greeting: "こんにちは、",
 			description: "Minecraftのmod/プラグイン開発者。<br>Cobblemon向けの競技システムや便利ツールを制作しています。<br>ご連絡はDiscord <code>@gashicha</code> まで。",
 			joinDiscord: "Discordに参加",
-			viewDocs: "ドキュメントを見る",
-			statMinecraft: "Minecraft歴",
-			statMods: "公開mod数"
+			viewDocs: "ドキュメントを見る"
 		}
 	};
 
@@ -138,7 +120,6 @@
 .hero-buttons {
 	display: flex;
 	gap: 1rem;
-	margin-bottom: 3rem;
 }
 
 .btn-discord {
@@ -182,27 +163,6 @@
 	transform: translateY(-3px);
 }
 
-.hero-stats {
-	display: flex;
-	gap: 3rem;
-}
-
-.stat {
-	display: flex;
-	flex-direction: column;
-}
-
-.stat-number {
-	font-size: 2.5rem;
-	font-weight: 700;
-	color: #fff;
-}
-
-.stat-label {
-	color: rgba(255, 255, 255, 0.6);
-	font-size: 0.9rem;
-}
-
 .hero-image {
 	display: flex;
 	justify-content: center;
@@ -244,10 +204,6 @@
 		justify-content: center;
 		flex-wrap: wrap;
 	}
-
-	.hero-stats {
-		justify-content: center;
-	}
 }
 
 @media (max-width: 576px) {
@@ -257,14 +213,6 @@
 
 	.hero-name {
 		font-size: 2.5rem;
-	}
-
-	.hero-stats {
-		gap: 1.5rem;
-	}
-
-	.stat-number {
-		font-size: 2rem;
 	}
 }
 </style>

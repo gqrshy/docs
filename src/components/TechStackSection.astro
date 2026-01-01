@@ -1,0 +1,263 @@
+---
+// Tech stack section showing development skills - i18n support
+---
+
+<section id="techstack" class="techstack-section">
+	<div class="techstack-container">
+		<h2 class="section-title" data-i18n="techstackTitle">Tech Stack</h2>
+		<p class="section-subtitle" data-i18n="techstackSubtitle">Technologies I work with</p>
+
+		<div class="techstack-grid">
+			<div class="techstack-category">
+				<h3 class="category-title" data-i18n="categoryMC">MC Development</h3>
+				<div class="tech-icons">
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=java" alt="Java" />
+						<span>Java</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=kotlin" alt="Kotlin" />
+						<span>Kotlin</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="techstack-category">
+				<h3 class="category-title" data-i18n="categoryDatabase">Database</h3>
+				<div class="tech-icons">
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" />
+						<span>MySQL</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=sqlite" alt="SQLite" />
+						<span>SQLite</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=redis" alt="Redis" />
+						<span>Redis</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB" />
+						<span>MongoDB</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="techstack-category">
+				<h3 class="category-title" data-i18n="categoryWeb">Web & Languages</h3>
+				<div class="tech-icons">
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=js" alt="JavaScript" />
+						<span>JavaScript</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=ts" alt="TypeScript" />
+						<span>TypeScript</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=html" alt="HTML" />
+						<span>HTML</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=css" alt="CSS" />
+						<span>CSS</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="techstack-category">
+				<h3 class="category-title" data-i18n="categoryTools">Dev Tools</h3>
+				<div class="tech-icons">
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=vscode" alt="VS Code" />
+						<span>VS Code</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=idea" alt="IntelliJ IDEA" />
+						<span>IntelliJ</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=git" alt="Git" />
+						<span>Git</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=github" alt="GitHub" />
+						<span>GitHub</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=docker" alt="Docker" />
+						<span>Docker</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="techstack-category">
+				<h3 class="category-title" data-i18n="categoryDesign">Design & BaaS</h3>
+				<div class="tech-icons">
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=figma" alt="Figma" />
+						<span>Figma</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=ps" alt="Photoshop" />
+						<span>Photoshop</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=ai" alt="Illustrator" />
+						<span>Illustrator</span>
+					</div>
+					<div class="tech-item">
+						<img src="https://skillicons.dev/icons?i=firebase" alt="Firebase" />
+						<span>Firebase</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+(function() {
+	const translations = {
+		en: {
+			techstackTitle: "Tech Stack",
+			techstackSubtitle: "Technologies I work with",
+			categoryMC: "MC Development",
+			categoryDatabase: "Database",
+			categoryWeb: "Web & Languages",
+			categoryTools: "Dev Tools",
+			categoryDesign: "Design & BaaS"
+		},
+		ja: {
+			techstackTitle: "技術スタック",
+			techstackSubtitle: "使用している技術",
+			categoryMC: "MC開発",
+			categoryDatabase: "データベース",
+			categoryWeb: "Web & 言語",
+			categoryTools: "開発ツール",
+			categoryDesign: "デザイン & BaaS"
+		}
+	};
+
+	function getBrowserLang() {
+		const lang = navigator.language || navigator.userLanguage;
+		return lang.startsWith('ja') ? 'ja' : 'en';
+	}
+
+	function applyTranslations(lang) {
+		const t = translations[lang] || translations.en;
+		document.querySelectorAll('[data-i18n]').forEach(el => {
+			const key = el.getAttribute('data-i18n');
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
+		});
+	}
+
+	applyTranslations(getBrowserLang());
+})();
+</script>
+
+<style>
+.techstack-section {
+	padding: 6rem 2rem;
+	background: #0f0a1a;
+}
+
+.techstack-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.section-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #fff;
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+	color: rgba(255, 255, 255, 0.6);
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+.techstack-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 2rem;
+}
+
+.techstack-category {
+	background: linear-gradient(135deg, rgba(26, 16, 51, 0.6) 0%, rgba(15, 10, 26, 0.6) 100%);
+	border: 1px solid rgba(124, 58, 237, 0.15);
+	border-radius: 1rem;
+	padding: 1.5rem;
+	transition: all 0.3s ease;
+}
+
+.techstack-category:hover {
+	border-color: rgba(124, 58, 237, 0.4);
+	box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1);
+}
+
+.category-title {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #a78bfa;
+	margin-bottom: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.tech-icons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.tech-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+	transition: transform 0.2s ease;
+}
+
+.tech-item:hover {
+	transform: translateY(-3px);
+}
+
+.tech-item img {
+	width: 48px;
+	height: 48px;
+	border-radius: 8px;
+}
+
+.tech-item span {
+	font-size: 0.75rem;
+	color: rgba(255, 255, 255, 0.7);
+	text-align: center;
+}
+
+@media (max-width: 768px) {
+	.techstack-section {
+		padding: 4rem 1rem;
+	}
+
+	.section-title {
+		font-size: 2rem;
+	}
+
+	.techstack-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.tech-item img {
+		width: 40px;
+		height: 40px;
+	}
+}
+</style>

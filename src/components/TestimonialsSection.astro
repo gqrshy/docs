@@ -1,0 +1,231 @@
+---
+// Testimonials section showcasing user reviews - i18n support
+---
+
+<section id="testimonials" class="testimonials-section">
+	<div class="testimonials-container">
+		<h2 class="section-title" data-i18n="testimonialsTitle">What Users Say</h2>
+		<p class="section-subtitle" data-i18n="testimonialsSubtitle">Feedback from our community</p>
+
+		<div class="testimonials-grid">
+			<div class="testimonial-card">
+				<div class="testimonial-header">
+					<div class="testimonial-avatar">L</div>
+					<div class="testimonial-info">
+						<span class="testimonial-name">Luan</span>
+						<div class="testimonial-rating">
+							<span class="stars">★★★★★</span>
+							<span class="rating-text">10/10</span>
+						</div>
+					</div>
+				</div>
+				<p class="testimonial-text" data-i18n="testimonialLuan">
+					10/10 service, quick and efficient. 10/10 problem solving, all problems encountered were solved very quickly.
+				</p>
+			</div>
+
+			<div class="testimonial-card">
+				<div class="testimonial-header">
+					<div class="testimonial-avatar">D</div>
+					<div class="testimonial-info">
+						<span class="testimonial-name">diego_crd</span>
+						<div class="testimonial-rating">
+							<span class="stars">★★★★★</span>
+							<span class="rating-text">10/10</span>
+						</div>
+					</div>
+				</div>
+				<p class="testimonial-text" data-i18n="testimonialDiego">
+					I am delighted, excellent customer service, I recommend 10/10.
+				</p>
+			</div>
+
+			<div class="testimonial-card">
+				<div class="testimonial-header">
+					<div class="testimonial-avatar">S</div>
+					<div class="testimonial-info">
+						<span class="testimonial-name">Silverflames123</span>
+						<div class="testimonial-rating">
+							<span class="stars">★★★★★</span>
+							<span class="rating-text">10/10</span>
+						</div>
+					</div>
+				</div>
+				<p class="testimonial-text" data-i18n="testimonialSilver">
+					10/10 Quality, 10/10 Service. Extremely well made and very responsive to issues.
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+(function() {
+	const translations = {
+		en: {
+			testimonialsTitle: "What Users Say",
+			testimonialsSubtitle: "Feedback from our community",
+			testimonialLuan: "10/10 service, quick and efficient. 10/10 problem solving, all problems encountered were solved very quickly.",
+			testimonialDiego: "I am delighted, excellent customer service, I recommend 10/10.",
+			testimonialSilver: "10/10 Quality, 10/10 Service. Extremely well made and very responsive to issues."
+		},
+		ja: {
+			testimonialsTitle: "ユーザーの声",
+			testimonialsSubtitle: "コミュニティからのフィードバック",
+			testimonialLuan: "10/10 サービス、迅速で効率的。10/10 問題解決、発生した問題はすべて非常に迅速に解決されました。",
+			testimonialDiego: "とても満足しています。優れたカスタマーサービス、10/10でおすすめです。",
+			testimonialSilver: "10/10 クオリティ、10/10 サービス。非常によく作られており、問題への対応も迅速です。"
+		}
+	};
+
+	function getBrowserLang() {
+		const lang = navigator.language || navigator.userLanguage;
+		return lang.startsWith('ja') ? 'ja' : 'en';
+	}
+
+	function applyTranslations(lang) {
+		const t = translations[lang] || translations.en;
+		document.querySelectorAll('[data-i18n]').forEach(el => {
+			const key = el.getAttribute('data-i18n');
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
+		});
+	}
+
+	applyTranslations(getBrowserLang());
+})();
+</script>
+
+<style>
+.testimonials-section {
+	padding: 6rem 2rem;
+	background: linear-gradient(135deg, #1a1033 0%, #0f0a1a 100%);
+}
+
+.testimonials-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.section-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #fff;
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+	color: rgba(255, 255, 255, 0.6);
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+.testimonials-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 1.5rem;
+}
+
+.testimonial-card {
+	background: linear-gradient(135deg, rgba(26, 16, 51, 0.8) 0%, rgba(15, 10, 26, 0.8) 100%);
+	border: 1px solid rgba(124, 58, 237, 0.2);
+	border-radius: 1rem;
+	padding: 1.5rem;
+	transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+	border-color: rgba(124, 58, 237, 0.5);
+	transform: translateY(-5px);
+	box-shadow: 0 15px 40px rgba(124, 58, 237, 0.15);
+}
+
+.testimonial-header {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.testimonial-avatar {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #7c3aed, #9333ea);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	font-size: 1.25rem;
+	color: #fff;
+}
+
+.testimonial-info {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.testimonial-name {
+	font-weight: 600;
+	color: #fff;
+	font-size: 1rem;
+}
+
+.testimonial-rating {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.stars {
+	color: #fbbf24;
+	font-size: 0.875rem;
+	letter-spacing: 1px;
+}
+
+.rating-text {
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 0.75rem;
+	font-weight: 500;
+}
+
+.testimonial-text {
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 0.95rem;
+	line-height: 1.7;
+	font-style: italic;
+}
+
+.testimonial-text::before {
+	content: '"';
+	color: #7c3aed;
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-right: 0.25rem;
+}
+
+.testimonial-text::after {
+	content: '"';
+	color: #7c3aed;
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-left: 0.25rem;
+}
+
+@media (max-width: 768px) {
+	.testimonials-section {
+		padding: 4rem 1rem;
+	}
+
+	.section-title {
+		font-size: 2rem;
+	}
+
+	.testimonials-grid {
+		grid-template-columns: 1fr;
+	}
+}
+</style>
