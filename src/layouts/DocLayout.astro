@@ -78,33 +78,44 @@ const { title, description, headings = [] } = Astro.props;
 	</div>
 
 	<script is:inline>
-		// Animated title - split into characters
-		(function() {
-			const titleEl = document.getElementById('doc-title');
-			if (!titleEl) return;
+		// Animated title - split into characters (runs on every page load including View Transitions)
+		(function initDocPage() {
+			function animateTitle() {
+				const titleEl = document.getElementById('doc-title');
+				if (!titleEl || titleEl.dataset.animated === 'true') return;
 
-			const text = titleEl.textContent || '';
-			titleEl.innerHTML = '';
-			titleEl.classList.add('chars-ready');
+				const text = titleEl.textContent || '';
+				titleEl.innerHTML = '';
+				titleEl.dataset.animated = 'true';
 
-			// Create character spans
-			[...text].forEach((char, i) => {
-				const span = document.createElement('span');
-				span.className = char === ' ' ? 'title-char space' : 'title-char';
-				span.textContent = char === ' ' ? '\u00A0' : char;
-				span.style.setProperty('--char-index', i);
-				titleEl.appendChild(span);
-			});
-
-			// Trigger animation after a brief delay
-			setTimeout(() => {
-				const chars = titleEl.querySelectorAll('.title-char');
-				chars.forEach((char, i) => {
-					setTimeout(() => {
-						char.classList.add('visible');
-					}, i * 40);
+				// Create character spans
+				[...text].forEach((char, i) => {
+					const span = document.createElement('span');
+					span.className = char === ' ' ? 'title-char space' : 'title-char';
+					span.textContent = char === ' ' ? '\u00A0' : char;
+					span.style.setProperty('--char-index', i);
+					titleEl.appendChild(span);
 				});
-			}, 200);
+
+				// Trigger animation after a brief delay
+				setTimeout(() => {
+					const chars = titleEl.querySelectorAll('.title-char');
+					chars.forEach((char, i) => {
+						setTimeout(() => {
+							char.classList.add('visible');
+						}, i * 40);
+					});
+				}, 150);
+			}
+
+			// Run now
+			animateTitle();
+
+			// Also run after View Transitions (only register once)
+			if (!window._docTitleAnimRegistered) {
+				window._docTitleAnimRegistered = true;
+				document.addEventListener('astro:page-load', animateTitle);
+			}
 		})();
 
 		// Copy code button functionality
@@ -277,23 +288,11 @@ const { title, description, headings = [] } = Astro.props;
 			}
 		}
 
-		/* ===== Header with animated gradient ===== */
+		/* ===== Header ===== */
 		.doc-header {
 			margin-bottom: 2.5rem;
 			padding-bottom: 1.5rem;
 			border-bottom: 1px solid rgba(124, 58, 237, 0.2);
-			animation: header-enter 1s var(--ease-out-expo) 0.2s backwards;
-		}
-
-		@keyframes header-enter {
-			from {
-				opacity: 0;
-				transform: translateY(-20px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
 		}
 
 		.doc-header h1 {
