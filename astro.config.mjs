@@ -12,71 +12,87 @@ export default defineConfig({
 				replacesTitle: false,
 			},
 			social: [
-				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/gashistudios' },
+				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/VVVvBTqqyP' },
 			],
 			customCss: [
 				'./src/styles/custom.css',
 			],
 			sidebar: [
 				{
-					label: 'Getting Started',
+					label: 'CobbleRanked',
 					items: [
-						{ label: 'Introduction', slug: 'getting-started/introduction' },
-						{ label: 'Installation', slug: 'getting-started/installation' },
-						{ label: 'Requirements', slug: 'getting-started/requirements' },
-						{ label: 'Quick Start', slug: 'getting-started/quick-start' },
-						{ label: 'Commands', slug: 'getting-started/commands' },
+						{ label: 'Overview', slug: 'cobbleranked' },
+						{
+							label: 'Getting Started',
+							items: [
+								{ label: 'Introduction', slug: 'cobbleranked/getting-started/introduction' },
+								{ label: 'Installation', slug: 'cobbleranked/getting-started/installation' },
+								{ label: 'Requirements', slug: 'cobbleranked/getting-started/requirements' },
+								{ label: 'Quick Start', slug: 'cobbleranked/getting-started/quick-start' },
+								{ label: 'Commands', slug: 'cobbleranked/getting-started/commands' },
+							],
+						},
+						{
+							label: 'Features',
+							items: [
+								{ label: 'Overview', slug: 'cobbleranked/features/overview' },
+								{ label: 'Ranked Battles', slug: 'cobbleranked/features/ranked-battles' },
+								{ label: 'Casual Battles', slug: 'cobbleranked/features/casual-battles' },
+								{ label: 'Battle Formats', slug: 'cobbleranked/features/battle-formats' },
+								{ label: 'ELO System', slug: 'cobbleranked/features/elo-system' },
+								{ label: 'Seasons', slug: 'cobbleranked/features/seasons' },
+								{ label: 'Leaderboards', slug: 'cobbleranked/features/leaderboards' },
+								{ label: 'Turn Timer', slug: 'cobbleranked/features/turn-timer' },
+								{ label: 'Battle Camera', slug: 'cobbleranked/features/battle-camera' },
+							],
+						},
+						{
+							label: 'Configuration',
+							items: [
+								{ label: 'Overview', slug: 'cobbleranked/configuration/overview' },
+								{ label: 'Main Config', slug: 'cobbleranked/configuration/config' },
+								{ label: 'Arenas', slug: 'cobbleranked/configuration/arenas' },
+								{ label: 'Blacklist', slug: 'cobbleranked/configuration/blacklist' },
+								{ label: 'Rewards', slug: 'cobbleranked/configuration/rewards' },
+								{ label: 'GUI', slug: 'cobbleranked/configuration/gui' },
+								{ label: 'Languages', slug: 'cobbleranked/configuration/languages' },
+							],
+						},
+						{
+							label: 'Integration',
+							items: [
+								{ label: 'Overview', slug: 'cobbleranked/integration/overview' },
+								{ label: 'LuckPerms', slug: 'cobbleranked/integration/luckperms' },
+								{ label: 'Placeholders', slug: 'cobbleranked/integration/placeholders' },
+							],
+						},
+						{
+							label: 'Advanced',
+							items: [
+								{ label: 'Overview', slug: 'cobbleranked/advanced/overview' },
+								{ label: 'Database', slug: 'cobbleranked/advanced/database' },
+								{ label: 'Cross-Server', slug: 'cobbleranked/advanced/cross-server' },
+							],
+						},
+						{
+							label: 'Support',
+							items: [
+								{ label: 'FAQ', slug: 'cobbleranked/support/faq' },
+								{ label: 'Troubleshooting', slug: 'cobbleranked/support/troubleshooting' },
+							],
+						},
 					],
 				},
 				{
-					label: 'Features',
+					label: 'GashiLibs',
 					items: [
-						{ label: 'Overview', slug: 'features/overview' },
-						{ label: 'Ranked Battles', slug: 'features/ranked-battles' },
-						{ label: 'Casual Battles', slug: 'features/casual-battles' },
-						{ label: 'Battle Formats', slug: 'features/battle-formats' },
-						{ label: 'ELO System', slug: 'features/elo-system' },
-						{ label: 'Seasons', slug: 'features/seasons' },
-						{ label: 'Leaderboards', slug: 'features/leaderboards' },
-						{ label: 'Turn Timer', slug: 'features/turn-timer' },
-						{ label: 'Battle Camera', slug: 'features/battle-camera' },
+						{ label: 'Overview', slug: 'gashilibs' },
 					],
 				},
 				{
-					label: 'Configuration',
+					label: 'MailLib',
 					items: [
-						{ label: 'Overview', slug: 'configuration/overview' },
-						{ label: 'Main Config', slug: 'configuration/config' },
-						{ label: 'Arenas', slug: 'configuration/arenas' },
-						{ label: 'Blacklist', slug: 'configuration/blacklist' },
-						{ label: 'Rewards', slug: 'configuration/rewards' },
-						{ label: 'GUI', slug: 'configuration/gui' },
-						{ label: 'Languages', slug: 'configuration/languages' },
-					],
-				},
-				{
-					label: 'Integration',
-					items: [
-						{ label: 'Overview', slug: 'integration/overview' },
-						{ label: 'GashiLibs', slug: 'integration/gashilibs' },
-						{ label: 'MailLib', slug: 'integration/maillib' },
-						{ label: 'LuckPerms', slug: 'integration/luckperms' },
-						{ label: 'Placeholders', slug: 'integration/placeholders' },
-					],
-				},
-				{
-					label: 'Advanced',
-					items: [
-						{ label: 'Overview', slug: 'advanced/overview' },
-						{ label: 'Database', slug: 'advanced/database' },
-						{ label: 'Cross-Server', slug: 'advanced/cross-server' },
-					],
-				},
-				{
-					label: 'Support',
-					items: [
-						{ label: 'FAQ', slug: 'support/faq' },
-						{ label: 'Troubleshooting', slug: 'support/troubleshooting' },
+						{ label: 'Overview', slug: 'maillib' },
 					],
 				},
 			],
