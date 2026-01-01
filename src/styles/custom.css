@@ -40,13 +40,31 @@
 
 /* Hero section - landing page */
 .hero {
-	padding-block: 4rem;
+	padding-block: 5rem;
 }
 
 .hero img {
-	max-width: 280px;
-	border-radius: 1rem;
-	filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.3));
+	max-width: 420px;
+	border-radius: 1.5rem;
+	filter: drop-shadow(0 0 40px rgba(124, 58, 237, 0.5));
+	animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+	0%, 100% { transform: translateY(0px); }
+	50% { transform: translateY(-10px); }
+}
+
+.hero .tagline {
+	font-size: 1.25rem;
+	max-width: 600px;
+}
+
+/* Hero actions styling */
+.hero .action {
+	font-weight: 600;
+	padding: 0.75rem 1.5rem;
+	border-radius: 0.5rem;
 }
 
 /* Sidebar hover effects */
@@ -97,12 +115,18 @@ a {
 .sl-link-card {
 	border: 1px solid var(--sl-color-gray-5);
 	border-radius: 0.75rem;
-	transition: border-color 0.2s ease, transform 0.2s ease;
+	transition: all 0.3s ease;
+	background: linear-gradient(135deg, var(--sl-color-gray-6) 0%, var(--sl-color-black) 100%);
 }
 
 .sl-link-card:hover {
 	border-color: var(--sl-color-accent);
-	transform: translateY(-2px);
+	transform: translateY(-4px);
+	box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+}
+
+.sl-link-card .title {
+	color: var(--sl-color-accent-high);
 }
 
 /* Section dividers */
@@ -119,11 +143,23 @@ hr {
 
 /* Action buttons */
 .action.primary {
-	background: var(--sl-color-accent);
+	background: linear-gradient(135deg, var(--sl-color-accent) 0%, #9333ea 100%);
 	border-color: var(--sl-color-accent);
+	box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+	transition: all 0.3s ease;
 }
 
 .action.primary:hover {
-	background: var(--sl-color-accent-high);
+	background: linear-gradient(135deg, var(--sl-color-accent-high) 0%, var(--sl-color-accent) 100%);
 	border-color: var(--sl-color-accent-high);
+	box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+	transform: translateY(-2px);
+}
+
+.action.minimal {
+	transition: all 0.3s ease;
+}
+
+.action.minimal:hover {
+	color: var(--sl-color-accent-high);
 }
