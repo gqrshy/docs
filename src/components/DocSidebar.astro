@@ -101,11 +101,11 @@ function hasActiveChild(items: any[]): boolean {
 <aside class="doc-sidebar">
 	<nav class="sidebar-nav">
 		{navigation.map(section => (
-			<div class="nav-section">
-				<h3 class="section-title">
+			<details class="nav-section" open={hasActiveChild(section.items)}>
+				<summary class="section-title">
 					<span class="section-icon">{section.icon}</span>
-					{section.title}
-				</h3>
+					<span class="section-name">{section.title}</span>
+				</summary>
 				<ul class="nav-list">
 					{section.items.map(item => (
 						<li>
@@ -136,7 +136,7 @@ function hasActiveChild(items: any[]): boolean {
 						</li>
 					))}
 				</ul>
-			</div>
+			</details>
 		))}
 	</nav>
 
@@ -206,12 +206,44 @@ function hasActiveChild(items: any[]): boolean {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-	padding: 0.5rem 1.25rem;
-	font-size: 0.75rem;
+	padding: 0.75rem 1.25rem;
+	font-size: 0.9rem;
 	font-weight: 600;
-	color: rgba(255, 255, 255, 0.4);
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
+	color: rgba(255, 255, 255, 0.9);
+	cursor: pointer;
+	list-style: none;
+	user-select: none;
+	transition: all 0.15s ease;
+	border-radius: 6px;
+	margin: 0 0.5rem;
+}
+
+.section-title::-webkit-details-marker {
+	display: none;
+}
+
+.section-title::before {
+	content: '';
+	width: 6px;
+	height: 6px;
+	border-right: 2px solid rgba(255, 255, 255, 0.5);
+	border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+	transform: rotate(-45deg);
+	transition: transform 0.2s ease;
+	flex-shrink: 0;
+}
+
+.nav-section[open] > .section-title::before {
+	transform: rotate(45deg);
+}
+
+.section-title:hover {
+	color: #a78bfa;
+	background: rgba(124, 58, 237, 0.1);
+}
+
+.section-title:hover::before {
+	border-color: #a78bfa;
 }
 
 .section-icon {
