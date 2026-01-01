@@ -1,12 +1,40 @@
 ---
-// Loading screen that shows only on first visit
+// Loading screen with advanced LOADING text animation
+// Sequence: appear -> split into 3 -> animate each -> merge -> disappear
 ---
 
 <div id="loading-screen" class="loading-screen">
-	<div class="loading-content">
-		<img src="/gashistudios.png" alt="GashiStudios" class="loading-logo" />
-		<div class="loading-bar">
-			<div class="loading-progress"></div>
+	<div class="loading-container">
+		<!-- Main LOADING text (will split into 3) -->
+		<div class="loading-text-wrapper" id="loading-wrapper">
+			<div class="loading-row main-row" id="main-row">
+				<span class="char" data-char="L">L</span>
+				<span class="char" data-char="O">O</span>
+				<span class="char" data-char="A">A</span>
+				<span class="char" data-char="D">D</span>
+				<span class="char" data-char="I">I</span>
+				<span class="char" data-char="N">N</span>
+				<span class="char" data-char="G">G</span>
+			</div>
+			<!-- Clone rows for split effect -->
+			<div class="loading-row clone-row top-row" id="top-row">
+				<span class="char" data-char="L">L</span>
+				<span class="char" data-char="O">O</span>
+				<span class="char" data-char="A">A</span>
+				<span class="char" data-char="D">D</span>
+				<span class="char" data-char="I">I</span>
+				<span class="char" data-char="N">N</span>
+				<span class="char" data-char="G">G</span>
+			</div>
+			<div class="loading-row clone-row bottom-row" id="bottom-row">
+				<span class="char" data-char="L">L</span>
+				<span class="char" data-char="O">O</span>
+				<span class="char" data-char="A">A</span>
+				<span class="char" data-char="D">D</span>
+				<span class="char" data-char="I">I</span>
+				<span class="char" data-char="N">N</span>
+				<span class="char" data-char="G">G</span>
+			</div>
 		</div>
 	</div>
 </div>
@@ -18,15 +46,138 @@
 
 	if (hasVisited) {
 		loadingScreen.style.display = 'none';
-	} else {
-		sessionStorage.setItem('hasVisited', 'true');
-		setTimeout(() => {
-			loadingScreen.classList.add('fade-out');
-			setTimeout(() => {
-				loadingScreen.style.display = 'none';
-			}, 500);
-		}, 2500);
+		return;
 	}
+
+	sessionStorage.setItem('hasVisited', 'true');
+
+	const mainRow = document.getElementById('main-row');
+	const topRow = document.getElementById('top-row');
+	const bottomRow = document.getElementById('bottom-row');
+	const wrapper = document.getElementById('loading-wrapper');
+
+	const mainChars = mainRow.querySelectorAll('.char');
+	const topChars = topRow.querySelectorAll('.char');
+	const bottomChars = bottomRow.querySelectorAll('.char');
+
+	// Animation timing constants
+	const CHAR_DELAY = 80;
+	const CHAR_DURATION = 400;
+	const PHASE_GAP = 300;
+
+	// Utility: animate characters appearing from below
+	function animateCharsIn(chars, onComplete) {
+		chars.forEach((char, i) => {
+			setTimeout(() => {
+				char.classList.add('visible');
+				if (i === chars.length - 1 && onComplete) {
+					setTimeout(onComplete, CHAR_DURATION);
+				}
+			}, i * CHAR_DELAY);
+		});
+	}
+
+	// Utility: animate characters wave (subtle bounce)
+	function animateCharsWave(chars, onComplete) {
+		chars.forEach((char, i) => {
+			setTimeout(() => {
+				char.classList.add('wave');
+				setTimeout(() => char.classList.remove('wave'), 300);
+				if (i === chars.length - 1 && onComplete) {
+					setTimeout(onComplete, 400);
+				}
+			}, i * 60);
+		});
+	}
+
+	// Utility: animate characters disappearing upward
+	function animateCharsOut(chars, onComplete) {
+		chars.forEach((char, i) => {
+			setTimeout(() => {
+				char.classList.add('exit');
+				if (i === chars.length - 1 && onComplete) {
+					setTimeout(onComplete, CHAR_DURATION);
+				}
+			}, i * CHAR_DELAY);
+		});
+	}
+
+	// Reset chars for re-animation
+	function resetChars(chars) {
+		chars.forEach(char => {
+			char.classList.remove('visible', 'wave', 'exit');
+		});
+	}
+
+	// ===== ANIMATION SEQUENCE =====
+
+	// Phase 1: Main text appears letter by letter
+	function phase1_appear() {
+		animateCharsIn(mainChars, () => {
+			setTimeout(phase2_split, PHASE_GAP);
+		});
+	}
+
+	// Phase 2: Split into 3 rows
+	function phase2_split() {
+		wrapper.classList.add('split');
+		// Wait for split animation
+		setTimeout(phase3_cloneWave, 600);
+	}
+
+	// Phase 3: Clone rows do wave animation
+	function phase3_cloneWave() {
+		// Show clone rows with animation
+		topChars.forEach(char => char.classList.add('visible'));
+		bottomChars.forEach(char => char.classList.add('visible'));
+
+		// Wave animation on all three rows
+		setTimeout(() => {
+			animateCharsWave(topChars, null);
+			setTimeout(() => animateCharsWave(mainChars, null), 150);
+			setTimeout(() => animateCharsWave(bottomChars, null), 300);
+		}, 200);
+
+		// After waves, do another round
+		setTimeout(() => {
+			animateCharsWave(bottomChars, null);
+			setTimeout(() => animateCharsWave(mainChars, null), 150);
+			setTimeout(() => animateCharsWave(topChars, null), 300);
+		}, 1000);
+
+		setTimeout(phase4_merge, 1800);
+	}
+
+	// Phase 4: Merge back to single row
+	function phase4_merge() {
+		wrapper.classList.remove('split');
+		wrapper.classList.add('merging');
+
+		// Hide clone rows during merge
+		setTimeout(() => {
+			topRow.style.opacity = '0';
+			bottomRow.style.opacity = '0';
+		}, 300);
+
+		setTimeout(phase5_exit, 600);
+	}
+
+	// Phase 5: Letters exit upward one by one
+	function phase5_exit() {
+		wrapper.classList.remove('merging');
+		animateCharsOut(mainChars, () => {
+			// Fade out loading screen
+			setTimeout(() => {
+				loadingScreen.classList.add('fade-out');
+				setTimeout(() => {
+					loadingScreen.style.display = 'none';
+				}, 500);
+			}, 200);
+		});
+	}
+
+	// Start the animation
+	setTimeout(phase1_appear, 300);
 })();
 </script>
 
@@ -49,41 +200,131 @@
 	opacity: 0;
 }
 
-.loading-content {
-	text-align: center;
+.loading-container {
+	position: relative;
 }
 
-.loading-logo {
-	width: 120px;
-	height: 120px;
-	margin-bottom: 2rem;
-	animation: pulse 2s ease-in-out infinite;
-	filter: drop-shadow(0 0 30px rgba(124, 58, 237, 0.5));
+.loading-text-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0;
+	transition: gap 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes pulse {
-	0%, 100% { transform: scale(1); opacity: 1; }
-	50% { transform: scale(1.05); opacity: 0.8; }
+.loading-text-wrapper.split {
+	gap: 2rem;
 }
 
-.loading-bar {
-	width: 200px;
-	height: 4px;
-	background: rgba(124, 58, 237, 0.2);
-	border-radius: 2px;
-	overflow: hidden;
+.loading-text-wrapper.merging {
+	gap: 0;
 }
 
-.loading-progress {
-	width: 0%;
-	height: 100%;
-	background: linear-gradient(90deg, #7c3aed, #a78bfa);
-	border-radius: 2px;
-	animation: loading 2.5s ease-in-out forwards;
+.loading-row {
+	display: flex;
+	gap: 0.15em;
+	font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+	font-size: clamp(2rem, 8vw, 4rem);
+	font-weight: 700;
+	letter-spacing: 0.15em;
+	position: relative;
 }
 
-@keyframes loading {
-	0% { width: 0%; }
-	100% { width: 100%; }
+.clone-row {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;
+	transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.loading-text-wrapper.split .clone-row {
+	opacity: 0.4;
+}
+
+.loading-text-wrapper.split .top-row {
+	transform: translateX(-50%) translateY(-100%);
+}
+
+.loading-text-wrapper.split .bottom-row {
+	transform: translateX(-50%) translateY(100%);
+}
+
+.loading-text-wrapper.merging .clone-row {
+	transform: translateX(-50%) translateY(0);
+}
+
+.main-row {
+	z-index: 2;
+}
+
+.char {
+	display: inline-block;
+	color: rgba(180, 180, 180, 0.9);
+	opacity: 0;
+	transform: translateY(100%) scale(0.5);
+	transition:
+		opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+		transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+		color 0.3s ease,
+		text-shadow 0.3s ease;
+	text-shadow: 0 0 20px rgba(124, 58, 237, 0);
+}
+
+.char.visible {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+}
+
+.char.wave {
+	transform: translateY(-15%) scale(1.1);
+	color: rgba(167, 139, 250, 1);
+	text-shadow: 0 0 30px rgba(124, 58, 237, 0.8);
+}
+
+.char.exit {
+	opacity: 0;
+	transform: translateY(-100%) scale(0.5);
+}
+
+/* Clone row chars are smaller and dimmer */
+.clone-row .char {
+	font-size: 0.85em;
+	color: rgba(150, 150, 150, 0.5);
+}
+
+.clone-row .char.wave {
+	color: rgba(167, 139, 250, 0.6);
+	text-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+}
+
+/* Subtle background animation */
+.loading-screen::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 300px;
+	height: 300px;
+	background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+	transform: translate(-50%, -50%);
+	animation: bgPulse 2s ease-in-out infinite;
+}
+
+@keyframes bgPulse {
+	0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+	50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+	.loading-row {
+		font-size: clamp(1.5rem, 10vw, 2.5rem);
+	}
+
+	.loading-text-wrapper.split {
+		gap: 1.5rem;
+	}
 }
 </style>
