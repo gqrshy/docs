@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import CustomNav from '../components/CustomNav.astro';
 import DocSidebar from '../components/DocSidebar.astro';
 import TableOfContents from '../components/TableOfContents.astro';
@@ -23,10 +24,11 @@ const { title, description, headings = [] } = Astro.props;
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<ViewTransitions />
 </head>
 <body>
-	<!-- Floating decorative particles -->
-	<div class="particles" aria-hidden="true">
+	<!-- Persistent background elements -->
+	<div class="particles" aria-hidden="true" transition:persist="particles">
 		<div class="particle"></div>
 		<div class="particle"></div>
 		<div class="particle"></div>
@@ -38,7 +40,7 @@ const { title, description, headings = [] } = Astro.props;
 	</div>
 
 	<!-- Animated gradient orbs -->
-	<div class="gradient-orbs" aria-hidden="true">
+	<div class="gradient-orbs" aria-hidden="true" transition:persist="orbs">
 		<div class="orb orb-1"></div>
 		<div class="orb orb-2"></div>
 		<div class="orb orb-3"></div>
@@ -50,9 +52,9 @@ const { title, description, headings = [] } = Astro.props;
 
 	<div class="doc-wrapper">
 		<main class="doc-main">
-			<article class="doc-content">
+			<article class="doc-content" transition:animate="fade">
 				<header class="doc-header">
-					<h1>{title}</h1>
+					<h1 transition:name="page-title">{title}</h1>
 					{description && <p class="doc-description">{description}</p>}
 				</header>
 				<div class="prose">
@@ -276,7 +278,39 @@ const { title, description, headings = [] } = Astro.props;
 			}
 		}
 
-		/* ===== Page Entrance Animation ===== */
+		/* ===== View Transitions ===== */
+		::view-transition-old(root),
+		::view-transition-new(root) {
+			animation-duration: 0.4s;
+			animation-timing-function: var(--ease-out-expo);
+		}
+
+		::view-transition-old(root) {
+			animation-name: fade-out;
+		}
+
+		::view-transition-new(root) {
+			animation-name: fade-in;
+		}
+
+		@keyframes fade-out {
+			from { opacity: 1; transform: translateY(0); }
+			to { opacity: 0; transform: translateY(-10px); }
+		}
+
+		@keyframes fade-in {
+			from { opacity: 0; transform: translateY(10px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		/* Page title morph transition */
+		::view-transition-old(page-title),
+		::view-transition-new(page-title) {
+			animation-duration: 0.3s;
+			animation-timing-function: var(--ease-out-expo);
+		}
+
+		/* ===== Layout ===== */
 		.doc-wrapper {
 			margin-left: 280px;
 			min-height: calc(100vh - 60px);
@@ -285,18 +319,6 @@ const { title, description, headings = [] } = Astro.props;
 			flex-direction: column;
 			position: relative;
 			z-index: 1;
-			animation: page-enter 0.8s var(--ease-out-expo) forwards;
-		}
-
-		@keyframes page-enter {
-			from {
-				opacity: 0;
-				transform: translateY(20px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
 		}
 
 		.doc-main {
