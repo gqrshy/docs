@@ -42,21 +42,16 @@
 			viewDocs: "View Documents"
 		},
 		ja: {
-			greeting: "こんにちは、",
-			description: "Minecraftのmod/プラグイン開発者。<br>Cobblemon向けの競技システムや便利ツールを制作しています。<br>ご連絡はDiscord <code>@gashicha</code> まで。",
-			joinDiscord: "Discordに参加",
+			greeting: "こんにちは！",
+			description: "Minecraftのmod/プラグイン開発者です。<br>Cobblemon向けの競技システムやツールを制作しています。<br>お問い合わせはDiscord <code>@gashicha</code> まで。",
+			joinDiscord: "Discordに参加する",
 			viewDocs: "ドキュメントを見る"
 		}
 	};
 
-	function getBrowserLang() {
-		const lang = navigator.language || navigator.userLanguage;
-		return lang.startsWith('ja') ? 'ja' : 'en';
-	}
-
-	function applyTranslations(lang) {
+	function applyHeroTranslations(lang) {
 		const t = translations[lang] || translations.en;
-		document.querySelectorAll('[data-i18n]').forEach(el => {
+		document.querySelectorAll('.hero-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
 			if (t[key]) {
 				el.innerHTML = t[key];
@@ -64,7 +59,22 @@
 		});
 	}
 
-	applyTranslations(getBrowserLang());
+	// Apply on load with current language
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyHeroTranslations(lang);
+	}
+
+	// Listen for language changes
+	window.addEventListener('langChange', (e) => {
+		applyHeroTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
 })();
 </script>
 

@@ -131,23 +131,18 @@
 		},
 		ja: {
 			techstackTitle: "技術スタック",
-			techstackSubtitle: "使用している技術",
-			categoryMC: "MC開発",
+			techstackSubtitle: "使用技術",
+			categoryMC: "Minecraft開発",
 			categoryDatabase: "データベース",
-			categoryWeb: "Web & 言語",
+			categoryWeb: "Web・言語",
 			categoryTools: "開発ツール",
-			categoryDesign: "デザイン & BaaS"
+			categoryDesign: "デザイン・BaaS"
 		}
 	};
 
-	function getBrowserLang() {
-		const lang = navigator.language || navigator.userLanguage;
-		return lang.startsWith('ja') ? 'ja' : 'en';
-	}
-
-	function applyTranslations(lang) {
+	function applyTechStackTranslations(lang) {
 		const t = translations[lang] || translations.en;
-		document.querySelectorAll('[data-i18n]').forEach(el => {
+		document.querySelectorAll('.techstack-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
 			if (t[key]) {
 				el.innerHTML = t[key];
@@ -155,7 +150,22 @@
 		});
 	}
 
-	applyTranslations(getBrowserLang());
+	// Apply on load with current language
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyTechStackTranslations(lang);
+	}
+
+	// Listen for language changes
+	window.addEventListener('langChange', (e) => {
+		applyTechStackTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
 })();
 </script>
 

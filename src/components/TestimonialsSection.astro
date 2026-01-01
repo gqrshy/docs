@@ -70,22 +70,17 @@
 			testimonialSilver: "10/10 Quality, 10/10 Service. Extremely well made and very responsive to issues."
 		},
 		ja: {
-			testimonialsTitle: "ユーザーの声",
-			testimonialsSubtitle: "コミュニティからのフィードバック",
-			testimonialLuan: "10/10 サービス、迅速で効率的。10/10 問題解決、発生した問題はすべて非常に迅速に解決されました。",
-			testimonialDiego: "とても満足しています。優れたカスタマーサービス、10/10でおすすめです。",
-			testimonialSilver: "10/10 クオリティ、10/10 サービス。非常によく作られており、問題への対応も迅速です。"
+			testimonialsTitle: "ユーザーレビュー",
+			testimonialsSubtitle: "コミュニティからの声",
+			testimonialLuan: "サービス10点満点！迅速かつ効率的。問題解決も10点満点！発生した問題はすべて素早く解決してもらえました。",
+			testimonialDiego: "大満足です。カスタマーサポートが素晴らしく、10点満点でおすすめします。",
+			testimonialSilver: "クオリティ10点満点、サービス10点満点。非常に丁寧に作られており、問題対応も迅速です。"
 		}
 	};
 
-	function getBrowserLang() {
-		const lang = navigator.language || navigator.userLanguage;
-		return lang.startsWith('ja') ? 'ja' : 'en';
-	}
-
-	function applyTranslations(lang) {
+	function applyTestimonialsTranslations(lang) {
 		const t = translations[lang] || translations.en;
-		document.querySelectorAll('[data-i18n]').forEach(el => {
+		document.querySelectorAll('.testimonials-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
 			if (t[key]) {
 				el.innerHTML = t[key];
@@ -93,7 +88,22 @@
 		});
 	}
 
-	applyTranslations(getBrowserLang());
+	// Apply on load with current language
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyTestimonialsTranslations(lang);
+	}
+
+	// Listen for language changes
+	window.addEventListener('langChange', (e) => {
+		applyTestimonialsTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
 })();
 </script>
 

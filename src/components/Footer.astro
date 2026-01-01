@@ -9,8 +9,8 @@
 				<img src="/gashistudios.png" alt="GashiStudios" />
 				<span>GashiStudios</span>
 			</div>
-			<p class="footer-description">
-				Cobblemon向けの高品質なModを制作しています。
+			<p class="footer-description" data-i18n="footerDesc">
+				Creating high-quality mods for Cobblemon.
 			</p>
 			<div class="footer-social">
 				<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="social-link">
@@ -27,26 +27,74 @@
 		</div>
 		<div class="footer-links">
 			<div class="footer-column">
-				<h4>Products</h4>
+				<h4 data-i18n="footerProducts">Products</h4>
 				<a href="/docs/cobbleranked/">CobbleRanked</a>
 				<a href="/docs/gashilibs/">GashiLibs</a>
 				<a href="/docs/maillib/">MailLib</a>
 			</div>
 			<div class="footer-column">
-				<h4>Legal</h4>
-				<a href="/terms">Terms & Conditions</a>
+				<h4 data-i18n="footerLegal">Legal</h4>
+				<a href="/terms" data-i18n="footerTerms">Terms & Conditions</a>
 			</div>
 			<div class="footer-column">
-				<h4>Community</h4>
+				<h4 data-i18n="footerCommunity">Community</h4>
 				<a href="https://discord.gg/VVVvBTqqyP" target="_blank">Discord</a>
 				<a href="https://github.com/gqrshy" target="_blank">GitHub</a>
 			</div>
 		</div>
 	</div>
 	<div class="footer-bottom">
-		<p>&copy; 2025 GashiStudios. All rights reserved.</p>
+		<p data-i18n="footerCopyright">&copy; 2025 GashiStudios. All rights reserved.</p>
 	</div>
 </footer>
+
+<script is:inline>
+(function() {
+	const translations = {
+		en: {
+			footerDesc: "Creating high-quality mods for Cobblemon.",
+			footerProducts: "Products",
+			footerLegal: "Legal",
+			footerTerms: "Terms & Conditions",
+			footerCommunity: "Community",
+			footerCopyright: "© 2025 GashiStudios. All rights reserved."
+		},
+		ja: {
+			footerDesc: "Cobblemon向けの高品質なModを制作しています。",
+			footerProducts: "プロダクト",
+			footerLegal: "法的情報",
+			footerTerms: "利用規約",
+			footerCommunity: "コミュニティ",
+			footerCopyright: "© 2025 GashiStudios. All rights reserved."
+		}
+	};
+
+	function applyFooterTranslations(lang) {
+		const t = translations[lang] || translations.en;
+		document.querySelectorAll('.footer [data-i18n]').forEach(el => {
+			const key = el.getAttribute('data-i18n');
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
+		});
+	}
+
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyFooterTranslations(lang);
+	}
+
+	window.addEventListener('langChange', (e) => {
+		applyFooterTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+})();
+</script>
 
 <style>
 .footer {

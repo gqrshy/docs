@@ -59,22 +59,17 @@
 			maillibDesc: "In-game mailbox system for delivering rewards and items to players."
 		},
 		ja: {
-			productsTitle: "製品一覧",
-			productsSubtitle: "Cobblemon向けのMod/ライブラリ",
-			cobblerankedDesc: "ELOベースのランク戦システム。シーズン制、リーダーボード、リワード機能を搭載。",
-			gashilibsDesc: "データベース接続、Redis、設定ユーティリティを提供する共有ライブラリ。",
-			maillibDesc: "プレイヤーへのリワードやアイテムを配信するゲーム内メールボックスシステム。"
+			productsTitle: "プロダクト",
+			productsSubtitle: "Cobblemon向けMod・ライブラリ",
+			cobblerankedDesc: "ELOレーティングを採用したランクバトルシステム。シーズン、リーダーボード、報酬機能を搭載。",
+			gashilibsDesc: "データベース接続、Redis、設定管理などの共有ライブラリ。",
+			maillibDesc: "プレイヤーに報酬やアイテムを届けるゲーム内メールシステム。"
 		}
 	};
 
-	function getBrowserLang() {
-		const lang = navigator.language || navigator.userLanguage;
-		return lang.startsWith('ja') ? 'ja' : 'en';
-	}
-
-	function applyTranslations(lang) {
+	function applyProductsTranslations(lang) {
 		const t = translations[lang] || translations.en;
-		document.querySelectorAll('[data-i18n]').forEach(el => {
+		document.querySelectorAll('.products-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
 			if (t[key]) {
 				el.innerHTML = t[key];
@@ -82,7 +77,22 @@
 		});
 	}
 
-	applyTranslations(getBrowserLang());
+	// Apply on load with current language
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyProductsTranslations(lang);
+	}
+
+	// Listen for language changes
+	window.addEventListener('langChange', (e) => {
+		applyProductsTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
 })();
 </script>
 
