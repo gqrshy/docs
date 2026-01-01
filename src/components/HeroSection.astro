@@ -7,32 +7,46 @@ import polymartLogo from '../assets/polymart.png';
 <section class="hero-section">
 	<!-- Animated Decorative Elements - Left Side -->
 	<div class="deco-grid deco-left">
-		<div class="deco-box deco-text">LOADING</div>
-		<div class="deco-box deco-dots">
+		<div class="deco-box deco-typewriter" style="--delay: 0.1s">
+			<span class="typewriter-text">LOADING</span>
+		</div>
+		<div class="deco-box deco-dots" style="--delay: 0.2s">
 			<span></span><span></span><span></span>
 		</div>
-		<div class="deco-box deco-icon">
+		<div class="deco-box deco-icon" style="--delay: 0.3s">
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<circle cx="12" cy="12" r="10"/>
 				<path d="M12 6v6l4 2"/>
 			</svg>
 		</div>
-		<div class="deco-box deco-play">
+		<div class="deco-box deco-play" style="--delay: 0.4s">
 			<svg viewBox="0 0 24 24" fill="currentColor">
 				<polygon points="5,3 19,12 5,21"/>
 			</svg>
 		</div>
-		<div class="deco-box deco-text-jp">ありがとう</div>
-		<div class="deco-box deco-curve">
+		<div class="deco-box deco-japanese" style="--delay: 0.5s">
+			<span class="char" style="--i: 0">あ</span>
+			<span class="char" style="--i: 1">り</span>
+			<span class="char" style="--i: 2">が</span>
+			<span class="char" style="--i: 3">と</span>
+			<span class="char" style="--i: 4">う</span>
+		</div>
+		<div class="deco-box deco-svg-line" style="--delay: 0.6s">
 			<svg viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="2">
-				<path d="M10,40 Q50,10 90,40"/>
+				<path class="draw-line" d="M10,40 Q30,10 50,25 T90,15"/>
 			</svg>
 		</div>
-		<div class="deco-box deco-bars">
-			<span></span><span></span><span></span><span></span>
+		<div class="deco-box deco-bars" style="--delay: 0.7s">
+			<span></span><span></span><span></span><span></span><span></span>
 		</div>
-		<div class="deco-box deco-cross">
+		<div class="deco-box deco-cross" style="--delay: 0.8s">
 			<span></span><span></span>
+		</div>
+		<div class="deco-box deco-typewriter-sm" style="--delay: 0.9s">
+			<span class="typewriter-text">CURVE</span>
+		</div>
+		<div class="deco-box deco-circle-pulse" style="--delay: 1.0s">
+			<span></span>
 		</div>
 	</div>
 
@@ -46,7 +60,13 @@ import polymartLogo from '../assets/polymart.png';
 				</div>
 				<div class="intro-text">
 					<p class="greeting" data-i18n="greeting">Hey there, I'm</p>
-					<h1 class="name">Gashi</h1>
+					<h1 class="name">
+						<span class="name-char" style="--i: 0">G</span>
+						<span class="name-char" style="--i: 1">a</span>
+						<span class="name-char" style="--i: 2">s</span>
+						<span class="name-char" style="--i: 3">h</span>
+						<span class="name-char" style="--i: 4">i</span>
+					</h1>
 				</div>
 				<p class="bio" data-i18n="bio">
 					Minecraft Mod開発者。<br />
@@ -144,26 +164,50 @@ import polymartLogo from '../assets/polymart.png';
 
 	<!-- Animated Decorative Elements - Right Side -->
 	<div class="deco-grid deco-right">
-		<div class="deco-box deco-text">GASHI</div>
-		<div class="deco-box deco-spinner">
+		<div class="deco-box deco-typewriter" style="--delay: 0.15s">
+			<span class="typewriter-text">GASHI</span>
+		</div>
+		<div class="deco-box deco-spinner" style="--delay: 0.25s">
 			<span></span>
 		</div>
-		<div class="deco-box deco-grid-dots">
-			<span></span><span></span><span></span><span></span>
-			<span></span><span></span><span></span><span></span>
+		<div class="deco-box deco-grid-dots" style="--delay: 0.35s">
+			<span></span><span></span><span></span>
+			<span></span><span></span><span></span>
+			<span></span><span></span><span></span>
+		</div>
+		<div class="deco-box deco-diamond" style="--delay: 0.45s">
 			<span></span>
 		</div>
-		<div class="deco-box deco-diamond">
-			<span></span>
+		<div class="deco-box deco-typewriter-sm" style="--delay: 0.55s">
+			<span class="typewriter-text">COBBLEMON</span>
 		</div>
-		<div class="deco-box deco-text-sm">COBBLEMON</div>
-		<div class="deco-box deco-circle-outline"></div>
-		<div class="deco-box deco-wave">
+		<div class="deco-box deco-x-marks" style="--delay: 0.65s">
+			<span class="x-mark" style="--i: 0">×</span>
+			<span class="x-mark" style="--i: 1">×</span>
+			<span class="x-mark" style="--i: 2">×</span>
+			<span class="x-mark" style="--i: 3">×</span>
+		</div>
+		<div class="deco-box deco-svg-wave" style="--delay: 0.75s">
 			<svg viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2">
-				<path d="M0,15 Q25,0 50,15 T100,15"/>
+				<path class="draw-line" d="M0,15 Q25,0 50,15 T100,15"/>
 			</svg>
 		</div>
-		<div class="deco-box deco-brackets">&#123;...&#125;</div>
+		<div class="deco-box deco-brackets" style="--delay: 0.85s">
+			<span class="bracket-char" style="--i: 0">{</span>
+			<span class="bracket-char" style="--i: 1">.</span>
+			<span class="bracket-char" style="--i: 2">.</span>
+			<span class="bracket-char" style="--i: 3">.</span>
+			<span class="bracket-char" style="--i: 4">}</span>
+		</div>
+		<div class="deco-box deco-progress" style="--delay: 0.95s">
+			<div class="progress-bar"></div>
+		</div>
+		<div class="deco-box deco-squares" style="--delay: 1.05s">
+			<span style="--i: 0"></span>
+			<span style="--i: 1"></span>
+			<span style="--i: 2"></span>
+			<span style="--i: 3"></span>
+		</div>
 	</div>
 </section>
 
@@ -243,7 +287,6 @@ import polymartLogo from '../assets/polymart.png';
 	flex-direction: column;
 	gap: 1rem;
 	padding: 2rem;
-	opacity: 0.4;
 }
 
 .deco-left {
@@ -254,7 +297,7 @@ import polymartLogo from '../assets/polymart.png';
 	align-items: flex-start;
 }
 
-/* Decorative Box Base */
+/* Decorative Box Base with Staggered Appearance */
 .deco-box {
 	background: rgba(255, 255, 255, 0.03);
 	border: 1px solid rgba(255, 255, 255, 0.06);
@@ -265,35 +308,127 @@ import polymartLogo from '../assets/polymart.png';
 	font-weight: 600;
 	letter-spacing: 0.1em;
 	transition: all 0.3s ease;
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fadeInUp 0.6s ease forwards;
+	animation-delay: var(--delay, 0s);
 }
 
 .deco-box:hover {
-	background: rgba(255, 255, 255, 0.06);
-	border-color: rgba(124, 58, 237, 0.3);
-	opacity: 1;
-	transform: translateY(-2px);
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(124, 58, 237, 0.4);
+	transform: translateY(-2px) scale(1.02);
 }
 
-/* Text Boxes */
-.deco-text {
-	font-family: 'Inter', monospace;
-	animation: pulse 3s ease-in-out infinite;
+@keyframes fadeInUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
-.deco-text-jp {
-	font-size: 1rem;
-	animation: pulse 4s ease-in-out infinite 0.5s;
+/* Typewriter Animation */
+.deco-typewriter,
+.deco-typewriter-sm {
+	font-family: 'JetBrains Mono', 'Consolas', monospace;
+	overflow: hidden;
 }
 
-.deco-text-sm {
+.typewriter-text {
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	border-right: 2px solid rgba(124, 58, 237, 0.8);
+	animation:
+		typing 2s steps(20) 1s forwards,
+		blink 0.7s step-end infinite;
+	width: 0;
+}
+
+.deco-typewriter-sm .typewriter-text {
 	font-size: 0.625rem;
-	animation: pulse 3.5s ease-in-out infinite 1s;
 }
 
-.deco-brackets {
-	font-family: 'JetBrains Mono', monospace;
-	color: rgba(167, 139, 250, 0.6);
-	animation: pulse 2.5s ease-in-out infinite;
+@keyframes typing {
+	from { width: 0; }
+	to { width: 100%; }
+}
+
+@keyframes blink {
+	50% { border-color: transparent; }
+}
+
+/* Japanese Character Animation */
+.deco-japanese {
+	display: flex;
+	gap: 2px;
+	font-size: 1rem;
+}
+
+.deco-japanese .char {
+	opacity: 0;
+	transform: translateY(10px);
+	animation: charAppear 0.4s ease forwards;
+	animation-delay: calc(1.5s + var(--i) * 0.15s);
+}
+
+@keyframes charAppear {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* SVG Line Drawing Animation */
+.deco-svg-line,
+.deco-svg-wave {
+	padding: 0.75rem;
+}
+
+.deco-svg-line svg,
+.deco-svg-wave svg {
+	width: 80px;
+	height: 40px;
+}
+
+.draw-line {
+	stroke-dasharray: 200;
+	stroke-dashoffset: 200;
+	animation: drawLine 2s ease forwards 1.2s;
+}
+
+@keyframes drawLine {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+/* Name Character Animation */
+.name {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin: 0;
+	letter-spacing: -0.03em;
+	display: flex;
+}
+
+.name-char {
+	display: inline-block;
+	background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	opacity: 0;
+	transform: translateY(20px) rotateX(-90deg);
+	animation: nameAppear 0.5s ease forwards;
+	animation-delay: calc(0.3s + var(--i) * 0.1s);
+}
+
+@keyframes nameAppear {
+	to {
+		opacity: 1;
+		transform: translateY(0) rotateX(0);
+	}
 }
 
 /* Dots Animation */
@@ -313,6 +448,11 @@ import polymartLogo from '../assets/polymart.png';
 
 .deco-dots span:nth-child(2) { animation-delay: 0.2s; }
 .deco-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+	0%, 80%, 100% { transform: translateY(0); }
+	40% { transform: translateY(-12px); }
+}
 
 /* Icon Boxes */
 .deco-icon {
@@ -343,38 +483,36 @@ import polymartLogo from '../assets/polymart.png';
 	width: 16px;
 	height: 16px;
 	margin-left: 3px;
+	animation: pulse 2s ease-in-out infinite;
 }
 
-/* Curve SVG */
-.deco-curve {
-	padding: 0.75rem;
-}
-
-.deco-curve svg {
-	width: 80px;
-	height: 40px;
-}
-
-/* Loading Bars */
+/* Loading Bars - Enhanced */
 .deco-bars {
 	display: flex;
 	align-items: flex-end;
-	gap: 4px;
-	height: 40px;
+	gap: 3px;
+	height: 45px;
 	padding: 0.75rem;
 }
 
 .deco-bars span {
-	width: 6px;
-	background: rgba(124, 58, 237, 0.5);
+	width: 5px;
+	background: linear-gradient(to top, rgba(124, 58, 237, 0.3), rgba(124, 58, 237, 0.8));
 	border-radius: 2px;
-	animation: barPulse 1s ease-in-out infinite;
+	animation: barPulse 1.2s ease-in-out infinite;
+	transform-origin: bottom;
 }
 
-.deco-bars span:nth-child(1) { height: 60%; animation-delay: 0s; }
-.deco-bars span:nth-child(2) { height: 100%; animation-delay: 0.15s; }
-.deco-bars span:nth-child(3) { height: 40%; animation-delay: 0.3s; }
-.deco-bars span:nth-child(4) { height: 80%; animation-delay: 0.45s; }
+.deco-bars span:nth-child(1) { height: 50%; animation-delay: 0s; }
+.deco-bars span:nth-child(2) { height: 80%; animation-delay: 0.1s; }
+.deco-bars span:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+.deco-bars span:nth-child(4) { height: 100%; animation-delay: 0.3s; }
+.deco-bars span:nth-child(5) { height: 40%; animation-delay: 0.4s; }
+
+@keyframes barPulse {
+	0%, 100% { transform: scaleY(1); }
+	50% { transform: scaleY(0.4); }
+}
 
 /* Cross */
 .deco-cross {
@@ -389,18 +527,31 @@ import polymartLogo from '../assets/polymart.png';
 	background: rgba(255, 255, 255, 0.3);
 	top: 50%;
 	left: 50%;
+	transition: all 0.3s ease;
 }
 
 .deco-cross span:first-child {
 	width: 20px;
 	height: 2px;
 	transform: translate(-50%, -50%);
+	animation: crossRotate1 4s ease-in-out infinite;
 }
 
 .deco-cross span:last-child {
 	width: 2px;
 	height: 20px;
 	transform: translate(-50%, -50%);
+	animation: crossRotate2 4s ease-in-out infinite;
+}
+
+@keyframes crossRotate1 {
+	0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+	50% { transform: translate(-50%, -50%) rotate(180deg); }
+}
+
+@keyframes crossRotate2 {
+	0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+	50% { transform: translate(-50%, -50%) rotate(180deg); }
 }
 
 /* Spinner */
@@ -417,12 +568,17 @@ import polymartLogo from '../assets/polymart.png';
 	width: 24px;
 	height: 24px;
 	border: 2px solid rgba(255, 255, 255, 0.1);
-	border-top-color: rgba(124, 58, 237, 0.6);
+	border-top-color: rgba(124, 58, 237, 0.8);
 	border-radius: 50%;
-	animation: spin 1s linear infinite;
+	animation: spin 0.8s linear infinite;
 }
 
-/* Grid Dots */
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* Grid Dots - Enhanced */
 .deco-grid-dots {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -437,9 +593,10 @@ import polymartLogo from '../assets/polymart.png';
 	height: 6px;
 	background: rgba(255, 255, 255, 0.3);
 	border-radius: 50%;
-	animation: dotPulse 2s ease-in-out infinite;
+	animation: gridDotPulse 2s ease-in-out infinite;
 }
 
+.deco-grid-dots span:nth-child(1) { animation-delay: 0s; }
 .deco-grid-dots span:nth-child(2) { animation-delay: 0.1s; }
 .deco-grid-dots span:nth-child(3) { animation-delay: 0.2s; }
 .deco-grid-dots span:nth-child(4) { animation-delay: 0.3s; }
@@ -448,6 +605,19 @@ import polymartLogo from '../assets/polymart.png';
 .deco-grid-dots span:nth-child(7) { animation-delay: 0.6s; }
 .deco-grid-dots span:nth-child(8) { animation-delay: 0.7s; }
 .deco-grid-dots span:nth-child(9) { animation-delay: 0.8s; }
+
+@keyframes gridDotPulse {
+	0%, 100% {
+		opacity: 0.3;
+		transform: scale(1);
+		background: rgba(255, 255, 255, 0.3);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.4);
+		background: rgba(124, 58, 237, 0.8);
+	}
+}
 
 /* Diamond */
 .deco-diamond {
@@ -462,66 +632,149 @@ import polymartLogo from '../assets/polymart.png';
 .deco-diamond span {
 	width: 16px;
 	height: 16px;
-	background: rgba(124, 58, 237, 0.4);
+	background: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(167, 139, 250, 0.6));
 	transform: rotate(45deg);
 	animation: diamondPulse 2s ease-in-out infinite;
 }
 
-/* Circle Outline */
-.deco-circle-outline {
+@keyframes diamondPulse {
+	0%, 100% { transform: rotate(45deg) scale(1); opacity: 0.6; }
+	50% { transform: rotate(45deg) scale(1.2); opacity: 1; }
+}
+
+/* X Marks Animation */
+.deco-x-marks {
+	display: flex;
+	gap: 8px;
+	font-size: 1rem;
+	color: rgba(255, 255, 255, 0.4);
+}
+
+.x-mark {
+	opacity: 0;
+	animation: xAppear 0.3s ease forwards, xPulse 2s ease-in-out infinite;
+	animation-delay: calc(1.8s + var(--i) * 0.1s), calc(2.2s + var(--i) * 0.2s);
+}
+
+@keyframes xAppear {
+	to { opacity: 1; }
+}
+
+@keyframes xPulse {
+	0%, 100% { opacity: 0.4; transform: scale(1); }
+	50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* Brackets Animation */
+.deco-brackets {
+	font-family: 'JetBrains Mono', monospace;
+	display: flex;
+	gap: 2px;
+	color: rgba(167, 139, 250, 0.8);
+}
+
+.bracket-char {
+	opacity: 0;
+	animation: bracketAppear 0.3s ease forwards;
+	animation-delay: calc(1.6s + var(--i) * 0.12s);
+}
+
+@keyframes bracketAppear {
+	to { opacity: 1; }
+}
+
+/* Progress Bar */
+.deco-progress {
+	width: 80px;
+	height: 30px;
+	padding: 0.5rem;
+	display: flex;
+	align-items: center;
+}
+
+.progress-bar {
+	width: 100%;
+	height: 4px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 2px;
+	overflow: hidden;
+	position: relative;
+}
+
+.progress-bar::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 30%;
+	background: linear-gradient(90deg, rgba(124, 58, 237, 0.6), rgba(167, 139, 250, 0.8));
+	border-radius: 2px;
+	animation: progressMove 1.5s ease-in-out infinite;
+}
+
+@keyframes progressMove {
+	0% { left: -30%; }
+	100% { left: 100%; }
+}
+
+/* Squares Animation */
+.deco-squares {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 4px;
+	padding: 0.75rem;
+	width: 50px;
+	height: 50px;
+}
+
+.deco-squares span {
+	width: 12px;
+	height: 12px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 2px;
+	animation: squareFade 2s ease-in-out infinite;
+	animation-delay: calc(var(--i) * 0.25s);
+}
+
+@keyframes squareFade {
+	0%, 100% { opacity: 0.2; transform: scale(1); }
+	50% { opacity: 0.8; transform: scale(0.8); }
+}
+
+/* Circle Pulse */
+.deco-circle-pulse {
 	width: 50px;
 	height: 50px;
 	padding: 0;
-	border-radius: 50%;
-	border: 2px solid rgba(255, 255, 255, 0.15);
-	animation: pulse 3s ease-in-out infinite;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-/* Wave */
-.deco-wave {
-	padding: 0.5rem;
-}
-
-.deco-wave svg {
-	width: 60px;
+.deco-circle-pulse span {
+	width: 20px;
 	height: 20px;
-	animation: waveMove 2s ease-in-out infinite;
+	border: 2px solid rgba(124, 58, 237, 0.5);
+	border-radius: 50%;
+	animation: circlePulse 2s ease-out infinite;
+}
+
+@keyframes circlePulse {
+	0% {
+		transform: scale(0.8);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1.8);
+		opacity: 0;
+	}
 }
 
 /* Animations */
 @keyframes pulse {
-	0%, 100% { opacity: 0.4; }
-	50% { opacity: 0.8; }
-}
-
-@keyframes bounce {
-	0%, 80%, 100% { transform: translateY(0); }
-	40% { transform: translateY(-8px); }
-}
-
-@keyframes spin {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
-}
-
-@keyframes barPulse {
-	0%, 100% { transform: scaleY(1); }
-	50% { transform: scaleY(0.6); }
-}
-
-@keyframes dotPulse {
-	0%, 100% { opacity: 0.3; transform: scale(1); }
-	50% { opacity: 0.8; transform: scale(1.2); }
-}
-
-@keyframes diamondPulse {
-	0%, 100% { transform: rotate(45deg) scale(1); }
-	50% { transform: rotate(45deg) scale(1.1); }
-}
-
-@keyframes waveMove {
-	0%, 100% { transform: translateX(0); }
-	50% { transform: translateX(5px); }
+	0%, 100% { opacity: 0.6; transform: scale(1); }
+	50% { opacity: 1; transform: scale(1.1); }
 }
 
 /* Main Content */
@@ -549,6 +802,16 @@ import polymartLogo from '../assets/polymart.png';
 	overflow: hidden;
 	margin-bottom: 1.25rem;
 	border: 2px solid rgba(124, 58, 237, 0.3);
+	animation: avatarAppear 0.8s ease forwards;
+	opacity: 0;
+	transform: scale(0.8);
+}
+
+@keyframes avatarAppear {
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 .avatar {
@@ -566,18 +829,12 @@ import polymartLogo from '../assets/polymart.png';
 	font-size: 0.875rem;
 	margin-bottom: 0.25rem;
 	font-weight: 400;
+	opacity: 0;
+	animation: fadeIn 0.5s ease forwards 0.2s;
 }
 
-.name {
-	font-size: 2.5rem;
-	font-weight: 700;
-	color: #fff;
-	margin: 0;
-	letter-spacing: -0.03em;
-	background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
+@keyframes fadeIn {
+	to { opacity: 1; }
 }
 
 .bio {
@@ -585,6 +842,8 @@ import polymartLogo from '../assets/polymart.png';
 	line-height: 1.9;
 	color: rgba(255, 255, 255, 0.6);
 	margin-bottom: 1.5rem;
+	opacity: 0;
+	animation: fadeIn 0.5s ease forwards 0.8s;
 }
 
 .bio code {
@@ -600,6 +859,8 @@ import polymartLogo from '../assets/polymart.png';
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+	opacity: 0;
+	animation: fadeIn 0.5s ease forwards 1s;
 }
 
 .link-category {
@@ -652,6 +913,8 @@ import polymartLogo from '../assets/polymart.png';
 	flex-direction: column;
 	gap: 1.5rem;
 	padding-top: 0.25rem;
+	opacity: 0;
+	animation: fadeIn 0.5s ease forwards 0.6s;
 }
 
 .info-row {
@@ -770,6 +1033,7 @@ import polymartLogo from '../assets/polymart.png';
 
 	.name {
 		font-size: 2rem;
+		justify-content: center;
 	}
 }
 
@@ -788,14 +1052,35 @@ import polymartLogo from '../assets/polymart.png';
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
 	.deco-box,
+	.typewriter-text,
+	.deco-japanese .char,
+	.draw-line,
+	.name-char,
 	.deco-dots span,
 	.deco-icon svg,
 	.deco-bars span,
 	.deco-spinner span,
 	.deco-grid-dots span,
 	.deco-diamond span,
-	.deco-wave svg {
+	.x-mark,
+	.bracket-char,
+	.progress-bar::after,
+	.deco-squares span,
+	.deco-circle-pulse span,
+	.deco-cross span,
+	.avatar-wrapper,
+	.greeting,
+	.bio,
+	.links-by-category,
+	.hero-right {
 		animation: none;
+		opacity: 1;
+		transform: none;
+	}
+
+	.typewriter-text {
+		width: 100%;
+		border-right: none;
 	}
 }
 </style>
