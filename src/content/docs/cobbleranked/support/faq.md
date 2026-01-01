@@ -12,11 +12,13 @@ Find answers to common questions and solutions for issues you may encounter.
 
 A competitive ranked battle system for Cobblemon servers with:
 
-- ELO-based matchmaking
-- Singles/Doubles/Triples battles
-- Season system with rewards
-- Pokemon/move/ability/item restrictions
-- Cross-server support (optional)
+- ELO-based matchmaking (Pokemon Showdown or Glicko-2)
+- Singles/Doubles/Triples battle formats
+- Season system with automatic rewards
+- Pokemon/move/ability/item blacklists
+- Label limits (e.g., max 1 legendary per team)
+- Cross-server support via Redis (optional)
+- Battle music and camera system
 
 </details>
 
@@ -35,174 +37,208 @@ A competitive ranked battle system for Cobblemon servers with:
 </details>
 
 <details>
-<summary><strong>Is cross-server required?</strong></summary>
+<summary><strong>What database options are available?</strong></summary>
 
-No. Single-server mode works with zero configuration. Cross-server is only needed for multi-server networks.
+| Database | Use Case |
+|----------|----------|
+| **SQLite** | Single server, simple setup (default) |
+| **MySQL** | Cross-server, large player bases |
+| **MongoDB** | NoSQL alternative, sharded setups |
 
-</details>
-
-## Installation Issues
-
-<details>
-<summary><strong>Mod not loading</strong></summary>
-
-**Symptoms:** No CobbleRanked in logs, commands don't work
-
-**Solutions:**
-1. Check all dependencies are installed (GashiLibs, MailLib)
-2. Verify Minecraft version is 1.21.1
-3. Check for JAR file conflicts
-4. Review `logs/latest.log` for errors
+Cross-server requires MySQL or MongoDB (not SQLite).
 
 </details>
 
-<details>
-<summary><strong>Config files not generating</strong></summary>
-
-**Symptoms:** No `config/cobbleranked/` folder
-
-**Solutions:**
-1. Verify all dependencies are installed
-2. Let server fully start once
-3. Check write permissions on config folder
-4. Check `logs/latest.log` for errors
-
-</details>
+## Configuration
 
 <details>
 <summary><strong>How do I change the language?</strong></summary>
 
-Edit `config/cobbleranked/config.json5`:
+Edit `config/cobbleranked/config.yaml`:
 
-```json5
-{
-  "language": "ja-Jp"  // en-Us, ja-Jp
-}
+```yaml
+language: ja-jp  # en-us or ja-jp
 ```
 
 Then run `/rankedadmin reload`.
 
 </details>
 
-## Battle Issues
+<details>
+<summary><strong>What are the battle format defaults?</strong></summary>
+
+| Format | Team Size | Turn Timer | Match Duration |
+|--------|-----------|------------|----------------|
+| Singles | 3v3 | 90s | 15 minutes |
+| Doubles | 4v4 | 120s | 20 minutes |
+| Triples | 6v6 | 150s | 25 minutes |
+
+All formats have 60s team selection and 30s lead selection timers.
+
+</details>
+
+## Arena Setup
+
+<details>
+<summary><strong>How do I set up an arena?</strong></summary>
+
+Use these commands in-game:
+
+```
+/rankedadmin setArena <name> pos1      # First player spawn
+/rankedadmin setArena <name> pos2      # Second player spawn
+/rankedadmin setArena <name> exit      # Exit teleport location
+/rankedadmin setArena <name> spectator # Optional spectator position
+```
+
+Check arena status with `/rankedadmin arena status`.
+
+</details>
 
 <details>
 <summary><strong>"No arenas available" error</strong></summary>
 
-**Symptoms:** Can't start battles, error message appears
+**Solutions:**
+
+1. Verify arena exists: `/rankedadmin arena status`
+2. Enable the arena: `/rankedadmin arena enable <name>`
+3. Ensure all positions are set (pos1, pos2, exit)
+4. Check world name matches exactly (case-sensitive)
+
+</details>
+
+## Blacklist & Validation
+
+<details>
+<summary><strong>How do I blacklist Pokemon forms?</strong></summary>
+
+Use hyphen (-) as the separator, not colon (:):
+
+```yaml
+blacklist:
+  pokemon:
+    - "Mewtwo"           # Bans all Mewtwo forms
+    - "Kyurem-Black"     # Only Black Kyurem
+    - "Zygarde-Complete" # Only Complete form
+    - "Necrozma-Ultra"   # Only Ultra Necrozma
+```
+
+Species-only entries ban ALL forms. Form-specific entries need exact `-Form` suffix.
+
+</details>
+
+<details>
+<summary><strong>How do I blacklist items?</strong></summary>
+
+Direct items or item tags:
+
+```yaml
+blacklist:
+  items:
+    - "cobblemon:choice_band"     # Specific item
+    - "minecraft:diamond"         # Vanilla item
+    - "#cobblemon:mega_stones"    # Item tag (starts with #)
+    - "#cobblemon:berries"        # All berries
+```
+
+</details>
+
+<details>
+<summary><strong>"Team is invalid for this format" error</strong></summary>
+
+**Common causes:**
+
+| Validation Error | Meaning |
+|-----------------|---------|
+| BLACKLISTED_SPECIES | Pokemon species is banned |
+| BLACKLISTED_MOVE | Move not allowed |
+| BLACKLISTED_ABILITY | Ability not allowed |
+| BLACKLISTED_ITEM | Held item not allowed |
+| LABEL_LIMIT_EXCEEDED | Too many legendaries/mythicals |
+| DUPLICATE_SPECIES | Species Clause violation |
+| DUPLICATE_ITEM | Item Clause violation |
 
 **Solutions:**
-1. Set up at least one arena:
-   ```
-   /rankedadmin setArena arena1 pos1
-   /rankedadmin setArena arena1 pos2
-   ```
-2. Check `arenas.yaml` syntax
-3. Run `/rankedadmin arena status`
+
+1. Check blacklist in season preset
+2. Verify label limits (default: max 1 legendary)
+3. No duplicate Pokemon species (Species Clause)
+4. No duplicate held items (Item Clause)
+
+</details>
+
+## Matchmaking
+
+<details>
+<summary><strong>How does matchmaking work?</strong></summary>
+
+1. Player joins queue with `/ranked`
+2. System searches within ELO range (default ±200)
+3. If no match found, range expands every 30s (+50 ELO)
+4. Recent opponents avoided for 5 minutes
+5. When matched, team selection begins (60s)
+6. Battle starts after lead selection (30s)
 
 </details>
 
 <details>
 <summary><strong>Queue not finding matches</strong></summary>
 
-**Symptoms:** Long wait times, no matches
-
 **Solutions:**
-1. Ensure players are in same format queue
-2. Check ELO range settings in config
-3. Verify multiple arenas are available
-4. For cross-server: check Redis connection
 
-</details>
-
-<details>
-<summary><strong>How does matchmaking work?</strong></summary>
-
-1. Player joins queue
-2. System searches for opponent with similar ELO
-3. Range expands over time if no match found
-4. When matched, both players select teams
-5. Battle begins
-
-</details>
-
-<details>
-<summary><strong>What happens if I disconnect?</strong></summary>
-
-| Situation | Result |
-|-----------|--------|
-| During battle | Automatic loss, ELO penalty |
-| During queue | Removed from queue |
-| During selection | Match cancelled |
-
-</details>
-
-<details>
-<summary><strong>Battle camera stuck</strong></summary>
-
-**Symptoms:** Camera won't disable, stuck in air
-
-**Solutions:**
-1. Run `/battlecamera toggle`
-2. Disconnect and reconnect
-3. Admin can teleport player if needed
-
-</details>
-
-## Blacklist & Restrictions
-
-<details>
-<summary><strong>How do I ban specific Pokemon forms?</strong></summary>
-
-Use the form syntax: `species:form_name`
-
-```yaml
-black_list_pokemon:
-  - "Kyurem:white-fusion"  # Only White Kyurem banned
-```
-
-</details>
-
-<details>
-<summary><strong>How do I find move names?</strong></summary>
-
-Move names use lowercase snake_case:
-
-| Display Name | Internal Name |
-|--------------|---------------|
-| Sheer Cold | `sheer_cold` |
-| Baton Pass | `baton_pass` |
+1. ELO range expands over time - wait longer
+2. Recent opponent avoidance may delay matches
+3. With 4+ players in queue, avoidance relaxes after 2 minutes
+4. Check if ELO enforcement is too strict in config
 
 </details>
 
 ## ELO & Rankings
 
 <details>
-<summary><strong>What is my starting ELO?</strong></summary>
+<summary><strong>How does the ELO system work?</strong></summary>
 
-New players start at **1500 ELO** (configurable).
+**Pokemon Showdown System (Default):**
+
+- Starting ELO: 1500
+- Floor ELO: 1000
+- New players get higher K-factor for first 30 games
+
+| ELO Range | K-Factor |
+|-----------|----------|
+| Below 1100 | 40 |
+| 1100-1299 | 32 |
+| 1300-1599 | 24 |
+| 1600-1999 | 16 |
+| 2000+ | 12 |
+
+Higher K-factor = bigger rating changes per match.
 
 </details>
 
 <details>
-<summary><strong>How much ELO do I gain or lose?</strong></summary>
+<summary><strong>What are the rank tiers?</strong></summary>
 
-| Result | Against Higher ELO | Against Lower ELO |
-|--------|-------------------|-------------------|
-| Win | Large gain | Small gain |
-| Loss | Small loss | Large loss |
+| Tier | ELO Range |
+|------|-----------|
+| Poke Ball | 0-1299 |
+| Great Ball | 1300-1499 |
+| Ultra Ball | 1500-1699 |
+| Master Ball | 1700-1899 |
+| Beast Ball | 1900-2099 |
+| Cherish Ball | 2100+ |
 
 </details>
 
 <details>
-<summary><strong>Leaderboard loading slowly</strong></summary>
+<summary><strong>ELO didn't change after battle</strong></summary>
 
-**Symptoms:** Long load times for rankings
+**Possible causes:**
 
-**Solutions:**
-1. Leaderboard is cached automatically
-2. Check database performance
-3. Consider MySQL for large player bases
+1. Daily ELO gain limit reached (default: 200)
+2. Battle didn't complete (timeout/disconnect)
+3. Casual battle (no ELO change)
+4. Very small change due to large ELO difference
 
 </details>
 
@@ -212,10 +248,22 @@ New players start at **1500 ELO** (configurable).
 <summary><strong>What happens when a season ends?</strong></summary>
 
 1. Final rankings calculated
-2. Rewards sent via MailLib
-3. Leaderboard archived
-4. ELO may reset (if configured)
-5. New season begins
+2. Rewards distributed via MailLib
+3. Leaderboard archived (top 100 by default)
+4. ELO reset (hard or soft reset, configurable)
+5. New season begins automatically
+
+</details>
+
+<details>
+<summary><strong>Season didn't end automatically</strong></summary>
+
+**Solutions:**
+
+1. Check season schedule timezone (IANA format)
+2. Verify end date/time in season.yaml
+3. Manual rotation: `/rankedadmin season rotate`
+4. Check server logs for errors
 
 </details>
 
@@ -226,6 +274,8 @@ New players start at **1500 ELO** (configurable).
 /mailbox
 ```
 
+Rewards are sent via MailLib when the season ends.
+
 </details>
 
 ## Database Issues
@@ -233,28 +283,38 @@ New players start at **1500 ELO** (configurable).
 <details>
 <summary><strong>SQLite errors</strong></summary>
 
-**Symptoms:** Data not saving, crashes
-
 **Solutions:**
-1. Check file permissions on `cobbleranked.db`
-2. Ensure disk space available
-3. Delete corrupt DB and restart (data loss)
+
+1. Check `config/cobbleranked/` directory exists
+2. Verify file permissions on `data.db`
+3. Ensure disk space is available
+4. Backup and delete corrupt DB to regenerate
 
 </details>
 
 <details>
 <summary><strong>MySQL connection failed</strong></summary>
 
-**Symptoms:** "Connection refused" or "Access denied"
+**Solutions:**
+
+1. Verify MySQL is running
+2. Check host, port, database, username, password
+3. Test connection: `mysql -h host -u user -p database`
+4. Verify firewall allows port 3306
+5. Check character set: `utf8mb4_unicode_ci`
+6. Increase pool size if "max pool reached" error
+
+</details>
+
+<details>
+<summary><strong>MongoDB connection issues</strong></summary>
 
 **Solutions:**
-1. Verify MySQL is running
-2. Check host/port/credentials
-3. Test connection manually:
-   ```bash
-   mysql -h localhost -u cobbleranked -p cobbleranked
-   ```
-4. Check user has proper permissions
+
+1. Verify connection string format
+2. Check MongoDB daemon is running
+3. Verify auth credentials if using authentication
+4. MongoDB driver is shaded - no conflicts with other mods
 
 </details>
 
@@ -263,29 +323,67 @@ New players start at **1500 ELO** (configurable).
 <details>
 <summary><strong>Redis not connecting</strong></summary>
 
-**Symptoms:** Queue not syncing across servers
-
 **Solutions:**
-1. Verify Redis is running:
-   ```bash
-   redis-cli PING
-   ```
-2. Check Redis host/port in config
-3. Check firewall rules
-4. Verify password if set
+
+1. Verify Redis is running: `redis-cli ping`
+2. Check host, port, password in config.yaml
+3. Verify firewall allows port 6379
+4. Test with password: `redis-cli -h host -p port -a password ping`
 
 </details>
 
 <details>
-<summary><strong>Players not transferring between servers</strong></summary>
+<summary><strong>Players not matching across servers</strong></summary>
 
-**Symptoms:** Match found but players don't move
+**Checklist:**
 
-**Solutions:**
-1. Check Velocity server names match config
-2. Verify battle server is online
-3. Check `battleServer` config value
-4. Review Velocity logs
+1. All servers use same database (MySQL/MongoDB)
+2. `crossServer.enabled: true` on all servers
+3. Redis connected on all servers
+4. Each server has unique `serverId`
+5. One server has empty `battleServer` (handles battles)
+
+</details>
+
+## Commands Reference
+
+<details>
+<summary><strong>Player commands</strong></summary>
+
+| Command | Permission | Description |
+|---------|------------|-------------|
+| `/ranked` | `cobbleranked.player.use` | Open ranked GUI |
+| `/casual` | `cobbleranked.player.casual_use` | Open casual GUI |
+| `/casual missions` | - | Open missions GUI |
+| `/battlecamera toggle` | - | Toggle battle camera |
+| `/battlecamera status` | - | Check camera status |
+
+</details>
+
+<details>
+<summary><strong>Admin commands</strong></summary>
+
+**Arena Management:**
+- `/rankedadmin setArena <name> <pos1|pos2|exit|spectator>`
+- `/rankedadmin arena status` - View all arenas
+- `/rankedadmin arena enable/disable <name>`
+- `/rankedadmin arena reset` - Clear all positions
+
+**ELO Management:**
+- `/rankedadmin setelo <player> <format> <elo>`
+- `/rankedadmin addelo <amount> <player> <format>`
+- `/rankedadmin removeelo <amount> <player> <format>`
+
+**Season Management:**
+- `/rankedadmin season info` - Current season details
+- `/rankedadmin season rotate` - End season manually
+- `/rankedadmin queue clear` - Clear all queues
+
+**Data Management:**
+- `/rankedadmin reload` - Reload all configs
+- `/rankedadmin usage export [season]` - Export Pokemon usage
+- `/rankedadmin leaderboard export [season] [limit]`
+- `/rankedadmin migrate ...` - v1 to v2 migration
 
 </details>
 
@@ -294,30 +392,13 @@ New players start at **1500 ELO** (configurable).
 <details>
 <summary><strong>Lag during battles</strong></summary>
 
-**Symptoms:** Stuttering, delays
-
 **Solutions:**
-1. Reduce battle camera speed
-2. Check server TPS
-3. Verify database connection stable
-4. Reduce concurrent battle limit
 
-</details>
-
-## Commands Reference
-
-<details>
-<summary><strong>Available commands</strong></summary>
-
-**Players:**
-- `/ranked` - Open ranked menu
-- `/casual` - Open casual menu
-- `/battlecamera toggle` - Toggle camera
-
-**Admins:**
-- `/rankedadmin reload` - Reload config
-- `/rankedadmin setArena <name> <pos>` - Set arena
-- `/rankedadmin season info` - View season
+1. Disable debug logging: `debug.enabled: false`
+2. Reduce battle music complexity
+3. Check server TPS
+4. Increase MySQL connection pool if needed
+5. Archive old seasons to reduce database size
 
 </details>
 
@@ -326,6 +407,6 @@ New players start at **1500 ELO** (configurable).
 If your issue isn't listed above:
 
 1. Collect `logs/latest.log`
-2. Export config files
-3. Note steps to reproduce
+2. Export relevant config files
+3. Note exact steps to reproduce
 4. Ask in [Discord](https://discord.gg/VVVvBTqqyP) #feedback
