@@ -1,0 +1,176 @@
+---
+// Products section showcasing mods
+---
+
+<section id="products" class="products-section">
+	<div class="products-container">
+		<h2 class="section-title">Our Products</h2>
+		<p class="section-subtitle">Cobblemon向けのMod/ライブラリ</p>
+
+		<div class="products-grid">
+			<a href="/getting-started/introduction/" class="product-card featured">
+				<div class="product-icon">
+					<img src="/cobbleranked.png" alt="CobbleRanked" />
+				</div>
+				<div class="product-info">
+					<h3>CobbleRanked</h3>
+					<p>ELOベースのランク戦システム。シーズン制、リーダーボード、リワード機能を搭載。</p>
+					<span class="product-tag">Featured</span>
+				</div>
+			</a>
+
+			<a href="/integration/gashilibs/" class="product-card">
+				<div class="product-icon library">
+					<svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+					</svg>
+				</div>
+				<div class="product-info">
+					<h3>GashiLibs</h3>
+					<p>データベース接続、Redis、設定ユーティリティを提供する共有ライブラリ。</p>
+					<span class="product-tag library">Library</span>
+				</div>
+			</a>
+
+			<a href="/integration/maillib/" class="product-card">
+				<div class="product-icon library">
+					<svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+					</svg>
+				</div>
+				<div class="product-info">
+					<h3>MailLib</h3>
+					<p>プレイヤーへのリワードやアイテムを配信するゲーム内メールボックスシステム。</p>
+					<span class="product-tag library">Library</span>
+				</div>
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+.products-section {
+	padding: 6rem 2rem;
+	background: #0f0a1a;
+}
+
+.products-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.section-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #fff;
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+	color: rgba(255, 255, 255, 0.6);
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+.products-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 1.5rem;
+}
+
+.product-card {
+	background: linear-gradient(135deg, rgba(26, 16, 51, 0.8) 0%, rgba(15, 10, 26, 0.8) 100%);
+	border: 1px solid rgba(124, 58, 237, 0.2);
+	border-radius: 1rem;
+	padding: 2rem;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	display: flex;
+	gap: 1.5rem;
+	align-items: flex-start;
+}
+
+.product-card:hover {
+	border-color: rgba(124, 58, 237, 0.5);
+	transform: translateY(-5px);
+	box-shadow: 0 15px 40px rgba(124, 58, 237, 0.2);
+}
+
+.product-card.featured {
+	border-color: rgba(124, 58, 237, 0.4);
+	background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(15, 10, 26, 0.9) 100%);
+}
+
+.product-icon {
+	flex-shrink: 0;
+	width: 64px;
+	height: 64px;
+	border-radius: 12px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.product-icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.product-icon.library {
+	background: rgba(124, 58, 237, 0.2);
+	color: #a78bfa;
+}
+
+.product-icon.library svg {
+	width: 32px;
+	height: 32px;
+}
+
+.product-info h3 {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: #fff;
+	margin-bottom: 0.5rem;
+}
+
+.product-info p {
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 0.9rem;
+	line-height: 1.6;
+	margin-bottom: 1rem;
+}
+
+.product-tag {
+	display: inline-block;
+	background: linear-gradient(135deg, #7c3aed, #9333ea);
+	color: #fff;
+	font-size: 0.75rem;
+	font-weight: 600;
+	padding: 0.25rem 0.75rem;
+	border-radius: 20px;
+}
+
+.product-tag.library {
+	background: rgba(124, 58, 237, 0.3);
+	color: #a78bfa;
+}
+
+@media (max-width: 768px) {
+	.products-section {
+		padding: 4rem 1rem;
+	}
+
+	.product-card {
+		flex-direction: column;
+		text-align: center;
+		align-items: center;
+	}
+
+	.section-title {
+		font-size: 2rem;
+	}
+}
+</style>
