@@ -564,25 +564,10 @@ const { title, description, headings = [] } = Astro.props;
 			padding: 1rem 1.5rem;
 			margin: 1.5rem 0;
 			border-radius: 0 0.5rem 0.5rem 0;
-			position: relative;
-			overflow: hidden;
-		}
-
-		.prose blockquote::before {
-			content: '"';
-			position: absolute;
-			top: -20px;
-			left: 10px;
-			font-size: 6rem;
-			color: rgba(124, 58, 237, 0.1);
-			font-family: Georgia, serif;
-			line-height: 1;
 		}
 
 		.prose blockquote p {
 			margin-bottom: 0;
-			position: relative;
-			z-index: 1;
 		}
 
 		/* ===== Collapsible FAQ/Troubleshooting ===== */
