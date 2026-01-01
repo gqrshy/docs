@@ -1,0 +1,252 @@
+---
+// Profile section - Links and social profiles
+---
+
+<section id="profile" class="profile-section">
+	<div class="profile-container">
+		<h2 class="section-title" data-i18n="linksTitle">Links</h2>
+
+		<!-- Links Section -->
+		<div class="links-section">
+			<!-- Development -->
+			<div class="link-category">
+				<h3 class="category-label" data-i18n="linksDev">Development</h3>
+				<div class="link-cards">
+					<a href="https://github.com/gqrshy" target="_blank" rel="noopener noreferrer" class="link-card">
+						<img src="https://cdn.simpleicons.org/github/white" alt="GitHub" class="link-icon" />
+						<span>GitHub</span>
+					</a>
+					<a href="https://modrinth.com/user/gashicha" target="_blank" rel="noopener noreferrer" class="link-card link-card-modrinth">
+						<img src="https://cdn.simpleicons.org/modrinth/1bd96a" alt="Modrinth" class="link-icon" />
+						<span>Modrinth</span>
+					</a>
+					<a href="https://www.curseforge.com/members/gqrshy/projects" target="_blank" rel="noopener noreferrer" class="link-card link-card-curseforge">
+						<img src="https://cdn.simpleicons.org/curseforge/f16436" alt="CurseForge" class="link-icon" />
+						<span>CurseForge</span>
+					</a>
+					<a href="https://polymart.org/user/47282/gashi" target="_blank" rel="noopener noreferrer" class="link-card link-card-polymart">
+						<img src="https://polymart.org/style/logo-white-trimmed-padded.svg" alt="Polymart" class="link-icon" />
+						<span>Polymart</span>
+					</a>
+				</div>
+			</div>
+
+			<!-- Hobbies -->
+			<div class="link-category">
+				<h3 class="category-label" data-i18n="linksHobby">Hobbies</h3>
+				<div class="link-cards">
+					<a href="https://www.youtube.com/@Gqrshy" target="_blank" rel="noopener noreferrer" class="link-card link-card-youtube">
+						<img src="https://cdn.simpleicons.org/youtube/ff0000" alt="YouTube" class="link-icon" />
+						<span>YouTube</span>
+					</a>
+					<a href="https://x.com/Gqrshy" target="_blank" rel="noopener noreferrer" class="link-card link-card-x">
+						<img src="https://cdn.simpleicons.org/x/white" alt="X" class="link-icon" />
+						<span>X (Twitter)</span>
+					</a>
+					<a href="https://note.com/gashicha" target="_blank" rel="noopener noreferrer" class="link-card link-card-note">
+						<img src="https://cdn.simpleicons.org/note/41c9b4" alt="note" class="link-icon" />
+						<span>note</span>
+					</a>
+				</div>
+			</div>
+
+			<!-- Gaming -->
+			<div class="link-category">
+				<h3 class="category-label" data-i18n="linksGaming">Gaming</h3>
+				<div class="link-cards">
+					<a href="https://steamcommunity.com/profiles/76561199134198471/" target="_blank" rel="noopener noreferrer" class="link-card link-card-steam">
+						<img src="https://cdn.simpleicons.org/steam/white" alt="Steam" class="link-icon" />
+						<span>Steam</span>
+					</a>
+					<a href="https://tracker.gg/valorant/profile/riot/%E5%B9%B3%E5%92%8C%E4%B8%BB%E7%BE%A9%E8%80%85%23peko/overview?platform=pc&playlist=competitive" target="_blank" rel="noopener noreferrer" class="link-card link-card-valorant">
+						<img src="https://cdn.simpleicons.org/valorant/ff4655" alt="Valorant" class="link-icon" />
+						<span>Valorant</span>
+					</a>
+					<a href="https://op.gg/ja/lol/summoners/jp/%E5%B9%B3%E5%92%8C%E4%B8%BB%E7%BE%A9%E8%80%85-peko" target="_blank" rel="noopener noreferrer" class="link-card link-card-lol">
+						<img src="https://cdn.simpleicons.org/leagueoflegends/c28f2c" alt="League of Legends" class="link-icon" />
+						<span>LoL</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+(function() {
+	const translations = {
+		en: {
+			linksTitle: "Links",
+			linksDev: "Development",
+			linksHobby: "Hobbies",
+			linksGaming: "Gaming"
+		},
+		ja: {
+			linksTitle: "リンク",
+			linksDev: "開発関連",
+			linksHobby: "趣味",
+			linksGaming: "ゲーム関連"
+		}
+	};
+
+	function applyProfileTranslations(lang) {
+		const t = translations[lang] || translations.en;
+		document.querySelectorAll('.profile-section [data-i18n]').forEach(el => {
+			const key = el.getAttribute('data-i18n');
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
+		});
+	}
+
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyProfileTranslations(lang);
+	}
+
+	window.addEventListener('langChange', (e) => {
+		applyProfileTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+})();
+</script>
+
+<style>
+.profile-section {
+	padding: 5rem 2rem;
+	background: #0f0a1a;
+}
+
+.profile-container {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.section-title {
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: #fff;
+	margin: 0 0 2rem 0;
+	letter-spacing: -0.02em;
+}
+
+/* Links Section */
+.links-section {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.link-category {
+	display: flex;
+	flex-direction: column;
+	gap: 0.875rem;
+}
+
+.category-label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.4);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin: 0;
+}
+
+.link-cards {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+}
+
+.link-card {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 0.875rem;
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	border-radius: 8px;
+	color: rgba(255, 255, 255, 0.8);
+	text-decoration: none;
+	font-size: 0.8125rem;
+	font-weight: 500;
+	transition: all 0.2s ease;
+}
+
+.link-card:hover {
+	background: rgba(255, 255, 255, 0.06);
+	border-color: rgba(255, 255, 255, 0.1);
+	transform: translateY(-1px);
+}
+
+.link-icon {
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
+}
+
+/* Specific card hover colors */
+.link-card-modrinth:hover {
+	border-color: rgba(27, 217, 106, 0.3);
+	background: rgba(27, 217, 106, 0.08);
+}
+
+.link-card-curseforge:hover {
+	border-color: rgba(241, 100, 54, 0.3);
+	background: rgba(241, 100, 54, 0.08);
+}
+
+.link-card-polymart:hover {
+	border-color: rgba(37, 99, 235, 0.3);
+	background: rgba(37, 99, 235, 0.08);
+}
+
+.link-card-youtube:hover {
+	border-color: rgba(255, 0, 0, 0.3);
+	background: rgba(255, 0, 0, 0.08);
+}
+
+.link-card-x:hover {
+	border-color: rgba(255, 255, 255, 0.3);
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.link-card-note:hover {
+	border-color: rgba(65, 201, 180, 0.3);
+	background: rgba(65, 201, 180, 0.08);
+}
+
+.link-card-steam:hover {
+	border-color: rgba(102, 192, 244, 0.3);
+	background: rgba(102, 192, 244, 0.08);
+}
+
+.link-card-valorant:hover {
+	border-color: rgba(255, 70, 85, 0.3);
+	background: rgba(255, 70, 85, 0.08);
+}
+
+.link-card-lol:hover {
+	border-color: rgba(194, 143, 44, 0.3);
+	background: rgba(194, 143, 44, 0.08);
+}
+
+@media (max-width: 768px) {
+	.profile-section {
+		padding: 3rem 1rem;
+	}
+
+	.section-title {
+		text-align: center;
+	}
+
+	.link-cards {
+		justify-content: center;
+	}
+}
+</style>

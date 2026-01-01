@@ -1,0 +1,165 @@
+---
+// Showcase section - Decorative cobblemon image divider
+---
+
+<section class="showcase-section">
+	<div class="showcase-container">
+		<div class="showcase-content">
+			<p class="showcase-label" data-i18n="showcaseLabel">Powered by</p>
+			<h2 class="showcase-title">Cobblemon</h2>
+			<p class="showcase-description" data-i18n="showcaseDesc">
+				The ultimate Pokemon mod for Minecraft
+			</p>
+		</div>
+		<div class="showcase-image">
+			<img src="/cobblemon.png" alt="Cobblemon" />
+		</div>
+	</div>
+	<div class="showcase-glow"></div>
+</section>
+
+<script is:inline>
+(function() {
+	const translations = {
+		en: {
+			showcaseLabel: "Powered by",
+			showcaseDesc: "The ultimate Pokemon mod for Minecraft"
+		},
+		ja: {
+			showcaseLabel: "Powered by",
+			showcaseDesc: "Minecraft向けポケモンMod"
+		}
+	};
+
+	function applyShowcaseTranslations(lang) {
+		const t = translations[lang] || translations.en;
+		document.querySelectorAll('.showcase-section [data-i18n]').forEach(el => {
+			const key = el.getAttribute('data-i18n');
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
+		});
+	}
+
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyShowcaseTranslations(lang);
+	}
+
+	window.addEventListener('langChange', (e) => {
+		applyShowcaseTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+})();
+</script>
+
+<style>
+.showcase-section {
+	position: relative;
+	padding: 6rem 2rem;
+	background: linear-gradient(180deg, #0f0a1a 0%, #1a1033 50%, #0f0a1a 100%);
+	overflow: hidden;
+}
+
+.showcase-container {
+	max-width: 900px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 3rem;
+	position: relative;
+	z-index: 1;
+}
+
+.showcase-content {
+	flex: 1;
+}
+
+.showcase-label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.4);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin-bottom: 0.5rem;
+}
+
+.showcase-title {
+	font-size: 3rem;
+	font-weight: 700;
+	margin: 0 0 0.75rem 0;
+	background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #c4b5fd 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	letter-spacing: -0.02em;
+}
+
+.showcase-description {
+	font-size: 1rem;
+	color: rgba(255, 255, 255, 0.6);
+	margin: 0;
+}
+
+.showcase-image {
+	flex-shrink: 0;
+}
+
+.showcase-image img {
+	width: 280px;
+	height: auto;
+	border-radius: 1rem;
+	filter: drop-shadow(0 0 40px rgba(124, 58, 237, 0.4));
+	animation: float 4s ease-in-out infinite;
+}
+
+.showcase-glow {
+	position: absolute;
+	top: 50%;
+	right: 15%;
+	transform: translate(50%, -50%);
+	width: 400px;
+	height: 400px;
+	background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+@keyframes float {
+	0%, 100% { transform: translateY(0px); }
+	50% { transform: translateY(-12px); }
+}
+
+@media (max-width: 768px) {
+	.showcase-section {
+		padding: 4rem 1.5rem;
+	}
+
+	.showcase-container {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.showcase-image {
+		order: -1;
+	}
+
+	.showcase-image img {
+		width: 200px;
+	}
+
+	.showcase-title {
+		font-size: 2.25rem;
+	}
+
+	.showcase-glow {
+		right: 50%;
+		transform: translate(50%, -50%);
+	}
+}
+</style>
