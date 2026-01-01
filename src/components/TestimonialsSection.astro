@@ -1,11 +1,48 @@
 ---
-// Testimonials section showcasing user reviews - i18n support
+// Testimonials section with WEB SITE-style reveal animation
 ---
 
 <section id="testimonials" class="testimonials-section">
 	<div class="testimonials-container">
-		<h2 class="section-title" data-i18n="testimonialsTitle">What Users Say</h2>
-		<p class="section-subtitle" data-i18n="testimonialsSubtitle">Feedback from our community</p>
+		<!-- Animated Title with reveal mask -->
+		<div class="title-wrapper" id="testimonials-title-wrapper">
+			<div class="reveal-title-container">
+				<!-- The mask that reveals the text -->
+				<div class="reveal-mask" id="testimonials-mask"></div>
+				<!-- English title -->
+				<h2 class="section-title reveal-title" id="testimonials-title-en">
+					<span class="char">W</span>
+					<span class="char">h</span>
+					<span class="char">a</span>
+					<span class="char">t</span>
+					<span class="char space">&nbsp;</span>
+					<span class="char">U</span>
+					<span class="char">s</span>
+					<span class="char">e</span>
+					<span class="char">r</span>
+					<span class="char">s</span>
+					<span class="char space">&nbsp;</span>
+					<span class="char">S</span>
+					<span class="char">a</span>
+					<span class="char">y</span>
+				</h2>
+				<!-- Japanese title -->
+				<h2 class="section-title reveal-title ja-title" id="testimonials-title-ja" style="display: none;">
+					<span class="char">ユ</span>
+					<span class="char">ー</span>
+					<span class="char">ザ</span>
+					<span class="char">ー</span>
+					<span class="char">レ</span>
+					<span class="char">ビ</span>
+					<span class="char">ュ</span>
+					<span class="char">ー</span>
+				</h2>
+			</div>
+			<!-- Subtitle -->
+			<p class="section-subtitle animated-subtitle" id="testimonials-subtitle">
+				<span class="subtitle-text" data-i18n="testimonialsSubtitle">Feedback from our community</span>
+			</p>
+		</div>
 
 		<div class="testimonials-grid">
 			<div class="testimonial-card">
@@ -63,14 +100,12 @@
 (function() {
 	const translations = {
 		en: {
-			testimonialsTitle: "What Users Say",
 			testimonialsSubtitle: "Feedback from our community",
 			testimonialLuan: "10/10 service, quick and efficient. 10/10 problem solving, all problems encountered were solved very quickly.",
 			testimonialDiego: "I am delighted, excellent customer service, I recommend 10/10.",
 			testimonialSilver: "10/10 Quality, 10/10 Service. Extremely well made and very responsive to issues."
 		},
 		ja: {
-			testimonialsTitle: "ユーザーレビュー",
 			testimonialsSubtitle: "コミュニティからの声",
 			testimonialLuan: "サービス10点満点！迅速かつ効率的。問題解決も10点満点！発生した問題はすべて素早く解決してもらえました。",
 			testimonialDiego: "大満足です。カスタマーサポートが素晴らしく、10点満点でおすすめします。",
@@ -78,20 +113,125 @@
 		}
 	};
 
+	let currentLang = 'en';
+	let hasAnimated = false;
+
 	function applyTestimonialsTranslations(lang) {
+		currentLang = lang;
 		const t = translations[lang] || translations.en;
+
+		// Handle title switching
+		const enTitle = document.getElementById('testimonials-title-en');
+		const jaTitle = document.getElementById('testimonials-title-ja');
+
+		if (lang === 'ja') {
+			enTitle.style.display = 'none';
+			jaTitle.style.display = 'flex';
+		} else {
+			enTitle.style.display = 'flex';
+			jaTitle.style.display = 'none';
+		}
+
+		// Apply other translations
 		document.querySelectorAll('.testimonials-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
 			if (t[key]) {
 				el.innerHTML = t[key];
 			}
 		});
+
+		// Re-trigger animation if language changed after animation
+		if (hasAnimated) {
+			resetAnimation();
+			playAnimation();
+		}
 	}
 
-	// Apply on load with current language
+	function resetAnimation() {
+		const wrapper = document.getElementById('testimonials-title-wrapper');
+		const mask = document.getElementById('testimonials-mask');
+		const activeTitle = currentLang === 'ja'
+			? document.getElementById('testimonials-title-ja')
+			: document.getElementById('testimonials-title-en');
+		const chars = activeTitle.querySelectorAll('.char');
+		const subtitle = wrapper.querySelector('.animated-subtitle');
+
+		// Reset mask
+		mask.classList.remove('phase1', 'phase2', 'phase3');
+
+		// Reset chars
+		chars.forEach(char => {
+			char.classList.remove('visible');
+		});
+
+		// Reset subtitle
+		subtitle.classList.remove('visible');
+	}
+
+	function playAnimation() {
+		const wrapper = document.getElementById('testimonials-title-wrapper');
+		const mask = document.getElementById('testimonials-mask');
+		const activeTitle = currentLang === 'ja'
+			? document.getElementById('testimonials-title-ja')
+			: document.getElementById('testimonials-title-en');
+		const chars = activeTitle.querySelectorAll('.char');
+		const subtitle = wrapper.querySelector('.animated-subtitle');
+
+		// Phase 1: Mask appears (small vertical bar)
+		mask.classList.add('phase1');
+
+		// Phase 2: Mask expands to reveal text (after 300ms)
+		setTimeout(() => {
+			mask.classList.remove('phase1');
+			mask.classList.add('phase2');
+
+			// Start revealing characters as mask expands
+			chars.forEach((char, i) => {
+				setTimeout(() => {
+					char.classList.add('visible');
+				}, i * 50);
+			});
+		}, 300);
+
+		// Phase 3: Mask shrinks and disappears (after text is revealed)
+		const revealTime = 300 + chars.length * 50 + 200;
+		setTimeout(() => {
+			mask.classList.remove('phase2');
+			mask.classList.add('phase3');
+		}, revealTime);
+
+		// Show subtitle after mask disappears
+		setTimeout(() => {
+			subtitle.classList.add('visible');
+		}, revealTime + 400);
+
+		hasAnimated = true;
+	}
+
+	// Intersection Observer for scroll-triggered animation
+	function setupIntersectionObserver() {
+		const wrapper = document.getElementById('testimonials-title-wrapper');
+		if (!wrapper) return;
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting && !hasAnimated) {
+					playAnimation();
+				}
+			});
+		}, {
+			threshold: 0.3,
+			rootMargin: '0px 0px -100px 0px'
+		});
+
+		observer.observe(wrapper);
+	}
+
+	// Initialize
 	function init() {
 		const lang = window.GashiLang?.get() || 'en';
 		applyTestimonialsTranslations(lang);
+		setupIntersectionObserver();
 	}
 
 	// Listen for language changes
@@ -118,20 +258,140 @@
 	margin: 0 auto;
 }
 
-.section-title {
-	font-size: 2.5rem;
-	font-weight: 700;
-	color: #fff;
-	text-align: center;
-	margin-bottom: 0.5rem;
-}
-
-.section-subtitle {
-	color: rgba(255, 255, 255, 0.6);
+/* ===== Animated Title with Reveal Mask ===== */
+.title-wrapper {
+	position: relative;
 	text-align: center;
 	margin-bottom: 3rem;
 }
 
+.reveal-title-container {
+	position: relative;
+	display: inline-block;
+	overflow: visible;
+}
+
+/* The reveal mask */
+.reveal-mask {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	background: #2d2d2d;
+	height: 0;
+	width: 0;
+	z-index: 2;
+	pointer-events: none;
+}
+
+/* Phase 1: Small vertical bar appears */
+.reveal-mask.phase1 {
+	height: 100%;
+	width: 8px;
+	animation: maskAppear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes maskAppear {
+	0% {
+		height: 0;
+		width: 8px;
+	}
+	100% {
+		height: 100%;
+		width: 8px;
+	}
+}
+
+/* Phase 2: Mask expands to full width */
+.reveal-mask.phase2 {
+	height: 100%;
+	width: 100%;
+	animation: maskExpand 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes maskExpand {
+	0% {
+		width: 8px;
+		left: 0;
+	}
+	100% {
+		width: 100%;
+		left: 0;
+	}
+}
+
+/* Phase 3: Mask shrinks from left to right and disappears */
+.reveal-mask.phase3 {
+	height: 100%;
+	animation: maskDisappear 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes maskDisappear {
+	0% {
+		width: 100%;
+		left: 0;
+	}
+	100% {
+		width: 0;
+		left: 100%;
+	}
+}
+
+/* Title text */
+.reveal-title {
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	gap: 0;
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #fff;
+	margin-bottom: 0.75rem;
+	letter-spacing: 0.08em;
+	position: relative;
+	z-index: 1;
+}
+
+.reveal-title .char {
+	display: inline-block;
+	opacity: 0;
+	transform: translateY(0);
+	transition: opacity 0.1s ease;
+}
+
+.reveal-title .char.visible {
+	opacity: 1;
+}
+
+.reveal-title .char.space {
+	width: 0.35em;
+}
+
+/* Japanese title adjustments */
+.ja-title {
+	letter-spacing: 0.15em;
+}
+
+/* Animated subtitle */
+.animated-subtitle {
+	opacity: 0;
+	transform: translateY(10px);
+	transition:
+		opacity 0.5s ease,
+		transform 0.5s ease;
+}
+
+.animated-subtitle.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.subtitle-text {
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 1rem;
+}
+
+/* ===== Testimonials Grid ===== */
 .testimonials-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -230,8 +490,8 @@
 		padding: 4rem 1rem;
 	}
 
-	.section-title {
-		font-size: 2rem;
+	.reveal-title {
+		font-size: 1.75rem;
 	}
 
 	.testimonials-grid {
