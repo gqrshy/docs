@@ -6,9 +6,10 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'CobbleRanked',
+			title: 'GashiStudios',
 			logo: {
 				src: './src/assets/gashistudios.png',
+				replacesTitle: false,
 			},
 			social: [
 				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/gashistudios' },

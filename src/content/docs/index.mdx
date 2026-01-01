@@ -1,24 +1,49 @@
 ---
-title: CobbleRanked
-description: A competitive ranked battle system for Cobblemon servers
+title: GashiStudios
+description: Minecraft mod development community creating quality mods for Cobblemon servers
 template: splash
 hero:
-  tagline: Competitive Pokemon battles with ELO matchmaking, seasonal rankings, and full customization for your Cobblemon server.
+  tagline: Creating quality mods for Cobblemon servers. Competitive battles, seamless integrations, and powerful tools for your community.
   image:
-    file: ../../assets/gashistudios.png
+    file: ../../assets/cobbleranked.png
   actions:
-    - text: Get Started
-      link: /getting-started/installation/
+    - text: View CobbleRanked
+      link: /getting-started/introduction/
       icon: right-arrow
       variant: primary
-    - text: View Features
-      link: /features/overview/
+    - text: Join Discord
+      link: https://discord.gg/VVVvBTqqyP
+      icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-## Why CobbleRanked?
+## Our Projects
+
+<CardGrid>
+  <LinkCard
+    title="CobbleRanked"
+    description="Competitive ranked battle system with ELO matchmaking, seasons, and leaderboards."
+    href="/getting-started/introduction/"
+  />
+  <LinkCard
+    title="GashiLibs"
+    description="Shared library providing database drivers, Redis client, and config utilities."
+    href="/integration/gashilibs/"
+  />
+  <LinkCard
+    title="MailLib"
+    description="In-game mailbox system for delivering rewards and items to players."
+    href="/integration/maillib/"
+  />
+</CardGrid>
+
+---
+
+## CobbleRanked
+
+The ultimate competitive battle system for your Cobblemon server.
 
 <CardGrid stagger>
   <Card title="Ranked Matchmaking" icon="star">
@@ -35,6 +60,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
   </Card>
 </CardGrid>
 
+---
+
 ## Quick Start
 
 ```bash
@@ -44,17 +71,26 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 # 4. Test with /ranked command
 ```
 
-## Requirements
-
-| Mod | Version |
-|-----|---------|
+| Requirement | Version |
+|-------------|---------|
 | Minecraft | 1.21.1 |
 | Cobblemon | 1.7.1+ |
 | GashiLibs | 1.0.3+ |
 | MailLib | 1.0.1+ |
 
-## Support
+---
 
-- **[FAQ](/support/faq/)** — Common questions answered
-- **[Troubleshooting](/support/troubleshooting/)** — Problem solving
-- **[Discord](https://discord.gg/VVVvBTqqyP)** — Community support
+## Community
+
+<CardGrid>
+  <LinkCard
+    title="Discord"
+    description="Join our community for support, feedback, and updates."
+    href="https://discord.gg/VVVvBTqqyP"
+  />
+  <LinkCard
+    title="Documentation"
+    description="Full guides for installation, configuration, and troubleshooting."
+    href="/getting-started/introduction/"
+  />
+</CardGrid>

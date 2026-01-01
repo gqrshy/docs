@@ -1,4 +1,4 @@
-/* Purple Theme for CobbleRanked Docs */
+/* GashiStudios Purple Theme */
 
 :root {
 	--sl-color-accent-low: #1a1033;
@@ -28,9 +28,25 @@
 	--sl-color-black: #17181c;
 }
 
-/* Logo styling */
-.site-title img {
-	max-height: 2.5rem;
+/* Header logo - subtle and small */
+[data-site-title] img {
+	max-height: 1.5rem;
+	opacity: 0.9;
+}
+
+[data-site-title]:hover img {
+	opacity: 1;
+}
+
+/* Hero section - landing page */
+.hero {
+	padding-block: 4rem;
+}
+
+.hero img {
+	max-width: 280px;
+	border-radius: 1rem;
+	filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.3));
 }
 
 /* Sidebar hover effects */
@@ -65,18 +81,49 @@ a {
 	transition: color 0.2s ease;
 }
 
-/* Hero section enhancements */
-.hero {
-	background: linear-gradient(135deg, var(--sl-color-black) 0%, var(--sl-color-accent-low) 100%);
-}
-
 /* Card styling */
 .card {
 	border: 1px solid var(--sl-color-gray-5);
 	border-radius: 0.75rem;
-	transition: border-color 0.2s ease;
+	transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .card:hover {
 	border-color: var(--sl-color-accent);
+	transform: translateY(-2px);
+}
+
+/* Link card styling */
+.sl-link-card {
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.75rem;
+	transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.sl-link-card:hover {
+	border-color: var(--sl-color-accent);
+	transform: translateY(-2px);
+}
+
+/* Section dividers */
+hr {
+	border: none;
+	border-top: 1px solid var(--sl-color-gray-5);
+	margin: 3rem 0;
+}
+
+/* Landing page specific */
+.sl-markdown-content h2 {
+	margin-top: 2rem;
+}
+
+/* Action buttons */
+.action.primary {
+	background: var(--sl-color-accent);
+	border-color: var(--sl-color-accent);
+}
+
+.action.primary:hover {
+	background: var(--sl-color-accent-high);
+	border-color: var(--sl-color-accent-high);
 }
