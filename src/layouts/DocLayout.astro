@@ -322,6 +322,69 @@ const { title, description, headings = [] } = Astro.props;
 			margin-bottom: 0;
 		}
 
+		/* Collapsible FAQ/Troubleshooting */
+		.prose details {
+			margin-bottom: 0.75rem;
+			background: rgba(26, 16, 51, 0.4);
+			border: 1px solid rgba(124, 58, 237, 0.2);
+			border-radius: 0.5rem;
+			overflow: hidden;
+		}
+
+		.prose details summary {
+			padding: 1rem 1.25rem;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+			list-style: none;
+			user-select: none;
+			transition: background 0.15s ease;
+		}
+
+		.prose details summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.prose details summary::before {
+			content: '';
+			width: 6px;
+			height: 6px;
+			border-right: 2px solid rgba(255, 255, 255, 0.5);
+			border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+			transform: rotate(-45deg);
+			transition: transform 0.2s ease;
+			flex-shrink: 0;
+		}
+
+		.prose details[open] summary::before {
+			transform: rotate(45deg);
+		}
+
+		.prose details summary:hover {
+			background: rgba(124, 58, 237, 0.1);
+		}
+
+		.prose details summary:hover::before {
+			border-color: #a78bfa;
+		}
+
+		.prose details summary strong {
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+		.prose details > *:not(summary) {
+			padding: 0 1.25rem;
+		}
+
+		.prose details > *:last-child {
+			padding-bottom: 1rem;
+		}
+
+		.prose details p:first-of-type {
+			margin-top: 0;
+		}
+
 		/* Callouts/Admonitions */
 		.callout {
 			padding: 1rem 1.25rem;
