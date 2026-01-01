@@ -9,10 +9,10 @@ Welcome to CobbleRanked! This section will help you get up and running quickly.
 
 | Step | Guide | Description |
 |------|-------|-------------|
-| 1 | [Requirements](/getting-started/requirements/) | What you need before installing |
-| 2 | [Installation](/getting-started/installation/) | Step-by-step installation guide |
-| 3 | [Quick Start](/getting-started/quick-start/) | Get your first battle going |
-| 4 | [Commands](/getting-started/commands/) | All available commands |
+| 1 | [Requirements](/docs/cobbleranked/getting-started/requirements/) | What you need before installing |
+| 2 | [Installation](/docs/cobbleranked/getting-started/installation/) | Step-by-step installation guide |
+| 3 | [Quick Start](/docs/cobbleranked/getting-started/quick-start/) | Get your first battle going |
+| 4 | [Commands](/docs/cobbleranked/getting-started/commands/) | All available commands |
 
 ## Before You Start
 

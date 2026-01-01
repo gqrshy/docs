@@ -1,0 +1,108 @@
+---
+interface Props {
+	headings: { depth: number; slug: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+
+// Filter to only h2 and h3
+const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
+---
+
+{tocHeadings.length > 0 && (
+	<nav class="toc">
+		<h4 class="toc-title">On This Page</h4>
+		<ul class="toc-list">
+			{tocHeadings.map(heading => (
+				<li class:list={[`toc-item`, `depth-${heading.depth}`]}>
+					<a href={`#${heading.slug}`} class="toc-link">
+						{heading.text}
+					</a>
+				</li>
+			))}
+		</ul>
+	</nav>
+)}
+
+<script is:inline>
+	// Highlight active TOC item based on scroll position
+	const tocLinks = document.querySelectorAll('.toc-link');
+	const headings = Array.from(tocLinks).map(link => {
+		const href = link.getAttribute('href');
+		return document.querySelector(href);
+	}).filter(Boolean);
+
+	function updateActiveLink() {
+		const scrollPos = window.scrollY + 100;
+
+		let activeIndex = 0;
+		headings.forEach((heading, index) => {
+			if (heading.offsetTop <= scrollPos) {
+				activeIndex = index;
+			}
+		});
+
+		tocLinks.forEach((link, index) => {
+			link.classList.toggle('active', index === activeIndex);
+		});
+	}
+
+	window.addEventListener('scroll', updateActiveLink);
+	updateActiveLink();
+</script>
+
+<style>
+.toc {
+	position: sticky;
+	top: 80px;
+}
+
+.toc-title {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.5);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-bottom: 1rem;
+}
+
+.toc-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.toc-item {
+	margin-bottom: 0.5rem;
+}
+
+.toc-item.depth-3 {
+	padding-left: 0.75rem;
+}
+
+.toc-link {
+	display: block;
+	padding: 0.25rem 0;
+	padding-left: 0.75rem;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 0.85rem;
+	text-decoration: none;
+	border-left: 2px solid rgba(124, 58, 237, 0.2);
+	transition: all 0.2s ease;
+	line-height: 1.4;
+}
+
+.toc-link:hover {
+	color: #a78bfa;
+	border-left-color: rgba(124, 58, 237, 0.5);
+}
+
+.toc-link.active {
+	color: #a78bfa;
+	border-left-color: #7c3aed;
+}
+
+.depth-3 .toc-link {
+	font-size: 0.8rem;
+}
+</style>

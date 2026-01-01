@@ -16,10 +16,10 @@ A competitive ranked battle system for Cobblemon servers with ELO-based matchmak
 
 ## Quick Links
 
-- [Installation](/cobbleranked/getting-started/installation/)
-- [Quick Start](/cobbleranked/getting-started/quick-start/)
-- [Commands](/cobbleranked/getting-started/commands/)
-- [Configuration](/cobbleranked/configuration/overview/)
+- [Installation](/docs/cobbleranked/getting-started/installation/)
+- [Quick Start](/docs/cobbleranked/getting-started/quick-start/)
+- [Commands](/docs/cobbleranked/getting-started/commands/)
+- [Configuration](/docs/cobbleranked/configuration/overview/)
 
 ## Requirements
 

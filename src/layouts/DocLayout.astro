@@ -1,0 +1,384 @@
+---
+import CustomNav from '../components/CustomNav.astro';
+import DocSidebar from '../components/DocSidebar.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+	headings?: { depth: number; slug: string; text: string }[];
+}
+
+const { title, description, headings = [] } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" type="image/png" href="/gashistudios.png" />
+	<meta name="description" content={description || `${title} - GashiStudios Documentation`} />
+	<title>{title} - GashiStudios</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+	<CustomNav />
+
+	<div class="doc-layout">
+		<DocSidebar />
+
+		<main class="doc-main">
+			<article class="doc-content">
+				<header class="doc-header">
+					<h1>{title}</h1>
+					{description && <p class="doc-description">{description}</p>}
+				</header>
+				<div class="prose">
+					<slot />
+				</div>
+			</article>
+
+			{headings.length > 0 && (
+				<aside class="doc-toc">
+					<TableOfContents headings={headings} />
+				</aside>
+			)}
+		</main>
+	</div>
+
+	<Footer />
+
+	<script is:inline>
+		// Copy code button functionality
+		document.querySelectorAll('pre').forEach(pre => {
+			const button = document.createElement('button');
+			button.className = 'copy-btn';
+			button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+			button.addEventListener('click', async () => {
+				const code = pre.querySelector('code')?.textContent || '';
+				await navigator.clipboard.writeText(code);
+				button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+				setTimeout(() => {
+					button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+				}, 2000);
+			});
+			pre.style.position = 'relative';
+			pre.appendChild(button);
+		});
+	</script>
+
+	<style is:global>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+			scroll-padding-top: 80px;
+		}
+
+		body {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			background: #0f0a1a;
+			color: rgba(255, 255, 255, 0.9);
+			line-height: 1.7;
+		}
+
+		/* Layout */
+		.doc-layout {
+			display: flex;
+			min-height: calc(100vh - 60px);
+			padding-top: 60px;
+		}
+
+		.doc-main {
+			flex: 1;
+			display: flex;
+			max-width: 100%;
+			margin-left: 280px;
+		}
+
+		.doc-content {
+			flex: 1;
+			max-width: 900px;
+			padding: 3rem 4rem;
+			min-width: 0;
+		}
+
+		.doc-toc {
+			width: 240px;
+			flex-shrink: 0;
+			padding: 3rem 1.5rem;
+			position: sticky;
+			top: 60px;
+			height: fit-content;
+			max-height: calc(100vh - 60px);
+			overflow-y: auto;
+		}
+
+		/* Header */
+		.doc-header {
+			margin-bottom: 2.5rem;
+			padding-bottom: 1.5rem;
+			border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+		}
+
+		.doc-header h1 {
+			font-size: 2.5rem;
+			font-weight: 700;
+			color: #fff;
+			margin-bottom: 0.75rem;
+			background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+
+		.doc-description {
+			font-size: 1.1rem;
+			color: rgba(255, 255, 255, 0.6);
+		}
+
+		/* Prose content */
+		.prose h2 {
+			font-size: 1.75rem;
+			font-weight: 600;
+			color: #fff;
+			margin-top: 3rem;
+			margin-bottom: 1rem;
+			padding-bottom: 0.5rem;
+			border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+		}
+
+		.prose h3 {
+			font-size: 1.35rem;
+			font-weight: 600;
+			color: #fff;
+			margin-top: 2rem;
+			margin-bottom: 0.75rem;
+		}
+
+		.prose h4 {
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: rgba(255, 255, 255, 0.95);
+			margin-top: 1.5rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.prose p {
+			margin-bottom: 1.25rem;
+			color: rgba(255, 255, 255, 0.8);
+		}
+
+		.prose a {
+			color: #a78bfa;
+			text-decoration: none;
+			border-bottom: 1px solid rgba(167, 139, 250, 0.3);
+			transition: all 0.2s ease;
+		}
+
+		.prose a:hover {
+			color: #c4b5fd;
+			border-bottom-color: #c4b5fd;
+		}
+
+		.prose strong {
+			color: #fff;
+			font-weight: 600;
+		}
+
+		/* Lists */
+		.prose ul, .prose ol {
+			margin-bottom: 1.25rem;
+			padding-left: 1.5rem;
+		}
+
+		.prose li {
+			margin-bottom: 0.5rem;
+			color: rgba(255, 255, 255, 0.8);
+		}
+
+		.prose li::marker {
+			color: #7c3aed;
+		}
+
+		/* Code */
+		.prose code {
+			font-family: 'JetBrains Mono', monospace;
+			background: rgba(124, 58, 237, 0.2);
+			color: #c4b5fd;
+			padding: 0.2rem 0.4rem;
+			border-radius: 4px;
+			font-size: 0.9em;
+		}
+
+		.prose pre {
+			background: linear-gradient(135deg, rgba(26, 16, 51, 0.8) 0%, rgba(15, 10, 26, 0.9) 100%);
+			border: 1px solid rgba(124, 58, 237, 0.2);
+			border-radius: 0.75rem;
+			padding: 1.25rem;
+			overflow-x: auto;
+			margin-bottom: 1.5rem;
+		}
+
+		.prose pre code {
+			background: transparent;
+			padding: 0;
+			color: #e0e0e0;
+			font-size: 0.875rem;
+			line-height: 1.6;
+		}
+
+		.copy-btn {
+			position: absolute;
+			top: 0.75rem;
+			right: 0.75rem;
+			background: rgba(124, 58, 237, 0.3);
+			border: none;
+			border-radius: 6px;
+			padding: 0.5rem;
+			cursor: pointer;
+			color: rgba(255, 255, 255, 0.7);
+			transition: all 0.2s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.copy-btn:hover {
+			background: rgba(124, 58, 237, 0.5);
+			color: #fff;
+		}
+
+		/* Tables */
+		.prose table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 1.5rem;
+			background: rgba(26, 16, 51, 0.4);
+			border-radius: 0.75rem;
+			overflow: hidden;
+		}
+
+		.prose th {
+			background: rgba(124, 58, 237, 0.2);
+			color: #a78bfa;
+			font-weight: 600;
+			text-align: left;
+			padding: 0.875rem 1rem;
+		}
+
+		.prose td {
+			padding: 0.875rem 1rem;
+			border-top: 1px solid rgba(124, 58, 237, 0.1);
+			color: rgba(255, 255, 255, 0.8);
+		}
+
+		.prose tr:hover {
+			background: rgba(124, 58, 237, 0.05);
+		}
+
+		/* Blockquotes */
+		.prose blockquote {
+			border-left: 4px solid #7c3aed;
+			background: rgba(124, 58, 237, 0.1);
+			padding: 1rem 1.5rem;
+			margin: 1.5rem 0;
+			border-radius: 0 0.5rem 0.5rem 0;
+		}
+
+		.prose blockquote p {
+			margin-bottom: 0;
+		}
+
+		/* Callouts/Admonitions */
+		.callout {
+			padding: 1rem 1.25rem;
+			border-radius: 0.75rem;
+			margin: 1.5rem 0;
+			border-left: 4px solid;
+		}
+
+		.callout-note {
+			background: rgba(124, 58, 237, 0.1);
+			border-color: #7c3aed;
+		}
+
+		.callout-tip {
+			background: rgba(34, 197, 94, 0.1);
+			border-color: #22c55e;
+		}
+
+		.callout-warning {
+			background: rgba(234, 179, 8, 0.1);
+			border-color: #eab308;
+		}
+
+		.callout-danger {
+			background: rgba(239, 68, 68, 0.1);
+			border-color: #ef4444;
+		}
+
+		/* Images */
+		.prose img {
+			max-width: 100%;
+			border-radius: 0.75rem;
+			margin: 1.5rem 0;
+		}
+
+		/* Horizontal rule */
+		.prose hr {
+			border: none;
+			border-top: 1px solid rgba(124, 58, 237, 0.2);
+			margin: 3rem 0;
+		}
+
+		/* Responsive */
+		@media (max-width: 1200px) {
+			.doc-toc {
+				display: none;
+			}
+		}
+
+		@media (max-width: 992px) {
+			.doc-main {
+				margin-left: 0;
+			}
+
+			.doc-content {
+				padding: 2rem 1.5rem;
+			}
+
+			.doc-header h1 {
+				font-size: 2rem;
+			}
+		}
+
+		@media (max-width: 576px) {
+			.doc-content {
+				padding: 1.5rem 1rem;
+			}
+
+			.doc-header h1 {
+				font-size: 1.75rem;
+			}
+
+			.prose h2 {
+				font-size: 1.5rem;
+			}
+
+			.prose pre {
+				border-radius: 0.5rem;
+				padding: 1rem;
+			}
+		}
+	</style>
+</body>
+</html>
