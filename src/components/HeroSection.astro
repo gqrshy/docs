@@ -507,34 +507,27 @@ import polymartLogo from '../assets/polymart.png';
 		const lang = window.GashiLang?.get() || 'en';
 		applyHeroTranslations(lang);
 
-		// Check for reduced motion preference
-		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		console.log('[HeroSection] prefersReducedMotion:', prefersReducedMotion);
-
-		if (!prefersReducedMotion) {
-			console.log('[HeroSection] Starting animations...');
-			try {
-				initParallax();
-				console.log('[HeroSection] initParallax done');
-				initTypewriters();
-				console.log('[HeroSection] initTypewriters done');
-				initGlitchEffects();
-				console.log('[HeroSection] initGlitchEffects done');
-				initBoxShuffle();
-				console.log('[HeroSection] initBoxShuffle done');
-				initVisibilityToggle();
-				console.log('[HeroSection] initVisibilityToggle done');
-				initRandomHighlight();
-				console.log('[HeroSection] initRandomHighlight done');
-				initGridDotsWave();
-				console.log('[HeroSection] initGridDotsWave done');
-				initXMarksAnimation();
-				console.log('[HeroSection] initXMarksAnimation done');
-			} catch (e) {
-				console.error('[HeroSection] Error:', e);
-			}
-		} else {
-			console.log('[HeroSection] Reduced motion enabled, skipping animations');
+		// Always run animations (ignore prefers-reduced-motion)
+		console.log('[HeroSection] Starting animations...');
+		try {
+			initParallax();
+			console.log('[HeroSection] initParallax done');
+			initTypewriters();
+			console.log('[HeroSection] initTypewriters done');
+			initGlitchEffects();
+			console.log('[HeroSection] initGlitchEffects done');
+			initBoxShuffle();
+			console.log('[HeroSection] initBoxShuffle done');
+			initVisibilityToggle();
+			console.log('[HeroSection] initVisibilityToggle done');
+			initRandomHighlight();
+			console.log('[HeroSection] initRandomHighlight done');
+			initGridDotsWave();
+			console.log('[HeroSection] initGridDotsWave done');
+			initXMarksAnimation();
+			console.log('[HeroSection] initXMarksAnimation done');
+		} catch (e) {
+			console.error('[HeroSection] Error:', e);
 		}
 	}
 
@@ -1356,41 +1349,4 @@ import polymartLogo from '../assets/polymart.png';
 	}
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-	.deco-box,
-	.typewriter-text,
-	.deco-japanese .char,
-	.draw-line,
-	.name-char,
-	.deco-dots span,
-	.deco-icon svg,
-	.deco-bars span,
-	.deco-spinner span,
-	.deco-grid-dots span,
-	.deco-diamond span,
-	.x-mark,
-	.bracket-char,
-	.progress-bar::after,
-	.deco-squares span,
-	.deco-circle-pulse span,
-	.deco-cross span,
-	.avatar-wrapper,
-	.greeting,
-	.bio,
-	.links-by-category,
-	.hero-right {
-		animation: none;
-		opacity: 1;
-		transform: none;
-	}
-
-	.typewriter-text {
-		border-right: none;
-	}
-
-	.deco-grid {
-		transform: none !important;
-	}
-}
 </style>
