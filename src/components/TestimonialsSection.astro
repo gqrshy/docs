@@ -1,16 +1,16 @@
 ---
-// Testimonials section with WEB SITE-style reveal animation
+// Testimonials section with glowing line reveal animation
 ---
 
 <section id="testimonials" class="testimonials-section">
 	<div class="testimonials-container">
-		<!-- Animated Title with reveal mask -->
+		<!-- Animated Title with glowing line reveal -->
 		<div class="title-wrapper" id="testimonials-title-wrapper">
-			<div class="reveal-title-container">
-				<!-- The mask that reveals the text -->
-				<div class="reveal-mask" id="testimonials-mask"></div>
+			<div class="glow-title-container">
+				<!-- Glowing sweep line -->
+				<div class="glow-line" id="testimonials-glow-line"></div>
 				<!-- English title -->
-				<h2 class="section-title reveal-title" id="testimonials-title-en">
+				<h2 class="section-title glow-title" id="testimonials-title-en">
 					<span class="char">W</span>
 					<span class="char">h</span>
 					<span class="char">a</span>
@@ -27,7 +27,7 @@
 					<span class="char">y</span>
 				</h2>
 				<!-- Japanese title -->
-				<h2 class="section-title reveal-title ja-title" id="testimonials-title-ja" style="display: none;">
+				<h2 class="section-title glow-title ja-title" id="testimonials-title-ja" style="display: none;">
 					<span class="char">ユ</span>
 					<span class="char">ー</span>
 					<span class="char">ザ</span>
@@ -149,19 +149,19 @@
 
 	function resetAnimation() {
 		const wrapper = document.getElementById('testimonials-title-wrapper');
-		const mask = document.getElementById('testimonials-mask');
+		const glowLine = document.getElementById('testimonials-glow-line');
 		const activeTitle = currentLang === 'ja'
 			? document.getElementById('testimonials-title-ja')
 			: document.getElementById('testimonials-title-en');
 		const chars = activeTitle.querySelectorAll('.char');
 		const subtitle = wrapper.querySelector('.animated-subtitle');
 
-		// Reset mask
-		mask.classList.remove('phase1', 'phase2', 'phase3');
+		// Reset glow line
+		glowLine.classList.remove('animate');
 
 		// Reset chars
 		chars.forEach(char => {
-			char.classList.remove('visible');
+			char.classList.remove('visible', 'glow');
 		});
 
 		// Reset subtitle
@@ -170,40 +170,35 @@
 
 	function playAnimation() {
 		const wrapper = document.getElementById('testimonials-title-wrapper');
-		const mask = document.getElementById('testimonials-mask');
+		const glowLine = document.getElementById('testimonials-glow-line');
 		const activeTitle = currentLang === 'ja'
 			? document.getElementById('testimonials-title-ja')
 			: document.getElementById('testimonials-title-en');
 		const chars = activeTitle.querySelectorAll('.char');
 		const subtitle = wrapper.querySelector('.animated-subtitle');
 
-		// Phase 1: Mask appears (small vertical bar)
-		mask.classList.add('phase1');
+		// Start glow line animation
+		glowLine.classList.add('animate');
 
-		// Phase 2: Mask expands to reveal text (after 300ms)
-		setTimeout(() => {
-			mask.classList.remove('phase1');
-			mask.classList.add('phase2');
+		// Reveal characters as glow line passes
+		const lineAnimDuration = 800; // ms
+		const charCount = chars.length;
 
-			// Start revealing characters as mask expands
-			chars.forEach((char, i) => {
+		chars.forEach((char, i) => {
+			const delay = (i / charCount) * lineAnimDuration;
+			setTimeout(() => {
+				char.classList.add('glow');
 				setTimeout(() => {
 					char.classList.add('visible');
-				}, i * 50);
-			});
-		}, 300);
+					char.classList.remove('glow');
+				}, 150);
+			}, delay + 100);
+		});
 
-		// Phase 3: Mask shrinks and disappears (after text is revealed)
-		const revealTime = 300 + chars.length * 50 + 200;
-		setTimeout(() => {
-			mask.classList.remove('phase2');
-			mask.classList.add('phase3');
-		}, revealTime);
-
-		// Show subtitle after mask disappears
+		// Show subtitle after characters
 		setTimeout(() => {
 			subtitle.classList.add('visible');
-		}, revealTime + 400);
+		}, lineAnimDuration + 400);
 
 		hasAnimated = true;
 	}
@@ -258,87 +253,64 @@
 	margin: 0 auto;
 }
 
-/* ===== Animated Title with Reveal Mask ===== */
+/* ===== Glowing Line Title Animation ===== */
 .title-wrapper {
 	position: relative;
 	text-align: center;
 	margin-bottom: 3rem;
 }
 
-.reveal-title-container {
+.glow-title-container {
 	position: relative;
 	display: inline-block;
 	overflow: visible;
 }
 
-/* The reveal mask */
-.reveal-mask {
+/* Glowing sweep line */
+.glow-line {
 	position: absolute;
 	top: 50%;
-	left: 0;
+	left: -20px;
+	width: 3px;
+	height: 120%;
 	transform: translateY(-50%);
-	background: #2d2d2d;
-	height: 0;
-	width: 0;
-	z-index: 2;
+	background: linear-gradient(
+		180deg,
+		transparent 0%,
+		rgba(167, 139, 250, 0.3) 20%,
+		rgba(167, 139, 250, 1) 50%,
+		rgba(167, 139, 250, 0.3) 80%,
+		transparent 100%
+	);
+	box-shadow:
+		0 0 20px rgba(167, 139, 250, 0.8),
+		0 0 40px rgba(124, 58, 237, 0.6),
+		0 0 60px rgba(124, 58, 237, 0.4);
+	opacity: 0;
+	z-index: 10;
 	pointer-events: none;
 }
 
-/* Phase 1: Small vertical bar appears */
-.reveal-mask.phase1 {
-	height: 100%;
-	width: 8px;
-	animation: maskAppear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.glow-line.animate {
+	animation: glowSweep 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes maskAppear {
+@keyframes glowSweep {
 	0% {
-		height: 0;
-		width: 8px;
+		left: -20px;
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
 	}
 	100% {
-		height: 100%;
-		width: 8px;
-	}
-}
-
-/* Phase 2: Mask expands to full width */
-.reveal-mask.phase2 {
-	height: 100%;
-	width: 100%;
-	animation: maskExpand 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes maskExpand {
-	0% {
-		width: 8px;
-		left: 0;
-	}
-	100% {
-		width: 100%;
-		left: 0;
-	}
-}
-
-/* Phase 3: Mask shrinks from left to right and disappears */
-.reveal-mask.phase3 {
-	height: 100%;
-	animation: maskDisappear 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes maskDisappear {
-	0% {
-		width: 100%;
-		left: 0;
-	}
-	100% {
-		width: 0;
-		left: 100%;
+		left: calc(100% + 20px);
+		opacity: 0;
 	}
 }
 
 /* Title text */
-.reveal-title {
+.glow-title {
 	display: flex;
 	justify-content: center;
 	align-items: baseline;
@@ -352,18 +324,40 @@
 	z-index: 1;
 }
 
-.reveal-title .char {
+.glow-title .char {
 	display: inline-block;
 	opacity: 0;
-	transform: translateY(0);
-	transition: opacity 0.1s ease;
+	transform: translateY(8px);
+	filter: blur(8px);
+	transition:
+		opacity 0.4s ease,
+		transform 0.4s ease,
+		filter 0.4s ease,
+		color 0.15s ease,
+		text-shadow 0.15s ease;
 }
 
-.reveal-title .char.visible {
+/* Glow state - when line passes */
+.glow-title .char.glow {
 	opacity: 1;
+	color: #a78bfa;
+	text-shadow:
+		0 0 20px rgba(167, 139, 250, 1),
+		0 0 40px rgba(124, 58, 237, 0.8);
+	filter: blur(0);
+	transform: translateY(0);
 }
 
-.reveal-title .char.space {
+/* Final visible state */
+.glow-title .char.visible {
+	opacity: 1;
+	transform: translateY(0);
+	filter: blur(0);
+	color: #fff;
+	text-shadow: none;
+}
+
+.glow-title .char.space {
 	width: 0.35em;
 }
 
@@ -490,7 +484,7 @@
 		padding: 4rem 1rem;
 	}
 
-	.reveal-title {
+	.glow-title {
 		font-size: 1.75rem;
 	}
 
