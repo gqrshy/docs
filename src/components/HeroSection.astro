@@ -213,6 +213,8 @@ import polymartLogo from '../assets/polymart.png';
 
 <script is:inline>
 (function() {
+	console.log('[HeroSection] Script loaded');
+
 	// ===== Translation System =====
 	const translations = {
 		en: {
@@ -501,21 +503,38 @@ import polymartLogo from '../assets/polymart.png';
 
 	// ===== Initialize Everything =====
 	function init() {
+		console.log('[HeroSection] init() called');
 		const lang = window.GashiLang?.get() || 'en';
 		applyHeroTranslations(lang);
 
 		// Check for reduced motion preference
 		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		console.log('[HeroSection] prefersReducedMotion:', prefersReducedMotion);
 
 		if (!prefersReducedMotion) {
-			initParallax();
-			initTypewriters();
-			initGlitchEffects();
-			initBoxShuffle();
-			initVisibilityToggle();
-			initRandomHighlight();
-			initGridDotsWave();
-			initXMarksAnimation();
+			console.log('[HeroSection] Starting animations...');
+			try {
+				initParallax();
+				console.log('[HeroSection] initParallax done');
+				initTypewriters();
+				console.log('[HeroSection] initTypewriters done');
+				initGlitchEffects();
+				console.log('[HeroSection] initGlitchEffects done');
+				initBoxShuffle();
+				console.log('[HeroSection] initBoxShuffle done');
+				initVisibilityToggle();
+				console.log('[HeroSection] initVisibilityToggle done');
+				initRandomHighlight();
+				console.log('[HeroSection] initRandomHighlight done');
+				initGridDotsWave();
+				console.log('[HeroSection] initGridDotsWave done');
+				initXMarksAnimation();
+				console.log('[HeroSection] initXMarksAnimation done');
+			} catch (e) {
+				console.error('[HeroSection] Error:', e);
+			}
+		} else {
+			console.log('[HeroSection] Reduced motion enabled, skipping animations');
 		}
 	}
 
