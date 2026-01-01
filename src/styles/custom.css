@@ -1,0 +1,82 @@
+/* Purple Theme for CobbleRanked Docs */
+
+:root {
+	--sl-color-accent-low: #1a1033;
+	--sl-color-accent: #7c3aed;
+	--sl-color-accent-high: #a78bfa;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #eceef2;
+	--sl-color-gray-2: #c0c2c7;
+	--sl-color-gray-3: #888b96;
+	--sl-color-gray-4: #545861;
+	--sl-color-gray-5: #353841;
+	--sl-color-gray-6: #24272f;
+	--sl-color-black: #17181c;
+}
+
+:root[data-theme='dark'] {
+	--sl-color-accent-low: #1a1033;
+	--sl-color-accent: #7c3aed;
+	--sl-color-accent-high: #a78bfa;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #eceef2;
+	--sl-color-gray-2: #c0c2c7;
+	--sl-color-gray-3: #888b96;
+	--sl-color-gray-4: #545861;
+	--sl-color-gray-5: #353841;
+	--sl-color-gray-6: #24272f;
+	--sl-color-black: #17181c;
+}
+
+/* Logo styling */
+.site-title img {
+	max-height: 2.5rem;
+}
+
+/* Sidebar hover effects */
+.sidebar-content a:hover {
+	color: var(--sl-color-accent-high);
+}
+
+/* Code block styling */
+pre {
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+}
+
+/* Table styling */
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th {
+	background: var(--sl-color-gray-6);
+	color: var(--sl-color-accent-high);
+}
+
+th, td {
+	border: 1px solid var(--sl-color-gray-5);
+	padding: 0.75rem;
+}
+
+/* Button/Link hover */
+a {
+	transition: color 0.2s ease;
+}
+
+/* Hero section enhancements */
+.hero {
+	background: linear-gradient(135deg, var(--sl-color-black) 0%, var(--sl-color-accent-low) 100%);
+}
+
+/* Card styling */
+.card {
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.75rem;
+	transition: border-color 0.2s ease;
+}
+
+.card:hover {
+	border-color: var(--sl-color-accent);
+}
