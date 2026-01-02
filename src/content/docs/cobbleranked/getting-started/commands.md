@@ -97,12 +97,86 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 
 ### Data Migration (v1 to v2)
 
+Upgrade your CobbleRanked v1 data to v2. All player ELO, wins, losses, and stats are preserved.
+
 | Command | Description |
 |---------|-------------|
 | `/rankedadmin migrate sqlite <v1_db_path> <season_name>` | Migrate from v1 SQLite |
 | `/rankedadmin migrate mysql <host> <db> <user> <pass> <season>` | Migrate from v1 MySQL |
 | `/rankedadmin migrate mongodb <uri> <db> <season_name>` | Migrate from v1 MongoDB |
 | `/rankedadmin migrate season <v1_config_path>` | Migrate v1 season config |
+
+<details>
+<summary><strong>Migration Guide</strong></summary>
+
+#### Before You Start
+
+1. **Stop the server** - Never migrate while the server is running
+2. **Backup your data** - Copy both v1 and v2 database files
+3. **Note your v1 database location** - Usually `config/cobbleranked/cobbleranked.db` for SQLite
+
+#### What Gets Migrated
+
+| Data | Description |
+|------|-------------|
+| Player Stats | Total matches, wins, last played time |
+| Format Stats | ELO, wins, losses, streaks for each format |
+| Seasons | Existing season records (if any) |
+
+> 📝 The `<season_name>` parameter assigns all migrated data to a specific season. Choose a meaningful name like `"Season 1"` or `"Legacy"`.
+
+#### SQLite Migration
+
+Most common scenario - migrating from v1 SQLite to v2 SQLite:
+
+```bash
+/rankedadmin migrate sqlite "config/cobbleranked/cobbleranked.db" "Season 1"
+```
+
+The command reads from the v1 database and writes to your current v2 database.
+
+#### MySQL Migration
+
+For cross-server setups using MySQL:
+
+```bash
+/rankedadmin migrate mysql localhost cobbleranked_v1 root password "Season 1"
+```
+
+Parameters:
+- `host` - MySQL server address
+- `db` - v1 database name
+- `user` - MySQL username
+- `pass` - MySQL password
+- `season` - Target season name
+
+> ⚠️ Uses the same MySQL credentials for both v1 and v2. Ensure v2 database already exists.
+
+#### MongoDB Migration
+
+For MongoDB deployments:
+
+```bash
+/rankedadmin migrate mongodb "mongodb://localhost:27017" cobbleranked_v1 "Season 1"
+```
+
+#### Season Config Migration
+
+Migrate your v1 `seasons.json5` to v2 `season.yaml` format:
+
+```bash
+/rankedadmin migrate season "config/cobbleranked/seasons.json5"
+```
+
+This extracts your season name and creates a v2 config with wide date range (1980-2099).
+
+#### After Migration
+
+1. Run `/rankedadmin reload` to apply changes
+2. Check `/ranked` GUI to verify player stats
+3. Check leaderboard to confirm rankings
+
+</details>
 
 ## Permission Nodes
 

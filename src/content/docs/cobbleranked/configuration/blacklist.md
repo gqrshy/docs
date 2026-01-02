@@ -141,6 +141,18 @@ blacklist:
     restricted: 0    # No restricted Pokemon
 ```
 
+### Removing Label Limits
+
+For formats like Smogon OU where you want **no label limits** at all, use an empty value:
+
+```yaml
+blacklist:
+  labelLimits: []    # No label limits (both [] and {} work)
+  labels: []         # No label bans either
+```
+
+> **Note:** Both `[]` and `{}` are accepted for empty `labelLimits`. Use whichever you prefer for consistency with `labels: []`.
+
 ## Item Clause
 
 Control duplicate held items:
@@ -328,6 +340,48 @@ formats:
         - "mythical"
       labelLimits:
         legendary: 2
+      maxDuplicateItems: 1
+```
+
+## Smogon OU Example
+
+A Smogon OU-style preset with no label limits:
+
+```yaml
+name: "Smogon OU"
+levelCap: 100
+
+clauses:
+  speciesClause: true
+  maxDuplicateItems: 1
+  sleepClause: true
+  ohkoClause: true
+  evasionClause: true
+  endlessBattleClause: true
+
+formats:
+  SINGLES:
+    enabled: true
+    teamSize: 6
+    selectCount: 6
+    turnTimeoutSeconds: 150
+    blacklist:
+      pokemon:
+        - "Koraidon"
+        - "Miraidon"
+        - "Mewtwo"
+        - "Ho-Oh"
+        - "Lugia"
+        # ... add Ubers here
+      moves:
+        - "baton_pass"
+      abilities:
+        - "moody"
+        - "shadow_tag"
+        - "arena_trap"
+      items: []
+      labels: []           # No label bans
+      labelLimits: {}      # No label limits - allows unlimited legendaries
       maxDuplicateItems: 1
 ```
 

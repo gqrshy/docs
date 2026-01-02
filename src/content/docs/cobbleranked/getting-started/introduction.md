@@ -5,12 +5,12 @@ description: Welcome to CobbleRanked! Get up and running quickly.
 
 ## Quick Navigation
 
-| Step | Guide | Description |
-|------|-------|-------------|
-| 1 | [Requirements](/docs/cobbleranked/getting-started/requirements/) | What you need before installing |
-| 2 | [Installation](/docs/cobbleranked/getting-started/installation/) | Step-by-step installation guide |
-| 3 | [Quick Start](/docs/cobbleranked/getting-started/quick-start/) | Get your first battle going |
-| 4 | [Commands](/docs/cobbleranked/getting-started/commands/) | All available commands |
+| Guide | Description |
+|-------|-------------|
+| [Requirements](/docs/cobbleranked/getting-started/requirements/) | What you need before installing |
+| [Installation](/docs/cobbleranked/getting-started/installation/) | Step-by-step installation guide |
+| [Quick Start](/docs/cobbleranked/getting-started/quick-start/) | Get your first battle going |
+| [Commands](/docs/cobbleranked/getting-started/commands/) | All available commands |
 
 ## Before You Start
 
