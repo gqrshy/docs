@@ -137,7 +137,7 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			updateLoadingState();
 
 			try {
-				const response = await fetch(`/api/cobbleranked/leaderboard?season=${currentSeason}&format=${currentFormat}`);
+				const response = await fetch(`/api/cobbleranked/leaderboard?serverId=battle&season=${currentSeason}&format=${currentFormat}`);
 				const data = await response.json();
 
 				// Extract players from response
