@@ -93,16 +93,40 @@ export const GET: APIRoute = async ({ url }) => {
 			});
 		}
 
-		// Filter by season/format if specified
-		let result = data;
-		if (season && format && data.seasons?.[season]?.formats?.[format]) {
-			result = {
-				serverId: data.serverId,
-				timestamp: data.timestamp,
-				season,
-				format,
-				players: data.seasons[season].formats[format].players
-			};
+		// Handle both CobbleRanked format (formats at top level) and demo format (nested seasons)
+		let result: any = data;
+
+		if (format) {
+			// CobbleRanked sends: { serverId, seasonName, formats: { SINGLES: { players: [...] } } }
+			if (data.formats?.[format]?.players) {
+				result = {
+					serverId: data.serverId,
+					timestamp: data.timestamp,
+					season: data.seasonName,
+					format,
+					players: data.formats[format].players.map((p: any) => ({
+						rank: p.rank,
+						uuid: p.uuid,
+						name: p.playerName,
+						elo: p.elo,
+						tier: p.tier,
+						wins: p.wins,
+						losses: p.losses,
+						currentStreak: p.currentStreak,
+						bestStreak: p.bestStreak
+					}))
+				};
+			}
+			// Demo data format: { seasons: { Season4: { formats: { SINGLES: { players: [...] } } } } }
+			else if (season && data.seasons?.[season]?.formats?.[format]?.players) {
+				result = {
+					serverId: data.serverId,
+					timestamp: data.timestamp,
+					season,
+					format,
+					players: data.seasons[season].formats[format].players
+				};
+			}
 		}
 
 		return new Response(JSON.stringify(result), {

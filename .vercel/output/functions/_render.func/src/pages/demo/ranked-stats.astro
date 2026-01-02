@@ -199,184 +199,211 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 
 	<script is:inline>
 	(function() {
-		// State
-		let pokemonData = [];
-		let selectedPokemon = null;
-		let currentFormat = 'SINGLES';
-		let currentSeason = 'Season4';
-		let currentEloMin = 1000;
-		let currentEloMax = 1500;
-		let isLoading = false;
-		let isDemo = false;
-
-		// Fetch usage stats from API
-		async function fetchUsageStats() {
-			isLoading = true;
-			updateLoadingState();
-
-			try {
-				const response = await fetch(`/api/cobbleranked/usage-stats?serverId=battle&season=${currentSeason}&format=${currentFormat}`);
-				const data = await response.json();
-
-				isDemo = data.isDemo || false;
-
-				// Find the matching tier based on ELO range
-				let tierData = null;
-				if (data.tiers) {
-					// Try to find exact match or closest tier
-					for (const [tierKey, tier] of Object.entries(data.tiers)) {
-						const tierMin = tier.minElo || 0;
-						const tierMax = tier.maxElo || 99999;
-						if (currentEloMin >= tierMin && (tierMax === null || currentEloMax <= tierMax || tierMax === 99999)) {
-							tierData = tier;
-							break;
-						}
-					}
-					// If no exact match, use first available tier
-					if (!tierData) {
-						const tierKeys = Object.keys(data.tiers);
-						if (tierKeys.length > 0) {
-							tierData = data.tiers[tierKeys[0]];
-						}
-					}
-				}
-
-				if (tierData && tierData.species) {
-					pokemonData = tierData.species.map((species, index) => ({
-						name: species.name,
-						usage: species.usagePercent,
-						rank: index + 1,
-						samples: species.count,
-						baseStats: { hp: 80, atk: 80, def: 80, spa: 80, spd: 80, spe: 80 }, // Default stats
-						moves: Object.entries(species.moves || {}).slice(0, 5).map(([name, pct]) => ({ name, pct })),
-						teammates: Object.entries(species.teammates || {}).slice(0, 5).map(([name, pct]) => ({ name, pct })),
-						items: Object.entries(species.items || {}).map(([name, pct]) => ({ name, pct })),
-						abilities: Object.entries(species.abilities || {}).map(([name, pct]) => ({ name, pct })),
-						evSpreads: Object.entries(species.evSpreads || {}).slice(0, 5).map(([key, pct]) => {
-							const parts = key.split(':');
-							return { nature: parts[0] || 'Hardy', spread: parts[1] || '0/0/0/0/0/0', pct };
-						})
-					}));
-				} else {
-					pokemonData = getDemoData();
-				}
-
-				// Update demo indicator
-				updateDemoIndicator();
-
-			} catch (error) {
-				console.error('Failed to fetch usage stats:', error);
-				pokemonData = getDemoData();
-				isDemo = true;
-				updateDemoIndicator();
+		// Demo Pokemon data with detailed stats
+		const pokemonData = [
+			{
+				name: 'Ogerpon-Wellspring', usage: 32.58, rank: 1, samples: 3939,
+				baseStats: { hp: 80, atk: 120, def: 84, spa: 60, spd: 96, spe: 110 },
+				moves: [
+					{ name: 'cobblemon.move.ivycudgel', pct: 100.0 },
+					{ name: 'Horn Leech', pct: 78.55 },
+					{ name: 'Swords Dance', pct: 75.88 },
+					{ name: 'Superpower', pct: 34.48 },
+					{ name: 'U-turn', pct: 30.41 }
+				],
+				teammates: [
+					{ name: 'Moltres', pct: 18.99 },
+					{ name: 'Ironvaliant', pct: 18.13 },
+					{ name: 'Dragapult-Ultra', pct: 17.47 },
+					{ name: 'Lopunny-Delta', pct: 15.26 },
+					{ name: 'Alomomola', pct: 14.12 }
+				],
+				items: [{ name: 'Wellspring Mask', pct: 100.0 }],
+				abilities: [{ name: 'Waterabsorb', pct: 100.0 }],
+				evSpreads: [
+					{ nature: 'Jolly', spread: '0/252/0/0/4/252', pct: 36.15 },
+					{ nature: 'Jolly', spread: '4/252/0/0/0/252', pct: 20.03 },
+					{ nature: 'Jolly', spread: '0/252/4/0/0/252', pct: 13.79 },
+					{ nature: 'Jolly', spread: '0/252/0/0/0/252', pct: 11.63 },
+					{ nature: 'Timid', spread: '0/252/0/0/4/252', pct: 7.72 }
+				]
+			},
+			{
+				name: 'Alomomola', usage: 30.09, rank: 2, samples: 3638,
+				baseStats: { hp: 165, atk: 75, def: 80, spa: 40, spd: 45, spe: 65 },
+				moves: [
+					{ name: 'Flip Turn', pct: 95.2 },
+					{ name: 'Wish', pct: 92.4 },
+					{ name: 'Protect', pct: 88.1 },
+					{ name: 'Scald', pct: 45.3 }
+				],
+				teammates: [
+					{ name: 'Ogerpon-Wellspring', pct: 22.1 },
+					{ name: 'Corviknight', pct: 18.4 },
+					{ name: 'Ferrothorn', pct: 15.2 }
+				],
+				items: [{ name: 'Heavy-Duty Boots', pct: 78.4 }, { name: 'Leftovers', pct: 21.6 }],
+				abilities: [{ name: 'Regenerator', pct: 100.0 }],
+				evSpreads: [
+					{ nature: 'Bold', spread: '252/0/252/0/4/0', pct: 45.2 },
+					{ nature: 'Impish', spread: '252/0/252/0/4/0', pct: 32.1 }
+				]
+			},
+			{
+				name: 'Gengar-Ultra', usage: 26.66, rank: 3, samples: 3223,
+				baseStats: { hp: 60, atk: 65, def: 60, spa: 130, spd: 75, spe: 110 },
+				moves: [
+					{ name: 'Shadow Ball', pct: 98.5 },
+					{ name: 'Sludge Wave', pct: 78.2 },
+					{ name: 'Focus Blast', pct: 62.4 },
+					{ name: 'Nasty Plot', pct: 45.1 }
+				],
+				teammates: [
+					{ name: 'Landorus-Therian', pct: 28.4 },
+					{ name: 'Corviknight', pct: 22.1 }
+				],
+				items: [{ name: 'Choice Specs', pct: 52.3 }, { name: 'Life Orb', pct: 38.2 }],
+				abilities: [{ name: 'Cursed Body', pct: 100.0 }],
+				evSpreads: [
+					{ nature: 'Timid', spread: '0/0/0/252/4/252', pct: 68.4 }
+				]
+			},
+			{
+				name: 'Landorus-Therian', usage: 24.96, rank: 4, samples: 3018,
+				baseStats: { hp: 89, atk: 145, def: 90, spa: 105, spd: 80, spe: 91 },
+				moves: [
+					{ name: 'Earthquake', pct: 99.1 },
+					{ name: 'U-turn', pct: 85.4 },
+					{ name: 'Stealth Rock', pct: 72.3 },
+					{ name: 'Stone Edge', pct: 45.8 }
+				],
+				teammates: [
+					{ name: 'Corviknight', pct: 32.1 },
+					{ name: 'Gengar-Ultra', pct: 28.4 }
+				],
+				items: [{ name: 'Rocky Helmet', pct: 45.8 }, { name: 'Leftovers', pct: 32.1 }],
+				abilities: [{ name: 'Intimidate', pct: 99.2 }],
+				evSpreads: [
+					{ nature: 'Impish', spread: '252/0/252/0/4/0', pct: 52.3 }
+				]
+			},
+			{
+				name: 'Ironvaliant', usage: 23.58, rank: 5, samples: 2851,
+				baseStats: { hp: 74, atk: 130, def: 90, spa: 120, spd: 60, spe: 116 },
+				moves: [
+					{ name: 'Close Combat', pct: 92.4 },
+					{ name: 'Moonblast', pct: 88.2 },
+					{ name: 'Swords Dance', pct: 65.1 },
+					{ name: 'Knock Off', pct: 42.3 }
+				],
+				teammates: [
+					{ name: 'Ogerpon-Wellspring', pct: 25.4 },
+					{ name: 'Alomomola', pct: 18.2 }
+				],
+				items: [{ name: 'Booster Energy', pct: 78.4 }],
+				abilities: [{ name: 'Quark Drive', pct: 100.0 }],
+				evSpreads: [
+					{ nature: 'Jolly', spread: '0/252/0/0/4/252', pct: 58.2 }
+				]
+			},
+			{
+				name: 'Gliscor', usage: 23.54, rank: 6, samples: 2846,
+				baseStats: { hp: 75, atk: 95, def: 125, spa: 45, spd: 75, spe: 95 },
+				moves: [
+					{ name: 'Earthquake', pct: 98.2 },
+					{ name: 'Toxic', pct: 72.4 },
+					{ name: 'Protect', pct: 68.1 },
+					{ name: 'Roost', pct: 55.3 }
+				],
+				teammates: [
+					{ name: 'Corviknight', pct: 28.4 },
+					{ name: 'Alomomola', pct: 22.1 }
+				],
+				items: [{ name: 'Toxic Orb', pct: 95.2 }],
+				abilities: [{ name: 'Poison Heal', pct: 95.2 }],
+				evSpreads: [
+					{ nature: 'Careful', spread: '244/0/8/0/200/56', pct: 42.1 }
+				]
+			},
+			{
+				name: 'Corviknight', usage: 22.34, rank: 7, samples: 2701,
+				baseStats: { hp: 98, atk: 87, def: 105, spa: 53, spd: 85, spe: 67 },
+				moves: [
+					{ name: 'Brave Bird', pct: 92.1 },
+					{ name: 'Roost', pct: 88.4 },
+					{ name: 'Defog', pct: 72.3 },
+					{ name: 'Body Press', pct: 52.4 }
+				],
+				teammates: [
+					{ name: 'Landorus-Therian', pct: 32.1 },
+					{ name: 'Alomomola', pct: 18.4 }
+				],
+				items: [{ name: 'Leftovers', pct: 52.3 }, { name: 'Rocky Helmet', pct: 38.2 }],
+				abilities: [{ name: 'Pressure', pct: 68.4 }, { name: 'Mirror Armor', pct: 31.6 }],
+				evSpreads: [
+					{ nature: 'Impish', spread: '252/0/252/0/4/0', pct: 48.2 }
+				]
+			},
+			{
+				name: 'Moltres', usage: 21.72, rank: 8, samples: 2626,
+				baseStats: { hp: 90, atk: 100, def: 90, spa: 125, spd: 85, spe: 90 },
+				moves: [
+					{ name: 'Flamethrower', pct: 88.2 },
+					{ name: 'Hurricane', pct: 72.4 },
+					{ name: 'Roost', pct: 65.1 },
+					{ name: 'U-turn', pct: 42.3 }
+				],
+				teammates: [
+					{ name: 'Ogerpon-Wellspring', pct: 28.4 },
+					{ name: 'Landorus-Therian', pct: 22.1 }
+				],
+				items: [{ name: 'Heavy-Duty Boots', pct: 85.4 }],
+				abilities: [{ name: 'Flame Body', pct: 72.3 }, { name: 'Pressure', pct: 27.7 }],
+				evSpreads: [
+					{ nature: 'Timid', spread: '0/0/0/252/4/252', pct: 52.3 }
+				]
+			},
+			{
+				name: 'Ferrothorn', usage: 21.30, rank: 9, samples: 2575,
+				baseStats: { hp: 74, atk: 94, def: 131, spa: 54, spd: 116, spe: 20 },
+				moves: [
+					{ name: 'Stealth Rock', pct: 92.4 },
+					{ name: 'Leech Seed', pct: 88.2 },
+					{ name: 'Power Whip', pct: 72.1 },
+					{ name: 'Knock Off', pct: 65.4 }
+				],
+				teammates: [
+					{ name: 'Corviknight', pct: 32.4 },
+					{ name: 'Alomomola', pct: 28.1 }
+				],
+				items: [{ name: 'Leftovers', pct: 78.4 }, { name: 'Rocky Helmet', pct: 21.6 }],
+				abilities: [{ name: 'Iron Barbs', pct: 99.8 }],
+				evSpreads: [
+					{ nature: 'Relaxed', spread: '252/0/252/0/4/0', pct: 58.2 }
+				]
+			},
+			{
+				name: 'Kingambit', usage: 21.02, rank: 10, samples: 2541,
+				baseStats: { hp: 100, atk: 135, def: 120, spa: 60, spd: 85, spe: 50 },
+				moves: [
+					{ name: 'Kowtow Cleave', pct: 98.2 },
+					{ name: 'Sucker Punch', pct: 92.4 },
+					{ name: 'Iron Head', pct: 72.1 },
+					{ name: 'Swords Dance', pct: 58.3 }
+				],
+				teammates: [
+					{ name: 'Landorus-Therian', pct: 32.1 },
+					{ name: 'Corviknight', pct: 28.4 }
+				],
+				items: [{ name: 'Leftovers', pct: 45.2 }, { name: 'Air Balloon', pct: 32.1 }],
+				abilities: [{ name: 'Supreme Overlord', pct: 98.2 }],
+				evSpreads: [
+					{ nature: 'Adamant', spread: '252/252/0/0/4/0', pct: 48.2 }
+				]
 			}
+		];
 
-			isLoading = false;
-			updateLoadingState();
-
-			if (pokemonData.length > 0) {
-				selectedPokemon = pokemonData[0];
-			}
-			renderPokemonList();
-			renderPokemonDetail();
-		}
-
-		function updateLoadingState() {
-			const container = document.getElementById('pokemon-list');
-			if (isLoading) {
-				container.innerHTML = '<div style="padding: 1rem; text-align: center; color: rgba(255,255,255,0.5);">Loading...</div>';
-			}
-		}
-
-		function updateDemoIndicator() {
-			// Could add a visual indicator for demo mode
-		}
-
-		function getDemoData() {
-			return [
-				{
-					name: 'Ogerpon-Wellspring', usage: 32.58, rank: 1, samples: 3939,
-					baseStats: { hp: 80, atk: 120, def: 84, spa: 60, spd: 96, spe: 110 },
-					moves: [
-						{ name: 'Ivy Cudgel', pct: 100.0 },
-						{ name: 'Horn Leech', pct: 78.55 },
-						{ name: 'Swords Dance', pct: 75.88 },
-						{ name: 'Superpower', pct: 34.48 },
-						{ name: 'U-turn', pct: 30.41 }
-					],
-					teammates: [
-						{ name: 'Moltres', pct: 18.99 },
-						{ name: 'Ironvaliant', pct: 18.13 },
-						{ name: 'Dragapult-Ultra', pct: 17.47 }
-					],
-					items: [{ name: 'Wellspring Mask', pct: 100.0 }],
-					abilities: [{ name: 'Water Absorb', pct: 100.0 }],
-					evSpreads: [
-						{ nature: 'Jolly', spread: '0/252/0/0/4/252', pct: 36.15 },
-						{ nature: 'Jolly', spread: '4/252/0/0/0/252', pct: 20.03 }
-					]
-				},
-				{
-					name: 'Alomomola', usage: 30.09, rank: 2, samples: 3638,
-					baseStats: { hp: 165, atk: 75, def: 80, spa: 40, spd: 45, spe: 65 },
-					moves: [
-						{ name: 'Flip Turn', pct: 95.2 },
-						{ name: 'Wish', pct: 92.4 },
-						{ name: 'Protect', pct: 88.1 },
-						{ name: 'Scald', pct: 45.3 }
-					],
-					teammates: [
-						{ name: 'Ogerpon-Wellspring', pct: 22.1 },
-						{ name: 'Corviknight', pct: 18.4 }
-					],
-					items: [{ name: 'Heavy-Duty Boots', pct: 78.4 }, { name: 'Leftovers', pct: 21.6 }],
-					abilities: [{ name: 'Regenerator', pct: 100.0 }],
-					evSpreads: [{ nature: 'Bold', spread: '252/0/252/0/4/0', pct: 45.2 }]
-				},
-				{
-					name: 'Gengar-Ultra', usage: 26.66, rank: 3, samples: 3223,
-					baseStats: { hp: 60, atk: 65, def: 60, spa: 130, spd: 75, spe: 110 },
-					moves: [
-						{ name: 'Shadow Ball', pct: 98.5 },
-						{ name: 'Sludge Wave', pct: 78.2 },
-						{ name: 'Focus Blast', pct: 62.4 },
-						{ name: 'Nasty Plot', pct: 45.1 }
-					],
-					teammates: [{ name: 'Landorus-Therian', pct: 28.4 }],
-					items: [{ name: 'Choice Specs', pct: 52.3 }, { name: 'Life Orb', pct: 38.2 }],
-					abilities: [{ name: 'Cursed Body', pct: 100.0 }],
-					evSpreads: [{ nature: 'Timid', spread: '0/0/0/252/4/252', pct: 68.4 }]
-				},
-				{
-					name: 'Landorus-Therian', usage: 24.96, rank: 4, samples: 3018,
-					baseStats: { hp: 89, atk: 145, def: 90, spa: 105, spd: 80, spe: 91 },
-					moves: [
-						{ name: 'Earthquake', pct: 99.1 },
-						{ name: 'U-turn', pct: 85.4 },
-						{ name: 'Stealth Rock', pct: 72.3 },
-						{ name: 'Stone Edge', pct: 45.8 }
-					],
-					teammates: [{ name: 'Corviknight', pct: 32.1 }],
-					items: [{ name: 'Rocky Helmet', pct: 45.8 }, { name: 'Leftovers', pct: 32.1 }],
-					abilities: [{ name: 'Intimidate', pct: 99.2 }],
-					evSpreads: [{ nature: 'Impish', spread: '252/0/252/0/4/0', pct: 52.3 }]
-				},
-				{
-					name: 'Ironvaliant', usage: 23.58, rank: 5, samples: 2851,
-					baseStats: { hp: 74, atk: 130, def: 90, spa: 120, spd: 60, spe: 116 },
-					moves: [
-						{ name: 'Close Combat', pct: 92.4 },
-						{ name: 'Moonblast', pct: 88.2 },
-						{ name: 'Swords Dance', pct: 65.1 },
-						{ name: 'Knock Off', pct: 42.3 }
-					],
-					teammates: [{ name: 'Ogerpon-Wellspring', pct: 25.4 }],
-					items: [{ name: 'Booster Energy', pct: 78.4 }],
-					abilities: [{ name: 'Quark Drive', pct: 100.0 }],
-					evSpreads: [{ nature: 'Jolly', spread: '0/252/0/0/4/252', pct: 58.2 }]
-				}
-			];
-		}
+		let selectedPokemon = pokemonData[0];
 
 		// Render Pokemon List
 		function renderPokemonList() {
@@ -486,8 +513,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 			btn.addEventListener('click', () => {
 				document.querySelectorAll('.format-tab').forEach(b => b.classList.remove('active'));
 				btn.classList.add('active');
-				currentFormat = btn.dataset.format;
-				fetchUsageStats();
 			});
 		});
 
@@ -495,8 +520,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 			btn.addEventListener('click', () => {
 				document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active'));
 				btn.classList.add('active');
-				currentSeason = 'Season' + btn.dataset.season;
-				fetchUsageStats();
 			});
 		});
 
@@ -561,29 +584,15 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 			syncSliderToInput();
 		});
 
-		// Debounced fetch for ELO changes
-		let eloFetchTimeout = null;
-		function debouncedFetch() {
-			currentEloMin = parseInt(eloMinSlider.value);
-			currentEloMax = parseInt(eloMaxSlider.value);
-			clearTimeout(eloFetchTimeout);
-			eloFetchTimeout = setTimeout(() => fetchUsageStats(), 500);
-		}
-
-		eloMinInput.addEventListener('change', () => {
-			syncInputToSlider();
-			debouncedFetch();
-		});
-		eloMaxInput.addEventListener('change', () => {
-			syncInputToSlider();
-			debouncedFetch();
-		});
+		eloMinInput.addEventListener('change', syncInputToSlider);
+		eloMaxInput.addEventListener('change', syncInputToSlider);
 
 		// Initialize slider range
 		updateSliderRange();
 
-		// Initialize - fetch from API
-		fetchUsageStats();
+		// Initialize
+		renderPokemonList();
+		renderPokemonDetail();
 	})();
 	</script>
 

@@ -96,16 +96,30 @@ export const GET: APIRoute = async ({ url }) => {
 			});
 		}
 
-		// Filter by season/format if specified
-		let result = data;
-		if (season && format && data.seasons?.[season]?.formats?.[format]) {
-			result = {
-				serverId: data.serverId,
-				timestamp: data.timestamp,
-				season,
-				format,
-				tiers: data.seasons[season].formats[format].tiers
-			};
+		// Handle both CobbleRanked format (formats at top level) and demo format (nested seasons)
+		let result: any = data;
+
+		if (format) {
+			// CobbleRanked sends: { serverId, seasonName, formats: { SINGLES: { format, tiers: { "1500+": {...} } } } }
+			if (data.formats?.[format]?.tiers) {
+				result = {
+					serverId: data.serverId,
+					timestamp: data.timestamp,
+					season: data.seasonName,
+					format,
+					tiers: data.formats[format].tiers
+				};
+			}
+			// Demo data format: { seasons: { Season4: { formats: { SINGLES: { tiers: {...} } } } } }
+			else if (season && data.seasons?.[season]?.formats?.[format]?.tiers) {
+				result = {
+					serverId: data.serverId,
+					timestamp: data.timestamp,
+					season,
+					format,
+					tiers: data.seasons[season].formats[format].tiers
+				};
+			}
 		}
 
 		return new Response(JSON.stringify(result), {
