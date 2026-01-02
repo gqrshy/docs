@@ -1,20 +1,16 @@
 ---
 title: CobbleRanked
 description: Competitive ranked battle system for Cobblemon with ELO matchmaking, seasons, leaderboards, and rewards
-template: splash
-hero:
-  tagline: The ultimate competitive Pokemon battle system for Cobblemon
-  actions:
-    - text: Get Started
-      link: /docs/cobbleranked/getting-started/installation/
-      icon: right-arrow
-      variant: primary
-    - text: View on Polymart
-      link: https://polymart.org/product/8733/cobbleranked
-      icon: external
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **The ultimate competitive Pokemon battle system for Cobblemon**
+
+<CardGrid>
+  <LinkCard title="Get Started" href="/docs/cobbleranked/getting-started/installation/" description="Install and configure CobbleRanked" />
+  <LinkCard title="View on Polymart" href="https://polymart.org/product/8733/cobbleranked" description="Purchase CobbleRanked - $10 USD" />
+</CardGrid>
 
 ## Features
 
