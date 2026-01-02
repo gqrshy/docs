@@ -20,45 +20,44 @@ Players see a boss bar countdown that changes color as time runs low. Audio warn
 
 ## Timer Colors
 
-- **Green** (60–30s): Plenty of time
-- **Yellow** (30–10s): Think faster
-- **Red** (10–0s): Decide now
+- **Green**: Plenty of time
+- **Yellow** (30%): Think faster
+- **Red** (20%): Decide now
+
+## Default Timer Values
+
+| Format | Turn Timer | Team Selection | Lead Selection |
+|--------|------------|----------------|----------------|
+| Singles | 90s | 60s | 30s |
+| Doubles | 120s | 60s | 30s |
+| Triples | 150s | 60s | 30s |
 
 ## Configuration
 
-```json5
-{
-  "battle": {
-    "turnTimer": {
-      "enabled": true,
-      "secondsPerTurn": 60,
-      "showWarningAt": 10
-    }
-  }
-}
-```
+Configure timers per format in `battle.yaml`:
 
-### Recommended Settings
+```yaml
+# battle.yaml
+formats:
+  SINGLES:
+    turnTimeoutSeconds: 90
 
-- **Competitive**: 45–60 seconds
-- **Casual**: 90–120 seconds
-- **Tournament**: 30–45 seconds
+  DOUBLES:
+    turnTimeoutSeconds: 120
 
-## Team & Lead Selection
+  TRIPLES:
+    turnTimeoutSeconds: 150
 
-Separate timers control the pre-battle phases:
-
-```json5
-{
-  "battle": {
-    "teamSelection": {
-      "timeoutSeconds": 90
-    },
-    "leadSelection": {
-      "timeoutSeconds": 30
-    }
-  }
-}
+timers:
+  teamSelectionSeconds: 60
+  leadSelectionSeconds: 30
+  matchReadySeconds: 17
+  countdownSeconds: 5
+  battleMinutes: 15
+  battleTimeWarningSeconds:
+    - 300
+    - 60
+    - 30
 ```
 
 ## On Timeout
@@ -71,22 +70,24 @@ When the timer hits zero:
 
 This applies to faint switches and turn-based switching too.
 
-## Disabling Timers
+## Timer Sounds
 
-For casual servers that prefer unlimited time:
+Audio cues help players track time:
 
-```json5
-{
-  "battle": {
-    "turnTimer": {
-      "enabled": false
-    }
-  }
-}
+```yaml
+# battle.yaml
+sounds:
+  battle:
+    turnTimer30Percent:
+      sound: "minecraft:block.note_block.harp"
+      volume: 2.0
+      pitch: 1.5
+    turnTimer20Percent:
+      sound: "minecraft:block.note_block.pling"
+      volume: 3.0
+      pitch: 2.0
 ```
-
-Not recommended for ranked battles — stalling becomes possible.
 
 ---
 
-**Related**: [Ranked Battles](/features/ranked-battles/) | [Casual Battles](/features/casual-battles/)
+**Related**: [Ranked Battles](/docs/cobbleranked/features/ranked-battles/) | [Casual Battles](/docs/cobbleranked/features/casual-battles/) | [Main Configuration](/docs/cobbleranked/configuration/config/)

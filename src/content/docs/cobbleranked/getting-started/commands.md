@@ -11,7 +11,7 @@ Complete list of CobbleRanked commands.
 
 | Command | Description | Permission |
 |---------|-------------|------------|
-| `/ranked` | Open ranked battle GUI | `cobbleranked.command.ranked` |
+| `/ranked` | Open ranked battle GUI | `cobbleranked.player.use` |
 
 > All stats, leaderboard, and queue functions are accessible through the `/ranked` GUI.
 
@@ -19,16 +19,16 @@ Complete list of CobbleRanked commands.
 
 | Command | Description | Permission |
 |---------|-------------|------------|
-| `/casual` | Open casual battle GUI | `cobbleranked.command.casual` |
-| `/casual missions` | View daily/weekly missions | `cobbleranked.command.casual` |
+| `/casual` | Open casual battle GUI | `cobbleranked.player.casual.use` |
+| `/casual missions` | View daily/weekly missions | `cobbleranked.player.casual.use` |
 
 ### Battle Camera
 
 | Command | Description | Permission |
 |---------|-------------|------------|
-| `/battlecamera` | Show camera help | `cobbleranked.command.battlecamera` |
-| `/battlecamera toggle` | Enable/disable battle camera | `cobbleranked.command.battlecamera` |
-| `/battlecamera status` | Show detailed camera status | `cobbleranked.command.battlecamera` |
+| `/battlecamera` | Show camera help | `cobbleranked.player.use` |
+| `/battlecamera toggle` | Enable/disable battle camera | `cobbleranked.player.use` |
+| `/battlecamera status` | Show detailed camera status | `cobbleranked.player.use` |
 
 ## Admin Commands
 
@@ -112,22 +112,38 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 
 | Permission | Description | Default |
 |------------|-------------|---------|
-| `cobbleranked.command.ranked` | Use /ranked command | true |
-| `cobbleranked.command.casual` | Use /casual command | true |
-| `cobbleranked.command.battlecamera` | Use /battlecamera command | true |
+| `cobbleranked.player.use` | Use /ranked and /battlecamera commands | true |
+| `cobbleranked.player.casual.use` | Use /casual command | true |
+| `cobbleranked.player.queue.join` | Join ranked queue | true |
+| `cobbleranked.player.queue.leave` | Leave ranked queue | true |
+| `cobbleranked.player.stats.view` | View own stats | true |
+| `cobbleranked.player.leaderboard.view` | View leaderboard | true |
+
+### Format Permissions
+
+| Permission | Description | Default |
+|------------|-------------|---------|
+| `cobbleranked.player.format.singles` | Queue for Singles format | true |
+| `cobbleranked.player.format.doubles` | Queue for Doubles format | true |
+| `cobbleranked.player.format.triples` | Queue for Triples format | true |
 
 ### Admin Permissions
 
 | Permission | Description | Default |
 |------------|-------------|---------|
-| `cobbleranked.admin` | All admin commands | op |
+| `cobbleranked.admin.*` | All admin commands | op |
+| `cobbleranked.admin.arena.*` | Arena management | op |
+| `cobbleranked.admin.config.reload` | Reload configuration | op |
+| `cobbleranked.admin.player.setelo` | Set player ELO | op |
+| `cobbleranked.admin.queue.clear` | Clear queues | op |
+| `cobbleranked.admin.season.*` | Season management | op |
 
 ### Bypass Permissions
 
 | Permission | Description | Default |
 |------------|-------------|---------|
-| `cobbleranked.bypass.cooldown` | Bypass queue cooldown | op |
-| `cobbleranked.bypass.blacklist` | Bypass Pokemon blacklist | false |
+| `cobbleranked.player.bypass.cooldown` | Bypass queue cooldown | false |
+| `cobbleranked.player.bypass.queuelimit` | Bypass queue player limit | false |
 
 ## Examples
 
@@ -157,3 +173,11 @@ Access stats, leaderboard, and queue from the GUI.
 /rankedadmin setArena arena1 pos1
 /rankedadmin setArena arena1 pos2
 ```
+
+---
+
+## See Also
+
+- [LuckPerms Integration](/docs/cobbleranked/integration/luckperms/) - Permission management
+- [Arena Setup](/docs/cobbleranked/configuration/arenas/) - Configure battle arenas
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

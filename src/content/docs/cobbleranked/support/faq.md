@@ -353,10 +353,10 @@ Rewards are sent via MailLib when the season ends.
 | Command | Permission | Description |
 |---------|------------|-------------|
 | `/ranked` | `cobbleranked.player.use` | Open ranked GUI |
-| `/casual` | `cobbleranked.player.casual_use` | Open casual GUI |
-| `/casual missions` | - | Open missions GUI |
-| `/battlecamera toggle` | - | Toggle battle camera |
-| `/battlecamera status` | - | Check camera status |
+| `/casual` | `cobbleranked.player.casual.use` | Open casual GUI |
+| `/casual missions` | `cobbleranked.player.casual.use` | Open missions GUI |
+| `/battlecamera toggle` | `cobbleranked.player.use` | Toggle battle camera |
+| `/battlecamera status` | `cobbleranked.player.use` | Check camera status |
 
 </details>
 

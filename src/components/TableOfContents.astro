@@ -29,7 +29,10 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 	const tocLinks = document.querySelectorAll('.toc-link');
 	const headings = Array.from(tocLinks).map(link => {
 		const href = link.getAttribute('href');
-		return document.querySelector(href);
+		if (!href || !href.startsWith('#')) return null;
+		const id = href.slice(1);
+		// Use getElementById to handle IDs that start with numbers
+		return document.getElementById(id);
 	}).filter(Boolean);
 
 	function updateActiveLink() {
@@ -60,7 +63,7 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 .toc-title {
 	font-size: 0.75rem;
 	font-weight: 600;
-	color: rgba(255, 255, 255, 0.5);
+	color: rgba(255, 255, 255, 0.85);
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 	margin-bottom: 1rem;
@@ -84,10 +87,10 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 	display: block;
 	padding: 0.25rem 0;
 	padding-left: 0.75rem;
-	color: rgba(255, 255, 255, 0.5);
+	color: rgba(255, 255, 255, 0.75);
 	font-size: 0.85rem;
 	text-decoration: none;
-	border-left: 2px solid rgba(124, 58, 237, 0.2);
+	border-left: 2px solid rgba(124, 58, 237, 0.25);
 	transition: all 0.2s ease;
 	line-height: 1.4;
 }

@@ -103,4 +103,4 @@ Season rewards are distributed per format. Rank high in all three? Get rewards f
 
 ---
 
-**Related**: [Ranked Battles](/features/ranked-battles/) | [ELO System](/features/elo-system/) | [Seasons](/features/seasons/)
+**Related**: [Ranked Battles](/docs/cobbleranked/features/ranked-battles/) | [ELO System](/docs/cobbleranked/features/elo-system/) | [Seasons](/docs/cobbleranked/features/seasons/)

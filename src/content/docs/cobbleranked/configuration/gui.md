@@ -148,3 +148,11 @@ Reload GUI without restart:
 ```
 /rankedadmin reload
 ```
+
+---
+
+## See Also
+
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [Language Configuration](/docs/cobbleranked/configuration/languages/) - Message customization
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

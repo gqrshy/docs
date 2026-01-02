@@ -60,4 +60,4 @@ Leaderboards are cached for smooth performance even with thousands of players. U
 
 ---
 
-**Related**: [Ranked Battles](/features/ranked-battles/) | [ELO System](/features/elo-system/) | [Seasons](/features/seasons/)
+**Related**: [Ranked Battles](/docs/cobbleranked/features/ranked-battles/) | [ELO System](/docs/cobbleranked/features/elo-system/) | [Seasons](/docs/cobbleranked/features/seasons/)

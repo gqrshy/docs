@@ -1,23 +1,21 @@
 ---
 title: Database Configuration
-description: SQLite and MySQL database setup.
+description: SQLite, MySQL, and MongoDB database setup.
 ---
 
-CobbleRanked supports SQLite (default) and MySQL databases.
+CobbleRanked supports SQLite (default), MySQL, and MongoDB databases.
 
 ## SQLite (Default)
 
-Zero configuration required. Database auto-creates at `config/cobbleranked/cobbleranked.db`.
+Zero configuration required. Database auto-creates at `config/cobbleranked/data.db`.
 
-```json5
-{
-  "database": {
-    "type": "sqlite",
-    "sqlite": {
-      "file": "cobbleranked.db"
-    }
-  }
-}
+```yaml
+# config.yaml
+database:
+  type: "sqlite"
+
+  sqlite:
+    path: "config/cobbleranked/data.db"
 ```
 
 ### When to Use SQLite
@@ -28,22 +26,22 @@ Zero configuration required. Database auto-creates at `config/cobbleranked/cobbl
 
 ## MySQL
 
-Required for cross-server setups.
+Required for cross-server setups with relational data.
 
-```json5
-{
-  "database": {
-    "type": "mysql",
-    "mysql": {
-      "host": "localhost",
-      "port": 3306,
-      "database": "cobbleranked",
-      "username": "cobbleranked",
-      "password": "your_password",
-      "useSSL": false
-    }
-  }
-}
+```yaml
+# config.yaml
+database:
+  type: "mysql"
+
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "cobbleranked"
+    username: "cobbleranked"
+    password: "your_password"
+    pool:
+      maxSize: 10
+      minIdle: 2
 ```
 
 ### When to Use MySQL
@@ -56,12 +54,12 @@ Required for cross-server setups.
 
 1. Create database:
 
-```sql
-CREATE DATABASE cobbleranked;
-CREATE USER 'cobbleranked'@'%' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON cobbleranked.* TO 'cobbleranked'@'%';
-FLUSH PRIVILEGES;
-```
+   ```sql
+   CREATE DATABASE cobbleranked;
+   CREATE USER 'cobbleranked'@'%' IDENTIFIED BY 'your_password';
+   GRANT ALL PRIVILEGES ON cobbleranked.* TO 'cobbleranked'@'%';
+   FLUSH PRIVILEGES;
+   ```
 
 2. Configure each server with same MySQL credentials
 
@@ -69,45 +67,77 @@ FLUSH PRIVILEGES;
 
 ### Connection Pool
 
-CobbleRanked uses HikariCP for efficient connection pooling. Default settings work for most servers.
+CobbleRanked uses HikariCP for efficient connection pooling:
+
+| Setting   | Default | Description              |
+|-----------|---------|--------------------------|
+| `maxSize` | 10      | Maximum connections      |
+| `minIdle` | 2       | Minimum idle connections |
+
+## MongoDB
+
+Alternative to MySQL for cross-server setups.
+
+```yaml
+# config.yaml
+database:
+  type: "mongodb"
+
+  mongodb:
+    connectionString: "mongodb://localhost:27017"
+    database: "cobbleranked"
+```
+
+### When to Use MongoDB
+
+- Cross-server with document-based storage
+- Already running MongoDB infrastructure
+- Flexible schema requirements
+
+### MongoDB Setup
+
+1. Install MongoDB 6.0+
+2. Create database (auto-creates on first write)
+3. Configure connection string
+
+**With authentication:**
+
+```yaml
+mongodb:
+  connectionString: "mongodb://user:password@localhost:27017"
+  database: "cobbleranked"
+```
 
 ## Migration
 
-### SQLite to MySQL
+### SQLite to MySQL/MongoDB
 
-1. Export SQLite data (contact support)
-2. Create MySQL database
-3. Update config to MySQL
+1. Export SQLite data
+2. Create new database
+3. Update config type
 4. Import data
 5. Restart server
 
 ### Backup
 
-**SQLite**: Copy `cobbleranked.db` file
+**SQLite**: Copy `data.db` file
 
-**MySQL**: Use `mysqldump`
+**MySQL**:
 
 ```bash
 mysqldump -u cobbleranked -p cobbleranked > backup.sql
 ```
 
-## Troubleshooting
+**MongoDB**:
 
-### Connection refused
+```bash
+mongodump --db cobbleranked --out backup/
+```
 
-- Check MySQL is running
-- Verify host/port
-- Check firewall rules
-- Verify user permissions
+---
 
-### Access denied
+## See Also
 
-- Check username/password
-- Verify user has privileges
-- Check if user can connect from server IP
-
-### Tables not creating
-
-- Check database exists
-- Verify CREATE permission
-- Check server logs for errors
+- [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/) - Multi-server configuration
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

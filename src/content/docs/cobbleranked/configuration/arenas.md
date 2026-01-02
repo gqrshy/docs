@@ -5,24 +5,44 @@ description: Configure battle arenas for CobbleRanked.
 
 Arenas are where battles take place. Configure them in `config/cobbleranked/arenas.yaml`.
 
-## Basic Arena Structure
+## Quick Setup
+
+The fastest way to set up an arena:
+
+1. Stand at Player 1's position
+2. Run `/rankedadmin setArena myarena pos1`
+3. Move to Player 2's position
+4. Run `/rankedadmin setArena myarena pos2`
+5. Move to the exit location
+6. Run `/rankedadmin setArena myarena exit`
+
+## Arena Structure
 
 ```yaml
+# arenas.yaml
+selectionMode: "RANDOM"  # or "SEQUENTIAL"
+
 arenas:
-  arena_id:
-    name: "Display Name"
+  - name: "grass_arena"
     world: "minecraft:overworld"
-    player1:
-      x: 100.0
-      y: 65.0
-      z: 200.0
+    enabled: true
+    player1Position:
+      x: 100.5
+      y: 64.0
+      z: 100.5
       yaw: 0.0
       pitch: 0.0
-    player2:
-      x: 100.0
-      y: 65.0
-      z: 210.0
+    player2Position:
+      x: 110.5
+      y: 64.0
+      z: 100.5
       yaw: 180.0
+      pitch: 0.0
+    exitPosition:
+      x: 0.5
+      y: 64.0
+      z: 0.5
+      yaw: 0.0
       pitch: 0.0
 ```
 
@@ -30,11 +50,13 @@ arenas:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `arena_id` | string | Unique identifier (no spaces) |
-| `name` | string | Display name shown in GUIs |
+| `selectionMode` | string | How arenas are chosen: `RANDOM` or `SEQUENTIAL` |
+| `name` | string | Unique arena identifier |
 | `world` | string | World identifier |
-| `player1` | object | Position for player 1 |
-| `player2` | object | Position for player 2 |
+| `enabled` | boolean | Whether this arena is active |
+| `player1Position` | object | Spawn position for player 1 |
+| `player2Position` | object | Spawn position for player 2 |
+| `exitPosition` | object | Where players teleport after battle |
 
 ### Position Fields
 
@@ -57,47 +79,67 @@ arenas:
 
 ## Multiple Arenas
 
-You can define multiple arenas for parallel battles:
+Define multiple arenas for parallel battles:
 
 ```yaml
 arenas:
-  arena_1:
-    name: "Arena 1"
+  - name: "arena_1"
     world: "minecraft:overworld"
-    player1:
+    enabled: true
+    player1Position:
       x: 100.0
       y: 65.0
       z: 200.0
       yaw: 0.0
-    player2:
+      pitch: 0.0
+    player2Position:
       x: 100.0
       y: 65.0
       z: 210.0
       yaw: 180.0
+      pitch: 0.0
+    exitPosition:
+      x: 0.0
+      y: 65.0
+      z: 0.0
+      yaw: 0.0
+      pitch: 0.0
 
-  arena_2:
-    name: "Arena 2"
+  - name: "arena_2"
     world: "minecraft:overworld"
-    player1:
+    enabled: true
+    player1Position:
       x: 200.0
       y: 65.0
       z: 200.0
       yaw: 0.0
-    player2:
+      pitch: 0.0
+    player2Position:
       x: 200.0
       y: 65.0
       z: 210.0
       yaw: 180.0
+      pitch: 0.0
+    exitPosition:
+      x: 0.0
+      y: 65.0
+      z: 0.0
+      yaw: 0.0
+      pitch: 0.0
 ```
 
-## Setting Up via Commands
+## Admin Commands
 
-The easiest way to set up arenas:
-
-1. Stand at Player 1's position
-2. Run `/rankedadmin setArena arena1 pos1`
-3. Move to Player 2's position
-4. Run `/rankedadmin setArena arena1 pos2`
+| Command | Description |
+|---------|-------------|
+| `/rankedadmin setArena <name> pos1` | Set player 1 spawn |
+| `/rankedadmin setArena <name> pos2` | Set player 2 spawn |
+| `/rankedadmin setArena <name> exit` | Set exit location |
+| `/rankedadmin setArena <name> spectator` | Set spectator position |
+| `/rankedadmin arena status` | View all arena statuses |
+| `/rankedadmin arena enable <name>` | Enable an arena |
+| `/rankedadmin arena disable <name>` | Disable an arena |
+| `/rankedadmin teleportArena <name>` | Teleport to arena |
 
 ## Arena Design Tips
 
@@ -106,7 +148,6 @@ The easiest way to set up arenas:
 - Place players facing each other (180° difference in yaw)
 - Recommended distance: 8-12 blocks apart
 - Ensure flat ground at spawn points
-- Y coordinate should be at floor level + 0.0
 
 ### Yaw Reference
 
@@ -124,31 +165,9 @@ The easiest way to set up arenas:
 - Good lighting for visibility
 - Consider barrier blocks for boundaries
 
-## Testing Arenas
+---
 
-Use admin command to test:
+## See Also
 
-```
-/rankedadmin teleportArena arena_1
-```
-
-This teleports you to player1 position.
-
-## Troubleshooting
-
-### "No arenas available"
-
-- Check arenas.yaml exists
-- Verify YAML syntax is valid
-- Ensure at least one arena is defined
-
-### Players spawn in wrong location
-
-- Check world identifier matches
-- Verify coordinates are correct
-- Ensure Y coordinate is at ground level
-
-### Players face wrong direction
-
-- Adjust yaw values
-- Player 1 and 2 should face each other (180° difference)
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

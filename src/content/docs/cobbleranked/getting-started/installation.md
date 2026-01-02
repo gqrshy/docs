@@ -58,11 +58,11 @@ On first launch, config files auto-generate:
 server/
 ├── config/
 │   └── cobbleranked/
-│       ├── config.json5        ← Main config
+│       ├── config.yaml         ← Main config
 │       ├── arenas.yaml         ← Battle coordinates
 │       ├── blacklist.yaml      ← Pokemon/move restrictions
 │       ├── rewards.yaml        ← Season rewards
-│       ├── cobbleranked.db     ← SQLite database
+│       ├── data.db             ← SQLite database
 │       ├── gui/                ← GUI layouts
 │       └── language/           ← Language files
 ```
@@ -90,14 +90,13 @@ If GUI opens → Installation successful!
 
 ### Language Configuration
 
-Default: English (`en-Us`)
+Default: English (`en-us`)
 
-Edit `config/cobbleranked/config.json5`:
+Edit `config/cobbleranked/config.yaml`:
 
-```json5
-{
-  "language": "ja-Jp"  // en-Us | ja-Jp
-}
+```yaml
+# config.yaml
+language: "ja-jp"  # en-us or ja-jp
 ```
 
 **Reload:** `/rankedadmin reload`
@@ -142,7 +141,7 @@ black_list_moves:
 
 **Reload:** `/rankedadmin reload`
 
-**Details:** [Blacklist Configuration](/configuration/blacklist/)
+**Details:** [Blacklist Configuration](/docs/cobbleranked/configuration/blacklist/)
 
 ## Cross-Server Setup (Advanced)
 
@@ -154,17 +153,21 @@ black_list_moves:
 - Redis 6.0+
 - Velocity 3.4.0+
 
-**Full Guide:** [Cross-Server Setup](/advanced/cross-server/)
+**Full Guide:** [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/)
 
 ## File Structure Reference
 
 ```
 config/cobbleranked/
-├── config.json5           # Main settings (seasons, ELO, clauses)
+├── config.yaml            # Main settings (language, database, cross-server)
+├── elo.yaml               # ELO/rating system settings
+├── battle.yaml            # Battle formats, timers, sounds
+├── matchmaking.yaml       # Queue matching rules
+├── season.yaml            # Season schedule and reset behavior
 ├── arenas.yaml            # Battle coordinates
 ├── blacklist.yaml         # Restrictions (Pokemon/moves/abilities/items)
 ├── rewards.yaml           # Season-end rewards
-├── cobbleranked.db        # SQLite database (auto-created)
+├── data.db                # SQLite database (auto-created)
 ├── gui/
 │   ├── ranked_gui.json5   # Ranked menu layout
 │   ├── casual_gui.json5   # Casual menu layout
@@ -178,24 +181,23 @@ config/cobbleranked/
 
 ### For Casual Servers
 
-1. **[Set arenas](/configuration/arenas/)** - Battle locations
-2. **[Configure rewards](/configuration/rewards/)** - Season prizes
-3. **[Customize GUI](/configuration/gui/)** - Interface tweaks
+1. **[Set arenas](/docs/cobbleranked/configuration/arenas/)** - Battle locations
+2. **[Configure rewards](/docs/cobbleranked/configuration/rewards/)** - Season prizes
+3. **[Customize GUI](/docs/cobbleranked/configuration/gui/)** - Interface tweaks
 
 ### For Competitive Servers
 
-1. **[Configure blacklist](/configuration/blacklist/)** - Smogon/VGC rules
-2. **[Adjust ELO system](/configuration/config/)** - Fine-tune ratings
-3. **[Set battle settings](/configuration/config/)** - Turn timers, team selection
+1. **[Configure blacklist](/docs/cobbleranked/configuration/blacklist/)** - Smogon/VGC rules
+2. **[Adjust ELO system](/docs/cobbleranked/configuration/config/)** - Fine-tune ratings
+3. **[Set battle settings](/docs/cobbleranked/configuration/config/)** - Turn timers, team selection
 
 ### For Cross-Server Networks
 
-1. **[Complete cross-server setup](/advanced/cross-server/)** - Full guide
-2. **[Configure database](/advanced/database/)** - MySQL setup
+1. **[Complete cross-server setup](/docs/cobbleranked/advanced/cross-server/)** - Full guide
+2. **[Configure database](/docs/cobbleranked/advanced/database/)** - MySQL setup
 
 ## See Also
 
-- [Requirements](/getting-started/requirements/) - System requirements
-- [Quick Start](/getting-started/quick-start/) - First battle setup
-- [FAQ](/support/faq/) - Common questions
-- [Troubleshooting](/support/troubleshooting/) - Problem solving
+- [Requirements](/docs/cobbleranked/getting-started/requirements/) - System requirements
+- [Quick Start](/docs/cobbleranked/getting-started/quick-start/) - First battle setup
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

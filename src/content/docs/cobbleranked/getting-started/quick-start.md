@@ -85,17 +85,10 @@ Same flow as ranked, but no ELO changes.
 3. **Mind the Timer** - Don't take too long on turns
 4. **Camera Toggle** - Use `/battlecamera toggle` if you prefer manual camera
 
-## Troubleshooting
+---
 
-### "No arenas available"
+## See Also
 
-Admin needs to configure at least one arena in `arenas.yaml`.
-
-### "You don't have enough Pokemon"
-
-You need at least 1 Pokemon (or more depending on format settings).
-
-### Queue not finding matches
-
-- Ensure both players are in the same format queue
-- Check if matchmaking range is too narrow in config
+- [Commands](/docs/cobbleranked/getting-started/commands/) - Full command reference
+- [Arena Setup](/docs/cobbleranked/configuration/arenas/) - Configure battle arenas
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

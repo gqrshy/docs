@@ -3,236 +3,390 @@ title: Main Configuration
 description: The main configuration file for CobbleRanked.
 ---
 
-The main configuration file is located at `config/cobbleranked/config.json5`.
+CobbleRanked v2 uses multiple YAML configuration files located in `config/cobbleranked/`.
+
+## Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `config.yaml` | Main settings (language, database, music, debug) |
+| `elo.yaml` | Rating system settings |
+| `battle.yaml` | Battle formats, timers, sounds, rewards |
+| `matchmaking.yaml` | Queue matching rules |
+| `season.yaml` | Season schedule and reset behavior |
+| `rewards.yaml` | Season rewards and milestones |
+| `restrictions.yaml` | Player action restrictions |
+| `arenas.yaml` | Battle arena positions |
+| `luckperms.yaml` | LuckPerms integration |
+| `missions.yaml` | Daily/weekly missions |
 
 ## Database Settings
 
-Configure how CobbleRanked stores data.
+Configure how CobbleRanked stores data in `config.yaml`.
 
 | Type | Use Case |
 |------|----------|
 | `sqlite` | Single server (default) |
 | `mysql` | Cross-server setups |
+| `mongodb` | Cross-server with MongoDB |
 
-```json5
-{
-  "database": {
-    "type": "sqlite",
-    "sqlite": {
-      "file": "cobbleranked.db"
-    }
-  }
-}
+```yaml
+# config.yaml
+database:
+  type: "sqlite"
+
+  sqlite:
+    path: "config/cobbleranked/data.db"
 ```
 
 ### MySQL Configuration
 
-```json5
-{
-  "database": {
-    "type": "mysql",
-    "mysql": {
-      "host": "localhost",
-      "port": 3306,
-      "database": "cobbleranked",
-      "username": "cobbleranked",
-      "password": "your_password",
-      "useSSL": false
-    }
-  }
-}
+```yaml
+# config.yaml
+database:
+  type: "mysql"
+
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "cobbleranked"
+    username: "root"
+    password: ""
+    pool:
+      maxSize: 10
+      minIdle: 2
+```
+
+### MongoDB Configuration
+
+```yaml
+# config.yaml
+database:
+  type: "mongodb"
+
+  mongodb:
+    connectionString: "mongodb://localhost:27017"
+    database: "cobbleranked"
+```
+
+## Matchmaking Settings
+
+Control how players are matched together in `matchmaking.yaml`.
+
+```yaml
+# matchmaking.yaml
+formatRules:
+  SINGLES:
+    enforceEloRange: true
+    initialRange: 200
+    expansionDelaySeconds: 30
+    expansionRate: 50
+    maxMultiplier: 3.0
+    immediateMatchRange: 100
+
+  DOUBLES:
+    enforceEloRange: true
+    initialRange: 200
+    expansionDelaySeconds: 30
+    expansionRate: 50
+    maxMultiplier: 3.0
+    immediateMatchRange: 100
+
+defaultEloRange:
+  enforceEloRange: true
+  initialRange: 200
+  expansionDelaySeconds: 30
+  expansionRate: 50
+  maxMultiplier: 3.0
+  immediateMatchRange: 100
+
+recentOpponentAvoidance:
+  enabled: true
+  avoidCount: 3
+  expirationSeconds: 300
+  relaxAfterSeconds: 120
+  minimumQueueSize: 4
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `initialRange` | `200` | Starting ELO difference for matching |
+| `expansionDelaySeconds` | `30` | Seconds before range starts expanding |
+| `expansionRate` | `50` | ELO points added per expansion |
+| `maxMultiplier` | `3.0` | Max range = initialRange x multiplier |
+| `immediateMatchRange` | `100` | Instant match if within this range |
+
+## Battle Settings
+
+Configure battle behavior in `battle.yaml`.
+
+```yaml
+# battle.yaml
+enabledFormats:
+  - "SINGLES"
+  - "DOUBLES"
+
+formats:
+  SINGLES:
+    teamSize: 3
+    selectCount: 3
+    matchDurationMinutes: 15
+    turnTimeoutSeconds: 90
+    levelCap: 100
+    allowShiny: true
+
+  DOUBLES:
+    teamSize: 4
+    selectCount: 4
+    matchDurationMinutes: 20
+    turnTimeoutSeconds: 120
+    levelCap: 100
+    allowShiny: true
+
+timers:
+  teamSelectionSeconds: 60
+  leadSelectionSeconds: 30
+  matchReadySeconds: 17
+  countdownSeconds: 5
+  battleMinutes: 15
+  battleTimeWarningSeconds:
+    - 300
+    - 60
+    - 30
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `teamSize` | Format-dependent | Pokemon to bring to battle |
+| `selectCount` | Format-dependent | Pokemon to select for battle |
+| `turnTimeoutSeconds` | `90-150` | Seconds per turn |
+| `teamSelectionSeconds` | `60` | Time limit for team selection |
+| `leadSelectionSeconds` | `30` | Time limit for lead selection |
+
+## ELO Settings
+
+Configure the rating system in `elo.yaml`.
+
+```yaml
+# elo.yaml
+ratingSystem: POKEMON_SHOWDOWN  # or GLICKO2
+
+startingElo: 1000
+floorElo: 1000
+
+pokemonShowdown:
+  newPlayerGames: 30
+  newPlayerKFactor: 50
+  kFactorBands:
+    - maxElo: 1100
+      kFactor: 40
+    - maxElo: 1300
+      kFactor: 32
+    - maxElo: 1600
+      kFactor: 24
+    - maxElo: 2000
+      kFactor: 16
+    - maxElo: 999999
+      kFactor: 12
+
+rankTiers:
+  - name: "POKEBALL"
+    displayName: "Poké Ball"
+    minElo: 0
+  - name: "GREATBALL"
+    displayName: "Great Ball"
+    minElo: 1300
+  - name: "ULTRABALL"
+    displayName: "Ultra Ball"
+    minElo: 1500
+  - name: "MASTERBALL"
+    displayName: "Master Ball"
+    minElo: 1700
+  - name: "BEASTBALL"
+    displayName: "Beast Ball"
+    minElo: 1900
+  - name: "CHERISH"
+    displayName: "Cherish Ball"
+    minElo: 2100
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `startingElo` | `1000` | Starting ELO for new players |
+| `floorElo` | `1000` | Minimum possible ELO |
+| `ratingSystem` | `POKEMON_SHOWDOWN` | Rating algorithm |
+
+## Season Settings
+
+Configure season behavior in `season.yaml`.
+
+```yaml
+# season.yaml
+checkIntervalMinutes: 1
+timezone: "Asia/Tokyo"
+
+schedule:
+  - name: "Season 1"
+    startDate: "2025-01-01"
+    endDate: "2025-03-31 23:59:59"
+    preset: "default"
+
+onSeasonEnd:
+  resetElo: false
+  softResetElo: true
+  softResetFactor: 0.5
+  resetWinLoss: true
+  resetStreak: true
+
+offSeason:
+  allowCasual: true
+  allowRankedView: true
+
+archive:
+  enabled: true
+  keepAllPlayers: false
+  topPlayersCount: 100
+  includeStatistics: true
+
+announcements:
+  enabled: true
+  intervalMinutes: 30
+  showRemainingDays: true
 ```
 
 | Setting | Description |
 |---------|-------------|
-| `host` | MySQL server address |
-| `port` | MySQL port (default: 3306) |
-| `database` | Database name |
-| `username` | MySQL username |
-| `password` | MySQL password |
-| `useSSL` | Enable SSL connection |
-
-## Matchmaking Settings
-
-Control how players are matched together.
-
-```json5
-{
-  "matchmaking": {
-    "initialEloRange": 100,
-    "eloRangeExpansionPerSecond": 5,
-    "maxEloRange": 500,
-    "matchmakingIntervalMs": 2000
-  }
-}
-```
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `initialEloRange` | `100` | Starting ELO difference for matching |
-| `eloRangeExpansionPerSecond` | `5` | How fast range expands in queue |
-| `maxEloRange` | `500` | Maximum ELO difference allowed |
-| `matchmakingIntervalMs` | `2000` | Queue check frequency (ms) |
-
-## Battle Settings
-
-Configure battle behavior and phases.
-
-```json5
-{
-  "battle": {
-    "defaultFormat": "SINGLES",
-    "teamPreview": true,
-    "teamSelection": {
-      "enabled": true,
-      "minPokemon": 3,
-      "maxPokemon": 6,
-      "timeoutSeconds": 90
-    },
-    "leadSelection": {
-      "enabled": true,
-      "timeoutSeconds": 30
-    },
-    "turnTimer": {
-      "enabled": true,
-      "secondsPerTurn": 60,
-      "showWarningAt": 10
-    }
-  }
-}
-```
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `defaultFormat` | `"SINGLES"` | Default battle format |
-| `teamPreview` | `true` | Show opponent's team before battle |
-| `teamSelection.enabled` | `true` | Enable team selection phase |
-| `teamSelection.minPokemon` | `3` | Minimum Pokemon to select |
-| `teamSelection.maxPokemon` | `6` | Maximum Pokemon to select |
-| `teamSelection.timeoutSeconds` | `90` | Time limit for selection |
-| `leadSelection.enabled` | `true` | Enable lead selection phase |
-| `leadSelection.timeoutSeconds` | `30` | Time limit for lead selection |
-| `turnTimer.enabled` | `true` | Enable per-turn timer |
-| `turnTimer.secondsPerTurn` | `60` | Seconds per turn |
-| `turnTimer.showWarningAt` | `10` | Show warning at X seconds |
-
-## ELO Settings
-
-Configure the rating system.
-
-```json5
-{
-  "elo": {
-    "defaultElo": 1500,
-    "minElo": 100,
-    "maxElo": 3000,
-    "kFactor": 32
-  }
-}
-```
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `defaultElo` | `1500` | Starting ELO for new players |
-| `minElo` | `100` | Minimum possible ELO |
-| `maxElo` | `3000` | Maximum possible ELO |
-| `kFactor` | `32` | Rating volatility (higher = more change per match) |
-
-## Season Settings
-
-Configure season behavior.
-
-```json5
-{
-  "season": {
-    "currentSeason": "Season 1",
-    "resetEloOnNewSeason": true,
-    "seasonResetElo": 1500
-  }
-}
-```
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `currentSeason` | `"Season 1"` | Current season name |
-| `resetEloOnNewSeason` | `true` | Reset ratings at season start |
-| `seasonResetElo` | `1500` | ELO after reset |
+| `checkIntervalMinutes` | How often to check for season transitions |
+| `softResetElo` | Partial reset towards starting ELO |
+| `softResetFactor` | How much to reset (0.5 = halfway) |
+| `resetWinLoss` | Clear win/loss records |
 
 ## Restriction Settings
 
-Prevent certain actions during queue/battle.
+Prevent certain actions during queue/battle in `restrictions.yaml`.
 
-```json5
-{
-  "restrictions": {
-    "preventPcAccess": true,
-    "preventItemUse": true,
-    "preventTeleport": true,
-    "preventEvolution": true
-  }
-}
+Two phases: `queue` (while waiting for match) and `arena` (from teleport to battle end).
+
+```yaml
+# restrictions.yaml
+queue:
+  blockEquipmentChange: true
+  blockTeleport: true
+  blockPortalUse: true
+  blockPcAccess: true
+  blockMoveSwap: true
+  blockedCommands:
+    - "tp"
+    - "teleport"
+    - "spawn"
+    - "home"
+    - "warp"
+    - "tpa"
+    - "pc"
+    - "pokeheal"
+
+arena:
+  blockItemUse: true
+  blockItemDrop: true
+  blockItemPickup: true
+  blockEquipmentChange: true
+  blockBlockBreak: true
+  blockBlockPlace: true
+  blockBlockInteract: true
+  blockContainerAccess: true
+  blockEntityInteract: true
+  blockEntityDamage: true
+  blockEntityMount: true
+  blockPvp: true
+  blockPve: true
+  blockProjectileLaunch: true
+  blockTeleport: true
+  blockPortalUse: true
+  blockFlight: true
+  blockPcAccess: true
+  blockMoveSwap: true
+  blockedCommands:
+    - "tp"
+    - "teleport"
+    - "spawn"
+    - "home"
+    - "warp"
+    - "ranked"
+    - "casual"
 ```
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `preventPcAccess` | `true` | Block PC access |
-| `preventItemUse` | `true` | Block item usage |
-| `preventTeleport` | `true` | Block teleportation |
-| `preventEvolution` | `true` | Block evolution |
+<details>
+<summary>All Restriction Options</summary>
 
-## GUI Settings
+| Option | Description |
+|--------|-------------|
+| `blockItemUse` | Block using items |
+| `blockItemDrop` | Block dropping items |
+| `blockItemPickup` | Block picking up items |
+| `blockEquipmentChange` | Block changing equipment |
+| `blockBlockBreak` | Block breaking blocks |
+| `blockBlockPlace` | Block placing blocks |
+| `blockBlockInteract` | Block interacting with blocks |
+| `blockContainerAccess` | Block opening containers |
+| `blockEntityInteract` | Block entity interaction |
+| `blockEntityDamage` | Block damaging entities |
+| `blockEntityMount` | Block mounting entities |
+| `blockPvp` | Block PvP combat |
+| `blockPve` | Block PvE combat |
+| `blockProjectileLaunch` | Block launching projectiles |
+| `blockTeleport` | Block teleportation |
+| `blockPortalUse` | Block using portals |
+| `blockFlight` | Block flying |
+| `blockPcAccess` | Block PC access |
+| `blockMoveSwap` | Block swapping Pokemon moves |
+| `blockedCommands` | List of blocked commands |
 
-Configure GUI behavior.
-
-```json5
-{
-  "gui": {
-    "defaultLanguage": "en-Us",
-    "availableLanguages": ["en-Us", "ja-Jp"]
-  }
-}
-```
+</details>
 
 ## Cross-Server Settings
 
-Enable for multi-server setups.
+Enable for multi-server setups in `config.yaml`.
 
-```json5
-{
-  "crossServer": {
-    "enabled": false,
-    "serverId": "lobby1",
-    "battleServer": "battle",
-    "redis": {
-      "host": "localhost",
-      "port": 6379,
-      "password": ""
-    }
-  }
-}
+```yaml
+# config.yaml
+crossServer:
+  enabled: false
+  serverId: "server1"
+  battleServer: ""
+
+  redis:
+    host: "localhost"
+    port: 6379
+    password: ""
+    database: 0
+    useSsl: false
+
+  timing:
+    matchFoundDelaySeconds: 5
+    battleStartDelaySeconds: 10
+    playerArrivalTimeoutSeconds: 30
 ```
 
-> See [Cross-Server Setup](/advanced/cross-server/) for detailed configuration.
+> See [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/) for detailed configuration.
 
 ## Debug Settings
 
-Enable for troubleshooting.
+Enable for troubleshooting in `config.yaml`.
 
-```json5
-{
-  "debug": {
-    "enabled": false,
-    "logMatchmaking": false,
-    "logBattleEvents": false
-  }
-}
+```yaml
+# config.yaml
+debug:
+  enabled: false
+  logBattleEvents: false
+  logMatchmaking: false
+  logGuiInteractions: false
+  logMusicEvents: false
 ```
 
 ## See Also
 
-- [Arenas](/configuration/arenas/) - Arena configuration
-- [Blacklist](/configuration/blacklist/) - Pokemon restrictions
-- [Rewards](/configuration/rewards/) - Season rewards
-- [Cross-Server](/advanced/cross-server/) - Multi-server setup
-- [Troubleshooting](/support/troubleshooting/) - Configuration issues
-- [FAQ](/support/faq/) - Common questions
+- [Arenas](/docs/cobbleranked/configuration/arenas/) - Arena configuration
+- [Blacklist](/docs/cobbleranked/configuration/blacklist/) - Pokemon restrictions
+- [Rewards](/docs/cobbleranked/configuration/rewards/) - Season rewards
+- [Cross-Server](/docs/cobbleranked/advanced/cross-server/) - Multi-server setup
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

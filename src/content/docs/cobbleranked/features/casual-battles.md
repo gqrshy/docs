@@ -55,4 +55,4 @@ Check `/casual missions` for daily and weekly challenges. Complete them for extr
 
 ---
 
-**Related**: [Ranked Battles](/features/ranked-battles/) | [Battle Formats](/features/battle-formats/)
+**Related**: [Ranked Battles](/docs/cobbleranked/features/ranked-battles/) | [Battle Formats](/docs/cobbleranked/features/battle-formats/)

@@ -46,51 +46,149 @@ Season rotation triggers on server start or when the end date is reached. No man
 
 ## Configuration
 
-```json5
-{
-  "season": {
-    "currentSeason": "Season 1",
-    "resetEloOnNewSeason": true,   // Fresh start each season
-    "seasonResetElo": 1500         // Starting ELO after reset
-  }
-}
+Configure seasons in `config/cobbleranked/season.yaml`:
+
+```yaml
+# season.yaml
+checkIntervalMinutes: 1
+
+# Server timezone (IANA format)
+# Examples: "Asia/Tokyo", "America/New_York", "Europe/London", "UTC"
+timezone: "Asia/Tokyo"
+
+# Season schedule
+# Date format: "YYYY-MM-DD" (starts at 00:00:00)
+# DateTime format: "YYYY-MM-DD HH:mm:ss" (precise control)
+schedule:
+  - name: "Season 1"
+    startDate: "2025-01-01"
+    endDate: "2025-03-31 23:59:59"
+    preset: "default"
+
+  - name: "Season 2"
+    startDate: "2025-04-01"
+    endDate: "2025-06-30 23:59:59"
+    preset: "default"
+
+# What happens when a season ends
+onSeasonEnd:
+  resetElo: false           # Hard reset to starting ELO
+  softResetElo: true        # Partial reset (recommended)
+  softResetFactor: 0.5      # 0.5 = halfway to starting ELO
+  resetWinLoss: true        # Clear win/loss records
+  resetStreak: true         # Clear win streaks
+
+# Off-season behavior
+offSeason:
+  allowCasual: true         # Allow casual battles
+  allowRankedView: true     # Allow viewing rankings
+
+# Leaderboard archiving
+archive:
+  enabled: true
+  keepAllPlayers: false     # Keep all or just top players
+  topPlayersCount: 100      # How many to keep if not all
+  includeStatistics: true   # Include detailed stats
+
+# Season end announcements
+announcements:
+  enabled: true
+  intervalMinutes: 30
+  showRemainingDays: true
 ```
 
-### Reset or Carry Over?
+### Key Settings
 
-- **Reset enabled**: Everyone starts fresh. Equal opportunity. Recommended for most servers.
-- **Reset disabled**: ELO carries over. Rewards skill investment over time.
+| Setting | Description |
+|---------|-------------|
+| `timezone` | Server timezone for schedule interpretation |
+| `softResetElo` | Partial reset towards starting ELO |
+| `softResetFactor` | How much to reset (0.5 = halfway) |
+| `resetWinLoss` | Clear win/loss records each season |
+
+### Reset Types
+
+**Hard Reset** (`resetElo: true`):
+Everyone returns to the starting ELO (1500). Complete fresh start.
+
+**Soft Reset** (`softResetElo: true`):
+ELO moves partway towards starting ELO based on `softResetFactor`.
+
+Example with `softResetFactor: 0.5`:
+- 1800 ELO → 1650 (halfway between 1800 and 1500)
+- 1200 ELO → 1350 (halfway between 1200 and 1500)
+
+**No Reset** (both false):
+ELO carries over. Rewards skill investment over time.
+
+## Season Presets
+
+Use presets to apply different rules for different seasons:
+
+```yaml
+# season.yaml
+schedule:
+  - name: "Standard Season"
+    startDate: "2025-01-01"
+    endDate: "2025-03-31"
+    preset: "default"
+
+  - name: "Hardcore Season"
+    startDate: "2025-04-01"
+    endDate: "2025-06-30"
+    preset: "hardcore"
+```
+
+Presets are defined in separate files in `config/cobbleranked/presets/`.
 
 ## Season Rewards
 
 The real motivation. Configure rewards in `rewards.yaml`:
 
 ```yaml
+# rewards.yaml
 seasonRewards:
-  enabled: true
-  rewards:
-    - minRank: 1
-      maxRank: 1
+  SINGLES:
+    - id: "singles_champion"
+      rankRange: "1"
+      displayName: "&6&l★ Singles Champion ★"
+      displayItem: "minecraft:nether_star"
       commands:
-        - "give {player} diamond_block 64"
-        - "give {player} cobblemon:master_ball 10"
-    - minRank: 2
-      maxRank: 10
+        - "pokegiveother {player} victini"
+        - "eco give {player} 50000"
+      mailSender: "&6Season Champion"
+      mailTitle: "&6&l★ {format} Champion - Season {season} ★"
+      mailMessage: "&eCongratulations! You are the #1 {format} player!"
+
+    - id: "singles_elite"
+      rankRange: "2-10"
+      displayName: "&eSingles Elite"
       commands:
-        - "give {player} diamond 64"
+        - "eco give {player} 25000"
 ```
 
 Rewards are delivered via MailLib. Players claim them from their mailbox at their convenience.
 
-See [Rewards Configuration](/configuration/rewards/) for the full setup guide.
+See [Rewards Configuration](/docs/cobbleranked/configuration/rewards/) for the full setup guide.
+
+## Endless Mode
+
+Leave the schedule empty for endless mode (no season rotation):
+
+```yaml
+# season.yaml
+schedule: []
+```
+
+In endless mode, rankings accumulate indefinitely with no automatic resets.
 
 ## Admin Commands
 
-```
+```bash
 /rankedadmin season info      # View current season details
 /rankedadmin season rotate    # Manually trigger rotation check
 ```
 
 ---
 
-**Related**: [Rewards](/configuration/rewards/) | [Leaderboards](/features/leaderboards/) | [ELO System](/features/elo-system/)
+**Related**: [Rewards](/docs/cobbleranked/configuration/rewards/) | [Leaderboards](/docs/cobbleranked/features/leaderboards/) | [ELO System](/docs/cobbleranked/features/elo-system/)

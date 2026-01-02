@@ -20,11 +20,15 @@ Make sure you have:
 
 | Requirement | Version |
 |-------------|---------|
-| Minecraft Server | 1.21.1 (Fabric) |
+| Minecraft | 1.21.1 |
+| Fabric Loader | 0.17.2+ |
+| Fabric API | 0.116.6+ |
+| Fabric Language Kotlin | 1.13.6+ |
 | Cobblemon | 1.7.1+ |
 | GashiLibs | 1.0.3+ |
 | MailLib | 1.0.1+ |
-| Fabric Language Kotlin | 1.13.6+ |
+
+See [Requirements](/docs/cobbleranked/getting-started/requirements/) for download links.
 
 ## 5-Minute Setup
 
@@ -39,13 +43,12 @@ That's it! CobbleRanked works out of the box with sensible defaults.
 
 After basic installation, you may want to:
 
-- **[Configure Arenas](/configuration/arenas/)** - Set battle locations
-- **[Configure Blacklist](/configuration/blacklist/)** - Restrict Pokemon/moves
-- **[Configure Rewards](/configuration/rewards/)** - Season end prizes
-- **[Configure Languages](/configuration/languages/)** - Change to Japanese
+- **[Configure Arenas](/docs/cobbleranked/configuration/arenas/)** - Set battle locations
+- **[Configure Blacklist](/docs/cobbleranked/configuration/blacklist/)** - Restrict Pokemon/moves
+- **[Configure Rewards](/docs/cobbleranked/configuration/rewards/)** - Season end prizes
+- **[Configure Languages](/docs/cobbleranked/configuration/languages/)** - Change to Japanese
 
 ## Need Help?
 
-- **[FAQ](/support/faq/)** - Common questions answered
-- **[Troubleshooting](/support/troubleshooting/)** - Problem solving
+- **[FAQ](/docs/cobbleranked/support/faq/)** - Common questions answered
 - **[Discord](https://discord.gg/VVVvBTqqyP)** - Community support

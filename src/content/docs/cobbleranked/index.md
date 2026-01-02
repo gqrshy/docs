@@ -19,7 +19,7 @@ A competitive ranked battle system for Cobblemon servers with ELO-based matchmak
 - [Installation](/docs/cobbleranked/getting-started/installation/)
 - [Quick Start](/docs/cobbleranked/getting-started/quick-start/)
 - [Commands](/docs/cobbleranked/getting-started/commands/)
-- [Configuration](/docs/cobbleranked/configuration/overview/)
+- [Configuration](/docs/cobbleranked/configuration/config/)
 
 ## Requirements
 
@@ -27,9 +27,13 @@ A competitive ranked battle system for Cobblemon servers with ELO-based matchmak
 |-------------|---------|
 | Minecraft | 1.21.1 |
 | Fabric Loader | 0.17.2+ |
+| Fabric API | 0.116.6+ |
+| Fabric Language Kotlin | 1.13.6+ |
 | Cobblemon | 1.7.1+ |
 | GashiLibs | 1.0.3+ |
 | MailLib | 1.0.1+ |
+
+See [Requirements](/docs/cobbleranked/getting-started/requirements/) for download links.
 
 ## Purchase
 

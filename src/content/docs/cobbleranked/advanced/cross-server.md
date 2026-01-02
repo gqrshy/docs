@@ -7,15 +7,15 @@ Share rankings and queue across your entire network.
 
 ## Requirements
 
-| Component | Version | Purpose |
-|-----------|---------|---------|
-| MySQL | 8.0+ | Shared database |
-| Redis | 6.0+ | Queue synchronization |
-| Velocity | 3.4.0+ | Player transfer |
+| Component | Version | Purpose               |
+|-----------|---------|---------------------- |
+| MySQL     | 8.0+    | Shared database       |
+| Redis     | 6.0+    | Queue synchronization |
+| Velocity  | 3.4.0+  | Player transfer       |
 
 ## Architecture
 
-```
+```text
 ┌─────────────┐     ┌─────────────┐
 │   Lobby 1   │     │   Lobby 2   │
 │  (Queue)    │     │  (Queue)    │
@@ -34,7 +34,7 @@ Share rankings and queue across your entire network.
          └───────┬───────┘
                  │
          ┌───────▼───────┐
-         │    MySQL      │
+         │ MySQL/MongoDB │
          │  (Rankings)   │
          └───────────────┘
 ```
@@ -64,58 +64,73 @@ redis-cli PING
 # Should return: PONG
 ```
 
-### 2. Configure MySQL
+### 2. Configure Database
 
-See [Database Configuration](/advanced/database/) for MySQL setup.
+See [Database Configuration](/docs/cobbleranked/advanced/database/) for MySQL/MongoDB setup.
 
 ### 3. Configure Battle Server
 
 The battle server hosts actual battles.
 
-```json5
-{
-  "crossServer": {
-    "enabled": true,
-    "serverId": "battle",
-    "battleServer": ""  // Empty = this IS the battle server
-  },
-  "database": {
-    "type": "mysql",
-    "mysql": {
-      "host": "localhost",
-      "port": 3306,
-      "database": "cobbleranked",
-      "username": "cobbleranked",
-      "password": "your_password"
-    }
-  },
-  "redis": {
-    "enabled": true,
-    "host": "localhost",
-    "port": 6379,
-    "password": ""
-  }
-}
+```yaml
+# config.yaml
+crossServer:
+  enabled: true
+  serverId: "battle"
+  battleServer: ""  # Empty = this IS the battle server
+
+  redis:
+    host: "localhost"
+    port: 6379
+    password: ""
+    database: 0
+    useSsl: false
+
+  timing:
+    matchFoundDelaySeconds: 5
+    battleStartDelaySeconds: 10
+    playerArrivalTimeoutSeconds: 30
+
+database:
+  type: "mysql"
+
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "cobbleranked"
+    username: "cobbleranked"
+    password: "your_password"
+    pool:
+      maxSize: 10
+      minIdle: 2
 ```
 
 ### 4. Configure Lobby Servers
 
 Lobby servers handle queuing.
 
-```json5
-{
-  "crossServer": {
-    "enabled": true,
-    "serverId": "lobby1",     // Unique per server!
-    "battleServer": "battle"  // Velocity server name
-  },
-  "database": {
-    // Same as battle server
-  },
-  "redis": {
-    // Same as battle server
-  }
-}
+```yaml
+# config.yaml
+crossServer:
+  enabled: true
+  serverId: "lobby1"      # Unique per server!
+  battleServer: "battle"  # Velocity server name
+
+  redis:
+    # Same as battle server
+    host: "localhost"
+    port: 6379
+    password: ""
+
+database:
+  # Same as battle server
+  type: "mysql"
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "cobbleranked"
+    username: "cobbleranked"
+    password: "your_password"
 ```
 
 ### 5. Configure Velocity
@@ -135,11 +150,11 @@ try = ["lobby1"]
 
 Each server needs a **unique** `serverId`:
 
-| Server | serverId | battleServer |
-|--------|----------|--------------|
-| Battle | `battle` | `""` (empty) |
-| Lobby 1 | `lobby1` | `"battle"` |
-| Lobby 2 | `lobby2` | `"battle"` |
+| Server  | serverId | battleServer |
+|---------|----------|--------------|
+| Battle  | `battle` | `""` (empty) |
+| Lobby 1 | `lobby1` | `"battle"`   |
+| Lobby 2 | `lobby2` | `"battle"`   |
 
 ## Flow
 
@@ -147,30 +162,13 @@ Each server needs a **unique** `serverId`:
 2. Player joins queue
 3. Queue syncs via Redis
 4. Match found → Both players transfer to battle server
-5. Battle completes → Results sync to MySQL
+5. Battle completes → Results sync to database
 6. Players return to original server
 
-## Troubleshooting
+---
 
-### Players not transferring
+## See Also
 
-- Check Velocity server names match config
-- Verify Redis connection
-- Check battle server is online
-
-### Queue not syncing
-
-- Verify Redis is running: `redis-cli PING`
-- Check all servers use same Redis config
-- Check server logs for Redis errors
-
-### Rankings not syncing
-
-- Verify MySQL connection on all servers
-- Check all servers use same database
-- Verify tables exist
-
-### "Server not found" errors
-
-- Check `battleServer` matches Velocity server name exactly
-- Verify battle server is registered in Velocity
+- [Database Configuration](/docs/cobbleranked/advanced/database/) - Database setup
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

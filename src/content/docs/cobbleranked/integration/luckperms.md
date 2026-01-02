@@ -12,7 +12,7 @@ Without LuckPerms, permissions work via OP level:
 | Permission | Default |
 |------------|---------|
 | Player commands | Everyone |
-| Admin commands | OP Level 4 |
+| Admin commands | OP Level 2+ |
 
 ## Permission Nodes
 
@@ -20,57 +20,58 @@ Without LuckPerms, permissions work via OP level:
 
 | Permission | Description |
 |------------|-------------|
-| `cobbleranked.command.ranked` | Use /ranked |
-| `cobbleranked.command.casual` | Use /casual |
-| `cobbleranked.command.battlecamera` | Use /battlecamera |
+| `cobbleranked.player.use` | Use /ranked and /battlecamera |
+| `cobbleranked.player.casual.use` | Use /casual |
+| `cobbleranked.player.queue.join` | Join queue |
+| `cobbleranked.player.queue.leave` | Leave queue |
+| `cobbleranked.player.stats.view` | View own stats |
+| `cobbleranked.player.leaderboard.view` | View leaderboard |
+
+### Format Permissions
+
+| Permission | Description |
+|------------|-------------|
+| `cobbleranked.player.format.singles` | Queue for Singles |
+| `cobbleranked.player.format.doubles` | Queue for Doubles |
+| `cobbleranked.player.format.triples` | Queue for Triples |
 
 ### Admin Permissions
 
 | Permission | Description |
 |------------|-------------|
-| `cobbleranked.admin` | All admin commands |
+| `cobbleranked.admin.*` | All admin commands |
+| `cobbleranked.admin.arena.*` | Arena management |
+| `cobbleranked.admin.config.reload` | Reload configuration |
+| `cobbleranked.admin.player.setelo` | Set player ELO |
+| `cobbleranked.admin.queue.clear` | Clear queues |
+| `cobbleranked.admin.season.*` | Season management |
 
 ### Bypass Permissions
 
 | Permission | Description |
 |------------|-------------|
-| `cobbleranked.bypass.cooldown` | Bypass queue cooldown |
-| `cobbleranked.bypass.blacklist` | Bypass Pokemon blacklist |
+| `cobbleranked.player.bypass.cooldown` | Bypass queue cooldown |
+| `cobbleranked.player.bypass.queuelimit` | Bypass queue limit |
 
 ## LuckPerms Setup
 
 ### Grant Player Permissions
 
-```
-/lp group default permission set cobbleranked.command.ranked true
-/lp group default permission set cobbleranked.command.casual true
-/lp group default permission set cobbleranked.command.battlecamera true
+```bash
+/lp group default permission set cobbleranked.player.use true
+/lp group default permission set cobbleranked.player.casual.use true
 ```
 
 ### Grant Admin Permissions
 
-```
-/lp group admin permission set cobbleranked.admin true
-```
-
-### Grant Specific Admin Commands
-
-```
-/lp user Steve permission set cobbleranked.bypass.blacklist true
+```bash
+/lp group admin permission set cobbleranked.admin.* true
 ```
 
-## Example Configuration
+### Grant Specific Bypass
 
-### Staff Group
-
-```
-/lp group staff permission set cobbleranked.admin true
-```
-
-### VIP Group (Bypass Cooldowns)
-
-```
-/lp group vip permission set cobbleranked.bypass.cooldown true
+```bash
+/lp group vip permission set cobbleranked.player.bypass.cooldown true
 ```
 
 ## Without LuckPerms
@@ -78,14 +79,13 @@ Without LuckPerms, permissions work via OP level:
 If LuckPerms is not installed:
 
 - All players can use basic commands
-- Only OP Level 4 can use admin commands
+- Only OP Level 2+ can use admin commands
 - Bypass permissions are not available
 
-## Troubleshooting
+---
 
-### "You don't have permission"
+## See Also
 
-1. Check if LuckPerms is installed
-2. Verify permission node spelling
-3. Check group inheritance
-4. Use `/lp user <name> permission check <node>`
+- [Commands](/docs/cobbleranked/getting-started/commands/) - Command list
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

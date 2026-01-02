@@ -14,12 +14,11 @@ Customize all CobbleRanked messages in `config/cobbleranked/language/`.
 
 ## Setting Language
 
-Edit `config/cobbleranked/config.json5`:
+Edit `config/cobbleranked/config.yaml`:
 
-```json5
-{
-  "language": "ja-Jp"  // en-Us | ja-Jp
-}
+```yaml
+# config.yaml
+language: "ja-jp"  # en-us or ja-jp
 ```
 
 Reload with `/rankedadmin reload`.
@@ -100,3 +99,11 @@ Language changes apply immediately:
 ```
 /rankedadmin reload
 ```
+
+---
+
+## See Also
+
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [GUI Customization](/docs/cobbleranked/configuration/gui/) - Menu customization
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

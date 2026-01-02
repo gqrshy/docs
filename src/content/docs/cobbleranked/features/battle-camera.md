@@ -72,9 +72,11 @@ Camera settings in `config/cobbleranked/camera/camera.json5`:
 
 ### Camera Parameters
 
-- **radius**: Distance from battle center
-- **height**: Camera elevation
-- **speed**: How fast the camera orbits
+| Setting | Description |
+|---------|-------------|
+| `radius` | Distance from battle center |
+| `height` | Camera elevation |
+| `speed` | How fast the camera orbits |
 
 ### Player Protection
 
@@ -88,17 +90,10 @@ While in camera mode:
 
 Open arenas work best for the camera system. Avoid tight enclosed spaces that block camera movement.
 
-## Troubleshooting
-
-**Camera won't disable?**
-Check if you're actually in a ranked battle. Use `/battlecamera status` for debug info.
-
-**Stuttering movement?**
-Lower server TPS affects smoothness. Try reducing orbit speed in config.
-
-**Stuck in the air?**
-Disconnect and reconnect. Admins can force teleport if needed.
-
 ---
 
-**Related**: [Ranked Battles](/features/ranked-battles/) | [Arena Configuration](/configuration/arenas/)
+## See Also
+
+- [Ranked Battles](/docs/cobbleranked/features/ranked-battles/) - Competitive battles
+- [Arena Configuration](/docs/cobbleranked/configuration/arenas/) - Arena setup
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

@@ -80,3 +80,11 @@ Placeholders are cached for performance. Clear cache if needed:
 ## Without Placeholder API
 
 If Text Placeholder API is not installed, placeholders won't work in external mods. Internal GUI placeholders still function normally.
+
+---
+
+## See Also
+
+- [GUI Customization](/docs/cobbleranked/configuration/gui/) - Internal placeholders
+- [Language Configuration](/docs/cobbleranked/configuration/languages/) - Message placeholders
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

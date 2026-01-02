@@ -44,3 +44,11 @@ Players can claim rewards using the `/mailbox` command.
 |-----|---------|
 | LuckPerms | Permission management for admin commands |
 | Text Placeholder API (mod) | Display stats in other mods |
+
+---
+
+## See Also
+
+- [Installation](/docs/cobbleranked/getting-started/installation/) - Step-by-step installation
+- [LuckPerms Integration](/docs/cobbleranked/integration/luckperms/) - Permission setup
+- [Placeholders](/docs/cobbleranked/integration/placeholders/) - Placeholder integration

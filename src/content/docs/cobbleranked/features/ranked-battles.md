@@ -32,7 +32,7 @@ Both players must confirm they're ready. If you don't respond in time, the match
 
 ### Team Selection
 
-Choose which Pokemon from your party will fight. You have 90 seconds to make your selection — choose wisely.
+Choose which Pokemon from your party will fight. You have 60 seconds to make your selection — choose wisely.
 
 ### Lead Selection
 
@@ -42,9 +42,9 @@ Pick your opening Pokemon. Your opponent won't see your choice until the battle 
 
 CobbleRanked finds fair matches based on your skill:
 
-- **Initial search**: ±100 ELO range
-- **As time passes**: Range automatically expands
-- **Maximum range**: Capped to prevent unfair matches
+- **Initial search**: ±200 ELO range
+- **As time passes**: Range expands every 30 seconds (+50 ELO)
+- **Maximum range**: 600 ELO to prevent unfair matches
 
 ## The Stakes
 
@@ -70,4 +70,4 @@ Open the GUI to view your stats, check the leaderboard, and jump into queue.
 
 ---
 
-**Related**: [ELO System](/features/elo-system/) | [Battle Formats](/features/battle-formats/) | [Leaderboards](/features/leaderboards/)
+**Related**: [ELO System](/docs/cobbleranked/features/elo-system/) | [Battle Formats](/docs/cobbleranked/features/battle-formats/) | [Leaderboards](/docs/cobbleranked/features/leaderboards/)
