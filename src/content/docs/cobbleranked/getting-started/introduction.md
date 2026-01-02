@@ -7,26 +7,49 @@ description: Welcome to CobbleRanked! Get up and running quickly.
 
 | Guide | Description |
 |-------|-------------|
-| [Requirements](/docs/cobbleranked/getting-started/requirements/) | What you need before installing |
 | [Installation](/docs/cobbleranked/getting-started/installation/) | Step-by-step installation guide |
 | [Quick Start](/docs/cobbleranked/getting-started/quick-start/) | Get your first battle going |
 | [Commands](/docs/cobbleranked/getting-started/commands/) | All available commands |
 
-## Before You Start
+## Requirements
 
-Make sure you have:
+### Core Dependencies
 
-| Requirement | Version |
-|-------------|---------|
-| Minecraft | 1.21.1 |
-| Fabric Loader | 0.17.2+ |
-| Fabric API | 0.116.6+ |
-| Fabric Language Kotlin | 1.13.6+ |
-| Cobblemon | 1.7.1+ |
-| GashiLibs | 1.0.3+ |
-| MailLib | 1.0.1+ |
+| Mod | Version | Download |
+|-----|---------|----------|
+| Minecraft | 1.21.1 | - |
+| Fabric Loader | 0.17.2+ | [Fabric](https://fabricmc.net/) |
+| Fabric API | 0.116.6+ | [Modrinth](https://modrinth.com/mod/fabric-api) |
+| Fabric Language Kotlin | 1.13.6+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
+| Cobblemon | 1.7.1+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
 
-See [Requirements](/docs/cobbleranked/getting-started/requirements/) for download links.
+### GashiStudios Dependencies
+
+| Mod | Version | Purpose |
+|-----|---------|---------|
+| **GashiLibs** | 1.0.3+ | Shared libraries (database drivers, Redis, config) |
+| **MailLib** | 1.0.1+ | Mail/reward delivery for season rewards |
+
+<details>
+<summary><strong>About GashiLibs & MailLib</strong></summary>
+
+**GashiLibs** provides common dependencies for GashiStudios mods including database drivers (SQLite, MySQL, MongoDB), Redis client, and configuration libraries.
+
+**MailLib** provides a mailbox system for delivering items and rewards to players. CobbleRanked uses it for:
+- Season end rewards
+- Tournament prizes
+- Offline reward delivery
+
+Players claim rewards using the `/mailbox` command.
+
+</details>
+
+### Optional Dependencies
+
+| Mod | Purpose |
+|-----|---------|
+| LuckPerms | Permission management for admin commands |
+| Text Placeholder API | Display stats in other mods |
 
 ## 5-Minute Setup
 

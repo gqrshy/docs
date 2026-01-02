@@ -31,7 +31,7 @@ description: Competitive ranked battle system for Cobblemon with ELO matchmaking
 | GashiLibs | 1.0.3+ |
 | MailLib | 1.0.1+ |
 
-See [Requirements](/docs/cobbleranked/getting-started/requirements/) for download links.
+See [Getting Started](/docs/cobbleranked/getting-started/introduction/) for download links.
 
 ## Purchase
 

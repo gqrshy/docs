@@ -194,6 +194,6 @@ config/cobbleranked/
 
 ## See Also
 
-- [Requirements](/docs/cobbleranked/getting-started/requirements/) - System requirements
+- [Getting Started](/docs/cobbleranked/getting-started/introduction/) - Requirements & setup
 - [Quick Start](/docs/cobbleranked/getting-started/quick-start/) - First battle setup
 - [FAQ](/docs/cobbleranked/support/faq/) - Common questions
