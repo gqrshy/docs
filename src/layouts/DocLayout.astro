@@ -37,8 +37,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 	<meta property="og:image" content={finalOgImage} />
 	<meta property="og:site_name" content="GashiStudios" />
 
-	<!-- Twitter Card -->
-	<meta name="twitter:card" content="summary_large_image" />
+	<!-- Twitter Card (summary = small thumbnail on left) -->
+	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:title" content={`${title} - GashiStudios`} />
 	<meta name="twitter:description" content={description || `${title} - GashiStudios Documentation`} />
 	<meta name="twitter:image" content={finalOgImage} />
@@ -181,66 +181,71 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			observer.observe(el);
 		});
 
-		// Image Lightbox functionality
+		// Image Lightbox functionality (singleton pattern with event delegation)
 		(function initLightbox() {
-			// Create lightbox elements
-			const lightbox = document.createElement('div');
-			lightbox.className = 'lightbox';
-			lightbox.innerHTML = `
-				<div class="lightbox-backdrop"></div>
-				<div class="lightbox-content">
-					<img class="lightbox-image" src="" alt="" />
-					<button class="lightbox-close" aria-label="Close">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<line x1="18" y1="6" x2="6" y2="18"></line>
-							<line x1="6" y1="6" x2="18" y2="18"></line>
-						</svg>
-					</button>
-				</div>
-			`;
-			document.body.appendChild(lightbox);
+			// Only create lightbox once
+			let lightbox = document.querySelector('.lightbox');
+			if (!lightbox) {
+				lightbox = document.createElement('div');
+				lightbox.className = 'lightbox';
+				lightbox.innerHTML = `
+					<div class="lightbox-backdrop"></div>
+					<div class="lightbox-content">
+						<img class="lightbox-image" src="" alt="" />
+						<button class="lightbox-close" aria-label="Close">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
+						</button>
+					</div>
+				`;
+				document.body.appendChild(lightbox);
 
-			const backdrop = lightbox.querySelector('.lightbox-backdrop');
-			const content = lightbox.querySelector('.lightbox-content');
-			const lightboxImg = lightbox.querySelector('.lightbox-image');
-			const closeBtn = lightbox.querySelector('.lightbox-close');
+				const backdrop = lightbox.querySelector('.lightbox-backdrop');
+				const closeBtn = lightbox.querySelector('.lightbox-close');
 
-			function openLightbox(img) {
-				lightboxImg.src = img.src;
-				lightboxImg.alt = img.alt;
-				lightbox.classList.add('active');
-				document.body.style.overflow = 'hidden';
-			}
-
-			function closeLightbox() {
-				lightbox.classList.remove('active');
-				document.body.style.overflow = '';
-			}
-
-			// Click on images to open lightbox
-			document.querySelectorAll('.prose img').forEach(img => {
-				img.style.cursor = 'zoom-in';
-				img.addEventListener('click', () => openLightbox(img));
-			});
-
-			// Close lightbox
-			backdrop.addEventListener('click', closeLightbox);
-			closeBtn.addEventListener('click', closeLightbox);
-			document.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-					closeLightbox();
+				function closeLightbox() {
+					lightbox.classList.remove('active');
+					document.body.style.overflow = '';
 				}
-			});
 
-			// Re-init on View Transitions
+				// Close handlers (only register once)
+				backdrop.addEventListener('click', closeLightbox);
+				closeBtn.addEventListener('click', closeLightbox);
+				document.addEventListener('keydown', (e) => {
+					if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+						closeLightbox();
+					}
+				});
+
+				// Event delegation - handle clicks on any .prose img
+				document.addEventListener('click', (e) => {
+					const img = e.target.closest('.prose img');
+					if (img && !lightbox.classList.contains('active')) {
+						e.preventDefault();
+						e.stopPropagation();
+						const lightboxImg = lightbox.querySelector('.lightbox-image');
+						lightboxImg.src = img.src;
+						lightboxImg.alt = img.alt || '';
+						lightbox.classList.add('active');
+						document.body.style.overflow = 'hidden';
+					}
+				});
+			}
+
+			// Style images (run on every page load)
+			function styleImages() {
+				document.querySelectorAll('.prose img').forEach(img => {
+					img.style.cursor = 'zoom-in';
+				});
+			}
+			styleImages();
+
+			// Re-style on View Transitions
 			if (!window._lightboxRegistered) {
 				window._lightboxRegistered = true;
-				document.addEventListener('astro:page-load', () => {
-					document.querySelectorAll('.prose img').forEach(img => {
-						img.style.cursor = 'zoom-in';
-						img.addEventListener('click', () => openLightbox(img));
-					});
-				});
+				document.addEventListener('astro:page-load', styleImages);
 			}
 		})();
 	</script>
@@ -938,14 +943,26 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			margin: 1.5rem 0;
 			transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease;
 			object-fit: contain;
+			/* Prevent all selection and caret */
 			user-select: none;
 			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
 			-webkit-user-drag: none;
+			-webkit-touch-callout: none;
+			pointer-events: auto;
+			caret-color: transparent;
+			outline: none;
 		}
 
 		.prose img:hover {
 			transform: scale(1.02);
 			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+		}
+
+		.prose img:focus,
+		.prose img:focus-visible {
+			outline: none;
 		}
 
 		/* ===== Image Lightbox ===== */
@@ -1002,6 +1019,12 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			border-radius: 0.75rem;
 			box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
 			object-fit: contain;
+			user-select: none;
+			-webkit-user-select: none;
+			-webkit-user-drag: none;
+			-webkit-touch-callout: none;
+			caret-color: transparent;
+			outline: none;
 		}
 
 		.lightbox-close {
@@ -1127,6 +1150,11 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		::selection {
 			background: rgba(124, 58, 237, 0.4);
 			color: #fff;
+		}
+
+		/* Prevent caret on non-editable elements */
+		*:not(input):not(textarea):not([contenteditable="true"]) {
+			caret-color: transparent;
 		}
 
 		/* ===== Responsive ===== */
