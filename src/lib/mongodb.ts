@@ -1,34 +1,48 @@
 import { MongoClient, type Db } from 'mongodb';
 
-const MONGODB_URI = import.meta.env.MONGODB_URI || process.env.MONGODB_URI;
-const MONGODB_DB = import.meta.env.MONGODB_DB || process.env.MONGODB_DB || 'cobbleranked_api';
-
-if (!MONGODB_URI) {
-	console.warn('MONGODB_URI not set - API will return demo data');
-}
-
 let cachedClient: MongoClient | null = null;
 let cachedDb: Db | null = null;
 
+function getMongoUri(): string | undefined {
+	// In Vercel serverless, process.env is available at runtime
+	return process.env.MONGODB_URI;
+}
+
+function getMongoDb(): string {
+	return process.env.MONGODB_DB || 'cobbleranked_api';
+}
+
 export async function connectToDatabase(): Promise<{ client: MongoClient; db: Db } | null> {
-	if (!MONGODB_URI) {
+	const uri = getMongoUri();
+	const dbName = getMongoDb();
+
+	if (!uri) {
+		console.warn('[MongoDB] MONGODB_URI not set - returning demo data');
 		return null;
 	}
 
 	if (cachedClient && cachedDb) {
+		console.log('[MongoDB] Using cached connection');
 		return { client: cachedClient, db: cachedDb };
 	}
 
-	const client = new MongoClient(MONGODB_URI);
-	await client.connect();
-	const db = client.db(MONGODB_DB);
+	try {
+		console.log('[MongoDB] Connecting to database:', dbName);
+		const client = new MongoClient(uri);
+		await client.connect();
+		const db = client.db(dbName);
 
-	cachedClient = client;
-	cachedDb = db;
+		cachedClient = client;
+		cachedDb = db;
 
-	return { client, db };
+		console.log('[MongoDB] Connected successfully');
+		return { client, db };
+	} catch (error) {
+		console.error('[MongoDB] Connection failed:', error);
+		return null;
+	}
 }
 
 export function isMongoConfigured(): boolean {
-	return !!MONGODB_URI;
+	return !!process.env.MONGODB_URI;
 }
