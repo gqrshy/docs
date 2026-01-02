@@ -180,6 +180,69 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			el.classList.add('scroll-animate');
 			observer.observe(el);
 		});
+
+		// Image Lightbox functionality
+		(function initLightbox() {
+			// Create lightbox elements
+			const lightbox = document.createElement('div');
+			lightbox.className = 'lightbox';
+			lightbox.innerHTML = `
+				<div class="lightbox-backdrop"></div>
+				<div class="lightbox-content">
+					<img class="lightbox-image" src="" alt="" />
+					<button class="lightbox-close" aria-label="Close">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<line x1="18" y1="6" x2="6" y2="18"></line>
+							<line x1="6" y1="6" x2="18" y2="18"></line>
+						</svg>
+					</button>
+				</div>
+			`;
+			document.body.appendChild(lightbox);
+
+			const backdrop = lightbox.querySelector('.lightbox-backdrop');
+			const content = lightbox.querySelector('.lightbox-content');
+			const lightboxImg = lightbox.querySelector('.lightbox-image');
+			const closeBtn = lightbox.querySelector('.lightbox-close');
+
+			function openLightbox(img) {
+				lightboxImg.src = img.src;
+				lightboxImg.alt = img.alt;
+				lightbox.classList.add('active');
+				document.body.style.overflow = 'hidden';
+			}
+
+			function closeLightbox() {
+				lightbox.classList.remove('active');
+				document.body.style.overflow = '';
+			}
+
+			// Click on images to open lightbox
+			document.querySelectorAll('.prose img').forEach(img => {
+				img.style.cursor = 'zoom-in';
+				img.addEventListener('click', () => openLightbox(img));
+			});
+
+			// Close lightbox
+			backdrop.addEventListener('click', closeLightbox);
+			closeBtn.addEventListener('click', closeLightbox);
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+					closeLightbox();
+				}
+			});
+
+			// Re-init on View Transitions
+			if (!window._lightboxRegistered) {
+				window._lightboxRegistered = true;
+				document.addEventListener('astro:page-load', () => {
+					document.querySelectorAll('.prose img').forEach(img => {
+						img.style.cursor = 'zoom-in';
+						img.addEventListener('click', () => openLightbox(img));
+					});
+				});
+			}
+		})();
 	</script>
 
 	<style is:global>
@@ -875,11 +938,97 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			margin: 1.5rem 0;
 			transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease;
 			object-fit: contain;
+			user-select: none;
+			-webkit-user-select: none;
+			-webkit-user-drag: none;
 		}
 
 		.prose img:hover {
 			transform: scale(1.02);
 			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+		}
+
+		/* ===== Image Lightbox ===== */
+		.lightbox {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 9999;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity 0.3s ease, visibility 0.3s ease;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		.lightbox.active {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.lightbox-backdrop {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.9);
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+		}
+
+		.lightbox-content {
+			position: relative;
+			max-width: 90vw;
+			max-height: 90vh;
+			transform: scale(0.9);
+			transition: transform 0.4s var(--ease-out-back);
+		}
+
+		.lightbox.active .lightbox-content {
+			transform: scale(1);
+		}
+
+		.lightbox-image {
+			max-width: 90vw;
+			max-height: 85vh;
+			width: auto;
+			height: auto;
+			border-radius: 0.75rem;
+			box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+			object-fit: contain;
+		}
+
+		.lightbox-close {
+			position: absolute;
+			top: -3rem;
+			right: 0;
+			width: 2.5rem;
+			height: 2.5rem;
+			background: rgba(255, 255, 255, 0.1);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			border-radius: 50%;
+			color: #fff;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.2s ease;
+		}
+
+		.lightbox-close:hover {
+			background: rgba(255, 255, 255, 0.2);
+			transform: scale(1.1);
+		}
+
+		.lightbox-close svg {
+			width: 20px;
+			height: 20px;
 		}
 
 		/* ===== Horizontal rule ===== */
