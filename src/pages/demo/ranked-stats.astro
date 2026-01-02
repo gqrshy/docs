@@ -39,24 +39,10 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 				</div>
 			</div>
 
-			<!-- Season Selector -->
+			<!-- Current Season Display -->
 			<div class="sidebar-section">
 				<div class="section-label">Season</div>
-				<div class="season-tabs">
-					<button class="season-tab" data-season="1">1</button>
-					<button class="season-tab" data-season="2">2</button>
-					<button class="season-tab" data-season="3">3</button>
-					<button class="season-tab active" data-season="4">4</button>
-				</div>
-			</div>
-
-			<!-- Season Stage -->
-			<div class="sidebar-section">
-				<div class="section-label">Season Stage</div>
-				<div class="stage-tabs">
-					<button class="stage-tab active" data-stage="MID">MID</button>
-					<button class="stage-tab" data-stage="END">END</button>
-				</div>
+				<div class="current-season" id="current-season-display">Loading...</div>
 			</div>
 
 			<!-- ELO Range Slider -->
@@ -117,14 +103,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 
 				<!-- Detail Grid -->
 				<div class="detail-grid">
-					<!-- Base Stats -->
-					<div class="detail-card">
-						<h3 class="card-title">Base Stats</h3>
-						<div class="base-stats" id="base-stats">
-							<!-- Populated by JavaScript -->
-						</div>
-					</div>
-
 					<!-- Moves -->
 					<div class="detail-card">
 						<h3 class="card-title">Moves</h3>
@@ -203,11 +181,11 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 		let pokemonData = [];
 		let selectedPokemon = null;
 		let currentFormat = 'SINGLES';
-		let currentSeason = 'Season4';
 		let currentEloMin = 1000;
 		let currentEloMax = 1500;
 		let isLoading = false;
 		let isDemo = false;
+		let currentSeasonName = 'Loading...';
 
 		// Fetch usage stats from API
 		async function fetchUsageStats() {
@@ -215,10 +193,12 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 			updateLoadingState();
 
 			try {
-				const response = await fetch(`/api/cobbleranked/usage-stats?serverId=battle&season=${currentSeason}&format=${currentFormat}`);
+				const response = await fetch(`/api/cobbleranked/usage-stats?serverId=battle&format=${currentFormat}`);
 				const data = await response.json();
 
 				isDemo = data.isDemo || false;
+				currentSeasonName = data.season || data.seasonName || 'Unknown Season';
+				document.getElementById('current-season-display').textContent = currentSeasonName;
 
 				// Find the matching tier based on ELO range
 				let tierData = null;
@@ -247,7 +227,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 						usage: species.usagePercent,
 						rank: index + 1,
 						samples: species.count,
-						baseStats: { hp: 80, atk: 80, def: 80, spa: 80, spd: 80, spe: 80 }, // Default stats
 						moves: Object.entries(species.moves || {}).slice(0, 5).map(([name, pct]) => ({ name, pct })),
 						teammates: Object.entries(species.teammates || {}).slice(0, 5).map(([name, pct]) => ({ name, pct })),
 						items: Object.entries(species.items || {}).map(([name, pct]) => ({ name, pct })),
@@ -268,6 +247,8 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 				console.error('Failed to fetch usage stats:', error);
 				pokemonData = getDemoData();
 				isDemo = true;
+				currentSeasonName = 'Demo Data';
+				document.getElementById('current-season-display').textContent = currentSeasonName;
 				updateDemoIndicator();
 			}
 
@@ -296,7 +277,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 			return [
 				{
 					name: 'Ogerpon-Wellspring', usage: 32.58, rank: 1, samples: 3939,
-					baseStats: { hp: 80, atk: 120, def: 84, spa: 60, spd: 96, spe: 110 },
 					moves: [
 						{ name: 'Ivy Cudgel', pct: 100.0 },
 						{ name: 'Horn Leech', pct: 78.55 },
@@ -318,7 +298,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 				},
 				{
 					name: 'Alomomola', usage: 30.09, rank: 2, samples: 3638,
-					baseStats: { hp: 165, atk: 75, def: 80, spa: 40, spd: 45, spe: 65 },
 					moves: [
 						{ name: 'Flip Turn', pct: 95.2 },
 						{ name: 'Wish', pct: 92.4 },
@@ -335,7 +314,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 				},
 				{
 					name: 'Gengar-Ultra', usage: 26.66, rank: 3, samples: 3223,
-					baseStats: { hp: 60, atk: 65, def: 60, spa: 130, spd: 75, spe: 110 },
 					moves: [
 						{ name: 'Shadow Ball', pct: 98.5 },
 						{ name: 'Sludge Wave', pct: 78.2 },
@@ -349,7 +327,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 				},
 				{
 					name: 'Landorus-Therian', usage: 24.96, rank: 4, samples: 3018,
-					baseStats: { hp: 89, atk: 145, def: 90, spa: 105, spd: 80, spe: 91 },
 					moves: [
 						{ name: 'Earthquake', pct: 99.1 },
 						{ name: 'U-turn', pct: 85.4 },
@@ -363,7 +340,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 				},
 				{
 					name: 'Ironvaliant', usage: 23.58, rank: 5, samples: 2851,
-					baseStats: { hp: 74, atk: 130, def: 90, spa: 120, spd: 60, spe: 116 },
 					moves: [
 						{ name: 'Close Combat', pct: 92.4 },
 						{ name: 'Moonblast', pct: 88.2 },
@@ -412,27 +388,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 			document.getElementById('usage-rank').textContent = `#${p.rank}`;
 			document.getElementById('usage-percent').textContent = `${p.usage.toFixed(2)}%`;
 			document.getElementById('usage-samples').textContent = p.samples.toLocaleString();
-
-			// Base Stats
-			const statsContainer = document.getElementById('base-stats');
-			const statNames = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'];
-			const statKeys = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
-			const maxStat = 255;
-
-			statsContainer.innerHTML = statKeys.map((key, i) => {
-				const value = p.baseStats[key];
-				const percent = (value / maxStat) * 100;
-				const color = value >= 100 ? '#22c55e' : value >= 70 ? '#eab308' : '#ef4444';
-				return `
-					<div class="stat-row">
-						<span class="stat-name">${statNames[i]}</span>
-						<span class="stat-num">${value}</span>
-						<div class="stat-bar-container">
-							<div class="stat-bar" style="width: ${percent}%; background: ${color};"></div>
-						</div>
-					</div>
-				`;
-			}).join('');
 
 			// Moves
 			const movesContainer = document.getElementById('moves-list');
@@ -491,21 +446,6 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 			});
 		});
 
-		document.querySelectorAll('.season-tab').forEach(btn => {
-			btn.addEventListener('click', () => {
-				document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active'));
-				btn.classList.add('active');
-				currentSeason = 'Season' + btn.dataset.season;
-				fetchUsageStats();
-			});
-		});
-
-		document.querySelectorAll('.stage-tab').forEach(btn => {
-			btn.addEventListener('click', () => {
-				document.querySelectorAll('.stage-tab').forEach(b => b.classList.remove('active'));
-				btn.classList.add('active');
-			});
-		});
 
 		// ELO Range Slider
 		const eloMinSlider = document.getElementById('elo-min-slider');
@@ -674,6 +614,17 @@ const description = 'Live demo of Pokemon usage statistics and ranked leaderboar
 			background: rgba(124, 58, 237, 0.3);
 			border-color: rgba(124, 58, 237, 0.5);
 			color: #a78bfa;
+		}
+
+		/* Current Season Display */
+		.current-season {
+			padding: 0.5rem 0.75rem;
+			background: rgba(124, 58, 237, 0.2);
+			border: 1px solid rgba(124, 58, 237, 0.3);
+			border-radius: 6px;
+			color: #a78bfa;
+			font-size: 0.875rem;
+			font-weight: 600;
 		}
 
 		/* Season Tabs */

@@ -58,7 +58,7 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 						<circle cx="12" cy="12" r="10"/>
 						<path d="M12 6v6l4 2"/>
 					</svg>
-					<span>Season 4</span>
+					<span id="season-name">Loading...</span>
 				</div>
 				<div class="last-updated">Last updated: Just now</div>
 			</div>
@@ -127,7 +127,6 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 
 		// State
 		let leaderboardData = [];
-		let currentSeason = 'Season4';
 		let currentFormat = 'SINGLES';
 		let isLoading = false;
 
@@ -137,15 +136,22 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			updateLoadingState();
 
 			try {
-				const response = await fetch(`/api/cobbleranked/leaderboard?serverId=battle&season=${currentSeason}&format=${currentFormat}`);
+				const response = await fetch(`/api/cobbleranked/leaderboard?serverId=battle&format=${currentFormat}`);
 				const data = await response.json();
 
+				console.log('Leaderboard API response:', data);
+
+				// Update season name
+				const seasonName = data.season || data.seasonName || 'Unknown Season';
+				document.getElementById('season-name').textContent = seasonName;
+
 				// Extract players from response
-				if (data.players) {
+				if (data.players && Array.isArray(data.players)) {
+					console.log('Found players array:', data.players.length, 'players');
 					leaderboardData = data.players.map(p => ({
 						rank: p.rank,
 						uuid: p.uuid,
-						name: p.name,
+						name: p.name || p.playerName,
 						elo: p.elo,
 						tier: p.tier,
 						wins: p.wins,
@@ -153,18 +159,23 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 						streak: p.currentStreak || 0,
 						best: p.bestStreak || 0
 					}));
-				} else if (data.seasons?.[currentSeason]?.formats?.[currentFormat]?.players) {
-					leaderboardData = data.seasons[currentSeason].formats[currentFormat].players.map(p => ({
-						rank: p.rank,
-						uuid: p.uuid,
-						name: p.name,
-						elo: p.elo,
-						tier: p.tier,
-						wins: p.wins,
-						losses: p.losses,
-						streak: p.currentStreak || 0,
-						best: p.bestStreak || 0
-					}));
+				} else {
+					console.log('No players array found in response. Keys:', Object.keys(data));
+					// Fallback: check if data has formats directly (raw MongoDB data)
+					if (data.formats?.[currentFormat]?.players) {
+						console.log('Found players in formats structure');
+						leaderboardData = data.formats[currentFormat].players.map(p => ({
+							rank: p.rank,
+							uuid: p.uuid,
+							name: p.name || p.playerName,
+							elo: p.elo,
+							tier: p.tier,
+							wins: p.wins,
+							losses: p.losses,
+							streak: p.currentStreak || 0,
+							best: p.bestStreak || 0
+						}));
+					}
 				}
 
 				// Update demo indicator
