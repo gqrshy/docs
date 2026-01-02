@@ -83,11 +83,7 @@ export const GET: APIRoute = async ({ url }) => {
 
 		const data = await collection.findOne({ serverId });
 
-		console.log(`[Leaderboard API] Query: serverId=${serverId}, format=${format}`);
-		console.log(`[Leaderboard API] Found data:`, data ? 'yes' : 'no');
-
 		if (!data) {
-			console.log('[Leaderboard API] No data found, returning demo data');
 			return new Response(JSON.stringify(getDemoData()), {
 				status: 200,
 				headers: {
@@ -95,15 +91,6 @@ export const GET: APIRoute = async ({ url }) => {
 					'Access-Control-Allow-Origin': '*'
 				}
 			});
-		}
-
-		console.log('[Leaderboard API] Data keys:', Object.keys(data));
-		if (data.formats) {
-			console.log('[Leaderboard API] Formats keys:', Object.keys(data.formats));
-			if (format && data.formats[format]) {
-				console.log(`[Leaderboard API] Format ${format} keys:`, Object.keys(data.formats[format]));
-				console.log(`[Leaderboard API] Players count:`, data.formats[format]?.players?.length || 0);
-			}
 		}
 
 		// Handle both CobbleRanked format (formats at top level) and demo format (nested seasons)

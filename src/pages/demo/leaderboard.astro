@@ -116,13 +116,14 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 
 	<script is:inline>
 	(function() {
-		// Tier definitions with colors
+		// Tier definitions with colors (matching CobbleRanked RankTier enum)
 		const tiers = {
-			CHERISH: { name: 'Cherish', color: '#ec4899', bg: 'rgba(236, 72, 153, 0.2)' },
-			ULTRA: { name: 'Ultra', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.2)' },
-			GREAT: { name: 'Great', color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.2)' },
-			POKE: { name: 'Poke', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.2)' },
-			PREMIER: { name: 'Premier', color: '#a1a1aa', bg: 'rgba(161, 161, 170, 0.2)' }
+			POKEBALL: { name: 'Poké Ball', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.2)' },
+			GREATBALL: { name: 'Great Ball', color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.2)' },
+			ULTRABALL: { name: 'Ultra Ball', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.2)' },
+			MASTERBALL: { name: 'Master Ball', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.2)' },
+			BEASTBALL: { name: 'Beast Ball', color: '#06b6d4', bg: 'rgba(6, 182, 212, 0.2)' },
+			CHERISH: { name: 'Cherish Ball', color: '#ec4899', bg: 'rgba(236, 72, 153, 0.2)' }
 		};
 
 		// State
@@ -139,15 +140,12 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 				const response = await fetch(`/api/cobbleranked/leaderboard?serverId=battle&format=${currentFormat}`);
 				const data = await response.json();
 
-				console.log('Leaderboard API response:', data);
-
 				// Update season name
 				const seasonName = data.season || data.seasonName || 'Unknown Season';
 				document.getElementById('season-name').textContent = seasonName;
 
 				// Extract players from response
 				if (data.players && Array.isArray(data.players)) {
-					console.log('Found players array:', data.players.length, 'players');
 					leaderboardData = data.players.map(p => ({
 						rank: p.rank,
 						uuid: p.uuid,
@@ -159,23 +157,19 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 						streak: p.currentStreak || 0,
 						best: p.bestStreak || 0
 					}));
-				} else {
-					console.log('No players array found in response. Keys:', Object.keys(data));
+				} else if (data.formats?.[currentFormat]?.players) {
 					// Fallback: check if data has formats directly (raw MongoDB data)
-					if (data.formats?.[currentFormat]?.players) {
-						console.log('Found players in formats structure');
-						leaderboardData = data.formats[currentFormat].players.map(p => ({
-							rank: p.rank,
-							uuid: p.uuid,
-							name: p.name || p.playerName,
-							elo: p.elo,
-							tier: p.tier,
-							wins: p.wins,
-							losses: p.losses,
-							streak: p.currentStreak || 0,
-							best: p.bestStreak || 0
-						}));
-					}
+					leaderboardData = data.formats[currentFormat].players.map(p => ({
+						rank: p.rank,
+						uuid: p.uuid,
+						name: p.name || p.playerName,
+						elo: p.elo,
+						tier: p.tier,
+						wins: p.wins,
+						losses: p.losses,
+						streak: p.currentStreak || 0,
+						best: p.bestStreak || 0
+					}));
 				}
 
 				// Update demo indicator
@@ -216,7 +210,7 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			tbody.innerHTML = '';
 
 			leaderboardData.forEach((player, index) => {
-				const tier = tiers[player.tier];
+				const tier = tiers[player.tier] || { name: player.tier, color: '#a1a1aa', bg: 'rgba(161, 161, 170, 0.2)' };
 				const winRate = ((player.wins / (player.wins + player.losses)) * 100).toFixed(1);
 				const row = document.createElement('tr');
 				row.className = 'leaderboard-row';
