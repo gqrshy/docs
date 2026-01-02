@@ -666,9 +666,23 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			color: #fff;
 		}
 
+		/* Details content area */
 		.prose details > *:not(summary) {
-			padding: 0 1.25rem;
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
 			animation: content-expand 0.3s var(--ease-out-expo);
+		}
+
+		.prose details > *:not(summary):first-of-type {
+			padding-top: 0.5rem;
+		}
+
+		.prose details > *:last-child {
+			padding-bottom: 1.25rem;
+		}
+
+		.prose details p:first-of-type {
+			margin-top: 0;
 		}
 
 		@keyframes content-expand {
@@ -682,12 +696,131 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			}
 		}
 
-		.prose details > *:last-child {
-			padding-bottom: 1rem;
+		/* Lists inside details - proper hierarchy and spacing */
+		.prose details ol,
+		.prose details ul {
+			margin: 0.75rem 0;
+			padding-left: 1.25rem;
 		}
 
-		.prose details p:first-of-type {
-			margin-top: 0;
+		.prose details li {
+			margin-bottom: 0.5rem;
+			line-height: 1.6;
+		}
+
+		.prose details li:last-child {
+			margin-bottom: 0;
+		}
+
+		/* Nested lists inside details */
+		.prose details li > ol,
+		.prose details li > ul {
+			margin-top: 0.5rem;
+			margin-bottom: 0.5rem;
+		}
+
+		/* Numbered list styling inside details */
+		.prose details ol {
+			list-style-type: decimal;
+		}
+
+		.prose details ol ol {
+			list-style-type: lower-alpha;
+		}
+
+		.prose details ol ol ol {
+			list-style-type: lower-roman;
+		}
+
+		/* Tables inside details */
+		.prose details table {
+			margin: 1rem 0;
+			width: 100%;
+			font-size: 0.9rem;
+		}
+
+		.prose details th,
+		.prose details td {
+			padding: 0.75rem 1rem;
+		}
+
+		.prose details th:first-child,
+		.prose details td:first-child {
+			padding-left: 1rem;
+		}
+
+		.prose details th:last-child,
+		.prose details td:last-child {
+			padding-right: 1rem;
+		}
+
+		/* Code blocks inside details */
+		.prose details pre {
+			margin: 1rem 0;
+			padding: 1rem;
+			font-size: 0.85rem;
+			border-radius: 0.5rem;
+		}
+
+		.prose details pre code {
+			font-size: 0.85rem;
+		}
+
+		/* Copy button fix inside details */
+		.prose details pre {
+			position: relative;
+		}
+
+		.prose details pre .copy-btn {
+			position: absolute;
+			top: 0.5rem;
+			right: 0.5rem;
+			padding: 0.35rem;
+			background: rgba(124, 58, 237, 0.4);
+		}
+
+		.prose details pre .copy-btn svg {
+			width: 14px;
+			height: 14px;
+		}
+
+		/* Inline code inside details */
+		.prose details code:not(pre code) {
+			font-size: 0.85em;
+			padding: 0.15rem 0.35rem;
+		}
+
+		/* Headings inside details */
+		.prose details h3,
+		.prose details h4 {
+			margin-top: 1.25rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.prose details h3:first-of-type,
+		.prose details h4:first-of-type {
+			margin-top: 0.5rem;
+		}
+
+		/* Blockquotes inside details */
+		.prose details blockquote {
+			margin: 1rem 0;
+			padding: 0.75rem 1rem;
+			font-size: 0.95rem;
+		}
+
+		/* Strong text styling inside details */
+		.prose details strong {
+			color: var(--color-primary-lighter);
+		}
+
+		/* Paragraphs inside details */
+		.prose details p {
+			margin-bottom: 0.75rem;
+		}
+
+		.prose details p:last-of-type {
+			margin-bottom: 0;
 		}
 
 		/* ===== Callouts/Admonitions ===== */
