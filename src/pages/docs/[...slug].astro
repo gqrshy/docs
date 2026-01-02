@@ -2,6 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import DocLayout from '../../layouts/DocLayout.astro';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
 	const docs = await getCollection('docs');
 	return docs.map(entry => ({
@@ -11,6 +13,11 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
+
+if (!entry) {
+	return Astro.redirect('/404');
+}
+
 const { Content, headings } = await render(entry);
 ---
 
