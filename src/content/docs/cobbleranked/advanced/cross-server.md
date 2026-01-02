@@ -15,29 +15,7 @@ Share rankings and queue across your entire network.
 
 ## Architecture
 
-```text
-┌─────────────┐     ┌─────────────┐
-│   Lobby 1   │     │   Lobby 2   │
-│  (Queue)    │     │  (Queue)    │
-└──────┬──────┘     └──────┬──────┘
-       │                   │
-       └─────────┬─────────┘
-                 │
-         ┌───────▼───────┐
-         │    Redis      │
-         │  (Pub/Sub)    │
-         └───────┬───────┘
-                 │
-         ┌───────▼───────┐
-         │ Battle Server │
-         │  (Battles)    │
-         └───────┬───────┘
-                 │
-         ┌───────▼───────┐
-         │ MySQL/MongoDB │
-         │  (Rankings)   │
-         └───────────────┘
-```
+![Cross-Server Architecture](../../../../assets/images/cross-server-architecture.jpg)
 
 ## Setup Steps
 
