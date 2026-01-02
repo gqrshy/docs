@@ -18,12 +18,8 @@ const siteUrl = 'https://gashistudios.site';
 const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
 const metaDescription = description || 'GashiStudios - Cobblemon向けの高品質なModを制作するコミュニティ';
 
-// Dynamic OG image
-const ogParams = new URLSearchParams({
-	title: 'GashiStudios',
-	subtitle: 'Cobblemon向けの高品質なMod',
-});
-const ogImage = `${siteUrl}/api/og.png?${ogParams.toString()}`;
+// Static OG image (dynamic generation disabled for now)
+const ogImage = `${siteUrl}/og-background.png`;
 ---
 
 <!DOCTYPE html>
