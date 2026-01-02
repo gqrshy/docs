@@ -8,11 +8,15 @@ export const prerender = false;
 let interBold: ArrayBuffer | null = null;
 let backgroundBase64: string | null = null;
 
-async function loadFont(siteUrl: string): Promise<ArrayBuffer> {
+// Use external CDN URLs to avoid circular fetch issues on Vercel
+const FONT_URL = 'https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-700-normal.ttf';
+// Hardcode production URL for background (with www to avoid redirect)
+const BG_IMAGE_URL = 'https://www.gashistudios.site/og-background.png';
+
+async function loadFont(): Promise<ArrayBuffer> {
 	if (interBold) return interBold;
 
-	// Satori requires TTF/OTF format (not WOFF/WOFF2)
-	const fontResponse = await fetch(`${siteUrl}/inter-bold.ttf`);
+	const fontResponse = await fetch(FONT_URL);
 	if (!fontResponse.ok) {
 		throw new Error(`Font fetch failed: ${fontResponse.status}`);
 	}
@@ -20,11 +24,15 @@ async function loadFont(siteUrl: string): Promise<ArrayBuffer> {
 	return interBold;
 }
 
-async function loadBackgroundImage(siteUrl: string): Promise<string> {
+async function loadBackgroundImage(): Promise<string> {
 	if (backgroundBase64) return backgroundBase64;
 
 	try {
-		const response = await fetch(`${siteUrl}/og-background.png`);
+		const response = await fetch(BG_IMAGE_URL);
+		if (!response.ok) {
+			console.error('Background fetch failed:', response.status);
+			return '';
+		}
 		const arrayBuffer = await response.arrayBuffer();
 		const base64 = Buffer.from(arrayBuffer).toString('base64');
 		backgroundBase64 = `data:image/png;base64,${base64}`;
@@ -40,11 +48,10 @@ export const GET: APIRoute = async ({ request }) => {
 	const title = url.searchParams.get('title') || 'GashiStudios';
 	const subtitle = url.searchParams.get('subtitle') || 'Documentation';
 
-	// Use request origin for both local dev and production
-	const siteUrl = url.origin;
+	// Load assets from external CDN URLs
 	const [fontData, bgImage] = await Promise.all([
-		loadFont(siteUrl),
-		loadBackgroundImage(siteUrl),
+		loadFont(),
+		loadBackgroundImage(),
 	]);
 
 	const svg = await satori(

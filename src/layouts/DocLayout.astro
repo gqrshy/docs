@@ -15,9 +15,13 @@ const { title, description, headings = [], ogImage } = Astro.props;
 const siteUrl = 'https://gashistudios.site';
 const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
 
-// Static OG image (dynamic generation disabled for now)
-const defaultOgImage = `${siteUrl}/og-background.png`;
-const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
+// Dynamic OG image with page title
+const ogParams = new URLSearchParams({
+	title: title,
+	subtitle: description || 'GashiStudios Documentation',
+});
+const dynamicOgImage = `${siteUrl}/api/og.png?${ogParams.toString()}`;
+const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : dynamicOgImage;
 ---
 
 <!DOCTYPE html>
