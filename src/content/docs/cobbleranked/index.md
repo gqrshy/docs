@@ -12,7 +12,7 @@ description: The ultimate competitive Pokemon battle system for Cobblemon
 ## Core Features
 
 ### Battle Formats
-6 competitive formats to master - **Singles**, **Doubles**, **Triples**, plus **Random** variants where Pokemon are selected randomly. Each format has its own leaderboard, meta, and rewards.
+Three competitive formats to master - **Singles**, **Doubles**, and **Triples**. Each format has its own leaderboard, meta, and rewards.
 
 ### Smart Matchmaking
 Choose between **Pokemon Showdown ELO** or **Glicko-2** rating systems. Dynamic Elo range expansion ensures quick matches while maintaining competitive balance. Recent opponent avoidance prevents repetitive matchups.
