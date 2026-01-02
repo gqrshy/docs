@@ -7,7 +7,9 @@ description: Prove your skills in competitive Pokemon battles.
 
 Every ranked battle matters. Beat stronger opponents for massive ELO gains. Take down rivals and watch your name rise on the leaderboard. This is where legends are made.
 
-> **Live Stats Demo**: See real-time Pokemon usage statistics and leaderboard data in action! [View Demo →](/demo/ranked-stats/)
+> **Live Stats Demo**: See real-time Pokemon usage statistics in action! [View Demo →](/demo/ranked-stats/)
+>
+> **Leaderboard Demo**: Check out the live ranked leaderboard showcase! [View Leaderboard →](/demo/leaderboard/)
 
 **Win** and your rating climbs. **Lose** and you'll need to fight your way back. Simple rules, endless competition.
 
