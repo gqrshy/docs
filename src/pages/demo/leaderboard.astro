@@ -125,29 +125,73 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			PREMIER: { name: 'Premier', color: '#a1a1aa', bg: 'rgba(161, 161, 170, 0.2)' }
 		};
 
-		// Demo leaderboard data
-		const leaderboardData = [
-			{ rank: 1, uuid: '069a79f4-44e9-4726-a5be-fca90e38aaf5', name: 'Notch', elo: 2847, tier: 'CHERISH', wins: 342, losses: 28, streak: 15, best: 23 },
-			{ rank: 2, uuid: '61699b2e-d327-4a01-9f1e-0ea8c3f06bc6', name: 'Dinnerbone', elo: 2695, tier: 'CHERISH', wins: 298, losses: 41, streak: 8, best: 19 },
-			{ rank: 3, uuid: '853c80ef-3c37-49fd-aa49-938b674adae6', name: 'jeb_', elo: 2534, tier: 'CHERISH', wins: 276, losses: 52, streak: 12, best: 16 },
-			{ rank: 4, uuid: 'f7c77d99-9f15-4a66-a87d-c4a51ef30d19', name: 'DragonSlayer', elo: 2412, tier: 'ULTRA', wins: 245, losses: 67, streak: 5, best: 14 },
-			{ rank: 5, uuid: 'e6b5c088-0680-44df-9571-6bd8c1f8d6f4', name: 'PokeMaster99', elo: 2356, tier: 'ULTRA', wins: 231, losses: 72, streak: 3, best: 11 },
-			{ rank: 6, uuid: 'a2080281-cf1a-4c05-a9f3-3b3a9d9a8589', name: 'CompetitiveKing', elo: 2198, tier: 'ULTRA', wins: 198, losses: 89, streak: 7, best: 13 },
-			{ rank: 7, uuid: '3b9f9b77-8e8e-4e8c-9f8d-8f8e8e8e8e8e', name: 'BattleQueen', elo: 2087, tier: 'ULTRA', wins: 187, losses: 95, streak: 2, best: 9 },
-			{ rank: 8, uuid: '4c0a0a88-9f9f-5f9d-0a9e-9a9f9f9f9f9f', name: 'ThunderBolt', elo: 1956, tier: 'GREAT', wins: 165, losses: 102, streak: 4, best: 8 },
-			{ rank: 9, uuid: '5d1b1b99-0a0a-6a0e-1b0f-0b0a0a0a0a0a', name: 'FireStorm', elo: 1834, tier: 'GREAT', wins: 152, losses: 118, streak: 1, best: 7 },
-			{ rank: 10, uuid: '6e2c2c00-1b1b-7b1f-2c1a-1c1b1b1b1b1b', name: 'IceBreaker', elo: 1756, tier: 'GREAT', wins: 143, losses: 125, streak: 6, best: 10 },
-			{ rank: 11, uuid: '7f3d3d11-2c2c-8c2a-3d2b-2d2c2c2c2c2c', name: 'ShadowHunter', elo: 1678, tier: 'GREAT', wins: 134, losses: 132, streak: 0, best: 6 },
-			{ rank: 12, uuid: '8a4e4e22-3d3d-9d3b-4e3c-3e3d3d3d3d3d', name: 'LightningFury', elo: 1589, tier: 'POKE', wins: 125, losses: 141, streak: 2, best: 5 },
-			{ rank: 13, uuid: '9b5f5f33-4e4e-0e4c-5f4d-4f4e4e4e4e4e', name: 'NaturePower', elo: 1512, tier: 'POKE', wins: 118, losses: 148, streak: 1, best: 4 },
-			{ rank: 14, uuid: '0c6a6a44-5f5f-1f5d-6a5e-5a5f5f5f5f5f', name: 'RockSolid', elo: 1445, tier: 'POKE', wins: 109, losses: 155, streak: 3, best: 6 },
-			{ rank: 15, uuid: '1d7b7b55-6a6a-2a6e-7b6f-6b6a6a6a6a6a', name: 'WaterWave', elo: 1378, tier: 'POKE', wins: 98, losses: 162, streak: 0, best: 4 },
-			{ rank: 16, uuid: '2e8c8c66-7b7b-3b7f-8c7a-7c7b7b7b7b7b', name: 'WindRider', elo: 1298, tier: 'PREMIER', wins: 89, losses: 171, streak: 1, best: 3 },
-			{ rank: 17, uuid: '3f9d9d77-8c8c-4c8a-9d8b-8d8c8c8c8c8c', name: 'EarthShaker', elo: 1234, tier: 'PREMIER', wins: 82, losses: 178, streak: 0, best: 5 },
-			{ rank: 18, uuid: '4a0e0e88-9d9d-5d9b-0e9c-9e9d9d9d9d9d', name: 'SteelGuard', elo: 1178, tier: 'PREMIER', wins: 75, losses: 185, streak: 2, best: 4 },
-			{ rank: 19, uuid: '5b1f1f99-0e0e-6e0c-1f0d-0f0e0e0e0e0e', name: 'PsychicMind', elo: 1123, tier: 'PREMIER', wins: 68, losses: 192, streak: 1, best: 3 },
-			{ rank: 20, uuid: '6c2a2a00-1f1f-7f1d-2a1e-1a1f1f1f1f1f', name: 'DarkKnight', elo: 1067, tier: 'PREMIER', wins: 61, losses: 199, streak: 0, best: 2 }
-		];
+		// State
+		let leaderboardData = [];
+		let currentSeason = 'Season4';
+		let currentFormat = 'SINGLES';
+		let isLoading = false;
+
+		// Fetch leaderboard from API
+		async function fetchLeaderboard() {
+			isLoading = true;
+			updateLoadingState();
+
+			try {
+				const response = await fetch(`/api/cobbleranked/leaderboard?season=${currentSeason}&format=${currentFormat}`);
+				const data = await response.json();
+
+				// Extract players from response
+				if (data.players) {
+					leaderboardData = data.players.map(p => ({
+						rank: p.rank,
+						uuid: p.uuid,
+						name: p.name,
+						elo: p.elo,
+						tier: p.tier,
+						wins: p.wins,
+						losses: p.losses,
+						streak: p.currentStreak || 0,
+						best: p.bestStreak || 0
+					}));
+				} else if (data.seasons?.[currentSeason]?.formats?.[currentFormat]?.players) {
+					leaderboardData = data.seasons[currentSeason].formats[currentFormat].players.map(p => ({
+						rank: p.rank,
+						uuid: p.uuid,
+						name: p.name,
+						elo: p.elo,
+						tier: p.tier,
+						wins: p.wins,
+						losses: p.losses,
+						streak: p.currentStreak || 0,
+						best: p.bestStreak || 0
+					}));
+				}
+
+				// Update demo indicator
+				const lastUpdated = document.querySelector('.last-updated');
+				if (data.isDemo) {
+					lastUpdated.textContent = 'Demo Data';
+					lastUpdated.style.color = '#f59e0b';
+				} else {
+					const timestamp = data.timestamp ? new Date(data.timestamp).toLocaleString() : 'Just now';
+					lastUpdated.textContent = `Last updated: ${timestamp}`;
+					lastUpdated.style.color = '';
+				}
+			} catch (error) {
+				console.error('Failed to fetch leaderboard:', error);
+			}
+
+			isLoading = false;
+			updateLoadingState();
+			renderLeaderboard();
+		}
+
+		function updateLoadingState() {
+			const tbody = document.getElementById('leaderboard-body');
+			if (isLoading) {
+				tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 3rem; color: rgba(255,255,255,0.5);">Loading...</td></tr>';
+			}
+		}
 
 		function getRankClass(rank) {
 			if (rank === 1) return 'rank-gold';
@@ -220,18 +264,13 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			btn.addEventListener('click', () => {
 				document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
 				btn.classList.add('active');
-				// Re-render with animation
-				document.querySelectorAll('.leaderboard-row').forEach((row, i) => {
-					row.style.animation = 'none';
-					row.offsetHeight; // Trigger reflow
-					row.style.animation = `fadeSlideIn 0.5s ease forwards`;
-					row.style.animationDelay = `${i * 0.03}s`;
-				});
+				currentFormat = btn.dataset.format;
+				fetchLeaderboard();
 			});
 		});
 
-		// Initialize
-		renderLeaderboard();
+		// Initialize - fetch from API
+		fetchLeaderboard();
 	})();
 	</script>
 
