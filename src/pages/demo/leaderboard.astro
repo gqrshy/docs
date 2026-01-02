@@ -144,6 +144,9 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 				const seasonName = data.season || data.seasonName || 'Unknown Season';
 				document.getElementById('season-name').textContent = seasonName;
 
+				// Reset data before processing
+				leaderboardData = [];
+
 				// Extract players from response
 				if (data.players && Array.isArray(data.players)) {
 					leaderboardData = data.players.map(p => ({
@@ -209,6 +212,12 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			const tbody = document.getElementById('leaderboard-body');
 			tbody.innerHTML = '';
 
+			// Show message if no players
+			if (leaderboardData.length === 0) {
+				tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 3rem; color: rgba(255,255,255,0.5);">No players found for this format</td></tr>';
+				return;
+			}
+
 			leaderboardData.forEach((player, index) => {
 				const tier = tiers[player.tier] || { name: player.tier, color: '#a1a1aa', bg: 'rgba(161, 161, 170, 0.2)' };
 				const winRate = ((player.wins / (player.wins + player.losses)) * 100).toFixed(1);
@@ -227,6 +236,7 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 								src="https://crafatar.com/avatars/${player.uuid}?size=32&overlay"
 								alt="${player.name}"
 								loading="lazy"
+								onerror="this.onerror=null;this.src='https://crafatar.com/avatars/MHF_Steve?size=32&overlay'"
 							/>
 							<span class="player-name" style="background: ${tier.bg}; color: ${tier.color};">${player.name}</span>
 						</div>

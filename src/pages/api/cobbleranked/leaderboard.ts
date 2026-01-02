@@ -94,7 +94,7 @@ export const GET: APIRoute = async ({ url }) => {
 		}
 
 		// Handle both CobbleRanked format (formats at top level) and demo format (nested seasons)
-		let result: any = data;
+		let result: any;
 
 		if (format) {
 			// CobbleRanked sends: { serverId, seasonName, formats: { SINGLES: { players: [...] } } }
@@ -127,6 +127,19 @@ export const GET: APIRoute = async ({ url }) => {
 					players: data.seasons[season].formats[format].players
 				};
 			}
+			// Format has no data - return empty players array
+			else {
+				result = {
+					serverId: data.serverId,
+					timestamp: data.timestamp,
+					season: data.seasonName,
+					format,
+					players: []
+				};
+			}
+		} else {
+			// No format specified - return raw data
+			result = data;
 		}
 
 		return new Response(JSON.stringify(result), {
