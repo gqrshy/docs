@@ -10,9 +10,20 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
+const siteUrl = 'https://gashistudios.site';
+const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
+const metaDescription = description || 'GashiStudios - Cobblemon向けの高品質なModを制作するコミュニティ';
+
+// Dynamic OG image
+const ogParams = new URLSearchParams({
+	title: 'GashiStudios',
+	subtitle: 'Cobblemon向けの高品質なMod',
+});
+const ogImage = `${siteUrl}/api/og.png?${ogParams.toString()}`;
 ---
 
 <!DOCTYPE html>
@@ -21,8 +32,25 @@ const { title } = Astro.props;
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="icon" type="image/png" href="/gashistudios.png" />
-	<meta name="description" content="GashiStudios - Cobblemon向けの高品質なModを制作するコミュニティ" />
+	<meta name="description" content={metaDescription} />
 	<title>{title}</title>
+
+	<!-- Open Graph / Discord Embed -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={pageUrl} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={metaDescription} />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:site_name" content="GashiStudios" />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={metaDescription} />
+	<meta name="twitter:image" content={ogImage} />
+
+	<!-- Theme Color (Discord embed sidebar) -->
+	<meta name="theme-color" content="#7c3aed" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">

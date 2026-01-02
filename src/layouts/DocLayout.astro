@@ -8,9 +8,20 @@ interface Props {
 	title: string;
 	description?: string;
 	headings?: { depth: number; slug: string; text: string }[];
+	ogImage?: string;
 }
 
-const { title, description, headings = [] } = Astro.props;
+const { title, description, headings = [], ogImage } = Astro.props;
+const siteUrl = 'https://gashistudios.site';
+const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+// Dynamic OG image with title and subtitle
+const ogParams = new URLSearchParams({
+	title: title,
+	subtitle: description || 'Documentation',
+});
+const dynamicOgImage = `${siteUrl}/api/og.png?${ogParams.toString()}`;
+const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : dynamicOgImage;
 ---
 
 <!DOCTYPE html>
@@ -21,6 +32,23 @@ const { title, description, headings = [] } = Astro.props;
 	<link rel="icon" type="image/png" href="/gashistudios.png" />
 	<meta name="description" content={description || `${title} - GashiStudios Documentation`} />
 	<title>{title} - GashiStudios</title>
+
+	<!-- Open Graph / Discord Embed -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={pageUrl} />
+	<meta property="og:title" content={`${title} - GashiStudios`} />
+	<meta property="og:description" content={description || `${title} - GashiStudios Documentation`} />
+	<meta property="og:image" content={finalOgImage} />
+	<meta property="og:site_name" content="GashiStudios" />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={`${title} - GashiStudios`} />
+	<meta name="twitter:description" content={description || `${title} - GashiStudios Documentation`} />
+	<meta name="twitter:image" content={finalOgImage} />
+
+	<!-- Theme Color (Discord embed sidebar) -->
+	<meta name="theme-color" content="#7c3aed" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
