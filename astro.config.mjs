@@ -5,8 +5,11 @@ import vercel from '@astrojs/vercel';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://gashistudios.site',
-	output: 'static',
-	adapter: vercel(),
+	output: 'server',
+	adapter: vercel({
+		// Enable ISR for static pages
+		isr: true,
+	}),
 	markdown: {
 		shikiConfig: {
 			theme: 'one-dark-pro',
