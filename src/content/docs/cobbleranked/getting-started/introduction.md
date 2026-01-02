@@ -3,8 +3,6 @@ title: Getting Started
 description: Welcome to CobbleRanked! Get up and running quickly.
 ---
 
-Welcome to CobbleRanked! This section will help you get up and running quickly.
-
 ## Quick Navigation
 
 | Step | Guide | Description |

@@ -3,8 +3,6 @@ title: Installation Guide
 description: Complete guide to install CobbleRanked on your Minecraft server.
 ---
 
-Complete guide to install CobbleRanked on your Minecraft server.
-
 ## Required Mods
 
 Place all of these in your `mods/` folder:
@@ -88,7 +86,8 @@ If GUI opens → Installation successful!
 
 ## Initial Setup (Optional)
 
-### Language Configuration
+<details>
+<summary>Language Configuration</summary>
 
 Default: English (`en-us`)
 
@@ -101,7 +100,10 @@ language: "ja-jp"  # en-us or ja-jp
 
 **Reload:** `/rankedadmin reload`
 
-### Arena Setup (Recommended)
+</details>
+
+<details>
+<summary>Arena Setup (Recommended)</summary>
 
 Teleport players to battle coordinates when battles start.
 
@@ -109,51 +111,45 @@ Teleport players to battle coordinates when battles start.
 
 **Step 2:** Run command:
 
-```
+```bash
 /rankedadmin setArena main_arena pos1
 ```
 
 **Step 3:** Move to Player 2's position and run:
 
-```
+```bash
 /rankedadmin setArena main_arena pos2
 ```
 
 **Saved:** Position (x, y, z), facing (yaw, pitch), dimension
 
-### Basic Rules (Recommended)
+**Details:** [Arena Configuration](/docs/cobbleranked/configuration/arenas/)
 
-Ban legendaries and OHKO moves:
+</details>
 
-Edit `config/cobbleranked/blacklist.yaml`:
+<details>
+<summary>Basic Rules (Recommended)</summary>
 
-```yaml
-black_list_labels:
-  - legendary
-  - mythical
+Ban legendaries and OHKO moves.
 
-black_list_moves:
-  - fissure
-  - sheer_cold
-  - horn_drill
-  - guillotine
-```
+See [Blacklist Configuration](/docs/cobbleranked/configuration/blacklist/) for full setup.
 
-**Reload:** `/rankedadmin reload`
+</details>
 
-**Details:** [Blacklist Configuration](/docs/cobbleranked/configuration/blacklist/)
-
-## Cross-Server Setup (Advanced)
+<details>
+<summary>Cross-Server Setup (Advanced)</summary>
 
 **Required for:** Multi-server networks sharing rankings
 
-### Requirements
+**Requirements:**
 
 - MySQL 8.0+
 - Redis 6.0+
 - Velocity 3.4.0+
 
 **Full Guide:** [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/)
+
+</details>
 
 ## File Structure Reference
 

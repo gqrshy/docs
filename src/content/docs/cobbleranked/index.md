@@ -1,9 +1,7 @@
 ---
 title: CobbleRanked
-description: Competitive ranked battle system for Cobblemon servers
+description: Competitive ranked battle system for Cobblemon with ELO matchmaking, seasons, leaderboards, and rewards
 ---
-
-A competitive ranked battle system for Cobblemon servers with ELO-based matchmaking, seasons, leaderboards, and rewards.
 
 ## Features
 

@@ -3,8 +3,6 @@ title: Casual Battles
 description: Practice without pressure. Test teams and battle friends.
 ---
 
-Practice without pressure. Test teams, try strategies, and battle friends — all without risking your rank.
-
 ## Why Casual?
 
 Not every battle needs to be life or death. Casual mode lets you:

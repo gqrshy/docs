@@ -3,8 +3,6 @@ title: Battle Camera
 description: Cinematic battles. Automatic orbiting camera for immersive viewing.
 ---
 
-Cinematic battles. Automatic orbiting camera for immersive viewing.
-
 ## What It Does
 
 The battle camera transforms fights into spectacles:

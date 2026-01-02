@@ -3,8 +3,6 @@ title: Seasons
 description: Fresh starts. New champions. Exclusive rewards for the best.
 ---
 
-Fresh starts. New champions. Exclusive rewards for the best.
-
 ## Why Seasons?
 
 Seasons keep competition alive. Every few weeks or months, the slate wipes clean. Last season's champion? They start at the same spot as everyone else. New players get a real shot at glory.

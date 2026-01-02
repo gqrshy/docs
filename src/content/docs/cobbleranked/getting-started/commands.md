@@ -3,8 +3,6 @@ title: Commands
 description: Complete list of CobbleRanked commands.
 ---
 
-Complete list of CobbleRanked commands.
-
 ## Player Commands
 
 ### Ranked Battles

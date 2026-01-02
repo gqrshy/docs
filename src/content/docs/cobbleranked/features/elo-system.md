@@ -3,8 +3,6 @@ title: ELO Rating System
 description: Your skill, quantified. Beat the best, climb the fastest.
 ---
 
-Your skill, quantified. Beat the best, climb the fastest.
-
 ## How Ratings Work
 
 CobbleRanked uses a proven rating system that rewards skill:

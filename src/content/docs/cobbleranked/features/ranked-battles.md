@@ -3,8 +3,6 @@ title: Ranked Battles
 description: Prove your skills in competitive Pokemon battles.
 ---
 
-Prove your skills in competitive Pokemon battles. Climb the leaderboard, earn your rank, and become the champion.
-
 ## The Thrill of Competition
 
 Every ranked battle matters. Beat stronger opponents for massive ELO gains. Take down rivals and watch your name rise on the leaderboard. This is where legends are made.

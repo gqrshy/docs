@@ -3,8 +3,6 @@ title: Battle Formats
 description: Three ways to prove your skills. Singles, Doubles, and Triples.
 ---
 
-Three ways to prove your skills. Choose your battlefield.
-
 ## Singles
 
 The classic duel. One Pokemon at a time. Pure strategy, no distractions.

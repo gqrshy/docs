@@ -3,8 +3,6 @@ title: Turn Timer
 description: No stalling. No waiting. Keep battles moving.
 ---
 
-No stalling. No waiting. Keep battles moving.
-
 ## Why Turn Timers?
 
 Nothing kills competitive momentum like a player who takes forever to move. Turn timers ensure every battle flows smoothly with fair time limits for decisions.

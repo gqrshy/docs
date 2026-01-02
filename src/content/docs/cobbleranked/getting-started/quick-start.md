@@ -3,8 +3,6 @@ title: Quick Start
 description: Get your first ranked battle started in 5 minutes.
 ---
 
-Get your first ranked battle started in 5 minutes.
-
 ## Prerequisites
 
 - CobbleRanked installed and server running

@@ -3,8 +3,6 @@ title: Leaderboards
 description: See where you stand. Track your rivals. Climb to the top.
 ---
 
-See where you stand. Track your rivals. Climb to the top.
-
 ## Your Name in Lights
 
 The leaderboard shows the best players on your server. Every win pushes you higher. Every loss drops you down. Real-time rankings that update after every battle.
