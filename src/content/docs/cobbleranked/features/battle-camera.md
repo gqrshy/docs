@@ -37,35 +37,28 @@ The camera responds to battle events:
 
 ## Configuration
 
-Camera settings in `config/cobbleranked/camera/camera.json5`:
+Camera settings in `config/cobbleranked/camera/camera.yaml`:
 
-```json5
-{
-  "enabled": true,
-  "defaultEnabled": true,
+```yaml
+enabled: true
+defaultEnabled: true
 
-  "parameters": {
-    "radius": {
-      "default": 6.0,
-      "min": 3.0,
-      "max": 12.0
-    },
-    "height": {
-      "default": 3.0,
-      "min": 1.5,
-      "max": 8.0
-    },
-    "speed": {
-      "default": 15.0
-    }
-  },
+parameters:
+  radius:
+    default: 4.0
+    min: 2.0
+    max: 12.0
+  height:
+    default: 4.0
+    min: 3.0
+    max: 8.0
+  speed:
+    default: 20.0
 
-  "protection": {
-    "makeInvisible": true,
-    "preventHunger": true,
-    "preventItemPickup": true
-  }
-}
+protection:
+  makeInvisible: true
+  preventHunger: true
+  preventItemPickup: true
 ```
 
 ### Camera Parameters
@@ -83,6 +76,8 @@ While in camera mode:
 - **Invisible** — Other players can't see you floating
 - **No hunger** — Won't starve during battles
 - **No item pickup** — Prevents accidental pickups
+
+> 📝 For full configuration options, see [Camera Configuration](/docs/cobbleranked/configuration/camera/).
 
 ## Arena Design Tips
 

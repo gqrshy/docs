@@ -21,6 +21,7 @@ CobbleRanked v2 uses multiple YAML files in `config/cobbleranked/`:
 | `arenas.yaml` | Battle arena positions |
 | `luckperms.yaml` | LuckPerms integration |
 | `missions.yaml` | Daily/weekly missions |
+| `camera/camera.yaml` | Battle camera system settings |
 
 ---
 

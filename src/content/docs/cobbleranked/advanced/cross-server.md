@@ -18,7 +18,18 @@ When two players are matched, they are transferred to the battle server via Velo
 
 > **Important: Pokemon Data Sync**
 >
-> CobbleRanked does **NOT** sync Cobblemon Pokemon data between servers. You need a separate solution (such as a shared database for Cobblemon, or a sync mod) to ensure players have access to the same Pokemon across your network.
+> CobbleRanked does **NOT** sync Cobblemon Pokemon data between servers. To ensure players have access to the same Pokemon across your network, configure Cobblemon's built-in MongoDB storage on **all servers**:
+>
+> ```hocon
+> # config/cobblemon/main.conf
+> storageFormat = "mongodb"
+> mongoDBConnectionString = "mongodb://your-mongodb-host:27017"
+> mongoDBDatabaseName = "cobblemon"
+> ```
+>
+> All servers must point to the **same MongoDB instance** so Pokemon data is shared across your network.
+>
+> See [Cobblemon Config Wiki](https://wiki.cobblemon.com/index.php/Config) for more details.
 >
 > CobbleRanked only syncs: Rankings, Match History, Queue State, Season Data
 
