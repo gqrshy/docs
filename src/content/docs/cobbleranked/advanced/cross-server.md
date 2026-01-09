@@ -42,7 +42,10 @@ When two players are matched, they are transferred to the battle server via Velo
 | MySQL | 8.0+ | Shared database (Option 1) |
 | MongoDB | 6.0+ | Shared database (Option 2) |
 | Redis | 6.0+ | Queue synchronization |
-| Velocity | 3.4.0+ | Player transfer between servers |
+| Velocity | 3.4.0+ | Proxy server |
+| [Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded) | Latest | Handles player transfers via Redis |
+
+> ⚠️ **Important:** CobbleRanked publishes transfer requests to Redis, but **[Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded)** is required on Velocity to receive these requests and actually move players between servers. Without this plugin, players will not be transferred after match is found.
 
 ---
 
@@ -161,6 +164,16 @@ try = ["lobby1"]
 ```
 
 > **Note:** The server names in Velocity must match the `serverId` and `battleServer` values in your CobbleRanked configs.
+
+### 6. Install Proxy-Command-Reloaded
+
+CobbleRanked is optimized for **[Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded)**. This Velocity plugin receives transfer requests from Redis and moves players between servers.
+
+1. Download from [Modrinth](https://modrinth.com/plugin/proxy-command-reloaded)
+2. Place the `.jar` in your Velocity `plugins` folder
+3. Restart Velocity
+
+When a match is found, CobbleRanked publishes transfer requests to Redis, and Proxy-Command-Reloaded handles the actual player movement.
 
 ---
 
