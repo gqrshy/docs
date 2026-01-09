@@ -130,8 +130,28 @@
 	left: 0;
 	right: 0;
 	z-index: 1000;
-	background: transparent;
-	padding: 1.5rem 3rem;
+	padding: 1rem 3rem 2.5rem;
+}
+
+/* Frosted glass background with bottom fade */
+.custom-nav::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(180deg,
+		rgba(237, 236, 255, 0.95) 0%,
+		rgba(232, 228, 255, 0.9) 40%,
+		rgba(228, 232, 255, 0.6) 70%,
+		rgba(224, 232, 255, 0) 100%);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	mask-image: linear-gradient(180deg, black 0%, black 50%, transparent 100%);
+	-webkit-mask-image: linear-gradient(180deg, black 0%, black 50%, transparent 100%);
+	z-index: -1;
+	pointer-events: none;
 }
 
 .nav-container {
@@ -347,7 +367,7 @@
 	}
 
 	.custom-nav {
-		padding: 1.25rem 2rem;
+		padding: 1rem 2rem 2rem;
 	}
 }
 </style>

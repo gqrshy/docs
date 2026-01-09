@@ -1,9 +1,22 @@
 ---
-// Minimal loading screen with gradient swipe reveal
+// Opening curtain animation - purple pastel curtains that open elegantly
 ---
 
 <div id="loading-screen" class="loading-screen">
-	<div class="swipe-overlay"></div>
+	<!-- Left curtain -->
+	<div class="curtain curtain-left">
+		<div class="curtain-inner"></div>
+		<div class="curtain-fold"></div>
+		<div class="curtain-edge"></div>
+	</div>
+	<!-- Right curtain -->
+	<div class="curtain curtain-right">
+		<div class="curtain-inner"></div>
+		<div class="curtain-fold"></div>
+		<div class="curtain-edge"></div>
+	</div>
+	<!-- Center glow effect -->
+	<div class="center-glow"></div>
 </div>
 
 <script is:inline>
@@ -19,22 +32,22 @@
 
 	sessionStorage.setItem('hasVisited', 'true');
 
-	// Start reveal animation after brief delay
+	// Start curtain opening animation after brief delay
 	setTimeout(() => {
-		loadingScreen.classList.add('reveal');
+		loadingScreen.classList.add('opening');
 
-		// After swipe completes, fade in content
+		// Start revealing content during curtain open
 		setTimeout(() => {
 			document.body.classList.add('page-revealing');
-		}, 350);
+		}, 400);
 
-		// Remove loading screen and finalize
+		// Remove loading screen after animation completes
 		setTimeout(() => {
 			loadingScreen.style.display = 'none';
 			document.body.classList.remove('page-revealing');
 			document.body.classList.add('page-revealed');
-		}, 1100);
-	}, 200);
+		}, 1400);
+	}, 300);
 })();
 </script>
 
@@ -54,45 +67,50 @@ body.page-revealing .hero-section,
 body.page-revealing .products-section,
 body.page-revealing .showcase-section,
 body.page-revealing .testimonials-section,
-body.page-revealing .language-switcher {
+body.page-revealing .language-switcher,
+body.page-revealing .wavy-background {
 	opacity: 1 !important;
 	visibility: visible !important;
-	animation: revealFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	animation: curtainRevealFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-body.page-revealing .custom-nav {
+body.page-revealing .wavy-background {
 	animation-delay: 0s;
 }
 
-body.page-revealing .hero-section {
+body.page-revealing .custom-nav {
 	animation-delay: 0.05s;
 }
 
-body.page-revealing .products-section {
+body.page-revealing .hero-section {
 	animation-delay: 0.1s;
 }
 
-body.page-revealing .showcase-section {
+body.page-revealing .products-section {
 	animation-delay: 0.15s;
 }
 
-body.page-revealing .testimonials-section {
+body.page-revealing .showcase-section {
 	animation-delay: 0.2s;
+}
+
+body.page-revealing .testimonials-section {
+	animation-delay: 0.25s;
 }
 
 body.page-revealing > footer,
 body.page-revealing .language-switcher {
-	animation-delay: 0.25s;
+	animation-delay: 0.3s;
 }
 
-@keyframes revealFadeIn {
+@keyframes curtainRevealFadeIn {
 	from {
 		opacity: 0;
-		transform: translateY(25px);
+		transform: translateY(20px) scale(0.98);
 	}
 	to {
 		opacity: 1;
-		transform: translateY(0);
+		transform: translateY(0) scale(1);
 	}
 }
 
@@ -115,59 +133,228 @@ body.page-revealed > * {
 	overflow: hidden;
 }
 
-.swipe-overlay {
+/* Curtain base styles */
+.curtain {
+	position: absolute;
+	top: 0;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.curtain-left {
+	left: 0;
+	transform-origin: left center;
+}
+
+.curtain-right {
+	right: 0;
+	transform-origin: right center;
+}
+
+/* Curtain inner gradient */
+.curtain-inner {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		135deg,
+		#e8e0f8 0%,
+		#d8d0f0 25%,
+		#c8c0e8 50%,
+		#d0c8f0 75%,
+		#e0d8f8 100%
+	);
+}
+
+.curtain-left .curtain-inner {
+	right: 0;
+	background: linear-gradient(
+		120deg,
+		#e0d8f0 0%,
+		#d0c4e8 30%,
+		#c8bce0 60%,
+		#d4c8ec 100%
+	);
+}
+
+.curtain-right .curtain-inner {
+	left: 0;
+	background: linear-gradient(
+		-120deg,
+		#e0d8f0 0%,
+		#d0c4e8 30%,
+		#c8bce0 60%,
+		#d4c8ec 100%
+	);
+}
+
+/* Curtain fold effect - subtle vertical stripes */
+.curtain-fold {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: repeating-linear-gradient(
+		90deg,
+		transparent 0px,
+		transparent 60px,
+		rgba(180, 160, 200, 0.15) 60px,
+		rgba(180, 160, 200, 0.15) 62px,
+		transparent 62px,
+		transparent 120px,
+		rgba(255, 255, 255, 0.1) 120px,
+		rgba(255, 255, 255, 0.1) 122px
+	);
+	pointer-events: none;
+}
+
+/* Inner edge highlight */
+.curtain-edge {
+	position: absolute;
+	top: 0;
+	width: 4px;
+	height: 100%;
+	pointer-events: none;
+}
+
+.curtain-left .curtain-edge {
+	right: 0;
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.6) 0%,
+		rgba(200, 180, 220, 0.8) 30%,
+		rgba(180, 160, 200, 0.9) 50%,
+		rgba(200, 180, 220, 0.8) 70%,
+		rgba(255, 255, 255, 0.6) 100%
+	);
+	box-shadow: 2px 0 15px rgba(160, 140, 180, 0.5);
+}
+
+.curtain-right .curtain-edge {
+	left: 0;
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.6) 0%,
+		rgba(200, 180, 220, 0.8) 30%,
+		rgba(180, 160, 200, 0.9) 50%,
+		rgba(200, 180, 220, 0.8) 70%,
+		rgba(255, 255, 255, 0.6) 100%
+	);
+	box-shadow: -2px 0 15px rgba(160, 140, 180, 0.5);
+}
+
+/* Center glow between curtains */
+.center-glow {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 8px;
+	height: 100%;
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(255, 255, 255, 0.9) 20%,
+		rgba(240, 230, 255, 1) 50%,
+		rgba(255, 255, 255, 0.9) 80%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	box-shadow:
+		0 0 30px 10px rgba(220, 200, 240, 0.6),
+		0 0 60px 20px rgba(200, 180, 220, 0.3);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+/* Opening animation */
+.loading-screen.opening .curtain-left {
+	transform: translateX(-100%);
+}
+
+.loading-screen.opening .curtain-right {
+	transform: translateX(100%);
+}
+
+.loading-screen.opening .center-glow {
+	opacity: 1;
+	animation: centerGlowPulse 0.8s ease-out forwards;
+}
+
+@keyframes centerGlowPulse {
+	0% {
+		opacity: 0;
+		width: 2px;
+	}
+	30% {
+		opacity: 1;
+		width: 20px;
+	}
+	100% {
+		opacity: 0;
+		width: 100vw;
+	}
+}
+
+/* Add subtle sparkle effect on curtains */
+.curtain::before {
+	content: '';
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(135deg, #d4c8e8 0%, #c8d4f0 100%);
-	transform: translateY(0);
-	transition: transform 0.65s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-/* Reveal animation - swipe up */
-.loading-screen.reveal .swipe-overlay {
-	transform: translateY(-100%);
-}
-
-/* Glowing edge line */
-.swipe-overlay::before {
-	content: '';
-	position: absolute;
+	right: 0;
 	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 3px;
-	background: linear-gradient(
-		90deg,
-		transparent 0%,
-		rgba(124, 108, 154, 0.5) 10%,
-		rgba(160, 184, 240, 1) 30%,
-		rgba(240, 160, 176, 0.8) 50%,
-		rgba(192, 160, 224, 1) 70%,
-		rgba(124, 108, 154, 0.5) 90%,
-		transparent 100%
-	);
-	box-shadow:
-		0 0 10px rgba(124, 108, 154, 0.6),
-		0 0 20px rgba(160, 184, 240, 0.4);
+	background-image:
+		radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+		radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+		radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+		radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+		radial-gradient(circle at 90% 50%, rgba(255, 255, 255, 0.45) 1px, transparent 1px);
+	background-size: 200px 200px;
+	pointer-events: none;
+	animation: sparkle 3s ease-in-out infinite;
 }
 
-/* Subtle glow underneath */
-.swipe-overlay::after {
-	content: '';
-	position: absolute;
-	bottom: -40px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 60%;
-	height: 80px;
-	background: radial-gradient(
-		ellipse at center,
-		rgba(124, 108, 154, 0.3) 0%,
-		transparent 70%
-	);
-	filter: blur(15px);
+@keyframes sparkle {
+	0%, 100% { opacity: 0.6; }
+	50% { opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.curtain-fold {
+		background: repeating-linear-gradient(
+			90deg,
+			transparent 0px,
+			transparent 40px,
+			rgba(180, 160, 200, 0.12) 40px,
+			rgba(180, 160, 200, 0.12) 41px,
+			transparent 41px,
+			transparent 80px
+		);
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.curtain {
+		transition: opacity 0.3s ease;
+	}
+
+	.loading-screen.opening .curtain-left,
+	.loading-screen.opening .curtain-right {
+		transform: none;
+		opacity: 0;
+	}
+
+	.center-glow {
+		display: none;
+	}
+
+	.curtain::before {
+		animation: none;
+	}
 }
 </style>

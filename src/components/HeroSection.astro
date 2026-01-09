@@ -187,34 +187,34 @@ import polymartLogo from '../assets/polymart.png';
 	pointer-events: none;
 }
 
-/* Large blue blob - top right */
+/* Large blue blob - top right (MUCH bigger like polarcub) */
 .blob-top-right {
-	width: 420px;
-	height: 500px;
-	background: linear-gradient(180deg, #7088f0 0%, #5070e8 100%);
-	border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-	top: -80px;
-	right: -80px;
+	width: 650px;
+	height: 700px;
+	background: linear-gradient(180deg, #8098f8 0%, #6080f0 100%);
+	border-radius: 35% 65% 60% 40% / 45% 50% 50% 55%;
+	top: -200px;
+	right: -200px;
 }
 
-/* Large pink blob - bottom left */
+/* Large pink blob - bottom left (larger, more visible) */
 .blob-bottom-left {
-	width: 320px;
-	height: 280px;
-	background: linear-gradient(135deg, #ff8090 0%, #f06070 100%);
-	border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-	bottom: -60px;
-	left: -80px;
+	width: 450px;
+	height: 400px;
+	background: linear-gradient(135deg, #ff8595 0%, #ff6080 100%);
+	border-radius: 55% 45% 40% 60% / 55% 35% 65% 45%;
+	bottom: -150px;
+	left: -150px;
 }
 
-/* Medium blue blob - mid right (behind character) */
+/* Large blue blob - mid right (behind character panel) */
 .blob-mid-right {
-	width: 280px;
-	height: 320px;
-	background: linear-gradient(180deg, rgba(112, 136, 240, 0.6) 0%, rgba(80, 112, 232, 0.4) 100%);
-	border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%;
-	top: 35%;
-	right: 5%;
+	width: 550px;
+	height: 600px;
+	background: linear-gradient(180deg, rgba(140, 160, 248, 0.7) 0%, rgba(100, 130, 240, 0.5) 100%);
+	border-radius: 45% 55% 50% 50% / 50% 50% 50% 50%;
+	top: 15%;
+	right: -5%;
 	z-index: 1;
 }
 
@@ -437,58 +437,57 @@ import polymartLogo from '../assets/polymart.png';
 	z-index: 2;
 }
 
-/* ===== Acrylic Panel (Glassmorphism) ===== */
+/* ===== Acrylic Panel (Glassmorphism) - Large like PolarCub ===== */
 .acrylic-panel {
 	position: absolute;
-	width: 380px;
-	height: 520px;
-	background: linear-gradient(145deg,
-		rgba(180, 170, 220, 0.35) 0%,
-		rgba(160, 150, 210, 0.25) 50%,
-		rgba(140, 160, 220, 0.3) 100%);
-	backdrop-filter: blur(20px);
-	-webkit-backdrop-filter: blur(20px);
-	border-radius: 60px;
-	border: 1.5px solid rgba(255, 255, 255, 0.4);
+	width: 520px;
+	height: 620px;
+	background: linear-gradient(160deg,
+		rgba(170, 165, 210, 0.5) 0%,
+		rgba(155, 150, 200, 0.4) 40%,
+		rgba(140, 155, 210, 0.45) 100%);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	border-radius: 50px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
 	box-shadow:
-		0 8px 40px rgba(100, 80, 160, 0.15),
-		inset 0 1px 0 rgba(255, 255, 255, 0.5);
+		0 15px 60px rgba(100, 80, 160, 0.2),
+		inset 0 2px 0 rgba(255, 255, 255, 0.4);
 	z-index: 1;
-	transform: rotate(8deg);
+	transform: rotate(6deg);
 	top: 50%;
 	left: 50%;
-	margin-top: -260px;
-	margin-left: -190px;
+	margin-top: -310px;
+	margin-left: -260px;
 	pointer-events: none;
 }
 
 /* ===== Decorative Stars around Panel ===== */
 .panel-star {
 	position: absolute;
-	font-size: 2rem;
 	z-index: 3;
 	pointer-events: none;
 	animation: panelStarPulse 4s ease-in-out infinite;
 }
 
 .panel-star-top {
-	top: 5%;
-	right: 8%;
+	top: 8%;
+	right: 5%;
 	color: #ff6090;
-	font-size: 2.2rem;
+	font-size: 2.8rem;
 }
 
 .panel-star-bottom {
-	bottom: 12%;
-	left: 5%;
-	color: #7088f0;
-	font-size: 1.6rem;
+	bottom: 25%;
+	left: -5%;
+	color: #8090f8;
+	font-size: 2rem;
 	animation-delay: -2s;
 }
 
 @keyframes panelStarPulse {
-	0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
-	50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+	0%, 100% { opacity: 0.7; transform: scale(1) rotate(0deg); }
+	50% { opacity: 1; transform: scale(1.15) rotate(10deg); }
 }
 
 /* ===== Social Bar ===== */
@@ -559,25 +558,25 @@ import polymartLogo from '../assets/polymart.png';
 		max-height: 400px;
 	}
 
-	/* Adjust blobs */
-	.blob-top-right { width: 280px; height: 340px; top: -50px; right: -60px; }
-	.blob-bottom-left { width: 200px; height: 180px; bottom: -40px; left: -50px; }
-	.blob-mid-right { display: none; }
+	/* Adjust blobs - still prominent on tablet */
+	.blob-top-right { width: 450px; height: 500px; top: -150px; right: -150px; }
+	.blob-bottom-left { width: 320px; height: 280px; bottom: -100px; left: -100px; }
+	.blob-mid-right { width: 380px; height: 420px; top: 10%; right: -10%; }
 
 	.spinning-star { font-size: 2rem; top: 10%; left: 8%; }
 	.drop-shape { display: none; }
 
 	/* Adjust acrylic panel */
 	.acrylic-panel {
-		width: 280px;
-		height: 380px;
-		margin-top: -190px;
-		margin-left: -140px;
-		border-radius: 45px;
+		width: 360px;
+		height: 450px;
+		margin-top: -225px;
+		margin-left: -180px;
+		border-radius: 40px;
 	}
 
-	.panel-star-top { font-size: 1.8rem; }
-	.panel-star-bottom { font-size: 1.3rem; }
+	.panel-star-top { font-size: 2.2rem; }
+	.panel-star-bottom { font-size: 1.6rem; }
 }
 
 @media (max-width: 600px) {
@@ -594,16 +593,21 @@ import polymartLogo from '../assets/polymart.png';
 	.hero-buttons { flex-direction: column; align-items: center; }
 	.btn { width: 100%; max-width: 240px; justify-content: center; }
 
-	/* Hide decorations on mobile */
+	/* Adjust blobs for mobile */
+	.blob-top-right { width: 300px; height: 350px; top: -120px; right: -120px; }
+	.blob-bottom-left { width: 220px; height: 200px; bottom: -80px; left: -80px; }
+	.blob-mid-right { display: none; }
+
+	/* Hide small decorations on mobile */
 	.wave-line, .brush-stroke, .small-star { display: none; }
 	.spinning-star { font-size: 1.5rem; }
 
 	/* Smaller acrylic panel on mobile */
 	.acrylic-panel {
-		width: 220px;
-		height: 300px;
-		margin-top: -150px;
-		margin-left: -110px;
+		width: 280px;
+		height: 360px;
+		margin-top: -180px;
+		margin-left: -140px;
 		border-radius: 35px;
 	}
 
