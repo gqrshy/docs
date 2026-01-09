@@ -1,11 +1,10 @@
 ---
-// Hero section - Cute & Playful design inspired by Gengar
-import gashiAvatar from '../assets/gashi.png';
+// Hero section - Cute & Playful design inspired by polarcub
 import polymartLogo from '../assets/polymart.png';
 ---
 
 <section class="hero-section" id="hero">
-	<!-- Floating Blob Decorations - Overflow viewport for cohesive feel -->
+	<!-- Floating Blob Decorations (overflow viewport) -->
 	<div class="blob blob-1"></div>
 	<div class="blob blob-2"></div>
 	<div class="blob blob-3"></div>
@@ -16,88 +15,78 @@ import polymartLogo from '../assets/polymart.png';
 	<!-- Small floating shapes -->
 	<div class="shape shape-star shape-1">★</div>
 	<div class="shape shape-star shape-2">★</div>
-	<div class="shape shape-circle shape-3"></div>
-	<div class="shape shape-circle shape-4"></div>
-	<div class="shape shape-dot shape-5"></div>
-	<div class="shape shape-dot shape-6"></div>
-	<div class="shape shape-ring shape-7"></div>
+	<div class="shape shape-drop shape-3"></div>
+	<div class="shape shape-drop shape-4"></div>
+	<div class="shape shape-circle shape-5"></div>
+	<div class="shape shape-circle shape-6"></div>
 
 	<!-- Main Content -->
-	<div class="hero-content">
-		<div class="hero-text">
-			<p class="greeting" data-i18n="greeting">Hey there! I'm</p>
-			<h1 class="name">
-				<span class="name-char" style="--i: 0">G</span>
-				<span class="name-char" style="--i: 1">a</span>
-				<span class="name-char" style="--i: 2">s</span>
-				<span class="name-char" style="--i: 3">h</span>
-				<span class="name-char" style="--i: 4">i</span>
-				<span class="name-char" style="--i: 5">!</span>
-			</h1>
-			<p class="bio" data-i18n="bio">
-				Minecraft Mod Developer.<br />
-				Creating high-quality mods for Cobblemon.<br />
-				Contact via <code>@gashicha</code>
-			</p>
-
-			<div class="hero-buttons">
-				<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="btn btn-primary">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-						<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-					</svg>
-					<span data-i18n="joinDiscord">Join Discord!</span>
-				</a>
-				<a href="/docs/cobbleranked/" class="btn btn-secondary">
-					<span data-i18n="viewDocs">View Docs</span>
-				</a>
-			</div>
-		</div>
-
-		<div class="hero-visual">
-			<div class="avatar-container">
-				<div class="avatar-glow"></div>
-				<div class="avatar-wrapper">
-					<img src={gashiAvatar.src} alt="Gashi" class="avatar" />
+	<div class="hero-wrapper">
+		<div class="hero-content">
+			<!-- Left: Text -->
+			<div class="hero-text">
+				<p class="greeting" data-i18n="greeting">Hey there! I'm</p>
+				<h1 class="name">Gashi!</h1>
+				<p class="bio" data-i18n="bio">
+					Minecraft Mod Developer from Japan!<br />
+					Creating high-quality mods for Cobblemon.
+				</p>
+				<div class="hero-buttons">
+					<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="btn btn-primary">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+							<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+						</svg>
+						<span data-i18n="joinDiscord">join discord!</span>
+					</a>
+					<a href="/docs/cobbleranked/" class="btn btn-secondary">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+							<polyline points="14,2 14,8 20,8"/>
+							<line x1="16" y1="13" x2="8" y2="13"/>
+							<line x1="16" y1="17" x2="8" y2="17"/>
+						</svg>
+						<span data-i18n="viewDocs">view docs!</span>
+					</a>
 				</div>
-				<div class="avatar-ring"></div>
 			</div>
 
-			<!-- Info cards floating around avatar -->
-			<div class="info-card card-skills">
-				<span class="card-label" data-i18n="labelSkills">Skills</span>
-				<span class="card-content">Java, Kotlin, TypeScript</span>
-			</div>
-			<div class="info-card card-tools">
-				<span class="card-label" data-i18n="labelTools">Tools</span>
-				<span class="card-content">Figma, Illustrator</span>
-			</div>
-			<div class="info-card card-field">
-				<span class="card-label" data-i18n="labelFields">Fields</span>
-				<span class="card-content" data-i18n="fieldsContent">Game & UI Design</span>
+			<!-- Right: Character Image -->
+			<div class="hero-visual">
+				<img src="/gengarmain.png" alt="Gengar" class="character-image" />
 			</div>
 		</div>
-	</div>
 
-	<!-- Social Links -->
-	<div class="social-bar">
-		<a href="https://github.com/gqrshy" target="_blank" rel="noopener noreferrer" title="GitHub" class="social-link">
-			<img src="https://cdn.simpleicons.org/github/6b5b95" alt="GitHub" />
-		</a>
-		<a href="https://modrinth.com/user/gashicha" target="_blank" rel="noopener noreferrer" title="Modrinth" class="social-link">
-			<img src="https://cdn.simpleicons.org/modrinth/1bd96a" alt="Modrinth" />
-		</a>
-		<a href="https://www.curseforge.com/members/gqrshy/projects" target="_blank" rel="noopener noreferrer" title="CurseForge" class="social-link">
-			<img src="https://cdn.simpleicons.org/curseforge/f16436" alt="CurseForge" />
-		</a>
-		<a href="https://polymart.org/user/47282/gashi" target="_blank" rel="noopener noreferrer" title="Polymart" class="social-link">
-			<img src={polymartLogo.src} alt="Polymart" />
-		</a>
-		<a href="https://www.youtube.com/@Gqrshy" target="_blank" rel="noopener noreferrer" title="YouTube" class="social-link">
-			<img src="https://cdn.simpleicons.org/youtube/ff6b6b" alt="YouTube" />
-		</a>
-		<a href="https://x.com/Gqrshy" target="_blank" rel="noopener noreferrer" title="X" class="social-link">
-			<img src="https://cdn.simpleicons.org/x/6b5b95" alt="X" />
-		</a>
+		<!-- Social Links Bar -->
+		<div class="social-bar">
+			<a href="https://github.com/gqrshy" target="_blank" class="social-link" title="GitHub">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+				</svg>
+			</a>
+			<a href="https://modrinth.com/user/gashicha" target="_blank" class="social-link modrinth" title="Modrinth">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M12.252.004a11.78 11.768 0 0 0-8.92 3.73 11 10.999 0 0 0-2.17 3.11 11.37 11.359 0 0 0-1.16 5.169c0 1.42.17 2.5.6 3.77.24.759.77 1.899 1.17 2.529a12.3 12.298 0 0 0 8.85 5.639c.44.05 2.54.07 2.76.02.2-.04.22.1-.26-1.7l-.36-1.37-1.01-.06a8.5 8.489 0 0 1-5.18-1.8 5.34 5.34 0 0 1-1.3-1.26c0-.05.34-.28.74-.5a37.572 37.545 0 0 1 2.88-1.54c.03 0 .07.08.1.17.58 1.341 1.63 2.381 3.11 3.001.56.24 1.01.34 1.81.39l.63.05.49-1.06c.52-1.14.93-2.11.9-2.16-.02-.02-.17-.04-.34-.04-.52 0-1.52-.18-2.1-.38a5.97 5.97 0 0 1-1.7-.86l-.27-.22.36-.13c.21-.07 1.02-.43 1.81-.79 2.27-.98 3.76-1.53 7.09-2.6a66.769 66.715 0 0 1 2.24-.67c.01 0 .06.26.1.59.14.94.14 2.96 0 3.9a11.29 11.279 0 0 1-3.93 7.139c-1.23 1.06-2.36 1.69-3.98 2.23-.63.21-1.78.47-2.29.52l-.3.03.43 1.58c.23.87.44 1.63.46 1.68.04.11.18.1.83 0a12.86 12.848 0 0 0 7.27-4.199 12.033 12.021 0 0 0 2.62-5.979c.17-1.04.2-1.5.2-2.79a11.39 11.379 0 0 0-.6-4.259 11.97 11.959 0 0 0-5.16-6.2A11.39 11.379 0 0 0 12.57 0c-.27 0-.6 0-.72.009z"/>
+				</svg>
+			</a>
+			<a href="https://www.curseforge.com/members/gqrshy/projects" target="_blank" class="social-link curseforge" title="CurseForge">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M18.326 9.2145H21.9984L20.036 11.4417L19.0094 12.5814H16.6148L15.7076 13.6L14.697 14.6998H21.9084L19.9108 17.011L18.8034 18.2898H9.3144L7.7686 19.8816H22.8V4.1184H0V8.133L1.8394 9.1632H1.9276L4.134 9.2146L7.4886 12.7736L9.134 14.469L9.5114 14.8526H5.1062C4.4968 14.8526 4.0026 14.3598 4.0026 13.7494V13.578H0.3226C0.3226 13.578 0.2556 14.0688 0.3226 14.5698C0.446 15.4812 0.719 16.0966 1.344 16.8814C1.4254 16.9816 2.4424 18.0744 2.6914 18.2898H2.702C3.878 19.2798 5.3992 19.8816 7.059 19.8816H7.7686L9.3144 18.2898H18.8034L20.8604 15.8816H12.2084L17.287 10.1006H14.9894L18.326 9.2145Z"/>
+				</svg>
+			</a>
+			<a href="https://polymart.org/user/47282/gashi" target="_blank" class="social-link polymart" title="Polymart">
+				<img src={polymartLogo.src} alt="Polymart" width="20" height="20" />
+			</a>
+			<a href="https://www.youtube.com/@Gqrshy" target="_blank" class="social-link youtube" title="YouTube">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+				</svg>
+			</a>
+			<a href="https://x.com/Gqrshy" target="_blank" class="social-link x" title="X">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+				</svg>
+			</a>
+		</div>
 	</div>
 </section>
 
@@ -106,22 +95,14 @@ import polymartLogo from '../assets/polymart.png';
 	const translations = {
 		en: {
 			greeting: "Hey there! I'm",
-			bio: "Minecraft Mod Developer.<br />Creating high-quality mods for Cobblemon.<br />Contact via <code>@gashicha</code>",
-			labelSkills: "Skills",
-			labelTools: "Tools",
-			labelFields: "Fields",
-			fieldsContent: "Game & UI Design",
-			joinDiscord: "Join Discord!",
-			viewDocs: "View Docs"
+			bio: "Minecraft Mod Developer from Japan!<br />Creating high-quality mods for Cobblemon.",
+			joinDiscord: "join discord!",
+			viewDocs: "view docs!"
 		},
 		ja: {
 			greeting: "こんにちは！",
-			bio: "Minecraft Mod開発者です。<br />Cobblemon向けの高品質なModを制作しています。<br />お問い合わせは <code>@gashicha</code> まで",
-			labelSkills: "スキル",
-			labelTools: "ツール",
-			labelFields: "分野",
-			fieldsContent: "ゲーム & UIデザイン",
-			joinDiscord: "Discordに参加！",
+			bio: "日本のMinecraft Mod開発者です！<br />Cobblemon向けの高品質なModを制作しています。",
+			joinDiscord: "discordに参加！",
 			viewDocs: "ドキュメント"
 		}
 	};
@@ -140,7 +121,6 @@ import polymartLogo from '../assets/polymart.png';
 	}
 
 	window.addEventListener('langChange', (e) => applyHeroTranslations(e.detail.lang));
-
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', init);
 	} else {
@@ -150,98 +130,85 @@ import polymartLogo from '../assets/polymart.png';
 </script>
 
 <style>
-/* ===== Base Section ===== */
 .hero-section {
 	min-height: 100vh;
 	background: linear-gradient(135deg, #e8e0f0 0%, #d4c8e8 50%, #c8d4f0 100%);
 	position: relative;
 	overflow: hidden;
 	display: flex;
-	flex-direction: column;
+	align-items: center;
 	justify-content: center;
-	padding: 6rem 2rem 2rem;
+	padding: 100px 40px 60px;
 }
 
-/* ===== Floating Blobs - Overflow viewport ===== */
+/* ===== Blobs (overflow viewport edges) ===== */
 .blob {
 	position: absolute;
 	border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%;
-	filter: blur(0px);
 	z-index: 0;
+	pointer-events: none;
 }
 
 .blob-1 {
 	width: 400px;
-	height: 400px;
-	background: linear-gradient(135deg, #7c8cf0 0%, #6b7ce0 100%);
-	top: -150px;
+	height: 380px;
+	background: linear-gradient(135deg, #7c8cf0, #6b7ce0);
+	top: -100px;
 	right: -100px;
-	animation: blobFloat1 8s ease-in-out infinite;
+	animation: blobFloat 8s ease-in-out infinite;
 }
 
 .blob-2 {
-	width: 300px;
-	height: 280px;
-	background: linear-gradient(135deg, #f0a0b0 0%, #e090a0 100%);
+	width: 320px;
+	height: 300px;
+	background: linear-gradient(135deg, #f0a0b0, #e090a0);
 	bottom: -80px;
 	left: -100px;
-	border-radius: 60% 40% 50% 60% / 40% 50% 60% 50%;
-	animation: blobFloat2 10s ease-in-out infinite;
+	animation: blobFloat 10s ease-in-out infinite reverse;
 }
 
 .blob-3 {
 	width: 200px;
 	height: 200px;
-	background: linear-gradient(135deg, #a0b8f0 0%, #90a8e0 100%);
-	top: 30%;
+	background: linear-gradient(135deg, #a0b8f0, #90a8e0);
+	top: 40%;
 	left: -80px;
-	animation: blobFloat3 7s ease-in-out infinite;
+	animation: blobFloat 7s ease-in-out infinite 1s;
 }
 
 .blob-4 {
 	width: 150px;
 	height: 150px;
-	background: linear-gradient(135deg, #c0a0e0 0%, #b090d0 100%);
+	background: linear-gradient(135deg, #c0a0e0, #b090d0);
 	bottom: 20%;
 	right: -50px;
-	animation: blobFloat1 9s ease-in-out infinite reverse;
+	animation: blobFloat 9s ease-in-out infinite 0.5s;
 }
 
 .blob-5 {
 	width: 100px;
 	height: 100px;
-	background: linear-gradient(135deg, #f0c0d0 0%, #e0b0c0 100%);
-	top: 60%;
-	right: 10%;
-	animation: blobFloat2 6s ease-in-out infinite;
+	background: linear-gradient(135deg, #90c0f0, #80b0e0);
+	top: 15%;
+	left: 8%;
+	animation: blobFloat 6s ease-in-out infinite 2s;
 }
 
 .blob-6 {
 	width: 80px;
 	height: 80px;
-	background: linear-gradient(135deg, #90c0f0 0%, #80b0e0 100%);
-	top: 15%;
-	left: 15%;
-	animation: blobFloat3 8s ease-in-out infinite;
+	background: linear-gradient(135deg, #f0c0d0, #e0b0c0);
+	bottom: 35%;
+	left: 5%;
+	animation: blobFloat 8s ease-in-out infinite 1.5s;
 }
 
-@keyframes blobFloat1 {
+@keyframes blobFloat {
 	0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-	33% { transform: translate(20px, -30px) rotate(5deg) scale(1.05); }
-	66% { transform: translate(-10px, 20px) rotate(-5deg) scale(0.95); }
+	50% { transform: translate(20px, -25px) rotate(5deg) scale(1.05); }
 }
 
-@keyframes blobFloat2 {
-	0%, 100% { transform: translate(0, 0) rotate(0deg); }
-	50% { transform: translate(30px, -20px) rotate(10deg); }
-}
-
-@keyframes blobFloat3 {
-	0%, 100% { transform: translate(0, 0) scale(1); }
-	50% { transform: translate(-20px, 30px) scale(1.1); }
-}
-
-/* ===== Small Floating Shapes ===== */
+/* ===== Floating Shapes ===== */
 .shape {
 	position: absolute;
 	z-index: 1;
@@ -249,149 +216,113 @@ import polymartLogo from '../assets/polymart.png';
 }
 
 .shape-star {
-	font-size: 1.5rem;
-	color: #f0a0b0;
-	animation: starTwinkle 3s ease-in-out infinite;
+	font-size: 1.8rem;
+	animation: twinkle 3s ease-in-out infinite;
 }
 
-.shape-1 { top: 20%; left: 8%; animation-delay: 0s; }
-.shape-2 { top: 70%; right: 15%; animation-delay: 1.5s; color: #a0b8f0; }
+.shape-1 { top: 20%; left: 5%; color: #f0a0b0; }
+.shape-2 { top: 60%; right: 8%; color: #a0b8f0; animation-delay: 1.5s; }
+
+.shape-drop {
+	width: 12px;
+	height: 18px;
+	background: linear-gradient(180deg, #a0c0f0 0%, #80a0e0 100%);
+	border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+	transform: rotate(45deg);
+	animation: dropFloat 4s ease-in-out infinite;
+}
+
+.shape-3 { top: 30%; right: 15%; }
+.shape-4 { bottom: 40%; left: 12%; animation-delay: 2s; }
 
 .shape-circle {
-	width: 20px;
-	height: 20px;
-	background: #c0a0e0;
+	width: 14px;
+	height: 14px;
 	border-radius: 50%;
-	animation: floatBounce 4s ease-in-out infinite;
+	animation: bounce 4s ease-in-out infinite;
 }
 
-.shape-3 { top: 40%; right: 8%; animation-delay: 0.5s; }
-.shape-4 { bottom: 30%; left: 12%; animation-delay: 2s; background: #90c0f0; }
+.shape-5 { top: 50%; right: 5%; background: #c0a0e0; }
+.shape-6 { bottom: 25%; left: 18%; background: #f0c0d0; animation-delay: 1s; }
 
-.shape-dot {
-	width: 12px;
-	height: 12px;
-	background: #f0c0d0;
-	border-radius: 50%;
-	animation: dotPulse 2s ease-in-out infinite;
-}
-
-.shape-5 { top: 25%; right: 25%; }
-.shape-6 { bottom: 40%; left: 25%; animation-delay: 1s; background: #a0d0f0; }
-
-.shape-ring {
-	width: 40px;
-	height: 40px;
-	border: 4px solid #c0a0e0;
-	border-radius: 50%;
-	animation: ringRotate 6s linear infinite;
-}
-
-.shape-7 { top: 50%; left: 5%; }
-
-@keyframes starTwinkle {
+@keyframes twinkle {
 	0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
-	50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+	50% { opacity: 1; transform: scale(1.3) rotate(20deg); }
 }
 
-@keyframes floatBounce {
+@keyframes dropFloat {
+	0%, 100% { transform: rotate(45deg) translateY(0); }
+	50% { transform: rotate(45deg) translateY(-15px); }
+}
+
+@keyframes bounce {
 	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-15px); }
+	50% { transform: translateY(-12px); }
 }
 
-@keyframes dotPulse {
-	0%, 100% { transform: scale(1); opacity: 0.7; }
-	50% { transform: scale(1.3); opacity: 1; }
+/* ===== Wrapper ===== */
+.hero-wrapper {
+	width: 100%;
+	max-width: 1200px;
+	position: relative;
+	z-index: 2;
 }
 
-@keyframes ringRotate {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
-}
-
-/* ===== Main Content ===== */
+/* ===== Content Grid ===== */
 .hero-content {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 4rem;
-	max-width: 1200px;
-	margin: 0 auto;
-	position: relative;
-	z-index: 2;
+	gap: 40px;
 	align-items: center;
 }
 
 /* ===== Text Section ===== */
 .hero-text {
-	animation: slideInLeft 0.8s ease-out;
+	animation: slideIn 0.8s ease-out;
 }
 
-@keyframes slideInLeft {
+@keyframes slideIn {
 	from { opacity: 0; transform: translateX(-30px); }
 	to { opacity: 1; transform: translateX(0); }
 }
 
 .greeting {
-	font-size: 1.25rem;
+	font-family: 'Lilita One', 'Inter', sans-serif;
+	font-size: 1.5rem;
 	color: #6b5b7a;
-	margin-bottom: 0.5rem;
+	margin: 0 0 4px;
 	font-weight: 500;
 }
 
 .name {
-	font-size: 4rem;
-	font-weight: 800;
-	margin: 0 0 1.5rem;
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.name-char {
-	display: inline-block;
+	font-family: 'Lilita One', 'Inter', sans-serif;
+	font-size: 5rem;
+	font-weight: 700;
 	color: #4a4a5a;
-	animation: charBounce 0.6s ease-out backwards;
-	animation-delay: calc(var(--i) * 0.1s);
-	transition: transform 0.2s, color 0.2s;
-}
-
-.name-char:hover {
-	transform: translateY(-8px) scale(1.1);
-	color: #7c6c9a;
-}
-
-@keyframes charBounce {
-	0% { opacity: 0; transform: translateY(-50px) rotate(-10deg); }
-	60% { transform: translateY(10px) rotate(5deg); }
-	100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+	margin: 0 0 24px;
+	letter-spacing: -0.01em;
+	line-height: 1.0;
 }
 
 .bio {
 	font-size: 1.1rem;
 	line-height: 1.8;
 	color: #6b5b7a;
-	margin-bottom: 2rem;
-}
-
-.bio code {
-	background: rgba(124, 108, 154, 0.15);
-	padding: 0.2rem 0.5rem;
-	border-radius: 6px;
-	color: #7c6c9a;
-	font-weight: 600;
+	margin: 0 0 32px;
 }
 
 /* ===== Buttons ===== */
 .hero-buttons {
 	display: flex;
-	gap: 1rem;
+	gap: 16px;
 	flex-wrap: wrap;
 }
 
 .btn {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.5rem;
-	padding: 0.875rem 1.5rem;
+	gap: 8px;
+	padding: 14px 28px;
 	border-radius: 50px;
 	font-weight: 600;
 	font-size: 1rem;
@@ -400,163 +331,67 @@ import polymartLogo from '../assets/polymart.png';
 	border: 2px solid transparent;
 }
 
+.btn svg {
+	flex-shrink: 0;
+}
+
 .btn-primary {
-	background: linear-gradient(135deg, #7c6c9a 0%, #6b5b8a 100%);
+	background: linear-gradient(135deg, #f07080, #e06070);
 	color: #fff;
-	box-shadow: 0 4px 15px rgba(124, 108, 154, 0.4);
+	box-shadow: 0 4px 20px rgba(240, 112, 128, 0.4);
 }
 
 .btn-primary:hover {
 	transform: translateY(-3px) scale(1.02);
-	box-shadow: 0 8px 25px rgba(124, 108, 154, 0.5);
+	box-shadow: 0 8px 30px rgba(240, 112, 128, 0.5);
 }
 
 .btn-secondary {
-	background: rgba(255, 255, 255, 0.7);
+	background: rgba(255, 255, 255, 0.8);
 	color: #6b5b7a;
-	border-color: rgba(124, 108, 154, 0.3);
-	backdrop-filter: blur(10px);
+	border-color: rgba(240, 112, 128, 0.4);
 }
 
 .btn-secondary:hover {
-	background: rgba(255, 255, 255, 0.9);
-	border-color: #7c6c9a;
+	background: #fff;
+	border-color: #f07080;
 	transform: translateY(-3px);
 }
 
-/* ===== Visual Section ===== */
+/* ===== Character Visual ===== */
 .hero-visual {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 400px;
-	animation: slideInRight 0.8s ease-out;
+	animation: slideIn 0.8s ease-out 0.2s backwards;
 }
 
-@keyframes slideInRight {
-	from { opacity: 0; transform: translateX(30px); }
-	to { opacity: 1; transform: translateX(0); }
+.character-image {
+	max-width: 100%;
+	max-height: 500px;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	filter: drop-shadow(0 10px 40px rgba(124, 108, 154, 0.3));
+	animation: characterFloat 4s ease-in-out infinite;
 }
 
-.avatar-container {
-	position: relative;
-	width: 220px;
-	height: 220px;
-}
-
-.avatar-glow {
-	position: absolute;
-	inset: -20px;
-	background: radial-gradient(circle, rgba(124, 108, 154, 0.3) 0%, transparent 70%);
-	border-radius: 50%;
-	animation: glowPulse 3s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-	0%, 100% { transform: scale(1); opacity: 0.5; }
-	50% { transform: scale(1.1); opacity: 0.8; }
-}
-
-.avatar-wrapper {
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-	overflow: hidden;
-	border: 4px solid rgba(255, 255, 255, 0.8);
-	box-shadow: 0 10px 40px rgba(124, 108, 154, 0.3);
-	position: relative;
-	z-index: 2;
-}
-
-.avatar {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transition: transform 0.3s ease;
-}
-
-.avatar-wrapper:hover .avatar {
-	transform: scale(1.1);
-}
-
-.avatar-ring {
-	position: absolute;
-	inset: -15px;
-	border: 3px dashed rgba(124, 108, 154, 0.3);
-	border-radius: 50%;
-	animation: ringRotate 20s linear infinite;
-}
-
-/* ===== Info Cards ===== */
-.info-card {
-	position: absolute;
-	background: rgba(255, 255, 255, 0.85);
-	backdrop-filter: blur(10px);
-	padding: 0.75rem 1.25rem;
-	border-radius: 16px;
-	box-shadow: 0 4px 20px rgba(124, 108, 154, 0.15);
-	display: flex;
-	flex-direction: column;
-	gap: 0.25rem;
-	animation: cardFloat 4s ease-in-out infinite;
-	transition: transform 0.3s ease;
-	z-index: 3;
-}
-
-.info-card:hover {
-	transform: scale(1.05);
-}
-
-.card-label {
-	font-size: 0.7rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	color: #9a8ab0;
-}
-
-.card-content {
-	font-size: 0.9rem;
-	font-weight: 600;
-	color: #5a4a6a;
-}
-
-.card-skills {
-	top: 10%;
-	right: 0;
-	animation-delay: 0s;
-}
-
-.card-tools {
-	bottom: 20%;
-	right: 10%;
-	animation-delay: 1s;
-}
-
-.card-field {
-	bottom: 10%;
-	left: 0;
-	animation-delay: 2s;
-}
-
-@keyframes cardFloat {
+@keyframes characterFloat {
 	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-10px); }
+	50% { transform: translateY(-15px); }
 }
 
 /* ===== Social Bar ===== */
 .social-bar {
 	display: flex;
 	justify-content: center;
-	gap: 1rem;
-	margin-top: 3rem;
-	position: relative;
-	z-index: 2;
-	animation: fadeInUp 0.8s ease-out 0.5s backwards;
+	gap: 12px;
+	margin-top: 60px;
+	animation: fadeUp 0.8s ease-out 0.4s backwards;
 }
 
-@keyframes fadeInUp {
+@keyframes fadeUp {
 	from { opacity: 0; transform: translateY(20px); }
 	to { opacity: 1; transform: translateY(0); }
 }
@@ -565,99 +400,69 @@ import polymartLogo from '../assets/polymart.png';
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 48px;
-	height: 48px;
+	width: 44px;
+	height: 44px;
 	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.7);
-	backdrop-filter: blur(10px);
-	box-shadow: 0 2px 10px rgba(124, 108, 154, 0.15);
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: 0 2px 10px rgba(124, 108, 154, 0.12);
 	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	color: #6b5b7a;
 }
 
 .social-link:hover {
-	transform: translateY(-5px) scale(1.1);
-	background: rgba(255, 255, 255, 0.95);
-	box-shadow: 0 8px 20px rgba(124, 108, 154, 0.25);
+	transform: translateY(-4px) scale(1.1);
+	background: #fff;
+	box-shadow: 0 6px 20px rgba(124, 108, 154, 0.2);
 }
 
+.social-link svg,
 .social-link img {
-	width: 22px;
-	height: 22px;
-	object-fit: contain;
+	width: 20px;
+	height: 20px;
+	flex-shrink: 0;
 }
+
+.social-link.modrinth { color: #1bd96a; }
+.social-link.curseforge { color: #f16436; }
+.social-link.youtube { color: #ff0000; }
+.social-link.x { color: #000; }
 
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
+	.hero-section {
+		padding: 100px 24px 50px;
+	}
+
 	.hero-content {
 		grid-template-columns: 1fr;
 		text-align: center;
-		gap: 3rem;
+		gap: 30px;
 	}
 
-	.hero-text {
-		order: 1;
+	.hero-text { order: 2; }
+	.hero-visual { order: 1; }
+
+	.name { font-size: 3.5rem; }
+	.hero-buttons { justify-content: center; }
+
+	.character-image {
+		max-height: 350px;
 	}
 
-	.hero-visual {
-		order: 0;
-		min-height: 300px;
-	}
-
-	.name {
-		justify-content: center;
-		font-size: 3rem;
-	}
-
-	.hero-buttons {
-		justify-content: center;
-	}
-
-	.info-card {
-		display: none;
-	}
-
-	.blob-1 { width: 250px; height: 250px; top: -100px; right: -80px; }
-	.blob-2 { width: 200px; height: 180px; bottom: -60px; left: -80px; }
-	.blob-3 { display: none; }
-	.blob-4 { display: none; }
+	.blob-1 { width: 250px; height: 230px; top: -60px; right: -80px; }
+	.blob-2 { width: 200px; height: 180px; bottom: -50px; left: -60px; }
+	.blob-3, .blob-4 { display: none; }
 }
 
 @media (max-width: 600px) {
-	.hero-section {
-		padding: 5rem 1rem 2rem;
-	}
-
-	.name {
-		font-size: 2.5rem;
-	}
-
-	.bio {
-		font-size: 1rem;
-	}
-
-	.avatar-container {
-		width: 160px;
-		height: 160px;
-	}
-
-	.social-bar {
-		flex-wrap: wrap;
-	}
-
-	.social-link {
-		width: 42px;
-		height: 42px;
-	}
-
-	.hero-buttons {
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.btn {
-		width: 100%;
-		max-width: 250px;
-		justify-content: center;
-	}
+	.hero-section { padding: 90px 16px 40px; }
+	.name { font-size: 2.8rem; }
+	.bio { font-size: 1rem; }
+	.character-image { max-height: 280px; }
+	.social-bar { flex-wrap: wrap; gap: 10px; }
+	.social-link { width: 40px; height: 40px; }
+	.social-link svg, .social-link img { width: 18px; height: 18px; }
+	.hero-buttons { flex-direction: column; align-items: center; }
+	.btn { width: 100%; max-width: 240px; justify-content: center; }
 }
 </style>
