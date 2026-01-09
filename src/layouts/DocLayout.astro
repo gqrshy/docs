@@ -44,10 +44,10 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 	<meta name="twitter:image" content={finalOgImage} />
 
 	<!-- Theme Color (Discord embed sidebar) -->
-	<meta name="theme-color" content="#7c3aed" />
+	<meta name="theme-color" content="#7c6c9a" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lilita+One&display=swap" rel="stylesheet">
 	<ViewTransitions />
 </head>
 <body>
@@ -251,13 +251,18 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 	</script>
 
 	<style is:global>
-		/* ===== CSS Custom Properties ===== */
+		/* ===== CSS Custom Properties - Pastel Theme ===== */
 		:root {
-			--color-primary: #7c3aed;
-			--color-primary-light: #a78bfa;
-			--color-primary-lighter: #c4b5fd;
-			--color-bg-dark: #0f0a1a;
-			--color-bg-darker: #0a0612;
+			--color-primary: #7c6c9a;
+			--color-primary-light: #9a8ab0;
+			--color-primary-lighter: #b0a0c8;
+			--color-bg: #edecff;
+			--color-bg-alt: #e8e4ff;
+			--color-bg-card: rgba(255, 255, 255, 0.7);
+			--color-text: #454141;
+			--color-text-muted: #6b5b7a;
+			--color-border: rgba(124, 108, 154, 0.2);
+			--color-accent-pink: #ff4080;
 			--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 			--ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
 			--ease-spring: cubic-bezier(0.87, 0.05, 0.02, 0.97);
@@ -282,8 +287,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		body {
 			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-			background: var(--color-bg-dark);
-			color: rgba(255, 255, 255, 0.9);
+			background: linear-gradient(135deg, #edecff 0%, #e8e4ff 50%, #e0e8ff 100%);
+			color: var(--color-text);
 			line-height: 1.7;
 			overflow-x: hidden;
 		}
@@ -390,13 +395,13 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.doc-header {
 			margin-bottom: 2.5rem;
 			padding-bottom: 1.5rem;
-			border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+			border-bottom: 1px solid var(--color-border);
 		}
 
 		.doc-header h1 {
 			font-size: 2.5rem;
 			font-weight: 700;
-			color: #fff;
+			color: var(--color-text);
 			margin-bottom: 0.75rem;
 			display: flex;
 			flex-wrap: wrap;
@@ -409,7 +414,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			display: inline-block;
 			opacity: 0;
 			transform: translateY(20px);
-			background: linear-gradient(135deg, #fff 0%, var(--color-primary-light) 50%, #ec4899 100%);
+			background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 50%, var(--color-accent-pink) 100%);
 			background-size: 200% 200%;
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
@@ -436,7 +441,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		.doc-description {
 			font-size: 1.1rem;
-			color: rgba(255, 255, 255, 0.6);
+			color: var(--color-text-muted);
 			animation: fade-in-up 0.8s var(--ease-out-expo) 0.4s backwards;
 		}
 
@@ -455,11 +460,11 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.prose h2 {
 			font-size: 1.75rem;
 			font-weight: 600;
-			color: #fff;
+			color: var(--color-text);
 			margin-top: 3rem;
 			margin-bottom: 1rem;
 			padding-bottom: 0.5rem;
-			border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+			border-bottom: 1px solid var(--color-border);
 			position: relative;
 		}
 
@@ -482,7 +487,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.prose h3 {
 			font-size: 1.35rem;
 			font-weight: 600;
-			color: #fff;
+			color: var(--color-text);
 			margin-top: 2rem;
 			margin-bottom: 0.75rem;
 		}
@@ -490,21 +495,21 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.prose h4 {
 			font-size: 1.1rem;
 			font-weight: 600;
-			color: rgba(255, 255, 255, 0.95);
+			color: var(--color-text);
 			margin-top: 1.5rem;
 			margin-bottom: 0.5rem;
 		}
 
 		.prose p {
 			margin-bottom: 1.25rem;
-			color: rgba(255, 255, 255, 0.8);
+			color: var(--color-text-muted);
 		}
 
 		.prose a {
-			color: var(--color-primary-light);
+			color: var(--color-primary);
 			text-decoration: none;
 			border-bottom: 1px solid transparent;
-			background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary-lighter));
+			background: linear-gradient(90deg, var(--color-primary), var(--color-primary-lighter));
 			background-size: 0% 2px;
 			background-position: 0 100%;
 			background-repeat: no-repeat;
@@ -513,12 +518,12 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose a:hover {
-			color: var(--color-primary-lighter);
+			color: var(--color-primary-light);
 			background-size: 100% 2px;
 		}
 
 		.prose strong {
-			color: #fff;
+			color: var(--color-text);
 			font-weight: 600;
 		}
 
@@ -530,7 +535,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		.prose li {
 			margin-bottom: 0.5rem;
-			color: rgba(255, 255, 255, 0.8);
+			color: var(--color-text-muted);
 			position: relative;
 		}
 
@@ -541,8 +546,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		/* ===== Code with enhanced styling ===== */
 		.prose code {
 			font-family: 'JetBrains Mono', monospace;
-			background: rgba(124, 58, 237, 0.2);
-			color: var(--color-primary-lighter);
+			background: rgba(124, 108, 154, 0.15);
+			color: var(--color-primary);
 			padding: 0.2rem 0.4rem;
 			border-radius: 4px;
 			font-size: 0.9em;
@@ -550,29 +555,30 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose code:hover {
-			background: rgba(124, 58, 237, 0.3);
+			background: rgba(124, 108, 154, 0.25);
 		}
 
 		.prose pre {
-			background: linear-gradient(135deg, rgba(26, 16, 51, 0.8) 0%, rgba(15, 10, 26, 0.9) 100%);
-			border: 1px solid rgba(124, 58, 237, 0.2);
+			background: rgba(255, 255, 255, 0.8);
+			border: 1px solid var(--color-border);
 			border-radius: 0.75rem;
 			padding: 1.25rem;
 			overflow-x: auto;
 			margin-bottom: 1.5rem;
 			transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s var(--ease-out-expo);
+			backdrop-filter: blur(10px);
 		}
 
 		.prose pre:hover {
-			border-color: rgba(124, 58, 237, 0.4);
-			box-shadow: 0 8px 30px rgba(124, 58, 237, 0.15);
+			border-color: rgba(124, 108, 154, 0.4);
+			box-shadow: 0 8px 30px rgba(124, 108, 154, 0.15);
 			transform: translateY(-2px);
 		}
 
 		.prose pre code {
 			background: transparent;
 			padding: 0;
-			color: #e0e0e0;
+			color: var(--color-text);
 			font-size: 0.875rem;
 			line-height: 1.6;
 		}
@@ -585,12 +591,12 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			position: absolute;
 			top: 0.75rem;
 			right: 0.75rem;
-			background: rgba(124, 58, 237, 0.3);
+			background: rgba(124, 108, 154, 0.2);
 			border: none;
 			border-radius: 6px;
 			padding: 0.5rem;
 			cursor: pointer;
-			color: rgba(255, 255, 255, 0.7);
+			color: var(--color-text-muted);
 			transition: all 0.3s var(--ease-out-back);
 			display: flex;
 			align-items: center;
@@ -598,13 +604,13 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.copy-btn:hover {
-			background: rgba(124, 58, 237, 0.5);
-			color: #fff;
+			background: rgba(124, 108, 154, 0.35);
+			color: var(--color-text);
 			transform: scale(1.1);
 		}
 
 		.copy-btn.copied {
-			background: rgba(34, 197, 94, 0.5);
+			background: rgba(34, 197, 94, 0.3);
 			animation: bounce-success 0.4s var(--ease-out-back);
 		}
 
@@ -618,19 +624,20 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			width: 100%;
 			border-collapse: collapse;
 			margin-bottom: 1.5rem;
-			background: rgba(26, 16, 51, 0.4);
+			background: var(--color-bg-card);
 			border-radius: 0.75rem;
 			overflow: hidden;
 			transition: box-shadow 0.3s ease;
+			backdrop-filter: blur(10px);
 		}
 
 		.prose table:hover {
-			box-shadow: 0 8px 30px rgba(124, 58, 237, 0.1);
+			box-shadow: 0 8px 30px rgba(124, 108, 154, 0.1);
 		}
 
 		.prose th {
-			background: rgba(124, 58, 237, 0.2);
-			color: var(--color-primary-light);
+			background: rgba(124, 108, 154, 0.15);
+			color: var(--color-primary);
 			font-weight: 600;
 			text-align: left;
 			padding: 0.875rem 1rem;
@@ -638,8 +645,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		.prose td {
 			padding: 0.875rem 1rem;
-			border-top: 1px solid rgba(124, 58, 237, 0.1);
-			color: rgba(255, 255, 255, 0.8);
+			border-top: 1px solid var(--color-border);
+			color: var(--color-text-muted);
 			transition: background 0.2s ease, transform 0.2s ease;
 		}
 
@@ -648,17 +655,17 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose tbody tr:hover {
-			background: rgba(124, 58, 237, 0.08);
+			background: rgba(124, 108, 154, 0.08);
 		}
 
 		.prose tbody tr:hover td {
-			color: rgba(255, 255, 255, 0.95);
+			color: var(--color-text);
 		}
 
 		/* ===== Blockquotes ===== */
 		.prose blockquote {
 			border-left: 4px solid var(--color-primary);
-			background: rgba(124, 58, 237, 0.1);
+			background: rgba(124, 108, 154, 0.1);
 			padding: 1rem 1.5rem;
 			margin: 1.5rem 0;
 			border-radius: 0 0.5rem 0.5rem 0;
@@ -671,20 +678,21 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		/* ===== Collapsible FAQ/Troubleshooting ===== */
 		.prose details {
 			margin-bottom: 0.75rem;
-			background: rgba(26, 16, 51, 0.4);
-			border: 1px solid rgba(124, 58, 237, 0.2);
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
 			border-radius: 0.5rem;
 			overflow: hidden;
 			transition: all 0.3s var(--ease-out-expo);
+			backdrop-filter: blur(10px);
 		}
 
 		.prose details:hover {
-			border-color: rgba(124, 58, 237, 0.4);
-			box-shadow: 0 4px 20px rgba(124, 58, 237, 0.1);
+			border-color: rgba(124, 108, 154, 0.4);
+			box-shadow: 0 4px 20px rgba(124, 108, 154, 0.1);
 		}
 
 		.prose details[open] {
-			background: rgba(26, 16, 51, 0.6);
+			background: rgba(255, 255, 255, 0.9);
 		}
 
 		.prose details summary {
@@ -706,8 +714,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			content: '';
 			width: 8px;
 			height: 8px;
-			border-right: 2px solid rgba(255, 255, 255, 0.5);
-			border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+			border-right: 2px solid var(--color-text-muted);
+			border-bottom: 2px solid var(--color-text-muted);
 			transform: rotate(-45deg);
 			transition: transform 0.3s var(--ease-out-back), border-color 0.2s ease;
 			flex-shrink: 0;
@@ -718,20 +726,20 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose details summary:hover {
-			background: rgba(124, 58, 237, 0.1);
+			background: rgba(124, 108, 154, 0.1);
 		}
 
 		.prose details summary:hover::before {
-			border-color: var(--color-primary-light);
+			border-color: var(--color-primary);
 		}
 
 		.prose details summary strong {
-			color: rgba(255, 255, 255, 0.9);
+			color: var(--color-text);
 			transition: color 0.2s ease;
 		}
 
 		.prose details summary:hover strong {
-			color: #fff;
+			color: var(--color-primary);
 		}
 
 		/* Details content area */
@@ -846,7 +854,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			top: 0.625rem;
 			right: 0.625rem;
 			padding: 0.375rem;
-			background: rgba(124, 58, 237, 0.4);
+			background: rgba(124, 108, 154, 0.25);
 			border-radius: 4px;
 		}
 
@@ -867,7 +875,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			margin-top: 1.75rem;
 			margin-bottom: 0.75rem;
 			font-size: 1.1rem;
-			color: #fff;
+			color: var(--color-text);
 		}
 
 		.prose details h4 {
@@ -890,7 +898,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		/* Strong text styling inside details */
 		.prose details strong {
-			color: var(--color-primary-lighter);
+			color: var(--color-primary);
 		}
 
 		/* Paragraphs inside details */
@@ -916,7 +924,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.callout-note {
-			background: rgba(124, 58, 237, 0.1);
+			background: rgba(124, 108, 154, 0.1);
 			border-color: var(--color-primary);
 		}
 
@@ -957,7 +965,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		.prose img:hover {
 			transform: scale(1.02);
-			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+			box-shadow: 0 20px 40px rgba(124, 108, 154, 0.2);
 		}
 
 		.prose img:focus,
@@ -994,7 +1002,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: rgba(0, 0, 0, 0.9);
+			background: rgba(0, 0, 0, 0.8);
 			backdrop-filter: blur(8px);
 			-webkit-backdrop-filter: blur(8px);
 		}
@@ -1017,7 +1025,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			width: auto;
 			height: auto;
 			border-radius: 0.75rem;
-			box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+			box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
 			object-fit: contain;
 			user-select: none;
 			-webkit-user-select: none;
@@ -1058,15 +1066,15 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.prose hr {
 			border: none;
 			height: 1px;
-			background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.4), transparent);
+			background: linear-gradient(90deg, transparent, rgba(124, 108, 154, 0.4), transparent);
 			margin: 3rem 0;
 		}
 
 		/* ===== Doc Footer ===== */
 		.doc-footer {
-			background: var(--color-bg-darker);
+			background: linear-gradient(135deg, #e0e8ff 0%, #d8d4f0 100%);
 			padding: 3rem 2rem 1.5rem;
-			border-top: 1px solid rgba(124, 58, 237, 0.2);
+			border-top: 1px solid var(--color-border);
 			margin-top: auto;
 			position: relative;
 			z-index: 1;
@@ -1085,7 +1093,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.doc-footer .footer-column h4 {
-			color: #fff;
+			color: var(--color-text);
 			font-size: 0.85rem;
 			font-weight: 600;
 			margin-bottom: 0.75rem;
@@ -1095,7 +1103,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		.doc-footer .footer-column a {
 			display: block;
-			color: rgba(255, 255, 255, 0.6);
+			color: var(--color-text-muted);
 			text-decoration: none;
 			font-size: 0.9rem;
 			margin-bottom: 0.5rem;
@@ -1104,7 +1112,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.doc-footer .footer-column a:hover {
-			color: var(--color-primary-light);
+			color: var(--color-primary);
 			transform: translateX(4px);
 		}
 
@@ -1112,18 +1120,18 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			max-width: 800px;
 			margin: 2rem auto 0;
 			padding: 1.5rem 2rem 0;
-			border-top: 1px solid rgba(124, 58, 237, 0.1);
+			border-top: 1px solid var(--color-border);
 		}
 
 		.doc-footer .footer-bottom p {
-			color: rgba(255, 255, 255, 0.4);
+			color: var(--color-text-muted);
 			font-size: 0.85rem;
 		}
 
 		.doc-footer .footer-disclaimer {
 			margin-top: 0.5rem;
 			font-size: 0.75rem;
-			color: rgba(255, 255, 255, 0.3);
+			color: rgba(107, 91, 122, 0.6);
 		}
 
 		/* ===== Custom Scrollbar ===== */
@@ -1133,23 +1141,23 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		::-webkit-scrollbar-track {
-			background: rgba(15, 10, 26, 0.5);
+			background: rgba(237, 236, 255, 0.5);
 		}
 
 		::-webkit-scrollbar-thumb {
-			background: rgba(124, 58, 237, 0.4);
+			background: rgba(124, 108, 154, 0.3);
 			border-radius: 4px;
 			transition: background 0.2s ease;
 		}
 
 		::-webkit-scrollbar-thumb:hover {
-			background: rgba(124, 58, 237, 0.6);
+			background: rgba(124, 108, 154, 0.5);
 		}
 
 		/* ===== Selection Color ===== */
 		::selection {
-			background: rgba(124, 58, 237, 0.4);
-			color: #fff;
+			background: rgba(124, 108, 154, 0.3);
+			color: var(--color-text);
 		}
 
 		/* Prevent caret on non-editable elements */

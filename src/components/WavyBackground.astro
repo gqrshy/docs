@@ -1,0 +1,112 @@
+---
+// WavyBackground - Large decorative wavy lines inspired by polarcub.art
+---
+
+<div class="wavy-background">
+	<!-- Bold curved wave (Blue) -->
+	<svg class="bold-wave" viewBox="0 0 400 1200" preserveAspectRatio="none">
+		<path class="wave-path-blue" d="M180,0 C200,100 120,200 180,300 C240,400 160,500 200,600 C240,700 180,800 220,900 C260,1000 180,1100 200,1200" fill="none" stroke="#5a8aff" stroke-width="28" stroke-linecap="round"/>
+	</svg>
+
+	<!-- Second bold wave (offset) -->
+	<svg class="bold-wave bold-wave-2" viewBox="0 0 400 1200" preserveAspectRatio="none">
+		<path class="wave-path-blue-2" d="M220,0 C180,100 260,200 200,300 C140,400 220,500 180,600 C140,700 220,800 180,900 C140,1000 220,1100 200,1200" fill="none" stroke="#5a8aff" stroke-width="20" stroke-linecap="round" opacity="0.5"/>
+	</svg>
+
+	<!-- Vertical wavy lines pattern -->
+	<div class="wavy-lines-container">
+		{[...Array(18)].map((_, i) => (
+			<svg class="wavy-line-vertical" style={`left: ${5 + i * 5.5}%`} viewBox="0 0 10 300" preserveAspectRatio="none">
+				<path d={`M5,0 Q0,25 5,50 Q10,75 5,100 Q0,125 5,150 Q10,175 5,200 Q0,225 5,250 Q10,275 5,300`} fill="none" stroke="#b8c8e8" stroke-width="1.5" stroke-linecap="round"/>
+			</svg>
+		))}
+	</div>
+</div>
+
+<style>
+.wavy-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 0;
+	overflow: hidden;
+}
+
+/* Bold curved wave - blue */
+.bold-wave {
+	position: absolute;
+	top: -5%;
+	left: -5%;
+	width: 350px;
+	height: 130%;
+	z-index: 1;
+}
+
+.bold-wave-2 {
+	left: 3%;
+	top: 5%;
+	width: 300px;
+	opacity: 0.6;
+}
+
+.wave-path-blue,
+.wave-path-blue-2 {
+	animation: waveMove 8s ease-in-out infinite;
+}
+
+.wave-path-blue-2 {
+	animation-delay: -3s;
+}
+
+@keyframes waveMove {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(20px); }
+}
+
+/* Vertical wavy lines pattern */
+.wavy-lines-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+
+.wavy-line-vertical {
+	position: absolute;
+	top: 0;
+	width: 10px;
+	height: 100%;
+	opacity: 0.4;
+}
+
+@media (max-width: 1000px) {
+	.bold-wave {
+		width: 250px;
+		left: -10%;
+	}
+
+	.bold-wave-2 {
+		display: none;
+	}
+
+	.wavy-line-vertical {
+		opacity: 0.25;
+	}
+}
+
+@media (max-width: 600px) {
+	.bold-wave {
+		width: 180px;
+		left: -15%;
+	}
+
+	.wavy-lines-container {
+		opacity: 0.5;
+	}
+}
+</style>

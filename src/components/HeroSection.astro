@@ -55,8 +55,13 @@ import polymartLogo from '../assets/polymart.png';
 				</div>
 			</div>
 
-			<!-- Right: Character (Large, prominent) -->
+			<!-- Right: Character with Acrylic Panel -->
 			<div class="hero-visual">
+				<!-- Large Acrylic Panel (moves with scroll) -->
+				<div class="acrylic-panel" id="acrylic-panel"></div>
+				<!-- Decorative Stars around panel -->
+				<div class="panel-star panel-star-top">★</div>
+				<div class="panel-star panel-star-bottom">★</div>
 				<img src="/gengarmain.png" alt="Gengar" class="character-image" />
 			</div>
 		</div>
@@ -130,6 +135,35 @@ import polymartLogo from '../assets/polymart.png';
 		document.addEventListener('DOMContentLoaded', init);
 	} else {
 		init();
+	}
+
+	// Parallax scroll effect for acrylic panel
+	function initParallax() {
+		const panel = document.getElementById('acrylic-panel');
+		if (!panel) return;
+
+		let ticking = false;
+
+		function updateParallax() {
+			const scrollY = window.scrollY;
+			const translateY = scrollY * 0.15;
+			const rotate = scrollY * 0.02;
+			panel.style.transform = `translateY(${translateY}px) rotate(${8 + rotate}deg)`;
+			ticking = false;
+		}
+
+		window.addEventListener('scroll', () => {
+			if (!ticking) {
+				requestAnimationFrame(updateParallax);
+				ticking = true;
+			}
+		}, { passive: true });
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initParallax);
+	} else {
+		initParallax();
 	}
 })();
 </script>
@@ -403,6 +437,60 @@ import polymartLogo from '../assets/polymart.png';
 	z-index: 2;
 }
 
+/* ===== Acrylic Panel (Glassmorphism) ===== */
+.acrylic-panel {
+	position: absolute;
+	width: 380px;
+	height: 520px;
+	background: linear-gradient(145deg,
+		rgba(180, 170, 220, 0.35) 0%,
+		rgba(160, 150, 210, 0.25) 50%,
+		rgba(140, 160, 220, 0.3) 100%);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-radius: 60px;
+	border: 1.5px solid rgba(255, 255, 255, 0.4);
+	box-shadow:
+		0 8px 40px rgba(100, 80, 160, 0.15),
+		inset 0 1px 0 rgba(255, 255, 255, 0.5);
+	z-index: 1;
+	transform: rotate(8deg);
+	top: 50%;
+	left: 50%;
+	margin-top: -260px;
+	margin-left: -190px;
+	pointer-events: none;
+}
+
+/* ===== Decorative Stars around Panel ===== */
+.panel-star {
+	position: absolute;
+	font-size: 2rem;
+	z-index: 3;
+	pointer-events: none;
+	animation: panelStarPulse 4s ease-in-out infinite;
+}
+
+.panel-star-top {
+	top: 5%;
+	right: 8%;
+	color: #ff6090;
+	font-size: 2.2rem;
+}
+
+.panel-star-bottom {
+	bottom: 12%;
+	left: 5%;
+	color: #7088f0;
+	font-size: 1.6rem;
+	animation-delay: -2s;
+}
+
+@keyframes panelStarPulse {
+	0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
+	50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+}
+
 /* ===== Social Bar ===== */
 .social-bar {
 	display: flex;
@@ -478,6 +566,18 @@ import polymartLogo from '../assets/polymart.png';
 
 	.spinning-star { font-size: 2rem; top: 10%; left: 8%; }
 	.drop-shape { display: none; }
+
+	/* Adjust acrylic panel */
+	.acrylic-panel {
+		width: 280px;
+		height: 380px;
+		margin-top: -190px;
+		margin-left: -140px;
+		border-radius: 45px;
+	}
+
+	.panel-star-top { font-size: 1.8rem; }
+	.panel-star-bottom { font-size: 1.3rem; }
 }
 
 @media (max-width: 600px) {
@@ -497,5 +597,16 @@ import polymartLogo from '../assets/polymart.png';
 	/* Hide decorations on mobile */
 	.wave-line, .brush-stroke, .small-star { display: none; }
 	.spinning-star { font-size: 1.5rem; }
+
+	/* Smaller acrylic panel on mobile */
+	.acrylic-panel {
+		width: 220px;
+		height: 300px;
+		margin-top: -150px;
+		margin-left: -110px;
+		border-radius: 35px;
+	}
+
+	.panel-star { display: none; }
 }
 </style>
