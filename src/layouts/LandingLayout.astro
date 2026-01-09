@@ -16,7 +16,7 @@ interface Props {
 const { title, description } = Astro.props;
 const siteUrl = 'https://gashistudios.site';
 const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
-const metaDescription = description || 'GashiStudios - Cobblemon向けの高品質なModを制作するコミュニティ';
+const metaDescription = description || 'GashiStudios - A community creating high-quality Mods for Cobblemon';
 
 // Static OG image (logo)
 const ogImage = `${siteUrl}/gashistudios.png`;
@@ -46,10 +46,10 @@ const ogImage = `${siteUrl}/gashistudios.png`;
 	<meta name="twitter:image" content={ogImage} />
 
 	<!-- Theme Color (Discord embed sidebar) -->
-	<meta name="theme-color" content="#7c3aed" />
+	<meta name="theme-color" content="#7c6c9a" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 	<style is:global>
 		* {
 			margin: 0;
@@ -63,8 +63,8 @@ const ogImage = `${siteUrl}/gashistudios.png`;
 
 		body {
 			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-			background: #0f0a1a;
-			color: #fff;
+			background: linear-gradient(135deg, #e8e0f0 0%, #d4c8e8 50%, #c8d4f0 100%);
+			color: #4a4a5a;
 			line-height: 1.6;
 		}
 

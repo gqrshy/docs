@@ -1,284 +1,128 @@
 ---
-// Hero section - yui540 inspired with animated decorations
+// Hero section - Cute & Playful design inspired by Gengar
 import gashiAvatar from '../assets/gashi.png';
 import polymartLogo from '../assets/polymart.png';
 ---
 
 <section class="hero-section" id="hero">
-	<!-- Animated Decorative Elements - Left Side -->
-	<div class="deco-grid deco-left" data-parallax="0.02">
-		<!-- Text Scramble Effect (Sci-fi decode) -->
-		<div class="deco-box deco-scramble" data-shuffle style="--delay: 0.1s">
-			<span class="scramble-text" data-final="SYSTEM">******</span>
-		</div>
-		<!-- Morphing Blob -->
-		<div class="deco-box deco-blob" data-shuffle style="--delay: 0.2s">
-			<div class="blob-shape"></div>
-		</div>
-		<!-- Neon Flicker Text -->
-		<div class="deco-box deco-neon" data-shuffle style="--delay: 0.3s">
-			<span class="neon-text">ONLINE</span>
-		</div>
-		<!-- Floating Particles -->
-		<div class="deco-box deco-particles" data-shuffle style="--delay: 0.4s">
-			<span class="particle" style="--x: 20%; --y: 30%; --d: 2s"></span>
-			<span class="particle" style="--x: 70%; --y: 60%; --d: 2.5s"></span>
-			<span class="particle" style="--x: 40%; --y: 80%; --d: 3s"></span>
-			<span class="particle" style="--x: 80%; --y: 20%; --d: 2.2s"></span>
-			<span class="particle" style="--x: 10%; --y: 50%; --d: 2.8s"></span>
-		</div>
-		<!-- Wave Text -->
-		<div class="deco-box deco-wave-text" data-shuffle style="--delay: 0.5s">
-			<span class="wave-char" style="--i: 0">W</span>
-			<span class="wave-char" style="--i: 1">A</span>
-			<span class="wave-char" style="--i: 2">V</span>
-			<span class="wave-char" style="--i: 3">E</span>
-		</div>
-		<!-- Counter Animation -->
-		<div class="deco-box deco-counter" data-shuffle style="--delay: 0.6s">
-			<span class="counter-value" data-target="100">0</span>
-			<span class="counter-label">%</span>
-		</div>
-		<!-- Japanese Characters with Glitch -->
-		<div class="deco-box deco-japanese" data-shuffle style="--delay: 0.7s">
-			<span class="char" data-glitch style="--i: 0">あ</span>
-			<span class="char" data-glitch style="--i: 1">り</span>
-			<span class="char" data-glitch style="--i: 2">が</span>
-			<span class="char" data-glitch style="--i: 3">と</span>
-			<span class="char" data-glitch style="--i: 4">う</span>
-		</div>
-		<!-- Matrix Rain (mini) -->
-		<div class="deco-box deco-matrix" data-shuffle style="--delay: 0.8s">
-			<div class="matrix-column" style="--col: 0"></div>
-			<div class="matrix-column" style="--col: 1"></div>
-			<div class="matrix-column" style="--col: 2"></div>
-			<div class="matrix-column" style="--col: 3"></div>
-			<div class="matrix-column" style="--col: 4"></div>
-		</div>
-		<!-- Magnetic Element -->
-		<div class="deco-box deco-magnetic" data-shuffle data-magnetic style="--delay: 0.9s">
-			<div class="magnetic-core"></div>
-		</div>
-		<!-- Orbit Animation -->
-		<div class="deco-box deco-orbit" data-shuffle style="--delay: 1.0s">
-			<div class="orbit-center"></div>
-			<div class="orbit-ring">
-				<span class="orbit-dot"></span>
-			</div>
-		</div>
-	</div>
+	<!-- Floating Blob Decorations - Overflow viewport for cohesive feel -->
+	<div class="blob blob-1"></div>
+	<div class="blob blob-2"></div>
+	<div class="blob blob-3"></div>
+	<div class="blob blob-4"></div>
+	<div class="blob blob-5"></div>
+	<div class="blob blob-6"></div>
+
+	<!-- Small floating shapes -->
+	<div class="shape shape-star shape-1">★</div>
+	<div class="shape shape-star shape-2">★</div>
+	<div class="shape shape-circle shape-3"></div>
+	<div class="shape shape-circle shape-4"></div>
+	<div class="shape shape-dot shape-5"></div>
+	<div class="shape shape-dot shape-6"></div>
+	<div class="shape shape-ring shape-7"></div>
 
 	<!-- Main Content -->
-	<div class="hero-main">
-		<div class="hero-container">
-			<!-- Left: Avatar & Intro -->
-			<div class="hero-left">
+	<div class="hero-content">
+		<div class="hero-text">
+			<p class="greeting" data-i18n="greeting">Hey there! I'm</p>
+			<h1 class="name">
+				<span class="name-char" style="--i: 0">G</span>
+				<span class="name-char" style="--i: 1">a</span>
+				<span class="name-char" style="--i: 2">s</span>
+				<span class="name-char" style="--i: 3">h</span>
+				<span class="name-char" style="--i: 4">i</span>
+				<span class="name-char" style="--i: 5">!</span>
+			</h1>
+			<p class="bio" data-i18n="bio">
+				Minecraft Mod Developer.<br />
+				Creating high-quality mods for Cobblemon.<br />
+				Contact via <code>@gashicha</code>
+			</p>
+
+			<div class="hero-buttons">
+				<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="btn btn-primary">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+					</svg>
+					<span data-i18n="joinDiscord">Join Discord!</span>
+				</a>
+				<a href="/docs/cobbleranked/" class="btn btn-secondary">
+					<span data-i18n="viewDocs">View Docs</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="hero-visual">
+			<div class="avatar-container">
+				<div class="avatar-glow"></div>
 				<div class="avatar-wrapper">
 					<img src={gashiAvatar.src} alt="Gashi" class="avatar" />
 				</div>
-				<div class="intro-text">
-					<p class="greeting" data-i18n="greeting">Hey there, I'm</p>
-					<h1 class="name">
-						<span class="name-char" data-glitch style="--i: 0">G</span>
-						<span class="name-char" data-glitch style="--i: 1">a</span>
-						<span class="name-char" data-glitch style="--i: 2">s</span>
-						<span class="name-char" data-glitch style="--i: 3">h</span>
-						<span class="name-char" data-glitch style="--i: 4">i</span>
-					</h1>
-				</div>
-				<p class="bio" data-i18n="bio">
-					Minecraft Mod開発者。<br />
-					Cobblemon向けの高品質なModを制作しています。<br />
-					お問い合わせは <code>@gashicha</code> まで。
-				</p>
-
-				<!-- Social Links by Category -->
-				<div class="links-by-category">
-					<!-- Development -->
-					<div class="link-category">
-						<span class="category-label" data-i18n="linksDev">Development</span>
-						<div class="link-row">
-							<a href="https://github.com/gqrshy" target="_blank" rel="noopener noreferrer" title="GitHub" class="link-btn">
-								<img src="https://cdn.simpleicons.org/github/white" alt="GitHub" />
-							</a>
-							<a href="https://modrinth.com/user/gashicha" target="_blank" rel="noopener noreferrer" title="Modrinth" class="link-btn">
-								<img src="https://cdn.simpleicons.org/modrinth/1bd96a" alt="Modrinth" />
-							</a>
-							<a href="https://www.curseforge.com/members/gqrshy/projects" target="_blank" rel="noopener noreferrer" title="CurseForge" class="link-btn">
-								<img src="https://cdn.simpleicons.org/curseforge/f16436" alt="CurseForge" />
-							</a>
-							<a href="https://polymart.org/user/47282/gashi" target="_blank" rel="noopener noreferrer" title="Polymart" class="link-btn">
-								<img src={polymartLogo.src} alt="Polymart" />
-							</a>
-						</div>
-					</div>
-
-					<!-- Hobbies -->
-					<div class="link-category">
-						<span class="category-label" data-i18n="linksHobby">Hobbies</span>
-						<div class="link-row">
-							<a href="https://www.youtube.com/@Gqrshy" target="_blank" rel="noopener noreferrer" title="YouTube" class="link-btn">
-								<img src="https://cdn.simpleicons.org/youtube/ff0000" alt="YouTube" />
-							</a>
-							<a href="https://x.com/Gqrshy" target="_blank" rel="noopener noreferrer" title="X" class="link-btn">
-								<img src="https://cdn.simpleicons.org/x/white" alt="X" />
-							</a>
-							<a href="https://note.com/gashicha" target="_blank" rel="noopener noreferrer" title="note" class="link-btn">
-								<img src="https://cdn.simpleicons.org/note/41c9b4" alt="note" />
-							</a>
-						</div>
-					</div>
-
-					<!-- Gaming -->
-					<div class="link-category">
-						<span class="category-label" data-i18n="linksGaming">Gaming</span>
-						<div class="link-row">
-							<a href="https://steamcommunity.com/profiles/76561199134198471/" target="_blank" rel="noopener noreferrer" title="Steam" class="link-btn">
-								<img src="https://cdn.simpleicons.org/steam/white" alt="Steam" />
-							</a>
-							<a href="https://tracker.gg/valorant/profile/riot/%E5%B9%B3%E5%92%8C%E4%B8%BB%E7%BE%A9%E8%80%85%23peko/overview?platform=pc&playlist=competitive" target="_blank" rel="noopener noreferrer" title="Valorant" class="link-btn">
-								<img src="https://cdn.simpleicons.org/valorant/ff4655" alt="Valorant" />
-							</a>
-							<a href="https://op.gg/ja/lol/summoners/jp/%E5%B9%B3%E5%92%8C%E4%B8%BB%E7%BE%A9%E8%80%85-peko" target="_blank" rel="noopener noreferrer" title="League of Legends" class="link-btn">
-								<img src="https://cdn.simpleicons.org/leagueoflegends/c28f2c" alt="LoL" />
-							</a>
-						</div>
-					</div>
-				</div>
+				<div class="avatar-ring"></div>
 			</div>
 
-			<!-- Right: Quick Info -->
-			<div class="hero-right">
-				<div class="info-row">
-					<span class="info-label" data-i18n="labelSkills">Skills</span>
-					<span class="info-content">Java, Kotlin, TypeScript, HTML, CSS, etc...</span>
-				</div>
-				<div class="info-row">
-					<span class="info-label" data-i18n="labelTools">Design Tools</span>
-					<span class="info-content">Figma, Adobe Illustrator, Adobe Photoshop, etc...</span>
-				</div>
-				<div class="info-row">
-					<span class="info-label" data-i18n="labelFields">Fields</span>
-					<span class="info-content" data-i18n="fieldsContent">Game Design, UI Design, UI Animation, Web Frontend</span>
-				</div>
-				<div class="info-row">
-					<span class="info-label">MBTI</span>
-					<span class="info-content info-highlight">ISFP</span>
-				</div>
-				<div class="hero-buttons">
-					<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="btn-discord">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-							<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-						</svg>
-						<span data-i18n="joinDiscord">Join Discord</span>
-					</a>
-					<a href="/docs/cobbleranked/" class="btn-docs">
-						<span data-i18n="viewDocs">View Documents</span>
-					</a>
-				</div>
+			<!-- Info cards floating around avatar -->
+			<div class="info-card card-skills">
+				<span class="card-label" data-i18n="labelSkills">Skills</span>
+				<span class="card-content">Java, Kotlin, TypeScript</span>
+			</div>
+			<div class="info-card card-tools">
+				<span class="card-label" data-i18n="labelTools">Tools</span>
+				<span class="card-content">Figma, Illustrator</span>
+			</div>
+			<div class="info-card card-field">
+				<span class="card-label" data-i18n="labelFields">Fields</span>
+				<span class="card-content" data-i18n="fieldsContent">Game & UI Design</span>
 			</div>
 		</div>
 	</div>
 
-	<!-- Animated Decorative Elements - Right Side -->
-	<div class="deco-grid deco-right" data-parallax="-0.02">
-		<!-- Text Scramble (different text) -->
-		<div class="deco-box deco-scramble" data-shuffle style="--delay: 0.15s">
-			<span class="scramble-text" data-final="READY">*****</span>
-		</div>
-		<!-- DNA Helix -->
-		<div class="deco-box deco-dna" data-shuffle style="--delay: 0.25s">
-			<div class="dna-strand">
-				<span style="--i: 0"></span>
-				<span style="--i: 1"></span>
-				<span style="--i: 2"></span>
-				<span style="--i: 3"></span>
-				<span style="--i: 4"></span>
-			</div>
-		</div>
-		<!-- Glitch Box -->
-		<div class="deco-box deco-glitch-box" data-shuffle style="--delay: 0.35s">
-			<div class="glitch-layer"></div>
-			<div class="glitch-layer"></div>
-			<div class="glitch-layer"></div>
-		</div>
-		<!-- Typing Cursor -->
-		<div class="deco-box deco-typing" data-shuffle style="--delay: 0.45s">
-			<span class="typing-text"></span>
-			<span class="typing-cursor">|</span>
-		</div>
-		<!-- Radar Scan -->
-		<div class="deco-box deco-radar" data-shuffle style="--delay: 0.55s">
-			<div class="radar-circle"></div>
-			<div class="radar-sweep"></div>
-			<div class="radar-dot" style="--angle: 45deg; --dist: 60%"></div>
-			<div class="radar-dot" style="--angle: 180deg; --dist: 40%"></div>
-		</div>
-		<!-- Heartbeat Line -->
-		<div class="deco-box deco-heartbeat" data-shuffle style="--delay: 0.65s">
-			<svg viewBox="0 0 100 40" fill="none" stroke="currentColor" stroke-width="2">
-				<path class="heartbeat-line" d="M0,20 L20,20 L25,5 L30,35 L35,15 L40,25 L45,20 L100,20"/>
-			</svg>
-		</div>
-		<!-- Binary Text -->
-		<div class="deco-box deco-binary" data-shuffle style="--delay: 0.75s">
-			<span class="binary-text">01001</span>
-		</div>
-		<!-- Ripple Effect -->
-		<div class="deco-box deco-ripple" data-shuffle style="--delay: 0.85s">
-			<span class="ripple-ring" style="--d: 0s"></span>
-			<span class="ripple-ring" style="--d: 0.5s"></span>
-			<span class="ripple-ring" style="--d: 1s"></span>
-		</div>
-		<!-- Loading Bars (spectrum) -->
-		<div class="deco-box deco-spectrum" data-shuffle style="--delay: 0.95s">
-			<span style="--i: 0"></span>
-			<span style="--i: 1"></span>
-			<span style="--i: 2"></span>
-			<span style="--i: 3"></span>
-			<span style="--i: 4"></span>
-			<span style="--i: 5"></span>
-			<span style="--i: 6"></span>
-		</div>
-		<!-- Bouncing Ball -->
-		<div class="deco-box deco-bounce" data-shuffle style="--delay: 1.05s">
-			<span class="bounce-ball"></span>
-			<span class="bounce-shadow"></span>
-		</div>
+	<!-- Social Links -->
+	<div class="social-bar">
+		<a href="https://github.com/gqrshy" target="_blank" rel="noopener noreferrer" title="GitHub" class="social-link">
+			<img src="https://cdn.simpleicons.org/github/6b5b95" alt="GitHub" />
+		</a>
+		<a href="https://modrinth.com/user/gashicha" target="_blank" rel="noopener noreferrer" title="Modrinth" class="social-link">
+			<img src="https://cdn.simpleicons.org/modrinth/1bd96a" alt="Modrinth" />
+		</a>
+		<a href="https://www.curseforge.com/members/gqrshy/projects" target="_blank" rel="noopener noreferrer" title="CurseForge" class="social-link">
+			<img src="https://cdn.simpleicons.org/curseforge/f16436" alt="CurseForge" />
+		</a>
+		<a href="https://polymart.org/user/47282/gashi" target="_blank" rel="noopener noreferrer" title="Polymart" class="social-link">
+			<img src={polymartLogo.src} alt="Polymart" />
+		</a>
+		<a href="https://www.youtube.com/@Gqrshy" target="_blank" rel="noopener noreferrer" title="YouTube" class="social-link">
+			<img src="https://cdn.simpleicons.org/youtube/ff6b6b" alt="YouTube" />
+		</a>
+		<a href="https://x.com/Gqrshy" target="_blank" rel="noopener noreferrer" title="X" class="social-link">
+			<img src="https://cdn.simpleicons.org/x/6b5b95" alt="X" />
+		</a>
 	</div>
 </section>
 
 <script is:inline>
 (function() {
-	console.log('[HeroSection] Script loaded');
-
-	// ===== Translation System =====
 	const translations = {
 		en: {
-			greeting: "Hey there, I'm",
-			bio: "Minecraft Mod Developer.<br />Creating high-quality mods for Cobblemon.<br />Contact via <code>@gashicha</code>.",
+			greeting: "Hey there! I'm",
+			bio: "Minecraft Mod Developer.<br />Creating high-quality mods for Cobblemon.<br />Contact via <code>@gashicha</code>",
 			labelSkills: "Skills",
-			labelTools: "Design Tools",
+			labelTools: "Tools",
 			labelFields: "Fields",
-			fieldsContent: "Game Design, UI Design, UI Animation, Web Frontend",
-			linksDev: "Development",
-			linksHobby: "Hobbies",
-			linksGaming: "Gaming",
-			joinDiscord: "Join Discord",
-			viewDocs: "View Documents"
+			fieldsContent: "Game & UI Design",
+			joinDiscord: "Join Discord!",
+			viewDocs: "View Docs"
 		},
 		ja: {
 			greeting: "こんにちは！",
-			bio: "Minecraft Mod開発者。<br />Cobblemon向けの高品質なModを制作しています。<br />お問い合わせは <code>@gashicha</code> まで。",
-			labelSkills: "使用する技術",
-			labelTools: "デザインツール",
-			labelFields: "扱う分野",
-			fieldsContent: "ゲームデザイン、UIデザイン、UIアニメーション、Webフロントエンド",
-			linksDev: "開発系",
-			linksHobby: "趣味",
-			linksGaming: "ゲーム",
-			joinDiscord: "Discordに参加",
-			viewDocs: "ドキュメントを見る"
+			bio: "Minecraft Mod開発者です。<br />Cobblemon向けの高品質なModを制作しています。<br />お問い合わせは <code>@gashicha</code> まで",
+			labelSkills: "スキル",
+			labelTools: "ツール",
+			labelFields: "分野",
+			fieldsContent: "ゲーム & UIデザイン",
+			joinDiscord: "Discordに参加！",
+			viewDocs: "ドキュメント"
 		}
 	};
 
@@ -286,464 +130,16 @@ import polymartLogo from '../assets/polymart.png';
 		const t = translations[lang] || translations.en;
 		document.querySelectorAll('.hero-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
-			if (t[key]) {
-				el.innerHTML = t[key];
-			}
+			if (t[key]) el.innerHTML = t[key];
 		});
 	}
 
-	// ===== Mouse Parallax Effect =====
-	let mouseX = 0, mouseY = 0;
-	let currentX = 0, currentY = 0;
-
-	function initParallax() {
-		const hero = document.getElementById('hero');
-		if (!hero) return;
-
-		document.addEventListener('mousemove', (e) => {
-			const rect = hero.getBoundingClientRect();
-			mouseX = (e.clientX - rect.left - rect.width / 2) / rect.width;
-			mouseY = (e.clientY - rect.top - rect.height / 2) / rect.height;
-		});
-
-		function updateParallax() {
-			currentX += (mouseX - currentX) * 0.05;
-			currentY += (mouseY - currentY) * 0.05;
-
-			document.querySelectorAll('[data-parallax]').forEach(el => {
-				const strength = parseFloat(el.dataset.parallax) || 0.02;
-				const x = currentX * 100 * strength;
-				const y = currentY * 100 * strength;
-				el.style.transform = `translate(${x}px, ${y}px)`;
-			});
-
-			requestAnimationFrame(updateParallax);
-		}
-		updateParallax();
-	}
-
-	// ===== Typewriter Effect with Glitch =====
-	function initTypewriters() {
-		const typewriters = document.querySelectorAll('.typewriter-text');
-		const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`0123456789';
-
-		typewriters.forEach((el, index) => {
-			const originalText = el.dataset.text || el.textContent;
-			let isTyping = false;
-
-			function typeText() {
-				if (isTyping) return;
-				isTyping = true;
-				el.textContent = '';
-				el.style.width = 'auto';
-
-				let i = 0;
-				const interval = setInterval(() => {
-					if (i < originalText.length) {
-						// Random glitch before showing correct character
-						if (Math.random() > 0.7) {
-							el.textContent = originalText.substring(0, i) +
-								glitchChars[Math.floor(Math.random() * glitchChars.length)];
-							setTimeout(() => {
-								el.textContent = originalText.substring(0, i + 1);
-							}, 50);
-						} else {
-							el.textContent = originalText.substring(0, i + 1);
-						}
-						i++;
-					} else {
-						clearInterval(interval);
-						isTyping = false;
-					}
-				}, 100 + Math.random() * 50);
-			}
-
-			// Initial type after delay
-			setTimeout(typeText, 1000 + index * 300);
-
-			// Retype periodically
-			setInterval(() => {
-				if (Math.random() > 0.7) {
-					typeText();
-				}
-			}, 8000 + Math.random() * 4000);
-		});
-	}
-
-	// ===== Random Glitch Effect on Characters =====
-	function initGlitchEffects() {
-		const glitchElements = document.querySelectorAll('[data-glitch]');
-		const japaneseChars = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん';
-		const englishChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-		glitchElements.forEach(el => {
-			const originalChar = el.textContent;
-			const isJapanese = /[\u3040-\u309F\u30A0-\u30FF]/.test(originalChar);
-			const charSet = isJapanese ? japaneseChars : englishChars;
-
-			setInterval(() => {
-				if (Math.random() > 0.95) {
-					const randomChar = charSet[Math.floor(Math.random() * charSet.length)];
-					el.textContent = randomChar;
-					el.classList.add('glitching');
-
-					setTimeout(() => {
-						el.textContent = originalChar;
-						el.classList.remove('glitching');
-					}, 100 + Math.random() * 150);
-				}
-			}, 500);
-		});
-	}
-
-	// ===== Box Shuffle Animation =====
-	function initBoxShuffle() {
-		const leftGrid = document.querySelector('.deco-left');
-		const rightGrid = document.querySelector('.deco-right');
-
-		function shuffleBoxes(grid) {
-			if (!grid) return;
-			const boxes = Array.from(grid.querySelectorAll('[data-shuffle]'));
-			if (boxes.length < 2) return;
-
-			// Pick two random boxes
-			const idx1 = Math.floor(Math.random() * boxes.length);
-			let idx2 = Math.floor(Math.random() * boxes.length);
-			while (idx2 === idx1) {
-				idx2 = Math.floor(Math.random() * boxes.length);
-			}
-
-			const box1 = boxes[idx1];
-			const box2 = boxes[idx2];
-
-			// Get positions
-			const rect1 = box1.getBoundingClientRect();
-			const rect2 = box2.getBoundingClientRect();
-			const gridRect = grid.getBoundingClientRect();
-
-			// Calculate relative positions
-			const y1 = rect1.top - gridRect.top;
-			const y2 = rect2.top - gridRect.top;
-			const diff = y2 - y1;
-
-			// Animate swap
-			box1.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-			box2.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-
-			box1.style.transform = `translateY(${diff}px)`;
-			box2.style.transform = `translateY(${-diff}px)`;
-
-			setTimeout(() => {
-				box1.style.transition = 'none';
-				box2.style.transition = 'none';
-				box1.style.transform = '';
-				box2.style.transform = '';
-
-				// Actually swap in DOM
-				const parent = box1.parentNode;
-				const next1 = box1.nextSibling;
-				const next2 = box2.nextSibling;
-
-				if (next2 === box1) {
-					parent.insertBefore(box1, box2);
-				} else if (next1 === box2) {
-					parent.insertBefore(box2, box1);
-				} else {
-					parent.insertBefore(box2, next1);
-					parent.insertBefore(box1, next2);
-				}
-			}, 600);
-		}
-
-		// Shuffle periodically
-		setInterval(() => {
-			if (Math.random() > 0.5) {
-				shuffleBoxes(leftGrid);
-			}
-		}, 3000);
-
-		setInterval(() => {
-			if (Math.random() > 0.5) {
-				shuffleBoxes(rightGrid);
-			}
-		}, 3500);
-	}
-
-	// ===== Random Box Highlight =====
-	function initRandomHighlight() {
-		const boxes = document.querySelectorAll('.deco-box');
-
-		setInterval(() => {
-			// Remove all highlights
-			boxes.forEach(box => box.classList.remove('highlight'));
-
-			// Add highlight to random box
-			if (Math.random() > 0.3) {
-				const randomBox = boxes[Math.floor(Math.random() * boxes.length)];
-				randomBox.classList.add('highlight');
-			}
-		}, 2000);
-	}
-
-	// ===== Grid Dots Wave Animation =====
-	function initGridDotsWave() {
-		const gridDots = document.querySelectorAll('.deco-grid-dots');
-
-		gridDots.forEach(container => {
-			const dots = container.querySelectorAll('span');
-
-			setInterval(() => {
-				const startIdx = Math.floor(Math.random() * dots.length);
-				dots.forEach((dot, i) => {
-					const delay = Math.abs(i - startIdx) * 100;
-					setTimeout(() => {
-						dot.classList.add('wave-active');
-						setTimeout(() => dot.classList.remove('wave-active'), 300);
-					}, delay);
-				});
-			}, 3000);
-		});
-	}
-
-	// ===== Text Scramble Effect (Sci-fi decode) =====
-	function initTextScramble() {
-		const scrambleElements = document.querySelectorAll('.scramble-text');
-		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ0123456789@#$%&*';
-
-		scrambleElements.forEach((el, index) => {
-			const finalText = el.dataset.final || el.textContent;
-			let iteration = 0;
-			let isAnimating = false;
-
-			function scramble() {
-				if (isAnimating) return;
-				isAnimating = true;
-				iteration = 0;
-
-				const interval = setInterval(() => {
-					el.textContent = finalText.split('')
-						.map((char, i) => {
-							if (i < iteration) return finalText[i];
-							return chars[Math.floor(Math.random() * chars.length)];
-						})
-						.join('');
-
-					if (iteration >= finalText.length) {
-						clearInterval(interval);
-						isAnimating = false;
-					}
-					iteration += 1/3;
-				}, 30);
-			}
-
-			// Initial scramble
-			setTimeout(() => scramble(), 1000 + index * 500);
-			// Repeat periodically
-			setInterval(() => {
-				if (Math.random() > 0.6) scramble();
-			}, 5000 + Math.random() * 3000);
-		});
-	}
-
-	// ===== Counter Animation =====
-	function initCounters() {
-		const counters = document.querySelectorAll('.counter-value');
-
-		counters.forEach(counter => {
-			const target = parseInt(counter.dataset.target) || 100;
-			let current = 0;
-			let isAnimating = false;
-
-			function animate() {
-				if (isAnimating) return;
-				isAnimating = true;
-				current = 0;
-
-				const increment = target / 50;
-				const interval = setInterval(() => {
-					current += increment;
-					if (current >= target) {
-						current = target;
-						clearInterval(interval);
-						isAnimating = false;
-					}
-					counter.textContent = Math.floor(current);
-				}, 30);
-			}
-
-			// Initial animation
-			setTimeout(animate, 1500);
-			// Repeat
-			setInterval(() => {
-				if (Math.random() > 0.7) {
-					current = 0;
-					counter.textContent = '0';
-					setTimeout(animate, 500);
-				}
-			}, 8000);
-		});
-	}
-
-	// ===== Matrix Rain Effect =====
-	function initMatrixRain() {
-		const columns = document.querySelectorAll('.matrix-column');
-		const matrixChars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
-
-		columns.forEach(col => {
-			function rain() {
-				const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-				const span = document.createElement('span');
-				span.textContent = char;
-				span.style.animation = `matrixFall ${1 + Math.random()}s linear forwards`;
-				col.appendChild(span);
-
-				setTimeout(() => span.remove(), 1500);
-			}
-
-			setInterval(rain, 200 + Math.random() * 300);
-		});
-	}
-
-	// ===== Magnetic Hover Effect =====
-	function initMagneticEffect() {
-		const magneticElements = document.querySelectorAll('[data-magnetic]');
-
-		magneticElements.forEach(el => {
-			const core = el.querySelector('.magnetic-core');
-			if (!core) return;
-
-			el.addEventListener('mousemove', (e) => {
-				const rect = el.getBoundingClientRect();
-				const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
-				const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
-				core.style.transform = `translate(${x}px, ${y}px)`;
-			});
-
-			el.addEventListener('mouseleave', () => {
-				core.style.transform = 'translate(0, 0)';
-			});
-		});
-	}
-
-	// ===== Binary Text Animation =====
-	function initBinaryAnimation() {
-		const binaryTexts = document.querySelectorAll('.binary-text');
-
-		binaryTexts.forEach(el => {
-			setInterval(() => {
-				const length = el.textContent.length;
-				let newText = '';
-				for (let i = 0; i < length; i++) {
-					newText += Math.random() > 0.5 ? '1' : '0';
-				}
-				el.textContent = newText;
-			}, 100);
-		});
-	}
-
-	// ===== Typing Animation =====
-	function initTypingAnimation() {
-		const typingElements = document.querySelectorAll('.typing-text');
-		const phrases = ['HELLO', 'WORLD', 'GASHI', 'CODE', 'PLAY'];
-
-		typingElements.forEach(el => {
-			let phraseIndex = 0;
-			let charIndex = 0;
-			let isDeleting = false;
-
-			function type() {
-				const currentPhrase = phrases[phraseIndex];
-
-				if (isDeleting) {
-					el.textContent = currentPhrase.substring(0, charIndex - 1);
-					charIndex--;
-				} else {
-					el.textContent = currentPhrase.substring(0, charIndex + 1);
-					charIndex++;
-				}
-
-				let delay = isDeleting ? 50 : 150;
-
-				if (!isDeleting && charIndex === currentPhrase.length) {
-					delay = 2000;
-					isDeleting = true;
-				} else if (isDeleting && charIndex === 0) {
-					isDeleting = false;
-					phraseIndex = (phraseIndex + 1) % phrases.length;
-					delay = 500;
-				}
-
-				setTimeout(type, delay);
-			}
-
-			setTimeout(type, 1000);
-		});
-	}
-
-	// ===== Wave Text Animation =====
-	function initWaveText() {
-		const waveChars = document.querySelectorAll('.wave-char');
-
-		waveChars.forEach((char, i) => {
-			setInterval(() => {
-				char.style.transform = `translateY(${Math.sin(Date.now() / 200 + i) * 5}px)`;
-			}, 50);
-		});
-	}
-
-	// ===== Neon Flicker Effect =====
-	function initNeonFlicker() {
-		const neonElements = document.querySelectorAll('.neon-text');
-
-		neonElements.forEach(el => {
-			function flicker() {
-				const flickerSequence = [
-					{ opacity: 1, duration: 50 },
-					{ opacity: 0.4, duration: 50 },
-					{ opacity: 1, duration: 100 },
-					{ opacity: 0.7, duration: 50 },
-					{ opacity: 1, duration: 2000 }
-				];
-
-				let delay = 0;
-				flickerSequence.forEach(step => {
-					setTimeout(() => {
-						el.style.opacity = step.opacity;
-					}, delay);
-					delay += step.duration;
-				});
-			}
-
-			// Random flicker
-			setInterval(() => {
-				if (Math.random() > 0.7) flicker();
-			}, 3000);
-		});
-	}
-
-	// ===== Initialize Everything =====
 	function init() {
 		const lang = window.GashiLang?.get() || 'en';
 		applyHeroTranslations(lang);
-
-		// Initialize all animations
-		initParallax();
-		initTextScramble();
-		initCounters();
-		initMatrixRain();
-		initMagneticEffect();
-		initBinaryAnimation();
-		initTypingAnimation();
-		initWaveText();
-		initNeonFlicker();
-		initGlitchEffects();
-		initBoxShuffle();
-		initRandomHighlight();
 	}
 
-	window.addEventListener('langChange', (e) => {
-		applyHeroTranslations(e.detail.lang);
-	});
+	window.addEventListener('langChange', (e) => applyHeroTranslations(e.detail.lang));
 
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', init);
@@ -754,1331 +150,514 @@ import polymartLogo from '../assets/polymart.png';
 </script>
 
 <style>
+/* ===== Base Section ===== */
 .hero-section {
 	min-height: 100vh;
-	display: grid;
-	grid-template-columns: 1fr minmax(auto, 900px) 1fr;
-	align-items: center;
-	padding: 6rem 1rem;
-	background: #0f0a1a;
-	overflow: hidden;
+	background: linear-gradient(135deg, #e8e0f0 0%, #d4c8e8 50%, #c8d4f0 100%);
 	position: relative;
-}
-
-/* Decorative Grid Containers */
-.deco-grid {
+	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
-	padding: 2rem;
-	will-change: transform;
+	justify-content: center;
+	padding: 6rem 2rem 2rem;
 }
 
-.deco-left {
-	align-items: flex-end;
+/* ===== Floating Blobs - Overflow viewport ===== */
+.blob {
+	position: absolute;
+	border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%;
+	filter: blur(0px);
+	z-index: 0;
 }
 
-.deco-right {
-	align-items: flex-start;
+.blob-1 {
+	width: 400px;
+	height: 400px;
+	background: linear-gradient(135deg, #7c8cf0 0%, #6b7ce0 100%);
+	top: -150px;
+	right: -100px;
+	animation: blobFloat1 8s ease-in-out infinite;
 }
 
-/* Decorative Box Base with Staggered Appearance */
-.deco-box {
-	background: rgba(255, 255, 255, 0.03);
-	border: 1px solid rgba(255, 255, 255, 0.06);
-	border-radius: 12px;
-	padding: 1rem 1.5rem;
-	color: rgba(255, 255, 255, 0.5);
-	font-size: 0.75rem;
-	font-weight: 600;
-	letter-spacing: 0.1em;
-	transition: all 0.3s ease;
-	opacity: 0;
-	transform: translateY(20px);
-	animation: fadeInUp 0.6s ease forwards;
-	animation-delay: var(--delay, 0s);
-	will-change: transform, opacity;
+.blob-2 {
+	width: 300px;
+	height: 280px;
+	background: linear-gradient(135deg, #f0a0b0 0%, #e090a0 100%);
+	bottom: -80px;
+	left: -100px;
+	border-radius: 60% 40% 50% 60% / 40% 50% 60% 50%;
+	animation: blobFloat2 10s ease-in-out infinite;
 }
 
-.deco-box:hover {
-	background: rgba(255, 255, 255, 0.08);
-	border-color: rgba(124, 58, 237, 0.4);
-	transform: translateY(-2px) scale(1.02);
+.blob-3 {
+	width: 200px;
+	height: 200px;
+	background: linear-gradient(135deg, #a0b8f0 0%, #90a8e0 100%);
+	top: 30%;
+	left: -80px;
+	animation: blobFloat3 7s ease-in-out infinite;
 }
 
-/* Highlight effect */
-.deco-box.highlight {
-	background: rgba(124, 58, 237, 0.15);
-	border-color: rgba(124, 58, 237, 0.5);
-	box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+.blob-4 {
+	width: 150px;
+	height: 150px;
+	background: linear-gradient(135deg, #c0a0e0 0%, #b090d0 100%);
+	bottom: 20%;
+	right: -50px;
+	animation: blobFloat1 9s ease-in-out infinite reverse;
 }
 
-/* Flash hide effect */
-.deco-box.flash-hide {
-	opacity: 0 !important;
-	transform: scale(0.95);
+.blob-5 {
+	width: 100px;
+	height: 100px;
+	background: linear-gradient(135deg, #f0c0d0 0%, #e0b0c0 100%);
+	top: 60%;
+	right: 10%;
+	animation: blobFloat2 6s ease-in-out infinite;
 }
 
-@keyframes fadeInUp {
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-/* Typewriter Animation */
-.deco-typewriter,
-.deco-typewriter-sm {
-	font-family: 'JetBrains Mono', 'Consolas', monospace;
-	overflow: hidden;
-}
-
-.typewriter-text {
-	display: inline-block;
-	overflow: hidden;
-	white-space: nowrap;
-	border-right: 2px solid rgba(124, 58, 237, 0.8);
-	animation: blink 0.7s step-end infinite;
-}
-
-.deco-typewriter-sm .typewriter-text {
-	font-size: 0.625rem;
-}
-
-@keyframes blink {
-	50% { border-color: transparent; }
-}
-
-/* Japanese Character Animation */
-.deco-japanese {
-	display: flex;
-	gap: 2px;
-	font-size: 1rem;
-}
-
-.deco-japanese .char {
-	opacity: 0;
-	transform: translateY(10px);
-	animation: charAppear 0.4s ease forwards;
-	animation-delay: calc(1.5s + var(--i) * 0.15s);
-	transition: color 0.1s, transform 0.1s;
-}
-
-.deco-japanese .char.glitching {
-	color: rgba(124, 58, 237, 0.8);
-	transform: translateX(2px);
-}
-
-@keyframes charAppear {
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-/* SVG Line Drawing Animation */
-.deco-svg-line,
-.deco-svg-wave {
-	padding: 0.75rem;
-}
-
-.deco-svg-line svg,
-.deco-svg-wave svg {
+.blob-6 {
 	width: 80px;
+	height: 80px;
+	background: linear-gradient(135deg, #90c0f0 0%, #80b0e0 100%);
+	top: 15%;
+	left: 15%;
+	animation: blobFloat3 8s ease-in-out infinite;
+}
+
+@keyframes blobFloat1 {
+	0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+	33% { transform: translate(20px, -30px) rotate(5deg) scale(1.05); }
+	66% { transform: translate(-10px, 20px) rotate(-5deg) scale(0.95); }
+}
+
+@keyframes blobFloat2 {
+	0%, 100% { transform: translate(0, 0) rotate(0deg); }
+	50% { transform: translate(30px, -20px) rotate(10deg); }
+}
+
+@keyframes blobFloat3 {
+	0%, 100% { transform: translate(0, 0) scale(1); }
+	50% { transform: translate(-20px, 30px) scale(1.1); }
+}
+
+/* ===== Small Floating Shapes ===== */
+.shape {
+	position: absolute;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.shape-star {
+	font-size: 1.5rem;
+	color: #f0a0b0;
+	animation: starTwinkle 3s ease-in-out infinite;
+}
+
+.shape-1 { top: 20%; left: 8%; animation-delay: 0s; }
+.shape-2 { top: 70%; right: 15%; animation-delay: 1.5s; color: #a0b8f0; }
+
+.shape-circle {
+	width: 20px;
+	height: 20px;
+	background: #c0a0e0;
+	border-radius: 50%;
+	animation: floatBounce 4s ease-in-out infinite;
+}
+
+.shape-3 { top: 40%; right: 8%; animation-delay: 0.5s; }
+.shape-4 { bottom: 30%; left: 12%; animation-delay: 2s; background: #90c0f0; }
+
+.shape-dot {
+	width: 12px;
+	height: 12px;
+	background: #f0c0d0;
+	border-radius: 50%;
+	animation: dotPulse 2s ease-in-out infinite;
+}
+
+.shape-5 { top: 25%; right: 25%; }
+.shape-6 { bottom: 40%; left: 25%; animation-delay: 1s; background: #a0d0f0; }
+
+.shape-ring {
+	width: 40px;
 	height: 40px;
+	border: 4px solid #c0a0e0;
+	border-radius: 50%;
+	animation: ringRotate 6s linear infinite;
 }
 
-.draw-line {
-	stroke-dasharray: 200;
-	stroke-dashoffset: 200;
-	animation: drawLine 2s ease forwards 1.2s;
+.shape-7 { top: 50%; left: 5%; }
+
+@keyframes starTwinkle {
+	0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
+	50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
 }
 
-@keyframes drawLine {
-	to {
-		stroke-dashoffset: 0;
-	}
+@keyframes floatBounce {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-15px); }
 }
 
-/* Name Character Animation */
+@keyframes dotPulse {
+	0%, 100% { transform: scale(1); opacity: 0.7; }
+	50% { transform: scale(1.3); opacity: 1; }
+}
+
+@keyframes ringRotate {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* ===== Main Content ===== */
+.hero-content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem;
+	max-width: 1200px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 2;
+	align-items: center;
+}
+
+/* ===== Text Section ===== */
+.hero-text {
+	animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+	from { opacity: 0; transform: translateX(-30px); }
+	to { opacity: 1; transform: translateX(0); }
+}
+
+.greeting {
+	font-size: 1.25rem;
+	color: #6b5b7a;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+}
+
 .name {
-	font-size: 2.5rem;
-	font-weight: 700;
-	margin: 0;
-	letter-spacing: -0.03em;
+	font-size: 4rem;
+	font-weight: 800;
+	margin: 0 0 1.5rem;
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .name-char {
 	display: inline-block;
-	background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
-	opacity: 0;
-	transform: translateY(20px) rotateX(-90deg);
-	animation: nameAppear 0.5s ease forwards;
-	animation-delay: calc(0.3s + var(--i) * 0.1s);
-	transition: transform 0.1s;
-}
-
-.name-char.glitching {
-	transform: translateX(2px) skewX(-5deg);
-}
-
-@keyframes nameAppear {
-	to {
-		opacity: 1;
-		transform: translateY(0) rotateX(0);
-	}
-}
-
-/* Dots Animation */
-.deco-dots {
-	display: flex;
-	gap: 0.5rem;
-	padding: 1rem;
-}
-
-.deco-dots span {
-	width: 8px;
-	height: 8px;
-	background: rgba(255, 255, 255, 0.4);
-	border-radius: 50%;
-	animation: bounce 1.4s ease-in-out infinite;
-}
-
-.deco-dots span:nth-child(2) { animation-delay: 0.2s; }
-.deco-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes bounce {
-	0%, 80%, 100% { transform: translateY(0); }
-	40% { transform: translateY(-12px); }
-}
-
-/* Icon Boxes */
-.deco-icon {
-	width: 60px;
-	height: 60px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0;
-}
-
-.deco-icon svg {
-	width: 24px;
-	height: 24px;
-	animation: spin 8s linear infinite;
-}
-
-.deco-play {
-	width: 50px;
-	height: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0;
-}
-
-.deco-play svg {
-	width: 16px;
-	height: 16px;
-	margin-left: 3px;
-	animation: pulse 2s ease-in-out infinite;
-}
-
-/* Loading Bars - Enhanced */
-.deco-bars {
-	display: flex;
-	align-items: flex-end;
-	gap: 3px;
-	height: 45px;
-	padding: 0.75rem;
-}
-
-.deco-bars span {
-	width: 5px;
-	background: linear-gradient(to top, rgba(124, 58, 237, 0.3), rgba(124, 58, 237, 0.8));
-	border-radius: 2px;
-	animation: barPulse 1.2s ease-in-out infinite;
-	transform-origin: bottom;
-}
-
-.deco-bars span:nth-child(1) { height: 50%; animation-delay: 0s; }
-.deco-bars span:nth-child(2) { height: 80%; animation-delay: 0.1s; }
-.deco-bars span:nth-child(3) { height: 60%; animation-delay: 0.2s; }
-.deco-bars span:nth-child(4) { height: 100%; animation-delay: 0.3s; }
-.deco-bars span:nth-child(5) { height: 40%; animation-delay: 0.4s; }
-
-@keyframes barPulse {
-	0%, 100% { transform: scaleY(1); }
-	50% { transform: scaleY(0.4); }
-}
-
-/* Cross */
-.deco-cross {
-	width: 40px;
-	height: 40px;
-	position: relative;
-	padding: 0;
-}
-
-.deco-cross span {
-	position: absolute;
-	background: rgba(255, 255, 255, 0.3);
-	top: 50%;
-	left: 50%;
-	transition: all 0.3s ease;
-}
-
-.deco-cross span:first-child {
-	width: 20px;
-	height: 2px;
-	transform: translate(-50%, -50%);
-	animation: crossRotate1 4s ease-in-out infinite;
-}
-
-.deco-cross span:last-child {
-	width: 2px;
-	height: 20px;
-	transform: translate(-50%, -50%);
-	animation: crossRotate2 4s ease-in-out infinite;
-}
-
-@keyframes crossRotate1 {
-	0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
-	50% { transform: translate(-50%, -50%) rotate(180deg); }
-}
-
-@keyframes crossRotate2 {
-	0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
-	50% { transform: translate(-50%, -50%) rotate(180deg); }
-}
-
-/* Spinner */
-.deco-spinner {
-	width: 50px;
-	height: 50px;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.deco-spinner span {
-	width: 24px;
-	height: 24px;
-	border: 2px solid rgba(255, 255, 255, 0.1);
-	border-top-color: rgba(124, 58, 237, 0.8);
-	border-radius: 50%;
-	animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
-}
-
-/* Grid Dots - Enhanced */
-.deco-grid-dots {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 6px;
-	padding: 1rem;
-	width: 60px;
-	height: 60px;
-}
-
-.deco-grid-dots span {
-	width: 6px;
-	height: 6px;
-	background: rgba(255, 255, 255, 0.3);
-	border-radius: 50%;
-	animation: gridDotPulse 2s ease-in-out infinite;
-	transition: all 0.3s ease;
-}
-
-.deco-grid-dots span.wave-active {
-	background: rgba(124, 58, 237, 1);
-	transform: scale(1.8);
-	box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
-}
-
-.deco-grid-dots span:nth-child(1) { animation-delay: 0s; }
-.deco-grid-dots span:nth-child(2) { animation-delay: 0.1s; }
-.deco-grid-dots span:nth-child(3) { animation-delay: 0.2s; }
-.deco-grid-dots span:nth-child(4) { animation-delay: 0.3s; }
-.deco-grid-dots span:nth-child(5) { animation-delay: 0.4s; }
-.deco-grid-dots span:nth-child(6) { animation-delay: 0.5s; }
-.deco-grid-dots span:nth-child(7) { animation-delay: 0.6s; }
-.deco-grid-dots span:nth-child(8) { animation-delay: 0.7s; }
-.deco-grid-dots span:nth-child(9) { animation-delay: 0.8s; }
-
-@keyframes gridDotPulse {
-	0%, 100% {
-		opacity: 0.3;
-		transform: scale(1);
-		background: rgba(255, 255, 255, 0.3);
-	}
-	50% {
-		opacity: 1;
-		transform: scale(1.4);
-		background: rgba(124, 58, 237, 0.8);
-	}
-}
-
-/* Diamond */
-.deco-diamond {
-	width: 50px;
-	height: 50px;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.deco-diamond span {
-	width: 16px;
-	height: 16px;
-	background: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(167, 139, 250, 0.6));
-	transform: rotate(45deg);
-	animation: diamondPulse 2s ease-in-out infinite;
-}
-
-@keyframes diamondPulse {
-	0%, 100% { transform: rotate(45deg) scale(1); opacity: 0.6; }
-	50% { transform: rotate(45deg) scale(1.2); opacity: 1; }
-}
-
-/* X Marks Animation */
-.deco-x-marks {
-	display: flex;
-	gap: 8px;
-	font-size: 1rem;
-	color: rgba(255, 255, 255, 0.4);
-}
-
-.x-mark {
-	opacity: 0;
-	animation: xAppear 0.3s ease forwards, xPulse 2s ease-in-out infinite;
-	animation-delay: calc(1.8s + var(--i) * 0.1s), calc(2.2s + var(--i) * 0.2s);
-	transition: transform 0.3s ease;
-}
-
-@keyframes xAppear {
-	to { opacity: 1; }
-}
-
-@keyframes xPulse {
-	0%, 100% { opacity: 0.4; }
-	50% { opacity: 0.8; }
-}
-
-/* Brackets Animation */
-.deco-brackets {
-	font-family: 'JetBrains Mono', monospace;
-	display: flex;
-	gap: 2px;
-	color: rgba(167, 139, 250, 0.8);
-}
-
-.bracket-char {
-	opacity: 0;
-	animation: bracketAppear 0.3s ease forwards;
-	animation-delay: calc(1.6s + var(--i) * 0.12s);
-}
-
-@keyframes bracketAppear {
-	to { opacity: 1; }
-}
-
-/* Progress Bar */
-.deco-progress {
-	width: 80px;
-	height: 30px;
-	padding: 0.5rem;
-	display: flex;
-	align-items: center;
-}
-
-.progress-bar {
-	width: 100%;
-	height: 4px;
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: 2px;
-	overflow: hidden;
-	position: relative;
-}
-
-.progress-bar::after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 30%;
-	background: linear-gradient(90deg, rgba(124, 58, 237, 0.6), rgba(167, 139, 250, 0.8));
-	border-radius: 2px;
-	animation: progressMove 1.5s ease-in-out infinite;
-}
-
-@keyframes progressMove {
-	0% { left: -30%; }
-	100% { left: 100%; }
-}
-
-/* Squares Animation */
-.deco-squares {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 4px;
-	padding: 0.75rem;
-	width: 50px;
-	height: 50px;
-}
-
-.deco-squares span {
-	width: 12px;
-	height: 12px;
-	background: rgba(255, 255, 255, 0.2);
-	border-radius: 2px;
-	animation: squareFade 2s ease-in-out infinite;
-	animation-delay: calc(var(--i) * 0.25s);
-}
-
-@keyframes squareFade {
-	0%, 100% { opacity: 0.2; transform: scale(1); }
-	50% { opacity: 0.8; transform: scale(0.8); }
-}
-
-/* ===== NEW ANIMATIONS ===== */
-
-/* Text Scramble - LARGER */
-.deco-scramble {
-	font-family: 'JetBrains Mono', 'Consolas', monospace;
-	font-size: 1.1rem;
-	letter-spacing: 0.2em;
-	color: rgba(124, 58, 237, 0.95);
-	padding: 1.25rem 1.75rem;
-}
-
-.scramble-text {
-	display: inline-block;
-	min-width: 80px;
-}
-
-/* Morphing Blob - LARGER */
-.deco-blob {
-	width: 90px;
-	height: 90px;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-}
-
-.blob-shape {
-	width: 70px;
-	height: 70px;
-	background: linear-gradient(135deg, rgba(124, 58, 237, 0.7), rgba(167, 139, 250, 0.5));
-	border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-	animation: blobMorph 6s ease-in-out infinite;
-	box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
-}
-
-@keyframes blobMorph {
-	0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg); }
-	25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-	50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; transform: rotate(180deg); }
-	75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
-}
-
-/* Neon Flicker - LARGER */
-.deco-neon {
-	background: rgba(124, 58, 237, 0.05);
-	border-color: rgba(124, 58, 237, 0.4);
-	padding: 1.25rem 2rem;
-}
-
-.neon-text {
-	font-family: 'JetBrains Mono', monospace;
-	font-size: 1.1rem;
-	font-weight: 600;
-	color: #a78bfa;
-	text-shadow:
-		0 0 10px rgba(167, 139, 250, 1),
-		0 0 20px rgba(167, 139, 250, 0.8),
-		0 0 40px rgba(124, 58, 237, 0.6),
-		0 0 60px rgba(124, 58, 237, 0.4);
-	letter-spacing: 0.15em;
-}
-
-/* Floating Particles - LARGER */
-.deco-particles {
-	width: 100px;
-	height: 100px;
-	padding: 0;
-	position: relative;
-	overflow: visible;
-}
-
-.particle {
-	position: absolute;
-	width: 8px;
-	height: 8px;
-	background: rgba(167, 139, 250, 0.9);
-	border-radius: 50%;
-	left: var(--x);
-	top: var(--y);
-	animation: particleFloat var(--d) ease-in-out infinite;
-	box-shadow: 0 0 15px rgba(167, 139, 250, 0.6);
-}
-
-@keyframes particleFloat {
-	0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
-	25% { transform: translate(5px, -10px) scale(1.2); opacity: 1; }
-	50% { transform: translate(-3px, -5px) scale(0.8); opacity: 0.6; }
-	75% { transform: translate(8px, 3px) scale(1.1); opacity: 0.9; }
-}
-
-/* Wave Text - LARGER */
-.deco-wave-text {
-	display: flex;
-	gap: 4px;
-	font-family: 'JetBrains Mono', monospace;
-	font-size: 1.5rem;
-	font-weight: 700;
-	padding: 1.25rem 1.5rem;
-}
-
-.wave-char {
-	display: inline-block;
-	color: rgba(255, 255, 255, 0.85);
-	transition: transform 0.1s ease;
-	text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
-}
-
-/* Counter Animation - LARGER */
-.deco-counter {
-	font-family: 'JetBrains Mono', monospace;
-	display: flex;
-	align-items: baseline;
-	gap: 4px;
-	padding: 1.25rem 1.75rem;
-}
-
-.counter-value {
-	font-size: 2.5rem;
-	font-weight: 700;
-	color: rgba(124, 58, 237, 1);
-	min-width: 60px;
-	text-align: right;
-	text-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
-}
-
-.counter-label {
-	font-size: 1.25rem;
-	color: rgba(255, 255, 255, 0.6);
-	font-weight: 600;
-}
-
-/* Matrix Rain - LARGER */
-.deco-matrix {
-	width: 90px;
-	height: 90px;
-	padding: 0;
-	display: flex;
-	gap: 3px;
-	overflow: hidden;
-	background: rgba(0, 0, 0, 0.4);
-	border-radius: 12px;
-	border: 1px solid rgba(124, 58, 237, 0.3);
-}
-
-.matrix-column {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	overflow: hidden;
-	position: relative;
-}
-
-.matrix-column span {
-	position: absolute;
-	font-size: 0.75rem;
-	color: rgba(124, 58, 237, 1);
-	text-shadow: 0 0 10px rgba(124, 58, 237, 0.8);
-	top: -15px;
-}
-
-@keyframes matrixFall {
-	0% { top: -15px; opacity: 1; }
-	100% { top: 100px; opacity: 0; }
-}
-
-/* Magnetic Element - LARGER */
-.deco-magnetic {
-	width: 90px;
-	height: 90px;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-}
-
-.magnetic-core {
-	width: 50px;
-	height: 50px;
-	background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(167, 139, 250, 0.7));
-	border-radius: 50%;
-	transition: transform 0.15s ease-out;
-	box-shadow: 0 0 30px rgba(124, 58, 237, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-/* Orbit Animation - LARGER */
-.deco-orbit {
-	width: 100px;
-	height: 100px;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-}
-
-.orbit-center {
-	width: 16px;
-	height: 16px;
-	background: rgba(255, 255, 255, 0.8);
-	border-radius: 50%;
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-}
-
-.orbit-ring {
-	position: absolute;
-	width: 80px;
-	height: 80px;
-	border: 2px solid rgba(124, 58, 237, 0.3);
-	border-radius: 50%;
-	animation: orbitSpin 3s linear infinite;
-}
-
-.orbit-dot {
-	position: absolute;
-	width: 12px;
-	height: 12px;
-	background: rgba(124, 58, 237, 1);
-	border-radius: 50%;
-	top: -6px;
-	left: 50%;
-	transform: translateX(-50%);
-	box-shadow: 0 0 15px rgba(124, 58, 237, 0.8);
-}
-
-@keyframes orbitSpin {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
-}
-
-/* DNA Helix - LARGER */
-.deco-dna {
-	width: 80px;
-	height: 110px;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.dna-strand {
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	height: 100%;
-	padding: 15px 0;
-}
-
-.dna-strand span {
-	width: 50px;
-	height: 5px;
-	background: linear-gradient(90deg, rgba(124, 58, 237, 0.9), transparent, rgba(167, 139, 250, 0.9));
-	border-radius: 3px;
-	animation: dnaWave 2s ease-in-out infinite;
-	animation-delay: calc(var(--i) * 0.15s);
-	box-shadow: 0 0 12px rgba(124, 58, 237, 0.4);
-}
-
-@keyframes dnaWave {
-	0%, 100% { transform: scaleX(1) translateX(0); }
-	50% { transform: scaleX(0.6) translateX(5px); }
-}
-
-/* Glitch Box - LARGER */
-.deco-glitch-box {
-	width: 80px;
-	height: 80px;
-	padding: 0;
-	position: relative;
-	overflow: hidden;
-}
-
-.glitch-layer {
-	position: absolute;
-	inset: 8px;
-	background: rgba(124, 58, 237, 0.4);
-	border: 2px solid rgba(124, 58, 237, 0.6);
-	box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
-}
-
-.glitch-layer:nth-child(1) {
-	animation: glitchShift1 3s infinite;
-}
-
-.glitch-layer:nth-child(2) {
-	animation: glitchShift2 3s infinite;
-	background: rgba(167, 139, 250, 0.2);
-}
-
-.glitch-layer:nth-child(3) {
-	animation: glitchShift3 3s infinite;
-	background: rgba(255, 255, 255, 0.1);
-}
-
-@keyframes glitchShift1 {
-	0%, 90%, 100% { transform: translate(0, 0); }
-	92% { transform: translate(-3px, 2px); }
-	94% { transform: translate(2px, -1px); }
-}
-
-@keyframes glitchShift2 {
-	0%, 90%, 100% { transform: translate(0, 0); }
-	91% { transform: translate(2px, -2px); }
-	93% { transform: translate(-1px, 3px); }
-}
-
-@keyframes glitchShift3 {
-	0%, 90%, 100% { transform: translate(0, 0); }
-	92% { transform: translate(1px, 1px); }
-	95% { transform: translate(-2px, -1px); }
-}
-
-/* Typing Cursor - LARGER */
-.deco-typing {
-	font-family: 'JetBrains Mono', monospace;
-	font-size: 1.25rem;
-	display: flex;
-	align-items: center;
-	min-width: 120px;
-	padding: 1.25rem 1.5rem;
-}
-
-.typing-text {
-	color: rgba(255, 255, 255, 0.9);
-	text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-.typing-cursor {
-	color: rgba(124, 58, 237, 1);
-	animation: cursorBlink 0.8s step-end infinite;
-	font-size: 1.5rem;
-	text-shadow: 0 0 15px rgba(124, 58, 237, 0.8);
-}
-
-@keyframes cursorBlink {
-	0%, 100% { opacity: 1; }
-	50% { opacity: 0; }
-}
-
-/* Radar Scan - LARGER & MORE DYNAMIC */
-.deco-radar {
-	width: 100px;
-	height: 100px;
-	padding: 0;
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.radar-circle {
-	width: 90px;
-	height: 90px;
-	border: 2px solid rgba(124, 58, 237, 0.4);
-	border-radius: 50%;
-	position: absolute;
-}
-
-.radar-circle::before,
-.radar-circle::after {
-	content: '';
-	position: absolute;
-	border: 1px solid rgba(124, 58, 237, 0.25);
-	border-radius: 50%;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.radar-circle::before {
-	width: 65%;
-	height: 65%;
-}
-
-.radar-circle::after {
-	width: 35%;
-	height: 35%;
-}
-
-.radar-sweep {
-	position: absolute;
-	width: 45px;
-	height: 45px;
-	background: conic-gradient(from 0deg, transparent 0deg, rgba(124, 58, 237, 0.6) 30deg, transparent 60deg);
-	border-radius: 50%;
-	animation: radarSweep 2s linear infinite;
-}
-
-@keyframes radarSweep {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
-}
-
-.radar-dot {
-	position: absolute;
-	width: 6px;
-	height: 6px;
-	background: rgba(124, 58, 237, 1);
-	border-radius: 50%;
-	animation: radarBlink 1.5s ease-in-out infinite;
-	box-shadow: 0 0 10px rgba(124, 58, 237, 0.8);
-}
-
-.radar-dot:nth-child(3) {
-	top: 25%;
-	right: 20%;
-}
-
-.radar-dot:nth-child(4) {
-	bottom: 30%;
-	left: 25%;
-}
-
-@keyframes radarBlink {
-	0%, 100% { opacity: 0.3; transform: scale(0.8); }
-	50% { opacity: 1; transform: scale(1.2); }
-}
-
-/* Heartbeat Line - LARGER */
-.deco-heartbeat {
-	width: 130px;
-	height: 60px;
-	padding: 0.75rem;
-}
-
-.deco-heartbeat svg {
-	width: 100%;
-	height: 100%;
-	filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.6));
-}
-
-.heartbeat-line {
-	stroke: rgba(124, 58, 237, 1);
-	stroke-width: 3;
-	stroke-dasharray: 200;
-	stroke-dashoffset: 200;
-	animation: heartbeatDraw 2s linear infinite;
-}
-
-@keyframes heartbeatDraw {
-	0% { stroke-dashoffset: 200; }
-	100% { stroke-dashoffset: 0; }
-}
-
-/* Binary Text - LARGER */
-.deco-binary {
-	font-family: 'JetBrains Mono', monospace;
-	font-size: 1.1rem;
-	letter-spacing: 0.25em;
-	padding: 1.25rem 1.5rem;
-}
-
-.binary-text {
-	color: rgba(124, 58, 237, 0.95);
-	text-shadow: 0 0 12px rgba(124, 58, 237, 0.6);
-}
-
-/* Ripple Effect - LARGER */
-.deco-ripple {
-	width: 100px;
-	height: 100px;
-	padding: 0;
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.ripple-ring {
-	position: absolute;
-	width: 15px;
-	height: 15px;
-	border: 3px solid rgba(124, 58, 237, 0.8);
-	border-radius: 50%;
-	animation: rippleExpand 2s ease-out infinite;
-	animation-delay: var(--d);
-	box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
-}
-
-@keyframes rippleExpand {
-	0% { width: 15px; height: 15px; opacity: 1; }
-	100% { width: 90px; height: 90px; opacity: 0; }
-}
-
-/* Spectrum Bars - LARGER */
-.deco-spectrum {
-	display: flex;
-	align-items: flex-end;
-	gap: 5px;
-	height: 80px;
-	padding: 1rem 1.25rem;
-}
-
-.deco-spectrum span {
-	width: 8px;
-	background: linear-gradient(to top, rgba(124, 58, 237, 0.5), rgba(167, 139, 250, 1));
-	border-radius: 4px;
-	animation: spectrumBounce 0.8s ease-in-out infinite;
+	color: #4a4a5a;
+	animation: charBounce 0.6s ease-out backwards;
 	animation-delay: calc(var(--i) * 0.1s);
-	box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+	transition: transform 0.2s, color 0.2s;
 }
 
-@keyframes spectrumBounce {
-	0%, 100% { height: 15px; }
-	50% { height: 55px; }
+.name-char:hover {
+	transform: translateY(-8px) scale(1.1);
+	color: #7c6c9a;
 }
 
-/* Bouncing Ball - LARGER */
-.deco-bounce {
-	width: 80px;
-	height: 100px;
-	padding: 0;
+@keyframes charBounce {
+	0% { opacity: 0; transform: translateY(-50px) rotate(-10deg); }
+	60% { transform: translateY(10px) rotate(5deg); }
+	100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+.bio {
+	font-size: 1.1rem;
+	line-height: 1.8;
+	color: #6b5b7a;
+	margin-bottom: 2rem;
+}
+
+.bio code {
+	background: rgba(124, 108, 154, 0.15);
+	padding: 0.2rem 0.5rem;
+	border-radius: 6px;
+	color: #7c6c9a;
+	font-weight: 600;
+}
+
+/* ===== Buttons ===== */
+.hero-buttons {
 	display: flex;
-	flex-direction: column;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.btn {
+	display: inline-flex;
 	align-items: center;
-	justify-content: flex-end;
-	padding-bottom: 12px;
+	gap: 0.5rem;
+	padding: 0.875rem 1.5rem;
+	border-radius: 50px;
+	font-weight: 600;
+	font-size: 1rem;
+	text-decoration: none;
+	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	border: 2px solid transparent;
 }
 
-.bounce-ball {
-	width: 30px;
-	height: 30px;
-	background: linear-gradient(135deg, rgba(124, 58, 237, 1), rgba(167, 139, 250, 0.8));
-	border-radius: 50%;
-	animation: ballBounce 1s ease-in-out infinite;
-	box-shadow: 0 0 25px rgba(124, 58, 237, 0.6), inset 0 -5px 15px rgba(0, 0, 0, 0.2);
+.btn-primary {
+	background: linear-gradient(135deg, #7c6c9a 0%, #6b5b8a 100%);
+	color: #fff;
+	box-shadow: 0 4px 15px rgba(124, 108, 154, 0.4);
 }
 
-.bounce-shadow {
-	width: 30px;
-	height: 8px;
-	background: rgba(0, 0, 0, 0.4);
-	border-radius: 50%;
-	animation: shadowScale 1s ease-in-out infinite;
-	margin-top: auto;
+.btn-primary:hover {
+	transform: translateY(-3px) scale(1.02);
+	box-shadow: 0 8px 25px rgba(124, 108, 154, 0.5);
 }
 
-@keyframes ballBounce {
-	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-55px); }
+.btn-secondary {
+	background: rgba(255, 255, 255, 0.7);
+	color: #6b5b7a;
+	border-color: rgba(124, 108, 154, 0.3);
+	backdrop-filter: blur(10px);
 }
 
-@keyframes shadowScale {
-	0%, 100% { transform: scaleX(1); opacity: 0.6; }
-	50% { transform: scaleX(0.4); opacity: 0.15; }
+.btn-secondary:hover {
+	background: rgba(255, 255, 255, 0.9);
+	border-color: #7c6c9a;
+	transform: translateY(-3px);
 }
 
-/* ===== END NEW ANIMATIONS ===== */
-
-/* Animations */
-@keyframes pulse {
-	0%, 100% { opacity: 0.6; transform: scale(1); }
-	50% { opacity: 1; transform: scale(1.1); }
-}
-
-/* Main Content */
-.hero-main {
-	padding: 0 2rem;
-}
-
-.hero-container {
-	display: grid;
-	grid-template-columns: 280px 1fr;
-	gap: 4rem;
-	align-items: start;
-}
-
-/* Left side - Avatar & Intro */
-.hero-left {
+/* ===== Visual Section ===== */
+.hero-visual {
+	position: relative;
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 400px;
+	animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+	from { opacity: 0; transform: translateX(30px); }
+	to { opacity: 1; transform: translateX(0); }
+}
+
+.avatar-container {
+	position: relative;
+	width: 220px;
+	height: 220px;
+}
+
+.avatar-glow {
+	position: absolute;
+	inset: -20px;
+	background: radial-gradient(circle, rgba(124, 108, 154, 0.3) 0%, transparent 70%);
+	border-radius: 50%;
+	animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+	0%, 100% { transform: scale(1); opacity: 0.5; }
+	50% { transform: scale(1.1); opacity: 0.8; }
 }
 
 .avatar-wrapper {
-	width: 100px;
-	height: 100px;
+	width: 100%;
+	height: 100%;
 	border-radius: 50%;
 	overflow: hidden;
-	margin-bottom: 1.25rem;
-	border: 2px solid rgba(124, 58, 237, 0.3);
-	animation: avatarAppear 0.8s ease forwards;
-	opacity: 0;
-	transform: scale(0.8);
-}
-
-@keyframes avatarAppear {
-	to {
-		opacity: 1;
-		transform: scale(1);
-	}
+	border: 4px solid rgba(255, 255, 255, 0.8);
+	box-shadow: 0 10px 40px rgba(124, 108, 154, 0.3);
+	position: relative;
+	z-index: 2;
 }
 
 .avatar {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	transition: transform 0.3s ease;
 }
 
-.intro-text {
-	margin-bottom: 1rem;
+.avatar-wrapper:hover .avatar {
+	transform: scale(1.1);
 }
 
-.greeting {
-	color: rgba(255, 255, 255, 0.5);
-	font-size: 0.875rem;
-	margin-bottom: 0.25rem;
-	font-weight: 400;
-	opacity: 0;
-	animation: fadeIn 0.5s ease forwards 0.2s;
+.avatar-ring {
+	position: absolute;
+	inset: -15px;
+	border: 3px dashed rgba(124, 108, 154, 0.3);
+	border-radius: 50%;
+	animation: ringRotate 20s linear infinite;
 }
 
-@keyframes fadeIn {
-	to { opacity: 1; }
-}
-
-.bio {
-	font-size: 0.8125rem;
-	line-height: 1.9;
-	color: rgba(255, 255, 255, 0.6);
-	margin-bottom: 1.5rem;
-	opacity: 0;
-	animation: fadeIn 0.5s ease forwards 0.8s;
-}
-
-.bio code {
-	background: rgba(124, 58, 237, 0.2);
-	padding: 0.125rem 0.375rem;
-	border-radius: 4px;
-	color: #a78bfa;
-	font-size: 0.75rem;
-}
-
-/* Links by Category */
-.links-by-category {
+/* ===== Info Cards ===== */
+.info-card {
+	position: absolute;
+	background: rgba(255, 255, 255, 0.85);
+	backdrop-filter: blur(10px);
+	padding: 0.75rem 1.25rem;
+	border-radius: 16px;
+	box-shadow: 0 4px 20px rgba(124, 108, 154, 0.15);
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
-	opacity: 0;
-	animation: fadeIn 0.5s ease forwards 1s;
+	gap: 0.25rem;
+	animation: cardFloat 4s ease-in-out infinite;
+	transition: transform 0.3s ease;
+	z-index: 3;
 }
 
-.link-category {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
+.info-card:hover {
+	transform: scale(1.05);
 }
 
-.category-label {
-	font-size: 0.625rem;
-	font-weight: 600;
-	color: rgba(255, 255, 255, 0.35);
+.card-label {
+	font-size: 0.7rem;
+	font-weight: 700;
 	text-transform: uppercase;
-	letter-spacing: 0.1em;
+	letter-spacing: 0.05em;
+	color: #9a8ab0;
 }
 
-.link-row {
+.card-content {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #5a4a6a;
+}
+
+.card-skills {
+	top: 10%;
+	right: 0;
+	animation-delay: 0s;
+}
+
+.card-tools {
+	bottom: 20%;
+	right: 10%;
+	animation-delay: 1s;
+}
+
+.card-field {
+	bottom: 10%;
+	left: 0;
+	animation-delay: 2s;
+}
+
+@keyframes cardFloat {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-10px); }
+}
+
+/* ===== Social Bar ===== */
+.social-bar {
 	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 3rem;
+	position: relative;
+	z-index: 2;
+	animation: fadeInUp 0.8s ease-out 0.5s backwards;
 }
 
-.link-btn {
+@keyframes fadeInUp {
+	from { opacity: 0; transform: translateY(20px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.social-link {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 36px;
-	height: 36px;
+	width: 48px;
+	height: 48px;
 	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.06);
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	transition: all 0.2s ease;
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 2px 10px rgba(124, 108, 154, 0.15);
+	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.link-btn:hover {
-	background: rgba(255, 255, 255, 0.12);
-	border-color: rgba(255, 255, 255, 0.2);
-	transform: translateY(-2px);
+.social-link:hover {
+	transform: translateY(-5px) scale(1.1);
+	background: rgba(255, 255, 255, 0.95);
+	box-shadow: 0 8px 20px rgba(124, 108, 154, 0.25);
 }
 
-.link-btn img {
-	width: 16px;
-	height: 16px;
+.social-link img {
+	width: 22px;
+	height: 22px;
 	object-fit: contain;
 }
 
-/* Right side - Info rows */
-.hero-right {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
-	padding-top: 0.25rem;
-	opacity: 0;
-	animation: fadeIn 0.5s ease forwards 0.6s;
-}
-
-.info-row {
-	display: flex;
-	flex-direction: column;
-	gap: 0.375rem;
-}
-
-.info-label {
-	font-size: 0.6875rem;
-	font-weight: 600;
-	color: rgba(255, 255, 255, 0.35);
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-}
-
-.info-content {
-	font-size: 0.875rem;
-	color: rgba(255, 255, 255, 0.75);
-	line-height: 1.5;
-}
-
-.info-highlight {
-	color: #a78bfa;
-	font-weight: 500;
-}
-
-/* Buttons */
-.hero-buttons {
-	display: flex;
-	gap: 0.75rem;
-	margin-top: 0.5rem;
-}
-
-.btn-discord {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	background: #5865F2;
-	color: #fff;
-	padding: 0.625rem 1rem;
-	border-radius: 8px;
-	text-decoration: none;
-	font-weight: 500;
-	font-size: 0.8125rem;
-	transition: all 0.2s ease;
-}
-
-.btn-discord:hover {
-	background: #4752C4;
-	transform: translateY(-2px);
-}
-
-.btn-docs {
-	display: flex;
-	align-items: center;
-	background: transparent;
-	color: rgba(255, 255, 255, 0.8);
-	padding: 0.625rem 1rem;
-	border-radius: 8px;
-	text-decoration: none;
-	font-weight: 500;
-	font-size: 0.8125rem;
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	transition: all 0.2s ease;
-}
-
-.btn-docs:hover {
-	border-color: rgba(124, 58, 237, 0.5);
-	background: rgba(124, 58, 237, 0.1);
-	transform: translateY(-2px);
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-	.hero-section {
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+	.hero-content {
 		grid-template-columns: 1fr;
-	}
-
-	.deco-grid {
-		display: none;
-	}
-
-	.hero-main {
-		padding: 0 2rem;
-	}
-}
-
-@media (max-width: 768px) {
-	.hero-section {
-		padding: 6rem 1rem 4rem;
-	}
-
-	.hero-main {
-		padding: 0 1rem;
-	}
-
-	.hero-container {
-		grid-template-columns: 1fr;
-		gap: 2.5rem;
-	}
-
-	.hero-left {
-		align-items: center;
 		text-align: center;
+		gap: 3rem;
 	}
 
-	.link-row {
-		justify-content: center;
+	.hero-text {
+		order: 1;
 	}
 
-	.hero-buttons {
-		justify-content: center;
-		flex-wrap: wrap;
+	.hero-visual {
+		order: 0;
+		min-height: 300px;
 	}
 
 	.name {
-		font-size: 2rem;
+		justify-content: center;
+		font-size: 3rem;
+	}
+
+	.hero-buttons {
 		justify-content: center;
 	}
+
+	.info-card {
+		display: none;
+	}
+
+	.blob-1 { width: 250px; height: 250px; top: -100px; right: -80px; }
+	.blob-2 { width: 200px; height: 180px; bottom: -60px; left: -80px; }
+	.blob-3 { display: none; }
+	.blob-4 { display: none; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+	.hero-section {
+		padding: 5rem 1rem 2rem;
+	}
+
+	.name {
+		font-size: 2.5rem;
+	}
+
+	.bio {
+		font-size: 1rem;
+	}
+
+	.avatar-container {
+		width: 160px;
+		height: 160px;
+	}
+
+	.social-bar {
+		flex-wrap: wrap;
+	}
+
+	.social-link {
+		width: 42px;
+		height: 42px;
+	}
+
 	.hero-buttons {
 		flex-direction: column;
-		width: 100%;
+		align-items: center;
 	}
 
-	.btn-discord,
-	.btn-docs {
+	.btn {
+		width: 100%;
+		max-width: 250px;
 		justify-content: center;
 	}
 }
-
 </style>
