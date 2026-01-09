@@ -1,108 +1,91 @@
 ---
-// Footer component - polarcub-inspired playful design
+// Footer component - PolarCub-inspired frosted glass design
 ---
 
 <footer class="footer">
-	<!-- Decorative wave top -->
-	<div class="footer-wave-top">
-		<svg viewBox="0 0 1200 80" preserveAspectRatio="none">
-			<path d="M0,60 Q200,20 400,50 T800,40 T1200,60 L1200,80 L0,80 Z" fill="currentColor"/>
-		</svg>
+	<!-- Character illustration above footer -->
+	<div class="footer-character">
+		<img src="/gengarmain.png" alt="Character" />
 	</div>
 
-	<!-- Decorative blob -->
-	<div class="footer-blob"></div>
+	<!-- Main frosted glass container -->
+	<div class="footer-glass">
+		<div class="footer-content">
+			<!-- Left: Navigation Links -->
+			<nav class="footer-nav">
+				<a href="/" class="nav-item">
+					<span class="nav-arrow">~&gt;</span>
+					<span data-i18n="footerHome">home</span>
+				</a>
+				<a href="/docs/cobbleranked/" class="nav-item">
+					<span class="nav-arrow">~</span>
+					<span data-i18n="footerDocs">documentation</span>
+				</a>
+				<a href="/servers" class="nav-item">
+					<span class="nav-arrow">~</span>
+					<span data-i18n="footerServers">servers</span>
+				</a>
+				<a href="/terms" class="nav-item">
+					<span class="nav-arrow">~</span>
+					<span data-i18n="footerAbout">about</span>
+				</a>
+			</nav>
 
-	<!-- Spinning star decorations -->
-	<div class="footer-star star-1">✦</div>
-	<div class="footer-star star-2">★</div>
-	<div class="footer-star star-3">✦</div>
+			<!-- Center: Links Column 2 -->
+			<nav class="footer-nav footer-nav-center">
+				<a href="/#contact" class="nav-item">
+					<span class="nav-arrow">~</span>
+					<span data-i18n="footerContact">contact</span>
+				</a>
+				<a href="#" class="nav-item nav-coming-soon">
+					<span data-i18n="footerShop">shop (coming soon)</span>
+				</a>
+			</nav>
 
-	<div class="footer-container">
-		<!-- Main Brand Section with Character -->
-		<div class="footer-main">
-			<div class="footer-brand-section">
-				<div class="footer-brand">
-					<img src="/gashistudios.png" alt="GashiStudios" />
-					<span>GashiStudios</span>
+			<!-- Center: Logo -->
+			<div class="footer-logo">
+				<img src="/gashistudios.png" alt="GashiStudios" class="logo-image" />
+				<div class="logo-text">
+					<span class="logo-main">Gashi</span>
+					<span class="logo-sub">Studios</span>
 				</div>
-				<p class="footer-tagline" data-i18n="footerDesc">
-					Creating high-quality mods for Cobblemon.
-				</p>
-
-				<!-- Colorful Social Buttons -->
-				<div class="footer-social">
-					<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="social-btn discord" aria-label="Discord">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-							<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-						</svg>
-					</a>
-					<a href="https://github.com/gqrshy" target="_blank" class="social-btn github" aria-label="GitHub">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-							<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-						</svg>
-					</a>
-				</div>
 			</div>
 
-			<!-- Character decoration -->
-			<div class="footer-character">
-				<img src="/gengarmain.png" alt="Gengar" />
+			<!-- Right: Social Icons Grid -->
+			<div class="footer-social-grid">
+				<a href="https://www.youtube.com/@GashiStudios" target="_blank" class="social-icon youtube" aria-label="YouTube">
+					<img src="/icons/youtube.svg" alt="YouTube" />
+				</a>
+				<a href="#" class="social-icon kofi" aria-label="Ko-fi">
+					<img src="/icons/kofi.svg" alt="Ko-fi" />
+				</a>
+				<a href="https://www.twitch.tv/gashirstudios" target="_blank" class="social-icon twitch" aria-label="Twitch">
+					<img src="/icons/twitch.svg" alt="Twitch" />
+				</a>
+				<a href="https://x.com/GashiStudios" target="_blank" class="social-icon twitter" aria-label="Twitter">
+					<img src="/icons/twitter.svg" alt="Twitter" />
+				</a>
+				<a href="#" class="social-icon bluesky" aria-label="Bluesky">
+					<img src="/icons/bluesky.svg" alt="Bluesky" />
+				</a>
+				<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="social-icon discord" aria-label="Discord">
+					<img src="/icons/discord.svg" alt="Discord" />
+				</a>
+				<a href="https://github.com/gqrshy" target="_blank" class="social-icon github" aria-label="GitHub">
+					<img src="/icons/github.svg" alt="GitHub" />
+				</a>
+				<a href="#" class="social-icon tiktok" aria-label="TikTok">
+					<img src="/icons/tiktok.svg" alt="TikTok" />
+				</a>
 			</div>
 		</div>
 
-		<!-- Link Columns -->
-		<div class="footer-links">
-			<div class="footer-column">
-				<h4 data-i18n="footerProducts">Products</h4>
-				<a href="/docs/cobbleranked/">
-					<span class="link-icon">⚔️</span>
-					CobbleRanked
-				</a>
-				<a href="/docs/gashilibs/">
-					<span class="link-icon">📚</span>
-					GashiLibs
-				</a>
-				<a href="/docs/maillib/">
-					<span class="link-icon">📬</span>
-					MailLib
-				</a>
-			</div>
-			<div class="footer-column">
-				<h4 data-i18n="footerCommunity">Community</h4>
-				<a href="https://discord.gg/VVVvBTqqyP" target="_blank">
-					<span class="link-icon">💬</span>
-					Discord
-				</a>
-				<a href="https://github.com/gqrshy" target="_blank">
-					<span class="link-icon">🐙</span>
-					GitHub
-				</a>
-				<a href="/servers">
-					<span class="link-icon">🎮</span>
-					<span data-i18n="navServers">Servers</span>
-				</a>
-			</div>
-			<div class="footer-column">
-				<h4 data-i18n="footerLegal">Legal</h4>
-				<a href="/terms">
-					<span class="link-icon">📋</span>
-					<span data-i18n="footerTerms">Terms</span>
-				</a>
-			</div>
-		</div>
-	</div>
-
-	<!-- Bottom bar -->
-	<div class="footer-bottom">
-		<div class="footer-bottom-content">
-			<p data-i18n="footerCopyright">&copy; 2026 GashiStudios. All rights reserved.</p>
-			<p class="footer-disclaimer" data-i18n="footerDisclaimer">Not affiliated with Microsoft, Mojang AB, or Minecraft.</p>
-		</div>
-		<div class="footer-bottom-deco">
-			<span class="deco-dot"></span>
-			<span class="deco-dot"></span>
-			<span class="deco-dot"></span>
+		<!-- Bottom copyright -->
+		<div class="footer-bottom">
+			<p>
+				<span data-i18n="footerCopyright">copyright &copy; 2026 GashiStudios.</span>
+				<span class="footer-credit" data-i18n="footerCredit">designed and built by GashiStudios.</span>
+			</p>
 		</div>
 	</div>
 </footer>
@@ -111,24 +94,24 @@
 (function() {
 	const translations = {
 		en: {
-			footerDesc: "Creating high-quality mods for Cobblemon.",
-			footerProducts: "Products",
-			footerLegal: "Legal",
-			footerTerms: "Terms",
-			footerCommunity: "Community",
-			footerCopyright: "© 2026 GashiStudios. All rights reserved.",
-			footerDisclaimer: "Not affiliated with Microsoft, Mojang AB, or Minecraft.",
-			navServers: "Servers"
+			footerHome: "home",
+			footerDocs: "documentation",
+			footerServers: "servers",
+			footerAbout: "about",
+			footerContact: "contact",
+			footerShop: "shop (coming soon)",
+			footerCopyright: "copyright © 2026 GashiStudios.",
+			footerCredit: "designed and built by GashiStudios."
 		},
 		ja: {
-			footerDesc: "Cobblemon向けの高品質なModを制作しています。",
-			footerProducts: "プロダクト",
-			footerLegal: "法的情報",
-			footerTerms: "利用規約",
-			footerCommunity: "コミュニティ",
-			footerCopyright: "© 2026 GashiStudios. All rights reserved.",
-			footerDisclaimer: "Microsoft、Mojang AB、Minecraftとは一切関係ありません。",
-			navServers: "サーバー"
+			footerHome: "ホーム",
+			footerDocs: "ドキュメント",
+			footerServers: "サーバー",
+			footerAbout: "概要",
+			footerContact: "お問い合わせ",
+			footerShop: "ショップ (準備中)",
+			footerCopyright: "copyright © 2026 GashiStudios.",
+			footerCredit: "designed and built by GashiStudios."
 		}
 	};
 
@@ -160,339 +143,328 @@
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
 .footer {
 	position: relative;
-	background: linear-gradient(135deg, #e8e0f8 0%, #d8d0f0 50%, #e0d8f8 100%);
-	padding: 5rem 2rem 2rem;
-	overflow: hidden;
+	padding-top: 80px;
+	background: transparent;
 }
 
-/* Wave decoration at top */
-.footer-wave-top {
-	position: absolute;
-	top: -1px;
-	left: 0;
-	right: 0;
-	height: 60px;
-	color: #c8d4f0;
-	pointer-events: none;
-}
-
-.footer-wave-top svg {
-	width: 100%;
-	height: 100%;
-}
-
-/* Decorative blob */
-.footer-blob {
-	position: absolute;
-	top: 20%;
-	right: -5%;
-	width: 300px;
-	height: 300px;
-	background: radial-gradient(circle, rgba(240, 112, 128, 0.15) 0%, transparent 70%);
-	border-radius: 50%;
-	filter: blur(40px);
-	pointer-events: none;
-}
-
-/* Spinning stars */
-.footer-star {
-	position: absolute;
-	font-size: 1.5rem;
-	color: #f07080;
-	opacity: 0.6;
-	animation: spinStar 8s linear infinite;
-	pointer-events: none;
-}
-
-.footer-star.star-1 {
-	top: 15%;
-	left: 10%;
-	animation-duration: 10s;
-}
-
-.footer-star.star-2 {
-	top: 30%;
-	right: 15%;
-	font-size: 2rem;
-	color: #7c6c9a;
-	animation-duration: 12s;
-	animation-direction: reverse;
-}
-
-.footer-star.star-3 {
-	bottom: 40%;
-	left: 20%;
-	font-size: 1rem;
-	animation-duration: 7s;
-}
-
-@keyframes spinStar {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
-}
-
-/* Container */
-.footer-container {
-	position: relative;
-	max-width: 1200px;
-	margin: 0 auto;
-	display: grid;
-	grid-template-columns: 1.2fr 2fr;
-	gap: 4rem;
-	z-index: 1;
-}
-
-/* Main brand section */
-.footer-main {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
-}
-
-.footer-brand-section {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-}
-
-.footer-brand {
-	display: flex;
-	align-items: center;
-	gap: 0.75rem;
-}
-
-.footer-brand img {
-	width: 48px;
-	height: 48px;
-	border-radius: 14px;
-	box-shadow: 0 4px 15px rgba(124, 108, 154, 0.25);
-}
-
-.footer-brand span {
-	color: #4a4a5a;
-	font-weight: 700;
-	font-size: 1.3rem;
-	font-family: 'Lilita One', 'Inter', sans-serif;
-}
-
-.footer-tagline {
-	color: #6b5b7a;
-	font-size: 0.95rem;
-	line-height: 1.6;
-}
-
-/* Colorful social buttons */
-.footer-social {
-	display: flex;
-	gap: 0.75rem;
-	margin-top: 0.5rem;
-}
-
-.social-btn {
-	width: 44px;
-	height: 44px;
-	border-radius: 14px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #fff;
-	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.social-btn.discord {
-	background: linear-gradient(135deg, #7289da, #5865f2);
-}
-
-.social-btn.github {
-	background: linear-gradient(135deg, #333, #24292e);
-}
-
-.social-btn:hover {
-	transform: translateY(-4px) scale(1.1);
-	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Character decoration */
+/* Character illustration */
 .footer-character {
-	width: 120px;
-	margin-top: 1rem;
-	opacity: 0.9;
+	position: absolute;
+	top: -40px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
 }
 
 .footer-character img {
-	width: 100%;
-	filter: drop-shadow(0 4px 20px rgba(124, 108, 154, 0.3));
-	animation: floatChar 4s ease-in-out infinite;
+	height: 140px;
+	width: auto;
+	filter: drop-shadow(0 8px 25px rgba(100, 80, 140, 0.3));
+	animation: charFloat 4s ease-in-out infinite;
 }
 
-@keyframes floatChar {
-	0%, 100% { transform: translateY(0) rotate(-2deg); }
-	50% { transform: translateY(-8px) rotate(2deg); }
+@keyframes charFloat {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-8px); }
 }
 
-/* Link columns */
-.footer-links {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 2rem;
-}
-
-.footer-column h4 {
-	color: #4a4a5a;
-	font-size: 0.9rem;
-	font-weight: 700;
-	margin-bottom: 1.25rem;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
+/* Frosted glass container */
+.footer-glass {
+	background: linear-gradient(
+		180deg,
+		rgba(220, 215, 240, 0.85) 0%,
+		rgba(210, 205, 235, 0.9) 100%
+	);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-top: 1px solid rgba(255, 255, 255, 0.5);
+	padding: 3rem 2rem 1.5rem;
 	position: relative;
-	padding-bottom: 0.75rem;
 }
 
-.footer-column h4::after {
+.footer-glass::before {
 	content: '';
 	position: absolute;
-	bottom: 0;
+	top: 0;
 	left: 0;
-	width: 30px;
-	height: 3px;
-	background: linear-gradient(90deg, #f07080, #f0a0a0);
-	border-radius: 2px;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		rgba(255, 255, 255, 0.8) 20%,
+		rgba(255, 255, 255, 0.8) 80%,
+		transparent 100%
+	);
 }
 
-.footer-column a {
+/* Main content grid */
+.footer-content {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1.5fr 1.5fr;
+	gap: 2rem;
+	align-items: start;
+}
+
+/* Navigation links */
+.footer-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 0.625rem;
+}
+
+.nav-item {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-	color: #5a5a6a;
+	color: #4a4560;
 	text-decoration: none;
-	font-size: 0.9rem;
-	font-weight: 500;
-	margin-bottom: 0.875rem;
+	font-family: 'Quicksand', sans-serif;
+	font-size: 0.95rem;
+	font-weight: 600;
 	transition: all 0.2s ease;
 }
 
-.footer-column a:hover {
+.nav-item:hover {
 	color: #7c6c9a;
-	transform: translateX(4px);
+	transform: translateX(3px);
 }
 
-.link-icon {
-	font-size: 1rem;
-	line-height: 1;
+.nav-arrow {
+	color: #9a8ab0;
+	font-size: 0.85rem;
+	font-weight: 400;
 }
 
-/* Bottom bar */
-.footer-bottom {
-	position: relative;
-	max-width: 1200px;
-	margin: 3rem auto 0;
-	padding-top: 2rem;
-	border-top: 2px solid rgba(124, 108, 154, 0.12);
+.nav-coming-soon {
+	color: #9a8ab0;
+	font-weight: 500;
+}
+
+.nav-coming-soon:hover {
+	color: #9a8ab0;
+	transform: none;
+	cursor: default;
+}
+
+/* Center logo */
+.footer-logo {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
 }
 
-.footer-bottom-content {
-	text-align: left;
+.logo-image {
+	width: 80px;
+	height: 80px;
+	border-radius: 20px;
+	box-shadow: 0 6px 20px rgba(124, 108, 154, 0.25);
+	transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+	transform: scale(1.05) rotate(3deg);
+}
+
+.logo-text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	line-height: 1.1;
+}
+
+.logo-main {
+	font-family: 'Quicksand', sans-serif;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #ff8095;
+	text-shadow: 0 2px 4px rgba(255, 128, 149, 0.2);
+}
+
+.logo-sub {
+	font-family: 'Quicksand', sans-serif;
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: #ff8095;
+	margin-top: -2px;
+}
+
+/* Social icons grid */
+.footer-social-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 0.625rem;
+	justify-items: center;
+}
+
+.social-icon {
+	width: 46px;
+	height: 46px;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.social-icon img {
+	width: 22px;
+	height: 22px;
+	object-fit: contain;
+	filter: brightness(0) invert(1);
+}
+
+.social-icon:hover {
+	transform: translateY(-4px) scale(1.08);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Social icon colors */
+.social-icon.youtube {
+	background: linear-gradient(135deg, #ff0000, #cc0000);
+}
+
+.social-icon.kofi {
+	background: linear-gradient(135deg, #29abe0, #00bfff);
+}
+
+.social-icon.twitch {
+	background: linear-gradient(135deg, #9146ff, #772ce8);
+}
+
+.social-icon.twitter {
+	background: linear-gradient(135deg, #1da1f2, #0d8ecf);
+}
+
+.social-icon.bluesky {
+	background: linear-gradient(135deg, #0085ff, #0066cc);
+}
+
+.social-icon.discord {
+	background: linear-gradient(135deg, #5865f2, #4752c4);
+}
+
+.social-icon.github {
+	background: linear-gradient(135deg, #333, #1a1a1a);
+}
+
+.social-icon.tiktok {
+	background: linear-gradient(135deg, #010101, #000);
+}
+
+/* Footer bottom */
+.footer-bottom {
+	max-width: 1200px;
+	margin: 2rem auto 0;
+	padding-top: 1.25rem;
+	border-top: 1px solid rgba(160, 140, 180, 0.2);
+	text-align: center;
 }
 
 .footer-bottom p {
 	color: #7a6a8a;
+	font-family: 'Quicksand', sans-serif;
 	font-size: 0.85rem;
+	font-weight: 500;
 }
 
-.footer-disclaimer {
-	margin-top: 0.25rem;
-	font-size: 0.75rem !important;
-	color: #9a8aaa !important;
+.footer-credit {
+	margin-left: 1rem;
+	color: #9a8aa0;
 }
 
-.footer-bottom-deco {
-	display: flex;
-	gap: 0.5rem;
-}
-
-.deco-dot {
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: rgba(124, 108, 154, 0.3);
-}
-
-.deco-dot:nth-child(2) {
-	background: rgba(240, 112, 128, 0.4);
-	width: 10px;
-	height: 10px;
-}
-
-/* Mobile styles */
+/* Responsive */
 @media (max-width: 900px) {
-	.footer-container {
-		grid-template-columns: 1fr;
-		gap: 3rem;
+	.footer-content {
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
 	}
 
-	.footer-main {
+	.footer-logo {
+		grid-column: 1 / -1;
+		order: -1;
+		margin-bottom: 1rem;
+	}
+
+	.footer-social-grid {
+		grid-column: 1 / -1;
+		justify-content: center;
+		max-width: 240px;
+		margin: 0 auto;
+	}
+
+	.footer-nav {
 		align-items: center;
 		text-align: center;
 	}
 
-	.footer-brand-section {
-		align-items: center;
-	}
-
-	.footer-social {
-		justify-content: center;
-	}
-
-	.footer-character {
+	.nav-arrow {
 		display: none;
-	}
-
-	.footer-links {
-		grid-template-columns: repeat(3, 1fr);
-	}
-
-	.footer-column h4::after {
-		left: 50%;
-		transform: translateX(-50%);
-	}
-
-	.footer-column {
-		text-align: center;
-	}
-
-	.footer-column a {
-		justify-content: center;
-	}
-
-	.footer-bottom {
-		flex-direction: column;
-		gap: 1rem;
-		text-align: center;
-	}
-
-	.footer-bottom-content {
-		text-align: center;
 	}
 }
 
 @media (max-width: 600px) {
 	.footer {
-		padding: 4rem 1.5rem 1.5rem;
+		padding-top: 60px;
 	}
 
-	.footer-links {
+	.footer-character img {
+		height: 100px;
+	}
+
+	.footer-glass {
+		padding: 2rem 1.25rem 1.25rem;
+	}
+
+	.footer-content {
 		grid-template-columns: 1fr;
-		gap: 2rem;
+		gap: 1.5rem;
+		text-align: center;
 	}
 
-	.footer-star {
-		display: none;
+	.footer-nav {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.75rem 1.5rem;
+	}
+
+	.footer-nav-center {
+		order: 1;
+	}
+
+	.footer-social-grid {
+		grid-template-columns: repeat(4, 1fr);
+		max-width: 220px;
+	}
+
+	.social-icon {
+		width: 42px;
+		height: 42px;
+	}
+
+	.social-icon img {
+		width: 20px;
+		height: 20px;
+	}
+
+	.footer-bottom p {
+		font-size: 0.8rem;
+	}
+
+	.footer-credit {
+		display: block;
+		margin-left: 0;
+		margin-top: 0.25rem;
 	}
 }
 </style>
