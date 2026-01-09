@@ -1,0 +1,363 @@
+---
+// Contact section - polarcub-inspired design with email form
+---
+
+<section id="contact" class="contact-section">
+	<!-- Blue blob decoration -->
+	<div class="contact-blob"></div>
+
+	<!-- Wave lines decoration -->
+	<svg class="wave-deco wave-1" viewBox="0 0 60 20" preserveAspectRatio="none">
+		<path d="M0,10 Q15,2 30,10 T60,10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+	</svg>
+	<svg class="wave-deco wave-2" viewBox="0 0 50 16" preserveAspectRatio="none">
+		<path d="M0,8 Q12,2 25,8 T50,8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+	</svg>
+
+	<!-- Pink arrow decoration -->
+	<div class="arrow-deco">
+		<svg viewBox="0 0 40 60" fill="currentColor">
+			<path d="M20,0 L40,50 L20,40 L0,50 Z"/>
+		</svg>
+	</div>
+
+	<div class="contact-container">
+		<!-- Left: Character + Blob -->
+		<div class="contact-visual">
+			<img src="/gengarmain.png" alt="" class="contact-character" />
+		</div>
+
+		<!-- Right: Form -->
+		<div class="contact-content">
+			<h2 class="contact-title">
+				<span data-i18n="contactTitle">Get in touch</span><span class="title-marks">!!</span>
+			</h2>
+			<p class="contact-subtitle" data-i18n="contactSubtitle">
+				Want to collaborate or have questions?<br />
+				Let me know and <span class="highlight">I'll reply as soon as I can</span>!
+			</p>
+			<p class="contact-note" data-i18n="contactNote">
+				Please refrain from sending spam or unrelated inquiries.
+			</p>
+
+			<form class="contact-form" action="https://formsubmit.co/gashistudios.llc@gmail.com" method="POST">
+				<!-- Honeypot -->
+				<input type="text" name="_honey" style="display:none">
+				<!-- Disable captcha -->
+				<input type="hidden" name="_captcha" value="false">
+				<!-- Success redirect -->
+				<input type="hidden" name="_next" value="https://gashistudios.site/?sent=true">
+
+				<div class="form-row">
+					<div class="form-group">
+						<input type="email" name="email" required placeholder="Email" />
+					</div>
+					<div class="form-group">
+						<input type="text" name="name" required placeholder="Name" />
+					</div>
+				</div>
+				<div class="form-group">
+					<textarea name="message" required placeholder="Type in a short message!" rows="5"></textarea>
+				</div>
+				<button type="submit" class="submit-btn">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<polyline points="20,6 9,17 4,12"/>
+					</svg>
+					<span data-i18n="contactSubmit">submit</span>
+				</button>
+			</form>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+(function() {
+	const translations = {
+		en: {
+			contactTitle: "Get in touch",
+			contactSubtitle: "Want to collaborate or have questions?<br />Let me know and <span class=\"highlight\">I'll reply as soon as I can</span>!",
+			contactNote: "Please refrain from sending spam or unrelated inquiries.",
+			contactSubmit: "submit"
+		},
+		ja: {
+			contactTitle: "お問い合わせ",
+			contactSubtitle: "コラボや質問がありますか？<br /><span class=\"highlight\">できるだけ早く返信します</span>！",
+			contactNote: "スパムや無関係なお問い合わせはご遠慮ください。",
+			contactSubmit: "送信"
+		}
+	};
+
+	function applyContactTranslations(lang) {
+		const t = translations[lang] || translations.en;
+		document.querySelectorAll('.contact-section [data-i18n]').forEach(el => {
+			const key = el.getAttribute('data-i18n');
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
+		});
+	}
+
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyContactTranslations(lang);
+	}
+
+	window.addEventListener('langChange', (e) => {
+		applyContactTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+})();
+</script>
+
+<style>
+.contact-section {
+	position: relative;
+	padding: 5rem 2rem 6rem;
+	background: linear-gradient(180deg, #edecff 0%, #e4e0f8 50%, #dce0f8 100%);
+	overflow: hidden;
+}
+
+/* Blue blob */
+.contact-blob {
+	position: absolute;
+	top: 5%;
+	left: -5%;
+	width: 350px;
+	height: 450px;
+	background: linear-gradient(180deg, #5070e8 0%, #4060d8 100%);
+	border-radius: 40% 60% 55% 45% / 55% 45% 50% 50%;
+	z-index: 0;
+	pointer-events: none;
+}
+
+/* Wave decorations */
+.wave-deco {
+	position: absolute;
+	color: rgba(100, 100, 120, 0.2);
+	z-index: 1;
+	pointer-events: none;
+}
+
+.wave-1 {
+	width: 80px;
+	height: 24px;
+	bottom: 25%;
+	right: 8%;
+}
+
+.wave-2 {
+	width: 60px;
+	height: 18px;
+	bottom: 22%;
+	right: 10%;
+}
+
+/* Pink arrow */
+.arrow-deco {
+	position: absolute;
+	bottom: 20%;
+	right: 5%;
+	width: 50px;
+	height: 75px;
+	color: #ff4080;
+	transform: rotate(15deg);
+	z-index: 1;
+	pointer-events: none;
+}
+
+.arrow-deco svg {
+	width: 100%;
+	height: 100%;
+}
+
+/* Container */
+.contact-container {
+	position: relative;
+	max-width: 1000px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 0.8fr 1.2fr;
+	gap: 40px;
+	align-items: center;
+	z-index: 2;
+}
+
+/* Visual side */
+.contact-visual {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.contact-character {
+	max-width: 200px;
+	height: auto;
+	filter: drop-shadow(0 8px 30px rgba(80, 112, 232, 0.3));
+	position: relative;
+	z-index: 2;
+}
+
+/* Content side */
+.contact-content {
+	position: relative;
+}
+
+.contact-title {
+	font-family: 'Lilita One', 'Inter', sans-serif;
+	font-size: 3rem;
+	font-weight: 400;
+	color: #454141;
+	margin: 0 0 16px;
+	line-height: 1.1;
+}
+
+.title-marks {
+	color: #ff4080;
+}
+
+.contact-subtitle {
+	font-size: 1rem;
+	color: #5a5a6a;
+	margin: 0 0 8px;
+	line-height: 1.7;
+}
+
+.highlight {
+	color: #ff4080;
+	text-decoration: underline;
+	text-decoration-style: wavy;
+	text-underline-offset: 3px;
+}
+
+.contact-note {
+	font-size: 0.85rem;
+	color: #ff4080;
+	margin: 0 0 28px;
+}
+
+/* Form */
+.contact-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+	width: 100%;
+	padding: 16px 20px;
+	border: none;
+	border-radius: 12px;
+	background: rgba(200, 195, 230, 0.4);
+	font-size: 1rem;
+	font-family: inherit;
+	color: #454141;
+	transition: all 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+	color: #8a8a9a;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+	outline: none;
+	background: rgba(200, 195, 230, 0.6);
+	box-shadow: 0 0 0 3px rgba(80, 112, 232, 0.2);
+}
+
+.form-group textarea {
+	resize: vertical;
+	min-height: 120px;
+}
+
+.submit-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 14px 36px;
+	background: linear-gradient(135deg, #ff4080 0%, #ff6090 100%);
+	color: #fff;
+	border: none;
+	border-radius: 50px;
+	font-size: 1rem;
+	font-weight: 600;
+	font-family: inherit;
+	cursor: pointer;
+	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	box-shadow: 0 4px 20px rgba(255, 64, 128, 0.35);
+	align-self: center;
+}
+
+.submit-btn:hover {
+	transform: translateY(-3px) scale(1.02);
+	box-shadow: 0 8px 30px rgba(255, 64, 128, 0.45);
+}
+
+.submit-btn svg {
+	flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+	.contact-container {
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	.contact-visual {
+		order: -1;
+	}
+
+	.contact-character {
+		max-width: 150px;
+	}
+
+	.contact-title {
+		font-size: 2.2rem;
+	}
+
+	.form-row {
+		grid-template-columns: 1fr;
+	}
+
+	.contact-blob {
+		width: 250px;
+		height: 320px;
+		top: 0;
+		left: -15%;
+	}
+
+	.arrow-deco {
+		display: none;
+	}
+}
+
+@media (max-width: 500px) {
+	.contact-section {
+		padding: 4rem 1.5rem;
+	}
+
+	.contact-title {
+		font-size: 1.8rem;
+	}
+
+	.wave-deco {
+		display: none;
+	}
+}
+</style>

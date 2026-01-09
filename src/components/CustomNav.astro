@@ -1,25 +1,58 @@
 ---
-// Custom navigation bar for the landing page
+// Custom navigation bar - polarcub-inspired playful design
 ---
 
 <nav class="custom-nav">
 	<div class="nav-container">
+		<!-- Logo with decorative star -->
 		<a href="/" class="nav-logo">
-			<img src="/gashistudios.png" alt="GashiStudios" />
-			<span>GashiStudios</span>
+			<div class="logo-wrapper">
+				<img src="/gashistudios.png" alt="GashiStudios" />
+				<span class="logo-star">✦</span>
+			</div>
+			<span class="logo-text">GashiStudios</span>
 		</a>
+
+		<!-- Navigation Links -->
 		<div class="nav-links">
-			<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="nav-link">Discord</a>
-			<a href="/servers" class="nav-link" data-i18n="navServers">Servers</a>
-			<a href="/docs/cobbleranked/" class="nav-link" data-i18n="navDocs">Documents</a>
-			<a href="/terms" class="nav-link" data-i18n="navTerms">Terms</a>
+			<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="nav-link">
+				<span class="link-dot"></span>
+				Discord
+			</a>
+			<a href="/servers" class="nav-link" data-i18n="navServers">
+				<span class="link-dot"></span>
+				Servers
+			</a>
+			<a href="/docs/cobbleranked/" class="nav-link" data-i18n="navDocs">
+				<span class="link-dot"></span>
+				Documents
+			</a>
+			<a href="/terms" class="nav-link" data-i18n="navTerms">
+				<span class="link-dot"></span>
+				Terms
+			</a>
 		</div>
-		<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="nav-discord-btn">
-			<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-				<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-			</svg>
-			<span data-i18n="navJoin">Join</span>
-		</a>
+
+		<!-- Social Buttons - Colorful style -->
+		<div class="nav-social">
+			<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="social-btn discord" aria-label="Discord">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+				</svg>
+			</a>
+			<a href="https://github.com/gqrshy" target="_blank" class="social-btn github" aria-label="GitHub">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+				</svg>
+			</a>
+		</div>
+	</div>
+
+	<!-- Decorative wave under nav -->
+	<div class="nav-wave">
+		<svg viewBox="0 0 1200 20" preserveAspectRatio="none">
+			<path d="M0,10 Q150,0 300,10 T600,10 T900,10 T1200,10 L1200,20 L0,20 Z" fill="currentColor"/>
+		</svg>
 	</div>
 </nav>
 
@@ -29,14 +62,12 @@
 		en: {
 			navServers: "Servers",
 			navDocs: "Documents",
-			navTerms: "Terms",
-			navJoin: "Join"
+			navTerms: "Terms"
 		},
 		ja: {
 			navServers: "サーバー",
 			navDocs: "ドキュメント",
-			navTerms: "利用規約",
-			navJoin: "参加"
+			navTerms: "利用規約"
 		}
 	};
 
@@ -45,7 +76,15 @@
 		document.querySelectorAll('.custom-nav [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
 			if (t[key]) {
-				el.textContent = t[key];
+				// Preserve the dot element
+				const dot = el.querySelector('.link-dot');
+				if (dot) {
+					el.innerHTML = '';
+					el.appendChild(dot);
+					el.appendChild(document.createTextNode(t[key]));
+				} else {
+					el.textContent = t[key];
+				}
 			}
 		});
 	}
@@ -74,11 +113,9 @@
 	left: 0;
 	right: 0;
 	z-index: 1000;
-	background: rgba(255, 255, 255, 0.7);
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 240, 255, 0.95) 100%);
 	backdrop-filter: blur(12px);
-	border-bottom: 1px solid rgba(124, 108, 154, 0.15);
-	padding: 0.75rem 2rem;
-	box-shadow: 0 2px 20px rgba(124, 108, 154, 0.1);
+	padding: 0.875rem 2rem;
 }
 
 .nav-container {
@@ -89,88 +126,142 @@
 	justify-content: space-between;
 }
 
+/* Logo */
 .nav-logo {
 	display: flex;
 	align-items: center;
 	gap: 0.75rem;
 	text-decoration: none;
-	color: #4a4a5a;
-	font-weight: 700;
-	font-size: 1.1rem;
 	caret-color: transparent;
 	user-select: none;
+}
+
+.logo-wrapper {
+	position: relative;
+}
+
+.logo-wrapper img {
+	width: 40px;
+	height: 40px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(124, 108, 154, 0.25);
+	transition: transform 0.3s ease;
+}
+
+.nav-logo:hover .logo-wrapper img {
+	transform: rotate(-5deg) scale(1.05);
+}
+
+.logo-star {
+	position: absolute;
+	top: -6px;
+	right: -6px;
+	font-size: 14px;
+	color: #f07080;
+	animation: twinkleStar 2s ease-in-out infinite;
+}
+
+@keyframes twinkleStar {
+	0%, 100% { opacity: 1; transform: scale(1); }
+	50% { opacity: 0.6; transform: scale(0.8); }
+}
+
+.logo-text {
+	color: #4a4a5a;
+	font-weight: 700;
+	font-size: 1.15rem;
+	font-family: 'Lilita One', 'Inter', sans-serif;
+	letter-spacing: 0.02em;
 	transition: color 0.2s ease;
 }
 
-.nav-logo:hover {
+.nav-logo:hover .logo-text {
 	color: #7c6c9a;
 }
 
-.nav-logo span {
-	caret-color: transparent;
-}
-
-.nav-logo img {
-	width: 36px;
-	height: 36px;
-	border-radius: 10px;
-	box-shadow: 0 2px 8px rgba(124, 108, 154, 0.2);
-}
-
+/* Nav Links */
 .nav-links {
 	display: flex;
 	gap: 2rem;
 }
 
 .nav-link {
-	color: #6b5b7a;
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #5a5a6a;
 	text-decoration: none;
 	font-size: 0.9rem;
-	font-weight: 500;
+	font-weight: 600;
 	transition: color 0.2s ease;
-	position: relative;
 }
 
-.nav-link::after {
-	content: '';
-	position: absolute;
-	bottom: -4px;
-	left: 0;
-	width: 0;
-	height: 2px;
-	background: #7c6c9a;
-	border-radius: 2px;
-	transition: width 0.2s ease;
+.link-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #d8c8f0;
+	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .nav-link:hover {
 	color: #7c6c9a;
 }
 
-.nav-link:hover::after {
-	width: 100%;
+.nav-link:hover .link-dot {
+	background: #f07080;
+	transform: scale(1.3);
 }
 
-.nav-discord-btn {
+/* Social Buttons */
+.nav-social {
+	display: flex;
+	gap: 0.625rem;
+}
+
+.social-btn {
+	width: 38px;
+	height: 38px;
+	border-radius: 12px;
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
-	background: linear-gradient(135deg, #7c6c9a 0%, #6b5b8a 100%);
+	justify-content: center;
 	color: #fff;
-	padding: 0.5rem 1.25rem;
-	border-radius: 50px;
-	text-decoration: none;
-	font-weight: 600;
-	font-size: 0.9rem;
 	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-	box-shadow: 0 2px 10px rgba(124, 108, 154, 0.3);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
-.nav-discord-btn:hover {
-	transform: translateY(-2px) scale(1.02);
-	box-shadow: 0 4px 15px rgba(124, 108, 154, 0.4);
+.social-btn.discord {
+	background: linear-gradient(135deg, #7289da, #5865f2);
 }
 
+.social-btn.github {
+	background: linear-gradient(135deg, #333, #24292e);
+}
+
+.social-btn:hover {
+	transform: translateY(-3px) scale(1.08);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Wave decoration */
+.nav-wave {
+	position: absolute;
+	bottom: -10px;
+	left: 0;
+	right: 0;
+	height: 12px;
+	color: rgba(124, 108, 154, 0.08);
+	pointer-events: none;
+}
+
+.nav-wave svg {
+	width: 100%;
+	height: 100%;
+}
+
+/* Mobile */
 @media (max-width: 768px) {
 	.nav-links {
 		display: none;
@@ -178,6 +269,10 @@
 
 	.custom-nav {
 		padding: 0.75rem 1rem;
+	}
+
+	.logo-text {
+		display: none;
 	}
 }
 </style>
