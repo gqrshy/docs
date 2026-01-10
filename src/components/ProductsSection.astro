@@ -1,43 +1,16 @@
 ---
-// Products section showcasing mods - with MOTION-style title animation
+// Products section showcasing mods - PolarCub-inspired right-aligned layout
 ---
 
 <section id="products" class="products-section">
 	<div class="products-container">
-		<!-- Animated Title -->
-		<div class="title-wrapper" id="products-title-wrapper">
-			<!-- Decorative dots -->
-			<div class="title-dots">
-				<span class="dot dot-1"></span>
-				<span class="dot dot-2"></span>
-				<span class="dot dot-3"></span>
-			</div>
-			<!-- Main title with individual characters -->
-			<h2 class="section-title animated-title" id="products-title">
-				<span class="char" data-index="0">O</span>
-				<span class="char" data-index="1">u</span>
-				<span class="char" data-index="2">r</span>
-				<span class="char space" data-index="3">&nbsp;</span>
-				<span class="char" data-index="4">P</span>
-				<span class="char" data-index="5">r</span>
-				<span class="char" data-index="6">o</span>
-				<span class="char" data-index="7">d</span>
-				<span class="char" data-index="8">u</span>
-				<span class="char" data-index="9">c</span>
-				<span class="char" data-index="10">t</span>
-				<span class="char" data-index="11">s</span>
+		<!-- Header: Right-aligned like ContactSection -->
+		<div class="products-header">
+			<h2 class="products-title">
+				<span data-i18n="productsTitle">Our Products</span><span class="title-marks">!!</span>
 			</h2>
-			<!-- Japanese version (hidden by default, shown when ja) -->
-			<h2 class="section-title animated-title ja-title" id="products-title-ja" style="display: none;">
-				<span class="char" data-index="0">プ</span>
-				<span class="char" data-index="1">ロ</span>
-				<span class="char" data-index="2">ダ</span>
-				<span class="char" data-index="3">ク</span>
-				<span class="char" data-index="4">ト</span>
-			</h2>
-			<!-- Subtitle -->
-			<p class="section-subtitle animated-subtitle" id="products-subtitle">
-				<span class="subtitle-text" data-i18n="productsSubtitle">Mods and libraries for Cobblemon</span>
+			<p class="products-subtitle" data-i18n="productsSubtitle">
+				Mods and libraries for <span class="highlight">Cobblemon</span>
 			</p>
 		</div>
 
@@ -86,131 +59,36 @@
 (function() {
 	const translations = {
 		en: {
-			productsSubtitle: "Mods and libraries for Cobblemon",
+			productsTitle: "Our Products",
+			productsSubtitle: "Mods and libraries for <span class=\"highlight\">Cobblemon</span>",
 			cobblerankedDesc: "ELO-based ranked battle system with seasons, leaderboards, and rewards.",
 			gashilibsDesc: "Shared library providing database connections, Redis, and config utilities.",
 			maillibDesc: "In-game mailbox system for delivering rewards and items to players."
 		},
 		ja: {
-			productsSubtitle: "Cobblemon向けMod・ライブラリ",
+			productsTitle: "プロダクト",
+			productsSubtitle: "<span class=\"highlight\">Cobblemon</span>向けMod・ライブラリ",
 			cobblerankedDesc: "ELOレーティングを採用したランクバトルシステム。シーズン、リーダーボード、報酬機能を搭載。",
 			gashilibsDesc: "データベース接続、Redis、設定管理などの共有ライブラリ。",
 			maillibDesc: "プレイヤーに報酬やアイテムを届けるゲーム内メールシステム。"
 		}
 	};
 
-	let currentLang = 'en';
-	let hasAnimated = false;
-
 	function applyProductsTranslations(lang) {
-		currentLang = lang;
 		const t = translations[lang] || translations.en;
-
-		// Handle title switching
-		const enTitle = document.getElementById('products-title');
-		const jaTitle = document.getElementById('products-title-ja');
-
-		if (lang === 'ja') {
-			enTitle.style.display = 'none';
-			jaTitle.style.display = 'flex';
-		} else {
-			enTitle.style.display = 'flex';
-			jaTitle.style.display = 'none';
-		}
-
-		// Apply other translations
 		document.querySelectorAll('.products-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
 			if (t[key]) {
 				el.innerHTML = t[key];
 			}
 		});
-
-		// Re-trigger animation if already visible and language changed
-		if (hasAnimated) {
-			resetAnimation();
-			playAnimation();
-		}
 	}
 
-	function resetAnimation() {
-		const wrapper = document.getElementById('products-title-wrapper');
-		const activeTitle = currentLang === 'ja'
-			? document.getElementById('products-title-ja')
-			: document.getElementById('products-title');
-		const chars = activeTitle.querySelectorAll('.char');
-		const dots = wrapper.querySelectorAll('.dot');
-		const subtitle = wrapper.querySelector('.animated-subtitle');
-
-		chars.forEach(char => {
-			char.classList.remove('visible');
-		});
-		dots.forEach(dot => {
-			dot.classList.remove('visible');
-		});
-		subtitle.classList.remove('visible');
-	}
-
-	function playAnimation() {
-		const wrapper = document.getElementById('products-title-wrapper');
-		const activeTitle = currentLang === 'ja'
-			? document.getElementById('products-title-ja')
-			: document.getElementById('products-title');
-		const chars = activeTitle.querySelectorAll('.char');
-		const dots = wrapper.querySelectorAll('.dot');
-		const subtitle = wrapper.querySelector('.animated-subtitle');
-
-		// Animate dots first (staggered)
-		dots.forEach((dot, i) => {
-			setTimeout(() => {
-				dot.classList.add('visible');
-			}, i * 100);
-		});
-
-		// Animate characters with stagger
-		const charDelay = 60;
-		chars.forEach((char, i) => {
-			setTimeout(() => {
-				char.classList.add('visible');
-			}, 200 + i * charDelay);
-		});
-
-		// Animate subtitle after all chars
-		const totalCharTime = 200 + chars.length * charDelay + 200;
-		setTimeout(() => {
-			subtitle.classList.add('visible');
-		}, totalCharTime);
-
-		hasAnimated = true;
-	}
-
-	// Intersection Observer for scroll-triggered animation
-	function setupIntersectionObserver() {
-		const wrapper = document.getElementById('products-title-wrapper');
-		if (!wrapper) return;
-
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting && !hasAnimated) {
-					playAnimation();
-				}
-			});
-		}, {
-			threshold: 0.3,
-			rootMargin: '0px 0px -100px 0px'
-		});
-
-		observer.observe(wrapper);
-	}
-
-	// Initialize
 	function init() {
 		const lang = window.GashiLang?.get() || 'en';
 		applyProductsTranslations(lang);
-		setupIntersectionObserver();
 	}
 
-	// Listen for language changes
 	window.addEventListener('langChange', (e) => {
 		applyProductsTranslations(e.detail.lang);
 	});
@@ -225,149 +103,111 @@
 
 <style>
 .products-section {
-	padding: 6rem 2rem;
+	padding: 5rem 2rem 6rem;
 	background: transparent;
 }
 
 .products-container {
-	max-width: 1200px;
+	max-width: 1100px;
 	margin: 0 auto;
 }
 
-/* ===== Animated Title Styles ===== */
-.title-wrapper {
-	position: relative;
-	text-align: center;
-	margin-bottom: 3rem;
-	padding-top: 2rem;
+/* ===== Header - Right-aligned like ContactSection ===== */
+.products-header {
+	text-align: right;
+	margin-bottom: 2.5rem;
 }
 
-/* Decorative dots */
-.title-dots {
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	display: flex;
-	gap: 0.75rem;
-	justify-content: center;
+.products-title {
+	font-family: 'Lilita One', 'Inter', sans-serif;
+	font-size: 4rem;
+	font-weight: 400;
+	color: #454141;
+	margin: 0 0 12px;
+	line-height: 1.1;
 }
 
-.dot {
-	width: 6px;
-	height: 6px;
-	background: rgba(124, 108, 154, 0.8);
-	border-radius: 50%;
-	opacity: 0;
-	transform: translateY(10px) scale(0);
-	transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+.title-marks {
+	color: #ff4080;
 }
 
-.dot.visible {
-	opacity: 1;
-	transform: translateY(0) scale(1);
+.products-subtitle {
+	font-size: 1.1rem;
+	color: #5a5a6a;
+	margin: 0;
+	line-height: 1.7;
 }
 
-.dot-1 { transition-delay: 0s; }
-.dot-2 { transition-delay: 0.1s; background: rgba(124, 108, 154, 1); width: 8px; height: 8px; }
-.dot-3 { transition-delay: 0.2s; }
-
-/* Animated title */
-.animated-title {
-	display: flex;
-	justify-content: center;
-	align-items: baseline;
-	gap: 0;
-	font-size: 2.5rem;
-	font-weight: 700;
-	color: #4a4a5a;
-	margin-bottom: 0.75rem;
-	letter-spacing: 0.05em;
-}
-
-.animated-title .char {
-	display: inline-block;
-	opacity: 0;
-	transform: translateY(30px);
-	transition:
-		opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-		transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.animated-title .char.visible {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.animated-title .char.space {
-	width: 0.3em;
-}
-
-/* Japanese title adjustments */
-.ja-title {
-	letter-spacing: 0.15em;
-}
-
-/* Animated subtitle */
-.animated-subtitle {
-	opacity: 0;
-	transform: translateY(15px);
-	transition:
-		opacity 0.6s ease,
-		transform 0.6s ease;
-}
-
-.animated-subtitle.visible {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.subtitle-text {
-	color: #6b5b7a;
-	font-size: 1rem;
+.highlight {
+	color: #ff4080;
+	text-decoration: underline;
+	text-decoration-style: wavy;
+	text-underline-offset: 3px;
 }
 
 /* ===== Product Grid Styles ===== */
 .products-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-	gap: 1.5rem;
+	gap: 1.25rem;
 }
 
+/* Frosted glass card - matching Footer style */
 .product-card {
-	background: rgba(255, 255, 255, 0.7);
-	border: 1px solid rgba(124, 108, 154, 0.2);
-	border-radius: 1rem;
-	padding: 2rem;
+	background: linear-gradient(
+		180deg,
+		rgba(200, 195, 225, 0.55) 0%,
+		rgba(195, 190, 220, 0.6) 100%
+	);
+	backdrop-filter: blur(40px) saturate(1.2);
+	-webkit-backdrop-filter: blur(40px) saturate(1.2);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	border-radius: 20px;
+	padding: 1.75rem;
 	text-decoration: none;
-	transition: all 0.3s ease;
+	transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 	display: flex;
-	gap: 1.5rem;
+	gap: 1.25rem;
 	align-items: flex-start;
-	backdrop-filter: blur(10px);
+	box-shadow:
+		0 8px 32px rgba(140, 120, 180, 0.12),
+		inset 0 1px 0 rgba(255, 255, 255, 0.4);
+	transform-style: preserve-3d;
+	transform-origin: center bottom;
+	animation: cardLiftOut 0.5s ease forwards;
 }
 
 .product-card:hover {
-	border-color: rgba(124, 108, 154, 0.5);
-	transform: translateY(-5px);
-	box-shadow: 0 15px 40px rgba(124, 108, 154, 0.2);
-	background: rgba(255, 255, 255, 0.9);
+	box-shadow:
+		0 25px 60px rgba(140, 120, 180, 0.3),
+		inset 0 1px 0 rgba(255, 255, 255, 0.5);
+	background: linear-gradient(
+		180deg,
+		rgba(210, 205, 235, 0.65) 0%,
+		rgba(205, 200, 230, 0.7) 100%
+	);
+	animation: cardLiftIn 0.45s ease forwards;
 }
 
 .product-card.featured {
-	border-color: rgba(124, 108, 154, 0.4);
-	background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(212, 200, 232, 0.5) 100%);
+	background: linear-gradient(
+		180deg,
+		rgba(210, 200, 235, 0.6) 0%,
+		rgba(200, 195, 225, 0.65) 100%
+	);
+	border-color: rgba(255, 255, 255, 0.45);
 }
 
 .product-icon {
 	flex-shrink: 0;
-	width: 80px;
-	height: 80px;
-	border-radius: 12px;
+	width: 72px;
+	height: 72px;
+	border-radius: 14px;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	box-shadow: 0 4px 16px rgba(124, 108, 154, 0.2);
 }
 
 .product-icon img {
@@ -377,58 +217,93 @@
 }
 
 .product-icon.library {
-	background: rgba(124, 108, 154, 0.15);
+	background: rgba(255, 255, 255, 0.5);
 	color: #7c6c9a;
 }
 
 .product-icon.library svg {
-	width: 36px;
-	height: 36px;
+	width: 32px;
+	height: 32px;
 }
 
 .product-info h3 {
-	font-size: 1.25rem;
+	font-size: 1.15rem;
 	font-weight: 600;
-	color: #4a4a5a;
-	margin-bottom: 0.5rem;
+	color: #454141;
+	margin-bottom: 0.4rem;
 }
 
 .product-info p {
-	color: #6b5b7a;
-	font-size: 0.9rem;
+	color: #5a5a6a;
+	font-size: 0.875rem;
 	line-height: 1.6;
-	margin-bottom: 1rem;
+	margin-bottom: 0.875rem;
 }
 
 .product-tag {
 	display: inline-block;
-	background: linear-gradient(135deg, #7c6c9a, #6b5b8a);
+	background: linear-gradient(135deg, #ff4080 0%, #ff6090 100%);
 	color: #fff;
-	font-size: 0.75rem;
+	font-size: 0.7rem;
 	font-weight: 600;
-	padding: 0.25rem 0.75rem;
+	padding: 0.3rem 0.875rem;
 	border-radius: 20px;
+	box-shadow: 0 2px 8px rgba(255, 64, 128, 0.3);
 }
 
 .product-tag.library {
-	background: rgba(124, 108, 154, 0.2);
-	color: #7c6c9a;
+	background: rgba(255, 255, 255, 0.6);
+	color: #6b5b7a;
+	box-shadow: none;
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 768px) {
-	.products-section {
-		padding: 4rem 1rem;
+@media (max-width: 900px) {
+	.products-header {
+		text-align: center;
 	}
 
-	.animated-title {
-		font-size: 2rem;
+	.products-title {
+		font-size: 3rem;
+	}
+
+	.products-grid {
+		grid-template-columns: 1fr;
+		max-width: 450px;
+		margin: 0 auto;
+	}
+}
+
+@media (max-width: 600px) {
+	.products-section {
+		padding: 3rem 1rem 4rem;
+	}
+
+	.products-title {
+		font-size: 2.5rem;
+	}
+
+	.products-subtitle {
+		font-size: 1rem;
 	}
 
 	.product-card {
-		flex-direction: column;
-		text-align: center;
-		align-items: center;
+		padding: 1.5rem;
+		border-radius: 16px;
+	}
+
+	.product-icon {
+		width: 60px;
+		height: 60px;
+		border-radius: 12px;
+	}
+
+	.product-info h3 {
+		font-size: 1.05rem;
+	}
+
+	.product-info p {
+		font-size: 0.85rem;
 	}
 }
 </style>

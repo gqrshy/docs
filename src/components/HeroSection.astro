@@ -1,36 +1,82 @@
 ---
 // Hero section - Clean & Cute design inspired by polarcub
 import polymartLogo from '../assets/polymart.png';
+import modrinthLogo from '../assets/modrinth.webp';
+import lolLogo from '../assets/lol.png';
+import steamLogo from '../assets/steam.png';
 ---
 
 <section class="hero-section" id="hero">
-	<!-- ===== Background Blobs (Strategic placement like polarcub) ===== -->
-	<div class="blob blob-top-right"></div>
-	<div class="blob blob-bottom-left"></div>
-	<div class="blob blob-mid-right"></div>
-
-	<!-- ===== Wave Line (Top left, subtle gray) ===== -->
-	<svg class="wave-line" viewBox="0 0 100 20" preserveAspectRatio="none">
-		<path d="M0,10 Q25,2 50,10 T100,10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-	</svg>
-	<svg class="wave-line wave-2" viewBox="0 0 80 16" preserveAspectRatio="none">
-		<path d="M0,8 Q20,2 40,8 T80,8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-	</svg>
-
-	<!-- ===== Brush Stroke (Left side, pink) ===== -->
-	<div class="brush-stroke"></div>
-
-	<!-- ===== Drop Shape (Blue, single) ===== -->
-	<div class="drop-shape"></div>
-
-	<!-- ===== Small Star (Bottom left, pink) ===== -->
-	<div class="small-star">★</div>
-
-	<!-- ===== Spinning Star (Top left, large) ===== -->
-	<div class="spinning-star">✦</div>
-
-	<!-- ===== Main Content ===== -->
+	<!-- ===== Unified Container (PolarCub style - content + decorations together) ===== -->
 	<div class="hero-wrapper">
+		<!-- Decorations (positioned relative to wrapper) -->
+		<div class="hero-decorations">
+			<!-- Acrylic Panels (PolarCub style - 2 panels) -->
+			<div class="acrylic-panel acrylic-main" id="acrylic-main"></div>
+			<div class="acrylic-panel acrylic-sub" id="acrylic-sub"></div>
+
+			<!-- Wavy Grid Pattern 1 (右側 - キャラクター後ろ) -->
+			<svg class="wave-grid wave-grid-1" viewBox="0 0 350 400" preserveAspectRatio="none">
+				<g opacity="0.15">
+					<path d="M10 0 Q25 50 10 100 Q-5 150 10 200 Q25 250 10 300 Q-5 350 10 400" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M55 0 Q70 50 55 100 Q40 150 55 200 Q70 250 55 300 Q40 350 55 400" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M100 0 Q115 50 100 100 Q85 150 100 200 Q115 250 100 300 Q85 350 100 400" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M145 0 Q160 50 145 100 Q130 150 145 200 Q160 250 145 300 Q130 350 145 400" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M190 0 Q205 50 190 100 Q175 150 190 200 Q205 250 190 300 Q175 350 190 400" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M235 0 Q250 50 235 100 Q220 150 235 200 Q250 250 235 300 Q220 350 235 400" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M280 0 Q295 50 280 100 Q265 150 280 200 Q295 250 280 300 Q265 350 280 400" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M325 0 Q340 50 325 100 Q310 150 325 200 Q340 250 325 300 Q310 350 325 400" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+				</g>
+			</svg>
+
+			<!-- Wavy Grid Pattern 2 (左下 - 小さめ) -->
+			<svg class="wave-grid wave-grid-2" viewBox="0 0 200 200" preserveAspectRatio="none">
+				<g opacity="0.15">
+					<path d="M5 0 Q12 25 5 50 Q-2 75 5 100 Q12 125 5 150 Q-2 175 5 200" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M30 0 Q37 25 30 50 Q23 75 30 100 Q37 125 30 150 Q23 175 30 200" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M55 0 Q62 25 55 50 Q48 75 55 100 Q62 125 55 150 Q48 175 55 200" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M80 0 Q87 25 80 50 Q73 75 80 100 Q87 125 80 150 Q73 175 80 200" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M105 0 Q112 25 105 50 Q98 75 105 100 Q112 125 105 150 Q98 175 105 200" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M130 0 Q137 25 130 50 Q123 75 130 100 Q137 125 130 150 Q123 175 130 200" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M155 0 Q162 25 155 50 Q148 75 155 100 Q162 125 155 150 Q148 175 155 200" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+					<path d="M180 0 Q187 25 180 50 Q173 75 180 100 Q187 125 180 150 Q173 175 180 200" stroke="#9E99FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+				</g>
+			</svg>
+
+			<!-- Bold S-curve Waves (PolarCub style - 3 curves) -->
+			<!-- S-curve 1: 左側 - 上から下へ -->
+			<svg class="s-curve s-curve-1" viewBox="-41 -41 573 813" fill="none">
+				<path d="M449.03 24.6557C366.929 37.1979 339.739 82.6143 367.461 160.905C395.183 239.196 367.993 284.612 285.892 297.154C203.79 309.697 176.601 355.113 204.322 433.404C232.044 511.695 204.854 557.111 122.753 569.653C40.6517 582.195 13.4619 627.612 41.1837 705.903" stroke="#4C75F2" stroke-width="82" stroke-linecap="round"/>
+			</svg>
+			<!-- S-curve 2: 右上 - 画面外からキャラ後ろへ -->
+			<svg class="s-curve s-curve-2" viewBox="-41 -41 573 813" fill="none">
+				<path d="M449.03 24.6557C366.929 37.1979 339.739 82.6143 367.461 160.905C395.183 239.196 367.993 284.612 285.892 297.154C203.79 309.697 176.601 355.113 204.322 433.404C232.044 511.695 204.854 557.111 122.753 569.653C40.6517 582.195 13.4619 627.612 41.1837 705.903" stroke="#4C75F2" stroke-width="82" stroke-linecap="round"/>
+			</svg>
+			<!-- S-curve 3: 右下 - 画面外へ延びる -->
+			<svg class="s-curve s-curve-3" viewBox="-41 -41 573 813" fill="none">
+				<path d="M449.03 24.6557C366.929 37.1979 339.739 82.6143 367.461 160.905C395.183 239.196 367.993 284.612 285.892 297.154C203.79 309.697 176.601 355.113 204.322 433.404C232.044 511.695 204.854 557.111 122.753 569.653C40.6517 582.195 13.4619 627.612 41.1837 705.903" stroke="#4C75F2" stroke-width="82" stroke-linecap="round"/>
+			</svg>
+
+			<!-- Rotating Star Sprites (PolarCub style - 視線誘導配置) -->
+			<!-- 紫大星: テキスト横上部 - 視線を右下へ誘導 -->
+			<svg class="rotating-star star-purple-large" viewBox="-1 -1 301 301" fill="none">
+				<path d="M72.8241 105.684C69.4889 94.948 77.9741 84.2107 89.1901 84.974L126.373 87.5042C130.045 87.7541 133.69 86.7306 136.695 84.6061L167.128 63.0923C176.307 56.6028 189.141 61.3547 191.881 72.2576L200.965 108.403C201.862 111.972 203.962 115.123 206.911 117.324L236.776 139.619C245.785 146.344 245.231 160.018 235.709 165.993L204.14 185.802C201.022 187.758 198.675 190.729 197.492 194.214L185.517 229.506C181.905 240.152 168.73 243.851 160.104 236.641L131.51 212.739C128.686 210.378 125.135 209.064 121.455 209.016L84.1896 208.533C72.9486 208.388 65.3589 197 69.5507 186.569L83.4473 151.988C84.8195 148.573 84.9727 144.789 83.8809 141.275L72.8241 105.684Z" fill="#9E99FF"/>
+			</svg>
+			<!-- 紫中星: 左下パネル横 -->
+			<svg class="rotating-star star-purple-medium" viewBox="-1 -1 159 159" fill="none">
+				<path d="M56.927 29.7812C58.6317 24.4249 65.1834 22.4507 69.5637 25.9732L88.6344 41.3096C90.0683 42.4628 91.856 43.0864 93.696 43.0753L118.168 42.9279C123.789 42.894 127.691 48.5149 125.694 53.7693L117.002 76.6459C116.348 78.366 116.308 80.2588 116.887 82.0054L124.589 105.234C126.358 110.569 122.218 116.018 116.604 115.742L92.1611 114.544C90.3232 114.454 88.5105 115.001 87.0283 116.091L67.3168 130.595C62.7893 133.926 56.3284 131.672 54.8552 126.248L48.4412 102.631C47.9589 100.855 46.8792 99.2998 45.3841 98.2272L25.4992 83.9622C20.9319 80.6857 21.0789 73.8447 25.7826 70.7673L46.2616 57.3692C47.8014 56.3618 48.9469 54.8543 49.5049 53.1009L56.927 29.7812Z" fill="#9E99FF"/>
+			</svg>
+			<!-- ピンク小星: ボタン周辺 - アクセント -->
+			<svg class="rotating-star star-pink-small" viewBox="-1 -1 60 60" fill="none">
+				<path d="M43.4081 19.217C46.1451 19.8557 47.3873 23.0435 45.8041 25.3656L42.145 30.7325C41.6267 31.4927 41.3863 32.4083 41.4644 33.325L42.0153 39.7972C42.2536 42.5976 39.6057 44.7641 36.908 43.9759L30.673 42.1544C29.7899 41.8964 28.8448 41.9507 27.9971 42.3082L22.0119 44.8322C19.4223 45.9242 16.5435 44.0754 16.4595 41.2661L16.2651 34.7735C16.2376 33.8539 15.8939 32.9718 15.2919 32.276L11.042 27.3638C9.20317 25.2383 10.0719 21.9292 12.7177 20.9811L18.8325 18.7899C19.6987 18.4796 20.4313 17.8801 20.907 17.0926L24.2656 11.5327C25.7187 9.12707 29.1344 8.93074 30.8537 11.154L34.8272 16.2925C35.39 17.0203 36.1865 17.5319 37.0825 17.7409L43.4081 19.217Z" fill="#FF3C77"/>
+			</svg>
+			<!-- 紫大星: ボタン下中央 (PolarCub参照) -->
+			<svg class="rotating-star star-pink-large" viewBox="-1 -1 232 232" fill="none">
+				<path d="M122.831 32.7328C128.984 26.9685 139.007 29.1803 142.163 36.9989L156.509 72.5424C157.542 75.1019 159.426 77.227 161.843 78.5596L195.409 97.0654C202.793 101.136 203.786 111.352 197.326 116.769L167.955 141.397C165.84 143.17 164.401 145.619 163.881 148.329L156.653 185.971C155.063 194.252 145.655 198.353 138.506 193.883L106.008 173.56C103.667 172.097 100.894 171.485 98.1553 171.827L60.1223 176.586C51.7561 177.632 44.9475 169.952 46.9901 161.771L56.2756 124.584C56.9443 121.906 56.6694 119.079 55.4972 116.58L39.2189 81.8791C35.6382 74.2458 40.8389 65.397 49.25 64.8117L87.4871 62.1512C90.2406 61.9596 92.8439 60.8246 94.8582 58.9376L122.831 32.7328Z" fill="#9E99FF"/>
+			</svg>
+		</div>
+
+		<!-- Main Content -->
 		<div class="hero-content">
 			<!-- Left: Text -->
 			<div class="hero-text">
@@ -49,53 +95,76 @@ import polymartLogo from '../assets/polymart.png';
 						<span data-i18n="joinDiscord">join discord!</span>
 					</a>
 					<a href="/docs/cobbleranked/" class="btn btn-secondary">
+						<svg class="animated-border" viewBox="0 0 200 56" preserveAspectRatio="none">
+							<rect x="1" y="1" width="198" height="54" rx="27" ry="27" vector-effect="non-scaling-stroke" />
+						</svg>
 						<img src="/brush.svg" alt="" class="btn-icon" />
 						<span data-i18n="viewDocs">see my mods!</span>
 					</a>
 				</div>
 			</div>
 
-			<!-- Right: Character with Acrylic Panel -->
+			<!-- Right: Character -->
 			<div class="hero-visual">
-				<!-- Large Acrylic Panel (moves with scroll) -->
-				<div class="acrylic-panel" id="acrylic-panel"></div>
-				<!-- Decorative Stars around panel -->
-				<div class="panel-star panel-star-top">★</div>
-				<div class="panel-star panel-star-bottom">★</div>
 				<img src="/gengarmain.png" alt="Gengar" class="character-image" />
 			</div>
 		</div>
 
 		<!-- Social Links Bar -->
 		<div class="social-bar">
-			<a href="https://github.com/gqrshy" target="_blank" class="social-link" title="GitHub">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-				</svg>
-			</a>
-			<a href="https://modrinth.com/user/gashicha" target="_blank" class="social-link modrinth" title="Modrinth">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M12.252.004a11.78 11.768 0 0 0-8.92 3.73 11 10.999 0 0 0-2.17 3.11 11.37 11.359 0 0 0-1.16 5.169c0 1.42.17 2.5.6 3.77.24.759.77 1.899 1.17 2.529a12.3 12.298 0 0 0 8.85 5.639c.44.05 2.54.07 2.76.02.2-.04.22.1-.26-1.7l-.36-1.37-1.01-.06a8.5 8.489 0 0 1-5.18-1.8 5.34 5.34 0 0 1-1.3-1.26c0-.05.34-.28.74-.5a37.572 37.545 0 0 1 2.88-1.54c.03 0 .07.08.1.17.58 1.341 1.63 2.381 3.11 3.001.56.24 1.01.34 1.81.39l.63.05.49-1.06c.52-1.14.93-2.11.9-2.16-.02-.02-.17-.04-.34-.04-.52 0-1.52-.18-2.1-.38a5.97 5.97 0 0 1-1.7-.86l-.27-.22.36-.13c.21-.07 1.02-.43 1.81-.79 2.27-.98 3.76-1.53 7.09-2.6a66.769 66.715 0 0 1 2.24-.67c.01 0 .06.26.1.59.14.94.14 2.96 0 3.9a11.29 11.279 0 0 1-3.93 7.139c-1.23 1.06-2.36 1.69-3.98 2.23-.63.21-1.78.47-2.29.52l-.3.03.43 1.58c.23.87.44 1.63.46 1.68.04.11.18.1.83 0a12.86 12.848 0 0 0 7.27-4.199 12.033 12.021 0 0 0 2.62-5.979c.17-1.04.2-1.5.2-2.79a11.39 11.379 0 0 0-.6-4.259 11.97 11.959 0 0 0-5.16-6.2A11.39 11.379 0 0 0 12.57 0c-.27 0-.6 0-.72.009z"/>
-				</svg>
-			</a>
-			<a href="https://www.curseforge.com/members/gqrshy/projects" target="_blank" class="social-link curseforge" title="CurseForge">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M18.326 9.2145H21.9984L20.036 11.4417L19.0094 12.5814H16.6148L15.7076 13.6L14.697 14.6998H21.9084L19.9108 17.011L18.8034 18.2898H9.3144L7.7686 19.8816H22.8V4.1184H0V8.133L1.8394 9.1632H1.9276L4.134 9.2146L7.4886 12.7736L9.134 14.469L9.5114 14.8526H5.1062C4.4968 14.8526 4.0026 14.3598 4.0026 13.7494V13.578H0.3226C0.3226 13.578 0.2556 14.0688 0.3226 14.5698C0.446 15.4812 0.719 16.0966 1.344 16.8814C1.4254 16.9816 2.4424 18.0744 2.6914 18.2898H2.702C3.878 19.2798 5.3992 19.8816 7.059 19.8816H7.7686L9.3144 18.2898H18.8034L20.8604 15.8816H12.2084L17.287 10.1006H14.9894L18.326 9.2145Z"/>
-				</svg>
-			</a>
-			<a href="https://polymart.org/user/47282/gashi" target="_blank" class="social-link polymart" title="Polymart">
-				<img src={polymartLogo.src} alt="Polymart" width="20" height="20" />
-			</a>
-			<a href="https://www.youtube.com/@Gqrshy" target="_blank" class="social-link youtube" title="YouTube">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-				</svg>
-			</a>
-			<a href="https://x.com/Gqrshy" target="_blank" class="social-link x" title="X">
-				<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-				</svg>
-			</a>
+			<!-- Mod Platforms -->
+			<div class="social-group">
+				<a href="https://github.com/gqrshy" target="_blank" class="social-link github" title="GitHub">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+					</svg>
+				</a>
+				<a href="https://modrinth.com/user/gashicha" target="_blank" class="social-link modrinth" title="Modrinth">
+					<img src={modrinthLogo.src} alt="Modrinth" width="20" height="20" />
+				</a>
+				<a href="https://www.curseforge.com/members/gqrshy/projects" target="_blank" class="social-link curseforge" title="CurseForge">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M18.326 9.2145H21.9984L20.036 11.4417L19.0094 12.5814H16.6148L15.7076 13.6L14.697 14.6998H21.9084L19.9108 17.011L18.8034 18.2898H9.3144L7.7686 19.8816H22.8V4.1184H0V8.133L1.8394 9.1632H1.9276L4.134 9.2146L7.4886 12.7736L9.134 14.469L9.5114 14.8526H5.1062C4.4968 14.8526 4.0026 14.3598 4.0026 13.7494V13.578H0.3226C0.3226 13.578 0.2556 14.0688 0.3226 14.5698C0.446 15.4812 0.719 16.0966 1.344 16.8814C1.4254 16.9816 2.4424 18.0744 2.6914 18.2898H2.702C3.878 19.2798 5.3992 19.8816 7.059 19.8816H7.7686L9.3144 18.2898H18.8034L20.8604 15.8816H12.2084L17.287 10.1006H14.9894L18.326 9.2145Z"/>
+					</svg>
+				</a>
+				<a href="https://polymart.org/user/47282/gashi" target="_blank" class="social-link polymart" title="Polymart">
+					<img src={polymartLogo.src} alt="Polymart" width="20" height="20" />
+				</a>
+			</div>
+
+			<span class="social-divider"></span>
+
+			<!-- SNS & Streaming -->
+			<div class="social-group">
+				<a href="https://www.youtube.com/@Gqrshy" target="_blank" class="social-link youtube" title="YouTube">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+					</svg>
+				</a>
+				<a href="https://x.com/Gqrshy" target="_blank" class="social-link x" title="X">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+					</svg>
+				</a>
+			</div>
+
+			<span class="social-divider"></span>
+
+			<!-- Gaming -->
+			<div class="social-group">
+				<a href="https://steamcommunity.com/profiles/76561199134198471/" target="_blank" class="social-link steam" title="Steam">
+					<img src={steamLogo.src} alt="Steam" width="20" height="20" />
+				</a>
+				<a href="https://tracker.gg/valorant/profile/riot/%E5%B9%B3%E5%92%8C%E4%B8%BB%E7%BE%A9%E8%80%85%23peko/overview?platform=pc&playlist=competitive" target="_blank" class="social-link valorant" title="Valorant Tracker">
+					<svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor">
+						<path d="M19.8,26.1h-0.2c-2.4,0-4.8,0-7.2,0c-0.3,0-0.5-0.1-0.6-0.3c-2.5-3.2-5.1-6.3-7.6-9.5C4.1,16.1,4,16,4,15.8c0-3.1,0-6.1,0-9.2c0-0.1,0-0.2,0.1-0.2h0.1c5.2,6.5,10.4,13,15.5,19.5c0,0,0,0.1,0.1,0.1L19.8,26.1L19.8,26.1z"/>
+						<path d="M27.8,16.3c-0.7,0.9-1.5,1.8-2.2,2.8c-0.2,0.2-0.4,0.3-0.6,0.3c-2.4,0-4.8,0-7.1,0c0,0-0.1,0-0.1,0c-0.1,0-0.2-0.1-0.1-0.2c0,0,0-0.1,0.1-0.1c2.4-3,4.7-5.9,7.1-8.9c1-1.2,2-2.5,2.9-3.7c0-0.1,0.1-0.1,0.2-0.1c0,0,0.1,0,0.1,0c0,0.1,0,0.1,0,0.2c0,3,0,6.1,0,9.1C28,16,27.9,16.2,27.8,16.3L27.8,16.3z"/>
+					</svg>
+				</a>
+				<a href="https://op.gg/ja/lol/summoners/jp/%E5%B9%B3%E5%92%8C%E4%B8%BB%E7%BE%A9%E8%80%85-peko" target="_blank" class="social-link lol" title="OP.GG">
+					<img src={lolLogo.src} alt="OP.GG" width="20" height="20" />
+				</a>
+			</div>
 		</div>
 	</div>
 </section>
@@ -137,27 +206,105 @@ import polymartLogo from '../assets/polymart.png';
 		init();
 	}
 
-	// Parallax scroll effect for acrylic panel
+	// PolarCub-style spring parallax - bouncy jelly effect on both acrylic panels
+	// スクロール方向と逆に動く（下にスクロール→パネルは上に動く）
 	function initParallax() {
-		const panel = document.getElementById('acrylic-panel');
-		if (!panel) return;
+		const mainPanel = document.getElementById('acrylic-main');
+		const subPanel = document.getElementById('acrylic-sub');
+		if (!mainPanel && !subPanel) return;
 
-		let ticking = false;
+		// Panel configurations (different speeds for depth effect)
+		const panels = [
+			{ el: mainPanel, baseRotate: 4, yMultiplier: -0.08, rotateMultiplier: 1.5 },
+			{ el: subPanel, baseRotate: -2, yMultiplier: -0.12, rotateMultiplier: 1.0 }
+		].filter(p => p.el);
 
-		function updateParallax() {
-			const scrollY = window.scrollY;
-			const translateY = scrollY * 0.15;
-			const rotate = scrollY * 0.02;
-			panel.style.transform = `translateY(${translateY}px) rotate(${8 + rotate}deg)`;
-			ticking = false;
+		// Spring state for each panel
+		const states = panels.map(p => ({
+			currentY: 0,
+			currentRotate: p.baseRotate,
+			targetY: 0,
+			targetRotate: p.baseRotate,
+			velocityY: 0,
+			velocityRotate: 0
+		}));
+
+		let isAnimating = false;
+
+		// Spring physics constants
+		const mass = 1.2;
+		const tension = 100;
+		const friction = 12;
+
+		function springStep(current, target, velocity) {
+			const displacement = current - target;
+			const springForce = -tension * displacement;
+			const dampingForce = -friction * velocity;
+			const acceleration = (springForce + dampingForce) / mass;
+			const dt = 1 / 60;
+			return {
+				position: current + (velocity + acceleration * dt) * dt,
+				velocity: velocity + acceleration * dt
+			};
 		}
 
-		window.addEventListener('scroll', () => {
-			if (!ticking) {
-				requestAnimationFrame(updateParallax);
-				ticking = true;
+		function animate() {
+			let stillMoving = false;
+
+			panels.forEach((panel, i) => {
+				const state = states[i];
+
+				// Update Y with spring
+				const yResult = springStep(state.currentY, state.targetY, state.velocityY);
+				state.currentY = yResult.position;
+				state.velocityY = yResult.velocity;
+
+				// Update rotation with spring
+				const rotateResult = springStep(state.currentRotate, state.targetRotate, state.velocityRotate);
+				state.currentRotate = rotateResult.position;
+				state.velocityRotate = rotateResult.velocity;
+
+				// Apply transform
+				panel.el.style.transform = `rotate(${state.currentRotate}deg) translateY(${state.currentY}px)`;
+
+				// Check if still moving
+				if (Math.abs(state.velocityY) > 0.001 ||
+					Math.abs(state.velocityRotate) > 0.0001 ||
+					Math.abs(state.currentY - state.targetY) > 0.05 ||
+					Math.abs(state.currentRotate - state.targetRotate) > 0.005) {
+					stillMoving = true;
+				}
+			});
+
+			if (stillMoving) {
+				requestAnimationFrame(animate);
+			} else {
+				isAnimating = false;
 			}
-		}, { passive: true });
+		}
+
+		function startAnimation() {
+			if (!isAnimating) {
+				isAnimating = true;
+				requestAnimationFrame(animate);
+			}
+		}
+
+		function onScroll() {
+			const scrollY = window.scrollY;
+			const viewportHeight = window.innerHeight;
+			const progress = Math.min(scrollY / viewportHeight, 1);
+
+			// Set target values - negative multiplier = opposite to scroll direction
+			panels.forEach((panel, i) => {
+				states[i].targetY = scrollY * panel.yMultiplier;
+				states[i].targetRotate = panel.baseRotate + (progress * panel.rotateMultiplier);
+			});
+
+			startAnimation();
+		}
+
+		window.addEventListener('scroll', onScroll, { passive: true });
 	}
 
 	if (document.readyState === 'loading') {
@@ -169,148 +316,40 @@ import polymartLogo from '../assets/polymart.png';
 </script>
 
 <style>
+/* =====================================================
+   DECORATIVE ELEMENT POSITION CONTROL PANEL
+   PolarCub完全再現版 - 統一コンテナで全要素が一緒にスケール
+   ===================================================== */
+
 .hero-section {
 	min-height: 100vh;
-	background: linear-gradient(135deg, #edecff 0%, #e8e4ff 50%, #e0e8ff 100%);
+	background: linear-gradient(180deg, #edecff 0%, #e8e6ff 50%, #e0e8ff 100%);
 	position: relative;
-	overflow: hidden;
+	overflow: visible; /* 装飾要素がセクション外へ延びることを許可 */
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 100px 60px 60px;
+	z-index: 2; /* seamless-sectionsより上に表示 */
 }
 
-/* ===== Background Blobs ===== */
-.blob {
-	position: absolute;
-	z-index: 0;
-	pointer-events: none;
-}
-
-/* Large blue blob - top right (MUCH bigger like polarcub) */
-.blob-top-right {
-	width: 650px;
-	height: 700px;
-	background: linear-gradient(180deg, #8098f8 0%, #6080f0 100%);
-	border-radius: 35% 65% 60% 40% / 45% 50% 50% 55%;
-	top: -200px;
-	right: -200px;
-}
-
-/* Large pink blob - bottom left (larger, more visible) */
-.blob-bottom-left {
-	width: 450px;
-	height: 400px;
-	background: linear-gradient(135deg, #ff8595 0%, #ff6080 100%);
-	border-radius: 55% 45% 40% 60% / 55% 35% 65% 45%;
-	bottom: -150px;
-	left: -150px;
-}
-
-/* Large blue blob - mid right (behind character panel) */
-.blob-mid-right {
-	width: 550px;
-	height: 600px;
-	background: linear-gradient(180deg, rgba(140, 160, 248, 0.7) 0%, rgba(100, 130, 240, 0.5) 100%);
-	border-radius: 45% 55% 50% 50% / 50% 50% 50% 50%;
-	top: 15%;
-	right: -5%;
-	z-index: 1;
-}
-
-/* ===== Wave Lines (Top left, subtle gray) ===== */
-.wave-line {
-	position: absolute;
-	top: 12%;
-	left: 4%;
-	width: 100px;
-	height: 24px;
-	color: rgba(100, 100, 120, 0.25);
-	z-index: 1;
-	pointer-events: none;
-}
-
-.wave-line.wave-2 {
-	top: 16%;
-	left: 5%;
-	width: 70px;
-	height: 18px;
-}
-
-/* ===== Brush Stroke (Left side, pink) ===== */
-.brush-stroke {
-	position: absolute;
-	top: 42%;
-	left: 2%;
-	width: 50px;
-	height: 12px;
-	background: linear-gradient(90deg, #ff3c77 0%, rgba(255, 60, 119, 0.3) 100%);
-	border-radius: 6px;
-	transform: rotate(-30deg);
-	z-index: 1;
-	pointer-events: none;
-}
-
-/* ===== Drop Shape (Blue, single) ===== */
-.drop-shape {
-	position: absolute;
-	top: 35%;
-	left: 28%;
-	width: 20px;
-	height: 30px;
-	background: linear-gradient(180deg, #7088f0 0%, #5070e8 100%);
-	border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-	transform: rotate(25deg);
-	z-index: 2;
-	pointer-events: none;
-	animation: dropFloat 5s ease-in-out infinite;
-}
-
-@keyframes dropFloat {
-	0%, 100% { transform: rotate(25deg) translateY(0); }
-	50% { transform: rotate(25deg) translateY(-10px); }
-}
-
-/* ===== Small Star (Bottom left, pink) ===== */
-.small-star {
-	position: absolute;
-	bottom: 18%;
-	left: 8%;
-	font-size: 1.8rem;
-	color: #ff6080;
-	z-index: 2;
-	pointer-events: none;
-	animation: starPulse 3s ease-in-out infinite;
-}
-
-@keyframes starPulse {
-	0%, 100% { opacity: 0.7; transform: scale(1); }
-	50% { opacity: 1; transform: scale(1.15); }
-}
-
-/* ===== Spinning Star (Top left area) ===== */
-.spinning-star {
-	position: absolute;
-	top: 22%;
-	left: 12%;
-	font-size: 2.5rem;
-	color: #ff3c77;
-	z-index: 2;
-	pointer-events: none;
-	animation: spinStar 10s linear infinite;
-}
-
-@keyframes spinStar {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
-}
-
-/* ===== Wrapper ===== */
+/* ===== Unified Wrapper (content + decorations together) ===== */
+/* コンテンツと装飾要素を同じコンテナに配置し、一緒にスケール */
 .hero-wrapper {
 	width: 100%;
-	max-width: 1200px;
+	max-width: 1400px; /* 装飾要素のスペースを確保するため拡大 */
 	position: relative;
-	z-index: 3;
+	z-index: 1;
+}
+
+/* ===== Decorations Container ===== */
+/* wrapperに対して相対配置、%単位で一緒にスケール */
+.hero-decorations {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 1;
+	overflow: visible; /* 要素がコンテナ外へ延びる */
 }
 
 /* ===== Content Grid ===== */
@@ -319,6 +358,8 @@ import polymartLogo from '../assets/polymart.png';
 	grid-template-columns: 1fr 1.3fr;
 	gap: 40px;
 	align-items: center;
+	position: relative;
+	z-index: 3; /* 装飾要素より上に表示 */
 }
 
 /* ===== Text Section ===== */
@@ -341,16 +382,17 @@ import polymartLogo from '../assets/polymart.png';
 	font-family: 'Lilita One', 'Inter', sans-serif;
 	font-weight: 400;
 	color: #454141;
-	line-height: 1.1;
+	line-height: 1.0;
+	text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
 }
 
 .title-line-1 {
-	font-size: 4rem;
+	font-size: clamp(2.5rem, 5vw, 5.5rem);
 	margin-bottom: 8px;
 }
 
 .title-line-2 {
-	font-size: 5rem;
+	font-size: clamp(3rem, 6.5vw, 7rem);
 }
 
 .name-highlight {
@@ -381,8 +423,9 @@ import polymartLogo from '../assets/polymart.png';
 	font-weight: 600;
 	font-size: 1rem;
 	text-decoration: none;
-	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	transition: box-shadow 0.2s ease;
 	border: 2px solid transparent;
+	animation: jellyOutDown 0.4s ease forwards;
 }
 
 .btn svg,
@@ -399,22 +442,52 @@ import polymartLogo from '../assets/polymart.png';
 }
 
 .btn-primary:hover {
-	transform: translateY(-3px) scale(1.02);
 	box-shadow: 0 8px 30px rgba(255, 64, 128, 0.45);
+	animation: jellyInUp 0.35s ease forwards;
 }
 
 .btn-secondary {
 	background: #fff;
 	color: #ff4080;
-	border: 2px dashed rgba(255, 64, 128, 0.5);
+	border: none;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	position: relative;
+	overflow: visible;
+}
+
+/* Animated dashed border using SVG */
+.btn-secondary .animated-border {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.btn-secondary .animated-border rect {
+	fill: none;
+	stroke: rgba(255, 64, 128, 0.7);
+	stroke-width: 2;
+	stroke-dasharray: 12 8;
+	stroke-linecap: round;
+	animation: dashMove 1s linear infinite;
+}
+
+@keyframes dashMove {
+	to {
+		stroke-dashoffset: -40;
+	}
 }
 
 .btn-secondary:hover {
-	border-style: solid;
-	border-color: #ff4080;
-	transform: translateY(-3px);
 	box-shadow: 0 4px 15px rgba(255, 64, 128, 0.2);
+	animation: jellyInUp 0.35s ease forwards;
+}
+
+.btn-secondary:hover .animated-border rect {
+	stroke: rgba(255, 64, 128, 0.9);
+	animation-duration: 0.4s;
 }
 
 /* ===== Character Visual ===== */
@@ -428,7 +501,7 @@ import polymartLogo from '../assets/polymart.png';
 
 .character-image {
 	max-width: 100%;
-	max-height: 600px;
+	max-height: clamp(280px, 40vw, 550px);
 	width: auto;
 	height: auto;
 	object-fit: contain;
@@ -437,66 +510,187 @@ import polymartLogo from '../assets/polymart.png';
 	z-index: 2;
 }
 
-/* ===== Acrylic Panel (Glassmorphism) - Large like PolarCub ===== */
+/* ===== Wavy Grid Patterns ===== */
+.wave-grid {
+	position: absolute;
+	pointer-events: none;
+}
+
+/* Wave Grid 1: キャラクター後ろ右側 */
+.wave-grid-1 {
+	width: 24%;
+	height: 55%;
+	bottom: 10%;
+	right: 22%;
+	animation: gridFloat 12s ease-in-out infinite;
+	z-index: 0;
+}
+
+/* Wave Grid 2: 左上 テキスト横 */
+.wave-grid-2 {
+	width: 14%;
+	height: 28%;
+	top: 15%;
+	left: 2%;
+	animation: gridFloat 14s ease-in-out infinite reverse;
+	z-index: 0;
+}
+
+@keyframes gridFloat {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(10px); }
+}
+
+/* ===== Bold S-curve Waves (PolarCub exact positioning) ===== */
+.s-curve {
+	position: absolute;
+	pointer-events: none;
+}
+
+/* S-curve 1: 右上から降りてくる (PolarCub: top:-643px, right:-152px) */
+.s-curve-1 {
+	width: 55%;
+	height: 230%;
+	top: -90%;
+	right: -10%;
+	transform: scaleX(-1);
+	animation: sCurveFloat1 12s ease-in-out infinite;
+}
+
+/* S-curve 2: さらに右から降りてくる (PolarCub: top:-687px, right:-389px) */
+.s-curve-2 {
+	width: 55%;
+	height: 230%;
+	top: -100%;
+	right: -28%;
+	transform: scaleX(-1);
+	animation: sCurveFloat2 10s ease-in-out infinite;
+}
+
+/* S-curve 3: 左側 - 下から上へ、パネルの後ろを通る (PolarCub参照) */
+.s-curve-3 {
+	width: 50%;
+	height: 130%;
+	bottom: -60%;
+	left: -30%;
+	transform: rotate(-60deg);
+	animation: sCurveFloat3 14s ease-in-out infinite;
+	z-index: 0; /* アクリル板の後ろ */
+}
+
+/* ===== Rotating Star Sprites (PolarCub exact positions) ===== */
+.rotating-star {
+	position: absolute;
+	pointer-events: none;
+}
+
+/* 紫大星: 右上 - ナビ下、パネルの上 (PolarCub: top:89px, right:405px, 301x301) */
+.star-purple-large {
+	width: 20%;
+	height: auto;
+	aspect-ratio: 1;
+	top: 12%;
+	right: 28%;
+	animation: spinStar 25s linear infinite;
+	z-index: 5;
+}
+
+/* 紫中星: コンテンツ中央上 (PolarCub: top:301px, right:637px, 57x57) */
+.star-purple-medium {
+	width: 4%;
+	height: auto;
+	aspect-ratio: 1;
+	top: 42%;
+	right: 45%;
+	animation: spinStar 20s linear infinite reverse;
+}
+
+/* ピンク小星: 右下 - ボタン横 (PolarCub参照) */
+.star-pink-small {
+	width: 4%;
+	height: auto;
+	aspect-ratio: 1;
+	bottom: 5%;
+	right: 5%;
+	animation: spinStar 15s linear infinite;
+	z-index: 5;
+}
+
+/* 紫星: ボタン下中央 (PolarCub参照: 紫星がボタン下に配置) */
+.star-pink-large {
+	width: 11%;
+	height: auto;
+	aspect-ratio: 1;
+	bottom: 5%;
+	left: 42%;
+	animation: spinStar 22s linear infinite reverse;
+	z-index: 3;
+}
+
+@keyframes spinStar {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* ===== Acrylic Panels (PolarCub exact positions) ===== */
 .acrylic-panel {
 	position: absolute;
-	width: 520px;
-	height: 620px;
 	background: linear-gradient(160deg,
-		rgba(170, 165, 210, 0.5) 0%,
-		rgba(155, 150, 200, 0.4) 40%,
-		rgba(140, 155, 210, 0.45) 100%);
-	backdrop-filter: blur(8px);
-	-webkit-backdrop-filter: blur(8px);
-	border-radius: 50px;
-	border: 2px solid rgba(255, 255, 255, 0.3);
+		rgba(180, 175, 220, 0.4) 0%,
+		rgba(160, 155, 210, 0.3) 40%,
+		rgba(150, 165, 220, 0.35) 100%);
+	backdrop-filter: blur(24px);
+	-webkit-backdrop-filter: blur(24px);
+	border-radius: 40px;
+	border: 2px solid rgba(255, 255, 255, 0.35);
 	box-shadow:
-		0 15px 60px rgba(100, 80, 160, 0.2),
-		inset 0 2px 0 rgba(255, 255, 255, 0.4);
-	z-index: 1;
-	transform: rotate(6deg);
-	top: 50%;
-	left: 50%;
-	margin-top: -310px;
-	margin-left: -260px;
+		0 20px 80px rgba(100, 80, 160, 0.15),
+		inset 0 2px 0 rgba(255, 255, 255, 0.5);
 	pointer-events: none;
 }
 
-/* ===== Decorative Stars around Panel ===== */
-.panel-star {
-	position: absolute;
-	z-index: 3;
-	pointer-events: none;
-	animation: panelStarPulse 4s ease-in-out infinite;
+/* メインパネル: キャラクター後ろ - 正方形 (PolarCub参照) */
+.acrylic-main {
+	width: 65%;
+	aspect-ratio: 1; /* 正方形 */
+	top: 10%;
+	right: -25%;
+	transform: rotate(4deg);
+	z-index: 2; /* S-curveより前 */
 }
 
-.panel-star-top {
-	top: 8%;
-	right: 5%;
-	color: #ff6090;
-	font-size: 2.8rem;
-}
-
-.panel-star-bottom {
-	bottom: 25%;
+/* サブパネル: 左下 - S-curveの前に配置 (PolarCub参照) */
+.acrylic-sub {
+	width: 38%;
+	height: 40%;
+	bottom: -5%;
 	left: -5%;
-	color: #8090f8;
-	font-size: 2rem;
-	animation-delay: -2s;
-}
-
-@keyframes panelStarPulse {
-	0%, 100% { opacity: 0.7; transform: scale(1) rotate(0deg); }
-	50% { opacity: 1; transform: scale(1.15) rotate(10deg); }
+	transform: rotate(-2deg);
+	z-index: 2; /* S-curveより前 */
 }
 
 /* ===== Social Bar ===== */
 .social-bar {
 	display: flex;
 	justify-content: center;
-	gap: 14px;
+	align-items: center;
+	gap: 12px;
 	margin-top: 60px;
 	animation: fadeUp 0.8s ease-out 0.3s backwards;
+	position: relative;
+	z-index: 5; /* コンテンツと一緒のレイヤーで装飾要素より上 */
+}
+
+.social-group {
+	display: flex;
+	gap: 10px;
+}
+
+.social-divider {
+	width: 1px;
+	height: 28px;
+	background: rgba(90, 90, 106, 0.25);
+	margin: 0 6px;
 }
 
 @keyframes fadeUp {
@@ -513,13 +707,14 @@ import polymartLogo from '../assets/polymart.png';
 	border-radius: 50%;
 	background: rgba(255, 255, 255, 0.85);
 	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 	color: #5a5a6a;
+	animation: snsPopOut 0.45s ease forwards;
 }
 
 .social-link:hover {
-	transform: translateY(-4px) scale(1.1);
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+	animation: snsPopIn 0.4s ease forwards;
 }
 
 .social-link svg,
@@ -527,14 +722,29 @@ import polymartLogo from '../assets/polymart.png';
 	width: 20px;
 	height: 20px;
 	flex-shrink: 0;
+	filter: grayscale(100%) brightness(0.6) contrast(1.2);
+	opacity: 0.85;
+	transition: filter 0.2s ease, opacity 0.2s ease;
 }
 
+.social-link:hover svg,
+.social-link:hover img {
+	filter: grayscale(0%) brightness(1) contrast(1);
+	opacity: 1;
+}
+
+.social-link.github:hover { background: #24292e; color: #fff; }
 .social-link.modrinth:hover { background: #1bd96a; color: #fff; }
 .social-link.curseforge:hover { background: #f16436; color: #fff; }
+.social-link.polymart:hover { background: #00b894; color: #fff; }
 .social-link.youtube:hover { background: #ff0000; color: #fff; }
 .social-link.x:hover { background: #000; color: #fff; }
+.social-link.valorant:hover { background: #fd4556; color: #fff; }
+.social-link.lol:hover { background: #0a1428; color: #fff; }
+.social-link.steam:hover { background: #171a21; color: #fff; }
 
 /* ===== Responsive ===== */
+/* パーセントベースなので基本的に自動スケール。微調整のみ */
 @media (max-width: 1000px) {
 	.hero-section {
 		padding: 100px 30px 50px;
@@ -549,68 +759,23 @@ import polymartLogo from '../assets/polymart.png';
 	.hero-text { order: 2; }
 	.hero-visual { order: 1; }
 
-	.title-line-1 { font-size: 2.8rem; }
-	.title-line-2 { font-size: 3.5rem; }
-
 	.hero-buttons { justify-content: center; }
-
-	.character-image {
-		max-height: 400px;
-	}
-
-	/* Adjust blobs - still prominent on tablet */
-	.blob-top-right { width: 450px; height: 500px; top: -150px; right: -150px; }
-	.blob-bottom-left { width: 320px; height: 280px; bottom: -100px; left: -100px; }
-	.blob-mid-right { width: 380px; height: 420px; top: 10%; right: -10%; }
-
-	.spinning-star { font-size: 2rem; top: 10%; left: 8%; }
-	.drop-shape { display: none; }
-
-	/* Adjust acrylic panel */
-	.acrylic-panel {
-		width: 360px;
-		height: 450px;
-		margin-top: -225px;
-		margin-left: -180px;
-		border-radius: 40px;
-	}
-
-	.panel-star-top { font-size: 2.2rem; }
-	.panel-star-bottom { font-size: 1.6rem; }
 }
 
 @media (max-width: 600px) {
 	.hero-section { padding: 90px 20px 40px; }
-	.title-line-1 { font-size: 2.2rem; }
-	.title-line-2 { font-size: 2.8rem; }
 	.bio { font-size: 1rem; }
-	.character-image { max-height: 320px; }
 
-	.social-bar { flex-wrap: wrap; gap: 10px; }
-	.social-link { width: 42px; height: 42px; }
+	.social-bar { flex-wrap: wrap; gap: 8px; }
+	.social-group { flex-wrap: wrap; justify-content: center; gap: 8px; }
+	.social-divider { display: none; }
+	.social-link { width: 40px; height: 40px; }
 	.social-link svg, .social-link img { width: 18px; height: 18px; }
 
 	.hero-buttons { flex-direction: column; align-items: center; }
 	.btn { width: 100%; max-width: 240px; justify-content: center; }
 
-	/* Adjust blobs for mobile */
-	.blob-top-right { width: 300px; height: 350px; top: -120px; right: -120px; }
-	.blob-bottom-left { width: 220px; height: 200px; bottom: -80px; left: -80px; }
-	.blob-mid-right { display: none; }
-
-	/* Hide small decorations on mobile */
-	.wave-line, .brush-stroke, .small-star { display: none; }
-	.spinning-star { font-size: 1.5rem; }
-
-	/* Smaller acrylic panel on mobile */
-	.acrylic-panel {
-		width: 280px;
-		height: 360px;
-		margin-top: -180px;
-		margin-left: -140px;
-		border-radius: 35px;
-	}
-
-	.panel-star { display: none; }
+	/* Hide decorative elements on mobile */
+	.hero-decorations { display: none; }
 }
 </style>

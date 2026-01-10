@@ -135,13 +135,14 @@
 	font-weight: 500;
 	cursor: pointer;
 	box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
-	transition: all 0.3s ease;
+	transition: box-shadow 0.2s ease;
 	backdrop-filter: blur(10px);
+	animation: jellyOutDown 0.4s ease forwards;
 }
 
 .lang-toggle:hover {
-	transform: translateY(-2px);
 	box-shadow: 0 6px 25px rgba(124, 58, 237, 0.5);
+	animation: jellyInUp 0.35s ease forwards;
 }
 
 .lang-icon {
@@ -192,13 +193,15 @@
 	color: rgba(255, 255, 255, 0.8);
 	font-size: 0.9rem;
 	cursor: pointer;
-	transition: all 0.2s ease;
+	transition: background 0.2s ease, color 0.2s ease;
 	text-align: left;
+	animation: jellyOut 0.4s ease forwards;
 }
 
 .lang-option:hover {
 	background: rgba(124, 58, 237, 0.2);
 	color: #fff;
+	animation: jellyIn 0.35s ease forwards;
 }
 
 .lang-option.active {

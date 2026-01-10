@@ -12,7 +12,7 @@ export default defineConfig({
 	}),
 	markdown: {
 		shikiConfig: {
-			theme: 'one-dark-pro',
+			theme: 'github-light',
 			wrap: true,
 		},
 	},

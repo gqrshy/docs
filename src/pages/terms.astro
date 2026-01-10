@@ -482,6 +482,9 @@ import Footer from '../components/Footer.astro';
 		</main>
 	</div>
 
+	<!-- Gradient transition to footer -->
+	<div class="footer-transition"></div>
+
 	<!-- Footer -->
 	<Footer />
 
@@ -1221,6 +1224,12 @@ import Footer from '../components/Footer.astro';
 		.back-to-top:hover {
 			transform: translateY(-3px);
 			box-shadow: 0 6px 20px rgba(124, 108, 154, 0.5);
+		}
+
+		/* Footer transition */
+		.footer-transition {
+			height: 80px;
+			background: linear-gradient(180deg, #e0e8ff 0%, #dce0f8 100%);
 		}
 
 		/* Responsive */

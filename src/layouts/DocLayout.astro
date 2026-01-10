@@ -253,16 +253,16 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 	<style is:global>
 		/* ===== CSS Custom Properties - Pastel Theme ===== */
 		:root {
-			--color-primary: #7c6c9a;
-			--color-primary-light: #9a8ab0;
-			--color-primary-lighter: #b0a0c8;
+			--color-primary: #6b5a8a;
+			--color-primary-light: #8a7aa8;
+			--color-primary-lighter: #a090b8;
 			--color-bg: #edecff;
 			--color-bg-alt: #e8e4ff;
-			--color-bg-card: rgba(255, 255, 255, 0.7);
-			--color-text: #454141;
-			--color-text-muted: #6b5b7a;
-			--color-border: rgba(124, 108, 154, 0.2);
-			--color-accent-pink: #ff4080;
+			--color-bg-card: rgba(255, 255, 255, 0.75);
+			--color-text: #3a3636;
+			--color-text-muted: #5a4a6a;
+			--color-border: rgba(107, 90, 138, 0.2);
+			--color-accent-pink: #e83a70;
 			--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 			--ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
 			--ease-spring: cubic-bezier(0.87, 0.05, 0.02, 0.97);
@@ -291,6 +291,33 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			color: var(--color-text);
 			line-height: 1.7;
 			overflow-x: hidden;
+		}
+
+		/* ===== Prevent image selection/caret ===== */
+		img:not(.prose img) {
+			user-select: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			-webkit-user-drag: none;
+			-webkit-touch-callout: none;
+			pointer-events: none;
+		}
+
+		svg {
+			user-select: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			-webkit-user-drag: none;
+		}
+
+		a img, button img, a svg, button svg {
+			pointer-events: auto;
+		}
+
+		img::selection, svg::selection {
+			background: transparent;
 		}
 
 		/* ===== View Transitions ===== */
@@ -546,8 +573,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		/* ===== Code with enhanced styling ===== */
 		.prose code {
 			font-family: 'JetBrains Mono', monospace;
-			background: rgba(124, 108, 154, 0.15);
-			color: var(--color-primary);
+			background: rgba(107, 90, 138, 0.12);
+			color: #5a4878;
 			padding: 0.2rem 0.4rem;
 			border-radius: 4px;
 			font-size: 0.9em;
@@ -555,12 +582,12 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose code:hover {
-			background: rgba(124, 108, 154, 0.25);
+			background: rgba(107, 90, 138, 0.2);
 		}
 
 		.prose pre {
-			background: rgba(255, 255, 255, 0.8);
-			border: 1px solid var(--color-border);
+			background: #fafbfc;
+			border: 1px solid rgba(107, 90, 138, 0.15);
 			border-radius: 0.75rem;
 			padding: 1.25rem;
 			overflow-x: auto;
@@ -570,17 +597,17 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose pre:hover {
-			border-color: rgba(124, 108, 154, 0.4);
-			box-shadow: 0 8px 30px rgba(124, 108, 154, 0.15);
+			border-color: rgba(107, 90, 138, 0.35);
+			box-shadow: 0 8px 30px rgba(107, 90, 138, 0.12);
 			transform: translateY(-2px);
 		}
 
+		/* Let Shiki syntax highlighting colors show through */
 		.prose pre code {
 			background: transparent;
 			padding: 0;
-			color: var(--color-text);
 			font-size: 0.875rem;
-			line-height: 1.6;
+			line-height: 1.7;
 		}
 
 		.prose pre code:hover {
@@ -591,7 +618,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			position: absolute;
 			top: 0.75rem;
 			right: 0.75rem;
-			background: rgba(124, 108, 154, 0.2);
+			background: rgba(107, 90, 138, 0.15);
 			border: none;
 			border-radius: 6px;
 			padding: 0.5rem;
@@ -604,7 +631,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.copy-btn:hover {
-			background: rgba(124, 108, 154, 0.35);
+			background: rgba(107, 90, 138, 0.28);
 			color: var(--color-text);
 			transform: scale(1.1);
 		}
@@ -632,12 +659,12 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose table:hover {
-			box-shadow: 0 8px 30px rgba(124, 108, 154, 0.1);
+			box-shadow: 0 8px 30px rgba(107, 90, 138, 0.1);
 		}
 
 		.prose th {
-			background: rgba(124, 108, 154, 0.15);
-			color: var(--color-primary);
+			background: rgba(107, 90, 138, 0.12);
+			color: var(--color-text);
 			font-weight: 600;
 			text-align: left;
 			padding: 0.875rem 1rem;
@@ -655,7 +682,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose tbody tr:hover {
-			background: rgba(124, 108, 154, 0.08);
+			background: rgba(107, 90, 138, 0.08);
 		}
 
 		.prose tbody tr:hover td {
@@ -665,13 +692,14 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		/* ===== Blockquotes ===== */
 		.prose blockquote {
 			border-left: 4px solid var(--color-primary);
-			background: rgba(124, 108, 154, 0.1);
+			background: rgba(107, 90, 138, 0.08);
 			padding: 1rem 1.5rem;
 			margin: 1.5rem 0;
 			border-radius: 0 0.5rem 0.5rem 0;
 		}
 
 		.prose blockquote p {
+			color: var(--color-text);
 			margin-bottom: 0;
 		}
 
@@ -687,8 +715,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose details:hover {
-			border-color: rgba(124, 108, 154, 0.4);
-			box-shadow: 0 4px 20px rgba(124, 108, 154, 0.1);
+			border-color: rgba(107, 90, 138, 0.4);
+			box-shadow: 0 4px 20px rgba(107, 90, 138, 0.1);
 		}
 
 		.prose details[open] {
@@ -726,7 +754,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose details summary:hover {
-			background: rgba(124, 108, 154, 0.1);
+			background: rgba(107, 90, 138, 0.1);
 		}
 
 		.prose details summary:hover::before {
@@ -840,12 +868,14 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			font-size: 0.875rem;
 			border-radius: 0.5rem;
 			position: relative;
-			line-height: 1.6;
+			line-height: 1.7;
+			background: #fafbfc;
 		}
 
 		.prose details pre code {
 			font-size: 0.875rem;
 			letter-spacing: 0;
+			line-height: 1.7;
 		}
 
 		/* Copy button fix inside details */
@@ -854,7 +884,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			top: 0.625rem;
 			right: 0.625rem;
 			padding: 0.375rem;
-			background: rgba(124, 108, 154, 0.25);
+			background: rgba(107, 90, 138, 0.18);
 			border-radius: 4px;
 		}
 
@@ -898,7 +928,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		/* Strong text styling inside details */
 		.prose details strong {
-			color: var(--color-primary);
+			color: var(--color-text);
+			font-weight: 600;
 		}
 
 		/* Paragraphs inside details */
@@ -924,23 +955,23 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.callout-note {
-			background: rgba(124, 108, 154, 0.1);
+			background: rgba(107, 90, 138, 0.1);
 			border-color: var(--color-primary);
 		}
 
 		.callout-tip {
-			background: rgba(34, 197, 94, 0.1);
-			border-color: #22c55e;
+			background: rgba(22, 163, 74, 0.1);
+			border-color: #16a34a;
 		}
 
 		.callout-warning {
-			background: rgba(234, 179, 8, 0.1);
-			border-color: #eab308;
+			background: rgba(202, 138, 4, 0.1);
+			border-color: #ca8a04;
 		}
 
 		.callout-danger {
-			background: rgba(239, 68, 68, 0.1);
-			border-color: #ef4444;
+			background: rgba(220, 38, 38, 0.1);
+			border-color: #dc2626;
 		}
 
 		/* ===== Images ===== */
@@ -965,7 +996,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		.prose img:hover {
 			transform: scale(1.02);
-			box-shadow: 0 20px 40px rgba(124, 108, 154, 0.2);
+			box-shadow: 0 20px 40px rgba(107, 90, 138, 0.2);
 		}
 
 		.prose img:focus,
@@ -1066,7 +1097,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.prose hr {
 			border: none;
 			height: 1px;
-			background: linear-gradient(90deg, transparent, rgba(124, 108, 154, 0.4), transparent);
+			background: linear-gradient(90deg, transparent, rgba(107, 90, 138, 0.4), transparent);
 			margin: 3rem 0;
 		}
 
@@ -1145,18 +1176,18 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		::-webkit-scrollbar-thumb {
-			background: rgba(124, 108, 154, 0.3);
+			background: rgba(107, 90, 138, 0.3);
 			border-radius: 4px;
 			transition: background 0.2s ease;
 		}
 
 		::-webkit-scrollbar-thumb:hover {
-			background: rgba(124, 108, 154, 0.5);
+			background: rgba(107, 90, 138, 0.5);
 		}
 
 		/* ===== Selection Color ===== */
 		::selection {
-			background: rgba(124, 108, 154, 0.3);
+			background: rgba(107, 90, 138, 0.3);
 			color: var(--color-text);
 		}
 
