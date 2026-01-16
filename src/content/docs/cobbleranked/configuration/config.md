@@ -7,21 +7,24 @@ Fine-tune every aspect of your competitive battles. From ELO calculations to mat
 
 ## Configuration Files
 
-CobbleRanked v2 uses multiple YAML files in `config/cobbleranked/`:
+CobbleRanked v2.0.13+ uses multiple YAML files in `config/cobbleranked/`:
 
 | File | Purpose |
 |------|---------|
 | `config.yaml` | Core settings: language, database, music, debug |
 | `elo.yaml` | Rating system and rank tiers |
-| `battle.yaml` | Formats, timers, sounds, rewards |
-| `matchmaking.yaml` | Queue matching rules |
+| `battle.yaml` | Timers, sounds, flee penalties, victory/defeat rewards |
+| `matchmaking.yaml` | Recent opponent avoidance (global) |
 | `season.yaml` | Season schedule and reset behavior |
+| `season_presets/*.yml` | **Format rules** (team size, level cap, matchmaking, blacklist) |
 | `rewards.yaml` | Season rewards and milestones |
 | `restrictions.yaml` | Player action restrictions |
 | `arenas.yaml` | Battle arena positions |
 | `luckperms.yaml` | LuckPerms integration |
-| `missions.yaml` | Daily/weekly missions |
+| `missions.yaml` | Daily/weekly missions (disabled by default) |
 | `camera/camera.yaml` | Battle camera system settings |
+
+> **Important**: As of v2.0.13, format-specific settings (team size, level cap, matchmaking rules, blacklists) are configured in **season_presets** instead of battle.yaml or matchmaking.yaml. This keeps all format settings in one place.
 
 ---
 
@@ -217,49 +220,13 @@ rankTiers:
 
 ## Matchmaking Settings
 
-Control how players are matched in `matchmaking.yaml`.
+Matchmaking is split into two locations:
+- **Global settings** (`matchmaking.yaml`) - Recent opponent avoidance
+- **Per-format settings** (`season_presets/*.yml`) - ELO range rules per format
 
-```yaml
-# matchmaking.yaml
-formatRules:
-  SINGLES:
-    enforceEloRange: true
-    initialRange: 200
-    expansionDelaySeconds: 30
-    expansionRate: 50
-    maxMultiplier: 3.0
-    immediateMatchRange: 100
-```
+### Recent Opponent Avoidance (Global)
 
-<details>
-<summary><strong>Matchmaking Settings Explained</strong></summary>
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `enforceEloRange` | `true` | Require similar ratings to match |
-| `initialRange` | `200` | Starting ELO range for matching |
-| `expansionDelaySeconds` | `30` | Seconds before range expands |
-| `expansionRate` | `50` | ELO points added per expansion |
-| `maxMultiplier` | `3.0` | Max range = initialRange × multiplier |
-| `immediateMatchRange` | `100` | Instant match if within this range |
-
-**How range expansion works:**
-
-1. Player (1500 ELO) joins queue
-2. System looks for opponents in 1500 ± 200 (1300-1700)
-3. After 30 seconds: expands to 1500 ± 250
-4. After 60 seconds: expands to 1500 ± 300
-5. Max range: 1500 ± 600 (200 × 3.0)
-
-**Immediate match:**
-- If two players are within 100 ELO, they match instantly
-- No waiting for better matches
-
-</details>
-
-### Recent Opponent Avoidance
-
-Prevent the same players from battling repeatedly:
+Prevent the same players from battling repeatedly. This applies to all formats:
 
 ```yaml
 # matchmaking.yaml
@@ -278,40 +245,55 @@ recentOpponentAvoidance:
 | `relaxAfterSeconds` | `120` | Seconds before rules relax (longer queue) |
 | `minimumQueueSize` | `4` | Don't avoid if queue has fewer players |
 
+### Per-Format Matchmaking (Season Presets)
+
+ELO range settings are configured per-format in season presets:
+
+```yaml
+# season_presets/default.yml
+singles:
+  matchmaking:
+    enforceEloRange: true
+    initialRange: 200
+    expansionDelay: 30
+    expansionRate: 50
+    maxMultiplier: 3.0
+    immediateMatchRange: 100
+```
+
+<details>
+<summary><strong>Matchmaking Settings Explained</strong></summary>
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `enforceEloRange` | `true` | Require similar ratings to match |
+| `initialRange` | `200` | Starting ELO range for matching |
+| `expansionDelay` | `30` | Seconds before range expands |
+| `expansionRate` | `50` | ELO points added per expansion |
+| `maxMultiplier` | `3.0` | Max range = initialRange × multiplier |
+| `immediateMatchRange` | `100` | Instant match if within this range |
+
+**How range expansion works:**
+
+1. Player (1500 ELO) joins queue
+2. System looks for opponents in 1500 ± 200 (1300-1700)
+3. After 30 seconds: expands to 1500 ± 250
+4. After 60 seconds: expands to 1500 ± 300
+5. Max range: 1500 ± 600 (200 × 3.0)
+
+**Immediate match:**
+- If two players are within 100 ELO, they match instantly
+- No waiting for better matches
+
+</details>
+
 ---
 
 ## Battle Settings
 
-Configure battle behavior in `battle.yaml`.
+Configure battle behavior in `battle.yaml`. Note that **format-specific settings** (team size, level cap, turn timer) are now in **season_presets**.
 
-### Formats
-
-```yaml
-# battle.yaml
-enabledFormats:
-  - "SINGLES"
-  - "DOUBLES"
-
-formats:
-  SINGLES:
-    teamSize: 3
-    selectCount: 3
-    matchDurationMinutes: 15
-    turnTimeoutSeconds: 90
-    levelCap: 100
-    allowShiny: true
-```
-
-| Setting | Description |
-|---------|-------------|
-| `teamSize` | Pokemon to bring to team preview |
-| `selectCount` | Pokemon to actually use in battle |
-| `matchDurationMinutes` | Total match time limit |
-| `turnTimeoutSeconds` | Time limit per turn |
-| `levelCap` | Pokemon scaled to this level |
-| `allowShiny` | Allow shiny Pokemon in battle |
-
-### Timers
+### Timers (Global)
 
 ```yaml
 # battle.yaml
@@ -320,12 +302,40 @@ timers:
   leadSelectionSeconds: 30
   matchReadySeconds: 17
   countdownSeconds: 5
-  battleMinutes: 15
   battleTimeWarningSeconds:
     - 300
     - 60
     - 30
 ```
+
+> **Note**: `matchDuration` (total match time) is now configured per-format in season_presets.
+
+### Format Settings (Season Presets)
+
+Format-specific settings are configured in season presets:
+
+```yaml
+# season_presets/default.yml
+singles:
+  enabled: true
+  teamSize: 3
+  selectCount: 3
+  levelCap: 100
+  turnTimer: 90           # seconds per turn
+  matchDuration: 15       # minutes total
+  megaEvolution: true
+  zMoves: true
+  dynamax: false
+  terastallize: false
+```
+
+| Setting | Description |
+|---------|-------------|
+| `teamSize` | Pokemon to bring to team preview |
+| `selectCount` | Pokemon to actually use in battle |
+| `levelCap` | Pokemon scaled to this level |
+| `turnTimer` | Time limit per turn (seconds) |
+| `matchDuration` | Total match time limit (minutes) |
 
 ### Victory/Defeat Rewards
 

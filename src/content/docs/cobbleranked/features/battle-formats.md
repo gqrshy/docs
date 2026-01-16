@@ -50,49 +50,82 @@ Player: Steve
 
 ## Format Configuration
 
+As of v2.0.13, all format settings are configured in **season presets** (`config/cobbleranked/season_presets/*.yml`).
+
 ### Enable/Disable Formats
 
-Control which formats appear in the GUI:
+Control which formats are available by setting `enabled` in each format section:
 
 ```yaml
-# battle.yaml
-enabledFormats:
-  - SINGLES
-  - DOUBLES
-  - TRIPLES    # Remove to disable
+# season_presets/default.yml
+singles:
+  enabled: true
+doubles:
+  enabled: true
+triples:
+  enabled: false    # Disabled
 ```
 
 ### Season Presets
 
-Run a VGC-only season? A Singles tournament? Season presets let you dynamically enable formats:
+Run a VGC-only season? A Singles tournament? Each preset has complete format configuration:
 
 ```yaml
 # season_presets/vgc.yml
-formats:
-  SINGLES:
-    enabled: false
-  DOUBLES:
-    enabled: true
-    teamSize: 6
-    selectCount: 4
-  TRIPLES:
-    enabled: false
+name: "VGC Rules"
+
+singles:
+  enabled: false
+
+doubles:
+  enabled: true
+  teamSize: 6
+  selectCount: 4
+  levelCap: 50
+  turnTimer: 45
+  matchDuration: 20
+  megaEvolution: false
+  zMoves: false
+  dynamax: false
+  terastallize: true
+
+triples:
+  enabled: false
 ```
 
-### Per-Format Rules
+### Per-Format Settings
 
-Different bans for different formats:
+Each format has its own complete configuration:
 
 ```yaml
-formats:
-  SINGLES:
-    blacklist:
-      moves: ["baton_pass"]
-  DOUBLES:
-    blacklist:
-      moves: ["dark_void"]
-  TRIPLES:
-    turnTimeoutSeconds: 150  # More time for complex decisions
+# season_presets/default.yml
+singles:
+  enabled: true
+  teamSize: 3
+  selectCount: 3
+  levelCap: 100
+  turnTimer: 90
+  matchDuration: 15
+  megaEvolution: true
+  zMoves: true
+  matchmaking:
+    initialRange: 200
+    expansionDelay: 30
+  blacklist:
+    moves:
+      - "baton_pass"
+
+doubles:
+  enabled: true
+  teamSize: 4
+  selectCount: 4
+  levelCap: 50
+  turnTimer: 120
+  matchDuration: 20
+  terastallize: true
+  blacklist:
+    moves:
+      - "dark_void"
 ```
 
 ## Multi-Format Rewards

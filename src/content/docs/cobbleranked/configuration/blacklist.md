@@ -9,26 +9,32 @@ File: `config/cobbleranked/season_presets/<preset_name>.yml`
 
 ## Structure Overview
 
-Blacklists are configured per-format within the `formats` section of a season preset:
+As of v2.0.13, season presets use a **flattened structure**. Blacklists are configured per-format directly under the format name:
 
 ```yaml
+# season_presets/default.yml
 name: "Default Rules"
-levelCap: 50
 
-formats:
-  SINGLES:
-    enabled: true
-    teamSize: 3
-    selectCount: 3
-    blacklist:
-      pokemon: []
-      moves: []
-      abilities: []
-      items: []
-      labels: ["restricted", "mythical"]
-      labelLimits:
-        legendary: 1
-      # ... more options
+singles:
+  enabled: true
+  teamSize: 3
+  selectCount: 3
+  levelCap: 100
+  blacklist:
+    pokemon: []
+    moves: []
+    abilities: []
+    items: []
+    labels:
+      - "restricted"
+      - "mythical"
+    labelLimits:
+      legendary: 1
+
+doubles:
+  enabled: true
+  teamSize: 4
+  # ... format settings and blacklist
 ```
 
 ## Blacklist Options
@@ -301,88 +307,337 @@ bannedInventoryItems:
 
 ## Complete Example
 
-A VGC-style preset with custom blacklist:
+A VGC-style preset with custom blacklist (flattened structure):
 
 ```yaml
+# season_presets/vgc.yml
 name: "VGC Rules"
-levelCap: 50
 
-clauses:
-  speciesClause: true
-  maxDuplicateItems: 1
-  sleepClause: true
-  ohkoClause: true
-  evasionClause: true
-  endlessBattleClause: true
+singles:
+  enabled: false
 
-mechanics:
+doubles:
+  enabled: true
+  teamSize: 6
+  selectCount: 4
+  levelCap: 50
+  turnTimer: 45
+  matchDuration: 20
+
+  # Mechanics (flattened)
   megaEvolution: false
   zMoves: false
   dynamax: false
   terastallize: true
 
-formats:
-  DOUBLES:
-    enabled: true
-    teamSize: 6
-    selectCount: 4
-    turnTimeoutSeconds: 45
-    blacklist:
-      pokemon: []
-      moves:
-        - "baton_pass"
-      abilities:
-        - "moody"
-        - "shadow_tag"
-      items: []
-      labels:
-        - "restricted"
-        - "mythical"
-      labelLimits:
-        legendary: 2
-      maxDuplicateItems: 1
-```
-
-## Smogon OU Example
-
-A Smogon OU-style preset with no label limits:
-
-```yaml
-name: "Smogon OU"
-levelCap: 100
-
-clauses:
+  # Clauses (flattened)
   speciesClause: true
-  maxDuplicateItems: 1
+  itemClause: 1
   sleepClause: true
   ohkoClause: true
   evasionClause: true
   endlessBattleClause: true
 
-formats:
-  SINGLES:
-    enabled: true
-    teamSize: 6
-    selectCount: 6
-    turnTimeoutSeconds: 150
-    blacklist:
-      pokemon:
-        - "Koraidon"
-        - "Miraidon"
-        - "Mewtwo"
-        - "Ho-Oh"
-        - "Lugia"
-        # ... add Ubers here
-      moves:
-        - "baton_pass"
-      abilities:
-        - "moody"
-        - "shadow_tag"
-        - "arena_trap"
-      items: []
-      labels: []           # No label bans
-      labelLimits: {}      # No label limits - allows unlimited legendaries
-      maxDuplicateItems: 1
+  # Blacklist
+  blacklist:
+    pokemon: []
+    moves:
+      - "baton_pass"
+    abilities:
+      - "moody"
+      - "shadow_tag"
+    items: []
+    labels:
+      - "restricted"
+      - "mythical"
+    labelLimits:
+      legendary: 2
+
+triples:
+  enabled: false
+```
+
+## Smogon OU Example
+
+> **Auto-generated preset**: A `smogon.yml` preset is automatically created with the complete Gen 9 OU banlist. To use it, set `preset: "smogon"` in your season.yaml.
+
+The Smogon OU preset includes:
+- **Standard clauses**: Species, Item, Sleep, OHKO, Evasion, Endless Battle
+- **No label limits**: Legendaries are controlled via individual bans, not labels
+- **Full Gen 9 OU banlist**: All Pokemon currently in Ubers tier
+
+<details>
+<summary>Smogon OU Banned Pokemon (Ubers)</summary>
+
+```yaml
+pokemon:
+  # Box Legendaries
+  - "Koraidon"
+  - "Miraidon"
+  # Gen 9 OU bans
+  - "Flutter-Mane"
+  - "Houndstone"
+  - "Palafin"
+  - "Iron-Bundle"
+  - "Annihilape"
+  - "Chi-Yu"
+  - "Espathra"
+  - "Chien-Pao"
+  - "Regieleki"
+  - "Magearna"
+  - "Zamazenta"
+  - "Urshifu-Rapid-Strike"
+  - "Volcarona"
+  - "Baxcalibur"
+  - "Ogerpon-Hearthflame"
+  - "Ursaluna-Bloodmoon"
+  - "Roaring-Moon"
+  - "Gliscor"
+  - "Sneasler"
+  - "Terapagos"
+  - "Archaludon"
+  - "Gouging-Fire"
+  - "Kyurem"
+  # Standard Ubers
+  - "Mewtwo"
+  - "Ho-Oh"
+  - "Lugia"
+  - "Kyogre"
+  - "Groudon"
+  - "Rayquaza"
+  # ... (full list in smogon.yml)
+```
+
+</details>
+
+<details>
+<summary>Smogon OU Banned Moves</summary>
+
+```yaml
+moves:
+  # OHKO moves
+  - "sheer_cold"
+  - "fissure"
+  - "guillotine"
+  - "horn_drill"
+  # Evasion moves
+  - "double_team"
+  - "minimize"
+  # Baton Pass
+  - "baton_pass"
+  # Sleep moves (SV OU Sleep Clause Mod)
+  - "dark_void"
+  - "grass_whistle"
+  - "hypnosis"
+  - "lovely_kiss"
+  - "relic_song"
+  - "sing"
+  - "sleep_powder"
+  - "spore"
+  - "yawn"
+```
+
+</details>
+
+```yaml
+# season_presets/smogon.yml (auto-generated)
+name: "Smogon OU"
+
+singles:
+  enabled: true
+  teamSize: 6
+  selectCount: 6
+  levelCap: 100
+  turnTimer: 150
+  matchDuration: 30
+  terastallize: true
+
+  speciesClause: true
+  itemClause: 1
+  sleepClause: true
+  ohkoClause: true
+  evasionClause: true
+  endlessBattleClause: true
+
+  blacklist:
+    pokemon: [...]        # Full Ubers list
+    moves: [...]          # OHKO, evasion, sleep moves
+    abilities:
+      - "moody"
+      - "shadow_tag"
+      - "arena_trap"
+    items: []
+    labels: []            # No label bans
+    labelLimits: {}       # No label limits
+
+doubles:
+  enabled: false
+
+triples:
+  enabled: false
+```
+
+## VGC + Smogon Combined Preset
+
+> **Auto-generated preset**: A `vgc_smogon.yml` preset combines both competitive formats. Use `preset: "vgc_smogon"` in season.yaml.
+
+Best of both worlds:
+- **Singles**: Smogon OU rules (6v6, level 100, full OU banlist)
+- **Doubles**: VGC rules (bring 6, pick 4, level 50, restricted legendaries)
+
+```yaml
+# season_presets/vgc_smogon.yml (auto-generated)
+name: "VGC + Smogon OU"
+
+singles:
+  enabled: true
+  teamSize: 6
+  selectCount: 6
+  levelCap: 100
+  terastallize: true
+  blacklist:
+    pokemon: [...]        # Full Smogon OU banlist
+    labels: []            # No label limits
+    labelLimits: {}
+
+doubles:
+  enabled: true
+  teamSize: 6
+  selectCount: 4
+  levelCap: 50
+  terastallize: true
+  blacklist:
+    labels:
+      - "restricted"
+      - "mythical"
+    labelLimits:
+      legendary: 2
+
+triples:
+  enabled: false
+```
+
+## National Dex OU Example
+
+> **Auto-generated preset**: A `national_dex.yml` preset is automatically created with National Dex OU rules. To use it, set `preset: "national_dex"` in your season.yaml.
+
+The National Dex OU preset includes:
+- **Mega Evolution**: Enabled (key feature of this format)
+- **Z-Moves**: Enabled
+- **Terastallization**: Disabled (banned in National Dex)
+- **Dynamax**: Disabled (banned)
+- **All generations**: Pokemon from Gen 1-9 allowed (except banned ones)
+
+<details>
+<summary>National Dex OU Banned Pokemon</summary>
+
+```yaml
+pokemon:
+  # Banned Mega Evolutions
+  - "Alakazam-Mega"
+  - "Blaziken-Mega"
+  - "Gengar-Mega"
+  - "Kangaskhan-Mega"
+  - "Lucario-Mega"
+  - "Metagross-Mega"
+  - "Salamence-Mega"
+  - "Rayquaza-Mega"
+  - "Mawile-Mega"
+  - "Medicham-Mega"
+  - "Sableye-Mega"
+  # Regular Pokemon
+  - "Annihilape"
+  - "Archaludon"
+  - "Baxcalibur"
+  - "Blaziken"
+  - "Chi-Yu"
+  - "Chien-Pao"
+  - "Cyclizar"
+  - "Darkrai"
+  - "Dracovish"
+  - "Flutter-Mane"
+  - "Gliscor"
+  - "Gouging-Fire"
+  - "Kingambit"
+  - "Landorus"
+  - "Volcarona"
+  # ... (full list in national_dex.yml)
+```
+
+</details>
+
+<details>
+<summary>National Dex OU Banned Moves</summary>
+
+```yaml
+moves:
+  # OHKO moves
+  - "sheer_cold"
+  - "fissure"
+  - "guillotine"
+  - "horn_drill"
+  # Evasion moves
+  - "double_team"
+  - "minimize"
+  # Baton Pass
+  - "baton_pass"
+  # Other
+  - "last_respects"
+```
+
+</details>
+
+<details>
+<summary>National Dex OU Banned Items</summary>
+
+```yaml
+items:
+  - "cobblemon:king_rock"    # King's Rock flinch abuse
+  - "cobblemon:razor_fang"   # Razor Fang flinch abuse
+```
+
+</details>
+
+```yaml
+# season_presets/national_dex.yml (auto-generated)
+name: "National Dex OU"
+
+singles:
+  enabled: true
+  teamSize: 6
+  selectCount: 6
+  levelCap: 100
+  megaEvolution: true       # Key feature!
+  zMoves: true              # Allowed
+  dynamax: false            # Banned
+  terastallize: false       # Banned in National Dex
+
+  speciesClause: true
+  itemClause: 1
+  sleepClause: true
+  ohkoClause: true
+  evasionClause: true
+  endlessBattleClause: true
+
+  blacklist:
+    pokemon: [...]          # Full National Dex OU banlist
+    moves: [...]            # OHKO, evasion, baton pass, last respects
+    abilities:
+      - "moody"
+      - "shadow_tag"
+      - "arena_trap"
+      - "power_construct"
+    items:
+      - "cobblemon:king_rock"
+      - "cobblemon:razor_fang"
+    labels: []              # No label bans
+    labelLimits: {}         # No label limits
+
+doubles:
+  enabled: false
+
+triples:
+  enabled: false
 ```
 
 ## Hot Reload

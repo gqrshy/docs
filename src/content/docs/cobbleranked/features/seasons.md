@@ -137,7 +137,9 @@ schedule:
     preset: "hardcore"
 ```
 
-Presets are defined in separate files in `config/cobbleranked/presets/`.
+Presets are defined in separate files in `config/cobbleranked/season_presets/`.
+
+Each preset contains complete format configuration (team sizes, level caps, mechanics, matchmaking rules, blacklists). See [Blacklist Configuration](/docs/cobbleranked/configuration/blacklist/) for format rules.
 
 ## Season Rewards
 
