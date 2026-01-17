@@ -94,7 +94,7 @@ blacklist:
     - "baton_pass"
 ```
 
-> Move names use snake_case format (e.g., `baton_pass`, not `Baton Pass`).
+> **Move name format:** Use snake_case (e.g., `baton_pass`). CobbleRanked automatically normalizes names to match Cobblemon's internal format, so both `baton_pass` and `batonpass` will work.
 
 ## Ability Blacklist
 
@@ -108,7 +108,7 @@ blacklist:
     - "arena_trap"   # Traps grounded Pokemon
 ```
 
-> Ability names use snake_case format.
+> **Ability name format:** Use snake_case (e.g., `shadow_tag`). Names are automatically normalized to match Cobblemon's internal format.
 
 ## Item Blacklist
 

@@ -43,9 +43,9 @@ When two players are matched, they are transferred to the battle server via Velo
 | MongoDB | 6.0+ | Shared database (Option 2) |
 | Redis | 6.0+ | Queue synchronization |
 | Velocity | 3.4.0+ | Proxy server |
-| [Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded) | Latest | Handles player transfers via Redis |
+| [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) | Latest | Required for PLUGIN_MESSAGE transfers |
 
-> ⚠️ **Important:** CobbleRanked publishes transfer requests to Redis, but **[Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded)** is required on Velocity to receive these requests and actually move players between servers. Without this plugin, players will not be transferred after match is found.
+> **Note:** As of v2.0.15, CobbleRanked supports two transfer methods. The default `PLUGIN_MESSAGE` method works with standard Velocity setups and doesn't require additional proxy plugins.
 
 ---
 
@@ -96,6 +96,10 @@ crossServer:
   enabled: true
   serverId: "battle"
   battleServer: ""  # Empty string = this IS the battle server
+
+  # Transfer method for moving players between servers
+  transferMethod: PLUGIN_MESSAGE  # or PROXY_COMMAND
+  transferCommand: "server {server}"  # Only used with PROXY_COMMAND
 
   redis:
     host: "your-redis-host"
@@ -165,15 +169,52 @@ try = ["lobby1"]
 
 > **Note:** The server names in Velocity must match the `serverId` and `battleServer` values in your CobbleRanked configs.
 
-### 6. Install Proxy-Command-Reloaded
+### 6. Configure Transfer Method
 
-CobbleRanked is optimized for **[Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded)**. This Velocity plugin receives transfer requests from Redis and moves players between servers.
+CobbleRanked supports two methods for transferring players between servers:
 
-1. Download from [Modrinth](https://modrinth.com/plugin/proxy-command-reloaded)
-2. Place the `.jar` in your Velocity `plugins` folder
-3. Restart Velocity
+#### PLUGIN_MESSAGE (Recommended)
 
-When a match is found, CobbleRanked publishes transfer requests to Redis, and Proxy-Command-Reloaded handles the actual player movement.
+Uses the BungeeCord plugin messaging channel to transfer players directly. This is the default and recommended method.
+
+**Requirements:**
+
+- [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) on all Fabric servers
+- `bungeecord: true` in Velocity's `velocity.toml` (under `[advanced]`)
+
+```yaml
+# config.yaml
+crossServer:
+  transferMethod: PLUGIN_MESSAGE
+```
+
+**Advantages:**
+
+- No additional proxy plugins needed
+- Works with any Velocity setup
+- Players don't need `/server` permission
+
+#### PROXY_COMMAND (Alternative)
+
+Uses [Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded) to execute transfer commands via Redis.
+
+**Requirements:**
+
+- [Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded) on Velocity
+- Configure the command format
+
+```yaml
+# config.yaml
+crossServer:
+  transferMethod: PROXY_COMMAND
+  transferCommand: "server {server}"  # Placeholders: {player}, {server}
+```
+
+**Use cases:**
+
+- Custom transfer commands or workflows
+- Networks with existing Proxy-Command-Reloaded setup
+- Need to execute additional commands during transfer
 
 ---
 

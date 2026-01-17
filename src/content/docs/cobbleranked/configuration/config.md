@@ -575,6 +575,10 @@ crossServer:
   serverId: "server1"
   battleServer: ""
 
+  # Transfer method (v2.0.15+)
+  transferMethod: PLUGIN_MESSAGE  # or PROXY_COMMAND
+  transferCommand: "server {server}"  # Only used with PROXY_COMMAND
+
   redis:
     host: "localhost"
     port: 6379
@@ -586,6 +590,13 @@ crossServer:
     battleStartDelaySeconds: 10
     playerArrivalTimeoutSeconds: 30
 ```
+
+### Transfer Methods
+
+| Method             | Description                                              |
+|--------------------|----------------------------------------------------------|
+| `PLUGIN_MESSAGE`   | Uses BungeeCord plugin messaging (default, recommended)  |
+| `PROXY_COMMAND`    | Uses Proxy-Command-Reloaded via Redis                    |
 
 > See [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/) for detailed guide.
 
