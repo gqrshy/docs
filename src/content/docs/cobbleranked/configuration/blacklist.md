@@ -3,6 +3,8 @@ title: Blacklist Configuration
 description: Control which Pokemon, moves, abilities, and items are allowed in battles.
 ---
 
+Create the perfect competitive environment. Ban overpowered Pokemon, restrict broken moves, and enforce species clauses with precision.
+
 Blacklist settings are part of **Season Presets**, allowing different rules for each season.
 
 File: `config/cobbleranked/season_presets/<preset_name>.yml`
@@ -652,6 +654,7 @@ Reload presets without restart:
 
 ## See Also
 
-- [Season Presets](/docs/cobbleranked/configuration/seasons/) - Full preset configuration
-- [Battle Formats](/docs/cobbleranked/features/battle-formats/) - Format-specific settings
-- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [Seasons](../features/seasons/) - Full preset configuration
+- [Battle Formats](../features/battle-formats/) - Format-specific settings
+- [Main Configuration](config/) - General settings
+- [FAQ](../support/faq/) - Common questions and troubleshooting

@@ -396,7 +396,6 @@ Lower values = smoother but more CPU usage. Default values work well for most se
 
 ## See Also
 
-- [Battle Camera Feature](/docs/cobbleranked/features/battle-camera/) - Camera overview
-- [Arena Configuration](/docs/cobbleranked/configuration/arenas/) - Arena setup
-- [FAQ](/docs/cobbleranked/support/faq/) - Common questions
-- [Troubleshooting](/docs/cobbleranked/support/troubleshooting/) - Problem solving
+- [Battle Camera Feature](../features/battle-camera/) - Camera overview
+- [Arena Configuration](arenas/) - Arena setup
+- [FAQ](../support/faq/) - Common questions and troubleshooting

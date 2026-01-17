@@ -301,4 +301,4 @@ app.post('/cobbleranked/usage-stats', (req, res) => {
 
 ---
 
-**Related**: [Main Configuration](/docs/cobbleranked/configuration/main/) | [ELO System](/docs/cobbleranked/features/elo-system/) | [Leaderboards](/docs/cobbleranked/features/leaderboards/)
+**Related**: [Main Configuration](config/) | [ELO System](../features/elo-system/) | [Leaderboards](../features/leaderboards/) | [FAQ](../support/faq/)

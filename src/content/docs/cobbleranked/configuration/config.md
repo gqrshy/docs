@@ -214,7 +214,7 @@ rankTiers:
     minElo: 2100
 ```
 
-> 📝 These are **display only** - they don't affect matchmaking or rewards. Use [LuckPerms Integration](/docs/cobbleranked/integration/luckperms/) for rank-based permissions.
+> 📝 These are **display only** - they don't affect matchmaking or rewards. Use [LuckPerms Integration](../integration/luckperms/) for rank-based permissions.
 
 ---
 
@@ -598,7 +598,7 @@ crossServer:
 | `PLUGIN_MESSAGE`   | Uses BungeeCord plugin messaging (default, recommended)  |
 | `PROXY_COMMAND`    | Uses Proxy-Command-Reloaded via Redis                    |
 
-> See [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/) for detailed guide.
+> See [Cross-Server Setup](../advanced/cross-server/) for detailed guide.
 
 ---
 
@@ -622,8 +622,8 @@ debug:
 
 ## See Also
 
-- [Arenas](/docs/cobbleranked/configuration/arenas/) - Battle arena setup
-- [Blacklist](/docs/cobbleranked/configuration/blacklist/) - Pokemon restrictions
-- [Rewards](/docs/cobbleranked/configuration/rewards/) - Season rewards
-- [Cross-Server](/docs/cobbleranked/advanced/cross-server/) - Multi-server setup
-- [FAQ](/docs/cobbleranked/support/faq/) - Common questions
+- [Arenas](arenas/) - Battle arena setup
+- [Blacklist](blacklist/) - Pokemon restrictions
+- [Rewards](rewards/) - Season rewards
+- [Cross-Server](../advanced/cross-server/) - Multi-server setup
+- [FAQ](../support/faq/) - Common questions and troubleshooting

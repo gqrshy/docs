@@ -104,6 +104,6 @@ Language changes apply immediately:
 
 ## See Also
 
-- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
-- [GUI Customization](/docs/cobbleranked/configuration/gui/) - Menu customization
-- [FAQ](/docs/cobbleranked/support/faq/) - Common questions
+- [Main Configuration](config/) - General settings
+- [GUI Customization](gui/) - Menu customization
+- [FAQ](../support/faq/) - Common questions and troubleshooting

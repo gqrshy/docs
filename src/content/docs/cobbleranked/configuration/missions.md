@@ -284,4 +284,4 @@ weeklyMissions:
 
 - [Rewards Configuration](rewards.md) - Season rewards and milestones
 - [Main Configuration](config.md) - General settings
-- [FAQ](/docs/cobbleranked/support/faq/) - Common questions
+- [FAQ](../support/faq/) - Common questions and troubleshooting

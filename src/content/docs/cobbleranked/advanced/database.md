@@ -138,6 +138,6 @@ mongodump --db cobbleranked --out backup/
 
 ## See Also
 
-- [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/) - Multi-server configuration
-- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
-- [FAQ](/docs/cobbleranked/support/faq/) - Common questions
+- [Cross-Server Setup](cross-server/) - Multi-server configuration
+- [Main Configuration](../configuration/config/) - General settings
+- [FAQ](../support/faq/) - Common questions and troubleshooting

@@ -153,6 +153,6 @@ Reload GUI without restart:
 
 ## See Also
 
-- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
-- [Language Configuration](/docs/cobbleranked/configuration/languages/) - Message customization
-- [FAQ](/docs/cobbleranked/support/faq/) - Common questions
+- [Main Configuration](config/) - General settings
+- [Language Configuration](languages/) - Message customization
+- [FAQ](../support/faq/) - Common questions and troubleshooting
