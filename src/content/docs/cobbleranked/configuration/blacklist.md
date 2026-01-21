@@ -50,8 +50,8 @@ doubles:
 | `labels` | List | Cobblemon labels to ban completely |
 | `labelLimits` | Map | Limit count of Pokemon with label |
 | `maxDuplicateItems` | Integer | Item clause (1 = no duplicates) |
-| `bannedInventoryItems` | List | Items banned from player inventory |
-| `bannedTrinketItems` | List | Items banned from trinket slots |
+| `inventoryItems` | List | Items banned from player inventory |
+| `trinketItems` | List | Items banned from trinket/accessory slots |
 | `consumables` | Object | Battle consumable restrictions |
 | `specialFormat` | Object | Special format rules (Little Cup, etc.) |
 
@@ -182,7 +182,7 @@ Ban items from player inventory during battles. Supports item tags:
 
 ```yaml
 blacklist:
-  bannedInventoryItems:
+  inventoryItems:
     - "#cobblemon:potions"
     - "#cobblemon:restores"
     - "#cobblemon:revives"
@@ -190,6 +190,32 @@ blacklist:
     - "cobblemon:rare_candy"
     - "#cobblemon:experience_candies"
 ```
+
+> 📝 **v2.0.17+**: Items in `trinketItems` are now also checked in regular inventory. This prevents players from keeping banned accessory items in their inventory.
+
+## Trinket/Accessory Items
+
+Ban items from Trinkets mod slots or Accessories mod slots (e.g., MegaShowdown). These items are checked in both accessory slots **and** regular inventory:
+
+```yaml
+blacklist:
+  trinketItems:
+    # MegaShowdown gimmick items
+    - "mega_showdown:mega_bracelet"     # Block Mega Evolution
+    - "mega_showdown:z_ring"            # Block Z-Moves
+    - "mega_showdown:tera_orb"          # Block Terastallization
+    - "mega_showdown:dynamax_band"      # Block Dynamax
+    - "mega_showdown:omni_ring"         # Block all gimmicks
+```
+
+### Supported Mods
+
+| Mod                        | Support                    |
+|----------------------------|----------------------------|
+| Trinkets                   | ✅ Full support            |
+| Accessories (wisp-forest)  | ✅ Full support (v2.0.17+) |
+
+> **Use Case**: Block MegaShowdown's Mega Bracelet to prevent Mega Evolution in your competitive format, even if players have it in their inventory.
 
 ## Consumables Config
 
@@ -296,7 +322,7 @@ abilities:
 <summary>Default Banned Inventory Items</summary>
 
 ```yaml
-bannedInventoryItems:
+inventoryItems:
   - "#cobblemon:potions"
   - "#cobblemon:restores"
   - "#cobblemon:revives"

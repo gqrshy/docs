@@ -30,8 +30,8 @@ A competitive ranked battle system for Cobblemon servers with:
 | Minecraft | 1.21.1 |
 | Fabric Loader | 0.17.2+ |
 | Cobblemon | 1.7.1+ |
-| GashiLibs | 1.0.3+ |
-| MailLib | 1.0.1+ |
+| GashiLibs | 1.0.6+ |
+| MailLib | 1.0.5+ |
 | Fabric Language Kotlin | 1.13.6+ |
 
 </details>
@@ -67,11 +67,13 @@ Then run `/rankedadmin reload`.
 <details>
 <summary><strong>What are the battle format defaults?</strong></summary>
 
-| Format | Team Size | Turn Timer | Match Duration |
-|--------|-----------|------------|----------------|
-| Singles | 3v3 | 90s | 15 minutes |
-| Doubles | 4v4 | 120s | 20 minutes |
-| Triples | 6v6 | 150s | 25 minutes |
+| Format | Team Size | Level Cap | Turn Timer | Match Duration |
+|--------|-----------|-----------|------------|----------------|
+| Singles | 3v3 | 100 | 90s | 15 minutes |
+| Doubles | 4v4 | 50 | 120s | 20 minutes |
+| Triples | 6v6 | 50 | 150s | 25 minutes |
+
+**Note:** Triples is disabled by default in the preset. Enable it in your season preset if needed.
 
 All formats have 60s team selection and 30s lead selection timers.
 
@@ -175,9 +177,10 @@ blacklist:
 1. Player joins queue with `/ranked`
 2. System searches within ELO range (default ±200)
 3. If no match found, range expands every 30s (+50 ELO)
-4. Recent opponents avoided for 5 minutes
-5. When matched, team selection begins (60s)
-6. Battle starts after lead selection (30s)
+4. Last 3 recent opponents avoided (expires after 5 minutes)
+5. When matched, ready check begins (17s to accept)
+6. Team selection begins (60s)
+7. Lead selection (30s), then battle starts
 
 </details>
 
@@ -200,17 +203,17 @@ blacklist:
 
 **Pokemon Showdown System (Default):**
 
-- Starting ELO: 1500
+- Starting ELO: 1000
 - Floor ELO: 1000
-- New players get higher K-factor for first 30 games
+- New players get K-factor 50 for first 30 games
 
 | ELO Range | K-Factor |
 |-----------|----------|
-| Below 1100 | 40 |
-| 1100-1299 | 32 |
-| 1300-1599 | 24 |
-| 1600-1999 | 16 |
-| 2000+ | 12 |
+| 0-1100 | 40 |
+| 1101-1300 | 32 |
+| 1301-1600 | 24 |
+| 1601-2000 | 16 |
+| 2001+ | 12 |
 
 Higher K-factor = bigger rating changes per match.
 
@@ -367,7 +370,10 @@ Rewards are sent via MailLib when the season ends.
 - `/rankedadmin setArena <name> <pos1|pos2|exit|spectator>`
 - `/rankedadmin arena status` - View all arenas
 - `/rankedadmin arena enable/disable <name>`
+- `/rankedadmin arena setcenter <name> [radius]` - Set arena center with radius
 - `/rankedadmin arena reset` - Clear all positions
+- `/rankedadmin teleportArena <name>` - Teleport to arena
+- `/rankedadmin setexit` - Set global exit location
 
 **ELO Management:**
 - `/rankedadmin setelo <player> <format> <elo>`

@@ -514,14 +514,21 @@ database:
 Prevent actions during queue/battle in `restrictions.yaml`.
 
 Two phases:
-- **queue**: While waiting for match
-- **arena**: From teleport until battle ends
+
+- **queue**: While waiting for match (prevents item manipulation)
+- **arena**: From teleport until battle ends (full lockdown)
 
 ```yaml
 # restrictions.yaml
 queue:
+  blockItemPickup: true
   blockEquipmentChange: true
+  blockContainerAccess: true
+  blockEntityInteract: true
   blockTeleport: true
+  blockPortalUse: true
+  blockPcAccess: true
+  blockMoveSwap: true
   blockedCommands:
     - "tp"
     - "spawn"
@@ -529,7 +536,13 @@ queue:
 
 arena:
   blockItemUse: true
+  blockItemDrop: true
+  blockItemPickup: true
   blockBlockBreak: true
+  blockBlockInteract: true
+  blockContainerAccess: true
+  blockWorkstationAccess: true
+  blockEntityInteract: true
   blockPvp: true
   # ... see full list below
 ```
@@ -541,26 +554,29 @@ arena:
 |--------|-------------|
 | `blockItemUse` | Block using items |
 | `blockItemDrop` | Block dropping items |
-| `blockItemPickup` | Block picking up items |
-| `blockEquipmentChange` | Block changing equipment |
+| `blockItemPickup` | Block picking up items from ground |
+| `blockEquipmentChange` | Block changing armor/equipment |
 | `blockBlockBreak` | Block breaking blocks |
 | `blockBlockPlace` | Block placing blocks |
-| `blockBlockInteract` | Block interacting with blocks |
-| `blockContainerAccess` | Block opening containers |
-| `blockEntityInteract` | Block entity interaction |
+| `blockBlockInteract` | Block doors, buttons, levers |
+| `blockContainerAccess` | Block opening chests, barrels, etc. |
+| `blockWorkstationAccess` | Block crafting tables, furnaces, anvils, etc. |
+| `blockEntityInteract` | Block villager trading, item frames, armor stands |
 | `blockEntityDamage` | Block damaging entities |
-| `blockEntityMount` | Block mounting entities |
+| `blockEntityMount` | Block mounting horses, boats, etc. |
 | `blockPvp` | Block PvP combat |
 | `blockPve` | Block PvE combat |
 | `blockProjectileLaunch` | Block launching projectiles |
 | `blockTeleport` | Block teleportation |
 | `blockPortalUse` | Block using portals |
 | `blockFlight` | Block flying |
-| `blockPcAccess` | Block PC access |
+| `blockPcAccess` | Block Cobblemon PC access |
 | `blockMoveSwap` | Block swapping Pokemon moves |
 | `blockedCommands` | List of blocked commands |
 
 </details>
+
+> 📝 **v2.0.17+**: Queue phase now blocks item pickup, container access, and entity interactions to prevent obtaining banned items after joining queue.
 
 ---
 
