@@ -337,6 +337,47 @@ singles:
 | `turnTimer` | Time limit per turn (seconds) |
 | `matchDuration` | Total match time limit (minutes) |
 
+### Battle Gimmicks (Mega Evolution, Z-Moves, Dynamax, Terastallize)
+
+> ⚠️ **Important**: The gimmick settings (`megaEvolution`, `zMoves`, `dynamax`, `terastallize`) are **placeholder settings only**. Cobblemon does not natively support these battle mechanics. They require the [Mega Showdown](https://modrinth.com/mod/megashowdown) mod to function.
+
+#### Current Status
+
+- CobbleRanked does **not** enforce these settings
+- Gimmick availability is entirely controlled by Mega Showdown
+- These settings are preserved for future Cobblemon API support
+
+#### Workaround: Banning Gimmick Items
+
+If you want to prevent certain gimmicks in ranked battles, ban the items required to use them via the blacklist:
+
+```yaml
+# season_presets/default.yml
+singles:
+  blacklist:
+    items:
+      # Ban Mega Stones (prevents Mega Evolution)
+      - "megashowdown:mega_stone_charizard_x"
+      - "megashowdown:mega_stone_charizard_y"
+      # ... add all mega stones you want to ban
+
+      # Ban Tera Orb (prevents Terastallization)
+      - "megashowdown:tera_orb"
+
+      # Ban Dynamax Band (prevents Dynamax)
+      - "megashowdown:dynamax_band"
+
+      # Ban Z-Crystals (prevents Z-Moves)
+      - "megashowdown:z_crystal_normal"
+      # ... add all z-crystals you want to ban
+
+    # Or ban items in player inventory/accessories
+    inventoryItems:
+      - "megashowdown:omni_ring"  # Bans the all-gimmick item
+```
+
+> 📝 Check Mega Showdown's item IDs for the exact names. Use `/megashowdown items` or check JEI/REI for item IDs.
+
 ### Victory/Defeat Rewards
 
 Commands executed after each ranked match:
