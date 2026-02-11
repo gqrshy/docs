@@ -37,7 +37,7 @@ A more advanced system that tracks rating uncertainty. Better for servers with i
 | 1300-1499 | Great Ball |
 | Below 1300 | Poke Ball |
 
-New players start at **1500 ELO** — right in the middle. Win your way up or fall trying.
+New players start at **1000 ELO** — right in the middle. Win your way up or fall trying.
 
 ## K-Factor Bands
 
@@ -45,14 +45,25 @@ The K-factor controls how much your rating changes per match. CobbleRanked uses 
 
 | ELO Range | K-Factor | Effect |
 |-----------|----------|--------|
-| New players (first 30 games) | 50 | Fast calibration |
-| Below 1100 | 40 | Larger swings |
-| 1100-1299 | 32 | Moderate changes |
-| 1300-1599 | 24 | Balanced |
+| New players (first 10 games) | 35 | Fast calibration |
+| Below 1100 | 30 | Larger swings |
+| 1100-1299 | 25 | Moderate changes |
+| 1300-1599 | 20 | Balanced |
 | 1600-1999 | 16 | Stable ratings |
 | 2000+ | 12 | Very stable |
 
 Higher K-factor means bigger rating changes. New players calibrate quickly, while established players have stable ratings.
+
+## Win Streak Bonus
+
+Consecutive wins reward your momentum with a small K-factor boost:
+
+| Win Streak | K-Factor Bonus | Example Effect |
+|-----------|-----------------|----------------|
+| 3+ wins | +3 | Base K=25 → Effective K=28 (+12% Elo gain) |
+| 5+ wins | +5 | Base K=25 → Effective K=30 (+20% Elo gain) |
+
+This bonus is automatically applied to winners and helps faster progression during hot streaks. Losing resets your streak.
 
 ## The Math (Simplified)
 
@@ -88,22 +99,26 @@ A 1700 player beats a 1400 player. Small gains for the favorite.
 ratingSystem: POKEMON_SHOWDOWN  # or GLICKO2
 
 startingElo: 1000
-floorElo: 1000
+floorElo: 0
 
 pokemonShowdown:
-  newPlayerGames: 30
-  newPlayerKFactor: 50
+  newPlayerGames: 10
+  newPlayerKFactor: 35
   kFactorBands:
     - maxElo: 1100
-      kFactor: 40
+      kFactor: 30
     - maxElo: 1300
-      kFactor: 32
+      kFactor: 25
     - maxElo: 1600
-      kFactor: 24
+      kFactor: 20
     - maxElo: 2000
       kFactor: 16
     - maxElo: 999999
       kFactor: 12
+  streakBonus:
+    enabled: true
+    threshold3Wins: 3
+    threshold5Wins: 5
 
 glicko2:
   startingRD: 150.0
@@ -138,9 +153,10 @@ rankTiers:
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `startingElo` | `1000` | Starting rating for new players |
-| `floorElo` | `1000` | Minimum possible rating |
-| `newPlayerGames` | `30` | Games before K-factor normalizes |
-| `newPlayerKFactor` | `50` | K-factor for new players |
+| `floorElo` | `0` | Minimum possible rating (set to prevent dropping below a threshold) |
+| `newPlayerGames` | `10` | Games before K-factor normalizes (industry standard: 10 placement matches) |
+| `newPlayerKFactor` | `35` | K-factor for new players (balanced for fairer matchmaking) |
+| `streakBonus.enabled` | `true` | Enable win streak K-factor bonus |
 
 ## Season Resets
 

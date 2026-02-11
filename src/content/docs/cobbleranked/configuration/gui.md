@@ -1,158 +1,159 @@
 ---
 title: GUI Customization
-description: Customize the CobbleRanked menus and interfaces.
+description: Customize menu appearance, borders, and button layouts.
 ---
 
-Customize menus in `config/cobbleranked/gui/*.json5`.
+Make your ranked menus look unique. Customize borders, materials, and layouts.
 
 ## GUI Files
+
+Edit files in `config/cobbleranked/gui/`:
 
 | File | Purpose |
 |------|---------|
 | `ranked_gui.json5` | Ranked battle menu |
 | `casual_gui.json5` | Casual battle menu |
-| `leaderboard_gui.json5` | Leaderboard display |
-| `team_selection_gui.json5` | Team selection screen |
-| `lead_selection_gui.json5` | Lead selection screen |
-| `blacklist_gui.json5` | Banned Pokemon viewer |
+| `leaderboard_gui.json5` | Top players display |
+| `blacklist_gui.json5` | Banned content viewer |
+| `reward_gui.json5` | Season and milestone rewards |
 
-## Basic Structure
+## Border & Fill
+
+Customize the glass panels that fill empty slots:
 
 ```json5
 {
-  "title": "Ranked Battles",
-  "rows": 6,
-  "items": {
-    "queue_singles": {
-      "slot": 10,
-      "item": "cobblemon:poke_ball",
-      "name": "&eSingles Queue",
-      "lore": [
-        "&7Click to join singles queue",
-        "&7Your ELO: &f{elo_singles}"
-      ],
-      "action": "JOIN_QUEUE_SINGLES"
-    }
+  "border": {
+    "enabled": true,
+    "material": "GRAY_STAINED_GLASS_PANE",
+    "displayname": " "
+  },
+  "fill": {
+    "enabled": false,
+    "material": "BLACK_STAINED_GLASS_PANE",
+    "displayname": " "
   }
 }
 ```
-
-## Item Properties
 
 | Property | Description |
 |----------|-------------|
-| `slot` | Inventory slot (0-53 for 6 rows) |
-| `item` | Minecraft/Cobblemon item ID |
-| `name` | Display name (supports color codes) |
-| `lore` | Description lines |
-| `action` | Click action |
+| `enabled` | Show/hide the border or fill |
+| `material` | Item ID (Minecraft or Cobblemon) |
+| `displayname` | Item name (use `" "` for blank) |
 
-## Available Actions
+<details>
+<summary><strong>Available Materials</strong></summary>
 
-| Action | Description |
-|--------|-------------|
-| `JOIN_QUEUE_SINGLES` | Join singles queue |
-| `JOIN_QUEUE_DOUBLES` | Join doubles queue |
-| `JOIN_QUEUE_TRIPLES` | Join triples queue |
-| `LEAVE_QUEUE` | Leave current queue |
-| `OPEN_LEADERBOARD` | Open leaderboard |
-| `OPEN_STATS` | Open player stats |
-| `CLOSE` | Close menu |
+Glass panes (most common):
+- `WHITE_STAINED_GLASS_PANE`, `ORANGE_STAINED_GLASS_PANE`, `MAGENTA_STAINED_GLASS_PANE`
+- `LIGHT_BLUE_STAINED_GLASS_PANE`, `YELLOW_STAINED_GLASS_PENE`, `LIME_STAINED_GLASS_PANE`
+- `PINK_STAINED_GLASS_PANE`, `GRAY_STAINED_GLASS_PANE`, `LIGHT_GRAY_STAINED_GLASS_PANE`
+- `CYAN_STAINED_GLASS_PANE`, `PURPLE_STAINED_GLASS_PANE`, `BLUE_STAINED_GLASS_PANE`
+- `BROWN_STAINED_GLASS_PANE`, `GREEN_STAINED_GLASS_PANE`, `RED_STAINED_GLASS_PANE`
+- `BLACK_STAINED_GLASS_PANE`
 
-## Placeholders
+Other decorative items:
+- `BARRIER`, `AIR`, `STONE`, `DIRT`
 
-| Placeholder | Description |
-|-------------|-------------|
-| `{player}` | Player name |
-| `{elo_singles}` | Singles ELO |
-| `{elo_doubles}` | Doubles ELO |
-| `{elo_triples}` | Triples ELO |
-| `{rank_singles}` | Singles rank |
-| `{wins}` | Total wins |
-| `{losses}` | Total losses |
-| `{season}` | Current season name |
+Use any Minecraft or Cobblemon item ID.
 
-## Color Codes
+</details>
 
-| Code | Color |
-|------|-------|
-| `&0` | Black |
-| `&1` | Dark Blue |
-| `&2` | Dark Green |
-| `&4` | Dark Red |
-| `&5` | Purple |
-| `&6` | Gold |
-| `&7` | Gray |
-| `&a` | Green |
-| `&b` | Aqua |
-| `&c` | Red |
-| `&d` | Pink |
-| `&e` | Yellow |
-| `&f` | White |
-| `&l` | Bold |
-| `&o` | Italic |
-| `&n` | Underline |
-| `&r` | Reset |
+## Ranked GUI
 
-## Example: Custom Ranked Menu
+Format buttons and navigation:
 
 ```json5
 {
-  "title": "&5Ranked Battles",
-  "rows": 5,
-  "items": {
+  "title": "ranked_gui_title",
+  "rows": 6,
+
+  "format_slots": [21, 23, 25],
+
+  "format_buttons": {
     "singles": {
-      "slot": 11,
-      "item": "minecraft:diamond_sword",
-      "name": "&e⚔ Singles",
-      "lore": [
-        "&7Classic 1v1 battles",
-        "",
-        "&7Your ELO: &f{elo_singles}",
-        "&7Rank: &f#{rank_singles}",
-        "",
-        "&aClick to queue!"
-      ],
-      "action": "JOIN_QUEUE_SINGLES"
-    },
-    "doubles": {
-      "slot": 13,
-      "item": "minecraft:diamond_axe",
-      "name": "&e⚔ Doubles",
-      "lore": [
-        "&7VGC-style 2v2",
-        "",
-        "&7Your ELO: &f{elo_doubles}",
-        "",
-        "&aClick to queue!"
-      ],
-      "action": "JOIN_QUEUE_DOUBLES"
-    },
-    "leaderboard": {
-      "slot": 31,
-      "item": "minecraft:golden_apple",
-      "name": "&6🏆 Leaderboard",
-      "lore": [
-        "&7View top players"
-      ],
-      "action": "OPEN_LEADERBOARD"
+      "slot": 21,
+      "material": "minecraft:iron_sword",
+      "displayname": "ranked_gui_format_title",
+      "lore": [],
+      "custom_model_data": 0
+    }
+  },
+
+  "blacklist_slot": 38,
+  "leaderboard_slot": 41,
+  "rewards_slot": 44
+}
+```
+
+## Leaderboard GUI
+
+Pyramid layout for top 16 players:
+
+```json5
+{
+  "pyramid_slots": {
+    "rank_1": [14],
+    "rank_2_4": [22, 23, 24],
+    "rank_5_9": [30, 31, 32, 33, 34],
+    "rank_10_16": [38, 39, 40, 41, 42, 43, 44]
+  },
+
+  "buttons": {
+    "player_rank": {
+      "slot": 47,
+      "material": "PLAYER_HEAD",
+      "displayname": "leaderboard_your_rank"
     }
   }
 }
 ```
 
+## Blacklist GUI
+
+Browse banned Pokemon, moves, items, abilities:
+
+```json5
+{
+  "content_slots": [
+    11, 12, 13, 14, 15, 16, 17,
+    20, 21, 22, 23, 24, 25, 26,
+    29, 30, 31, 32, 33, 34, 35,
+    38, 39, 40, 41, 42, 43, 44
+  ],
+
+  "buttons": {
+    "category_selector": { "slot": 48 },
+    "prev_page": { "slot": 49 },
+    "format_toggle": { "slot": 50 },
+    "next_page": { "slot": 51 },
+    "sort": { "slot": 52 }
+  }
+}
+```
+
+## Slot Reference
+
+6-row GUI (54 slots):
+
+| Row | Slots |
+|-----|-------|
+| 1 | 1-9 |
+| 2 | 10-18 |
+| 3 | 19-27 |
+| 4 | 28-36 |
+| 5 | 37-45 |
+| 6 | 46-54 |
+
 ## Hot Reload
 
-Reload GUI without restart:
+Apply changes without restart:
 
-```
+```bash
 /rankedadmin reload
 ```
 
 ---
 
-## See Also
-
-- [Main Configuration](config/) - General settings
-- [Language Configuration](languages/) - Message customization
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+**See Also**: [Language Configuration](languages/) - Customize text and colors

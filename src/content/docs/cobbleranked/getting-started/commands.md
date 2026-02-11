@@ -55,7 +55,7 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 | `/rankedadmin arena status` | Show all arena statuses |
 | `/rankedadmin arena enable <name>` | Enable an arena |
 | `/rankedadmin arena disable <name>` | Disable an arena |
-| `/rankedadmin arena setcenter <name> [radius]` | Set field effect center |
+| `/rankedadmin setArena <name> setcenter [radius]` | Set field effect center |
 | `/rankedadmin arena reset` | Reset all arena states |
 
 ### Player Management

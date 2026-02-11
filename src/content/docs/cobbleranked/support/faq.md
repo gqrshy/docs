@@ -370,7 +370,7 @@ Rewards are sent via MailLib when the season ends.
 - `/rankedadmin setArena <name> <pos1|pos2|exit|spectator>`
 - `/rankedadmin arena status` - View all arenas
 - `/rankedadmin arena enable/disable <name>`
-- `/rankedadmin arena setcenter <name> [radius]` - Set arena center with radius
+- `/rankedadmin setArena <name> setcenter [radius]` - Set arena center with radius
 - `/rankedadmin arena reset` - Clear all positions
 - `/rankedadmin teleportArena <name>` - Teleport to arena
 - `/rankedadmin setexit` - Set global exit location
