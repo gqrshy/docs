@@ -16,6 +16,8 @@ Edit files in `config/cobbleranked/gui/`:
 | `leaderboard_gui.json5` | Top players display |
 | `blacklist_gui.json5` | Banned content viewer |
 | `reward_gui.json5` | Season and milestone rewards |
+| `missions_gui.json5` | Daily/weekly missions display |
+| `ready_gui.json5` | Match ready confirmation |
 
 ## Border & Fill
 
@@ -41,6 +43,31 @@ Customize the glass panels that fill empty slots:
 | `enabled` | Show/hide the border or fill |
 | `material` | Item ID (Minecraft or Cobblemon) |
 | `displayname` | Item name (use `" "` for blank) |
+| `custom_model_data` | Custom model ID for resource pack |
+
+## Custom Model Data
+
+Apply custom resource pack models to any GUI element:
+
+```json5
+{
+  "buttons": {
+    "leaderboard": {
+      "slot": 41,
+      "material": "cobblemon:kings_rock",
+      "displayname": "ranked_gui_leaderboard_button",
+      "custom_model_data": 1001
+    }
+  }
+}
+```
+
+<details>
+<summary><strong>Creating a resource pack with custom models</strong></summary>
+
+See [Minecraft Wiki: Custom Model Data](https://minecraft.wiki/w/Model#Item_models) for creating resource packs.
+
+</details>
 
 <details>
 <summary><strong>Available Materials</strong></summary>
@@ -68,6 +95,7 @@ Format buttons and navigation:
 {
   "title": "ranked_gui_title",
   "rows": 6,
+  "player_info_slot": 5,
 
   "format_slots": [21, 23, 25],
 
@@ -76,16 +104,36 @@ Format buttons and navigation:
       "slot": 21,
       "material": "minecraft:iron_sword",
       "displayname": "ranked_gui_format_title",
-      "lore": [],
+      "custom_model_data": 0
+    },
+    "doubles": {
+      "slot": 23,
+      "material": "minecraft:diamond_sword",
+      "displayname": "ranked_gui_format_title",
+      "custom_model_data": 0
+    },
+    "triples": {
+      "slot": 25,
+      "material": "minecraft:netherite_sword",
+      "displayname": "ranked_gui_format_title",
       "custom_model_data": 0
     }
   },
 
-  "blacklist_slot": 38,
-  "leaderboard_slot": 41,
-  "rewards_slot": 44
+  "buttons": {
+    "blacklist": { "slot": 38, "material": "BARRIER" },
+    "leaderboard": { "slot": 41, "material": "cobblemon:kings_rock" },
+    "rewards": { "slot": 44, "material": "CHEST" }
+  }
 }
 ```
+
+| Property | Description |
+|----------|-------------|
+| `player_info_slot` | Slot showing player's ELO and stats |
+| `format_slots` | Slots for format selection buttons |
+| `format_buttons` | Per-format button configuration |
+| `buttons` | Navigation and action buttons |
 
 ## Leaderboard GUI
 

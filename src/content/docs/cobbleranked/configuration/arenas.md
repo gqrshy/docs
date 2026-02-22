@@ -136,6 +136,8 @@ arenas:
 | `/rankedadmin setArena <name> pos2` | Set player 2 spawn |
 | `/rankedadmin setArena <name> exit` | Set exit location |
 | `/rankedadmin setArena <name> spectator` | Set spectator position |
+| `/rankedadmin setArena <name> setcenter [radius]` | Set field effect center (default radius: 8) |
+| `/rankedadmin setexit` | Set global exit position |
 | `/rankedadmin arena status` | View all arena statuses |
 | `/rankedadmin arena enable <name>` | Enable an arena |
 | `/rankedadmin arena disable <name>` | Disable an arena |

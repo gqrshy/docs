@@ -136,6 +136,118 @@ mongodump --db cobbleranked --out backup/
 
 ---
 
+## Database Schema
+
+Tables auto-create on first start. For advanced users who want to query or modify data directly.
+
+### Player Stats Table
+
+```sql
+player_stats (
+    uuid VARCHAR(36) PRIMARY KEY,
+    total_matches INT,
+    total_wins INT,
+    last_played_at BIGINT
+)
+```
+
+### Format Stats Table
+
+Per-format statistics for each player:
+
+```sql
+format_stats (
+    uuid VARCHAR(36),
+    format VARCHAR(32),
+    season_name VARCHAR(64),
+    elo INT,
+    rd DOUBLE,
+    volatility DOUBLE,
+    matches INT,
+    wins INT,
+    current_streak INT,
+    best_streak INT,
+    flee_count INT,
+    PRIMARY KEY (uuid, format, season_name)
+)
+```
+
+### Seasons Table
+
+```sql
+seasons (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(64) UNIQUE,
+    start_date DATE,
+    end_date DATE,
+    is_active BOOLEAN
+)
+```
+
+### Pending Rewards Table
+
+Rewards awaiting claim via MailLib:
+
+```sql
+pending_rewards (
+    id VARCHAR(128) PRIMARY KEY,
+    uuid VARCHAR(36),
+    season_name VARCHAR(64),
+    reward_type VARCHAR(32),
+    commands TEXT,
+    claimed BOOLEAN
+)
+```
+
+### Player Missions Table
+
+Daily/weekly mission progress:
+
+```sql
+player_missions (
+    uuid VARCHAR(36),
+    mission_id VARCHAR(64),
+    progress INT,
+    completed BOOLEAN,
+    claimed BOOLEAN,
+    current_streak INT,
+    last_reset_at BIGINT,
+    PRIMARY KEY (uuid, mission_id)
+)
+```
+
+### Claimed Milestones Table
+
+Track which milestones players have claimed:
+
+```sql
+claimed_milestones (
+    uuid VARCHAR(36),
+    milestone_id VARCHAR(64),
+    claimed_at BIGINT,
+    PRIMARY KEY (uuid, milestone_id)
+)
+```
+
+### Battle Records Table
+
+Battle snapshots for usage stats:
+
+```sql
+battle_records (
+    id INTEGER PRIMARY KEY,
+    season_name VARCHAR(64),
+    format VARCHAR(32),
+    elo_tier INT,
+    timestamp BIGINT,
+    pokemon_json TEXT
+)
+```
+
+> 📝 **Index:** `battle_records` has an index on `(season_name, format, elo_tier)` for efficient usage stat queries.
+
+---
+
 ## See Also
 
 - [Cross-Server Setup](cross-server/) - Multi-server configuration

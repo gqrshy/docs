@@ -24,9 +24,8 @@ description: Complete list of CobbleRanked commands.
 
 | Command | Description | Permission |
 |---------|-------------|------------|
-| `/battlecamera` | Show camera help | `cobbleranked.player.use` |
 | `/battlecamera toggle` | Enable/disable battle camera | `cobbleranked.player.use` |
-| `/battlecamera status` | Show detailed camera status | `cobbleranked.player.use` |
+| `/battlecamera status` | Show camera status | `cobbleranked.player.use` |
 
 ## Admin Commands
 
@@ -92,7 +91,6 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 | Command | Description |
 |---------|-------------|
 | `/rankedadmin placeholder list` | List all available placeholders |
-| `/rankedadmin placeholder test <placeholder>` | Test a placeholder |
 | `/rankedadmin placeholder clear` | Clear placeholder cache |
 
 ### Data Migration (v1 to v2)

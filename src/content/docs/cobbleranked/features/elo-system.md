@@ -75,8 +75,8 @@ New Rating = Old Rating + K × (Result - Expected)
 
 Two 1500-rated players face off. 50/50 odds.
 
-- Winner: 1500 → **1512** (+12, K=24)
-- Loser: 1500 → **1488** (-12)
+- Winner: 1500 → **1510** (+10, K=20)
+- Loser: 1500 → **1490** (-10)
 
 ### Example: Upset Victory
 

@@ -43,9 +43,7 @@ When two players are matched, they are transferred to the battle server via Velo
 | MongoDB | 6.0+ | Shared database (Option 2) |
 | Redis | 6.0+ | Queue synchronization |
 | Velocity | 3.4.0+ | Proxy server |
-| [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) | Latest | Required for PLUGIN_MESSAGE transfers |
-
-> **Note:** As of v2.0.15, CobbleRanked supports two transfer methods. The default `PLUGIN_MESSAGE` method works with standard Velocity setups and doesn't require additional proxy plugins.
+| [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) | Latest | Required for player transfers |
 
 ---
 
@@ -97,9 +95,9 @@ crossServer:
   serverId: "battle"
   battleServer: ""  # Empty string = this IS the battle server
 
-  # Transfer method for moving players between servers
-  transferMethod: PLUGIN_MESSAGE  # or PROXY_COMMAND
-  transferCommand: "server {server}"  # Only used with PROXY_COMMAND
+  # Allow players on battle server to join queue directly (NOT RECOMMENDED)
+  # Default: false - battle servers should only handle matched battles
+  allowQueueOnBattleServer: false
 
   redis:
     host: "your-redis-host"
@@ -169,52 +167,14 @@ try = ["lobby1"]
 
 > **Note:** The server names in Velocity must match the `serverId` and `battleServer` values in your CobbleRanked configs.
 
-### 6. Configure Transfer Method
+### 6. Configure FabricProxy-Lite
 
-CobbleRanked supports two methods for transferring players between servers:
-
-#### PLUGIN_MESSAGE (Recommended)
-
-Uses the BungeeCord plugin messaging channel to transfer players directly. This is the default and recommended method.
+Install [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) on all Fabric servers to enable player transfers via the BungeeCord plugin messaging channel.
 
 **Requirements:**
 
-- [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) on all Fabric servers
+- FabricProxy-Lite on all Fabric servers
 - `bungeecord: true` in Velocity's `velocity.toml` (under `[advanced]`)
-
-```yaml
-# config.yaml
-crossServer:
-  transferMethod: PLUGIN_MESSAGE
-```
-
-**Advantages:**
-
-- No additional proxy plugins needed
-- Works with any Velocity setup
-- Players don't need `/server` permission
-
-#### PROXY_COMMAND (Alternative)
-
-Uses [Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded) to execute transfer commands via Redis.
-
-**Requirements:**
-
-- [Proxy-Command-Reloaded](https://modrinth.com/plugin/proxy-command-reloaded) on Velocity
-- Configure the command format
-
-```yaml
-# config.yaml
-crossServer:
-  transferMethod: PROXY_COMMAND
-  transferCommand: "server {server}"  # Placeholders: {player}, {server}
-```
-
-**Use cases:**
-
-- Custom transfer commands or workflows
-- Networks with existing Proxy-Command-Reloaded setup
-- Need to execute additional commands during transfer
 
 ---
 

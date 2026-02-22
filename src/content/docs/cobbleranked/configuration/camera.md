@@ -20,14 +20,14 @@ Control the overall camera system behavior.
 ```yaml
 enabled: true
 allowPlayerOptOut: true
-defaultEnabled: true
+defaultEnabled: false
 ```
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `enabled` | `true` | Master switch for the camera system |
 | `allowPlayerOptOut` | `true` | Let players disable camera with `/battlecamera toggle` |
-| `defaultEnabled` | `true` | Camera on by default for new players |
+| `defaultEnabled` | `false` | Camera off by default for new players |
 
 ---
 
@@ -311,14 +311,14 @@ Optional ML system that learns player preferences over time.
 
 ```yaml
 machineLearning:
-  enabled: true
+  enabled: false
   defaultOptIn: true
   minBattlesForActivation: 10
 ```
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `enabled` | `true` | Enable ML camera optimization |
+| `enabled` | `false` | Enable ML camera optimization (disabled by default to reduce logging) |
 | `defaultOptIn` | `true` | New players opt-in by default |
 | `minBattlesForActivation` | `10` | Battles needed before ML activates |
 
@@ -337,9 +337,13 @@ machineLearning:
     collectExplicitFeedback: true
     maxTrainingExamples: 1000
   modelPersistence:
-    autoSaveInterval: 300
+    autoSaveInterval: 1800
     modelDirectory: "cobbleranked/camera/ml_models"
 ```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `autoSaveInterval` | `1800` | Auto-save interval in seconds (30 minutes) |
 
 The ML system analyzes player behavior to personalize camera angles and reactions.
 

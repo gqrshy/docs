@@ -120,7 +120,10 @@ Run `/rankedadmin api test` in-game to verify connection.
 | `sync.intervalMinutes` | How often to sync (default: 60) |
 | `sync.dataTypes.usageStats` | Send usage statistics |
 | `sync.dataTypes.leaderboard` | Send leaderboard data |
-| `crossServer.battleServerOnly` | Only battle server syncs (cross-server mode) |
+| `sync.push.enabled` | Enable pushing data to external API |
+| `sync.push.onlyIfChanged` | Only sync when data changes |
+| `http.timeoutSeconds` | Request timeout (default: 30) |
+| `http.retryAttempts` | Number of retries on failure |
 
 <details>
 <summary><strong>Full Configuration</strong></summary>
@@ -130,9 +133,6 @@ enabled: true
 
 endpoint:
   baseUrl: "https://your-website.com/api"
-  paths:
-    pushUsageStats: "/usage-stats"
-    pushLeaderboard: "/leaderboard"
 
 auth:
   apiKey: "your-secret-key-here"
@@ -145,9 +145,13 @@ sync:
   push:
     enabled: true
     onlyIfChanged: true
+  pull:
+    enabled: false
 
-crossServer:
-  battleServerOnly: true
+http:
+  timeoutSeconds: 30
+  retryAttempts: 3
+  retryDelaySeconds: 5
 ```
 
 </details>

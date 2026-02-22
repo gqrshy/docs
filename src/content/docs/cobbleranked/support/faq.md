@@ -125,7 +125,9 @@ blacklist:
     - "Necrozma-Ultra"   # Only Ultra Necrozma
 ```
 
-Species-only entries ban ALL forms. Form-specific entries need exact `-Form` suffix.
+**v2.0.21+ Behavior:**
+- Species-only entries (e.g., `Landorus`) ban ALL forms
+- Form-specific entries (e.g., `Landorus-Therian`) ban ONLY that form
 
 </details>
 
@@ -204,18 +206,20 @@ blacklist:
 **Pokemon Showdown System (Default):**
 
 - Starting ELO: 1000
-- Floor ELO: 1000
-- New players get K-factor 50 for first 30 games
+- Floor ELO: 0 (no minimum)
+- New players get K-factor 35 for first 10 games (industry standard)
 
 | ELO Range | K-Factor |
 |-----------|----------|
-| 0-1100 | 40 |
-| 1101-1300 | 32 |
-| 1301-1600 | 24 |
+| 0-1100 | 30 |
+| 1101-1300 | 25 |
+| 1301-1600 | 20 |
 | 1601-2000 | 16 |
 | 2001+ | 12 |
 
 Higher K-factor = bigger rating changes per match.
+
+**Win Streak Bonus:** Players on 3+ win streaks get +3 K-factor, 5+ wins get +5 K-factor.
 
 </details>
 
@@ -345,6 +349,20 @@ Rewards are sent via MailLib when the season ends.
 3. Redis connected on all servers
 4. Each server has unique `serverId`
 5. One server has empty `battleServer` (handles battles)
+
+</details>
+
+<details>
+<summary><strong>Players not teleported back after battle</strong></summary>
+
+**This issue was fixed in v2.0.21.** Players are now correctly teleported back to their original position after ranked battles (single-server mode).
+
+**If still experiencing issues:**
+
+1. Verify `exitPosition` is set in your arena config
+2. Run `/rankedadmin arena status` to check arena configuration
+3. Ensure no other plugins are interfering with teleportation
+4. Check server logs for teleport-related errors
 
 </details>
 

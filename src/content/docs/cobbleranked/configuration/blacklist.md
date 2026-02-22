@@ -9,6 +9,8 @@ Blacklist settings are part of **Season Presets**, allowing different rules for 
 
 File: `config/cobbleranked/season_presets/<preset_name>.yml`
 
+> **In-Game Viewer:** Use `/ranked` → Blacklist button to view banned content. Click the format display item to toggle between Singles, Doubles, and Triples blacklists (when multiple formats are enabled).
+
 ## Structure Overview
 
 As of v2.0.13, season presets use a **flattened structure**. Blacklists are configured per-format directly under the format name:
@@ -75,10 +77,17 @@ blacklist:
 
 | Format | Example | Description |
 |--------|---------|-------------|
-| Species | `Mewtwo` | Bans all forms |
-| Species-Form | `Kyurem-Black` | Bans specific form |
+| Species only | `Landorus` | Bans ALL forms (Incarnate, Therian, etc.) |
+| Species-Form | `Kyurem-Black` | Bans ONLY that specific form |
 | Regional | `Meowth-Alolan` | Regional variant |
 | Mega | `Charizard-Mega-X` | Mega evolution |
+
+> **v2.0.21+ Behavior:**
+> - `Landorus` → bans ALL Landorus forms (Incarnate, Therian)
+> - `Landorus-Therian` → bans ONLY Therian form
+> - `Landorus-Incarnate` → bans ONLY Incarnate form
+>
+> Use species-only names to ban all forms, or use specific form names to ban individual forms.
 
 ## Move Blacklist
 

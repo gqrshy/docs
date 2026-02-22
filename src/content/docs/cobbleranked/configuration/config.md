@@ -7,13 +7,14 @@ Fine-tune every aspect of your competitive battles. From ELO calculations to mat
 
 ## Configuration Files
 
-CobbleRanked v2.0.13+ uses multiple YAML files in `config/cobbleranked/`:
+CobbleRanked v2.0.21+ uses multiple YAML files in `config/cobbleranked/`:
 
 | File | Purpose |
 |------|---------|
 | `config.yaml` | Core settings: language, database, music, debug |
 | `elo.yaml` | Rating system and rank tiers |
-| `battle.yaml` | Timers, sounds, flee penalties, victory/defeat rewards |
+| `battle.yaml` | Timers, GUI behavior, flee penalties, victory/defeat rewards |
+| `sounds.yaml` | All sound effects (battle, GUI, queue) |
 | `matchmaking.yaml` | Recent opponent avoidance (global) |
 | `season.yaml` | Season schedule and reset behavior |
 | `season_presets/*.yml` | **Format rules** (team size, level cap, matchmaking, blacklist) |
@@ -23,6 +24,21 @@ CobbleRanked v2.0.13+ uses multiple YAML files in `config/cobbleranked/`:
 | `luckperms.yaml` | LuckPerms integration |
 | `missions.yaml` | Daily/weekly missions (disabled by default) |
 | `camera/camera.yaml` | Battle camera system settings |
+
+### GUI Layouts
+
+GUI appearance is configured separately in JSON5 files:
+
+| File | Purpose |
+|------|---------|
+| `gui/ranked_gui.json5` | Ranked battle menu layout |
+| `gui/casual_gui.json5` | Casual battle menu layout |
+| `gui/leaderboard_gui.json5` | Leaderboard display layout |
+| `gui/blacklist_gui.json5` | Banned content viewer layout |
+| `gui/reward_gui.json5` | Season and milestone rewards layout |
+| `gui/missions_gui.json5` | Daily/weekly missions layout |
+
+> 📝 **Note**: GUI layouts (slots, materials, borders) are in `gui/*.json5` files, while GUI behavior (page sizes, cooldowns) is in `battle.yaml` under the `gui:` section.
 
 > **Important**: As of v2.0.13, format-specific settings (team size, level cap, matchmaking rules, blacklists) are configured in **season_presets** instead of battle.yaml or matchmaking.yaml. This keeps all format settings in one place.
 
@@ -37,15 +53,15 @@ The heart of competitive ranking. Configure how player ratings change after each
 ```yaml
 # elo.yaml
 ratingSystem: POKEMON_SHOWDOWN  # or GLICKO2
-startingElo: 1500
-floorElo: 1000
+startingElo: 1000
+floorElo: 0
 ```
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `ratingSystem` | `POKEMON_SHOWDOWN` | Rating algorithm to use |
-| `startingElo` | `1500` | Rating for new players |
-| `floorElo` | `1000` | Minimum possible rating (can't go lower) |
+| `startingElo` | `1000` | Rating for new players |
+| `floorElo` | `0` | Minimum possible rating (no floor) |
 
 ### Pokemon Showdown Mode (Default)
 
@@ -54,19 +70,23 @@ Uses the classic Elo formula with **K-Factor** adjustments. This is the same sys
 ```yaml
 # elo.yaml
 pokemonShowdown:
-  newPlayerGames: 30
-  newPlayerKFactor: 50
+  newPlayerGames: 10
+  newPlayerKFactor: 35
   kFactorBands:
     - maxElo: 1100
-      kFactor: 40
+      kFactor: 30
     - maxElo: 1300
-      kFactor: 32
+      kFactor: 25
     - maxElo: 1600
-      kFactor: 24
+      kFactor: 20
     - maxElo: 2000
       kFactor: 16
     - maxElo: 999999
       kFactor: 12
+  streakBonus:
+    enabled: true
+    threshold3Wins: 3
+    threshold5Wins: 5
 ```
 
 <details>
@@ -75,25 +95,51 @@ pokemonShowdown:
 **K-Factor** determines how much your rating changes after each match. Higher K-Factor = bigger rating swings.
 
 **How it works:**
-- **K-Factor 50**: Win against equal opponent → gain ~25 points
-- **K-Factor 32**: Win against equal opponent → gain ~16 points
+- **K-Factor 35**: Win against equal opponent → gain ~17 points
+- **K-Factor 25**: Win against equal opponent → gain ~12 points
 - **K-Factor 12**: Win against equal opponent → gain ~6 points
 
 **Why variable K-Factor?**
 
 | Player Type | K-Factor | Reason |
 |-------------|----------|--------|
-| New players (< 30 games) | 50 | Quickly find true skill level |
-| Low rating (< 1100) | 40 | Easier to climb out |
-| Mid rating (1100-1600) | 32-24 | Balanced progression |
-| High rating (1600-2000) | 16 | More stable rankings |
+| New players (< 10 games) | 35 | Quickly find true skill level |
+| Low rating (< 1100) | 30 | Easier to climb out |
+| Mid rating (1100-1300) | 25 | Balanced progression |
+| Mid-high rating (1300-1600) | 20 | More stable |
+| High rating (1600-2000) | 16 | Stable rankings |
 | Top rating (2000+) | 12 | Very stable, small changes |
 
 **Example scenario:**
-- Player A (1500 ELO, K=24) beats Player B (1500 ELO, K=24)
+- Player A (1500 ELO, K=20) beats Player B (1500 ELO, K=20)
 - Both have equal 50% expected win rate
-- Player A gains: 24 × (1 - 0.5) = **+12 ELO**
-- Player B loses: 24 × (0 - 0.5) = **-12 ELO**
+- Player A gains: 20 × (1 - 0.5) = **+10 ELO**
+- Player B loses: 20 × (0 - 0.5) = **-10 ELO**
+
+</details>
+
+<details>
+<summary><strong>Win Streak Bonus</strong></summary>
+
+Players on winning streaks receive a K-Factor boost, making it easier to climb when playing well:
+
+```yaml
+streakBonus:
+  enabled: true
+  threshold3Wins: 3   # +3 K-Factor after 3 wins
+  threshold5Wins: 5   # +5 K-Factor after 5+ wins
+```
+
+| Win Streak | K-Factor Bonus |
+|------------|----------------|
+| 3 wins | +3 |
+| 5+ wins | +5 |
+
+**Example:**
+- Player on 5-win streak with K=20 gets effective K=25
+- Win against equal opponent: gain ~12.5 instead of ~10
+
+This rewards consistent performance while keeping the system fair.
 
 </details>
 
@@ -104,12 +150,12 @@ K-Factor Bands assign different K-Factors based on current rating:
 
 ```yaml
 kFactorBands:
-  - maxElo: 1100    # Players below 1100 use K=40
-    kFactor: 40
-  - maxElo: 1300    # Players 1100-1299 use K=32
-    kFactor: 32
-  - maxElo: 1600    # Players 1300-1599 use K=24
-    kFactor: 24
+  - maxElo: 1100    # Players below 1100 use K=30
+    kFactor: 30
+  - maxElo: 1300    # Players 1100-1299 use K=25
+    kFactor: 25
+  - maxElo: 1600    # Players 1300-1599 use K=20
+    kFactor: 20
   - maxElo: 2000    # Players 1600-1999 use K=16
     kFactor: 16
   - maxElo: 999999  # Players 2000+ use K=12
@@ -117,7 +163,7 @@ kFactorBands:
 ```
 
 **Reading the bands:**
-- `maxElo: 1100, kFactor: 40` means "if rating < 1100, use K=40"
+- `maxElo: 1100, kFactor: 30` means "if rating < 1100, use K=30"
 - The system checks bands in order, using the first match
 
 **Customization tips:**
@@ -134,13 +180,13 @@ New players get boosted K-Factor to quickly find their true skill level:
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `newPlayerGames` | `30` | Games before considered "established" |
-| `newPlayerKFactor` | `50` | K-Factor for new players |
+| `newPlayerGames` | `10` | Games before considered "established" (industry standard) |
+| `newPlayerKFactor` | `35` | K-Factor for new players (balanced for fairer matchmaking) |
 
 **How it works:**
-1. Player joins with `startingElo` (e.g., 1500)
-2. First 30 games use K=50 (large rating swings)
-3. After 30 games, K-Factor determined by `kFactorBands`
+1. Player joins with `startingElo` (e.g., 1000)
+2. First 10 games use K=35 (moderate rating swings)
+3. After 10 games, K-Factor determined by `kFactorBands`
 
 **Tuning tips:**
 - Increase `newPlayerGames` if rankings feel unstable
@@ -418,7 +464,13 @@ competitive:
     enabled: true
     decayRate: 1
     decayIntervalHours: 24
+
+  pendingMatchTimeoutMinutes: 5
 ```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `pendingMatchTimeoutMinutes` | `5` | Minutes before a pending match expires |
 
 | Flee Count | Queue Ban |
 |------------|-----------|
@@ -632,15 +684,16 @@ crossServer:
   serverId: "server1"
   battleServer: ""
 
-  # Transfer method (v2.0.15+)
-  transferMethod: PLUGIN_MESSAGE  # or PROXY_COMMAND
-  transferCommand: "server {server}"  # Only used with PROXY_COMMAND
+  # Allow players on battle server to join queue directly (NOT RECOMMENDED)
+  # Default: false - battle servers should only handle matched battles
+  allowQueueOnBattleServer: false
 
   redis:
     host: "localhost"
     port: 6379
     password: ""
     database: 0
+    useSsl: false
 
   timing:
     matchFoundDelaySeconds: 5
@@ -648,12 +701,15 @@ crossServer:
     playerArrivalTimeoutSeconds: 30
 ```
 
-### Transfer Methods
+### Battle Server Queue Behavior
 
-| Method             | Description                                              |
-|--------------------|----------------------------------------------------------|
-| `PLUGIN_MESSAGE`   | Uses BungeeCord plugin messaging (default, recommended)  |
-| `PROXY_COMMAND`    | Uses Proxy-Command-Reloaded via Redis                    |
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `allowQueueOnBattleServer` | `false` | Allow players on battle server to join queue |
+
+When disabled (default), players on the battle server cannot join the queue. This is recommended because the battle server is dedicated to handling matched battles from lobby servers.
+
+> ⚠️ **Warning**: Enabling `allowQueueOnBattleServer` can cause unexpected behavior. Only enable if you understand the implications and have a specific use case.
 
 > See [Cross-Server Setup](../advanced/cross-server/) for detailed guide.
 

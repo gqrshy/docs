@@ -34,7 +34,7 @@ announceCompletion: true
 | `weeklyResetTime` | `"00:00"` | Time to reset weekly missions |
 | `weeklyResetTimezone` | `"UTC"` | Timezone for weekly reset |
 | `autoClaim` | `false` | Automatically claim rewards on completion |
-| `announceCompletion` | `true` | Notify players when missions complete |
+| `announceCompletion` | `false` | Send chat message when mission completes |
 
 ---
 

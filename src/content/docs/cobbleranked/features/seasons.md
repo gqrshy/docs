@@ -107,14 +107,14 @@ announcements:
 ### Reset Types
 
 **Hard Reset** (`resetElo: true`):
-Everyone returns to the starting ELO (1500). Complete fresh start.
+Everyone returns to the starting ELO (1000). Complete fresh start.
 
 **Soft Reset** (`softResetElo: true`):
 ELO moves partway towards starting ELO based on `softResetFactor`.
 
 Example with `softResetFactor: 0.5`:
-- 1800 ELO → 1650 (halfway between 1800 and 1500)
-- 1200 ELO → 1350 (halfway between 1200 and 1500)
+- 1800 ELO → 1400 (halfway between 1800 and 1000)
+- 1200 ELO → 1100 (halfway between 1200 and 1000)
 
 **No Reset** (both false):
 ELO carries over. Rewards skill investment over time.

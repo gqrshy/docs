@@ -40,11 +40,23 @@ Without LuckPerms, permissions work via OP level:
 | Permission | Description |
 |------------|-------------|
 | `cobbleranked.admin.*` | All admin commands |
-| `cobbleranked.admin.arena.*` | Arena management |
+| `cobbleranked.admin.arena.*` | All arena commands |
+| `cobbleranked.admin.arena.create` | Create arenas |
+| `cobbleranked.admin.arena.delete` | Delete arenas |
+| `cobbleranked.admin.arena.edit` | Edit arena positions |
+| `cobbleranked.admin.arena.list` | List all arenas |
+| `cobbleranked.admin.arena.teleport` | Teleport to arenas |
 | `cobbleranked.admin.config.reload` | Reload configuration |
+| `cobbleranked.admin.config.view` | View configuration |
 | `cobbleranked.admin.player.setelo` | Set player ELO |
-| `cobbleranked.admin.queue.clear` | Clear queues |
-| `cobbleranked.admin.season.*` | Season management |
+| `cobbleranked.admin.player.viewothers` | View other players' stats |
+| `cobbleranked.admin.queue.clear` | Clear all queues |
+| `cobbleranked.admin.queue.view` | View queue status |
+| `cobbleranked.admin.queue.kick` | Kick players from queue |
+| `cobbleranked.admin.season.*` | All season commands |
+| `cobbleranked.admin.season.info` | View season info |
+| `cobbleranked.admin.season.rotate` | Trigger season rotation |
+| `cobbleranked.admin.debug` | Access debug commands |
 
 ### Bypass Permissions
 

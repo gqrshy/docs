@@ -27,8 +27,8 @@ description: Welcome to CobbleRanked! Get up and running quickly.
 
 | Mod | Version | Purpose |
 |-----|---------|---------|
-| **GashiLibs** | 1.0.3+ | Shared libraries (database drivers, Redis, config) |
-| **MailLib** | 1.0.1+ | Mail/reward delivery for season rewards |
+| **GashiLibs** | 1.0.6+ | Shared libraries (database drivers, Redis, config) |
+| **MailLib** | 1.0.5+ | Mail/reward delivery for season rewards |
 
 <details>
 <summary><strong>About GashiLibs & MailLib</strong></summary>
