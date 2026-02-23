@@ -1,7 +1,5 @@
 ---
-import LoadingScreen from '../components/LoadingScreen.astro';
 import CustomNav from '../components/CustomNav.astro';
-import WavyBackground from '../components/WavyBackground.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ProductsSection from '../components/ProductsSection.astro';
 import ContactSection from '../components/ContactSection.astro';
@@ -46,11 +44,24 @@ const ogImage = `${siteUrl}/gashistudios.png`;
 	<meta name="twitter:image" content={ogImage} />
 
 	<!-- Theme Color (Discord embed sidebar) -->
-	<meta name="theme-color" content="#7c6c9a" />
+	<meta name="theme-color" content="#0a0a0f" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lilita+One&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 	<style is:global>
+		/* ===== CSS Custom Properties - Dark Theme ===== */
+		:root {
+			--color-bg: #0a0a0f;
+			--color-bg-alt: #111118;
+			--color-bg-card: #16161e;
+			--color-text: #e4e4e7;
+			--color-text-muted: #a1a1aa;
+			--color-primary: #8b5cf6;
+			--color-primary-hover: #a78bfa;
+			--color-border: rgba(255, 255, 255, 0.1);
+			--color-accent: #8b5cf6;
+		}
+
 		* {
 			margin: 0;
 			padding: 0;
@@ -63,10 +74,10 @@ const ogImage = `${siteUrl}/gashistudios.png`;
 
 		body {
 			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-			background: linear-gradient(135deg, #e8e0f0 0%, #d4c8e8 50%, #c8d4f0 100%);
-			color: #4a4a5a;
+			background: var(--color-bg);
+			color: var(--color-text);
 			line-height: 1.6;
-			overflow-x: clip; /* 水平スクロールバー防止、垂直方向はvisible */
+			overflow-x: clip;
 		}
 
 		a {
@@ -117,243 +128,70 @@ const ogImage = `${siteUrl}/gashistudios.png`;
 
 		/* Prevent selection highlight on images and decorative elements */
 		img::selection,
-		svg::selection,
-		.character-image::selection,
-		.acrylic-panel::selection,
-		.blob::selection,
-		.deco-box::selection {
+		svg::selection {
 			background: transparent;
 		}
 
-		/* Prevent caret/cursor appearing in empty or decorative areas */
-		.hero-visual,
-		.acrylic-panel,
-		.blob,
-		.depth-wave,
-		.panel-star,
-		.character-image {
-			user-select: none;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			caret-color: transparent;
+		/* Simple fade animations only */
+		@keyframes fadeIn {
+			from { opacity: 0; }
+			to { opacity: 1; }
 		}
 
-		/* ===== Jelly Animation System ===== */
-		/* Hover in: expand → shrink slightly → expand to final */
-		@keyframes jellyIn {
-			0% { transform: var(--jelly-base, scale(1)); }
-			40% { transform: var(--jelly-overshoot, scale(1.12)); }
-			70% { transform: var(--jelly-undershoot, scale(1.02)); }
-			100% { transform: var(--jelly-final, scale(1.06)); }
-		}
-
-		/* Hover out: expand → shrink → expand slightly → return */
-		@keyframes jellyOut {
-			0% { transform: var(--jelly-final, scale(1.06)); }
-			25% { transform: var(--jelly-out-overshoot, scale(1.1)); }
-			50% { transform: var(--jelly-out-undershoot, scale(0.97)); }
-			75% { transform: var(--jelly-out-bounce, scale(1.02)); }
-			100% { transform: var(--jelly-base, scale(1)); }
-		}
-
-		/* Button/Card variants with translateY */
-		@keyframes jellyInUp {
-			0% { transform: translateY(0) scale(1); }
-			40% { transform: translateY(-6px) scale(1.08); }
-			70% { transform: translateY(-2px) scale(1.01); }
-			100% { transform: translateY(-4px) scale(1.04); }
-		}
-
-		@keyframes jellyOutDown {
-			0% { transform: translateY(-4px) scale(1.04); }
-			25% { transform: translateY(-6px) scale(1.06); }
-			50% { transform: translateY(2px) scale(0.98); }
-			75% { transform: translateY(-1px) scale(1.01); }
-			100% { transform: translateY(0) scale(1); }
-		}
-
-		/* Card variants with larger movement */
-		@keyframes jellyInCard {
-			0% { transform: translateY(0) scale(1); }
-			40% { transform: translateY(-10px) scale(1.05); }
-			70% { transform: translateY(-4px) scale(1.01); }
-			100% { transform: translateY(-6px) scale(1.02); }
-		}
-
-		@keyframes jellyOutCard {
-			0% { transform: translateY(-6px) scale(1.02); }
-			25% { transform: translateY(-8px) scale(1.04); }
-			50% { transform: translateY(3px) scale(0.99); }
-			75% { transform: translateY(-1px) scale(1.005); }
-			100% { transform: translateY(0) scale(1); }
-		}
-
-		/* SNS Icons - Playful pop/wobble effect */
-		@keyframes snsPopIn {
-			0% { transform: scale(1) rotate(0deg); }
-			25% { transform: scale(1.2) rotate(-8deg); }
-			50% { transform: scale(1.15) rotate(5deg); }
-			75% { transform: scale(1.18) rotate(-2deg); }
-			100% { transform: scale(1.15) rotate(0deg); }
-		}
-
-		@keyframes snsPopOut {
-			0% { transform: scale(1.15) rotate(0deg); }
-			20% { transform: scale(1.2) rotate(5deg); }
-			45% { transform: scale(0.95) rotate(-3deg); }
-			70% { transform: scale(1.02) rotate(1deg); }
-			100% { transform: scale(1) rotate(0deg); }
-		}
-
-		/* Footer buttons - Soft float/glow effect */
-		@keyframes floatIn {
-			0% { transform: translateY(0) scale(1); filter: brightness(1); }
-			30% { transform: translateY(-5px) scale(1.05); filter: brightness(1.1); }
-			60% { transform: translateY(-2px) scale(1.02); filter: brightness(1.05); }
-			100% { transform: translateY(-3px) scale(1.03); filter: brightness(1.08); }
-		}
-
-		@keyframes floatOut {
-			0% { transform: translateY(-3px) scale(1.03); filter: brightness(1.08); }
-			30% { transform: translateY(-5px) scale(1.05); filter: brightness(1.1); }
-			60% { transform: translateY(2px) scale(0.98); filter: brightness(0.98); }
-			100% { transform: translateY(0) scale(1); filter: brightness(1); }
-		}
-
-		/* Product Card - Card flip/peek effect from bottom edge */
-		@keyframes cardLiftIn {
-			0% {
-				transform: perspective(1000px) rotateX(0deg) translateY(0) translateZ(0);
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
 			}
-			40% {
-				transform: perspective(1000px) rotateX(-12deg) translateY(-8px) translateZ(30px);
-			}
-			70% {
-				transform: perspective(1000px) rotateX(-4deg) translateY(-3px) translateZ(15px);
-			}
-			100% {
-				transform: perspective(1000px) rotateX(-6deg) translateY(-5px) translateZ(20px);
+			to {
+				opacity: 1;
+				transform: translateY(0);
 			}
 		}
 
-		@keyframes cardLiftOut {
-			0% {
-				transform: perspective(1000px) rotateX(-6deg) translateY(-5px) translateZ(20px);
-			}
-			30% {
-				transform: perspective(1000px) rotateX(-10deg) translateY(-6px) translateZ(25px);
-			}
-			60% {
-				transform: perspective(1000px) rotateX(3deg) translateY(3px) translateZ(-5px);
-			}
-			85% {
-				transform: perspective(1000px) rotateX(-1deg) translateY(-1px) translateZ(5px);
-			}
-			100% {
-				transform: perspective(1000px) rotateX(0deg) translateY(0) translateZ(0);
-			}
-		}
-
-		/* Main container - allow decorations to overflow */
+		/* Main container */
 		main {
 			position: relative;
-			overflow: visible;
 		}
 
-		/* Seamless sections container */
+		/* Sections container */
 		.seamless-sections {
 			position: relative;
-			background: linear-gradient(180deg, #e0e8ff 0%, #e4e6fc 25%, #e8e6fa 50%, #e6e4f8 75%, #dce0f8 100%);
+			background: var(--color-bg);
 			z-index: 1;
-			overflow: visible;
 		}
 
-		/* Shared wave container - spans across Products and Contact */
-		.shared-wave-container {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			pointer-events: none;
-			z-index: 3;
-			overflow: visible;
+		/* Selection Color */
+		::selection {
+			background: rgba(139, 92, 246, 0.3);
+			color: var(--color-text);
 		}
 
-		.depth-wave {
-			position: absolute;
+		/* Custom Scrollbar */
+		::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
 		}
 
-		/* Wave 1 - Left side, through forms */
-		.depth-wave-1 {
-			width: 420px;
-			height: 400px;
-			top: 50%;
-			left: 50%;
-			transform: rotate(-45deg);
+		::-webkit-scrollbar-track {
+			background: var(--color-bg);
 		}
 
-		/* Wave 2 - Right side, through forms */
-		.depth-wave-2 {
-			width: 400px;
-			height: 500px;
-			top: 43%;
-			right: 25%;
-			left: auto;
-			transform: rotate(23deg) scaleX(-1);
+		::-webkit-scrollbar-thumb {
+			background: rgba(255, 255, 255, 0.2);
+			border-radius: 4px;
 		}
 
-		@media (max-width: 900px) {
-			.depth-wave-1 {
-				width: 320px;
-				height: 600px;
-				left: 2%;
-			}
-			.depth-wave-2 {
-				width: 300px;
-				height: 550px;
-				right: 2%;
-			}
-		}
-
-		@media (max-width: 600px) {
-			.depth-wave-1 {
-				width: 220px;
-				height: 400px;
-				left: -5%;
-				top: 40%;
-			}
-			.depth-wave-2 {
-				width: 200px;
-				height: 380px;
-				right: -5%;
-				top: 30%;
-			}
+		::-webkit-scrollbar-thumb:hover {
+			background: rgba(255, 255, 255, 0.3);
 		}
 	</style>
 </head>
 <body>
-	<LoadingScreen />
-	<WavyBackground />
 	<CustomNav />
 	<main>
 		<HeroSection />
-		<!-- Seamless container for Products + Contact with shared wave decorations -->
 		<div class="seamless-sections">
-			<!-- Main bold wave decoration - spans across both sections -->
-			<div class="shared-wave-container">
-				<!-- Wave 1 - Left side -->
-				<svg class="depth-wave depth-wave-1" viewBox="-41 -41 573 813" fill="none">
-					<path d="M449.03 24.6557C366.929 37.1979 339.739 82.6143 367.461 160.905C395.183 239.196 367.993 284.612 285.892 297.154C203.79 309.697 176.601 355.113 204.322 433.404C232.044 511.695 204.854 557.111 122.753 569.653C40.6517 582.195 13.4619 627.612 41.1837 705.903"
-						stroke="#4C75F2" stroke-width="82" stroke-linecap="round"/>
-				</svg>
-				<!-- Wave 2 - Right side -->
-				<svg class="depth-wave depth-wave-2" viewBox="-41 -41 573 813" fill="none">
-					<path d="M449.03 24.6557C366.929 37.1979 339.739 82.6143 367.461 160.905C395.183 239.196 367.993 284.612 285.892 297.154C203.79 309.697 176.601 355.113 204.322 433.404C232.044 511.695 204.854 557.111 122.753 569.653C40.6517 582.195 13.4619 627.612 41.1837 705.903"
-						stroke="#4C75F2" stroke-width="82" stroke-linecap="round"/>
-				</svg>
-			</div>
 			<ProductsSection />
 			<ContactSection />
 		</div>

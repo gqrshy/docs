@@ -63,7 +63,7 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 .toc-title {
 	font-size: 0.75rem;
 	font-weight: 600;
-	color: #454141;
+	color: var(--color-text);
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 	margin-bottom: 1rem;
@@ -87,22 +87,22 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 	display: block;
 	padding: 0.25rem 0;
 	padding-left: 0.75rem;
-	color: #6b5b7a;
+	color: var(--color-text-muted);
 	font-size: 0.85rem;
 	text-decoration: none;
-	border-left: 2px solid rgba(74, 122, 255, 0.25);
+	border-left: 2px solid rgba(139, 92, 246, 0.25);
 	transition: all 0.2s ease;
 	line-height: 1.4;
 }
 
 .toc-link:hover {
-	color: #4a7aff;
-	border-left-color: rgba(74, 122, 255, 0.5);
+	color: var(--color-primary);
+	border-left-color: rgba(139, 92, 246, 0.5);
 }
 
 .toc-link.active {
-	color: #4a7aff;
-	border-left-color: #4a7aff;
+	color: var(--color-primary);
+	border-left-color: var(--color-primary);
 }
 
 .depth-3 .toc-link {

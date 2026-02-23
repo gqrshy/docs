@@ -1,29 +1,13 @@
 ---
-// Contact section - PolarCub-inspired layout with wave on left, text on right
+// Contact section - Dark mode design
 ---
 
 <section id="contact" class="contact-section">
-	<!-- Thin decorative wave lines - organized in periodic blocks like PolarCub -->
-	<!-- Left block -->
-	<div class="thin-wave-block block-left">
-		<svg class="thin-wave" viewBox="0 0 20 200" fill="none"><path d="M10 0 Q0 25 10 50 Q20 75 10 100 Q0 125 10 150 Q20 175 10 200" stroke="#a0a0c8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-		<svg class="thin-wave" viewBox="0 0 20 200" fill="none"><path d="M10 0 Q0 25 10 50 Q20 75 10 100 Q0 125 10 150 Q20 175 10 200" stroke="#a0a0c8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-		<svg class="thin-wave" viewBox="0 0 20 200" fill="none"><path d="M10 0 Q0 25 10 50 Q20 75 10 100 Q0 125 10 150 Q20 175 10 200" stroke="#a0a0c8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-		<svg class="thin-wave" viewBox="0 0 20 200" fill="none"><path d="M10 0 Q0 25 10 50 Q20 75 10 100 Q0 125 10 150 Q20 175 10 200" stroke="#a0a0c8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-	</div>
-	<!-- Right block -->
-	<div class="thin-wave-block block-right">
-		<svg class="thin-wave" viewBox="0 0 20 200" fill="none"><path d="M10 0 Q0 25 10 50 Q20 75 10 100 Q0 125 10 150 Q20 175 10 200" stroke="#a0a0c8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-		<svg class="thin-wave" viewBox="0 0 20 200" fill="none"><path d="M10 0 Q0 25 10 50 Q20 75 10 100 Q0 125 10 150 Q20 175 10 200" stroke="#a0a0c8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-		<svg class="thin-wave" viewBox="0 0 20 200" fill="none"><path d="M10 0 Q0 25 10 50 Q20 75 10 100 Q0 125 10 150 Q20 175 10 200" stroke="#a0a0c8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-		<svg class="thin-wave" viewBox="0 0 20 200" fill="none"><path d="M10 0 Q0 25 10 50 Q20 75 10 100 Q0 125 10 150 Q20 175 10 200" stroke="#a0a0c8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-	</div>
-
 	<div class="contact-wrapper">
-		<!-- Header - Left aligned -->
+		<!-- Header -->
 		<div class="contact-header">
 			<h2 class="contact-title">
-				<span data-i18n="contactTitle">Get in touch</span><span class="title-marks">!!</span>
+				<span data-i18n="contactTitle">Get in touch</span>
 			</h2>
 			<p class="contact-subtitle" data-i18n="contactSubtitle">
 				Want to collaborate or have questions?<br />
@@ -34,7 +18,7 @@
 			</p>
 		</div>
 
-		<!-- Form - PolarCub style (no card wrapper, inputs have individual glass effect) -->
+		<!-- Form -->
 		<form class="contact-form" action="https://formsubmit.co/gashistudios.llc@gmail.com" method="POST">
 			<!-- Honeypot -->
 			<input type="text" name="_honey" style="display:none">
@@ -106,133 +90,53 @@
 .contact-section {
 	position: relative;
 	padding: 5rem 2rem 6rem;
-	background: transparent;
-	overflow: visible;
+	background: var(--color-bg);
 }
 
-/* ===== Thin Decorative Waves - Organized Periodic Blocks ===== */
-.thin-wave-block {
-	position: absolute;
-	display: flex;
-	gap: 30px;
-	pointer-events: none;
-	z-index: 1;
-}
-
-.thin-wave {
-	width: 20px;
-	height: 180px;
-	opacity: 0.35;
-}
-
-/* Left block - positioned at left edge */
-.block-left {
-	top: 15%;
-	left: 3%;
-	transform: rotate(-5deg);
-}
-
-/* Right block - positioned at right edge */
-.block-right {
-	top: 20%;
-	right: 3%;
-	transform: rotate(5deg);
-}
-
-/* ===== Wave Container - Behind form for depth effect ===== */
-.wave-container {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	pointer-events: none;
-	z-index: 3;
-	overflow: visible;
-}
-
-.depth-wave {
-	position: absolute;
-}
-
-/* Wave 1 - Left side, through Email input and textarea */
-.depth-wave-1 {
-	width: 420px;
-	height: 800px;
-	top: -20%;
-	left: 18%;
-	transform: rotate(5deg);
-}
-
-/* Wave 2 - Right side, through Name input and textarea */
-.depth-wave-2 {
-	width: 400px;
-	height: 750px;
-	top: -30%;
-	right: 15%;
-	left: auto;
-	transform: rotate(-8deg) scaleX(-1);
-}
-
-/* ===== Wrapper ===== */
+/* Wrapper */
 .contact-wrapper {
 	position: relative;
-	max-width: 1100px;
+	max-width: 800px;
 	margin: 0 auto;
-	z-index: 5;
 }
 
-/* ===== Header - Left aligned ===== */
+/* Header */
 .contact-header {
-	text-align: left;
+	text-align: center;
 	margin-bottom: 2rem;
-	position: relative;
-	z-index: 10;
-	/* Header should be above everything */
-	background: transparent;
 }
 
 .contact-title {
-	font-family: 'Lilita One', 'Inter', sans-serif;
-	font-size: 4rem;
-	font-weight: 400;
-	color: #454141;
+	font-size: 3rem;
+	font-weight: 700;
+	color: var(--color-text);
 	margin: 0 0 16px;
 	line-height: 1.1;
 }
 
-.title-marks {
-	color: #ff4080;
-}
-
 .contact-subtitle {
 	font-size: 1.1rem;
-	color: #5a5a6a;
+	color: var(--color-text-muted);
 	margin: 0 0 8px;
 	line-height: 1.7;
 }
 
 .highlight {
-	color: #ff4080;
-	text-decoration: underline;
-	text-decoration-style: wavy;
-	text-underline-offset: 3px;
+	color: var(--color-primary);
 }
 
 .contact-note {
 	font-size: 0.9rem;
-	color: #ff4080;
+	color: var(--color-text-muted);
 	margin: 0;
-	font-weight: 500;
+	opacity: 0.7;
 }
 
-/* ===== Form - PolarCub Style ===== */
+/* Form */
 .contact-form {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	position: relative;
-	z-index: 5;
 }
 
 .form-row {
@@ -241,40 +145,34 @@
 	gap: 20px;
 }
 
-/* PolarCub-style frosted glass inputs */
 .contact-form input[type="email"],
 .contact-form input[type="text"],
 .contact-form textarea {
 	width: 100%;
-	padding: 24px 32px;
-	border: 2px solid transparent;
-	border-radius: 16px;
-	background-color: rgba(203, 201, 242, 0.7);
-	backdrop-filter: blur(24px);
-	-webkit-backdrop-filter: blur(24px);
-	font-size: 1.15rem;
+	padding: 16px 20px;
+	border: 1px solid var(--color-border);
+	border-radius: 8px;
+	background: var(--color-bg-card);
+	font-size: 1rem;
 	font-family: inherit;
-	font-weight: 500;
-	color: #4c75f2;
-	transition: all 0.2s ease;
+	color: var(--color-text);
+	transition: border-color 0.2s ease;
 }
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-	color: #454141;
-	font-weight: 500;
+	color: var(--color-text-muted);
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
 	outline: none;
-	border-color: #4c75f2;
-	background-color: rgba(203, 201, 242, 0.85);
+	border-color: var(--color-primary);
 }
 
 .contact-form textarea {
 	resize: vertical;
-	min-height: 160px;
+	min-height: 140px;
 }
 
 .submit-btn {
@@ -283,68 +181,46 @@
 	justify-content: center;
 	gap: 10px;
 	padding: 14px 40px;
-	background: linear-gradient(135deg, #ff4080 0%, #ff6090 100%);
+	background: var(--color-primary);
 	color: #fff;
 	border: none;
-	border-radius: 50px;
+	border-radius: 8px;
 	font-size: 1rem;
 	font-weight: 600;
 	font-family: inherit;
 	cursor: pointer;
-	transition: box-shadow 0.2s ease;
-	box-shadow: 0 4px 20px rgba(255, 64, 128, 0.35);
+	transition: background 0.2s ease;
 	align-self: center;
 	margin-top: 8px;
-	animation: jellyOutDown 0.4s ease forwards;
 }
 
 .submit-btn:hover {
-	box-shadow: 0 8px 30px rgba(255, 64, 128, 0.45);
-	animation: jellyInUp 0.35s ease forwards;
+	background: var(--color-primary-light);
 }
 
 .submit-btn svg {
 	flex-shrink: 0;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 900px) {
+/* Responsive */
+@media (max-width: 768px) {
 	.contact-header {
 		text-align: center;
 	}
 
 	.contact-title {
-		font-size: 3rem;
+		font-size: 2.5rem;
 	}
 
-	.depth-wave-1 {
-		width: 320px;
-		height: 600px;
-		left: 2%;
+	.contact-form input[type="email"],
+	.contact-form input[type="text"],
+	.contact-form textarea {
+		padding: 14px 16px;
+		font-size: 1rem;
 	}
 
-	.depth-wave-2 {
-		width: 300px;
-		height: 550px;
-		right: 2%;
-	}
-
-	/* Adjust thin wave blocks on tablet */
-	.thin-wave-block {
-		gap: 20px;
-	}
-
-	.thin-wave {
-		height: 140px;
-		opacity: 0.25;
-	}
-
-	.block-left {
-		left: 1%;
-	}
-
-	.block-right {
-		right: 1%;
+	.form-row {
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -354,46 +230,16 @@
 	}
 
 	.contact-title {
-		font-size: 2.5rem;
+		font-size: 2rem;
 	}
 
 	.contact-subtitle {
 		font-size: 1rem;
 	}
 
-	.contact-form input[type="email"],
-	.contact-form input[type="text"],
-	.contact-form textarea {
-		padding: 18px 20px;
-		font-size: 1rem;
-	}
-
-	.form-row {
-		grid-template-columns: 1fr;
-	}
-
-	.depth-wave-1 {
-		width: 220px;
-		height: 400px;
-		left: -5%;
-		top: 5%;
-	}
-
-	.depth-wave-2 {
-		width: 200px;
-		height: 380px;
-		right: -5%;
-		top: -5%;
-	}
-
 	.submit-btn {
 		padding: 14px 32px;
 		font-size: 0.95rem;
-	}
-
-	/* Hide thin wave blocks on mobile */
-	.thin-wave-block {
-		display: none;
 	}
 }
 </style>

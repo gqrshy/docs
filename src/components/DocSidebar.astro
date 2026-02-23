@@ -170,22 +170,14 @@ function hasActiveChild(items: any[]): boolean {
 </script>
 
 <style>
-/* CSS Variables */
-:root {
-	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-	--ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
-	--ease-spring: cubic-bezier(0.87, 0.05, 0.02, 0.97);
-}
-
 .doc-sidebar {
 	position: fixed;
 	top: 60px;
 	left: 0;
 	width: 280px;
 	height: calc(100vh - 60px);
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 246, 255, 0.9) 100%);
-	backdrop-filter: blur(12px);
-	border-right: 1px solid rgba(124, 108, 154, 0.15);
+	background: var(--color-bg-alt);
+	border-right: 1px solid var(--color-border);
 	display: flex;
 	flex-direction: column;
 	z-index: 100;
@@ -209,11 +201,11 @@ function hasActiveChild(items: any[]): boolean {
 	padding: 0.75rem 1.25rem;
 	font-size: 0.9rem;
 	font-weight: 600;
-	color: #454141;
+	color: var(--color-text);
 	cursor: pointer;
 	list-style: none;
 	user-select: none;
-	transition: color 0.2s var(--ease-out-expo), background 0.2s var(--ease-out-expo);
+	transition: color 0.2s ease, background 0.2s ease;
 	border-radius: 8px;
 	margin: 0 0.5rem;
 }
@@ -226,10 +218,10 @@ function hasActiveChild(items: any[]): boolean {
 	content: '';
 	width: 6px;
 	height: 6px;
-	border-right: 2px solid rgba(107, 91, 122, 0.5);
-	border-bottom: 2px solid rgba(107, 91, 122, 0.5);
+	border-right: 2px solid var(--color-text-muted);
+	border-bottom: 2px solid var(--color-text-muted);
 	transform: rotate(-45deg);
-	transition: transform 0.25s var(--ease-out-expo), border-color 0.2s ease;
+	transition: transform 0.25s ease, border-color 0.2s ease;
 	flex-shrink: 0;
 }
 
@@ -238,12 +230,12 @@ function hasActiveChild(items: any[]): boolean {
 }
 
 .section-title:hover {
-	color: #6b5b7a;
-	background: rgba(124, 108, 154, 0.1);
+	color: var(--color-primary);
+	background: rgba(139, 92, 246, 0.1);
 }
 
 .section-title:hover::before {
-	border-color: #6b5b7a;
+	border-color: var(--color-primary);
 }
 
 .section-icon {
@@ -263,11 +255,11 @@ function hasActiveChild(items: any[]): boolean {
 	display: flex;
 	align-items: center;
 	padding: 0.5rem 0.875rem;
-	color: #6b5b7a;
+	color: var(--color-text-muted);
 	text-decoration: none;
 	font-size: 0.875rem;
 	border-radius: 6px;
-	transition: color 0.2s var(--ease-out-expo), background 0.2s var(--ease-out-expo);
+	transition: color 0.2s ease, background 0.2s ease;
 }
 
 .link-text {
@@ -276,23 +268,23 @@ function hasActiveChild(items: any[]): boolean {
 }
 
 .nav-link:hover {
-	color: #4a7aff;
-	background: rgba(74, 122, 255, 0.08);
+	color: var(--color-primary);
+	background: rgba(139, 92, 246, 0.1);
 }
 
 .nav-link.active {
-	color: #4a7aff;
-	background: rgba(74, 122, 255, 0.12);
+	color: var(--color-primary);
+	background: rgba(139, 92, 246, 0.15);
 	font-weight: 500;
 }
 
 .nav-link.top-level {
 	font-weight: 500;
-	color: #454141;
+	color: var(--color-text);
 }
 
 .nav-link.top-level:hover {
-	color: #4a7aff;
+	color: var(--color-primary);
 }
 
 /* Collapsible groups - dropdown style */
@@ -304,12 +296,12 @@ details > summary {
 	display: flex;
 	align-items: center;
 	padding: 0.5rem 0.875rem;
-	color: #454141;
+	color: var(--color-text);
 	font-size: 0.875rem;
 	font-weight: 500;
 	cursor: pointer;
 	border-radius: 6px;
-	transition: color 0.2s var(--ease-out-expo), background 0.2s var(--ease-out-expo);
+	transition: color 0.2s ease, background 0.2s ease;
 	list-style: none;
 	user-select: none;
 }
@@ -322,11 +314,11 @@ details > summary::before {
 	content: '';
 	width: 6px;
 	height: 6px;
-	border-right: 2px solid rgba(107, 91, 122, 0.5);
-	border-bottom: 2px solid rgba(107, 91, 122, 0.5);
+	border-right: 2px solid var(--color-text-muted);
+	border-bottom: 2px solid var(--color-text-muted);
 	transform: rotate(-45deg);
 	margin-right: 0.625rem;
-	transition: transform 0.25s var(--ease-out-expo), border-color 0.2s ease;
+	transition: transform 0.25s ease, border-color 0.2s ease;
 }
 
 details[open] > summary::before {
@@ -334,12 +326,12 @@ details[open] > summary::before {
 }
 
 details > summary:hover {
-	color: #4a7aff;
-	background: rgba(74, 122, 255, 0.06);
+	color: var(--color-primary);
+	background: rgba(139, 92, 246, 0.1);
 }
 
 details > summary:hover::before {
-	border-color: #4a7aff;
+	border-color: var(--color-primary);
 }
 
 /* Hierarchical nested list - staircase style */
@@ -347,10 +339,10 @@ details > summary:hover::before {
 	list-style: none;
 	margin: 4px 0 4px 0;
 	padding: 4px 0 4px 0.75rem;
-	border-left: 2px solid rgba(74, 122, 255, 0.2);
+	border-left: 2px solid rgba(139, 92, 246, 0.3);
 	margin-left: 0.875rem;
 	position: relative;
-	transition: border-color 0.3s var(--ease-out-expo);
+	transition: border-color 0.3s ease;
 }
 
 .nav-sublist li {
@@ -360,7 +352,7 @@ details > summary:hover::before {
 .nav-sublist .nav-link {
 	font-size: 0.8125rem;
 	padding: 0.375rem 0.75rem;
-	color: #7c6c9a;
+	color: var(--color-text-muted);
 	font-weight: 400;
 	position: relative;
 }
@@ -374,15 +366,15 @@ details > summary:hover::before {
 	transform: translateY(-50%);
 	width: 3px;
 	height: 0;
-	background: linear-gradient(180deg, #4a7aff, #6b8cff);
+	background: var(--color-primary);
 	border-radius: 2px;
 	margin-left: -2px;
 	opacity: 0;
-	transition: height 0.25s var(--ease-out-expo), opacity 0.25s var(--ease-out-expo);
+	transition: height 0.25s ease, opacity 0.25s ease;
 }
 
 .nav-sublist .nav-link:hover {
-	color: #4a7aff;
+	color: var(--color-primary);
 }
 
 .nav-sublist .nav-link:hover::after {
@@ -391,8 +383,8 @@ details > summary:hover::before {
 }
 
 .nav-sublist .nav-link.active {
-	color: #4a7aff;
-	background: rgba(74, 122, 255, 0.1);
+	color: var(--color-primary);
+	background: rgba(139, 92, 246, 0.1);
 }
 
 .nav-sublist .nav-link.active::after {
@@ -403,7 +395,7 @@ details > summary:hover::before {
 /* Footer */
 .sidebar-footer {
 	padding: 1rem 1.5rem;
-	border-top: 1px solid rgba(74, 122, 255, 0.15);
+	border-top: 1px solid var(--color-border);
 }
 
 .sidebar-discord {
@@ -418,7 +410,7 @@ details > summary:hover::before {
 	border-radius: 8px;
 	font-weight: 500;
 	font-size: 0.9rem;
-	transition: background 0.2s var(--ease-out-expo), transform 0.2s var(--ease-out-expo);
+	transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .sidebar-discord:hover {
@@ -433,18 +425,18 @@ details > summary:hover::before {
 	top: 70px;
 	left: 1rem;
 	z-index: 200;
-	background: rgba(74, 122, 255, 0.9);
+	background: var(--color-primary);
 	border: none;
 	border-radius: 8px;
 	padding: 0.5rem;
 	color: #fff;
 	cursor: pointer;
-	box-shadow: 0 4px 15px rgba(74, 122, 255, 0.3);
+	box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
 	transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .sidebar-toggle:hover {
-	background: rgba(74, 122, 255, 1);
+	background: var(--color-primary-light);
 }
 
 .sidebar-toggle:active {
@@ -458,11 +450,11 @@ details > summary:hover::before {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(4px);
 	z-index: 99;
 	opacity: 0;
-	transition: opacity 0.3s var(--ease-out-expo);
+	transition: opacity 0.3s ease;
 }
 
 .sidebar-overlay.open {
@@ -479,20 +471,20 @@ details > summary:hover::before {
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb {
-	background: rgba(74, 122, 255, 0.3);
+	background: rgba(139, 92, 246, 0.3);
 	border-radius: 3px;
 	transition: background 0.2s ease;
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb:hover {
-	background: rgba(74, 122, 255, 0.5);
+	background: rgba(139, 92, 246, 0.5);
 }
 
 /* Responsive */
 @media (max-width: 992px) {
 	.doc-sidebar {
 		transform: translateX(-100%);
-		transition: transform 0.35s var(--ease-out-expo);
+		transition: transform 0.35s ease;
 	}
 
 	.doc-sidebar.open {
