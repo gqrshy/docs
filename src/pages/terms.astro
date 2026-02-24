@@ -646,6 +646,18 @@ import Footer from '../components/Footer.astro';
 	</script>
 
 	<style>
+		/* CSS Variables */
+		:root {
+			--color-bg: #0a0a0f;
+			--color-bg-alt: #111118;
+			--color-bg-card: #16161e;
+			--color-text: #e4e4e7;
+			--color-text-muted: #a1a1aa;
+			--color-primary: #8b5cf6;
+			--color-primary-light: #a78bfa;
+			--color-border: rgba(255, 255, 255, 0.1);
+		}
+
 		* {
 			margin: 0;
 			padding: 0;
@@ -659,26 +671,26 @@ import Footer from '../components/Footer.astro';
 
 		body {
 			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-			background: linear-gradient(135deg, #edecff 0%, #e8e4ff 50%, #e0e8ff 100%);
-			color: #454141;
+			background: var(--color-bg);
+			color: var(--color-text);
 			line-height: 1.7;
 		}
 
 		a {
-			color: #7c6c9a;
+			color: var(--color-primary);
 			text-decoration: none;
 			transition: color 0.2s;
 		}
 
 		a:hover {
-			color: #9a8ab0;
+			color: var(--color-primary-light);
 		}
 
 		/* Hero */
 		.terms-hero {
 			padding: 8rem 2rem 4rem;
-			background: linear-gradient(135deg, #e8e4ff 0%, #dce0f8 100%);
-			border-bottom: 1px solid rgba(124, 108, 154, 0.2);
+			background: var(--color-bg-alt);
+			border-bottom: 1px solid var(--color-border);
 		}
 
 		.hero-content {
@@ -689,8 +701,8 @@ import Footer from '../components/Footer.astro';
 
 		.hero-badge {
 			display: inline-block;
-			background: rgba(124, 108, 154, 0.2);
-			color: #7c6c9a;
+			background: rgba(139, 92, 246, 0.15);
+			color: var(--color-primary-light);
 			padding: 0.25rem 1rem;
 			border-radius: 20px;
 			font-size: 0.85rem;
@@ -701,12 +713,12 @@ import Footer from '../components/Footer.astro';
 		.terms-hero h1 {
 			font-size: 3rem;
 			font-weight: 700;
-			color: #454141;
+			color: var(--color-text);
 			margin-bottom: 1rem;
 		}
 
 		.hero-subtitle {
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			font-size: 1.1rem;
 			margin-bottom: 1.5rem;
 		}
@@ -722,7 +734,7 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
-			color: #8a7a9a;
+			color: var(--color-text-muted);
 			font-size: 0.9rem;
 		}
 
@@ -747,7 +759,7 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.toc h3 {
-			color: #8a7a9a;
+			color: var(--color-text-muted);
 			font-size: 0.75rem;
 			font-weight: 600;
 			text-transform: uppercase;
@@ -763,21 +775,21 @@ import Footer from '../components/Footer.astro';
 			display: block;
 			padding: 0.5rem 0;
 			padding-left: 1rem;
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			font-size: 0.9rem;
-			border-left: 2px solid rgba(124, 108, 154, 0.2);
+			border-left: 2px solid rgba(139, 92, 246, 0.25);
 			transition: all 0.2s;
 		}
 
 		.toc-link:hover {
-			color: #7c6c9a;
-			border-left-color: rgba(124, 108, 154, 0.5);
+			color: var(--color-primary);
+			border-left-color: rgba(139, 92, 246, 0.5);
 		}
 
 		.toc-link.active {
-			color: #7c6c9a;
-			border-left-color: #7c6c9a;
-			background: rgba(124, 108, 154, 0.1);
+			color: var(--color-primary);
+			border-left-color: var(--color-primary);
+			background: rgba(139, 92, 246, 0.1);
 		}
 
 		/* Content */
@@ -788,7 +800,7 @@ import Footer from '../components/Footer.astro';
 		.terms-section {
 			margin-bottom: 4rem;
 			padding-bottom: 3rem;
-			border-bottom: 1px solid rgba(124, 108, 154, 0.15);
+			border-bottom: 1px solid var(--color-border);
 		}
 
 		.terms-section.final {
@@ -808,39 +820,38 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background: rgba(124, 108, 154, 0.15);
+			background: rgba(139, 92, 246, 0.15);
 			border-radius: 12px;
-			color: #7c6c9a;
+			color: var(--color-primary);
 			flex-shrink: 0;
 		}
 
 		.section-icon svg {
-			stroke: #7c6c9a;
+			stroke: var(--color-primary);
 		}
 
 		.section-header h2 {
 			font-size: 1.75rem;
 			font-weight: 600;
-			color: #454141;
+			color: var(--color-text);
 		}
 
 		.section-intro {
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			margin-bottom: 1.5rem;
 		}
 
 		/* Info Cards */
 		.info-card {
-			background: rgba(255, 255, 255, 0.7);
-			border: 1px solid rgba(124, 108, 154, 0.2);
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.5rem;
 			margin-bottom: 1.5rem;
-			backdrop-filter: blur(10px);
 		}
 
 		.info-card h3, .info-card h4 {
-			color: #454141;
+			color: var(--color-text);
 			margin-bottom: 1rem;
 		}
 
@@ -853,7 +864,7 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			justify-content: space-between;
 			padding: 0.75rem 0;
-			border-bottom: 1px solid rgba(124, 108, 154, 0.1);
+			border-bottom: 1px solid var(--color-border);
 		}
 
 		.info-item:last-child {
@@ -861,15 +872,15 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.info-label {
-			color: #8a7a9a;
+			color: var(--color-text-muted);
 		}
 
 		.info-value {
-			color: #5a5a6a;
+			color: var(--color-text);
 		}
 
 		.info-value.highlight {
-			color: #7c6c9a;
+			color: var(--color-primary-light);
 		}
 
 		.info-row {
@@ -894,23 +905,23 @@ import Footer from '../components/Footer.astro';
 		.price {
 			font-size: 2rem;
 			font-weight: 700;
-			color: #454141;
+			color: var(--color-text);
 		}
 
 		.price span {
 			font-size: 1rem;
-			color: #8a7a9a;
+			color: var(--color-text-muted);
 		}
 
 		.payment-method, .delivery {
 			font-size: 1.1rem;
 			font-weight: 600;
-			color: #454141;
+			color: var(--color-text);
 		}
 
 		.note {
 			font-size: 0.85rem;
-			color: #8a7a9a;
+			color: var(--color-text-muted);
 			margin-top: 0.5rem;
 		}
 
@@ -918,38 +929,38 @@ import Footer from '../components/Footer.astro';
 		.warning-box {
 			display: flex;
 			gap: 1rem;
-			background: rgba(124, 108, 154, 0.08);
-			border: 1px solid rgba(124, 108, 154, 0.25);
+			background: rgba(139, 92, 246, 0.1);
+			border: 1px solid rgba(139, 92, 246, 0.25);
 			border-radius: 12px;
 			padding: 1.25rem;
 		}
 
 		.warning-icon {
 			flex-shrink: 0;
-			color: #7c6c9a;
+			color: var(--color-primary);
 		}
 
 		.warning-icon svg {
-			stroke: #7c6c9a;
+			stroke: var(--color-primary);
 		}
 
 		.warning-box strong {
-			color: #5a4a7a;
+			color: var(--color-text);
 		}
 
 		.warning-box p {
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			margin-top: 0.25rem;
 			font-size: 0.9rem;
 		}
 
 		.danger-box {
-			background: rgba(124, 108, 154, 0.12);
-			border: 1px solid rgba(124, 108, 154, 0.3);
+			background: rgba(239, 68, 68, 0.1);
+			border: 1px solid rgba(239, 68, 68, 0.3);
 			border-radius: 12px;
 			padding: 1.25rem;
 			text-align: center;
-			color: #5a4a7a;
+			color: #fca5a5;
 		}
 
 		/* Permit Grid */
@@ -961,8 +972,8 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.permit-card {
-			background: rgba(124, 108, 154, 0.08);
-			border: 1px solid rgba(124, 108, 154, 0.2);
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.25rem;
 			text-align: center;
@@ -970,29 +981,30 @@ import Footer from '../components/Footer.astro';
 
 		.permit-icon {
 			margin-bottom: 0.5rem;
-			color: #7c6c9a;
+			color: var(--color-primary);
 		}
 
 		.permit-icon svg {
-			stroke: #7c6c9a;
+			stroke: var(--color-primary);
 		}
 
 		.permit-card h4 {
-			color: #7c6c9a;
+			color: var(--color-text);
 			font-size: 0.95rem;
 			margin-bottom: 0.25rem;
 		}
 
 		.permit-card p {
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			font-size: 0.85rem;
 		}
 
 		.license-note {
-			background: rgba(124, 108, 154, 0.1);
-			border-left: 3px solid #7c6c9a;
+			background: rgba(139, 92, 246, 0.1);
+			border-left: 3px solid var(--color-primary);
 			padding: 1rem 1.25rem;
 			border-radius: 0 8px 8px 0;
+			color: var(--color-text);
 		}
 
 		/* Prohibited */
@@ -1001,7 +1013,7 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.prohibited-category h3 {
-			color: #5a4a7a;
+			color: var(--color-text);
 			font-size: 1.1rem;
 			margin-bottom: 0.75rem;
 		}
@@ -1014,14 +1026,14 @@ import Footer from '../components/Footer.astro';
 			position: relative;
 			padding-left: 1.5rem;
 			margin-bottom: 0.5rem;
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 		}
 
 		.prohibited-list li::before {
 			content: '×';
 			position: absolute;
 			left: 0;
-			color: #7c6c9a;
+			color: #f87171;
 			font-weight: bold;
 		}
 
@@ -1035,14 +1047,14 @@ import Footer from '../components/Footer.astro';
 			position: relative;
 			padding-left: 1.5rem;
 			margin-bottom: 0.5rem;
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 		}
 
 		.standard-list li::before {
 			content: '•';
 			position: absolute;
 			left: 0;
-			color: #7c6c9a;
+			color: var(--color-primary);
 		}
 
 		.compact-list {
@@ -1053,7 +1065,7 @@ import Footer from '../components/Footer.astro';
 			position: relative;
 			padding-left: 1rem;
 			margin-bottom: 0.4rem;
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			font-size: 0.9rem;
 		}
 
@@ -1061,22 +1073,21 @@ import Footer from '../components/Footer.astro';
 			content: '–';
 			position: absolute;
 			left: 0;
-			color: #8a7a9a;
+			color: var(--color-text-muted);
 		}
 
 		/* Legal Box */
 		.legal-box {
-			background: rgba(255, 255, 255, 0.8);
-			border: 1px solid rgba(124, 108, 154, 0.2);
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.5rem;
 			margin-bottom: 1.5rem;
 			font-family: 'Courier New', monospace;
-			backdrop-filter: blur(10px);
 		}
 
 		.legal-box p {
-			color: #454141;
+			color: var(--color-text);
 			margin-bottom: 1rem;
 		}
 
@@ -1086,33 +1097,33 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.legal-box li {
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			margin-bottom: 0.25rem;
 		}
 
 		.legal-box li::before {
 			content: '› ';
-			color: #7c6c9a;
+			color: var(--color-primary);
 		}
 
 		.liability-cap {
-			background: rgba(124, 108, 154, 0.15);
+			background: rgba(139, 92, 246, 0.15);
 			border-radius: 8px;
 			padding: 1rem 1.5rem;
 			text-align: center;
-			color: #7c6c9a;
+			color: var(--color-primary-light);
 		}
 
 		/* No Refund Box */
 		.no-refund-box {
-			background: rgba(124, 108, 154, 0.08);
-			border: 1px solid rgba(124, 108, 154, 0.2);
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.25rem;
 		}
 
 		.no-refund-box h4 {
-			color: #7c6c9a;
+			color: var(--color-text);
 			margin-bottom: 0.75rem;
 		}
 
@@ -1123,8 +1134,8 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.no-refund-grid span {
-			background: rgba(124, 108, 154, 0.15);
-			color: #5a4a7a;
+			background: rgba(139, 92, 246, 0.15);
+			color: var(--color-text);
 			padding: 0.25rem 0.75rem;
 			border-radius: 20px;
 			font-size: 0.85rem;
@@ -1132,19 +1143,19 @@ import Footer from '../components/Footer.astro';
 
 		/* Privacy */
 		.privacy-note {
-			background: rgba(124, 108, 154, 0.08);
-			border: 1px solid rgba(124, 108, 154, 0.2);
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.25rem;
 			margin-bottom: 1.5rem;
 		}
 
 		.privacy-note strong {
-			color: #7c6c9a;
+			color: var(--color-primary-light);
 		}
 
 		.privacy-note p {
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			margin-top: 0.5rem;
 			font-size: 0.9rem;
 		}
@@ -1157,8 +1168,8 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.dependency-grid span {
-			background: rgba(124, 108, 154, 0.15);
-			color: #7c6c9a;
+			background: rgba(139, 92, 246, 0.15);
+			color: var(--color-primary-light);
 			padding: 0.35rem 0.75rem;
 			border-radius: 6px;
 			font-size: 0.85rem;
@@ -1166,16 +1177,15 @@ import Footer from '../components/Footer.astro';
 
 		/* Dispute Steps */
 		.dispute-steps {
-			background: rgba(255, 255, 255, 0.7);
-			border: 1px solid rgba(124, 108, 154, 0.2);
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.5rem;
 			margin-top: 1.5rem;
-			backdrop-filter: blur(10px);
 		}
 
 		.dispute-steps h4 {
-			color: #454141;
+			color: var(--color-text);
 			margin-bottom: 1rem;
 		}
 
@@ -1196,7 +1206,7 @@ import Footer from '../components/Footer.astro';
 		.step-num {
 			width: 32px;
 			height: 32px;
-			background: linear-gradient(135deg, #7c6c9a, #9a8ab0);
+			background: var(--color-primary);
 			border-radius: 50%;
 			display: flex;
 			align-items: center;
@@ -1207,7 +1217,7 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.step span:last-child {
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 		}
 
 		/* Contact Grid */
@@ -1222,30 +1232,28 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			align-items: center;
 			gap: 1rem;
-			background: rgba(255, 255, 255, 0.7);
-			border: 1px solid rgba(124, 108, 154, 0.2);
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.25rem;
 			transition: all 0.2s;
-			backdrop-filter: blur(10px);
 			min-width: 0;
 			overflow: hidden;
 		}
 
 		.contact-card:hover {
-			border-color: #7c6c9a;
+			border-color: var(--color-primary);
 			transform: translateY(-2px);
-			background: rgba(255, 255, 255, 0.9);
-			box-shadow: 0 8px 20px rgba(124, 108, 154, 0.15);
+			box-shadow: 0 8px 20px rgba(139, 92, 246, 0.15);
 		}
 
 		.contact-icon {
 			flex-shrink: 0;
-			color: #7c6c9a;
+			color: var(--color-primary);
 		}
 
 		.contact-icon svg {
-			stroke: #7c6c9a;
+			stroke: var(--color-primary);
 		}
 
 		.contact-info {
@@ -1257,11 +1265,11 @@ import Footer from '../components/Footer.astro';
 
 		.contact-label {
 			font-size: 0.8rem;
-			color: #8a7a9a;
+			color: var(--color-text-muted);
 		}
 
 		.contact-value {
-			color: #454141;
+			color: var(--color-text);
 			font-weight: 500;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -1277,30 +1285,29 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.final-item {
-			background: rgba(255, 255, 255, 0.7);
-			border: 1px solid rgba(124, 108, 154, 0.15);
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.25rem;
-			backdrop-filter: blur(10px);
 		}
 
 		.final-item h4 {
-			color: #454141;
+			color: var(--color-text);
 			margin-bottom: 0.5rem;
 		}
 
 		.final-item h4 svg {
-			stroke: #7c6c9a;
+			stroke: var(--color-primary);
 		}
 
 		.final-item p {
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			font-size: 0.9rem;
 		}
 
 		.acceptance-box {
-			background: linear-gradient(135deg, rgba(124, 108, 154, 0.1) 0%, rgba(124, 108, 154, 0.18) 100%);
-			border: 1px solid rgba(124, 108, 154, 0.25);
+			background: rgba(139, 92, 246, 0.1);
+			border: 1px solid rgba(139, 92, 246, 0.25);
 			border-radius: 12px;
 			padding: 1.5rem;
 			text-align: center;
@@ -1308,25 +1315,25 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.acceptance-box strong {
-			color: #7c6c9a;
+			color: var(--color-primary-light);
 			font-size: 1.1rem;
 		}
 
 		.acceptance-box strong svg {
-			stroke: #7c6c9a;
+			stroke: var(--color-primary);
 		}
 
 		.acceptance-box p {
-			color: #6b5b7a;
+			color: var(--color-text-muted);
 			margin-top: 0.75rem;
 		}
 
 		.copyright {
 			text-align: center;
-			color: #8a7a9a;
+			color: var(--color-text-muted);
 			font-size: 0.9rem;
 			padding-top: 2rem;
-			border-top: 1px solid rgba(124, 108, 154, 0.15);
+			border-top: 1px solid var(--color-border);
 		}
 
 		/* Back to Top */
@@ -1336,7 +1343,7 @@ import Footer from '../components/Footer.astro';
 			right: 2rem;
 			width: 48px;
 			height: 48px;
-			background: linear-gradient(135deg, #7c6c9a, #9a8ab0);
+			background: var(--color-primary);
 			border: none;
 			border-radius: 50%;
 			color: #fff;
@@ -1347,7 +1354,7 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			box-shadow: 0 4px 15px rgba(124, 108, 154, 0.4);
+			box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 		}
 
 		.back-to-top.visible {
@@ -1357,13 +1364,13 @@ import Footer from '../components/Footer.astro';
 
 		.back-to-top:hover {
 			transform: translateY(-3px);
-			box-shadow: 0 6px 20px rgba(124, 108, 154, 0.5);
+			box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
 		}
 
 		/* Footer transition */
 		.footer-transition {
 			height: 80px;
-			background: linear-gradient(180deg, #e0e8ff 0%, #dce0f8 100%);
+			background: var(--color-bg);
 		}
 
 		/* Responsive */

@@ -452,7 +452,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose pre {
-			background: var(--color-bg-card);
+			background: #0d0d12 !important;
 			border: 1px solid var(--color-border);
 			border-radius: 0.75rem;
 			padding: 1.25rem;
@@ -461,11 +461,33 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose pre code {
-			background: transparent;
+			background: transparent !important;
 			padding: 0;
 			font-size: 0.875rem;
 			line-height: 1.7;
+			color: #e4e4e7 !important;
 		}
+
+		/* Syntax highlighting overrides for dark mode */
+		.prose pre .line {
+			color: #e4e4e7 !important;
+		}
+
+		.prose pre span {
+			color: inherit;
+		}
+
+		/* Common syntax highlighting colors for dark mode */
+		.prose pre .keyword { color: #c792ea !important; }
+		.prose pre .string { color: #c3e88d !important; }
+		.prose pre .number { color: #f78c6c !important; }
+		.prose pre .comment { color: #546e7a !important; }
+		.prose pre .function { color: #82aaff !important; }
+		.prose pre .variable { color: #f07178 !important; }
+		.prose pre .operator { color: #89ddff !important; }
+		.prose pre .punctuation { color: #89ddff !important; }
+		.prose pre .class { color: #ffcb6b !important; }
+		.prose pre .property { color: #f07178 !important; }
 
 		.copy-btn {
 			position: absolute;
