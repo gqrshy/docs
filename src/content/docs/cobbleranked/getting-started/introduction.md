@@ -18,7 +18,7 @@ description: Welcome to CobbleRanked! Get up and running quickly.
 | Mod | Version | Download |
 |-----|---------|----------|
 | Minecraft | 1.21.1 | - |
-| Fabric Loader | 0.17.2+ | [Fabric](https://fabricmc.net/) |
+| Fabric Loader | 0.17.0+ | [Fabric](https://fabricmc.net/) |
 | Fabric API | 0.116.6+ | [Modrinth](https://modrinth.com/mod/fabric-api) |
 | Fabric Language Kotlin | 1.13.6+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
 | Cobblemon | 1.7.1+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
@@ -66,6 +66,7 @@ After basic installation, you may want to:
 
 - **[Configure Arenas](/docs/cobbleranked/configuration/arenas/)** - Set battle locations
 - **[Configure Blacklist](/docs/cobbleranked/configuration/blacklist/)** - Restrict Pokemon/moves
+- **[Configure Restrictions](/docs/cobbleranked/configuration/restrictions/)** - Queue/arena restriction levels
 - **[Configure Rewards](/docs/cobbleranked/configuration/rewards/)** - Season end prizes
 - **[Configure Languages](/docs/cobbleranked/configuration/languages/)** - Change to Japanese
 

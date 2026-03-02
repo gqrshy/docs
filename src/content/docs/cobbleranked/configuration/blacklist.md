@@ -48,14 +48,14 @@ doubles:
 | `pokemon` | List | Banned Pokemon species/forms |
 | `moves` | List | Banned moves |
 | `abilities` | List | Banned abilities |
-| `items` | List | Banned held items |
+| `heldItems` | List | Banned held items |
 | `labels` | List | Cobblemon labels to ban completely |
 | `labelLimits` | Map | Limit count of Pokemon with label |
-| `maxDuplicateItems` | Integer | Item clause (1 = no duplicates) |
 | `inventoryItems` | List | Items banned from player inventory |
-| `trinketItems` | List | Items banned from trinket/accessory slots |
 | `consumables` | Object | Battle consumable restrictions |
 | `specialFormat` | Object | Special format rules (Little Cup, etc.) |
+
+> **Note**: The `maxDuplicateItems` and `trinketItems` options have been removed. Use the format-level `itemClause` setting for item restrictions instead.
 
 ## Pokemon Blacklist
 
@@ -121,14 +121,14 @@ blacklist:
 
 > **Ability name format:** Use snake_case (e.g., `shadow_tag`). Names are automatically normalized to match Cobblemon's internal format.
 
-## Item Blacklist
+## Held Item Blacklist
 
 Ban held items. Supports item tags with `#` prefix:
 
 ```yaml
 blacklist:
-  items:
-    - "cobblemon:choice_band"      # Specific item
+  heldItems:
+    - "cobblemon:focus_sash"      # Specific item
     - "#cobblemon:mega_stones"     # All items in tag
 ```
 
@@ -158,25 +158,35 @@ blacklist:
     restricted: 0    # No restricted Pokemon
 ```
 
+### Restricted Count
+
+Alternatively, use the `restrictedCount` setting to limit restricted Pokemon:
+
+```yaml
+# Format level setting
+singles:
+  restrictedCount: 2   # Max 2 restricted Pokemon
+```
+
+This is equivalent to setting `labelLimits: { restricted: 2 }` but applies specifically to the "restricted" label.
+
 ### Removing Label Limits
 
 For formats like Smogon OU where you want **no label limits** at all, use an empty value:
 
 ```yaml
 blacklist:
-  labelLimits: []    # No label limits (both [] and {} work)
+  labelLimits: {}    # No label limits
   labels: []         # No label bans either
 ```
 
-> **Note:** Both `[]` and `{}` are accepted for empty `labelLimits`. Use whichever you prefer for consistency with `labels: []`.
-
 ## Item Clause
 
-Control duplicate held items:
+Control duplicate held items with the `itemClause` setting:
 
 ```yaml
-blacklist:
-  maxDuplicateItems: 1   # Standard item clause (no duplicates)
+singles:
+  itemClause: 1   # Standard item clause (no duplicates)
 ```
 
 | Value | Effect |
@@ -184,6 +194,8 @@ blacklist:
 | `1` | Standard item clause - each held item can only appear once |
 | `2` | Allow up to 2 of same item |
 | `0` | No item clause (unlimited duplicates) |
+
+> **Note**: This is a format-level setting, not part of the blacklist config.
 
 ## Inventory Restrictions
 
@@ -200,31 +212,7 @@ blacklist:
     - "#cobblemon:experience_candies"
 ```
 
-> 📝 **v2.0.17+**: Items in `trinketItems` are now also checked in regular inventory. This prevents players from keeping banned accessory items in their inventory.
-
-## Trinket/Accessory Items
-
-Ban items from Trinkets mod slots or Accessories mod slots (e.g., MegaShowdown). These items are checked in both accessory slots **and** regular inventory:
-
-```yaml
-blacklist:
-  trinketItems:
-    # MegaShowdown gimmick items
-    - "mega_showdown:mega_bracelet"     # Block Mega Evolution
-    - "mega_showdown:z_ring"            # Block Z-Moves
-    - "mega_showdown:tera_orb"          # Block Terastallization
-    - "mega_showdown:dynamax_band"      # Block Dynamax
-    - "mega_showdown:omni_ring"         # Block all gimmicks
-```
-
-### Supported Mods
-
-| Mod                        | Support                    |
-|----------------------------|----------------------------|
-| Trinkets                   | ✅ Full support            |
-| Accessories (wisp-forest)  | ✅ Full support (v2.0.17+) |
-
-> **Use Case**: Block MegaShowdown's Mega Bracelet to prevent Mega Evolution in your competitive format, even if players have it in their inventory.
+> 📝 **v2.0.17+**: Inventory items are checked during the queue phase to prevent obtaining banned items after joining queue.
 
 ## Consumables Config
 

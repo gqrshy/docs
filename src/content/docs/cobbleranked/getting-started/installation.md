@@ -9,13 +9,13 @@ Place all of these in your `mods/` folder:
 
 | Mod | Version | Download |
 |-----|---------|----------|
-| Fabric Loader | 0.17.2+ | [fabricmc.net](https://fabricmc.net/use/server/) |
+| Fabric Loader | 0.17.0+ | [fabricmc.net](https://fabricmc.net/use/server/) |
 | Fabric API | Latest | [Modrinth](https://modrinth.com/mod/fabric-api) |
-| Fabric Language Kotlin | 1.13.6+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
+| Fabric Language Kotlin | 1.13.0+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
 | Cobblemon | 1.7.1+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
-| GashiLibs | 1.0.3+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
-| MailLib | 1.0.1+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
-| **CobbleRanked** | 2.0.4+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| GashiLibs | 1.0.6+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| MailLib | 1.0.5+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| **CobbleRanked** | 2.0.23+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
 
 **Target:** Minecraft 1.21.1 (Fabric server)
 
@@ -37,9 +37,9 @@ mods/
 ├── fabric-api-x.x.x+1.21.1.jar
 ├── fabric-language-kotlin-x.x.x+kotlin.x.x.x.jar
 ├── Cobblemon-fabric-x.x.x+1.21.1.jar
-├── gashilibs-1.0.3.jar
-├── maillib-1.0.1.jar
-└── CobbleRanked-2.0.4.jar
+├── gashilibs-1.0.6.jar
+├── maillib-1.0.5.jar
+└── CobbleRanked-2.0.23.jar
 ```
 
 ## Installation Steps
@@ -59,7 +59,10 @@ server/
 │       ├── config.yaml         ← Main config
 │       ├── arenas.yaml         ← Battle coordinates
 │       ├── blacklist.yaml      ← Pokemon/move restrictions
+│       ├── restrictions.yaml   ← Queue/arena restrictions
 │       ├── rewards.yaml        ← Season rewards
+│       ├── missions.yaml       ← Daily/weekly missions
+│       ├── season_presets/     ← Season rule presets
 │       ├── data.db             ← SQLite database
 │       ├── gui/                ← GUI layouts
 │       └── language/           ← Language files
@@ -161,8 +164,20 @@ config/cobbleranked/
 ├── matchmaking.yaml       # Queue matching rules
 ├── season.yaml            # Season schedule and reset behavior
 ├── arenas.yaml            # Battle coordinates
-├── blacklist.yaml         # Restrictions (Pokemon/moves/abilities/items)
+├── blacklist.yaml         # Pokemon/move restrictions (per format)
+├── restrictions.yaml      # Queue/arena restriction levels
 ├── rewards.yaml           # Season-end rewards
+├── missions.yaml          # Daily/weekly missions
+├── luckperms.yaml         # LuckPerms integration
+├── api.yaml               # Web API settings
+├── sounds.yaml            # Sound effect settings
+├── camera/
+│   └── camera.yaml        # Battle camera settings
+├── season_presets/        # Season rule presets
+│   ├── default.yml
+│   ├── smogon.yml
+│   ├── vgc.yml
+│   └── ...
 ├── data.db                # SQLite database (auto-created)
 ├── gui/
 │   ├── ranked_gui.json5   # Ranked menu layout

@@ -72,19 +72,22 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 |---------|-------------|
 | `/rankedadmin queue clear` | Clear all queues |
 
-### Usage Stats
+### Placeholders
 
 | Command | Description |
 |---------|-------------|
-| `/rankedadmin usage info` | Show usage stats info |
-| `/rankedadmin usage export [seasonName]` | Export usage stats |
-| `/rankedadmin usage clear <seasonName>` | Clear usage stats for season |
+| `/rankedadmin placeholder test <placeholder>` | Test a placeholder with player data |
+| `/rankedadmin placeholder list` | List all available placeholders |
+| `/rankedadmin placeholder clear` | Clear placeholder cache |
+| `/rankedadmin placeholder status` | Show placeholder API status |
 
-### Leaderboard Export
+### API Sync
 
 | Command | Description |
 |---------|-------------|
-| `/rankedadmin leaderboard export [seasonName] [limit]` | Export leaderboard data |
+| `/rankedadmin api sync` | Sync data to external API |
+| `/rankedadmin api status` | Show API sync status |
+| `/rankedadmin api test` | Test API connection |
 
 ### Placeholders
 

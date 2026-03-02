@@ -28,11 +28,11 @@ A competitive ranked battle system for Cobblemon servers with:
 | Requirement | Version |
 |-------------|---------|
 | Minecraft | 1.21.1 |
-| Fabric Loader | 0.17.2+ |
+| Fabric Loader | 0.17.0+ |
 | Cobblemon | 1.7.1+ |
 | GashiLibs | 1.0.6+ |
 | MailLib | 1.0.5+ |
-| Fabric Language Kotlin | 1.13.6+ |
+| Fabric Language Kotlin | 1.13.0+ |
 
 </details>
 

@@ -54,7 +54,21 @@ When a season ends, the final leaderboard is preserved. See who dominated last s
 
 ## Performance
 
-Leaderboards are cached for smooth performance even with thousands of players. Updates happen automatically — you'll always see fresh data.
+Leaderboards are cached for smooth performance even with thousands of players:
+
+| Setting | Value | Description |
+|---------|-------|-------------|
+| Cache TTL | 30 seconds | Auto-refresh interval |
+| Default page size | 25 players | Players per page |
+| Max archive entries | 100 players | Off-season display limit |
+
+Updates happen automatically in the background — you'll always see fresh data.
+
+### Cache Behavior
+
+- **First access**: Loads from database (may take 1-2 seconds)
+- **Subsequent access**: Returns cached data (instant)
+- **After 30 seconds**: Background refresh keeps data fresh
 
 ---
 

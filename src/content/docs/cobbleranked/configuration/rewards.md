@@ -119,6 +119,31 @@ rankRewards:
       - "give {player} cobblemon:master_ball 3"
 ```
 
+### Reward Eligibility
+
+Control whether rank rewards use **highest Elo achieved** or **current Elo** for eligibility:
+
+```yaml
+# rewards.yaml
+rankRewardsUseHighestElo: true
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `rankRewardsUseHighestElo` | `true` | Use `true` to base eligibility on peak Elo, `false` for current Elo |
+
+**How it works:**
+
+- **When `true` (default)**: Players keep rewards based on their **highest Elo ever achieved**
+  - Player reaches 1500 Elo → Gets ULTRABALL reward → Keeps ULTRABALL reward even if Elo drops to 1400
+  - More lenient for players
+
+- **When `false`**: Players only qualify for rewards based on their **current Elo**
+  - Player reaches 1500 Elo → Gets ULTRABALL reward → Elo drops to 1400 → Can no longer claim higher tier rewards
+  - More competitive; rewards must be "re-earned" after rating loss
+
+> 📝 This affects **reward eligibility only**. Players keep any rewards they've already claimed.
+
 ## Milestones
 
 Achievement rewards based on wins, ELO reached, or win streaks. Tracked per-format.

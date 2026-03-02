@@ -62,6 +62,8 @@ Decline a ready check? You'll need to wait before queuing again. Repeated offens
 
 While queued, you can't access PC, use certain items, teleport, or start other battles. Stay focused on the upcoming fight.
 
+These restrictions are configurable in `config/cobbleranked/restrictions.yaml`. You can adjust which items, moves, and abilities are blocked at both Queue and Arena restriction levels.
+
 ## Get Started
 
 ```
@@ -72,4 +74,4 @@ Open the GUI to view your stats, check the leaderboard, and jump into queue.
 
 ---
 
-**Related**: [ELO System](/docs/cobbleranked/features/elo-system/) | [Battle Formats](/docs/cobbleranked/features/battle-formats/) | [Leaderboards](/docs/cobbleranked/features/leaderboards/)
+**Related**: [ELO System](/docs/cobbleranked/features/elo-system/) | [Battle Formats](/docs/cobbleranked/features/battle-formats/) | [Leaderboards](/docs/cobbleranked/features/leaderboards/) | [Restrictions](/docs/cobbleranked/configuration/restrictions/)

@@ -385,44 +385,43 @@ singles:
 
 ### Battle Gimmicks (Mega Evolution, Z-Moves, Dynamax, Terastallize)
 
-> ⚠️ **Important**: The gimmick settings (`megaEvolution`, `zMoves`, `dynamax`, `terastallize`) are **placeholder settings only**. Cobblemon does not natively support these battle mechanics. They require the [Mega Showdown](https://modrinth.com/mod/megashowdown) mod to function.
-
-#### Current Status
-
-- CobbleRanked does **not** enforce these settings
-- Gimmick availability is entirely controlled by Mega Showdown
-- These settings are preserved for future Cobblemon API support
-
-#### Workaround: Banning Gimmick Items
-
-If you want to prevent certain gimmicks in ranked battles, ban the items required to use them via the blacklist:
+Configure which gimmicks are allowed in ranked battles:
 
 ```yaml
 # season_presets/default.yml
 singles:
-  blacklist:
-    items:
-      # Ban Mega Stones (prevents Mega Evolution)
-      - "megashowdown:mega_stone_charizard_x"
-      - "megashowdown:mega_stone_charizard_y"
-      # ... add all mega stones you want to ban
-
-      # Ban Tera Orb (prevents Terastallization)
-      - "megashowdown:tera_orb"
-
-      # Ban Dynamax Band (prevents Dynamax)
-      - "megashowdown:dynamax_band"
-
-      # Ban Z-Crystals (prevents Z-Moves)
-      - "megashowdown:z_crystal_normal"
-      # ... add all z-crystals you want to ban
-
-    # Or ban items in player inventory/accessories
-    inventoryItems:
-      - "megashowdown:omni_ring"  # Bans the all-gimmick item
+  megaEvolution: true
+  zMoves: true
+  dynamax: false
+  terastallize: false
 ```
 
-> 📝 Check Mega Showdown's item IDs for the exact names. Use `/megashowdown items` or check JEI/REI for item IDs.
+**Requirements:**
+
+| Gimmick | Required Mod |
+|---------|--------------|
+| Mega Evolution | [Mega Showdown](https://modrinth.com/mod/megashowdown) |
+| Z-Moves | [Mega Showdown](https://modrinth.com/mod/megashowdown) |
+| Dynamax | [Mega Showdown](https://modrinth.com/mod/megashowdown) |
+| Terastallize | [Mega Showdown](https://modrinth.com/mod/megashowdown) |
+
+> ⚠️ **Important**: Gimmick settings only work when Mega Showdown is installed. Cobblemon does not natively support these mechanics.
+
+**How Gimmick Restrictions Work:**
+
+When set to `false`:
+- CobbleRanked removes key items from player data before battle
+- Mega Showdown's `GimmickTurnCheck` is prevented from re-adding them during battle
+- Players cannot use the disabled gimmick during ranked matches
+
+When set to `true`:
+- Players with the required accessory items can use the gimmick
+- Normal Mega Showdown behavior applies
+
+**Notes:**
+- Gimmick restrictions only apply during **ranked battles**
+- Casual battles, wild battles, and PvP outside ranked are unaffected
+- Players retain their accessory items; only key items are temporarily removed
 
 ### Victory/Defeat Rewards
 
@@ -479,6 +478,68 @@ competitive:
 | 11+ | 30 minutes |
 
 Flee count decreases by 1 every 24 hours (configurable).
+
+### Announcements
+
+Broadcast messages to players about battle activity:
+
+```yaml
+# battle.yaml
+announcements:
+  broadcastMatchStart: true
+  broadcastMatchResult: true
+  showActionbarWhileQueued: true
+  queueJoin:
+    enabled: false
+    showPlayerName: true
+    showFormat: true
+    showQueueCount: true
+    showTier: false
+    showElo: false
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `broadcastMatchStart` | `true` | Announce when matches start |
+| `broadcastMatchResult` | `true` | Announce match results |
+| `showActionbarWhileQueued` | `true` | Show queue info in action bar |
+| `queueJoin.enabled` | `false` | Announce when players join queue |
+| `queueJoin.showPlayerName` | `true` | Show player name in announcement |
+| `queueJoin.showFormat` | `true` | Show format being queued for |
+| `queueJoin.showQueueCount` | `true` | Show total players in queue |
+| `queueJoin.showTier` | `false` | Show player's rank tier |
+| `queueJoin.showElo` | `false` | Show player's Elo rating |
+
+**Queue Join Announcement Example:**
+```
+[Ranked] Player123 joined the Singles queue! (3 in queue)
+```
+
+Enable `queueJoin` to create more competition by showing queue activity. Disable to reduce chat spam.
+
+### Daily Limits
+
+Prevent Elo farming and reward abuse with daily limits:
+
+```yaml
+# battle.yaml
+dailyLimits:
+  eloGainLimit: 200
+  rewardLimit: -1
+  resetTimezone: "UTC"
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `eloGainLimit` | `200` | Max Elo gained per day (0 = unlimited) |
+| `rewardLimit` | `-1` | Max rewards per day (-1 = unlimited) |
+| `resetTimezone` | `"UTC"` | Timezone for daily reset |
+
+**How it works:**
+- Limits reset at midnight in the configured timezone
+- `eloGainLimit` tracks net Elo gain (wins - losses)
+- Players hitting the limit can still battle, but Elo won't increase
+- Helps prevent smurfing and Elo manipulation
 
 ---
 

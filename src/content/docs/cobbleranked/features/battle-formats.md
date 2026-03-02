@@ -108,12 +108,44 @@ singles:
   matchDuration: 15
   megaEvolution: true
   zMoves: true
+  dynamax: false
+  terastallize: false
+
+  # Clauses
+  speciesClause: true
+  itemClause: 1
+  ohkoClause: true
+  evasionClause: true
+  endlessBattleClause: true
+
+  # Restricted Pokemon
+  restrictedCount: 1
+
+  # Matchmaking
   matchmaking:
+    enforceEloRange: true
     initialRange: 200
     expansionDelay: 30
+    expansionRate: 50
+    maxMultiplier: 3.0
+    immediateMatchRange: 100
+
+  # Blacklist
   blacklist:
-    moves:
-      - "baton_pass"
+    pokemon: []
+    moves: []
+    abilities: []
+    heldItems: []
+    labels: []
+    labelLimits: {}
+    inventoryItems: []
+    consumables:
+      blockAllHealingItems: true
+      blockedHealingItems: []
+      blockStatusHealingItems: true
+      blockedStatusItems: []
+      blockRevivalItems: true
+      blockedRevivalItems: []
 
 doubles:
   enabled: true
@@ -122,11 +154,38 @@ doubles:
   levelCap: 50
   turnTimer: 120
   matchDuration: 20
-  terastallize: true
-  blacklist:
-    moves:
-      - "dark_void"
+  # ... similar structure
 ```
+
+### Matchmaking Settings
+
+Control how players are matched within each format:
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `enforceEloRange` | `true` | Enable Elo-based matchmaking |
+| `initialRange` | `200` | Starting ELO range (±100 = 200 total) |
+| `expansionDelay` | `30` | Seconds before range starts expanding |
+| `expansionRate` | `50` | ELO added per expansion cycle |
+| `maxMultiplier` | `3.0` | Maximum range multiplier (3× initial range) |
+| `immediateMatchRange` | `100` | ELO range for instant matches |
+
+**How range expansion works:**
+- Start: ±100 ELO (200 total range)
+- After 30s: ±150 ELO (expands by 50)
+- After 60s: ±200 ELO (expands by another 50)
+- Maximum: ±300 ELO (3× initial range)
+
+### Restricted Pokemon System
+
+Some presets use a restricted Pokemon system (VGC-style):
+
+| Setting | Description |
+|---------|-------------|
+| `restrictedCount` | Max number of restricted Pokemon allowed |
+| `restrictedPokemon` | List of specific Pokemon marked as restricted |
+
+When `restrictedCount > 0`, players can only include that many Pokemon from the restricted list in their team.
 
 ## Multi-Format Rewards
 

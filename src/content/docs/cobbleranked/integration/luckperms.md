@@ -86,6 +86,47 @@ Without LuckPerms, permissions work via OP level:
 /lp group vip permission set cobbleranked.player.bypass.cooldown true
 ```
 
+## Rank Display Permissions
+
+CobbleRanked automatically grants rank-based permissions and display features:
+
+| Permission | Description |
+|------------|-------------|
+| `cobbleranked.rank.<tier>` | Current rank tier permission |
+| `cobbleranked.rank.title.<tier>` | Persistent title permission (earned once, kept forever) |
+
+**Example:** When a player reaches Ultra Ball tier:
+- They get `cobbleranked.rank.ULTRABALL` permission (current rank)
+- They get `cobbleranked.rank.title.ULTRABALL` permission (permanent, kept even after tier loss)
+
+## Rank Display Settings
+
+Configure in `config/cobbleranked/luckperms.yaml`:
+
+```yaml
+luckperms:
+  enabled: true
+  syncMode: SUFFIX          # PREFIX, SUFFIX, GROUP, or ALL
+  removeOnRankLoss: true   # Remove display when losing rank
+
+  tierMappings:
+    POKEBALL:
+      suffix: " &f[Poké Ball]&r"
+      weight: 100
+    GREATBALL:
+      suffix: " &9[Great Ball]&r"
+      weight: 101
+    # ... other tiers
+```
+
+| Setting | Description |
+|---------|-------------|
+| `syncMode` | How rank display is applied (suffix, prefix, group) |
+| `removeOnRankLoss` | Whether to remove display when player drops below tier |
+| `permissionMode` | ALLOW_BY_DEFAULT or REQUIRE_PERMISSION for command access |
+
+---
+
 ## Without LuckPerms
 
 If LuckPerms is not installed:
@@ -93,6 +134,7 @@ If LuckPerms is not installed:
 - All players can use basic commands
 - Only OP Level 2+ can use admin commands
 - Bypass permissions are not available
+- Rank display features are disabled
 
 ---
 
