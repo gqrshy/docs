@@ -562,12 +562,14 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		/* ===== Collapsible Details ===== */
+		/* Comprehensive browser reset for details/summary */
 		.prose details {
 			margin-bottom: 0.75rem;
 			background: var(--color-bg-card);
 			border: 1px solid var(--color-border);
 			border-radius: 0.5rem;
 			overflow: hidden;
+			padding: 0; /* Explicitly remove padding */
 		}
 
 		.prose details:hover {
@@ -578,21 +580,36 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			background: var(--color-bg-alt);
 		}
 
-		.prose details summary {
+		/* Summary styling - complete reset for GitBook style */
+		.prose details > summary {
 			padding: 1rem 1.25rem;
 			cursor: pointer;
 			display: flex;
 			align-items: center;
 			gap: 0.75rem;
-			list-style: none;
+			/* Remove default browser list styling */
+			list-style: none !important;
+			list-style-type: none !important;
+			/* Remove default padding - critical for GitBook style */
+			padding-left: 1.25rem !important;
+			padding-inline-start: 1.25rem !important;
 			user-select: none;
+			/* Force block display to remove list-item behavior */
+			display: flex !important;
 		}
 
-		.prose details summary::-webkit-details-marker {
-			display: none;
+		/* Remove default marker across all browsers */
+		.prose details > summary::-webkit-details-marker {
+			display: none !important;
 		}
 
-		.prose details summary::before {
+		.prose details > summary::marker {
+			display: none !important;
+			content: "" !important;
+		}
+
+		/* Custom GitBook-style arrow icon */
+		.prose details > summary::before {
 			content: '';
 			width: 8px;
 			height: 8px;
@@ -601,83 +618,99 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			transform: rotate(-45deg);
 			transition: transform 0.2s ease;
 			flex-shrink: 0;
-		}
-
-		.prose details[open] summary::before {
-			transform: rotate(45deg);
-		}
-
-		.prose details summary:hover {
-			background: rgba(255, 255, 255, 0.03);
-		}
-
-		.prose details summary:hover::before {
-			border-color: var(--color-primary);
-		}
-
-		.prose details summary strong {
-			color: var(--color-text);
-		}
-
-		.prose details summary:hover strong {
-			color: var(--color-primary);
-		}
-
-		/* Details content */
-		.prose details > *:not(summary) {
-			padding-left: 1.5rem;
-			padding-right: 1.5rem;
-		}
-
-		.prose details > *:not(summary):first-of-type {
-			padding-top: 0.5rem;
-		}
-
-		.prose details > *:last-child {
-			padding-bottom: 1.25rem;
-		}
-
-		.prose details p:first-of-type {
-			margin-top: 0;
-		}
-
-		/* Lists inside details */
-		.prose details ol,
-		.prose details ul {
-			margin: 1rem 0;
-			padding-left: 1.5rem;
 			margin-left: 0;
 		}
 
+		.prose details[open] > summary::before {
+			transform: rotate(45deg);
+		}
+
+		.prose details > summary:hover {
+			background: rgba(255, 255, 255, 0.03);
+		}
+
+		.prose details > summary:hover::before {
+			border-color: var(--color-primary);
+		}
+
+		.prose details > summary strong {
+			color: var(--color-text);
+		}
+
+		.prose details > summary:hover strong {
+			color: var(--color-primary);
+		}
+
+		/* Details content wrapper - GitBook style with proper padding */
+		.prose details > div,
+		.prose details > p,
+		.prose details > ul,
+		.prose details > ol,
+		.prose details > table,
+		.prose details > pre,
+		.prose details > blockquote,
+		.prose details > h3,
+		.prose details > h4 {
+			/* Content padding - balanced left/right for GitBook style */
+			padding-right: 1.25rem;
+			padding-left: 1.25rem;
+			/* Reset inline padding for consistency */
+			padding-inline-start: 1.25rem;
+			padding-inline-end: 1.25rem;
+		}
+
+		/* First content element gets top spacing */
+		.prose details > *:not(summary):first-of-type {
+			padding-top: 0.5rem;
+			margin-top: 0;
+		}
+
+		/* Last content element gets bottom spacing */
+		.prose details > *:last-child:not(summary) {
+			padding-bottom: 1.25rem;
+			margin-bottom: 0;
+		}
+
+		/* Lists - maintain proper indentation */
+		.prose details ul,
+		.prose details ol {
+			margin: 1rem 0;
+			/* Keep list padding for bullets */
+			padding-left: 2.75rem !important;
+			padding-inline-start: 2.75rem !important;
+		}
+
 		.prose details li {
-			margin-bottom: 0.75rem;
+			margin-bottom: 0.5rem;
 			line-height: 1.7;
-			padding-left: 0;
+			color: var(--color-text-muted);
 		}
 
 		.prose details li:last-child {
 			margin-bottom: 0;
 		}
 
-		/* Nested lists */
-		.prose details li > ol,
-		.prose details li > ul {
-			margin-top: 0.75rem;
-			margin-bottom: 0.5rem;
-			margin-left: 0.5rem;
+		/* Nested lists - proper indentation */
+		.prose details li > ul,
+		.prose details li > ol {
+			margin-top: 0.5rem;
+			margin-bottom: 0.25rem;
+			padding-left: 1.5rem !important;
+			padding-inline-start: 1.5rem !important;
 		}
 
-		/* Numbered list styling */
-		.prose details ol {
-			list-style-type: decimal;
+		/* Paragraphs */
+		.prose details p {
+			margin-bottom: 0.75rem;
+			color: var(--color-text-muted);
 		}
 
-		.prose details ol ol {
-			list-style-type: lower-alpha;
+		.prose details p:first-of-type {
+			margin-top: 0;
 		}
 
-		.prose details ol ol ol {
-			list-style-type: lower-roman;
+		.prose details p:last-of-type {
+			margin-bottom: 0;
 		}
 
 		/* Tables inside details */
@@ -685,6 +718,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			margin: 1rem 0;
 			width: 100%;
 			font-size: 0.9rem;
+			padding: 0; /* Tables have their own padding */
 		}
 
 		.prose details th,
@@ -698,6 +732,9 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			padding: 1rem 1.25rem;
 			font-size: 0.875rem;
 			border-radius: 0.5rem;
+			/* Pre blocks need padding adjustment */
+			padding-left: 1.25rem !important;
+			padding-inline-start: 1.25rem !important;
 		}
 
 		.prose details pre code {
@@ -751,14 +788,6 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.prose details strong {
 			color: var(--color-text);
 			font-weight: 600;
-		}
-
-		.prose details p {
-			margin-bottom: 0.75rem;
-		}
-
-		.prose details p:last-of-type {
-			margin-bottom: 0;
 		}
 
 		/* ===== Callouts ===== */
