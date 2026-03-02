@@ -644,17 +644,12 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		/* Details content wrapper - GitBook style with proper padding */
 		.prose details > div,
 		.prose details > p,
-		.prose details > ul,
-		.prose details > ol,
-		.prose details > table,
-		.prose details > pre,
-		.prose details > blockquote,
 		.prose details > h3,
-		.prose details > h4 {
-			/* Content padding - balanced left/right for GitBook style */
+		.prose details > h4,
+		.prose details > blockquote {
+			/* Text content padding - GitBook style */
 			padding-right: 1.25rem;
 			padding-left: 1.25rem;
-			/* Reset inline padding for consistency */
 			padding-inline-start: 1.25rem;
 			padding-inline-end: 1.25rem;
 		}
@@ -671,19 +666,24 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			margin-bottom: 0;
 		}
 
-		/* Lists - maintain proper indentation */
+		/* Lists - maintain proper indentation with GitBook style */
 		.prose details ul,
 		.prose details ol {
-			margin: 1rem 0;
+			margin: 1rem 1.25rem; /* Horizontal margin creates beautiful spacing */
 			/* Keep list padding for bullets */
-			padding-left: 2.75rem !important;
-			padding-inline-start: 2.75rem !important;
+			padding-left: 1.75rem !important;
+			padding-inline-start: 1.75rem !important;
 		}
 
 		.prose details li {
-			margin-bottom: 0.5rem;
-			line-height: 1.7;
+			margin-bottom: 0.6rem;
+			line-height: 1.75;
 			color: var(--color-text-muted);
+		}
+
+		.prose details li::marker {
+			color: var(--color-primary-light);
+			font-weight: 500;
 		}
 
 		.prose details li:last-child {
@@ -693,15 +693,22 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		/* Nested lists - proper indentation */
 		.prose details li > ul,
 		.prose details li > ol {
-			margin-top: 0.5rem;
-			margin-bottom: 0.25rem;
+			margin-top: 0.6rem;
+			margin-bottom: 0.3rem;
+			margin-left: 0;
 			padding-left: 1.5rem !important;
 			padding-inline-start: 1.5rem !important;
 		}
 
+		/* Nested list markers with lighter color */
+		.prose details li li::marker {
+			color: var(--color-primary-lighter);
+		}
+
 		/* Paragraphs */
 		.prose details p {
-			margin-bottom: 0.75rem;
+			margin-bottom: 0.8rem;
+			line-height: 1.75;
 			color: var(--color-text-muted);
 		}
 
@@ -713,28 +720,41 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			margin-bottom: 0;
 		}
 
-		/* Tables inside details */
+		/* Tables inside details - GitBook style with margins */
 		.prose details table {
-			margin: 1rem 0;
-			width: 100%;
+			margin: 1rem 1.25rem; /* Horizontal margins for beautiful spacing */
+			width: calc(100% - 2.5rem); /* Subtract margins from width */
 			font-size: 0.9rem;
-			padding: 0; /* Tables have their own padding */
+			padding: 0;
+			/* Enhanced table styling */
+			border-collapse: separate;
+			border-spacing: 0;
 		}
 
-		.prose details th,
+		.prose details th {
+			padding: 0.875rem 1rem;
+			font-weight: 600;
+			color: var(--color-text);
+			background: rgba(255, 255, 255, 0.05);
+			border-bottom: 2px solid var(--color-border);
+		}
+
 		.prose details td {
-			padding: 0.75rem 1rem;
+			padding: 0.875rem 1rem;
+			border-bottom: 1px solid var(--color-border);
 		}
 
-		/* Code inside details */
+		.prose details tbody tr:last-child td {
+			border-bottom: none;
+		}
+
+		/* Code inside details - GitBook style with margins */
 		.prose details pre {
-			margin: 1rem 0;
+			margin: 1rem 1.25rem; /* Horizontal margins for beautiful spacing */
+			width: calc(100% - 2.5rem); /* Subtract margins from width */
 			padding: 1rem 1.25rem;
 			font-size: 0.875rem;
 			border-radius: 0.5rem;
-			/* Pre blocks need padding adjustment */
-			padding-left: 1.25rem !important;
-			padding-inline-start: 1.25rem !important;
 		}
 
 		.prose details pre code {
@@ -754,40 +774,66 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			height: 14px;
 		}
 
+		/* Inline code inside details */
 		.prose details code:not(pre code) {
 			font-size: 0.85em;
-			padding: 0.15rem 0.35rem;
+			padding: 0.2rem 0.4rem;
+			background: rgba(139, 92, 246, 0.2);
 		}
 
-		/* Headings inside details */
+		/* Headings inside details - GitBook style with margins */
 		.prose details h3 {
-			margin-top: 1.75rem;
-			margin-bottom: 0.75rem;
+			margin: 1.5rem 1.25rem 0.75rem;
 			font-size: 1.1rem;
+			font-weight: 600;
 			color: var(--color-text);
+			line-height: 1.4;
 		}
 
 		.prose details h4 {
-			margin-top: 1.25rem;
-			margin-bottom: 0.5rem;
+			margin: 1.25rem 1.25rem 0.5rem;
 			font-size: 1rem;
+			font-weight: 600;
+			color: var(--color-text);
+			line-height: 1.4;
 		}
 
 		.prose details h3:first-of-type,
 		.prose details h4:first-of-type {
-			margin-top: 0.75rem;
+			margin-top: 0.5rem;
 		}
 
-		/* Blockquotes inside details */
+		/* Blockquotes inside details - GitBook style with margins */
 		.prose details blockquote {
-			margin: 1rem 0;
-			padding: 0.75rem 1rem;
+			margin: 1rem 1.25rem; /* Horizontal margins for beautiful spacing */
+			width: calc(100% - 2.5rem); /* Subtract margins from width */
+			padding: 1rem 1.25rem;
 			font-size: 0.95rem;
+			line-height: 1.7;
 		}
 
 		.prose details strong {
 			color: var(--color-text);
 			font-weight: 600;
+		}
+
+		/* Overall content spacing optimization */
+		.prose details > * + * {
+			/* Add spacing between sibling elements */
+			margin-top: 0.5rem;
+		}
+
+		/* Special spacing for certain element combinations */
+		.prose details > h3 + *,
+		.prose details > h4 + * {
+			margin-top: 0.25rem;
+		}
+
+		.prose details > p + ul,
+		.prose details > p + ol,
+		.prose details > ul + p,
+		.prose details > ol + p {
+			margin-top: 0.75rem;
 		}
 
 		/* ===== Callouts ===== */
