@@ -182,6 +182,6 @@ enabled: false
 
 ## See Also
 
-- [Main Configuration](config.md) - General settings
-- [Battle Configuration](config.md#battle-settings) - Battle timers
+- [Main Configuration](config/) - General settings
+- [Battle Configuration](battle/) - Battle timers and settings
 - [FAQ](../support/faq/) - Common questions and troubleshooting
