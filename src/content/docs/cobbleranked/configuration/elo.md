@@ -190,6 +190,87 @@ glicko2:
 
 </details>
 
+<details>
+<summary><strong>Understanding Rating Deviation (RD)</strong></summary>
+
+**Rating Deviation (RD)** measures how uncertain the system is about a player's true skill level. Unlike Pokemon Showdown's simple ELO, Glicko-2 tracks both rating **and** uncertainty.
+
+### How RD Works
+
+Each player has two values:
+- **Rating** - Estimated skill level (like 1500)
+- **RD** - Uncertainty in that estimate (like 50)
+
+```
+Player A: 1500 ± 50 (high confidence)
+Player B: 1500 ± 200 (low confidence, new player)
+```
+
+### RD Impact on Matchmaking
+
+| RD Value | Meaning | Matchmaking Impact |
+|----------|---------|---------------------|
+| **Low (30-50)** | Established skill, high confidence | Precise matchups |
+| **Medium (50-100)** | Some uncertainty | Moderate range adjustments |
+| **High (100+)** | Very uncertain | Wide ELO range accepted |
+
+When two players match:
+- Both with low RD → Normal rating changes
+- One with high RD → Larger rating changes to find true skill faster
+- Both with high RD → Maximum rating adjustments
+
+### RD Changes Over Time
+
+**After each battle:**
+- **RD decreases** (becomes more certain about skill)
+- Decrease amount depends on opponent's RD
+- Playing against established players (low RD) reduces your RD faster
+
+**During inactivity:**
+- **RD increases** over time (less certain about current skill)
+- Controlled by `rdDecayDays` setting
+- After returning, RD slowly decreases back to normal
+
+### RD vs K-Factor Comparison
+
+| System | What Changes | How |
+|--------|--------------|-----|
+| Pokemon Showdown | K-Factor (fixed bands) | Based on rating only |
+| Glicko-2 | RD (dynamic per player) | Based on certainty + activity |
+
+### Example: RD in Action
+
+```
+New Player (1500 ± 150 RD)
+├─ Match 1: Wins vs 1400 ± 50 RD
+│  → Rating: +30, RD: 150 → 130 (more certain now)
+├─ Match 2: Wins vs 1450 ± 40 RD
+│  → Rating: +25, RD: 130 → 110
+├─ ... 10 matches later ...
+└─ Settles at: 1600 ± 40 RD (established)
+
+[Returns after 30 days]
+├─ RD increased: 40 → 80 (less certain now)
+├─ Match 1: Wins vs 1550 ± 50 RD
+│  → Rating: +12, RD: 80 → 72
+└─ Slowly returns to low RD with more games
+```
+
+### Tuning RD Settings
+
+| Setting | Effect of Increasing |
+|---------|---------------------|
+| `startingRD` | New players have more uncertainty, larger rating swings |
+| `rdDecayDays` | Takes longer for RD to increase during inactivity |
+| `systemConstant` | Higher = slower RD changes, lower = faster RD changes |
+
+**Recommendations:**
+- **Active servers** (daily players): Lower `rdDecayDays` (7-14)
+- **Casual servers** (infrequent players): Higher `rdDecayDays` (30-60)
+- **Competitive servers**: Lower `startingRD` (100-120) for faster skill detection
+
+</details>
+
 ## Rank Tiers
 
 Cosmetic ranks displayed in GUI and leaderboard:

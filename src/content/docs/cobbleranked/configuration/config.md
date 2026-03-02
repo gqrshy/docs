@@ -47,13 +47,15 @@ singles:
 
 ```yaml
 # config.yaml
-language: "en-us"  # en-us or ja-jp
+language: "en-us"
 ```
 
 | Value | Language |
 |-------|----------|
-| `en-us` | English |
+| `en-us` | English (default) |
 | `ja-jp` | Japanese |
+
+> 💡 **You can add ANY language!** Create a custom language file in `config/cobbleranked/language/` (e.g., `ko-KR.json5`, `zh-CN.json5`) and set the language code to match. See [Languages Configuration](languages/) for details.
 
 Reload with `/rankedadmin reload` after changing.
 

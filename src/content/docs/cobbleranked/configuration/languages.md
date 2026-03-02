@@ -31,23 +31,6 @@ The language value must match your language file name (without extension).
 
 Reload with `/rankedadmin reload`.
 
-## Message Structure
-
-```json5
-{
-  "queue": {
-    "joined": "&aYou joined the {format} queue!",
-    "left": "&eYou left the queue.",
-    "already_in": "&cYou're already in queue."
-  },
-  "battle": {
-    "start": "&a&lBattle starting!",
-    "win": "&6&l🎉 Victory!",
-    "lose": "&c&lDefeat..."
-  }
-}
-```
-
 ## Placeholders
 
 Messages support dynamic placeholders:
@@ -171,53 +154,6 @@ If you've created a translation that others might find useful:
 3. Help other players by providing feedback
 
 ---
-
-## Example Messages
-
-### English (en-Us.json5)
-
-```json5
-{
-  "queue": {
-    "joined": "&aYou joined the {format} queue!",
-    "match_found": "&6Match found! Click to accept."
-  },
-  "elo": {
-    "gained": "&a+{elo_change} ELO &7(Now: {elo})",
-    "lost": "&c-{elo_change} ELO &7(Now: {elo})"
-  }
-}
-```
-
-### Japanese (ja-Jp.json5)
-
-```json5
-{
-  "queue": {
-    "joined": "&a{format}キューに参加しました！",
-    "match_found": "&6対戦相手が見つかりました！クリックして承認。"
-  },
-  "elo": {
-    "gained": "&a+{elo_change} ELO &7(現在: {elo})",
-    "lost": "&c-{elo_change} ELO &7(現在: {elo})"
-  }
-}
-```
-
-### Spanish Custom (es-ES.json5)
-
-```json5
-{
-  "queue": {
-    "joined": "&a¡Te uniste a la cola de {format}!",
-    "match_found": "&6¡Partido encontrado! Haz clic para aceptar."
-  },
-  "elo": {
-    "gained": "&a+{elo_change} ELO &7(Ahora: {elo})",
-    "lost": "&c-{elo_change} ELO &7(Ahora: {elo})"
-  }
-}
-```
 
 ## Hot Reload
 
