@@ -707,7 +707,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		/* Paragraphs */
 		.prose details p {
-			margin-bottom: 0.8rem;
+			margin-bottom: 1rem;
 			line-height: 1.75;
 			color: var(--color-text-muted);
 		}
@@ -717,7 +717,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose details p:last-of-type {
-			margin-bottom: 0;
+			margin-bottom: 1.5rem; /* More space after last paragraph before next section */
 		}
 
 		/* Tables inside details - GitBook style with margins */
@@ -783,7 +783,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		/* Headings inside details - GitBook style with margins */
 		.prose details h3 {
-			margin: 1.5rem 1.25rem 0.75rem;
+			margin: 2rem 1.25rem 0.75rem;
 			font-size: 1.1rem;
 			font-weight: 600;
 			color: var(--color-text);
@@ -791,7 +791,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose details h4 {
-			margin: 1.25rem 1.25rem 0.5rem;
+			margin: 1.75rem 1.25rem 0.5rem;
 			font-size: 1rem;
 			font-weight: 600;
 			color: var(--color-text);
@@ -801,6 +801,16 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.prose details h3:first-of-type,
 		.prose details h4:first-of-type {
 			margin-top: 0.5rem;
+		}
+
+		/* Add space before headings when following other content */
+		.prose details > p + h3,
+		.prose details > p + h4,
+		.prose details > ul + h3,
+		.prose details > ol + h3,
+		.prose details > blockquote + h3,
+		.prose details > table + h3 {
+			margin-top: 2.5rem;
 		}
 
 		/* Blockquotes inside details - GitBook style with margins */
@@ -820,20 +830,35 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		/* Overall content spacing optimization */
 		.prose details > * + * {
 			/* Add spacing between sibling elements */
+			margin-top: 1rem;
+		}
+
+		/* Tighter spacing after headings */
+		.prose details > h3 + *,
+		.prose details > h4 + * {
 			margin-top: 0.5rem;
 		}
 
-		/* Special spacing for certain element combinations */
-		.prose details > h3 + *,
-		.prose details > h4 + * {
-			margin-top: 0.25rem;
+		/* More space before headings when following paragraphs */
+		.prose details > p + h3,
+		.prose details > p + h4 {
+			margin-top: 2.5rem !important;
 		}
 
+		/* Space between paragraphs and lists */
 		.prose details > p + ul,
 		.prose details > p + ol,
 		.prose details > ul + p,
 		.prose details > ol + p {
-			margin-top: 0.75rem;
+			margin-top: 1.5rem;
+		}
+
+		/* Space between lists and headings */
+		.prose details > ul + h3,
+		.prose details > ul + h4,
+		.prose details > ol + h3,
+		.prose details > ol + h4 {
+			margin-top: 2rem !important;
 		}
 
 		/* ===== Callouts ===== */

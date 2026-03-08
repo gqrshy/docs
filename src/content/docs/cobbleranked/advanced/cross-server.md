@@ -67,6 +67,14 @@ sudo systemctl start redis-server
 sudo systemctl enable redis-server
 ```
 
+**Windows:**
+
+Download Redis from the [MicrosoftArchive Redis releases](https://github.com/MicrosoftArchive/redis/releases). Download the latest `.msi` installer and run it.
+
+Redis will install as a Windows service and start automatically.
+
+> ⚠️ **Note:** The Windows port of Redis is not officially maintained by the Redis project. For production environments, consider running Redis on Linux or in Docker.
+
 **Docker:**
 
 ```bash
@@ -180,6 +188,8 @@ Install [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) on all Fab
 
 ## Server ID Reference
 
+Configure these values in `config/cobbleranked/config.yaml` on each server.
+
 Each server needs a **unique** `serverId`. The `battleServer` field should be empty on the battle server itself, and set to the battle server's name on lobby servers.
 
 | Server | serverId | battleServer |
@@ -187,6 +197,24 @@ Each server needs a **unique** `serverId`. The `battleServer` field should be em
 | Battle Server | `battle` | `""` (empty) |
 | Lobby 1 | `lobby1` | `"battle"` |
 | Lobby 2 | `lobby2` | `"battle"` |
+
+**Battle Server Example (`config/cobbleranked/config.yaml`):**
+
+```yaml
+crossServer:
+  enabled: true
+  serverId: "battle"
+  battleServer: ""  # Empty = this IS the battle server
+```
+
+**Lobby Server Example (`config/cobbleranked/config.yaml`):**
+
+```yaml
+crossServer:
+  enabled: true
+  serverId: "lobby1"      # Unique for each lobby
+  battleServer: "battle"  # Name of battle server in Velocity
+```
 
 ---
 
