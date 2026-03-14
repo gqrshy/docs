@@ -248,6 +248,236 @@ battle_records (
 
 ---
 
+## Building Web Applications & APIs
+
+CobbleRanked does not include a built-in web API server. To create websites or external services, you have two options:
+
+### Option 1: Direct Database Access
+
+Connect your web application directly to CobbleRanked's database.
+
+**Node.js Example:**
+
+```javascript
+const mysql = require('mysql2/promise');
+
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'cobbleranked',
+  password: 'your_password',
+  database: 'cobbleranked'
+});
+
+// Get top 10 players by ELO
+async function getLeaderboard(format, seasonName) {
+  const [rows] = await pool.query(
+    `SELECT uuid, elo, matches, wins
+     FROM format_stats
+     WHERE format = ? AND season_name = ?
+     ORDER BY elo DESC
+     LIMIT 10`,
+    [format, seasonName]
+  );
+  return rows;
+}
+
+// Get player stats
+async function getPlayerStats(uuid, format, seasonName) {
+  const [rows] = await pool.query(
+    `SELECT * FROM format_stats
+     WHERE uuid = ? AND format = ? AND season_name = ?`,
+    [uuid, format, seasonName]
+  );
+  return rows[0];
+}
+```
+
+**Python Example:**
+
+```python
+import mysql.connector
+from typing import List, Dict
+
+class CobbleRankedAPI:
+    def __init__(self, host='localhost', user='cobbleranked',
+                 password='your_password', database='cobbleranked'):
+        self.conn = mysql.connector.connect(
+            host=host, user=user, password=password, database=database
+        )
+
+    def get_leaderboard(self, format: str, season: str, limit: int = 10) -> List[Dict]:
+        cursor = self.conn.cursor(dictionary=True)
+        cursor.execute(
+            f"SELECT uuid, elo, matches, wins FROM format_stats "
+            f"WHERE format = %s AND season_name = %s "
+            f"ORDER BY elo DESC LIMIT %s",
+            (format, season, limit)
+        )
+        return cursor.fetchall()
+
+    def get_player_stats(self, uuid: str, format: str, season: str) -> Dict:
+        cursor = self.conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT * FROM format_stats "
+            "WHERE uuid = %s AND format = %s AND season_name = %s",
+            (uuid, format, season)
+        )
+        return cursor.fetchone()
+```
+
+### Option 2: Custom API Server
+
+Create a REST API server that interfaces with the database.
+
+**Express.js Example:**
+
+```javascript
+const express = require('express');
+const mysql = require('mysql2/promise');
+
+const app = express();
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: 'cobbleranked'
+});
+
+// Leaderboard endpoint
+app.get('/api/leaderboard/:format/:season', async (req, res) => {
+  const { format, season } = req.params;
+  const limit = parseInt(req.query.limit) || 10;
+
+  try {
+    const [rows] = await pool.query(
+      `SELECT uuid, elo, matches, wins
+       FROM format_stats
+       WHERE format = ? AND season_name = ?
+       ORDER BY elo DESC
+       LIMIT ?`,
+      [format, season, limit]
+    );
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Player stats endpoint
+app.get('/api/player/:uuid/:format/:season', async (req, res) => {
+  const { uuid, format, season } = req.params;
+
+  try {
+    const [rows] = await pool.query(
+      `SELECT * FROM format_stats
+       WHERE uuid = ? AND format = ? AND season_name = ?`,
+      [uuid, format, season]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Player not found' });
+    }
+
+    res.json(rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Usage stats endpoint
+app.get('/api/usage/:season', async (req, res) => {
+  const { season } = req.params;
+
+  try {
+    const [rows] = await pool.query(
+      `SELECT
+        format,
+        COUNT(*) as total_battles,
+        AVG(elo) as avg_elo
+       FROM battle_records
+       WHERE season_name = ?
+       GROUP BY format`,
+      [season]
+    );
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.listen(3000, () => console.log('API running on port 3000'));
+```
+
+### Common Use Cases
+
+**Leaderboard Display:**
+
+```sql
+-- Top 10 Singles players
+SELECT uuid, elo, matches, wins
+FROM format_stats
+WHERE format = 'singles' AND season_name = 'Season 1'
+ORDER BY elo DESC
+LIMIT 10;
+```
+
+**Player Profile:**
+
+```sql
+-- Player stats across all formats
+SELECT format, elo, matches, wins, current_streak
+FROM format_stats
+WHERE uuid = 'player-uuid-here'
+AND season_name = 'Season 1';
+```
+
+**Usage Statistics:**
+
+```sql
+-- Battle count by format
+SELECT format, COUNT(*) as battles
+FROM battle_records
+WHERE season_name = 'Season 1'
+GROUP BY format;
+```
+
+**Season Overview:**
+
+```sql
+-- Get current season info
+SELECT * FROM seasons
+WHERE is_active = TRUE;
+```
+
+### Security Considerations
+
+⚠️ **Important:** When connecting external applications to CobbleRanked's database:
+
+1. **Use Read-Only Accounts:** Create a separate database user with `SELECT` only permissions
+
+   ```sql
+   CREATE USER 'cobbleranked_web'@'%' IDENTIFIED BY 'secure_password';
+   GRANT SELECT ON cobbleranked.* TO 'cobbleranked_web'@'%';
+   ```
+
+2. **Connection Pooling:** Limit concurrent connections to prevent database overload
+
+3. **Rate Limiting:** Implement rate limiting on your API endpoints
+
+4. **Data Sanitization:** Always sanitize user input to prevent SQL injection
+
+5. **HTTPS:** Use HTTPS in production for secure data transmission
+
+### Real-Time Updates
+
+For real-time leaderboard updates, consider:
+
+1. **Polling:** Query the database every 30-60 seconds
+2. **WebSocket Server:** Create a WebSocket server that pushes updates
+3. **Redis Integration:** Use Redis as a cache layer for faster reads
+
+---
+
 ## See Also
 
 - [Cross-Server Setup](cross-server/) - Multi-server configuration
