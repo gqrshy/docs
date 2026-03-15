@@ -154,8 +154,6 @@ rankTiers:
 |---------|---------|-------------|
 | `startingElo` | `1000` | Starting rating for new players |
 | `floorElo` | `0` | Minimum possible rating (set to prevent dropping below a threshold) |
-| `newPlayerGames` | `10` | Games before K-factor normalizes (industry standard: 10 placement matches) |
-| `newPlayerKFactor` | `35` | K-factor for new players (balanced for fairer matchmaking) |
 | `streakBonus.enabled` | `true` | Enable win streak K-factor bonus |
 
 ## Season Resets
