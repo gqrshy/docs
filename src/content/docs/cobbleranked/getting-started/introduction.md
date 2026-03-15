@@ -7,9 +7,9 @@ description: Welcome to CobbleRanked! Get up and running quickly.
 
 | Guide | Description |
 |-------|-------------|
-| [Installation](/docs/cobbleranked/getting-started/installation/) | Step-by-step installation guide |
-| [Quick Start](/docs/cobbleranked/getting-started/quick-start/) | Get your first battle going |
-| [Commands](/docs/cobbleranked/getting-started/commands/) | All available commands |
+| [Installation](/docs/cobbleranked/getting-started/installation) | Step-by-step installation guide |
+| [Quick Start](/docs/cobbleranked/getting-started/quick-start) | Get your first battle going |
+| [Commands](/docs/cobbleranked/getting-started/commands) | All available commands |
 
 ## Requirements
 
@@ -64,13 +64,13 @@ That's it! CobbleRanked works out of the box with sensible defaults.
 
 After basic installation, you may want to:
 
-- **[Configure Arenas](/docs/cobbleranked/configuration/arenas/)** - Set battle locations
-- **[Configure Blacklist](/docs/cobbleranked/configuration/blacklist/)** - Restrict Pokemon/moves
-- **[Configure Restrictions](/docs/cobbleranked/configuration/restrictions/)** - Queue/arena restriction levels
-- **[Configure Rewards](/docs/cobbleranked/configuration/rewards/)** - Season end prizes
-- **[Configure Languages](/docs/cobbleranked/configuration/languages/)** - Change to Japanese
+- **[Configure Arenas](/docs/cobbleranked/configuration/arenas)** - Set battle locations
+- **[Configure Blacklist](/docs/cobbleranked/configuration/blacklist)** - Restrict Pokemon/moves
+- **[Configure Restrictions](/docs/cobbleranked/configuration/restrictions)** - Queue/arena restriction levels
+- **[Configure Rewards](/docs/cobbleranked/configuration/rewards)** - Season end prizes
+- **[Configure Languages](/docs/cobbleranked/configuration/languages)** - Change to Japanese
 
 ## Need Help?
 
-- **[FAQ](/docs/cobbleranked/support/faq/)** - Common questions answered
+- **[FAQ](/docs/cobbleranked/support/faq)** - Common questions answered
 - **[Discord](https://discord.gg/VVVvBTqqyP)** - Community support

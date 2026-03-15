@@ -153,5 +153,5 @@ Together, these create a fair competitive environment.
 
 ## See Also
 
-- [ELO Configuration](elo/) - Rating system settings
-- [Battle Configuration](battle/) - Flee penalties and other settings
+- [ELO Configuration](elo) - Rating system settings
+- [Battle Configuration](battle) - Flee penalties and other settings

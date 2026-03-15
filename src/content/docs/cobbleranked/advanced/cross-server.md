@@ -90,7 +90,7 @@ redis-cli PING
 
 ### 2. Configure Database
 
-All servers must connect to the same database. See [Database Configuration](/docs/cobbleranked/advanced/database/) for detailed MySQL/MongoDB setup.
+All servers must connect to the same database. See [Database Configuration](/docs/cobbleranked/advanced/database) for detailed MySQL/MongoDB setup.
 
 ### 3. Configure Battle Server
 
@@ -231,6 +231,6 @@ crossServer:
 
 ## See Also
 
-- [Database Configuration](database/) - MySQL/MongoDB setup details
-- [Main Configuration](../configuration/config/) - General settings
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Database Configuration](database) - MySQL/MongoDB setup details
+- [Main Configuration](../configuration/config) - General settings
+- [FAQ](../support/faq) - Common questions and troubleshooting

@@ -204,4 +204,4 @@ Apply changes without restart:
 
 ---
 
-**See Also**: [Language Configuration](languages/) - Customize text and colors
+**See Also**: [Language Configuration](languages) - Customize text and colors

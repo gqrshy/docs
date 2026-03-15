@@ -274,6 +274,6 @@ queue:
 
 ## See Also
 
-- [Main Configuration](config.md) - General settings
-- [Arena Setup](arenas.md) - Battle location configuration
-- [Troubleshooting](../support/troubleshooting.md) - Common issues
+- [Main Configuration](config) - General settings
+- [Arena Setup](arenas) - Battle location configuration
+- [Troubleshooting](../support/troubleshooting) - Common issues

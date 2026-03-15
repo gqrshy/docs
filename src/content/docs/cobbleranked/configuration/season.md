@@ -158,6 +158,6 @@ Use IANA timezone identifiers:
 
 ## See Also
 
-- [Seasons Feature](../features/seasons/) - How seasons work for players
-- [Rewards Configuration](rewards/) - Season-end rewards
-- [Season Presets](../features/battle-formats/) - Format rules per season
+- [Seasons Feature](../features/seasons) - How seasons work for players
+- [Rewards Configuration](rewards) - Season-end rewards
+- [Season Presets](../features/battle-formats) - Format rules per season

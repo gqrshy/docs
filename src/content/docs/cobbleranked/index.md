@@ -5,7 +5,7 @@ description: The ultimate competitive Pokemon battle system for Cobblemon
 
 > **Transform your Cobblemon server into a competitive Pokemon arena**
 
-[Get Started](/docs/cobbleranked/getting-started/installation/) | [View on Polymart](https://polymart.org/product/8733/cobbleranked)
+[Get Started](/docs/cobbleranked/getting-started/installation) | [View on Polymart](https://polymart.org/product/8733/cobbleranked)
 
 ---
 
@@ -78,7 +78,7 @@ SQLite for single servers, MySQL for cross-server setups, MongoDB for cloud depl
 ### Web API
 Sync leaderboards and Pokemon usage statistics to your website in real-time. Authenticated API endpoints with configurable sync intervals.
 
-**Live Demos:** [Leaderboard](/demo/leaderboard/) | [Usage Stats](/demo/usage-stats/)
+**Live Demos:** [Leaderboard](/demo/leaderboard) | [Usage Stats](/demo/usage-stats)
 
 ---
 
@@ -93,10 +93,10 @@ Sync leaderboards and Pokemon usage statistics to your website in real-time. Aut
 
 ## Quick Links
 
-- [Installation](/docs/cobbleranked/getting-started/installation/)
-- [Quick Start](/docs/cobbleranked/getting-started/quick-start/)
-- [Commands](/docs/cobbleranked/getting-started/commands/)
-- [Configuration](/docs/cobbleranked/configuration/config/)
+- [Installation](/docs/cobbleranked/getting-started/installation)
+- [Quick Start](/docs/cobbleranked/getting-started/quick-start)
+- [Commands](/docs/cobbleranked/getting-started/commands)
+- [Configuration](/docs/cobbleranked/configuration/config)
 
 ---
 

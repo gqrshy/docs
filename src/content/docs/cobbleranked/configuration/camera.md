@@ -400,7 +400,7 @@ Lower values = smoother but more CPU usage. Default values work well for most se
 
 ## See Also
 
-- [Main Configuration](config/) - General settings
-- [Battle Configuration](battle/) - Battle timers and settings
-- [Battle Camera Feature](../features/battle-camera/) - Camera overview
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Main Configuration](config) - General settings
+- [Battle Configuration](battle) - Battle timers and settings
+- [Battle Camera Feature](../features/battle-camera) - Camera overview
+- [FAQ](../support/faq) - Common questions and troubleshooting

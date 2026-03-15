@@ -677,7 +677,7 @@ Reload presets without restart:
 
 ## See Also
 
-- [Seasons](../features/seasons/) - Full preset configuration
-- [Battle Formats](../features/battle-formats/) - Format-specific settings
-- [Main Configuration](config/) - General settings
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Seasons](../features/seasons) - Full preset configuration
+- [Battle Formats](../features/battle-formats) - Format-specific settings
+- [Main Configuration](config) - General settings
+- [FAQ](../support/faq) - Common questions and troubleshooting

@@ -181,6 +181,6 @@ Validate `X-API-Key` on your server before processing data.
 
 ## See Also
 
-- [Configuration](config/) - Main configuration guide
-- [Leaderboards](../features/leaderboards/) - Leaderboard feature
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Configuration](config) - Main configuration guide
+- [Leaderboards](../features/leaderboards) - Leaderboard feature
+- [FAQ](../support/faq) - Common questions and troubleshooting

@@ -126,7 +126,7 @@ Teleport players to battle coordinates when battles start.
 
 **Saved:** Position (x, y, z), facing (yaw, pitch), dimension
 
-**Details:** [Arena Configuration](/docs/cobbleranked/configuration/arenas/)
+**Details:** [Arena Configuration](/docs/cobbleranked/configuration/arenas)
 
 </details>
 
@@ -135,7 +135,7 @@ Teleport players to battle coordinates when battles start.
 
 Ban legendaries and OHKO moves.
 
-See [Blacklist Configuration](/docs/cobbleranked/configuration/blacklist/) for full setup.
+See [Blacklist Configuration](/docs/cobbleranked/configuration/blacklist) for full setup.
 
 </details>
 
@@ -150,7 +150,7 @@ See [Blacklist Configuration](/docs/cobbleranked/configuration/blacklist/) for f
 - Redis 6.0+
 - Velocity 3.4.0+
 
-**Full Guide:** [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/)
+**Full Guide:** [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server)
 
 </details>
 
@@ -192,23 +192,23 @@ config/cobbleranked/
 
 ### For Casual Servers
 
-1. **[Set arenas](/docs/cobbleranked/configuration/arenas/)** - Battle locations
-2. **[Configure rewards](/docs/cobbleranked/configuration/rewards/)** - Season prizes
-3. **[Customize GUI](/docs/cobbleranked/configuration/gui/)** - Interface tweaks
+1. **[Set arenas](/docs/cobbleranked/configuration/arenas)** - Battle locations
+2. **[Configure rewards](/docs/cobbleranked/configuration/rewards)** - Season prizes
+3. **[Customize GUI](/docs/cobbleranked/configuration/gui)** - Interface tweaks
 
 ### For Competitive Servers
 
-1. **[Configure blacklist](/docs/cobbleranked/configuration/blacklist/)** - Smogon/VGC rules
-2. **[Adjust ELO system](/docs/cobbleranked/configuration/config/)** - Fine-tune ratings
-3. **[Set battle settings](/docs/cobbleranked/configuration/config/)** - Turn timers, team selection
+1. **[Configure blacklist](/docs/cobbleranked/configuration/blacklist)** - Smogon/VGC rules
+2. **[Adjust ELO system](/docs/cobbleranked/configuration/config)** - Fine-tune ratings
+3. **[Set battle settings](/docs/cobbleranked/configuration/config)** - Turn timers, team selection
 
 ### For Cross-Server Networks
 
-1. **[Complete cross-server setup](/docs/cobbleranked/advanced/cross-server/)** - Full guide
-2. **[Configure database](/docs/cobbleranked/advanced/database/)** - MySQL setup
+1. **[Complete cross-server setup](/docs/cobbleranked/advanced/cross-server)** - Full guide
+2. **[Configure database](/docs/cobbleranked/advanced/database)** - MySQL setup
 
 ## See Also
 
-- [Getting Started](/docs/cobbleranked/getting-started/introduction/) - Requirements & setup
-- [Quick Start](/docs/cobbleranked/getting-started/quick-start/) - First battle setup
-- [FAQ](/docs/cobbleranked/support/faq/) - Common questions
+- [Getting Started](/docs/cobbleranked/getting-started/introduction) - Requirements & setup
+- [Quick Start](/docs/cobbleranked/getting-started/quick-start) - First battle setup
+- [FAQ](/docs/cobbleranked/support/faq) - Common questions

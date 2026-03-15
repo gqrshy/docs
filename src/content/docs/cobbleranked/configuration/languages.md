@@ -169,6 +169,6 @@ No server restart required!
 
 ## See Also
 
-- [Main Configuration](config/) - General settings
-- [GUI Customization](gui/) - Menu customization
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Main Configuration](config) - General settings
+- [GUI Customization](gui) - Menu customization
+- [FAQ](../support/faq) - Common questions and troubleshooting

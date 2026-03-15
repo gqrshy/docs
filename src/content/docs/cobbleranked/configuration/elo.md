@@ -304,7 +304,7 @@ rankTiers:
 
 ## See Also
 
-- [Main Configuration](config/) - Basic settings
-- [Matchmaking Settings](matchmaking/) - ELO range configuration
-- [Season Settings](season/) - Season reset behavior
-- [ELO System Feature](../features/elo-system/) - Player-facing guide
+- [Main Configuration](config) - Basic settings
+- [Matchmaking Settings](matchmaking) - ELO range configuration
+- [Season Settings](season) - Season reset behavior
+- [ELO System Feature](../features/elo-system) - Player-facing guide

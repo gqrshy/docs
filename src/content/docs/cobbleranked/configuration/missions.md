@@ -282,6 +282,6 @@ weeklyMissions:
 
 ## See Also
 
-- [Rewards Configuration](rewards.md) - Season rewards and milestones
-- [Main Configuration](config.md) - General settings
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Rewards Configuration](rewards) - Season rewards and milestones
+- [Main Configuration](config) - General settings
+- [FAQ](../support/faq) - Common questions and troubleshooting
