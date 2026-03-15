@@ -11,10 +11,10 @@ File: `config/cobbleranked/restrictions.yaml`
 
 Competitive integrity matters. Restrictions prevent players from:
 
-- **Swapping Pokemon mid-match** — Changing teams after seeing opponent
-- **Healing during battle** — Using potions or PC to gain unfair advantage
-- **Escaping losing battles** — Teleporting away to avoid defeat
-- **Interfering with arena** — Breaking blocks or accessing storage during match
+- **Swapping Pokemon mid-match**: Changing teams after seeing opponent
+- **Healing during battle**: Using potions or PC to gain unfair advantage
+- **Escaping losing battles**: Teleporting away to avoid defeat
+- **Interfering with arena**: Breaking blocks or accessing storage during match
 
 ## Restriction Levels
 
@@ -102,9 +102,9 @@ Applied while player waits in matchmaking queue. More relaxed than arena, but pr
 ### Permissive Options
 
 Keep these `false` during queue:
-- `blockItemUse` — Let players use items while waiting
-- `blockBlockBreak/Place` — Allow building/mining
-- `blockPvp/Pve` — Allow engaging in other combat
+- `blockItemUse`: Let players use items while waiting
+- `blockBlockBreak/Place`: Allow building/mining
+- `blockPvp/Pve`: Allow engaging in other combat
 
 ## Arena Restrictions
 
@@ -116,34 +116,34 @@ Set all these to `true` for competitive play:
 
 ```yaml
 arena:
-  # Items — No using items during battle
+  # Items: No using items during battle
   blockItemUse: true
   blockItemDrop: true
   blockItemPickup: true
   blockEquipmentChange: true
 
-  # World — No interfering with arena
+  # World: No interfering with arena
   blockBlockBreak: true
   blockBlockPlace: true
   blockBlockInteract: true
   blockContainerAccess: true
 
-  # Entities — No external interference
+  # Entities: No external interference
   blockEntityInteract: true
   blockEntityDamage: true
   blockEntityMount: true
 
-  # Combat — Battle only happens in the arena
+  # Combat: Battle only happens in the arena
   blockPvp: true
   blockPve: true
   blockProjectileLaunch: true
 
-  # Movement — No escaping
+  # Movement: No escaping
   blockTeleport: true
   blockPortalUse: true
   blockFlight: true
 
-  # Cobblemon — No changing Pokemon mid-battle
+  # Cobblemon: No changing Pokemon mid-battle
   blockPcAccess: true
   blockMoveSwap: true
 ```
@@ -274,6 +274,6 @@ queue:
 
 ## See Also
 
-- [Main Configuration](config) - General settings
-- [Arena Setup](arenas) - Battle location configuration
-- [Troubleshooting](../support/troubleshooting) - Common issues
+- [Main Configuration](config/) - General settings
+- [Arena Setup](arenas/) - Battle location configuration
+- [Troubleshooting](../support/troubleshooting/) - Common issues

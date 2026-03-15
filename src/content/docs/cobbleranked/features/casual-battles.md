@@ -7,10 +7,10 @@ description: Practice without pressure. Test teams and battle friends.
 
 Not every battle needs to be life or death. Casual mode lets you:
 
-- **Experiment freely** — Test wild team compositions without consequences
-- **Practice new strategies** — Perfect your plays before going ranked
-- **Battle friends** — Fun matches without the competitive stress
-- **Learn the system** — New players can get comfortable before diving into ranked
+- **Experiment freely**: Test wild team compositions without consequences
+- **Practice new strategies**: Perfect your plays before going ranked
+- **Battle friends**: Fun matches without the competitive stress
+- **Learn the system**: New players can get comfortable before diving into ranked
 
 ## Casual vs Ranked
 
@@ -35,7 +35,7 @@ No waiting for skill-based matching. Casual battles connect you with the first a
 
 ## Same Rules, No Stakes
 
-Casual battles follow the same format rules and blacklist restrictions as ranked — unless your server admin configures them differently. Same competitive integrity, zero pressure.
+Casual battles follow the same format rules and blacklist restrictions as ranked (unless your server admin configures them differently). Same competitive integrity, zero pressure.
 
 ## Daily Missions
 
@@ -43,13 +43,13 @@ Check `/casual missions` for daily and weekly challenges. Complete them for extr
 
 ## Perfect For
 
-**Team Testing** — Built a new team? Test it in casual before risking your rank.
+**Team Testing**: Built a new team? Test it in casual before risking your rank.
 
-**Warming Up** — Get into the groove before jumping into ranked competition.
+**Warming Up**: Get into the groove before jumping into ranked competition.
 
-**Teaching Friends** — Help new players learn without worrying about their rating.
+**Teaching Friends**: Help new players learn without worrying about their rating.
 
-**Just Having Fun** — Sometimes you just want to battle without the stress.
+**Just Having Fun**: Sometimes you just want to battle without the stress.
 
 ---
 

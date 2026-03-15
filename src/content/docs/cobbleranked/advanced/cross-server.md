@@ -231,6 +231,6 @@ crossServer:
 
 ## See Also
 
-- [Database Configuration](database) - MySQL/MongoDB setup details
-- [Main Configuration](../configuration/config) - General settings
-- [FAQ](../support/faq) - Common questions and troubleshooting
+- [Database Configuration](database/) - MySQL/MongoDB setup details
+- [Main Configuration](../configuration/config/) - General settings
+- [FAQ](../support/faq/) - Common questions and troubleshooting

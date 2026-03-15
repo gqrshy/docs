@@ -12,20 +12,20 @@ CobbleRanked v2.0.21+ uses multiple YAML files in `config/cobbleranked/`:
 | File | Purpose |
 |------|---------|
 | `config.yaml` | Core settings: language, database, cross-server, debug |
-| `elo.yaml` | Rating system and rank tiers → [ELO Settings](elo) |
-| `battle.yaml` | Timers, penalties, rewards → [Battle Settings](battle) |
-| `matchmaking.yaml` | Recent opponent avoidance → [Matchmaking Settings](matchmaking) |
-| `season.yaml` | Season schedule and reset behavior → [Season Settings](season) |
-| `sounds.yaml` | All sound effects → [Sounds](sounds) |
-| `arenas.yaml` | Battle arena positions → [Arenas](arenas) |
-| `blacklist.yaml` | Pokemon/move restrictions → [Blacklist](blacklist) |
-| `restrictions.yaml` | Player action restrictions → [Restrictions](restrictions) |
-| `rewards.yaml` | Season rewards → [Rewards](rewards) |
-| `missions.yaml` | Daily/weekly missions → [Missions](missions) |
-| `luckperms.yaml` | LuckPerms integration → [LuckPerms](../integration/luckperms) |
-| `camera/camera.yaml` | Battle camera system → [Camera](camera) |
-| `api.yaml` | Web API settings → [API](api) |
-| `season_presets/*.yml` | Format rules per season → [Battle Formats](../features/battle-formats) |
+| `elo.yaml` | Rating system and rank tiers → [ELO Settings](elo/) |
+| `battle.yaml` | Timers, penalties, rewards → [Battle Settings](battle/) |
+| `matchmaking.yaml` | Recent opponent avoidance → [Matchmaking Settings](matchmaking/) |
+| `season.yaml` | Season schedule and reset behavior → [Season Settings](season/) |
+| `sounds.yaml` | All sound effects → [Sounds](sounds/) |
+| `arenas.yaml` | Battle arena positions → [Arenas](arenas/) |
+| `blacklist.yaml` | Pokemon/move restrictions → [Blacklist](blacklist/) |
+| `restrictions.yaml` | Player action restrictions → [Restrictions](restrictions/) |
+| `rewards.yaml` | Season rewards → [Rewards](rewards/) |
+| `missions.yaml` | Daily/weekly missions → [Missions](missions/) |
+| `luckperms.yaml` | LuckPerms integration → [LuckPerms](../integration/luckperms/) |
+| `camera/camera.yaml` | Battle camera system → [Camera](camera/) |
+| `api.yaml` | Web API settings → [API](api/) |
+| `season_presets/*.yml` | Format rules per season → [Battle Formats](../features/battle-formats/) |
 
 ### Season Presets (v2.0.13+)
 
@@ -185,23 +185,23 @@ debug:
 
 | Setting | Documentation |
 |---------|---------------|
-| ELO Rating System | [ELO Configuration](elo) |
-| Matchmaking Rules | [Matchmaking Configuration](matchmaking) |
-| Battle Timers & Penalties | [Battle Configuration](battle) |
-| Season Schedule | [Season Configuration](season) |
-| Match Announcements | [Announcements Configuration](announcements) |
-| Daily Elo Limits | [Daily Limits Configuration](daily-limits) |
-| Pokemon/Move Restrictions | [Blacklist Configuration](blacklist) |
-| Player Action Restrictions | [Restrictions Configuration](restrictions) |
-| Season End Rewards | [Rewards Configuration](rewards) |
-| Daily/Weekly Missions | [Missions Configuration](missions) |
-| Battle Arenas | [Arena Configuration](arenas) |
-| GUI Customization | [GUI Configuration](gui) |
-| Language Files | [Languages Configuration](languages) |
-| Sound Effects | [Sounds Configuration](sounds) |
-| Battle Camera | [Camera Configuration](camera) |
-| Web API | [API Configuration](api) |
-| LuckPerms Integration | [LuckPerms](../integration/luckperms) |
+| ELO Rating System | [ELO Configuration](elo/) |
+| Matchmaking Rules | [Matchmaking Configuration](matchmaking/) |
+| Battle Timers & Penalties | [Battle Configuration](battle/) |
+| Season Schedule | [Season Configuration](season/) |
+| Match Announcements | [Announcements Configuration](announcements/) |
+| Daily Elo Limits | [Daily Limits Configuration](daily-limits/) |
+| Pokemon/Move Restrictions | [Blacklist Configuration](blacklist/) |
+| Player Action Restrictions | [Restrictions Configuration](restrictions/) |
+| Season End Rewards | [Rewards Configuration](rewards/) |
+| Daily/Weekly Missions | [Missions Configuration](missions/) |
+| Battle Arenas | [Arena Configuration](arenas/) |
+| GUI Customization | [GUI Configuration](gui/) |
+| Language Files | [Languages Configuration](languages/) |
+| Sound Effects | [Sounds Configuration](sounds/) |
+| Battle Camera | [Camera Configuration](camera/) |
+| Web API | [API Configuration](api/) |
+| LuckPerms Integration | [LuckPerms](../integration/luckperms/) |
 
 ---
 

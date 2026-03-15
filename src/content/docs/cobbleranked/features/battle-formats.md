@@ -36,10 +36,10 @@ Position matters. Center Pokemon can hit anyone; side Pokemon have limited reach
 ## Independent Rankings
 
 Each format has its own:
-- **Queue** — Singles players only match with Singles players
-- **ELO rating** — Climb separately in each format
-- **Leaderboard** — Dominate one format or conquer them all
-- **Blacklist rules** — Different bans per format if configured
+- **Queue**: Singles players only match with Singles players
+- **ELO rating**: Climb separately in each format
+- **Leaderboard**: Dominate one format or conquer them all
+- **Blacklist rules**: Different bans per format if configured
 
 ```
 Player: Steve

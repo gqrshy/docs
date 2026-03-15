@@ -171,5 +171,5 @@ arenas:
 
 ## See Also
 
-- [Main Configuration](config) - General settings
-- [FAQ](../support/faq) - Common questions and troubleshooting
+- [Main Configuration](config/) - General settings
+- [FAQ](../support/faq/) - Common questions and troubleshooting

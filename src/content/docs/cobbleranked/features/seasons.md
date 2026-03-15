@@ -7,7 +7,7 @@ description: Fresh starts. New champions. Exclusive rewards for the best.
 
 Seasons keep competition alive. Every few weeks or months, the slate wipes clean. Last season's champion? They start at the same spot as everyone else. New players get a real shot at glory.
 
-**Top performers earn exclusive rewards** — items, Pokemon, titles, whatever you configure. Give your players something to fight for.
+**Top performers earn exclusive rewards**. Configure items, Pokemon, titles, and more. Give your players something to fight for.
 
 ## Season Lifecycle
 

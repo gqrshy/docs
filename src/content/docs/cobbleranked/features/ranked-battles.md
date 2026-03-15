@@ -16,7 +16,7 @@ Every ranked battle matters. Beat stronger opponents for massive ELO gains. Take
 ## How to Play
 
 1. Open the ranked menu with `/ranked`
-2. Choose your format — Singles, Doubles, or Triples
+2. Choose your format (Singles, Doubles, or Triples)
 3. Click **Join Queue**
 4. Wait for matchmaking to find a worthy opponent
 5. Accept the match and prepare for battle
@@ -34,7 +34,7 @@ Both players must confirm they're ready. If you don't respond in time, the match
 
 ### Team Selection
 
-Choose which Pokemon from your party will fight. You have 60 seconds to make your selection — choose wisely.
+Choose which Pokemon from your party will fight. You have 60 seconds to make your selection. Choose wisely.
 
 ### Lead Selection
 

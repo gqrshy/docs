@@ -154,5 +154,5 @@ Queue join announcements generate chat messages for every player who joins. On l
 
 ## See Also
 
-- [Battle Configuration](battle) - Other battle settings
-- [Matchmaking Configuration](matchmaking) - Queue behavior settings
+- [Battle Configuration](battle/) - Other battle settings
+- [Matchmaking Configuration](matchmaking/) - Queue behavior settings

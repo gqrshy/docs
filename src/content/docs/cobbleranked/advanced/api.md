@@ -432,7 +432,7 @@ Season information and status.
 
 ## See Also
 
-- [Database Configuration](database) - Database setup and schema
-- [Placeholders](../integration/placeholders) - Placeholder API details
-- [Cross-Server Setup](cross-server) - Multi-server configuration
-- [FAQ](../support/faq) - Common questions
+- [Database Configuration](database/) - Database setup and schema
+- [Placeholders](../integration/placeholders/) - Placeholder API details
+- [Cross-Server Setup](cross-server/) - Multi-server configuration
+- [FAQ](../support/faq/) - Common questions

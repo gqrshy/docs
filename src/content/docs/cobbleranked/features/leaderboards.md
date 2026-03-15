@@ -17,18 +17,18 @@ The leaderboard shows the best players on your server. Every win pushes you high
 
 Open `/ranked` and click the leaderboard button. You'll see:
 
-- **Rank position** — Where you stand
-- **Player names** — Your competition
-- **ELO ratings** — Skill at a glance
-- **Win/Loss records** — Battle history
+- **Rank position**: Where you stand
+- **Player names**: Your competition
+- **ELO ratings**: Skill at a glance
+- **Win/Loss records**: Battle history
 
 ## Three Leaderboards
 
 Each format has its own rankings:
 
-- **Singles** — The 1v1 legends
-- **Doubles** — The VGC masters
-- **Triples** — The full-team tacticians
+- **Singles**: The 1v1 legends
+- **Doubles**: The VGC masters
+- **Triples**: The full-team tacticians
 
 Toggle between them with a single click. Dominate one format or conquer all three.
 
@@ -62,7 +62,7 @@ Leaderboards are cached for smooth performance even with thousands of players:
 | Default page size | 25 players | Players per page |
 | Max archive entries | 100 players | Off-season display limit |
 
-Updates happen automatically in the background — you'll always see fresh data.
+Updates happen automatically in the background. You'll always see fresh data.
 
 ### Cache Behavior
 

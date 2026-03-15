@@ -3,7 +3,7 @@ title: Web API Integration
 description: Sync ranked battle data to your external website.
 ---
 
-Display live ranked data on your community website. Leaderboards, usage statistics, player rankings — all synced automatically.
+Display live ranked data on your community website. Leaderboards, usage statistics, player rankings. All synced automatically.
 
 ---
 
@@ -181,6 +181,6 @@ Validate `X-API-Key` on your server before processing data.
 
 ## See Also
 
-- [Configuration](config) - Main configuration guide
-- [Leaderboards](../features/leaderboards) - Leaderboard feature
-- [FAQ](../support/faq) - Common questions and troubleshooting
+- [Configuration](config/) - Main configuration guide
+- [Leaderboards](../features/leaderboards/) - Leaderboard feature
+- [FAQ](../support/faq/) - Common questions and troubleshooting

@@ -122,43 +122,43 @@ eventReactions:
 <summary><strong>All Event Types</strong></summary>
 
 **Battle Lifecycle:**
-- `BATTLE_START` — Match begins
-- `BATTLE_END` — Match ends
+- `BATTLE_START`: Match begins
+- `BATTLE_END`: Match ends
 
 **Pokemon Actions:**
-- `POKEMON_SENDOUT` — Pokemon enters battle
-- `POKEMON_RECALLED` — Pokemon returns to ball
-- `POKEMON_MOVE_USED` — Move is executed
-- `POKEMON_HIT` — Move connects
-- `POKEMON_FAINT` — Pokemon faints
+- `POKEMON_SENDOUT`: Pokemon enters battle
+- `POKEMON_RECALLED`: Pokemon returns to ball
+- `POKEMON_MOVE_USED`: Move is executed
+- `POKEMON_HIT`: Move connects
+- `POKEMON_FAINT`: Pokemon faints
 
 **Hit Types:**
-- `CRITICAL_HIT` — Critical hit lands
-- `SUPER_EFFECTIVE_HIT` — Super effective damage
-- `NOT_VERY_EFFECTIVE_HIT` — Resisted damage
+- `CRITICAL_HIT`: Critical hit lands
+- `SUPER_EFFECTIVE_HIT`: Super effective damage
+- `NOT_VERY_EFFECTIVE_HIT`: Resisted damage
 
 **Transformations:**
-- `MEGA_EVOLUTION` — Mega evolution activates
-- `TERASTALLIZATION` — Tera type changes
-- `FORME_CHANGE` — Form changes
-- `ZPOWER_USED` — Z-Move used
-- `DYNAMAX_USED` — Dynamax activates
+- `MEGA_EVOLUTION`: Mega evolution activates
+- `TERASTALLIZATION`: Tera type changes
+- `FORME_CHANGE`: Form changes
+- `ZPOWER_USED`: Z-Move used
+- `DYNAMAX_USED`: Dynamax activates
 
 **Status:**
-- `STATUS_APPLIED` — Status condition inflicted
-- `STATUS_CURED` — Status healed
+- `STATUS_APPLIED`: Status condition inflicted
+- `STATUS_CURED`: Status healed
 
 **Custom Presets:**
-- `CUSTOM_CLOSE_UP` — Dramatic close shot
-- `CUSTOM_WIDE_SHOT` — Panoramic view
-- `CUSTOM_ACTION_SEQUENCE` — Fast action mode
-- `CUSTOM_FOCUS_POKEMON` — Focus on single Pokemon
-- `CUSTOM_DRAMATIC_MOMENT` — Slow dramatic effect
+- `CUSTOM_CLOSE_UP`: Dramatic close shot
+- `CUSTOM_WIDE_SHOT`: Panoramic view
+- `CUSTOM_ACTION_SEQUENCE`: Fast action mode
+- `CUSTOM_FOCUS_POKEMON`: Focus on single Pokemon
+- `CUSTOM_DRAMATIC_MOMENT`: Slow dramatic effect
 
 **Combo Events:**
-- `COMBO_CRITICAL_SUPER_EFFECTIVE` — Crit + Super effective
-- `COMBO_FAINT_ON_CRITICAL` — KO with critical hit
-- `COMBO_MEGA_EVOLUTION_MOVE` — Move after Mega evolving
+- `COMBO_CRITICAL_SUPER_EFFECTIVE`: Crit + Super effective
+- `COMBO_FAINT_ON_CRITICAL`: KO with critical hit
+- `COMBO_MEGA_EVOLUTION_MOVE`: Move after Mega evolving
 
 </details>
 
@@ -400,7 +400,7 @@ Lower values = smoother but more CPU usage. Default values work well for most se
 
 ## See Also
 
-- [Main Configuration](config) - General settings
-- [Battle Configuration](battle) - Battle timers and settings
-- [Battle Camera Feature](../features/battle-camera) - Camera overview
-- [FAQ](../support/faq) - Common questions and troubleshooting
+- [Main Configuration](config/) - General settings
+- [Battle Configuration](battle/) - Battle timers and settings
+- [Battle Camera Feature](../features/battle-camera/) - Camera overview
+- [FAQ](../support/faq/) - Common questions and troubleshooting

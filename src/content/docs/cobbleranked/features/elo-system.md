@@ -37,7 +37,7 @@ A more advanced system that tracks rating uncertainty. Better for servers with i
 | 1300-1499 | Great Ball |
 | Below 1300 | Poke Ball |
 
-New players start at **1000 ELO** — right in the middle. Win your way up or fall trying.
+New players start at **1000 ELO**. Win your way up or fall trying.
 
 ## K-Factor Bands
 

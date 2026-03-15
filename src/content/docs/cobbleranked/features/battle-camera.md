@@ -8,7 +8,7 @@ description: Cinematic battles. Automatic orbiting camera for immersive viewing.
 The battle camera transforms fights into spectacles:
 
 - **Orbits smoothly** around the battlefield
-- **Reacts to events** — zooms on big hits, pans on faints
+- **Reacts to events**: zooms on big hits, pans on faints
 - **Breathing motion** keeps the view alive during pauses
 - **Toggle on/off** anytime with a command
 
@@ -24,16 +24,16 @@ Check current status:
 /battlecamera status
 ```
 
-Your preference is saved — it persists across sessions and server restarts.
+Your preference is saved. It persists across sessions and server restarts.
 
 ## Camera Reactions
 
 The camera responds to battle events:
 
-- **Move used** — Brief zoom
-- **Super effective hit** — Dramatic angle shift
-- **Pokemon faints** — Slow pan
-- **Battle ends** — Victory pose angle
+- **Move used**: Brief zoom
+- **Super effective hit**: Dramatic angle shift
+- **Pokemon faints**: Slow pan
+- **Battle ends**: Victory pose angle
 
 ## Configuration
 
@@ -73,9 +73,9 @@ protection:
 
 While in camera mode:
 
-- **Invisible** — Other players can't see you floating
-- **No hunger** — Won't starve during battles
-- **No item pickup** — Prevents accidental pickups
+- **Invisible**: Other players can't see you floating
+- **No hunger**: Won't starve during battles
+- **No item pickup**: Prevents accidental pickups
 
 > 📝 For full configuration options, see [Camera Configuration](/docs/cobbleranked/configuration/camera/).
 

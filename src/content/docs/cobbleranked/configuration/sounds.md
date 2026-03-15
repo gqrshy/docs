@@ -3,7 +3,7 @@ title: Sound Configuration
 description: Customize all sound effects for battles, GUI, and queue events.
 ---
 
-Make your server unique with custom sound effects. Every interaction can have its own sound — from battle start to button clicks.
+Make your server unique with custom sound effects. Every interaction can have its own sound. From battle start to button clicks.
 
 File: `config/cobbleranked/sounds.yaml`
 
@@ -193,19 +193,27 @@ No Minecraft installation required. Copy the sound ID (e.g., `entity.player.leve
 </details>
 
 <details>
-<summary><strong>Software: Playsounder Mod</strong></summary>
+<summary><strong>Software: Playsounder</strong></summary>
 
-Play sounds in-game with a dedicated GUI:
+Standalone application to play all Minecraft sounds:
 
-- **[Playsounder](https://github.com/midorikuma/Playsounder/releases)** - Client-side mod for sound preview
+- **[Download Playsounder](https://github.com/midorikuma/Playsounder/releases)** - Download the latest `.exe` file
 
-**Installation:**
-1. Download the latest release
-2. Place in your client's `mods` folder
-3. Open the sound GUI in-game
-4. Click any sound to preview it
+Browse and play sounds from Minecraft versions installed on your system. No need to launch the game.
 
-This is ideal for server owners who want to test sounds while configuring.
+**Usage:**
+1. Launch the application
+2. Select your Minecraft version (matches your launcher configurations)
+3. Browse sound paths (same format as sound commands)
+4. Click to play any sound
+
+**Extension Tab Features:**
+- Load/save command lists
+- playsound parameter configuration
+- Double-click commands in the list to preview
+- Edit commands (replace, add, delete, move)
+- Multi-select with Ctrl/Shift
+- Simultaneous playback of multiple sounds
 
 </details>
 
@@ -244,6 +252,6 @@ This gives you complete `sound event → OGG` traceability. Ideal for developers
 
 ## See Also
 
-- [Main Configuration](config) - General settings
-- [Battle Configuration](battle) - Battle timers and settings
-- [FAQ](../support/faq) - Common questions and troubleshooting
+- [Main Configuration](config/) - General settings
+- [Battle Configuration](battle/) - Battle timers and settings
+- [FAQ](../support/faq/) - Common questions and troubleshooting
