@@ -163,13 +163,14 @@ enabled: false
 
 ## Finding Sounds
 
-### In-Game Method
+<details>
+<summary><strong>In-Game: Tab-Complete Method</strong></summary>
 
 1. Use `/playsound minecraft:` and press Tab
 2. Browse categories like `entity.`, `block.`, `item.`
 3. Test with: `/playsound minecraft:entity.player.levelup master @p`
 
-### Common Categories
+**Common Categories:**
 
 | Category | Examples |
 |----------|----------|
@@ -177,6 +178,67 @@ enabled: false
 | `block.*` | Block interactions, note blocks |
 | `item.*` | Item use sounds |
 | `ui.*` | Interface sounds |
+
+</details>
+
+<details>
+<summary><strong>Browser: Minecraft Sounds Library</strong></summary>
+
+Browse and preview all Minecraft sounds online:
+
+- **[minecraft-sounds.vercel.app](https://minecraft-sounds.vercel.app/)** - Search, filter, and play sounds directly in your browser
+
+No Minecraft installation required. Copy the sound ID (e.g., `entity.player.levelup`) and paste it into your config.
+
+</details>
+
+<details>
+<summary><strong>Software: Playsounder Mod</strong></summary>
+
+Play sounds in-game with a dedicated GUI:
+
+- **[Playsounder](https://github.com/midorikuma/Playsounder/releases)** - Client-side mod for sound preview
+
+**Installation:**
+1. Download the latest release
+2. Place in your client's `mods` folder
+3. Open the sound GUI in-game
+4. Click any sound to preview it
+
+This is ideal for server owners who want to test sounds while configuring.
+
+</details>
+
+<details>
+<summary><strong>Developer: Direct Asset Access</strong></summary>
+
+Trace sound events directly from Minecraft assets:
+
+**Asset Index Location:**
+```
+.minecraft/assets/indexes/
+├── 1.20.json
+├── 1.21.json
+└── ...
+```
+
+Each JSON contains the location of `sounds.json`, which maps all sound events to their OGG files.
+
+**Sound Files Location:**
+```
+.minecraft/assets/objects/
+└── [hash_prefix]/[hash]
+```
+
+**Workflow:**
+1. Open the version JSON (e.g., `1.21.json`)
+2. Locate `sounds.json` in the assets map
+3. Parse `sounds.json` to get sound event → OGG hash mappings
+4. Find the OGG file in `.minecraft/assets/objects/[hash_prefix]/[hash]`
+
+This gives you complete `sound event → OGG` traceability. Ideal for developers building sound-related tools or mods.
+
+</details>
 
 ---
 
