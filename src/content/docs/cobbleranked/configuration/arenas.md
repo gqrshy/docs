@@ -171,5 +171,5 @@ arenas:
 
 ## See Also
 
-- [Main Configuration](config/) - General settings
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions and troubleshooting

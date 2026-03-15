@@ -400,7 +400,7 @@ Lower values = smoother but more CPU usage. Default values work well for most se
 
 ## See Also
 
-- [Main Configuration](config/) - General settings
-- [Battle Configuration](battle/) - Battle timers and settings
-- [Battle Camera Feature](../features/battle-camera/) - Camera overview
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [Battle Configuration](/docs/cobbleranked/configuration/battle/) - Battle timers and settings
+- [Battle Camera Feature](/docs/cobbleranked/features/battle-camera/) - Camera overview
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions and troubleshooting

@@ -12,20 +12,20 @@ CobbleRanked v2.0.21+ uses multiple YAML files in `config/cobbleranked/`:
 | File | Purpose |
 |------|---------|
 | `config.yaml` | Core settings: language, database, cross-server, debug |
-| `elo.yaml` | Rating system and rank tiers → [ELO Settings](elo/) |
-| `battle.yaml` | Timers, penalties, rewards → [Battle Settings](battle/) |
-| `matchmaking.yaml` | Recent opponent avoidance → [Matchmaking Settings](matchmaking/) |
-| `season.yaml` | Season schedule and reset behavior → [Season Settings](season/) |
-| `sounds.yaml` | All sound effects → [Sounds](sounds/) |
-| `arenas.yaml` | Battle arena positions → [Arenas](arenas/) |
-| `blacklist.yaml` | Pokemon/move restrictions → [Blacklist](blacklist/) |
-| `restrictions.yaml` | Player action restrictions → [Restrictions](restrictions/) |
-| `rewards.yaml` | Season rewards → [Rewards](rewards/) |
-| `missions.yaml` | Daily/weekly missions → [Missions](missions/) |
-| `luckperms.yaml` | LuckPerms integration → [LuckPerms](../integration/luckperms/) |
-| `camera/camera.yaml` | Battle camera system → [Camera](camera/) |
-| `api.yaml` | Web API settings → [API](api/) |
-| `season_presets/*.yml` | Format rules per season → [Battle Formats](../features/battle-formats/) |
+| `elo.yaml` | Rating system and rank tiers → [ELO Settings](/docs/cobbleranked/configuration/elo/) |
+| `battle.yaml` | Timers, penalties, rewards → [Battle Settings](/docs/cobbleranked/configuration/battle/) |
+| `matchmaking.yaml` | Recent opponent avoidance → [Matchmaking Settings](/docs/cobbleranked/configuration/matchmaking/) |
+| `season.yaml` | Season schedule and reset behavior → [Season Settings](/docs/cobbleranked/configuration/season/) |
+| `sounds.yaml` | All sound effects → [Sounds](/docs/cobbleranked/configuration/sounds/) |
+| `arenas.yaml` | Battle arena positions → [Arenas](/docs/cobbleranked/configuration/arenas/) |
+| `blacklist.yaml` | Pokemon/move restrictions → [Blacklist](/docs/cobbleranked/configuration/blacklist/) |
+| `restrictions.yaml` | Player action restrictions → [Restrictions](/docs/cobbleranked/configuration/restrictions/) |
+| `rewards.yaml` | Season rewards → [Rewards](/docs/cobbleranked/configuration/rewards/) |
+| `missions.yaml` | Daily/weekly missions → [Missions](/docs/cobbleranked/configuration/missions/) |
+| `luckperms.yaml` | LuckPerms integration → [LuckPerms](/docs/cobbleranked/integration/luckperms/) |
+| `camera/camera.yaml` | Battle camera system → [Camera](/docs/cobbleranked/configuration/camera/) |
+| `api.yaml` | Web API settings → [API](/docs/cobbleranked/configuration/api/) |
+| `season_presets/*.yml` | Format rules per season → [Battle Formats](/docs/cobbleranked/features/battle-formats/) |
 
 ### Season Presets (v2.0.13+)
 
@@ -109,7 +109,7 @@ database:
     database: "cobbleranked"
 ```
 
-> 📝 See [Database Configuration](../advanced/database/) for detailed setup and migration guides.
+> 📝 See [Database Configuration](/docs/cobbleranked/advanced/database/) for detailed setup and migration guides.
 
 ---
 
@@ -151,7 +151,7 @@ When disabled (default), players on the battle server cannot join the queue. Thi
 
 > ⚠️ **Warning**: Enabling `allowQueueOnBattleServer` can cause unexpected behavior. Only enable if you understand the implications.
 
-> See [Cross-Server Setup](../advanced/cross-server/) for detailed guide.
+> See [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/) for detailed guide.
 
 ---
 
@@ -185,27 +185,27 @@ debug:
 
 | Setting | Documentation |
 |---------|---------------|
-| ELO Rating System | [ELO Configuration](elo/) |
-| Matchmaking Rules | [Matchmaking Configuration](matchmaking/) |
-| Battle Timers & Penalties | [Battle Configuration](battle/) |
-| Season Schedule | [Season Configuration](season/) |
-| Match Announcements | [Announcements Configuration](announcements/) |
-| Daily Elo Limits | [Daily Limits Configuration](daily-limits/) |
-| Pokemon/Move Restrictions | [Blacklist Configuration](blacklist/) |
-| Player Action Restrictions | [Restrictions Configuration](restrictions/) |
-| Season End Rewards | [Rewards Configuration](rewards/) |
-| Daily/Weekly Missions | [Missions Configuration](missions/) |
-| Battle Arenas | [Arena Configuration](arenas/) |
-| GUI Customization | [GUI Configuration](gui/) |
-| Language Files | [Languages Configuration](languages/) |
-| Sound Effects | [Sounds Configuration](sounds/) |
-| Battle Camera | [Camera Configuration](camera/) |
-| Web API | [API Configuration](api/) |
-| LuckPerms Integration | [LuckPerms](../integration/luckperms/) |
+| ELO Rating System | [ELO Configuration](/docs/cobbleranked/configuration/elo/) |
+| Matchmaking Rules | [Matchmaking Configuration](/docs/cobbleranked/configuration/matchmaking/) |
+| Battle Timers & Penalties | [Battle Configuration](/docs/cobbleranked/configuration/battle/) |
+| Season Schedule | [Season Configuration](/docs/cobbleranked/configuration/season/) |
+| Match Announcements | [Announcements Configuration](/docs/cobbleranked/configuration/announcements/) |
+| Daily Elo Limits | [Daily Limits Configuration](/docs/cobbleranked/configuration/daily-limits/) |
+| Pokemon/Move Restrictions | [Blacklist Configuration](/docs/cobbleranked/configuration/blacklist/) |
+| Player Action Restrictions | [Restrictions Configuration](/docs/cobbleranked/configuration/restrictions/) |
+| Season End Rewards | [Rewards Configuration](/docs/cobbleranked/configuration/rewards/) |
+| Daily/Weekly Missions | [Missions Configuration](/docs/cobbleranked/configuration/missions/) |
+| Battle Arenas | [Arena Configuration](/docs/cobbleranked/configuration/arenas/) |
+| GUI Customization | [GUI Configuration](/docs/cobbleranked/configuration/gui/) |
+| Language Files | [Languages Configuration](/docs/cobbleranked/configuration/languages/) |
+| Sound Effects | [Sounds Configuration](/docs/cobbleranked/configuration/sounds/) |
+| Battle Camera | [Camera Configuration](/docs/cobbleranked/configuration/camera/) |
+| Web API | [API Configuration](/docs/cobbleranked/configuration/api/) |
+| LuckPerms Integration | [LuckPerms](/docs/cobbleranked/integration/luckperms/) |
 
 ---
 
 ## See Also
 
-- [Getting Started](../getting-started/) - Installation and quick start
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Getting Started](/docs/cobbleranked/getting-started/) - Installation and quick start
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions and troubleshooting

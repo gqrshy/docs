@@ -282,6 +282,6 @@ weeklyMissions:
 
 ## See Also
 
-- [Rewards Configuration](rewards/) - Season rewards and milestones
-- [Main Configuration](config/) - General settings
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Rewards Configuration](/docs/cobbleranked/configuration/rewards/) - Season rewards and milestones
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions and troubleshooting

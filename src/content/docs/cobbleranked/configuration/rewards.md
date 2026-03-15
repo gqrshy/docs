@@ -312,7 +312,7 @@ seasonRewards:
 
 ## See Also
 
-- [Seasons](../features/seasons/) - Season mechanics
-- [ELO System](../features/elo-system/) - Rank tiers
-- [GUI Customization](gui/) - Reward GUI layout
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Seasons](/docs/cobbleranked/features/seasons/) - Season mechanics
+- [ELO System](/docs/cobbleranked/features/elo-system/) - Rank tiers
+- [GUI Customization](/docs/cobbleranked/configuration/gui/) - Reward GUI layout
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions and troubleshooting

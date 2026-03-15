@@ -432,7 +432,7 @@ Season information and status.
 
 ## See Also
 
-- [Database Configuration](database/) - Database setup and schema
-- [Placeholders](../integration/placeholders/) - Placeholder API details
-- [Cross-Server Setup](cross-server/) - Multi-server configuration
-- [FAQ](../support/faq/) - Common questions
+- [Database Configuration](/docs/cobbleranked/advanced/database/) - Database setup and schema
+- [Placeholders](/docs/cobbleranked/integration/placeholders/) - Placeholder API details
+- [Cross-Server Setup](/docs/cobbleranked/advanced/cross-server/) - Multi-server configuration
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

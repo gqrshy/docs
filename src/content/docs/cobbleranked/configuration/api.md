@@ -181,6 +181,6 @@ Validate `X-API-Key` on your server before processing data.
 
 ## See Also
 
-- [Configuration](config/) - Main configuration guide
-- [Leaderboards](../features/leaderboards/) - Leaderboard feature
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Configuration](/docs/cobbleranked/configuration/config/) - Main configuration guide
+- [Leaderboards](/docs/cobbleranked/features/leaderboards/) - Leaderboard feature
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions and troubleshooting

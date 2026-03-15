@@ -252,6 +252,6 @@ This gives you complete `sound event → OGG` traceability. Ideal for developers
 
 ## See Also
 
-- [Main Configuration](config/) - General settings
-- [Battle Configuration](battle/) - Battle timers and settings
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [Battle Configuration](/docs/cobbleranked/configuration/battle/) - Battle timers and settings
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions and troubleshooting

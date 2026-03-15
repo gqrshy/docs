@@ -200,6 +200,6 @@ gui:
 
 ## See Also
 
-- [Turn Timer Feature](../features/turn-timer/) - Timer system details
-- [Announcements](announcements/) - Match broadcasts
-- [Daily Limits](daily-limits/) - Elo gain limits
+- [Turn Timer Feature](/docs/cobbleranked/features/turn-timer/) - Timer system details
+- [Announcements](/docs/cobbleranked/configuration/announcements/) - Match broadcasts
+- [Daily Limits](/docs/cobbleranked/configuration/daily-limits/) - Elo gain limits

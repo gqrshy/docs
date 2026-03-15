@@ -274,6 +274,6 @@ queue:
 
 ## See Also
 
-- [Main Configuration](config/) - General settings
-- [Arena Setup](arenas/) - Battle location configuration
-- [Troubleshooting](../support/troubleshooting/) - Common issues
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [Arena Setup](/docs/cobbleranked/configuration/arenas/) - Battle location configuration
+- [Troubleshooting](/docs/cobbleranked/support/troubleshooting/) - Common issues

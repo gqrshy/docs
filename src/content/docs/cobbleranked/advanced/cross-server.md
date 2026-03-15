@@ -231,6 +231,6 @@ crossServer:
 
 ## See Also
 
-- [Database Configuration](database/) - MySQL/MongoDB setup details
-- [Main Configuration](../configuration/config/) - General settings
-- [FAQ](../support/faq/) - Common questions and troubleshooting
+- [Database Configuration](/docs/cobbleranked/advanced/database/) - MySQL/MongoDB setup details
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions and troubleshooting

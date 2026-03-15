@@ -150,6 +150,6 @@ Set `enforceEloRange: false` for:
 
 ## See Also
 
-- [ELO Configuration](elo/) - Rating system settings
-- [Battle Formats](../features/battle-formats/) - Format-specific settings
-- [Ranked Battles](../features/ranked-battles/) - How matchmaking works for players
+- [ELO Configuration](/docs/cobbleranked/configuration/elo/) - Rating system settings
+- [Battle Formats](/docs/cobbleranked/features/battle-formats/) - Format-specific settings
+- [Ranked Battles](/docs/cobbleranked/features/ranked-battles/) - How matchmaking works for players

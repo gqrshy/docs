@@ -298,13 +298,13 @@ rankTiers:
     minElo: 2100
 ```
 
-> 📝 These are **display only** - they don't affect matchmaking or rewards. Use [LuckPerms Integration](../integration/luckperms/) for rank-based permissions.
+> 📝 These are **display only** - they don't affect matchmaking or rewards. Use [LuckPerms Integration](/docs/cobbleranked/integration/luckperms/) for rank-based permissions.
 
 ---
 
 ## See Also
 
-- [Main Configuration](config/) - Basic settings
-- [Matchmaking Settings](matchmaking/) - ELO range configuration
-- [Season Settings](season/) - Season reset behavior
-- [ELO System Feature](../features/elo-system/) - Player-facing guide
+- [Main Configuration](/docs/cobbleranked/configuration/config/) - Basic settings
+- [Matchmaking Settings](/docs/cobbleranked/configuration/matchmaking/) - ELO range configuration
+- [Season Settings](/docs/cobbleranked/configuration/season/) - Season reset behavior
+- [ELO System Feature](/docs/cobbleranked/features/elo-system/) - Player-facing guide
