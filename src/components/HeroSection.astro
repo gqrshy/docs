@@ -1,70 +1,110 @@
 ---
-// Hero section - Minimal dark mode design
-import polymartLogo from '../assets/polymart.png';
-import modrinthLogo from '../assets/modrinth.webp';
+// Hero section
 ---
 
-<section class="hero-section" id="hero">
+<section class="hero-section">
 	<div class="hero-content">
 		<div class="hero-text">
-			<h1 class="title">
-				<span class="title-line-1" data-i18n="greeting">Hey there!</span>
-				<span class="title-line-2">I'm <span class="name-highlight">Gashi!</span></span>
+			<h1 class="hero-title">
+				<span data-i18n="heroHey">Hey there!</span>
+				<br />
+				<span class="name-highlight" data-i18n="heroName">I'm Gashi!</span>
+				<span class="hero-badge" data-i18n="heroBadge">mod dev</span>
 			</h1>
-			<p class="bio" data-i18n="bio">
-				AKA Gqrshy! I'm a Minecraft Mod Developer from Japan!
+			<p class="bio" data-i18n="heroBio">
+				Minecraft mod developer from Japan, creating tools for Cobblemon servers.<br />
+				Passionate about clean code and fun gameplay.
 			</p>
 			<div class="hero-buttons">
-				<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="btn btn-primary">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-						<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+				<a href="https://discord.gg/VVVvBTqqyP" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.36-.698.772-1.362 1.225-1.993a.076.076 0 0 0-.041-.107c-.636-.255-1.242-.568-1.872-.892a.077.077 0 0 1-.008-.128c.12-.09.246-.198.372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127c-.628.326-1.278.64-1.873.892a.077.077 0 0 0-.041.107c.448.693.907 1.361 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
 					</svg>
-					<span data-i18n="joinDiscord">join discord!</span>
+					<span data-i18n="heroDiscord">Discord</span>
 				</a>
 				<a href="/docs/cobbleranked/" class="btn btn-secondary">
-					<span data-i18n="viewDocs">see my mods!</span>
+					<span data-i18n="heroDocs">Docs</span>
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M5 12h14M12 5l7 7-7 7"/>
+					</svg>
 				</a>
+			</div>
+		</div>
+
+		<!-- Multi-window character composition -->
+		<div class="hero-character-grid">
+			<!-- Main window: plain image, no dialog wrapper -->
+			<div class="char-window char-window-main">
+				<img src="/character.png" alt="Gashi" />
+			</div>
+
+			<!-- Sub-window: Right eye zoom -->
+			<div class="char-window char-window-eye window-card">
+				<div class="window-titlebar">
+					<span class="window-title">right_eye.png</span>
+					<span class="window-close"></span>
+				</div>
+				<div class="window-content char-window-body">
+					<img src="/character.png" alt="Gashi - eye detail" />
+				</div>
+			</div>
+
+			<!-- Sub-window: Gengar zoom -->
+			<div class="char-window char-window-hand window-card">
+				<div class="window-titlebar">
+					<span class="window-title">gengar.png</span>
+					<span class="window-close"></span>
+				</div>
+				<div class="window-content char-window-body">
+					<img src="/character.png" alt="Gashi - hand detail" />
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Social Links Bar -->
-	<div class="social-bar">
-		<!-- Mod Platforms -->
-		<div class="social-group">
-			<a href="https://github.com/gqrshy" target="_blank" class="social-link github" title="GitHub">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-				</svg>
-			</a>
-			<a href="https://modrinth.com/user/gashicha" target="_blank" class="social-link modrinth" title="Modrinth">
-				<img src={modrinthLogo.src} alt="Modrinth" width="20" height="20" />
-			</a>
-			<a href="https://www.curseforge.com/members/gqrshy/projects" target="_blank" class="social-link curseforge" title="CurseForge">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M18.326 9.2145H21.9984L20.036 11.4417L19.0094 12.5814H16.6148L15.7076 13.6L14.697 14.6998H21.9084L19.9108 17.011L18.8034 18.2898H9.3144L7.7686 19.8816H22.8V4.1184H0V8.133L1.8394 9.1632H1.9276L4.134 9.2146L7.4886 12.7736L9.134 14.469L9.5114 14.8526H5.1062C4.4968 14.8526 4.0026 14.3598 4.0026 13.7494V13.578H0.3226C0.3226 13.578 0.2556 14.0688 0.3226 14.5698C0.446 15.4812 0.719 16.0966 1.344 16.8814C1.4254 16.9816 2.4424 18.0744 2.6914 18.2898H2.702C3.878 19.2798 5.3992 19.8816 7.059 19.8816H7.7686L9.3144 18.2898H18.8034L20.8604 15.8816H12.2084L17.287 10.1006H14.9894L18.326 9.2145Z"/>
-				</svg>
-			</a>
-			<a href="https://polymart.org/user/47282/gashi" target="_blank" class="social-link polymart" title="Polymart">
-				<img src={polymartLogo.src} alt="Polymart" width="20" height="20" />
-			</a>
-		</div>
+	<!-- Social sidebar (desktop) -->
+	<div class="social-sidebar">
+		<a href="https://github.com/gqrshy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+				<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+			</svg>
+		</a>
+		<a href="https://x.com/Gqrshy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+				<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+			</svg>
+		</a>
+		<a href="https://www.youtube.com/@Gqrshy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+				<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+			</svg>
+		</a>
+		<a href="https://discord.gg/VVVvBTqqyP" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Discord">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+				<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.36-.698.772-1.362 1.225-1.993a.076.076 0 0 0-.041-.107c-.636-.255-1.242-.568-1.872-.892a.077.077 0 0 1-.008-.128c.12-.09.246-.198.372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127c-.628.326-1.278.64-1.873.892a.077.077 0 0 0-.041.107c.448.693.907 1.361 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+			</svg>
+		</a>
+	</div>
 
-		<span class="social-divider"></span>
+	<!-- Social bar (mobile) -->
+	<div class="social-mobile">
+		<a href="https://github.com/gqrshy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+		</a>
+		<a href="https://x.com/Gqrshy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+		</a>
+		<a href="https://www.youtube.com/@Gqrshy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+		</a>
+		<a href="https://discord.gg/VVVvBTqqyP" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Discord">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.36-.698.772-1.362 1.225-1.993a.076.076 0 0 0-.041-.107c-.636-.255-1.242-.568-1.872-.892a.077.077 0 0 1-.008-.128c.12-.09.246-.198.372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127c-.628.326-1.278.64-1.873.892a.077.077 0 0 0-.041.107c.448.693.907 1.361 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+		</a>
+	</div>
 
-		<!-- SNS -->
-		<div class="social-group">
-			<a href="https://www.youtube.com/@Gqrshy" target="_blank" class="social-link youtube" title="YouTube">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-				</svg>
-			</a>
-			<a href="https://x.com/Gqrshy" target="_blank" class="social-link x" title="X">
-				<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-				</svg>
-			</a>
-		</div>
+	<!-- Scroll indicator -->
+	<div class="scroll-indicator">
+		<span class="scroll-chevron"></span>
 	</div>
 </section>
 
@@ -72,16 +112,20 @@ import modrinthLogo from '../assets/modrinth.webp';
 (function() {
 	const translations = {
 		en: {
-			greeting: "Hey there!",
-			bio: "AKA Gqrshy! I'm a Minecraft Mod Developer from Japan!",
-			joinDiscord: "join discord!",
-			viewDocs: "see my mods!"
+			heroHey: "Hey there!",
+			heroName: "I'm Gashi!",
+			heroBadge: "mod dev",
+			heroBio: "Minecraft mod developer from Japan, creating tools for Cobblemon servers.<br />Passionate about clean code and fun gameplay.",
+			heroDiscord: "Discord",
+			heroDocs: "Docs"
 		},
 		ja: {
-			greeting: "こんにちは！",
-			bio: "Gqrshyです！日本のMinecraft Mod開発者です！",
-			joinDiscord: "discordに参加！",
-			viewDocs: "Modを見る！"
+			heroHey: "こんにちは！",
+			heroName: "がしです！",
+			heroBadge: "mod開発者",
+			heroBio: "日本のMinecraft Mod開発者。Cobblemonサーバー向けツールを制作。<br />クリーンなコードと楽しいゲームプレイを追求。",
+			heroDiscord: "Discord",
+			heroDocs: "ドキュメント"
 		}
 	};
 
@@ -89,7 +133,9 @@ import modrinthLogo from '../assets/modrinth.webp';
 		const t = translations[lang] || translations.en;
 		document.querySelectorAll('.hero-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
-			if (t[key]) el.innerHTML = t[key];
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
 		});
 	}
 
@@ -98,7 +144,10 @@ import modrinthLogo from '../assets/modrinth.webp';
 		applyHeroTranslations(lang);
 	}
 
-	window.addEventListener('langChange', (e) => applyHeroTranslations(e.detail.lang));
+	window.addEventListener('langChange', (e) => {
+		applyHeroTranslations(e.detail.lang);
+	});
+
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', init);
 	} else {
@@ -120,270 +169,358 @@ import modrinthLogo from '../assets/modrinth.webp';
 	overflow: hidden;
 }
 
-/* Subtle grid pattern */
-.hero-section::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-image:
-		linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-		linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-	background-size: 60px 60px;
-	pointer-events: none;
-}
-
-/* Glow effect */
-.hero-section::after {
-	content: '';
-	position: absolute;
-	top: 20%;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 600px;
-	height: 400px;
-	background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
-	pointer-events: none;
-}
+/* Grid background removed - now using warped grid in layout */
 
 .hero-content {
-	width: 100%;
-	max-width: 800px;
-	text-align: center;
-	animation: fadeInUp 0.6s ease-out;
 	position: relative;
 	z-index: 1;
-}
-
-@keyframes fadeInUp {
-	from {
-		opacity: 0;
-		transform: translateY(30px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+	max-width: 1100px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 4rem;
+	align-items: center;
 }
 
 .hero-text {
-	animation: fadeInUp 0.6s ease-out;
+	padding-left: 2rem;
 }
 
-.title {
-	margin: 0 0 24px;
-}
-
-.title-line-1,
-.title-line-2 {
-	display: block;
+/* Title */
+.hero-title {
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 3.5rem;
 	font-weight: 700;
-	color: var(--color-text);
-	line-height: 1.1;
-}
-
-.title-line-1 {
-	font-size: clamp(2rem, 4vw, 4rem);
-	margin-bottom: 8px;
-}
-
-.title-line-2 {
-	font-size: clamp(2.5rem, 5vw, 5rem);
+	color: #fff;
+	line-height: 1.15;
+	margin-bottom: 0.25rem;
 }
 
 .name-highlight {
-	background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 50%, #a78bfa 100%);
-	background-size: 200% auto;
-	-webkit-background-clip: text;
-	background-clip: text;
-	-webkit-text-fill-color: transparent;
-	animation: gradient-shift 3s ease infinite;
+	color: #fff;
 }
 
-@keyframes gradient-shift {
-	0% { background-position: 0% center; }
-	50% { background-position: 100% center; }
-	100% { background-position: 0% center; }
-}
-
-.bio {
-	font-size: 1.1rem;
-	line-height: 1.7;
+.hero-badge {
+	display: inline-block;
+	border: 1px solid rgba(255, 255, 255, 0.3);
 	color: var(--color-text-muted);
-	margin: 0 0 32px;
-	font-weight: 500;
+	padding: 0.15rem 0.6rem;
+	border-radius: 4px;
+	font-size: 0.35em;
+	font-weight: 600;
+	font-family: 'IBM Plex Mono', monospace;
+	letter-spacing: 0.05em;
+	vertical-align: middle;
+	margin-left: 0.75rem;
 }
 
-/* Buttons */
+/* Bio */
+.bio {
+	color: var(--color-text-muted);
+	font-size: 1.1rem;
+	line-height: 1.8;
+	margin-top: 1.25rem;
+	max-width: 520px;
+	border-left: 2px solid rgba(255, 255, 255, 0.15);
+	padding-left: 1rem;
+}
+
+/* Buttons — pill shape with hover inversion */
 .hero-buttons {
 	display: flex;
-	gap: 16px;
-	flex-wrap: wrap;
-	justify-content: center;
+	gap: 1rem;
+	margin-top: 2rem;
 }
 
 .btn {
 	display: inline-flex;
 	align-items: center;
-	gap: 10px;
-	padding: 14px 28px;
-	border-radius: 8px;
+	gap: 0.5rem;
+	padding: 0.75rem 1.5rem;
+	border-radius: 100vh;
+	font-size: 0.9rem;
 	font-weight: 600;
-	font-size: 1rem;
+	font-family: 'IBM Plex Mono', monospace;
 	text-decoration: none;
 	transition: all 0.2s ease;
-	border: none;
-	position: relative;
-}
-
-.btn svg {
-	width: 18px;
-	height: 18px;
-	flex-shrink: 0;
 }
 
 .btn-primary {
-	background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+	background: transparent;
 	color: #fff;
-	box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+	border: solid 1px rgba(255, 255, 255, 0.3);
 }
 
 .btn-primary:hover {
-	box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
-	transform: translateY(-2px);
+	background: #fff;
+	color: #000;
 }
 
 .btn-secondary {
 	background: transparent;
-	color: var(--color-text);
-	border: 1px solid var(--color-border);
+	color: var(--color-text-muted);
+	border: solid 1px rgba(255, 255, 255, 0.15);
 }
 
 .btn-secondary:hover {
-	background: rgba(139, 92, 246, 0.1);
-	border-color: var(--color-primary);
-	color: var(--color-primary);
+	border-color: rgba(255, 255, 255, 0.4);
+	color: #fff;
 }
 
-/* Social Bar */
-.social-bar {
+.btn-secondary svg {
+	transition: transform 0.2s ease;
+}
+
+.btn-secondary:hover svg {
+	transform: translateX(3px);
+}
+
+/* ===== Character image - multi-window composition ===== */
+
+.hero-character-grid {
+	position: relative;
+	place-items: end center;
+	width: 560px;
+	height: 880px;
+	flex-shrink: 0;
+}
+
+.char-window {
+	position: absolute;
+}
+
+/* ---- Main window: plain image, no dialog wrapper ---- */
+.char-window-main {
+	width: 500px;
+	z-index: 1;
+	bottom: 0;
+	left: 50%;
+	translate: -50% 0;
+}
+
+/* Main img needs its own rules since no char-window-body parent */
+.char-window-main img {
+	display: block;
+	width: 100%;
+	height: 835px;
+	object-fit: cover;
+	object-position: center 30%;
+}
+
+/* ---- Sub-window body (shared) ---- */
+.char-window-body {
+	padding: 0;
+	overflow: hidden;
+}
+
+.char-window-body img {
+	display: block;
+	width: 100%;
+	object-fit: cover;
+}
+
+/* === Sub-window: Right eye zoom === */
+/*
+ * Cropping mechanism:
+ *   The .char-window-body is a fixed 160x160 square with overflow:hidden.
+ *   Inside, the img is position:absolute with a large width (zoom level).
+ *   Adjust these to control what's visible:
+ *
+ *   width  = zoom level (600px ≈ 3x, 1200px ≈ 6x)
+ *   top    = vertical pan  (negative = shift up, positive = shift down)
+ *   left   = horizontal pan (negative = shift left, positive = shift right)
+ *
+ *   Visible area = (|left|, |top|) to (|left|+160, |top|+160) on the scaled image
+ */
+.char-window-eye {
+	width: 160px;
+	z-index: 3;
+	top: 110px;
+	right: 130px;
+}
+
+.char-window-eye .char-window-body {
+	height: 160px;
+	position: relative;
+	overflow: hidden;
+}
+
+.char-window-eye .char-window-body img {
+	position: absolute;
+	max-width: none;
+	width: 600px;
+	top: -150px;
+	left: -300px;
+}
+
+/* === Sub-window: Gengar zoom === */
+.char-window-hand {
+	width: 160px;
+	z-index: 2;
+	top: 320px;
+	left: 200px;
+}
+
+.char-window-hand .char-window-body {
+	height: 160px;
+	position: relative;
+	overflow: hidden;
+}
+
+.char-window-hand .char-window-body img {
+	position: absolute;
+	max-width: none;
+	width: 600px;
+	top: -370px;
+	left: -210px;
+}
+
+/* Stagger entrance animation */
+@keyframes charWindowIn {
+	from { opacity: 0; transform: translateY(20px) scale(0.95); }
+	to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.char-window-main { animation: charWindowIn 0.6s ease 0.1s both; }
+.char-window-eye { animation: charWindowIn 0.6s ease 0.3s both; }
+.char-window-hand { animation: charWindowIn 0.6s ease 0.5s both; }
+
+/* Disable window-card hover on character sub-windows */
+.char-window.window-card:hover {
+	transform: none;
+	border-color: rgba(255, 255, 255, 0.12);
+	box-shadow: none;
+}
+
+/* Social sidebar - desktop */
+.social-sidebar {
+	position: fixed;
+	left: 1.5rem;
+	top: 50%;
+	transform: translateY(-50%);
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	gap: 0.75rem;
+	z-index: 10;
+}
+
+.social-link {
+	width: 40px;
+	height: 40px;
+	border-radius: 2px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	background: transparent;
+	display: flex;
 	align-items: center;
-	gap: 12px;
-	margin-top: 60px;
-	animation: fadeInUp 0.6s ease-out 0.2s backwards;
+	justify-content: center;
+	color: var(--color-text-muted);
+	transition: all 0.2s ease;
+}
+
+.social-link:hover {
+	background: rgba(255, 255, 255, 0.08);
+	color: #fff;
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Social bar - mobile */
+.social-mobile {
+	display: none;
+	justify-content: center;
+	gap: 0.75rem;
+	margin-top: 2rem;
 	position: relative;
 	z-index: 1;
 }
 
-.social-group {
-	display: flex;
-	gap: 10px;
+/* Scroll indicator */
+.scroll-indicator {
+	position: absolute;
+	bottom: 5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
 }
 
-.social-divider {
-	width: 1px;
-	height: 28px;
-	background: var(--color-border);
-	margin: 0 6px;
+.scroll-chevron {
+	display: block;
+	width: 12px;
+	height: 12px;
+	border-right: 2px solid rgba(255, 255, 255, 0.3);
+	border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+	transform: rotate(45deg);
+	animation: scrollBounce 2s ease-in-out infinite;
 }
-
-.social-link {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 46px;
-	height: 46px;
-	border-radius: 50%;
-	background: var(--color-bg-card);
-	color: var(--color-text-muted);
-	transition: all 0.2s ease;
-	border: 1px solid transparent;
-}
-
-.social-link:hover {
-	transform: translateY(-2px);
-	border-color: var(--color-border);
-}
-
-.social-link svg,
-.social-link img {
-	width: 20px;
-	height: 20px;
-	flex-shrink: 0;
-	opacity: 0.7;
-	transition: opacity 0.2s ease;
-}
-
-.social-link:hover svg,
-.social-link:hover img {
-	opacity: 1;
-}
-
-.social-link.github:hover { background: #333; color: #fff; border-color: #333; }
-.social-link.modrinth:hover { background: #1bd96a; color: #fff; border-color: #1bd96a; }
-.social-link.curseforge:hover { background: #f16436; color: #fff; border-color: #f16436; }
-.social-link.polymart:hover { background: #00b894; color: #fff; border-color: #00b894; }
-.social-link.youtube:hover { background: #ff0000; color: #fff; border-color: #ff0000; }
-.social-link.x:hover { background: #fff; color: #000; border-color: #fff; }
 
 /* Responsive */
+@media (max-width: 900px) {
+	.hero-content {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.hero-character-grid {
+		width: 260px;
+		justify-self: center;
+		order: -1;
+	}
+}
+
 @media (max-width: 768px) {
 	.hero-section {
-		padding: 80px 20px 40px;
+		padding: 80px 1.5rem 60px;
+		align-items: flex-start;
 	}
 
-	.hero-section::after {
+	.hero-text {
+		padding-left: 0;
+		text-align: center;
 		width: 100%;
-		height: 300px;
 	}
 
-	.hero-content {
-		padding: 0 1rem;
+	.hero-title {
+		font-size: 2.5rem;
 	}
 
 	.bio {
-		font-size: 1rem;
+		border-left: none;
+		padding-left: 0;
+		text-align: center;
+		max-width: 100%;
 	}
 
-	.social-bar {
-		flex-wrap: wrap;
-		gap: 8px;
-		margin-top: 40px;
-	}
-
-	.social-group {
-		flex-wrap: wrap;
+	.hero-buttons {
 		justify-content: center;
-		gap: 8px;
 	}
 
-	.social-divider {
+	.social-sidebar {
 		display: none;
 	}
 
-	.social-link {
-		width: 40px;
-		height: 40px;
+	.social-mobile {
+		display: flex;
 	}
 
-	.social-link svg,
-	.social-link img {
-		width: 18px;
-		height: 18px;
+	.hero-badge {
+		display: none;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero-title {
+		font-size: 2rem;
+	}
+
+	.hero-character-grid {
+		width: 200px;
 	}
 
 	.hero-buttons {
 		flex-direction: column;
-		align-items: center;
+		width: 100%;
 	}
 
 	.btn {
-		width: 100%;
-		max-width: 240px;
 		justify-content: center;
 	}
 }

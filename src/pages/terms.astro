@@ -14,7 +14,7 @@ import Footer from '../components/Footer.astro';
 	<title>Terms & Conditions - GashiStudios</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 	<!-- Navigation -->
@@ -653,8 +653,8 @@ import Footer from '../components/Footer.astro';
 			--color-bg-card: #16161e;
 			--color-text: #e4e4e7;
 			--color-text-muted: #a1a1aa;
-			--color-primary: #8b5cf6;
-			--color-primary-light: #a78bfa;
+			--color-primary: #ffffff;
+			--color-primary-light: rgba(255,255,255,0.7);
 			--color-border: rgba(255, 255, 255, 0.1);
 		}
 
@@ -701,7 +701,7 @@ import Footer from '../components/Footer.astro';
 
 		.hero-badge {
 			display: inline-block;
-			background: rgba(139, 92, 246, 0.15);
+			background: rgba(255, 255, 255, 0.15);
 			color: var(--color-primary-light);
 			padding: 0.25rem 1rem;
 			border-radius: 20px;
@@ -777,19 +777,19 @@ import Footer from '../components/Footer.astro';
 			padding-left: 1rem;
 			color: var(--color-text-muted);
 			font-size: 0.9rem;
-			border-left: 2px solid rgba(139, 92, 246, 0.25);
+			border-left: 2px solid rgba(255, 255, 255, 0.25);
 			transition: all 0.2s;
 		}
 
 		.toc-link:hover {
 			color: var(--color-primary);
-			border-left-color: rgba(139, 92, 246, 0.5);
+			border-left-color: rgba(255, 255, 255, 0.5);
 		}
 
 		.toc-link.active {
 			color: var(--color-primary);
 			border-left-color: var(--color-primary);
-			background: rgba(139, 92, 246, 0.1);
+			background: rgba(255, 255, 255, 0.1);
 		}
 
 		/* Content */
@@ -820,7 +820,7 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background: rgba(139, 92, 246, 0.15);
+			background: rgba(255, 255, 255, 0.15);
 			border-radius: 12px;
 			color: var(--color-primary);
 			flex-shrink: 0;
@@ -929,8 +929,8 @@ import Footer from '../components/Footer.astro';
 		.warning-box {
 			display: flex;
 			gap: 1rem;
-			background: rgba(139, 92, 246, 0.1);
-			border: 1px solid rgba(139, 92, 246, 0.25);
+			background: rgba(255, 255, 255, 0.1);
+			border: 1px solid rgba(255, 255, 255, 0.25);
 			border-radius: 12px;
 			padding: 1.25rem;
 		}
@@ -1000,7 +1000,7 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.license-note {
-			background: rgba(139, 92, 246, 0.1);
+			background: rgba(255, 255, 255, 0.1);
 			border-left: 3px solid var(--color-primary);
 			padding: 1rem 1.25rem;
 			border-radius: 0 8px 8px 0;
@@ -1083,7 +1083,7 @@ import Footer from '../components/Footer.astro';
 			border-radius: 12px;
 			padding: 1.5rem;
 			margin-bottom: 1.5rem;
-			font-family: 'Courier New', monospace;
+			font-family: 'IBM Plex Mono', monospace;
 		}
 
 		.legal-box p {
@@ -1107,7 +1107,7 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.liability-cap {
-			background: rgba(139, 92, 246, 0.15);
+			background: rgba(255, 255, 255, 0.15);
 			border-radius: 8px;
 			padding: 1rem 1.5rem;
 			text-align: center;
@@ -1134,7 +1134,7 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.no-refund-grid span {
-			background: rgba(139, 92, 246, 0.15);
+			background: rgba(255, 255, 255, 0.15);
 			color: var(--color-text);
 			padding: 0.25rem 0.75rem;
 			border-radius: 20px;
@@ -1168,7 +1168,7 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.dependency-grid span {
-			background: rgba(139, 92, 246, 0.15);
+			background: rgba(255, 255, 255, 0.15);
 			color: var(--color-primary-light);
 			padding: 0.35rem 0.75rem;
 			border-radius: 6px;
@@ -1244,7 +1244,7 @@ import Footer from '../components/Footer.astro';
 		.contact-card:hover {
 			border-color: var(--color-primary);
 			transform: translateY(-2px);
-			box-shadow: 0 8px 20px rgba(139, 92, 246, 0.15);
+			box-shadow: 0 8px 20px rgba(255, 255, 255, 0.05);
 		}
 
 		.contact-icon {
@@ -1306,8 +1306,8 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.acceptance-box {
-			background: rgba(139, 92, 246, 0.1);
-			border: 1px solid rgba(139, 92, 246, 0.25);
+			background: rgba(255, 255, 255, 0.1);
+			border: 1px solid rgba(255, 255, 255, 0.25);
 			border-radius: 12px;
 			padding: 1.5rem;
 			text-align: center;
@@ -1354,7 +1354,7 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+			box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
 		}
 
 		.back-to-top.visible {
@@ -1364,7 +1364,7 @@ import Footer from '../components/Footer.astro';
 
 		.back-to-top:hover {
 			transform: translateY(-3px);
-			box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+			box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
 		}
 
 		/* Footer transition */
@@ -1452,6 +1452,20 @@ import Footer from '../components/Footer.astro';
 				font-size: 1.5rem;
 			}
 		}
+
+/* ===== Viewport Frame ===== */
+.viewport-frame {
+	position: fixed;
+	inset: 8px;
+	z-index: 9999;
+	pointer-events: none;
+}
 	</style>
+
+<!-- Viewport frame -->
+<svg class="viewport-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
+	<rect x="0.4" y="0.4" width="99.2" height="99.2" rx="0.6" ry="0.6"
+		fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.12" vector-effect="non-scaling-stroke"/>
+</svg>
 </body>
 </html>

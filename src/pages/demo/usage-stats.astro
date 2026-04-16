@@ -17,10 +17,10 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 	<title>{title}</title>
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
-	<meta name="theme-color" content="#7c3aed" />
+	<meta name="theme-color" content="#0a0a0f" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900" rel="stylesheet">
 </head>
 <body>
 	<CustomNav />
@@ -539,11 +539,11 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 		}
 
 		body {
-			font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-			background: #0f1419;
+			font-family: 'Inter', 'IBM Plex Mono', -apple-system, BlinkMacSystemFont, sans-serif;
+			background: #0a0a0f;
 			color: #fff;
 			line-height: 1.6;
-			overflow-x: hidden;
+			overflow-x: clip;
 		}
 
 		.container {
@@ -611,18 +611,18 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 		}
 
 		.format-tab.active {
-			background: rgba(124, 58, 237, 0.3);
-			border-color: rgba(124, 58, 237, 0.5);
-			color: #a78bfa;
+			background: rgba(255, 255, 255, 0.3);
+			border-color: rgba(255, 255, 255, 0.5);
+			color: rgba(255,255,255,0.7);
 		}
 
 		/* Current Season Display */
 		.current-season {
 			padding: 0.5rem 0.75rem;
-			background: rgba(124, 58, 237, 0.2);
-			border: 1px solid rgba(124, 58, 237, 0.3);
+			background: rgba(255, 255, 255, 0.2);
+			border: 1px solid rgba(255, 255, 255, 0.3);
 			border-radius: 6px;
-			color: #a78bfa;
+			color: rgba(255,255,255,0.7);
 			font-size: 0.875rem;
 			font-weight: 600;
 		}
@@ -654,9 +654,9 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 		}
 
 		.season-tab.active {
-			background: rgba(124, 58, 237, 0.3);
-			border-color: rgba(124, 58, 237, 0.5);
-			color: #a78bfa;
+			background: rgba(255, 255, 255, 0.3);
+			border-color: rgba(255, 255, 255, 0.5);
+			color: rgba(255,255,255,0.7);
 		}
 
 		/* Stage Tabs */
@@ -683,9 +683,9 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 		}
 
 		.stage-tab.active {
-			background: rgba(124, 58, 237, 0.3);
-			border-color: rgba(124, 58, 237, 0.5);
-			color: #a78bfa;
+			background: rgba(255, 255, 255, 0.3);
+			border-color: rgba(255, 255, 255, 0.5);
+			color: rgba(255,255,255,0.7);
 		}
 
 		/* ELO Range Slider */
@@ -719,7 +719,7 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 		}
 
 		.elo-input:focus {
-			border-color: rgba(124, 58, 237, 0.5);
+			border-color: rgba(255, 255, 255, 0.5);
 			background: rgba(0, 0, 0, 0.4);
 		}
 
@@ -749,7 +749,7 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 			position: absolute;
 			top: 0;
 			height: 100%;
-			background: linear-gradient(90deg, #7c3aed, #a78bfa);
+			background: rgba(255, 255, 255, 0.3);
 			border-radius: 3px;
 		}
 
@@ -771,7 +771,7 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 			appearance: none;
 			width: 18px;
 			height: 18px;
-			background: linear-gradient(135deg, #a78bfa, #7c3aed);
+			background: linear-gradient(135deg, rgba(255,255,255,0.7), #ffffff);
 			border: 2px solid #fff;
 			border-radius: 50%;
 			cursor: pointer;
@@ -787,7 +787,7 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 		.elo-slider::-moz-range-thumb {
 			width: 18px;
 			height: 18px;
-			background: linear-gradient(135deg, #a78bfa, #7c3aed);
+			background: linear-gradient(135deg, rgba(255,255,255,0.7), #ffffff);
 			border: 2px solid #fff;
 			border-radius: 50%;
 			cursor: pointer;
@@ -823,7 +823,7 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 		}
 
 		.pokemon-item.active {
-			background: rgba(236, 72, 153, 0.15);
+			background: rgba(255, 255, 255, 0.15);
 		}
 
 		.pokemon-item.active .pokemon-item-name {
@@ -995,7 +995,7 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 
 		.ev-nature {
 			font-size: 0.8125rem;
-			color: #a78bfa;
+			color: rgba(255,255,255,0.7);
 			font-weight: 500;
 		}
 
@@ -1026,7 +1026,7 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 			align-items: center;
 			gap: 0.75rem;
 			margin-bottom: 1rem;
-			color: #a78bfa;
+			color: rgba(255,255,255,0.7);
 		}
 
 		.api-card-header h3 {
@@ -1045,14 +1045,14 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 			display: inline-flex;
 			align-items: center;
 			gap: 0.5rem;
-			color: #a78bfa;
+			color: rgba(255,255,255,0.7);
 			text-decoration: none;
 			font-weight: 500;
 			transition: all 0.2s ease;
 		}
 
 		.api-link:hover {
-			color: #c4b5fd;
+			color: rgba(255,255,255,0.5);
 		}
 
 		/* Custom Scrollbar */
@@ -1068,7 +1068,7 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 
 		.pokemon-list::-webkit-scrollbar-thumb,
 		.sidebar::-webkit-scrollbar-thumb {
-			background: rgba(124, 58, 237, 0.3);
+			background: rgba(255, 255, 255, 0.3);
 			border-radius: 3px;
 		}
 
@@ -1137,6 +1137,54 @@ const description = 'Live demo of Pokemon usage statistics from CobbleRanked Web
 				justify-content: space-around;
 			}
 		}
-	</style>
+	
+/* ===== Warped Grid Background ===== */
+.warped-grid {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	perspective: 800px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.warped-grid-inner {
+	width: 120%;
+	height: 120%;
+	background-image:
+		repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 64px),
+		repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 64px);
+	animation: gridWarp 12s ease-in-out infinite;
+}
+
+@keyframes gridWarp {
+	0%, 100% { transform: perspective(800px) rotateX(0deg) rotateY(0deg); }
+	25% { transform: perspective(800px) rotateX(0.3deg) rotateY(-0.3deg); }
+	50% { transform: perspective(800px) rotateX(-0.3deg) rotateY(0.3deg); }
+	75% { transform: perspective(800px) rotateX(0.2deg) rotateY(0.2deg); }
+}
+
+/* ===== Viewport Frame ===== */
+.viewport-frame {
+	position: fixed;
+	inset: 8px;
+	z-index: 9999;
+	pointer-events: none;
+}
+</style>
+
+<!-- Warped grid background -->
+<div class="warped-grid" aria-hidden="true">
+	<div class="warped-grid-inner"></div>
+</div>
+
+<!-- Viewport frame -->
+<svg class="viewport-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
+	<rect x="0.4" y="0.4" width="99.2" height="99.2" rx="0.6" ry="0.6"
+		fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.12" vector-effect="non-scaling-stroke"/>
+</svg>
 </body>
 </html>

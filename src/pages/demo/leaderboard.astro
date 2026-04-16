@@ -17,10 +17,10 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 	<title>{title}</title>
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
-	<meta name="theme-color" content="#7c3aed" />
+	<meta name="theme-color" content="#0a0a0f" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900" rel="stylesheet">
 </head>
 <body>
 	<CustomNav />
@@ -123,7 +123,7 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			ULTRABALL: { name: 'Ultra Ball', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.2)' },
 			MASTERBALL: { name: 'Master Ball', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.2)' },
 			BEASTBALL: { name: 'Beast Ball', color: '#06b6d4', bg: 'rgba(6, 182, 212, 0.2)' },
-			CHERISH: { name: 'Cherish Ball', color: '#ec4899', bg: 'rgba(236, 72, 153, 0.2)' }
+			CHERISH: { name: 'Cherish Ball', color: '#ec4899', bg: 'rgba(255, 255, 255, 0.2)' }
 		};
 
 		// State
@@ -322,11 +322,11 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 		}
 
 		body {
-			font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-			background: #0f1419;
+			font-family: 'Inter', 'IBM Plex Mono', -apple-system, BlinkMacSystemFont, sans-serif;
+			background: #0a0a0f;
 			color: #fff;
 			line-height: 1.6;
-			overflow-x: hidden;
+			overflow-x: clip;
 		}
 
 		.container {
@@ -350,8 +350,8 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			right: 0;
 			bottom: 0;
 			background:
-				radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 60%),
-				radial-gradient(ellipse at 80% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+				radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.15) 0%, transparent 60%),
+				radial-gradient(ellipse at 80% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
 				radial-gradient(ellipse at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
 			pointer-events: none;
 		}
@@ -369,7 +369,7 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			align-items: center;
 			justify-content: center;
 			gap: 1rem;
-			background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #ec4899 100%);
+			background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 50%, #ec4899 100%);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
 			background-clip: text;
@@ -419,8 +419,8 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 		}
 
 		.format-btn.active {
-			background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(236, 72, 153, 0.3));
-			border-color: rgba(124, 58, 237, 0.5);
+			background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+			border-color: rgba(255, 255, 255, 0.5);
 			color: #fff;
 		}
 
@@ -441,10 +441,10 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			align-items: center;
 			gap: 0.5rem;
 			padding: 0.5rem 1rem;
-			background: rgba(124, 58, 237, 0.2);
-			border: 1px solid rgba(124, 58, 237, 0.3);
+			background: rgba(255, 255, 255, 0.2);
+			border: 1px solid rgba(255, 255, 255, 0.3);
 			border-radius: 20px;
-			color: #a78bfa;
+			color: rgba(255,255,255,0.7);
 			font-weight: 600;
 		}
 
@@ -672,7 +672,7 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 		/* API Info Section */
 		.api-info-section {
 			padding: 4rem 0;
-			background: linear-gradient(180deg, transparent 0%, rgba(124, 58, 237, 0.05) 100%);
+			background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%);
 		}
 
 		.api-card {
@@ -689,7 +689,7 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			align-items: center;
 			gap: 0.75rem;
 			margin-bottom: 1rem;
-			color: #a78bfa;
+			color: rgba(255,255,255,0.7);
 		}
 
 		.api-card-header h3 {
@@ -708,14 +708,14 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 			display: inline-flex;
 			align-items: center;
 			gap: 0.5rem;
-			color: #a78bfa;
+			color: rgba(255,255,255,0.7);
 			text-decoration: none;
 			font-weight: 500;
 			transition: all 0.2s ease;
 		}
 
 		.api-link:hover {
-			color: #c4b5fd;
+			color: rgba(255,255,255,0.5);
 		}
 
 		/* Responsive */
@@ -748,6 +748,54 @@ const description = 'Live demo of ranked leaderboard data from CobbleRanked API.
 				padding: 0.75rem 0.625rem;
 			}
 		}
-	</style>
+	
+/* ===== Warped Grid Background ===== */
+.warped-grid {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	perspective: 800px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.warped-grid-inner {
+	width: 120%;
+	height: 120%;
+	background-image:
+		repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 64px),
+		repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 64px);
+	animation: gridWarp 12s ease-in-out infinite;
+}
+
+@keyframes gridWarp {
+	0%, 100% { transform: perspective(800px) rotateX(0deg) rotateY(0deg); }
+	25% { transform: perspective(800px) rotateX(0.3deg) rotateY(-0.3deg); }
+	50% { transform: perspective(800px) rotateX(-0.3deg) rotateY(0.3deg); }
+	75% { transform: perspective(800px) rotateX(0.2deg) rotateY(0.2deg); }
+}
+
+/* ===== Viewport Frame ===== */
+.viewport-frame {
+	position: fixed;
+	inset: 8px;
+	z-index: 9999;
+	pointer-events: none;
+}
+</style>
+
+<!-- Warped grid background -->
+<div class="warped-grid" aria-hidden="true">
+	<div class="warped-grid-inner"></div>
+</div>
+
+<!-- Viewport frame -->
+<svg class="viewport-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
+	<rect x="0.4" y="0.4" width="99.2" height="99.2" rx="0.6" ry="0.6"
+		fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.12" vector-effect="non-scaling-stroke"/>
+</svg>
 </body>
 </html>

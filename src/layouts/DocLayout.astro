@@ -47,7 +47,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 	<meta name="theme-color" content="#0a0a0f" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 	<ViewTransitions />
 </head>
 <body>
@@ -218,11 +218,11 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			--color-bg-card: #16161e;
 			--color-text: #e4e4e7;
 			--color-text-muted: #a1a1aa;
-			--color-primary: #8b5cf6;
-			--color-primary-light: #a78bfa;
-			--color-primary-lighter: #c4b5fd;
+			--color-primary: #ffffff;
+			--color-primary-light: rgba(255,255,255,0.7);
+			--color-primary-lighter: rgba(255,255,255,0.5);
 			--color-border: rgba(255, 255, 255, 0.1);
-			--color-accent: #8b5cf6;
+			--color-accent: #ffffff;
 			--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 		}
 
@@ -248,7 +248,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			background: var(--color-bg);
 			color: var(--color-text);
 			line-height: 1.7;
-			overflow-x: hidden;
+			overflow-x: clip;
 		}
 
 		/* ===== Prevent image selection/caret ===== */
@@ -443,8 +443,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		/* ===== Code ===== */
 		.prose code {
-			font-family: 'JetBrains Mono', monospace;
-			background: rgba(139, 92, 246, 0.15);
+			font-family: 'IBM Plex Mono', monospace;
+			background: rgba(255, 255, 255, 0.15);
 			color: var(--color-primary-lighter);
 			padding: 0.2rem 0.4rem;
 			border-radius: 4px;
@@ -550,7 +550,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		/* ===== Blockquotes ===== */
 		.prose blockquote {
 			border-left: 4px solid var(--color-primary);
-			background: rgba(139, 92, 246, 0.1);
+			background: rgba(255, 255, 255, 0.1);
 			padding: 1rem 1.5rem;
 			margin: 1.5rem 0;
 			border-radius: 0 0.5rem 0.5rem 0;
@@ -573,7 +573,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose details:hover {
-			border-color: rgba(139, 92, 246, 0.4);
+			border-color: rgba(255, 255, 255, 0.4);
 		}
 
 		.prose details[open] {
@@ -778,7 +778,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.prose details code:not(pre code) {
 			font-size: 0.85em;
 			padding: 0.2rem 0.4rem;
-			background: rgba(139, 92, 246, 0.2);
+			background: rgba(255, 255, 255, 0.2);
 		}
 
 		/* Headings inside details - GitBook style with margins */
@@ -870,7 +870,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.callout-note {
-			background: rgba(139, 92, 246, 0.1);
+			background: rgba(255, 255, 255, 0.1);
 			border-color: var(--color-primary);
 		}
 
@@ -1057,7 +1057,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		/* ===== Selection ===== */
 		::selection {
-			background: rgba(139, 92, 246, 0.3);
+			background: rgba(255, 255, 255, 0.3);
 			color: var(--color-text);
 		}
 
@@ -1117,6 +1117,20 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 				gap: 1.5rem;
 			}
 		}
+
+			/* ===== Viewport Frame ===== */
+			.viewport-frame {
+				position: fixed;
+				inset: 8px;
+				z-index: 9999;
+				pointer-events: none;
+			}
 	</style>
+
+		<!-- Viewport frame -->
+		<svg class="viewport-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
+			<rect x="0.4" y="0.4" width="99.2" height="99.2" rx="0.6" ry="0.6"
+				fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.12" vector-effect="non-scaling-stroke"/>
+		</svg>
 </body>
 </html>

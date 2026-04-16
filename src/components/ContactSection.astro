@@ -1,14 +1,16 @@
 ---
-// Contact section - Dark mode design
+// Contact section - B&W window card form, grid bg, outlined submit
 ---
 
 <section id="contact" class="contact-section">
+
 	<div class="contact-wrapper">
 		<!-- Header -->
 		<div class="contact-header">
 			<h2 class="contact-title">
 				<span data-i18n="contactTitle">Get in touch</span>
 			</h2>
+			<span class="title-underline" aria-hidden="true"></span>
 			<p class="contact-subtitle" data-i18n="contactSubtitle">
 				Want to collaborate or have questions?<br />
 				Let me know and <span class="highlight">I'll reply as soon as I can</span>!
@@ -18,27 +20,42 @@
 			</p>
 		</div>
 
-		<!-- Form -->
-		<form class="contact-form" action="https://formsubmit.co/gashistudios.llc@gmail.com" method="POST">
-			<!-- Honeypot -->
-			<input type="text" name="_honey" style="display:none">
-			<!-- Disable captcha -->
-			<input type="hidden" name="_captcha" value="false">
-			<!-- Success redirect -->
-			<input type="hidden" name="_next" value="https://gashistudios.site/?sent=true">
+		<!-- Success banner -->
+		<div id="contact-success" class="success-banner" style="display: none;">
+			<span class="success-icon">&#10003;</span>
+			<span data-i18n="contactSuccess">Message sent!</span>
+			<p data-i18n="contactSuccessText">Thanks for reaching out. I'll get back to you soon.</p>
+		</div>
 
-			<div class="form-row">
-				<input type="email" name="email" required placeholder="Email" />
-				<input type="text" name="name" required placeholder="Name" />
+		<!-- Form in window card -->
+		<div class="window-card contact-form-card">
+			<div class="window-titlebar">
+				<span class="window-close"></span>
+				<span class="window-title">contact.msg</span>
 			</div>
-			<textarea name="message" required placeholder="Type in a short message!" rows="5"></textarea>
-			<button type="submit" class="submit-btn">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-					<polyline points="20,6 9,17 4,12"/>
-				</svg>
-				<span data-i18n="contactSubmit">submit</span>
-			</button>
-		</form>
+			<div class="window-content">
+				<form class="contact-form" action="https://formsubmit.co/gashistudios.llc@gmail.com" method="POST">
+					<!-- Honeypot -->
+					<input type="text" name="_honey" style="display:none">
+					<!-- Disable captcha -->
+					<input type="hidden" name="_captcha" value="false">
+					<!-- Success redirect -->
+					<input type="hidden" name="_next" value="https://gashistudios.site/?sent=true">
+
+					<div class="form-row">
+						<input type="email" name="email" required placeholder="Email" />
+						<input type="text" name="name" required placeholder="Name" />
+					</div>
+					<textarea name="message" required placeholder="Type in a short message!" rows="5"></textarea>
+					<button type="submit" class="submit-btn">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+							<polyline points="20,6 9,17 4,12"/>
+						</svg>
+						<span data-i18n="contactSubmit">submit</span>
+					</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </section>
 
@@ -49,13 +66,17 @@
 			contactTitle: "Get in touch",
 			contactSubtitle: "Want to collaborate or have questions?<br />Let me know and <span class=\"highlight\">I'll reply as soon as I can</span>!",
 			contactNote: "Please refrain from sending spam or unrelated inquiries.",
-			contactSubmit: "submit"
+			contactSubmit: "submit",
+			contactSuccess: "Message sent!",
+			contactSuccessText: "Thanks for reaching out. I'll get back to you soon."
 		},
 		ja: {
 			contactTitle: "お問い合わせ",
 			contactSubtitle: "コラボや質問がありますか？<br /><span class=\"highlight\">できるだけ早く返信します</span>！",
 			contactNote: "スパムや無関係なお問い合わせはご遠慮ください。",
-			contactSubmit: "送信"
+			contactSubmit: "送信",
+			contactSuccess: "メッセージ送信完了！",
+			contactSuccessText: "お問い合わせありがとうございます。できるだけ早く返信します。"
 		}
 	};
 
@@ -72,6 +93,16 @@
 	function init() {
 		const lang = window.GashiLang?.get() || 'en';
 		applyContactTranslations(lang);
+
+		// Check for success state
+		const params = new URLSearchParams(window.location.search);
+		if (params.get('sent') === 'true') {
+			const banner = document.getElementById('contact-success');
+			if (banner) {
+				banner.style.display = 'block';
+				banner.classList.add('animate-in');
+			}
+		}
 	}
 
 	window.addEventListener('langChange', (e) => {
@@ -91,19 +122,10 @@
 	position: relative;
 	padding: 5rem 2rem 6rem;
 	background: var(--color-bg-alt);
+	overflow: hidden;
 }
 
-/* Subtle gradient */
-.contact-section::before {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	height: 400px;
-	background: radial-gradient(ellipse at 50% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
-	pointer-events: none;
-}
+/* Grid background removed */
 
 /* Wrapper */
 .contact-wrapper {
@@ -123,8 +145,19 @@
 	font-size: 3rem;
 	font-weight: 700;
 	color: var(--color-text);
-	margin: 0 0 16px;
+	margin: 0 0 8px;
 	line-height: 1.1;
+	font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Straight underline */
+.title-underline {
+	display: block;
+	width: 80px;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 1px;
+	margin: 0 auto 16px;
 }
 
 .contact-subtitle {
@@ -135,7 +168,7 @@
 }
 
 .highlight {
-	color: var(--color-primary);
+	color: #ffffff;
 }
 
 .contact-note {
@@ -143,6 +176,44 @@
 	color: var(--color-text-muted);
 	margin: 0;
 	opacity: 0.7;
+}
+
+/* Success banner */
+.success-banner {
+	text-align: center;
+	padding: 1.25rem;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
+	margin-bottom: 2rem;
+	color: #ffffff;
+	font-weight: 600;
+	font-family: 'IBM Plex Mono', monospace;
+}
+
+.success-banner.animate-in {
+	animation: bounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.success-icon {
+	font-size: 1.25rem;
+	margin-right: 0.5rem;
+}
+
+.success-banner p {
+	color: var(--color-text-muted);
+	font-weight: 400;
+	font-size: 0.9rem;
+	margin: 0.5rem 0 0;
+}
+
+/* Form window card */
+.contact-form-card {
+	background: var(--color-surface);
+}
+
+.contact-form-card:hover {
+	border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Form */
@@ -165,9 +236,9 @@
 	padding: 16px 20px;
 	border: 1px solid var(--color-border);
 	border-radius: 8px;
-	background: var(--color-bg-card);
+	background: rgba(255, 255, 255, 0.03);
 	font-size: 1rem;
-	font-family: inherit;
+	font-family: 'IBM Plex Mono', monospace;
 	color: var(--color-text);
 	transition: all 0.2s ease;
 }
@@ -175,13 +246,16 @@
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
 	color: var(--color-text-muted);
+	opacity: 0.5;
 }
 
+/* White border on focus */
 .contact-form input:focus,
 .contact-form textarea:focus {
 	outline: none;
-	border-color: var(--color-primary);
-	box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+	border-color: rgba(255, 255, 255, 0.4);
+	box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+	background: rgba(255, 255, 255, 0.05);
 }
 
 .contact-form textarea {
@@ -189,28 +263,30 @@
 	min-height: 140px;
 }
 
+/* Submit button - white outlined */
 .submit-btn {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
 	padding: 14px 40px;
-	background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
-	color: #fff;
-	border: none;
+	background: transparent;
+	color: #ffffff;
+	border: 1px solid rgba(255, 255, 255, 0.3);
 	border-radius: 8px;
 	font-size: 1rem;
 	font-weight: 600;
-	font-family: inherit;
+	font-family: 'IBM Plex Mono', monospace;
 	cursor: pointer;
 	transition: all 0.2s ease;
 	align-self: center;
 	margin-top: 8px;
-	box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
 }
 
 .submit-btn:hover {
-	box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
+	background: #ffffff;
+	color: #000000;
+	border-color: #ffffff;
 	transform: translateY(-2px);
 }
 

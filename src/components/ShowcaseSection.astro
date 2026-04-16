@@ -1,33 +1,54 @@
 ---
-// Showcase section - Decorative cobblemon image divider
+// Showcase section - Built for Cobblemon
 ---
 
 <section class="showcase-section">
-	<div class="showcase-container">
-		<div class="showcase-content">
-			<p class="showcase-label" data-i18n="showcaseLabel">Powered by</p>
-			<h2 class="showcase-title">Cobblemon</h2>
-			<p class="showcase-description" data-i18n="showcaseDesc">
-				The ultimate Pokemon mod for Minecraft
-			</p>
-		</div>
+	<div class="showcase-content">
 		<div class="showcase-image">
-			<img src="/cobblemon.png" alt="Cobblemon" />
+			<img src="/gengar.gif" alt="Gengar" />
+		</div>
+		<div class="showcase-text">
+			<h2 class="showcase-title" data-i18n="showcaseTitle">Built for Cobblemon</h2>
+			<p class="showcase-desc" data-i18n="showcaseDesc">
+				Seamlessly integrated with the Cobblemon mod. Bringing competitive Pokemon battles
+				to your Minecraft server with style and precision.
+			</p>
+			<div class="showcase-marquee">
+				<div class="marquee-track">
+					<div class="marquee-content showcase-marquee-content">
+						<span>open source</span>
+						<span class="showcase-marquee-sep">//</span>
+						<span>pokemon</span>
+						<span class="showcase-marquee-sep">//</span>
+						<span>minecraft</span>
+						<span class="showcase-marquee-sep">//</span>
+						<span>cobbled</span>
+						<span class="showcase-marquee-sep">//</span>
+						<span>open source</span>
+						<span class="showcase-marquee-sep">//</span>
+						<span>pokemon</span>
+						<span class="showcase-marquee-sep">//</span>
+						<span>minecraft</span>
+						<span class="showcase-marquee-sep">//</span>
+						<span>cobbled</span>
+						<span class="showcase-marquee-sep">//</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="showcase-glow"></div>
 </section>
 
 <script is:inline>
 (function() {
 	const translations = {
 		en: {
-			showcaseLabel: "Powered by",
-			showcaseDesc: "The ultimate Pokemon mod for Minecraft"
+			showcaseTitle: "Built for Cobblemon",
+			showcaseDesc: "Seamlessly integrated with the Cobblemon mod. Bringing competitive Pokemon battles to your Minecraft server with style and precision."
 		},
 		ja: {
-			showcaseLabel: "Powered by",
-			showcaseDesc: "Minecraft向けポケモンMod"
+			showcaseTitle: "Cobblemonのために",
+			showcaseDesc: "Cobblemon Modとシームレスに統合。Minecraftサーバーに競争型ポケモンバトルをスタイリッシュに。"
 		}
 	};
 
@@ -58,108 +79,112 @@
 })();
 </script>
 
-<style>
+<style is:global>
 .showcase-section {
+	padding: 5rem 4rem 5rem 0;
+	background: var(--color-bg-alt);
 	position: relative;
-	padding: 6rem 2rem;
-	background: transparent;
 	overflow: hidden;
 }
 
-.showcase-container {
-	max-width: 900px;
+.showcase-content {
+	max-width: 1400px;
 	margin: 0 auto;
 	display: flex;
+	gap: 4rem;
 	align-items: center;
-	justify-content: space-between;
-	gap: 3rem;
-	position: relative;
-	z-index: 1;
 }
 
-.showcase-content {
-	flex: 1;
-}
-
-.showcase-label {
-	font-size: 0.75rem;
-	font-weight: 600;
-	color: #8a7a9a;
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
-	margin-bottom: 0.5rem;
-}
-
-.showcase-title {
-	font-size: 3rem;
-	font-weight: 700;
-	margin: 0 0 0.75rem 0;
-	background: linear-gradient(135deg, #7c6c9a 0%, #9a8ab0 50%, #b0a0c8 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
-	letter-spacing: -0.02em;
-}
-
-.showcase-description {
-	font-size: 1rem;
-	color: #6b5b7a;
-	margin: 0;
-}
-
+/* Image container — pushed to left edge */
 .showcase-image {
+	width: 825px;
 	flex-shrink: 0;
 }
 
 .showcase-image img {
-	width: 280px;
+	width: 825px;
+	max-width: none;
 	height: auto;
-	border-radius: 1rem;
-	filter: drop-shadow(0 0 40px rgba(124, 108, 154, 0.3));
-	animation: float 4s ease-in-out infinite;
+	display: block;
 }
 
-.showcase-glow {
-	position: absolute;
-	top: 50%;
-	right: 15%;
-	transform: translate(50%, -50%);
-	width: 400px;
-	height: 400px;
-	background: radial-gradient(circle, rgba(124, 108, 154, 0.1) 0%, transparent 70%);
-	pointer-events: none;
+/* Text — right side, left-aligned */
+.showcase-text {
+	flex: 1;
+	min-width: 320px;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 
-@keyframes float {
-	0%, 100% { transform: translateY(0px); }
-	50% { transform: translateY(-12px); }
+.showcase-title {
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 2rem;
+	font-weight: 700;
+	color: #fff;
+	text-align: left;
+}
+
+.showcase-desc {
+	color: var(--color-text-muted);
+	font-size: 1rem;
+	line-height: 1.8;
+	text-align: left;
+}
+
+/* Marquee */
+.showcase-marquee {
+	overflow: hidden;
+	margin-top: 0.5rem;
+}
+
+.showcase-marquee-content {
+	animation: marquee 20s linear infinite;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 0.75rem;
+	color: rgba(255, 255, 255, 0.25);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	gap: 0;
+}
+
+.showcase-marquee-content span:not(.showcase-marquee-sep) {
+	margin: 0 1rem;
+}
+
+.showcase-marquee-sep {
+	color: rgba(255, 255, 255, 0.15);
+	margin: 0 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+	.showcase-content {
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.showcase-image {
+		flex: none;
+		width: 100%;
+		max-width: 825px;
+		align-self: center;
+	}
+
+	.showcase-image img {
+		width: 100%;
+		max-width: 100%;
+	}
 }
 
 @media (max-width: 768px) {
 	.showcase-section {
-		padding: 4rem 1.5rem;
-	}
-
-	.showcase-container {
-		flex-direction: column;
-		text-align: center;
-	}
-
-	.showcase-image {
-		order: -1;
-	}
-
-	.showcase-image img {
-		width: 200px;
+		padding: 3rem 1rem;
 	}
 
 	.showcase-title {
-		font-size: 2.25rem;
-	}
-
-	.showcase-glow {
-		right: 50%;
-		transform: translate(50%, -50%);
+		font-size: 1.75rem;
 	}
 }
 </style>

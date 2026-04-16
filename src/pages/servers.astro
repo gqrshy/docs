@@ -14,7 +14,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 	<title>GashiStudios Server</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900" rel="stylesheet">
 </head>
 <body>
 	<CustomNav />
@@ -313,11 +313,11 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 		}
 
 		body {
-			font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+			font-family: 'Inter', 'IBM Plex Mono', -apple-system, BlinkMacSystemFont, sans-serif;
 			background: #0a0a0f;
 			color: #fff;
 			line-height: 1.6;
-			overflow-x: hidden;
+			overflow-x: clip;
 		}
 
 		.container {
@@ -341,9 +341,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 			position: absolute;
 			inset: 0;
 			background:
-				radial-gradient(ellipse at 20% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
-				radial-gradient(ellipse at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-				radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+				radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
 			z-index: 0;
 		}
 
@@ -377,7 +375,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 			font-size: 0.875rem;
 			font-weight: 600;
 			letter-spacing: 0.3em;
-			color: #a78bfa;
+			color: rgba(255, 255, 255, 0.7);
 			margin-bottom: 1.5rem;
 			animation: fadeInUp 0.8s ease-out;
 		}
@@ -400,10 +398,10 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 		}
 
 		.hero-title-accent {
-			background: linear-gradient(135deg, #a78bfa 0%, #ec4899 50%, #f97316 100%);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			background-clip: text;
+			background: #ffffff;
+			-webkit-background-clip: initial;
+			-webkit-text-fill-color: initial;
+			background-clip: initial;
 		}
 
 		.hero-desc {
@@ -433,10 +431,10 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 			display: inline-flex;
 			align-items: center;
 			gap: 0.75rem;
-			background: linear-gradient(135deg, #5865F2 0%, #7c3aed 100%);
+			background: transparent; border: 1px solid rgba(255, 255, 255, 0.3);
 			color: #fff;
 			padding: 1rem 2rem;
-			border-radius: 12px;
+			border-radius: 100vh;
 			text-decoration: none;
 			font-weight: 600;
 			font-size: 1rem;
@@ -447,7 +445,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 
 		.btn-primary:hover {
 			transform: translateY(-3px);
-			box-shadow: 0 10px 40px rgba(88, 101, 242, 0.4);
+			background: #ffffff; color: #000000; border-color: #ffffff;
 		}
 
 		.btn-large {
@@ -480,7 +478,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 		/* Features Overview */
 		.features-overview {
 			padding: 3rem 0;
-			background: linear-gradient(180deg, #0a0a0f 0%, #0f0a1a 100%);
+			background: var(--color-bg, #0a0a0f);
 		}
 
 		.feature-tags {
@@ -498,11 +496,11 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 			letter-spacing: 0.05em;
 		}
 
-		.tag-pvp { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
-		.tag-pve { background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
-		.tag-mmo { background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
-		.tag-competitive { background: rgba(249, 115, 22, 0.2); color: #f97316; border: 1px solid rgba(249, 115, 22, 0.3); }
-		.tag-economy { background: rgba(234, 179, 8, 0.2); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.3); }
+		.tag-pvp { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); }
+		.tag-pve { background: rgba(255, 255, 255, 0.05); color: rgba(255,255,255,0.7); border: 1px solid rgba(255, 255, 255, 0.15); }
+		.tag-mmo { background: rgba(255, 255, 255, 0.05); color: rgba(255,255,255,0.7); border: 1px solid rgba(255, 255, 255, 0.15); }
+		.tag-competitive { background: rgba(255, 255, 255, 0.05); color: rgba(255,255,255,0.7); border: 1px solid rgba(255, 255, 255, 0.15); }
+		.tag-economy { background: rgba(255, 255, 255, 0.05); color: rgba(255,255,255,0.7); border: 1px solid rgba(255, 255, 255, 0.15); }
 
 		/* Content Sections */
 		.content-section {
@@ -519,14 +517,12 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 
 		.section-bg-guns {
 			background:
-				radial-gradient(ellipse at 0% 50%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
-				linear-gradient(180deg, #0f0a1a 0%, #0a0a0f 100%);
+				radial-gradient(ellipse at 0% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
 		}
 
 		.section-bg-pokemon {
 			background:
-				radial-gradient(ellipse at 100% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
-				linear-gradient(180deg, #0a0a0f 0%, #0f0a1a 100%);
+				radial-gradient(ellipse at 100% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
 		}
 
 		.section-header {
@@ -550,7 +546,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 		.section-number {
 			font-size: 0.875rem;
 			font-weight: 700;
-			color: rgba(167, 139, 250, 0.5);
+			color: rgba(255, 255, 255, 0.25);
 			letter-spacing: 0.2em;
 			display: block;
 			margin-bottom: 0.5rem;
@@ -583,7 +579,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 		.content-card {
 			background: rgba(255, 255, 255, 0.03);
 			border: 1px solid rgba(255, 255, 255, 0.08);
-			border-radius: 16px;
+			border-radius: 2px;
 			padding: 2rem;
 			position: relative;
 			transition: all 0.4s ease;
@@ -598,12 +594,12 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 
 		.content-card:hover {
 			background: rgba(255, 255, 255, 0.05);
-			border-color: rgba(167, 139, 250, 0.3);
+			border-color: rgba(255, 255, 255, 0.2);
 			transform: translateY(-5px);
 		}
 
 		.content-card.featured {
-			background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+			background: rgba(255, 255, 255, 0.05);
 			border-color: rgba(167, 139, 250, 0.3);
 		}
 
@@ -628,26 +624,26 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 			display: inline-block;
 			margin-top: 1rem;
 			padding: 0.25rem 0.75rem;
-			background: rgba(249, 115, 22, 0.2);
-			color: #f97316;
+			background: rgba(255, 255, 255, 0.08);
+			color: rgba(255,255,255,0.7);
 			border-radius: 100px;
 			font-size: 0.75rem;
 			font-weight: 600;
 		}
 
 		.card-badge-done {
-			background: rgba(34, 197, 94, 0.2);
-			color: #22c55e;
+			background: rgba(255, 255, 255, 0.08);
+			color: #ffffff;
 		}
 
 		.card-badge-test {
-			background: rgba(59, 130, 246, 0.2);
-			color: #3b82f6;
+			background: rgba(255, 255, 255, 0.05);
+			color: rgba(255,255,255,0.7);
 		}
 
 		/* Target Section */
 		.section-target {
-			background: linear-gradient(180deg, #0f0a1a 0%, #0a0a0f 100%);
+			background: var(--color-bg-alt, #111118);
 		}
 
 		.target-grid {
@@ -692,8 +688,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 		.cta-section {
 			padding: 8rem 0;
 			background:
-				radial-gradient(ellipse at 50% 100%, rgba(124, 58, 237, 0.15) 0%, transparent 60%),
-				#0a0a0f;
+				radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
 		}
 
 		.cta-content {
@@ -704,9 +699,9 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 			font-size: 3rem;
 			font-weight: 900;
 			background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			background-clip: text;
+			-webkit-background-clip: initial;
+			-webkit-text-fill-color: initial;
+			background-clip: initial;
 			margin-bottom: 0.5rem;
 		}
 
@@ -763,6 +758,55 @@ import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 		.target-item:nth-child(4) { transition-delay: 0.15s; }
 		.target-item:nth-child(5) { transition-delay: 0.2s; }
 		.target-item:nth-child(6) { transition-delay: 0.25s; }
+
+		/* ===== Warped Grid Background ===== */
+		.warped-grid {
+			position: fixed;
+			inset: 0;
+			z-index: 0;
+			pointer-events: none;
+			perspective: 800px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+		}
+
+		.warped-grid-inner {
+			width: 120%;
+			height: 120%;
+			background-image:
+				repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 64px),
+				repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 64px);
+			animation: gridWarp 12s ease-in-out infinite;
+		}
+
+		@keyframes gridWarp {
+			0%, 100% { transform: perspective(800px) rotateX(0deg) rotateY(0deg); }
+			25% { transform: perspective(800px) rotateX(0.3deg) rotateY(-0.3deg); }
+			50% { transform: perspective(800px) rotateX(-0.3deg) rotateY(0.3deg); }
+			75% { transform: perspective(800px) rotateX(0.2deg) rotateY(0.2deg); }
+		}
+
+		/* ===== Viewport Frame ===== */
+		.viewport-frame {
+			position: fixed;
+			inset: 8px;
+			z-index: 9999;
+			pointer-events: none;
+		}
+
 	</style>
+
+	<!-- Warped grid background -->
+	<div class="warped-grid" aria-hidden="true">
+		<div class="warped-grid-inner"></div>
+	</div>
+
+	<!-- Viewport frame -->
+	<svg class="viewport-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
+		<rect x="0.4" y="0.4" width="99.2" height="99.2" rx="0.6" ry="0.6"
+			fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.12" vector-effect="non-scaling-stroke"/>
+	</svg>
 </body>
 </html>

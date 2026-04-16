@@ -1,5 +1,5 @@
 ---
-// Testimonials section with glowing line reveal animation
+// Testimonials section - B&W window cards, white glow line reveal
 ---
 
 <section id="testimonials" class="testimonials-section">
@@ -45,52 +45,70 @@
 		</div>
 
 		<div class="testimonials-grid">
-			<div class="testimonial-card">
-				<div class="testimonial-header">
-					<div class="testimonial-avatar">L</div>
-					<div class="testimonial-info">
-						<span class="testimonial-name">Luan</span>
-						<div class="testimonial-rating">
-							<span class="stars">★★★★★</span>
-							<span class="rating-text">10/10</span>
+			<div class="window-card testimonial-card">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title">testimonial</span>
+				</div>
+				<div class="window-content">
+					<div class="testimonial-header">
+						<div class="testimonial-avatar">L</div>
+						<div class="testimonial-info">
+							<span class="testimonial-name">Luan</span>
+							<div class="testimonial-rating">
+								<span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+								<span class="rating-text">10/10</span>
+							</div>
 						</div>
 					</div>
+					<p class="testimonial-text" data-i18n="testimonialLuan">
+						10/10 service, quick and efficient. 10/10 problem solving, all problems encountered were solved very quickly.
+					</p>
 				</div>
-				<p class="testimonial-text" data-i18n="testimonialLuan">
-					10/10 service, quick and efficient. 10/10 problem solving, all problems encountered were solved very quickly.
-				</p>
 			</div>
 
-			<div class="testimonial-card">
-				<div class="testimonial-header">
-					<div class="testimonial-avatar">D</div>
-					<div class="testimonial-info">
-						<span class="testimonial-name">diego_crd</span>
-						<div class="testimonial-rating">
-							<span class="stars">★★★★★</span>
-							<span class="rating-text">10/10</span>
+			<div class="window-card testimonial-card">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title">testimonial</span>
+				</div>
+				<div class="window-content">
+					<div class="testimonial-header">
+						<div class="testimonial-avatar">D</div>
+						<div class="testimonial-info">
+							<span class="testimonial-name">diego_crd</span>
+							<div class="testimonial-rating">
+								<span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+								<span class="rating-text">10/10</span>
+							</div>
 						</div>
 					</div>
+					<p class="testimonial-text" data-i18n="testimonialDiego">
+						I am delighted, excellent customer service, I recommend 10/10.
+					</p>
 				</div>
-				<p class="testimonial-text" data-i18n="testimonialDiego">
-					I am delighted, excellent customer service, I recommend 10/10.
-				</p>
 			</div>
 
-			<div class="testimonial-card">
-				<div class="testimonial-header">
-					<div class="testimonial-avatar">S</div>
-					<div class="testimonial-info">
-						<span class="testimonial-name">Silverflames123</span>
-						<div class="testimonial-rating">
-							<span class="stars">★★★★★</span>
-							<span class="rating-text">10/10</span>
+			<div class="window-card testimonial-card">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title">testimonial</span>
+				</div>
+				<div class="window-content">
+					<div class="testimonial-header">
+						<div class="testimonial-avatar">S</div>
+						<div class="testimonial-info">
+							<span class="testimonial-name">Silverflames123</span>
+							<div class="testimonial-rating">
+								<span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+								<span class="rating-text">10/10</span>
+							</div>
 						</div>
 					</div>
+					<p class="testimonial-text" data-i18n="testimonialSilver">
+						10/10 Quality, 10/10 Service. Extremely well made and very responsive to issues.
+					</p>
 				</div>
-				<p class="testimonial-text" data-i18n="testimonialSilver">
-					10/10 Quality, 10/10 Service. Extremely well made and very responsive to issues.
-				</p>
 			</div>
 		</div>
 	</div>
@@ -181,7 +199,7 @@
 		glowLine.classList.add('animate');
 
 		// Reveal characters as glow line passes
-		const lineAnimDuration = 800; // ms
+		const lineAnimDuration = 800;
 		const charCount = chars.length;
 
 		chars.forEach((char, i) => {
@@ -266,7 +284,7 @@
 	overflow: visible;
 }
 
-/* Glowing sweep line */
+/* Glowing sweep line - white */
 .glow-line {
 	position: absolute;
 	top: 50%;
@@ -277,15 +295,15 @@
 	background: linear-gradient(
 		180deg,
 		transparent 0%,
-		rgba(124, 108, 154, 0.3) 20%,
-		rgba(124, 108, 154, 1) 50%,
-		rgba(124, 108, 154, 0.3) 80%,
+		rgba(255, 255, 255, 0.3) 20%,
+		rgba(255, 255, 255, 1) 50%,
+		rgba(255, 255, 255, 0.3) 80%,
 		transparent 100%
 	);
 	box-shadow:
-		0 0 20px rgba(124, 108, 154, 0.8),
-		0 0 40px rgba(124, 108, 154, 0.6),
-		0 0 60px rgba(124, 108, 154, 0.4);
+		0 0 20px rgba(255, 255, 255, 0.8),
+		0 0 40px rgba(255, 255, 255, 0.6),
+		0 0 60px rgba(255, 255, 255, 0.4);
 	opacity: 0;
 	z-index: 10;
 	pointer-events: none;
@@ -317,7 +335,8 @@
 	gap: 0;
 	font-size: 2.5rem;
 	font-weight: 700;
-	color: #4a4a5a;
+	font-family: 'IBM Plex Mono', monospace;
+	color: var(--color-text-muted);
 	margin-bottom: 0.75rem;
 	letter-spacing: 0.08em;
 	position: relative;
@@ -337,13 +356,13 @@
 		text-shadow 0.15s ease;
 }
 
-/* Glow state - when line passes */
+/* Glow state - white when line passes */
 .glow-title .char.glow {
 	opacity: 1;
-	color: #7c6c9a;
+	color: #ffffff;
 	text-shadow:
-		0 0 20px rgba(124, 108, 154, 1),
-		0 0 40px rgba(124, 108, 154, 0.8);
+		0 0 20px rgba(255, 255, 255, 1),
+		0 0 40px rgba(255, 255, 255, 0.8);
 	filter: blur(0);
 	transform: translateY(0);
 }
@@ -353,7 +372,7 @@
 	opacity: 1;
 	transform: translateY(0);
 	filter: blur(0);
-	color: #4a4a5a;
+	color: var(--color-text);
 	text-shadow: none;
 }
 
@@ -381,7 +400,7 @@
 }
 
 .subtitle-text {
-	color: #6b5b7a;
+	color: var(--color-text-muted);
 	font-size: 1rem;
 }
 
@@ -393,19 +412,12 @@
 }
 
 .testimonial-card {
-	background: rgba(255, 255, 255, 0.7);
-	border: 1px solid rgba(124, 108, 154, 0.2);
-	border-radius: 1rem;
-	padding: 1.5rem;
-	transition: all 0.3s ease;
-	backdrop-filter: blur(10px);
+	padding: 0;
+	background: var(--color-surface);
 }
 
 .testimonial-card:hover {
-	border-color: rgba(124, 108, 154, 0.5);
-	transform: translateY(-5px);
-	box-shadow: 0 15px 40px rgba(124, 108, 154, 0.15);
-	background: rgba(255, 255, 255, 0.9);
+	border-color: rgba(255, 255, 255, 0.25);
 }
 
 .testimonial-header {
@@ -419,13 +431,15 @@
 	width: 48px;
 	height: 48px;
 	border-radius: 50%;
-	background: linear-gradient(135deg, #7c6c9a, #9a8ab0);
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-weight: 700;
 	font-size: 1.25rem;
 	color: #fff;
+	font-family: 'IBM Plex Mono', monospace;
 }
 
 .testimonial-info {
@@ -436,8 +450,9 @@
 
 .testimonial-name {
 	font-weight: 600;
-	color: #4a4a5a;
+	color: var(--color-text);
 	font-size: 1rem;
+	font-family: 'IBM Plex Mono', monospace;
 }
 
 .testimonial-rating {
@@ -447,35 +462,36 @@
 }
 
 .stars {
-	color: #e8a040;
+	color: rgba(255, 255, 255, 0.7);
 	font-size: 0.875rem;
 	letter-spacing: 1px;
 }
 
 .rating-text {
-	color: #8a7a9a;
+	color: var(--color-text-muted);
 	font-size: 0.75rem;
 	font-weight: 500;
+	font-family: 'IBM Plex Mono', monospace;
 }
 
 .testimonial-text {
-	color: #5a5a6a;
+	color: var(--color-text-muted);
 	font-size: 0.95rem;
 	line-height: 1.7;
 	font-style: italic;
 }
 
 .testimonial-text::before {
-	content: '"';
-	color: #7c6c9a;
+	content: '\201C';
+	color: rgba(255, 255, 255, 0.3);
 	font-size: 1.5rem;
 	font-weight: 700;
 	margin-right: 0.25rem;
 }
 
 .testimonial-text::after {
-	content: '"';
-	color: #7c6c9a;
+	content: '\201D';
+	color: rgba(255, 255, 255, 0.3);
 	font-size: 1.5rem;
 	font-weight: 700;
 	margin-left: 0.25rem;

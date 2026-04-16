@@ -1,115 +1,79 @@
 ---
-// Tech stack section showing development skills - i18n support
+// Tech stack section - B&W window cards
 ---
 
 <section id="techstack" class="techstack-section">
 	<div class="techstack-container">
 		<h2 class="section-title" data-i18n="techstackTitle">Tech Stack</h2>
-		<p class="section-subtitle" data-i18n="techstackSubtitle">Technologies I work with</p>
 
 		<div class="techstack-grid">
-			<div class="techstack-category">
-				<h3 class="category-title" data-i18n="categoryMC">MC Development</h3>
-				<div class="tech-icons">
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=java" alt="Java" />
-						<span>Java</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=kotlin" alt="Kotlin" />
-						<span>Kotlin</span>
+			<div class="techstack-category window-card" data-category="mc">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title" data-i18n="categoryMC">MC Development</span>
+				</div>
+				<div class="window-content">
+					<div class="tech-icons">
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/java/white" alt="Java" loading="lazy" /><span>Java</span></div>
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/gradle/white" alt="Gradle" loading="lazy" /><span>Gradle</span></div>
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/spigotmc/white" alt="Spigot" loading="lazy" /><span>Spigot</span></div>
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/papermc/white" alt="Paper" loading="lazy" /><span>Paper</span></div>
 					</div>
 				</div>
 			</div>
 
-			<div class="techstack-category">
-				<h3 class="category-title" data-i18n="categoryDatabase">Database</h3>
-				<div class="tech-icons">
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" />
-						<span>MySQL</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=sqlite" alt="SQLite" />
-						<span>SQLite</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=redis" alt="Redis" />
-						<span>Redis</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB" />
-						<span>MongoDB</span>
+			<div class="techstack-category window-card" data-category="cobblemon">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title" data-i18n="categoryCobblemon">Cobblemon</span>
+				</div>
+				<div class="window-content">
+					<div class="tech-icons">
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/kotlin/white" alt="Kotlin" loading="lazy" /><span>Kotlin</span></div>
+						<div class="tech-item"><span class="tech-text-icon">CB</span><span>Cobblemon API</span></div>
+						<div class="tech-item"><span class="tech-text-icon">FD</span><span>Fabric</span></div>
 					</div>
 				</div>
 			</div>
 
-			<div class="techstack-category">
-				<h3 class="category-title" data-i18n="categoryWeb">Web & Languages</h3>
-				<div class="tech-icons">
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=js" alt="JavaScript" />
-						<span>JavaScript</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=ts" alt="TypeScript" />
-						<span>TypeScript</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=html" alt="HTML" />
-						<span>HTML</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=css" alt="CSS" />
-						<span>CSS</span>
+			<div class="techstack-category window-card" data-category="db">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title" data-i18n="categoryDB">Database</span>
+				</div>
+				<div class="window-content">
+					<div class="tech-icons">
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/mysql/white" alt="MySQL" loading="lazy" /><span>MySQL</span></div>
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/sqlite/white" alt="SQLite" loading="lazy" /><span>SQLite</span></div>
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/mongodb/white" alt="MongoDB" loading="lazy" /><span>MongoDB</span></div>
 					</div>
 				</div>
 			</div>
 
-			<div class="techstack-category">
-				<h3 class="category-title" data-i18n="categoryTools">Dev Tools</h3>
-				<div class="tech-icons">
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=vscode" alt="VS Code" />
-						<span>VS Code</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=idea" alt="IntelliJ IDEA" />
-						<span>IntelliJ</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=git" alt="Git" />
-						<span>Git</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=github" alt="GitHub" />
-						<span>GitHub</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=docker" alt="Docker" />
-						<span>Docker</span>
+			<div class="techstack-category window-card" data-category="web">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title" data-i18n="categoryWeb">Web</span>
+				</div>
+				<div class="window-content">
+					<div class="tech-icons">
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/javascript/white" alt="JavaScript" loading="lazy" /><span>JavaScript</span></div>
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/typescript/white" alt="TypeScript" loading="lazy" /><span>TypeScript</span></div>
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/astro/white" alt="Astro" loading="lazy" /><span>Astro</span></div>
 					</div>
 				</div>
 			</div>
 
-			<div class="techstack-category">
-				<h3 class="category-title" data-i18n="categoryDesign">Design & BaaS</h3>
-				<div class="tech-icons">
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=figma" alt="Figma" />
-						<span>Figma</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=ps" alt="Photoshop" />
-						<span>Photoshop</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=ai" alt="Illustrator" />
-						<span>Illustrator</span>
-					</div>
-					<div class="tech-item">
-						<img src="https://skillicons.dev/icons?i=firebase" alt="Firebase" />
-						<span>Firebase</span>
+			<div class="techstack-category window-card" data-category="tools">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title" data-i18n="categoryTools">Tools</span>
+				</div>
+				<div class="window-content">
+					<div class="tech-icons">
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/git/white" alt="Git" loading="lazy" /><span>Git</span></div>
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/github/white" alt="GitHub" loading="lazy" /><span>GitHub</span></div>
+						<div class="tech-item"><img src="https://cdn.simpleicons.org/figma/white" alt="Figma" loading="lazy" /><span>Figma</span></div>
 					</div>
 				</div>
 			</div>
@@ -122,43 +86,60 @@
 	const translations = {
 		en: {
 			techstackTitle: "Tech Stack",
-			techstackSubtitle: "Technologies I work with",
 			categoryMC: "MC Development",
-			categoryDatabase: "Database",
-			categoryWeb: "Web & Languages",
-			categoryTools: "Dev Tools",
-			categoryDesign: "Design & BaaS"
+			categoryCobblemon: "Cobblemon",
+			categoryDB: "Database",
+			categoryWeb: "Web",
+			categoryTools: "Tools"
 		},
 		ja: {
 			techstackTitle: "技術スタック",
-			techstackSubtitle: "使用技術",
-			categoryMC: "Minecraft開発",
-			categoryDatabase: "データベース",
-			categoryWeb: "Web・言語",
-			categoryTools: "開発ツール",
-			categoryDesign: "デザイン・BaaS"
+			categoryMC: "MC開発",
+			categoryCobblemon: "Cobblemon",
+			categoryDB: "データベース",
+			categoryWeb: "Web",
+			categoryTools: "ツール"
 		}
 	};
 
-	function applyTechStackTranslations(lang) {
+	function applyTechTranslations(lang) {
 		const t = translations[lang] || translations.en;
 		document.querySelectorAll('.techstack-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
 			if (t[key]) {
-				el.innerHTML = t[key];
+				el.textContent = t[key];
 			}
 		});
 	}
 
-	// Apply on load with current language
 	function init() {
 		const lang = window.GashiLang?.get() || 'en';
-		applyTechStackTranslations(lang);
+		applyTechTranslations(lang);
+		setupObserver();
 	}
 
-	// Listen for language changes
+	function setupObserver() {
+		const categories = document.querySelectorAll('.techstack-category');
+		if (!categories.length) return;
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const items = entry.target.querySelectorAll('.tech-item');
+					items.forEach((item, i) => {
+						item.style.animationDelay = `${i * 80}ms`;
+						item.classList.add('bounce-in');
+					});
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.2 });
+
+		categories.forEach(cat => observer.observe(cat));
+	}
+
 	window.addEventListener('langChange', (e) => {
-		applyTechStackTranslations(e.detail.lang);
+		applyTechTranslations(e.detail.lang);
 	});
 
 	if (document.readyState === 'loading') {
@@ -171,103 +152,115 @@
 
 <style>
 .techstack-section {
-	padding: 6rem 2rem;
-	background: #0f0a1a;
+	padding: 5rem 2rem;
+	background: var(--color-bg-alt);
+	position: relative;
+	overflow: hidden;
+}
+
+.techstack-section::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image:
+		repeating-linear-gradient(0deg, var(--grid-line) 0, var(--grid-line) 1px, transparent 1px, transparent 48px),
+		repeating-linear-gradient(90deg, var(--grid-line) 0, var(--grid-line) 1px, transparent 1px, transparent 48px);
+	pointer-events: none;
 }
 
 .techstack-container {
-	max-width: 1200px;
+	max-width: 1100px;
 	margin: 0 auto;
+	position: relative;
+	z-index: 1;
 }
 
 .section-title {
-	font-size: 2.5rem;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 2rem;
 	font-weight: 700;
 	color: #fff;
-	text-align: center;
-	margin-bottom: 0.5rem;
-}
-
-.section-subtitle {
-	color: rgba(255, 255, 255, 0.6);
-	text-align: center;
-	margin-bottom: 3rem;
+	margin-bottom: 2rem;
 }
 
 .techstack-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	gap: 2rem;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1.25rem;
 }
 
 .techstack-category {
-	background: linear-gradient(135deg, rgba(26, 16, 51, 0.6) 0%, rgba(15, 10, 26, 0.6) 100%);
-	border: 1px solid rgba(124, 58, 237, 0.15);
-	border-radius: 1rem;
-	padding: 1.5rem;
-	transition: all 0.3s ease;
+	opacity: 0;
 }
 
-.techstack-category:hover {
-	border-color: rgba(124, 58, 237, 0.4);
-	box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1);
+.techstack-category.visible {
+	opacity: 1;
 }
 
-.category-title {
-	font-size: 1rem;
-	font-weight: 600;
-	color: #a78bfa;
-	margin-bottom: 1rem;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-}
-
+/* Tech items */
 .tech-icons {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1rem;
+	gap: 0.75rem;
 }
 
 .tech-item {
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	gap: 0.5rem;
-	transition: transform 0.2s ease;
+	padding: 0.4rem 0.75rem;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 6px;
+	font-size: 0.8rem;
+	color: var(--color-text-muted);
+	font-family: 'IBM Plex Mono', monospace;
+	transition: border-color 0.2s ease;
 }
 
 .tech-item:hover {
-	transform: translateY(-3px);
+	border-color: rgba(255, 255, 255, 0.2);
 }
 
 .tech-item img {
-	width: 48px;
-	height: 48px;
-	border-radius: 8px;
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
 }
 
-.tech-item span {
-	font-size: 0.75rem;
-	color: rgba(255, 255, 255, 0.7);
-	text-align: center;
+.tech-text-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16px;
+	height: 16px;
+	font-size: 0.55rem;
+	font-weight: 700;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 3px;
+	color: var(--color-text-muted);
 }
 
+/* Bounce in animation */
+.tech-item {
+	opacity: 0;
+	transform: scale(0.3);
+}
+
+.tech-item.bounce-in {
+	animation: bounceIn 0.4s ease forwards;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
 	.techstack-section {
-		padding: 4rem 1rem;
-	}
-
-	.section-title {
-		font-size: 2rem;
+		padding: 3rem 1rem;
 	}
 
 	.techstack-grid {
 		grid-template-columns: 1fr;
-	}
-
-	.tech-item img {
-		width: 40px;
-		height: 40px;
 	}
 }
 </style>

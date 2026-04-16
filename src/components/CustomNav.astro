@@ -1,5 +1,5 @@
 ---
-// Custom navigation bar - Minimal dark mode design
+// Custom navigation bar - B&W clean design
 ---
 
 <nav class="custom-nav">
@@ -7,7 +7,6 @@
 		<!-- Navigation Links - Left side -->
 		<div class="nav-links">
 			<a href="/" class="nav-link" data-i18n="navHome">home</a>
-			<a href="#products" class="nav-link" data-i18n="navProducts">products</a>
 			<a href="/docs/cobbleranked/" class="nav-link" data-i18n="navDocs">documents</a>
 			<a href="/terms" class="nav-link" data-i18n="navTerms">terms</a>
 			<a href="#contact" class="nav-link" data-i18n="navContact">contact</a>
@@ -32,8 +31,7 @@
 <div class="mobile-menu-overlay" id="mobile-menu-overlay">
 	<div class="mobile-menu-content">
 		<a href="/" class="mobile-link" data-i18n="navHome">home</a>
-		<a href="#products" class="mobile-link" data-i18n="navProducts">products</a>
-		<a href="/docs/cobbleranked/" class="mobile-link" data-i18n="navDocs">documents</a>
+				<a href="/docs/cobbleranked/" class="mobile-link" data-i18n="navDocs">documents</a>
 		<a href="/terms" class="mobile-link" data-i18n="navTerms">terms</a>
 		<a href="#contact" class="mobile-link" data-i18n="navContact">contact</a>
 		<span class="mobile-shop-btn disabled">
@@ -48,15 +46,13 @@
 	const translations = {
 		en: {
 			navHome: "home",
-			navProducts: "products",
-			navDocs: "documents",
+					navDocs: "documents",
 			navTerms: "terms",
 			navContact: "contact"
 		},
 		ja: {
 			navHome: "ホーム",
-			navProducts: "プロダクト",
-			navDocs: "ドキュメント",
+					navDocs: "ドキュメント",
 			navTerms: "利用規約",
 			navContact: "お問い合わせ"
 		}
@@ -141,11 +137,26 @@
 .nav-link {
 	color: var(--color-text-muted);
 	text-decoration: none;
-	font-size: 0.95rem;
+	font-size: 0.9rem;
 	font-weight: 500;
+	font-family: 'IBM Plex Mono', monospace;
 	padding: 0.5rem 1rem;
 	border-radius: 8px;
 	transition: color 0.2s ease, background 0.2s ease;
+	position: relative;
+}
+
+.nav-link::after {
+	content: '';
+	position: absolute;
+	bottom: 4px;
+	left: 50%;
+	transform: translateX(-50%) scaleX(0);
+	width: 60%;
+	height: 1px;
+	background: rgba(255, 255, 255, 0.5);
+	border-radius: 1px;
+	transition: transform 0.2s ease;
 }
 
 .nav-link:hover {
@@ -153,29 +164,41 @@
 	background: rgba(255, 255, 255, 0.05);
 }
 
+.nav-link:hover::after {
+	transform: translateX(-50%) scaleX(1);
+}
+
 /* Shop Button */
 .shop-btn {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-	background: var(--color-primary);
-	color: #fff;
+	background: transparent;
+	color: var(--color-text-muted);
 	text-decoration: none;
-	padding: 0.6rem 1.25rem;
+	padding: 0.5rem 1rem;
 	border-radius: 8px;
-	font-size: 0.9rem;
+	font-size: 0.85rem;
 	font-weight: 600;
-	transition: background 0.2s ease;
+	font-family: 'IBM Plex Mono', monospace;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	transition: all 0.2s ease;
 }
 
 .shop-btn.disabled {
 	cursor: default;
-	opacity: 0.6;
+	opacity: 0.4;
+}
+
+.shop-btn:not(.disabled):hover {
+	background: #fff;
+	color: #000;
+	border-color: #fff;
 }
 
 .shop-icon {
-	width: 18px;
-	height: 18px;
+	width: 16px;
+	height: 16px;
 }
 
 .shop-text {
@@ -192,12 +215,12 @@
 .mobile-menu-btn {
 	display: none;
 	position: fixed;
-	top: 1.25rem;
+	top: 8px;
 	right: 1.25rem;
 	z-index: 1002;
 	width: 44px;
 	height: 44px;
-	border: none;
+	border: 1px solid var(--color-border);
 	background: var(--color-bg-card);
 	border-radius: 8px;
 	cursor: pointer;
@@ -240,6 +263,7 @@
 	opacity: 0;
 	pointer-events: none;
 	transition: opacity 0.3s ease;
+	overflow: hidden;
 }
 
 .mobile-menu-overlay.active {
@@ -261,24 +285,39 @@
 	text-decoration: none;
 	font-size: 1.5rem;
 	font-weight: 500;
+	font-family: 'IBM Plex Mono', monospace;
 	transition: color 0.2s ease;
+	opacity: 0;
+	transform: translateY(20px);
 }
 
+.mobile-menu-overlay.active .mobile-link {
+	animation: fadeInStagger 0.4s ease forwards;
+}
+
+.mobile-menu-overlay.active .mobile-link:nth-child(1) { animation-delay: 0.05s; }
+.mobile-menu-overlay.active .mobile-link:nth-child(2) { animation-delay: 0.1s; }
+.mobile-menu-overlay.active .mobile-link:nth-child(3) { animation-delay: 0.15s; }
+.mobile-menu-overlay.active .mobile-link:nth-child(4) { animation-delay: 0.2s; }
+.mobile-menu-overlay.active .mobile-link:nth-child(5) { animation-delay: 0.25s; }
+
 .mobile-link:hover {
-	color: var(--color-primary);
+	color: #fff;
 }
 
 .mobile-shop-btn {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-	background: var(--color-primary);
-	color: #fff;
+	background: transparent;
+	color: var(--color-text-muted);
 	text-decoration: none;
 	padding: 0.75rem 1.5rem;
 	border-radius: 8px;
 	font-size: 1rem;
 	font-weight: 600;
+	font-family: 'IBM Plex Mono', monospace;
+	border: 1px solid rgba(255, 255, 255, 0.15);
 	margin-top: 1rem;
 }
 
@@ -289,7 +328,7 @@
 
 .mobile-shop-btn.disabled {
 	cursor: default;
-	opacity: 0.6;
+	opacity: 0.4;
 }
 
 /* Responsive */
@@ -314,7 +353,7 @@
 
 	.nav-link {
 		padding: 0.4rem 0.75rem;
-		font-size: 0.9rem;
+		font-size: 0.85rem;
 	}
 
 	.custom-nav {

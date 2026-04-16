@@ -1,54 +1,66 @@
 ---
-// Products section - Dark mode design
+// Products section - B&W window cards
 ---
 
 <section id="products" class="products-section">
 	<div class="products-container">
-		<!-- Header -->
 		<div class="products-header">
-			<h2 class="products-title">
-				<span data-i18n="productsTitle">Our Products</span>
-			</h2>
-			<p class="products-subtitle" data-i18n="productsSubtitle">
-				Mods and libraries for <span class="highlight">Cobblemon</span>
-			</p>
+			<h2 class="products-title" data-i18n="productsTitle">Products</h2>
+			<p class="products-subtitle" data-i18n="productsSubtitle">Tools and libraries for Cobblemon servers</p>
 		</div>
 
 		<div class="products-grid">
-			<a href="/docs/cobbleranked/" class="product-card featured">
-				<div class="product-icon">
-					<img src="/cobbleranked.png" alt="CobbleRanked" />
+			<a href="/docs/cobbleranked/" class="product-card window-card featured">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title">cobbleranked.cfg</span>
 				</div>
-				<div class="product-info">
-					<h3>CobbleRanked</h3>
-					<p data-i18n="cobblerankedDesc">ELO-based ranked battle system with seasons, leaderboards, and rewards.</p>
-					<span class="product-tag">Featured</span>
-				</div>
-			</a>
-
-			<a href="/docs/gashilibs/" class="product-card">
-				<div class="product-icon library">
-					<svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-						<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-					</svg>
-				</div>
-				<div class="product-info">
-					<h3>GashiLibs</h3>
-					<p data-i18n="gashilibsDesc">Shared library providing database connections, Redis, and config utilities.</p>
-					<span class="product-tag library">Library</span>
+				<div class="window-content">
+					<div class="product-info">
+						<div class="product-header">
+							<h3 class="product-name">CobbleRanked</h3>
+							<span class="product-tag featured-tag">Featured</span>
+						</div>
+						<p class="product-desc" data-i18n="productRankedDesc">
+							Competitive Pokemon battle system with ELO ranking, tiers, and leaderboards for Cobblemon servers.
+						</p>
+					</div>
 				</div>
 			</a>
 
-			<a href="/docs/maillib/" class="product-card">
-				<div class="product-icon library">
-					<svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-						<path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-					</svg>
+			<a href="/docs/gashilibs/" class="product-card window-card">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title">gashilibs.jar</span>
 				</div>
-				<div class="product-info">
-					<h3>MailLib</h3>
-					<p data-i18n="maillibDesc">In-game mailbox system for delivering rewards and items to players.</p>
-					<span class="product-tag library">Library</span>
+				<div class="window-content">
+					<div class="product-info">
+						<div class="product-header">
+							<h3 class="product-name">GashiLibs</h3>
+							<span class="product-tag">Library</span>
+						</div>
+						<p class="product-desc" data-i18n="productLibsDesc">
+							Shared utility library for Cobblemon addons. Database, UI, and common tools.
+						</p>
+					</div>
+				</div>
+			</a>
+
+			<a href="/docs/maillib/" class="product-card window-card">
+				<div class="window-titlebar">
+					<span class="window-close"></span>
+					<span class="window-title">maillib.jar</span>
+				</div>
+				<div class="window-content">
+					<div class="product-info">
+						<div class="product-header">
+							<h3 class="product-name">MailLib</h3>
+							<span class="product-tag">Library</span>
+						</div>
+						<p class="product-desc" data-i18n="productMailDesc">
+							In-game mail system library. Send, receive, and manage mail between players.
+						</p>
+					</div>
 				</div>
 			</a>
 		</div>
@@ -59,18 +71,18 @@
 (function() {
 	const translations = {
 		en: {
-			productsTitle: "Our Products",
-			productsSubtitle: "Mods and libraries for <span class=\"highlight\">Cobblemon</span>",
-			cobblerankedDesc: "ELO-based ranked battle system with seasons, leaderboards, and rewards.",
-			gashilibsDesc: "Shared library providing database connections, Redis, and config utilities.",
-			maillibDesc: "In-game mailbox system for delivering rewards and items to players."
+			productsTitle: "Products",
+			productsSubtitle: "Tools and libraries for Cobblemon servers",
+			productRankedDesc: "Competitive Pokemon battle system with ELO ranking, tiers, and leaderboards for Cobblemon servers.",
+			productLibsDesc: "Shared utility library for Cobblemon addons. Database, UI, and common tools.",
+			productMailDesc: "In-game mail system library. Send, receive, and manage mail between players."
 		},
 		ja: {
 			productsTitle: "プロダクト",
-			productsSubtitle: "<span class=\"highlight\">Cobblemon</span>向けMod・ライブラリ",
-			cobblerankedDesc: "ELOレーティングを採用したランクバトルシステム。シーズン、リーダーボード、報酬機能を搭載。",
-			gashilibsDesc: "データベース接続、Redis、設定管理などの共有ライブラリ。",
-			maillibDesc: "プレイヤーに報酬やアイテムを届けるゲーム内メールシステム。"
+			productsSubtitle: "Cobblemonサーバー向けのツールとライブラリ",
+			productRankedDesc: "ELOランキング、ティア、リーダーボードを備えたCobblemon向け競争型ポケモンバトルシステム。",
+			productLibsDesc: "Cobblemonアドオン向けの共有ユーティリティライブラリ。データベース、UI、共通ツール。",
+			productMailDesc: "ゲーム内メールシステムライブラリ。プレイヤー間でメールの送受信と管理。"
 		}
 	};
 
@@ -103,22 +115,13 @@
 
 <style>
 .products-section {
-	padding: 5rem 2rem 6rem;
+	padding: 5rem 2rem;
 	background: var(--color-bg);
 	position: relative;
+	overflow: hidden;
 }
 
-/* Subtle gradient overlay */
-.products-section::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 400px;
-	background: radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
-	pointer-events: none;
-}
+/* Grid background removed */
 
 .products-container {
 	max-width: 1100px;
@@ -127,194 +130,99 @@
 	z-index: 1;
 }
 
-/* Header */
 .products-header {
-	text-align: center;
 	margin-bottom: 2.5rem;
 }
 
 .products-title {
-	font-size: 3rem;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 2rem;
 	font-weight: 700;
-	color: var(--color-text);
-	margin: 0 0 12px;
-	line-height: 1.1;
+	color: #fff;
+	margin-bottom: 0.5rem;
 }
 
 .products-subtitle {
-	font-size: 1.1rem;
 	color: var(--color-text-muted);
-	margin: 0;
-	line-height: 1.7;
+	font-size: 0.95rem;
 }
 
-.highlight {
-	color: var(--color-primary);
-}
-
-/* Product Grid */
+/* Grid */
 .products-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 	gap: 1.25rem;
 }
 
-/* Product Card */
+/* Product cards */
 .product-card {
-	background: var(--color-bg-card);
-	border: 1px solid var(--color-border);
-	border-radius: 12px;
-	padding: 1.75rem;
 	text-decoration: none;
-	transition: all 0.3s ease;
-	display: flex;
-	gap: 1.25rem;
-	align-items: flex-start;
-	position: relative;
-	overflow: hidden;
+	color: inherit;
 }
 
-.product-card::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
-	opacity: 0;
-	transition: opacity 0.3s ease;
-	pointer-events: none;
+.product-card .window-titlebar {
+	cursor: pointer;
 }
 
-.product-card:hover {
-	border-color: var(--color-primary);
-	transform: translateY(-4px);
-	box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
-}
-
-.product-card:hover::before {
-	opacity: 1;
-}
-
+/* Featured card */
 .product-card.featured {
-	border-color: rgba(139, 92, 246, 0.3);
-	background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, var(--color-bg-card) 100%);
+	border-color: rgba(255, 255, 255, 0.2);
 }
 
 .product-card.featured:hover {
-	border-color: var(--color-primary);
-	box-shadow: 0 12px 40px rgba(139, 92, 246, 0.25);
+	border-color: rgba(255, 255, 255, 0.35);
 }
 
-.product-icon {
-	flex-shrink: 0;
-	width: 72px;
-	height: 72px;
-	border-radius: 12px;
-	overflow: hidden;
+/* Product info */
+.product-header {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	background: var(--color-bg-alt);
-	transition: transform 0.3s ease;
+	justify-content: space-between;
+	margin-bottom: 0.75rem;
 }
 
-.product-card:hover .product-icon {
-	transform: scale(1.05);
-}
-
-.product-icon img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.product-icon.library {
-	color: var(--color-primary);
-}
-
-.product-icon.library svg {
-	width: 32px;
-	height: 32px;
-}
-
-.product-info h3 {
-	font-size: 1.15rem;
+.product-name {
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 1.1rem;
 	font-weight: 600;
-	color: var(--color-text);
-	margin-bottom: 0.4rem;
-}
-
-.product-info p {
-	color: var(--color-text-muted);
-	font-size: 0.875rem;
-	line-height: 1.6;
-	margin-bottom: 0.875rem;
+	color: #fff;
 }
 
 .product-tag {
-	display: inline-block;
-	background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
-	color: #fff;
+	font-family: 'IBM Plex Mono', monospace;
 	font-size: 0.7rem;
 	font-weight: 600;
-	padding: 0.3rem 0.875rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	padding: 0.2rem 0.6rem;
 	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	color: var(--color-text-muted);
 }
 
-.product-tag.library {
-	background: rgba(139, 92, 246, 0.2);
-	color: var(--color-primary-light);
+.featured-tag {
+	border-color: rgba(255, 255, 255, 0.3);
+	color: #fff;
+}
+
+.product-desc {
+	color: var(--color-text-muted);
+	font-size: 0.9rem;
+	line-height: 1.7;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+	.products-section {
+		padding: 3rem 1rem;
+	}
+
 	.products-header {
 		text-align: center;
 	}
 
-	.products-title {
-		font-size: 2.5rem;
-	}
-
 	.products-grid {
 		grid-template-columns: 1fr;
-		max-width: 450px;
-		margin: 0 auto;
-	}
-}
-
-@media (max-width: 600px) {
-	.products-section {
-		padding: 3rem 1rem 4rem;
-	}
-
-	.products-title {
-		font-size: 2rem;
-	}
-
-	.products-subtitle {
-		font-size: 1rem;
-	}
-
-	.product-card {
-		padding: 1.5rem;
-		border-radius: 12px;
-	}
-
-	.product-icon {
-		width: 60px;
-		height: 60px;
-		border-radius: 10px;
-	}
-
-	.product-info h3 {
-		font-size: 1.05rem;
-	}
-
-	.product-info p {
-		font-size: 0.85rem;
 	}
 }
 </style>
