@@ -206,14 +206,14 @@ blacklist:
 **Pokemon Showdown System (Default):**
 
 - Starting ELO: 1000
-- Floor ELO: 0 (no minimum)
-- New players get K-factor 35 for first 10 games (industry standard)
+- Floor ELO: 1000
+- New players get K-factor 50 for first 30 games
 
 | ELO Range | K-Factor |
 |-----------|----------|
-| 0-1100 | 30 |
-| 1101-1300 | 25 |
-| 1301-1600 | 20 |
+| 0-1100 | 40 |
+| 1101-1300 | 32 |
+| 1301-1600 | 24 |
 | 1601-2000 | 16 |
 | 2001+ | 12 |
 
@@ -285,46 +285,6 @@ Rewards are sent via MailLib when the season ends.
 
 </details>
 
-## Database Issues
-
-<details>
-<summary><strong>SQLite errors</strong></summary>
-
-**Solutions:**
-
-1. Check `config/cobbleranked/` directory exists
-2. Verify file permissions on `data.db`
-3. Ensure disk space is available
-4. Backup and delete corrupt DB to regenerate
-
-</details>
-
-<details>
-<summary><strong>MySQL connection failed</strong></summary>
-
-**Solutions:**
-
-1. Verify MySQL is running
-2. Check host, port, database, username, password
-3. Test connection: `mysql -h host -u user -p database`
-4. Verify firewall allows port 3306
-5. Check character set: `utf8mb4_unicode_ci`
-6. Increase pool size if "max pool reached" error
-
-</details>
-
-<details>
-<summary><strong>MongoDB connection issues</strong></summary>
-
-**Solutions:**
-
-1. Verify connection string format
-2. Check MongoDB daemon is running
-3. Verify auth credentials if using authentication
-4. MongoDB driver is shaded - no conflicts with other mods
-
-</details>
-
 ## Cross-Server Issues
 
 <details>
@@ -363,66 +323,6 @@ Rewards are sent via MailLib when the season ends.
 2. Run `/rankedadmin arena status` to check arena configuration
 3. Ensure no other plugins are interfering with teleportation
 4. Check server logs for teleport-related errors
-
-</details>
-
-## Commands Reference
-
-<details>
-<summary><strong>Player commands</strong></summary>
-
-| Command | Permission | Description |
-|---------|------------|-------------|
-| `/ranked` | `cobbleranked.player.use` | Open ranked GUI |
-| `/casual` | `cobbleranked.player.casual.use` | Open casual GUI |
-| `/casual missions` | `cobbleranked.player.casual.use` | Open missions GUI |
-| `/battlecamera toggle` | `cobbleranked.player.use` | Toggle battle camera |
-| `/battlecamera status` | `cobbleranked.player.use` | Check camera status |
-
-</details>
-
-<details>
-<summary><strong>Admin commands</strong></summary>
-
-**Arena Management:**
-- `/rankedadmin setArena <name> <pos1|pos2|exit|spectator>`
-- `/rankedadmin arena status` - View all arenas
-- `/rankedadmin arena enable/disable <name>`
-- `/rankedadmin setArena <name> setcenter [radius]` - Set arena center with radius
-- `/rankedadmin arena reset` - Clear all positions
-- `/rankedadmin teleportArena <name>` - Teleport to arena
-- `/rankedadmin setexit` - Set global exit location
-
-**ELO Management:**
-- `/rankedadmin setelo <player> <format> <elo>`
-- `/rankedadmin addelo <amount> <player> <format>`
-- `/rankedadmin removeelo <amount> <player> <format>`
-
-**Season Management:**
-- `/rankedadmin season info` - Current season details
-- `/rankedadmin season rotate` - End season manually
-- `/rankedadmin queue clear` - Clear all queues
-
-**Data Management:**
-- `/rankedadmin reload` - Reload all configs
-- `/rankedadmin usage export [season]` - Export Pokemon usage
-- `/rankedadmin leaderboard export [season] [limit]`
-- `/rankedadmin migrate ...` - v1 to v2 migration
-
-</details>
-
-## Performance
-
-<details>
-<summary><strong>Lag during battles</strong></summary>
-
-**Solutions:**
-
-1. Disable debug logging: `debug.enabled: false`
-2. Reduce battle music complexity
-3. Check server TPS
-4. Increase MySQL connection pool if needed
-5. Archive old seasons to reduce database size
 
 </details>
 

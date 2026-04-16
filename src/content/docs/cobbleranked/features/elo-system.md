@@ -45,10 +45,10 @@ The K-factor controls how much your rating changes per match. CobbleRanked uses 
 
 | ELO Range | K-Factor | Effect |
 |-----------|----------|--------|
-| New players (first 10 games) | 35 | Fast calibration |
-| Below 1100 | 30 | Larger swings |
-| 1100-1299 | 25 | Moderate changes |
-| 1300-1599 | 20 | Balanced |
+| New players (first 30 games) | 50 | Fast calibration |
+| Below 1100 | 40 | Larger swings |
+| 1100-1299 | 32 | Moderate changes |
+| 1300-1599 | 24 | Balanced |
 | 1600-1999 | 16 | Stable ratings |
 | 2000+ | 12 | Very stable |
 
@@ -99,24 +99,24 @@ A 1700 player beats a 1400 player. Small gains for the favorite.
 ratingSystem: POKEMON_SHOWDOWN  # or GLICKO2
 
 startingElo: 1000
-floorElo: 0
+floorElo: 1000
 
 pokemonShowdown:
-  newPlayerGames: 10
-  newPlayerKFactor: 35
+  newPlayerGames: 30
+  newPlayerKFactor: 50
   kFactorBands:
     - maxElo: 1100
-      kFactor: 30
+      kFactor: 40
     - maxElo: 1300
-      kFactor: 25
+      kFactor: 32
     - maxElo: 1600
-      kFactor: 20
+      kFactor: 24
     - maxElo: 2000
       kFactor: 16
     - maxElo: 999999
       kFactor: 12
   streakBonus:
-    enabled: true
+    enabled: false
     threshold3Wins: 3
     threshold5Wins: 5
 
@@ -153,8 +153,8 @@ rankTiers:
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `startingElo` | `1000` | Starting rating for new players |
-| `floorElo` | `0` | Minimum possible rating (set to prevent dropping below a threshold) |
-| `streakBonus.enabled` | `true` | Enable win streak K-factor bonus |
+| `floorElo` | `1000` | Minimum possible rating |
+| `streakBonus.enabled` | `false` | Enable win streak K-factor bonus |
 
 ## Season Resets
 
@@ -168,7 +168,7 @@ onSeasonEnd:
   softResetFactor: 0.5   # How much to reset (0.5 = halfway to starting)
 ```
 
-**Soft reset example**: A 1800 player with factor 0.5 resets to 1650 (halfway between 1800 and 1500).
+**Soft reset example**: A 1800 player with factor 0.5 resets to 1400 (halfway between 1800 and 1000).
 
 ## Check Your Rating
 

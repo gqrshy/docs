@@ -141,6 +141,36 @@ Use `keepAllPlayers: true` only if you need complete records for all players.
 
 </details>
 
+## Off-Season Settings
+
+```yaml
+# season.yaml
+offSeason:
+  allowCasual: true         # Allow casual battles during off-season
+  allowRankedView: true     # Allow viewing rankings during off-season
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `allowCasual` | `true` | Allow casual battles between seasons |
+| `allowRankedView` | `true` | Allow viewing leaderboard/rankings |
+
+## Season Pause/Resume
+
+Admins can pause the active season to temporarily stop ranked queues without ending the season.
+
+```bash
+/rankedadmin season pause     # Pause — stops new ranked queue entries
+/rankedadmin season resume    # Resume — re-enables ranked queues
+```
+
+**When paused:**
+- Ranked queue is disabled (players cannot join)
+- Existing matches continue normally
+- Casual battles still work (if `allowCasual` is true)
+- Season rotation is blocked (no automatic season end)
+- Rankings remain visible (if `allowRankedView` is true)
+
 ## Timezone Reference
 
 Use IANA timezone identifiers:

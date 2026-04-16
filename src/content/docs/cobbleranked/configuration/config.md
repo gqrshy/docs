@@ -7,7 +7,7 @@ Core server configuration for CobbleRanked. Advanced settings are organized in s
 
 ## Configuration Files
 
-CobbleRanked v2.0.21+ uses multiple YAML files in `config/cobbleranked/`:
+CobbleRanked v2.0.29+ uses multiple YAML files in `config/cobbleranked/`:
 
 | File | Purpose |
 |------|---------|
@@ -55,7 +55,7 @@ language: "en-us"
 | `en-us` | English (default) |
 | `ja-jp` | Japanese |
 
-> 💡 **You can add ANY language!** Create a custom language file in `config/cobbleranked/language/` (e.g., `ko-KR.json5`, `zh-CN.json5`) and set the language code to match. See [Languages Configuration](languages/) for details.
+> 💡 **You can add ANY language!** Create a custom language file in `config/cobbleranked/language/` (e.g., `ko-KR.json5`, `zh-CN.json5`) and set the language code to match. See [Languages Configuration](/docs/cobbleranked/configuration/languages/) for details.
 
 Reload with `/rankedadmin reload` after changing.
 

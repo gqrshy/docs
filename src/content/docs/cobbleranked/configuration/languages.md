@@ -16,7 +16,7 @@ These languages are included with CobbleRanked:
 | `en-Us.json5` | English (default) |
 | `ja-Jp.json5` | Japanese |
 
-> 💡 **You can create translations for any language!** See [Creating Custom Languages](#creating-custom-languages) below.
+> 📝 **You can create translations for any language!** See [Creating Custom Languages](#creating-custom-languages) below.
 
 ## Setting Language
 
@@ -101,69 +101,24 @@ Language files use **ISO 639-1** language codes:
 | `vi` | Vietnamese | `vi-VN.json5` |
 | `th` | Thai | `th-TH.json5` |
 
-### Complete Example: Korean Translation
-
-**Step 1:** Create `ko-KR.json5`
+### Example: Korean Translation
 
 ```json5
+// ko-KR.json5
 {
   "queue": {
-    "joined": "&a{format} 대기열에 참가했습니다!",
-    "left": "&e대기열에서 나왔습니다.",
-    "already_in": "&c이미 대기열에 있습니다.",
-    "match_found": "&6매칭을 찾았습니다! 클릭하여 수락하세요."
-  },
-  "battle": {
-    "start": "&a&l배틀이 시작됩니다!",
-    "win": "&6&l🎉 승리!",
-    "lose": "&c&l패배..."
+    "joined": "&a{format} queue joined!",
+    "left": "&eLeft the queue.",
+    "match_found": "&6Match found!"
   },
   "elo": {
-    "gained": "&a+{elo_change} ELO &7(현재: {elo})",
-    "lost": "&c-{elo_change} ELO &7(현재: {elo})"
+    "gained": "&a+{elo_change} ELO &7(current: {elo})",
+    "lost": "&c-{elo_change} ELO &7(current: {elo})"
   }
 }
 ```
 
-**Step 2:** Set in config
-
-```yaml
-# config.yaml
-language: "ko-KR"
-```
-
-**Step 3:** Reload
-
-```
-/rankedadmin reload
-```
-
-### Translation Tips
-
-1. **Keep placeholders intact** - Don't modify `{player}`, `{format}`, etc.
-2. **Preserve color codes** - Keep `&a`, `&c`, `&6` etc. for consistent styling
-3. **Test thoroughly** - Some messages may be longer in your language; check GUI layouts
-4. **Back up your work** - Keep a copy of your translation outside the config folder
-
-### Sharing Your Translation
-
-If you've created a translation that others might find useful:
-
-1. Share it on the [Discord](https://discord.gg/VVVvBTqqyP)
-2. Submit it to the community repository (if available)
-3. Help other players by providing feedback
-
----
-
-## Hot Reload
-
-Language changes apply immediately:
-
-```
-/rankedadmin reload
-```
-
-No server restart required!
+> 📝 Keep placeholders (`{player}`, `{format}`, etc.) and color codes (`&a`, `&c`) intact. Share translations on [Discord](https://discord.gg/VVVvBTqqyP).
 
 ---
 

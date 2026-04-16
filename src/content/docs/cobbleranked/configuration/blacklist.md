@@ -54,8 +54,8 @@ doubles:
 | `inventoryItems` | List | Items banned from player inventory |
 | `consumables` | Object | Battle consumable restrictions |
 | `specialFormat` | Object | Special format rules (Little Cup, etc.) |
-
-> **Note**: The `maxDuplicateItems` and `trinketItems` options have been removed. Use the format-level `itemClause` setting for item restrictions instead.
+| `maxDuplicateItems` | Int | Max of same held item (default: 1) |
+| `bannedTrinketItems` | List | Banned trinket/curios items |
 
 ## Pokemon Blacklist
 
@@ -549,7 +549,7 @@ triples:
 The National Dex OU preset includes:
 - **Mega Evolution**: Enabled (key feature of this format)
 - **Z-Moves**: Enabled
-- **Terastallization**: Disabled (banned in National Dex)
+- **Terastallization**: Enabled
 - **Dynamax**: Disabled (banned)
 - **All generations**: Pokemon from Gen 1-9 allowed (except banned ones)
 
@@ -635,7 +635,7 @@ singles:
   megaEvolution: true       # Key feature!
   zMoves: true              # Allowed
   dynamax: false            # Banned
-  terastallize: false       # Banned in National Dex
+  terastallize: true
 
   speciesClause: true
   itemClause: 1

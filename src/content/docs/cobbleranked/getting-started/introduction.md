@@ -27,8 +27,8 @@ description: Welcome to CobbleRanked! Get up and running quickly.
 
 | Mod | Version | Purpose |
 |-----|---------|---------|
-| **GashiLibs** | 1.0.6+ | Shared libraries (database drivers, Redis, config) |
-| **MailLib** | 1.0.5+ | Mail/reward delivery for season rewards |
+| **GashiLibs** | 1.0.3+ | Shared libraries (database drivers, Redis, config) |
+| **MailLib** | 1.0.1+ | Mail/reward delivery for season rewards |
 
 <details>
 <summary><strong>About GashiLibs & MailLib</strong></summary>
@@ -69,6 +69,8 @@ After basic installation, you may want to:
 - **[Configure Restrictions](/docs/cobbleranked/configuration/restrictions)** - Queue/arena restriction levels
 - **[Configure Rewards](/docs/cobbleranked/configuration/rewards)** - Season end prizes
 - **[Configure Languages](/docs/cobbleranked/configuration/languages)** - Change to Japanese
+- **[Configure Seasons](/docs/cobbleranked/configuration/season)** - Season schedule and pause/resume
+- **[Configure Turn Timers](/docs/cobbleranked/features/turn-timer)** - Traditional and showdown-style timers
 
 ## Need Help?
 

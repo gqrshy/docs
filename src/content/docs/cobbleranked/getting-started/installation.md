@@ -13,9 +13,9 @@ Place all of these in your `mods/` folder:
 | Fabric API | Latest | [Modrinth](https://modrinth.com/mod/fabric-api) |
 | Fabric Language Kotlin | 1.13.0+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
 | Cobblemon | 1.7.1+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
-| GashiLibs | 1.0.6+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
-| MailLib | 1.0.5+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
-| **CobbleRanked** | 2.0.23+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| GashiLibs | 1.0.3+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| MailLib | 1.0.1+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| **CobbleRanked** | 2.0.29+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
 
 **Target:** Minecraft 1.21.1 (Fabric server)
 
@@ -37,9 +37,9 @@ mods/
 ├── fabric-api-x.x.x+1.21.1.jar
 ├── fabric-language-kotlin-x.x.x+kotlin.x.x.x.jar
 ├── Cobblemon-fabric-x.x.x+1.21.1.jar
-├── gashilibs-1.0.6.jar
-├── maillib-1.0.5.jar
-└── CobbleRanked-2.0.23.jar
+├── gashilibs-1.0.3.jar
+├── maillib-1.0.1.jar
+└── CobbleRanked-2.0.29.jar
 ```
 
 ## Installation Steps
@@ -57,12 +57,19 @@ server/
 ├── config/
 │   └── cobbleranked/
 │       ├── config.yaml         ← Main config
+│       ├── elo.yaml            ← ELO/rating settings
+│       ├── battle.yaml         ← Battle formats, timers, sounds
+│       ├── matchmaking.yaml    ← Queue matching rules
+│       ├── season.yaml         ← Season schedule and reset
 │       ├── arenas.yaml         ← Battle coordinates
 │       ├── blacklist.yaml      ← Pokemon/move restrictions
 │       ├── restrictions.yaml   ← Queue/arena restrictions
 │       ├── rewards.yaml        ← Season rewards
 │       ├── missions.yaml       ← Daily/weekly missions
+│       ├── api.yaml            ← Web API settings
+│       ├── sounds.yaml         ← Sound effect settings
 │       ├── season_presets/     ← Season rule presets
+│       ├── camera/             ← Camera settings
 │       ├── data.db             ← SQLite database
 │       ├── gui/                ← GUI layouts
 │       └── language/           ← Language files

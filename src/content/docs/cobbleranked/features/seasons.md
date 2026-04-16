@@ -12,7 +12,7 @@ Seasons keep competition alive. Every few weeks or months, the slate wipes clean
 ## Season Lifecycle
 
 ```
-Season Active → Season Ends → Rewards Sent → Off-Season → New Season
+Season Active → (Paused) → Season Ends → Rewards Sent → Off-Season → New Season
 ```
 
 ### During Active Season
@@ -187,7 +187,56 @@ In endless mode, rankings accumulate indefinitely with no automatic resets.
 ```bash
 /rankedadmin season info      # View current season details
 /rankedadmin season rotate    # Manually trigger rotation check
+/rankedadmin season pause     # Pause the current season
+/rankedadmin season resume    # Resume a paused season
 ```
+
+<details>
+<summary><strong>Season Pause/Resume</strong></summary>
+
+Pausing a season **stops new ranked queue entries** while keeping the current season active. Existing matches continue normally.
+
+**Use cases:**
+- Temporarily disable ranked during server events
+- Pause for maintenance without ending the season
+- Hold ranked while investigating issues
+
+When paused:
+- Players **cannot** join ranked queues
+- Players **can** still view rankings (if `allowRankedView` is true)
+- Casual battles continue normally (if `allowCasual` is true)
+- Season rotation is **blocked** — no automatic season end while paused
+
+</details>
+
+## ELO Decay
+
+Inactive players can lose ELO over time to keep the leaderboard competitive.
+
+<details>
+<summary><strong>Decay Configuration</strong></summary>
+
+Configure ELO decay in `elo.yaml`:
+
+```yaml
+# elo.yaml
+decay:
+  enabled: false
+  inactiveDays: 14          # Days before decay starts
+  decayAmount: 10           # ELO lost per decay tick
+  decayIntervalDays: 7      # How often decay ticks
+  minimumElo: 1000          # ELO floor (won't decay below this)
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `enabled` | `false` | Enable/disable ELO decay |
+| `inactiveDays` | `14` | Grace period before decay starts |
+| `decayAmount` | `10` | ELO lost per tick |
+| `decayIntervalDays` | `7` | Days between decay ticks |
+| `minimumElo` | `1000` | Floor — players won't drop below this |
+
+</details>
 
 ---
 

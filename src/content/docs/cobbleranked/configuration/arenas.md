@@ -79,54 +79,7 @@ arenas:
 
 ## Multiple Arenas
 
-Define multiple arenas for parallel battles:
-
-```yaml
-arenas:
-  - name: "arena_1"
-    world: "minecraft:overworld"
-    enabled: true
-    player1Position:
-      x: 100.0
-      y: 65.0
-      z: 200.0
-      yaw: 0.0
-      pitch: 0.0
-    player2Position:
-      x: 100.0
-      y: 65.0
-      z: 210.0
-      yaw: 180.0
-      pitch: 0.0
-    exitPosition:
-      x: 0.0
-      y: 65.0
-      z: 0.0
-      yaw: 0.0
-      pitch: 0.0
-
-  - name: "arena_2"
-    world: "minecraft:overworld"
-    enabled: true
-    player1Position:
-      x: 200.0
-      y: 65.0
-      z: 200.0
-      yaw: 0.0
-      pitch: 0.0
-    player2Position:
-      x: 200.0
-      y: 65.0
-      z: 210.0
-      yaw: 180.0
-      pitch: 0.0
-    exitPosition:
-      x: 0.0
-      y: 65.0
-      z: 0.0
-      yaw: 0.0
-      pitch: 0.0
-```
+Add more entries under `arenas:` for parallel battles. Each arena needs its own `name`, `world`, positions, and `enabled` flag.
 
 ## Admin Commands
 
@@ -145,27 +98,9 @@ arenas:
 
 ## Arena Design Tips
 
-### Player Positioning
-
-- Place players facing each other (180° difference in yaw)
+- Place players facing each other (180° yaw difference)
 - Recommended distance: 8-12 blocks apart
-- Ensure flat ground at spawn points
-
-### Yaw Reference
-
-| Direction | Yaw |
-|-----------|-----|
-| South (+Z) | 0° |
-| West (-X) | 90° |
-| North (-Z) | 180° |
-| East (+X) | 270° |
-
-### Arena Environment
-
 - Build walls to prevent escape
-- Add seating for spectators
-- Good lighting for visibility
-- Consider barrier blocks for boundaries
 
 ---
 

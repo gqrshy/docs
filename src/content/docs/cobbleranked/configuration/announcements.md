@@ -91,68 +91,9 @@ Players see their queue status in the action bar at the top of the screen:
 Queue: Singles | 2/3 players | Time: 0:45
 ```
 
-## Usage Tips
-
-### Enable Queue Join For:
-
-- **Small servers** - Build awareness of queue activity
-- **Competitive servers** - Show who's queuing for what format
-- **Tournament events** - Create hype around matches
-
-### Disable Queue Join For:
-
-- **Large servers** - Prevent chat spam
-- **Casual servers** - Reduce competitive pressure
-- **Peak hours** - Reduce notification fatigue
-
-### Recommended Combinations
-
-**Competitive Server:**
-```yaml
-queueJoin:
-  enabled: true
-  showPlayerName: true
-  showFormat: true
-  showQueueCount: true
-  showTier: true        # Show rank for competition
-  showElo: false        # Hide exact Elo to reduce pressure
-```
-
-**Casual Server:**
-```yaml
-queueJoin:
-  enabled: false
-broadcastMatchStart: false
-broadcastMatchResult: false
-showActionbarWhileQueued: true   # Keep personal feedback
-```
-
-**Tournament Event:**
-```yaml
-queueJoin:
-  enabled: true
-  showPlayerName: true
-  showFormat: true
-  showQueueCount: true
-  showTier: true
-  showElo: true         # Full information for events
-```
-
-## Performance Considerations
-
-Queue join announcements generate chat messages for every player who joins. On large servers with frequent queuing, this can create significant chat traffic.
-
-**Impact by server size:**
-
-| Server Size | Queue Join Impact |
-|-------------|-------------------|
-| Small (< 20 players) | Minimal - creates engagement |
-| Medium (20-50 players) | Moderate - may need filtering |
-| Large (50+ players) | High - consider disabling |
-
 ---
 
 ## See Also
 
-- [Battle Configuration](battle/) - Other battle settings
-- [Matchmaking Configuration](matchmaking/) - Queue behavior settings
+- [Battle Configuration](/docs/cobbleranked/configuration/battle/) - Battle settings
+- [Matchmaking Configuration](/docs/cobbleranked/configuration/matchmaking/) - Queue behavior

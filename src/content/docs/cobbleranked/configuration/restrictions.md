@@ -226,54 +226,10 @@ arena:
 | `blockPcAccess` | Opening Pokemon PC to change team |
 | `blockMoveSwap` | Changing Pokemon moves in party view |
 
-## Advanced: Custom Restriction Levels
-
-The restriction system is extensible. You can modify which restrictions apply at each level by editing `restrictions.yaml`.
-
-### Example: Permissive Queue
-
-Allow players to build and explore while waiting:
-
-```yaml
-queue:
-  blockBlockBreak: false
-  blockBlockPlace: false
-  blockBlockInteract: false
-  blockContainerAccess: false
-  blockPvp: false      # Allow PvP while waiting
-  blockPve: false      # Allow fighting wild Pokemon
-```
-
-### Example: Strict Queue
-
-Prevent any actions besides chatting:
-
-```yaml
-queue:
-  blockItemUse: true
-  blockBlockBreak: true
-  blockBlockPlace: true
-  blockEntityDamage: true
-  # ... enable most restrictions
-```
-
-## Troubleshooting
-
-**Players can't use commands during battle:**
-- Check `blockedCommands` list in `restrictions.yaml`
-- Remove commands you want to allow
-
-**Players can still change Pokemon:**
-- Ensure `blockPcAccess: true` in both queue and arena sections
-
-**Restrictions not working:**
-- Run `/rankedadmin reload` to apply config changes
-- Check server console for errors loading restrictions.yaml
-
 ---
 
 ## See Also
 
 - [Main Configuration](/docs/cobbleranked/configuration/config/) - General settings
 - [Arena Setup](/docs/cobbleranked/configuration/arenas/) - Battle location configuration
-- [Troubleshooting](/docs/cobbleranked/support/troubleshooting/) - Common issues
+- [FAQ](/docs/cobbleranked/support/faq/) - Common questions

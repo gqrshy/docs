@@ -26,7 +26,7 @@ defaultEnabled: false
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `enabled` | `true` | Master switch for the camera system |
-| `allowPlayerOptOut` | `true` | Let players disable camera with `/battlecamera toggle` |
+| `allowPlayerOptOut` | `true` | Let players disable camera with `/battlecamera status` |
 | `defaultEnabled` | `false` | Camera off by default for new players |
 
 ---
@@ -304,50 +304,6 @@ formatOverrides:
 Doubles and Triples battles automatically use wider camera angles to capture all Pokemon.
 
 ---
-
-## Machine Learning Enhancement
-
-Optional ML system that learns player preferences over time.
-
-```yaml
-machineLearning:
-  enabled: false
-  defaultOptIn: true
-  minBattlesForActivation: 10
-```
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `enabled` | `false` | Enable ML camera optimization (disabled by default to reduce logging) |
-| `defaultOptIn` | `true` | New players opt-in by default |
-| `minBattlesForActivation` | `10` | Battles needed before ML activates |
-
-<details>
-<summary><strong>ML Advanced Settings</strong></summary>
-
-```yaml
-machineLearning:
-  neuralNetwork:
-    inputNodes: 15
-    hiddenNodes: 12
-    outputNodes: 6
-    learningRate: 0.01
-  dataCollection:
-    collectImplicitFeedback: true
-    collectExplicitFeedback: true
-    maxTrainingExamples: 1000
-  modelPersistence:
-    autoSaveInterval: 1800
-    modelDirectory: "cobbleranked/camera/ml_models"
-```
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `autoSaveInterval` | `1800` | Auto-save interval in seconds (30 minutes) |
-
-The ML system analyzes player behavior to personalize camera angles and reactions.
-
-</details>
 
 ---
 

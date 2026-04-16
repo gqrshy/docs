@@ -43,6 +43,8 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 |---------|-------------|
 | `/rankedadmin season info` | Show current season info |
 | `/rankedadmin season rotate` | Check and apply season rotation |
+| `/rankedadmin season pause` | Pause the current season (stops queue) |
+| `/rankedadmin season resume` | Resume a paused season |
 
 ### Arena Management
 
@@ -54,7 +56,7 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 | `/rankedadmin arena status` | Show all arena statuses |
 | `/rankedadmin arena enable <name>` | Enable an arena |
 | `/rankedadmin arena disable <name>` | Disable an arena |
-| `/rankedadmin setArena <name> setcenter [radius]` | Set field effect center |
+| `/rankedadmin arena setcenter <name> [radius]` | Set field effect center |
 | `/rankedadmin arena reset` | Reset all arena states |
 
 ### Player Management
@@ -79,22 +81,15 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 | `/rankedadmin placeholder test <placeholder>` | Test a placeholder with player data |
 | `/rankedadmin placeholder list` | List all available placeholders |
 | `/rankedadmin placeholder clear` | Clear placeholder cache |
-| `/rankedadmin placeholder status` | Show placeholder API status |
 
-### API Sync
-
-| Command | Description |
-|---------|-------------|
-| `/rankedadmin api sync` | Sync data to external API |
-| `/rankedadmin api status` | Show API sync status |
-| `/rankedadmin api test` | Test API connection |
-
-### Placeholders
+### Data Management
 
 | Command | Description |
 |---------|-------------|
-| `/rankedadmin placeholder list` | List all available placeholders |
-| `/rankedadmin placeholder clear` | Clear placeholder cache |
+| `/rankedadmin usage export` | Export usage statistics |
+| `/rankedadmin usage clear` | Clear usage statistics |
+| `/rankedadmin usage info` | Show usage statistics summary |
+| `/rankedadmin leaderboard export` | Export leaderboard data |
 
 ### Data Migration (v1 to v2)
 

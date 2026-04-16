@@ -217,37 +217,6 @@ Browse and play sounds from Minecraft versions installed on your system. No need
 
 </details>
 
-<details>
-<summary><strong>Developer: Direct Asset Access</strong></summary>
-
-Trace sound events directly from Minecraft assets:
-
-**Asset Index Location:**
-```
-.minecraft/assets/indexes/
-├── 1.20.json
-├── 1.21.json
-└── ...
-```
-
-Each JSON contains the location of `sounds.json`, which maps all sound events to their OGG files.
-
-**Sound Files Location:**
-```
-.minecraft/assets/objects/
-└── [hash_prefix]/[hash]
-```
-
-**Workflow:**
-1. Open the version JSON (e.g., `1.21.json`)
-2. Locate `sounds.json` in the assets map
-3. Parse `sounds.json` to get sound event → OGG hash mappings
-4. Find the OGG file in `.minecraft/assets/objects/[hash_prefix]/[hash]`
-
-This gives you complete `sound event → OGG` traceability. Ideal for developers building sound-related tools or mods.
-
-</details>
-
 ---
 
 ## See Also

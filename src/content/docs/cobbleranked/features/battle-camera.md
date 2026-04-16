@@ -5,19 +5,16 @@ description: Cinematic battles. Automatic orbiting camera for immersive viewing.
 
 ## What It Does
 
-The battle camera transforms fights into spectacles:
+The battle camera provides an immersive viewing experience during ranked and casual battles.
 
-- **Orbits smoothly** around the battlefield
-- **Reacts to events**: zooms on big hits, pans on faints
-- **Breathing motion** keeps the view alive during pauses
-- **Toggle on/off** anytime with a command
+CobbleRanked integrates with Cobblemon's **stadium camera** system via reflection. This means:
+
+- If Cobblemon's stadium camera is available (feat-stadium-camera branch or compatible builds), cinematic cameras activate automatically
+- If using standard Cobblemon, the camera gracefully degrades — no errors, no missing features
+
+Every ranked and casual match automatically gets stadium camera when available. Arena lookup uses the `stadiumId` setting (if configured) or falls back to the arena name.
 
 ## Commands
-
-Toggle the camera:
-```
-/battlecamera toggle
-```
 
 Check current status:
 ```
@@ -28,12 +25,11 @@ Your preference is saved. It persists across sessions and server restarts.
 
 ## Camera Reactions
 
-The camera responds to battle events:
+When stadium camera is available, the camera responds to battle events:
 
-- **Move used**: Brief zoom
-- **Super effective hit**: Dramatic angle shift
-- **Pokemon faints**: Slow pan
-- **Battle ends**: Victory pose angle
+- **Pokemon send-out**: Focus animation on entering Pokemon
+- **Battle events**: Camera follows the action
+- **Battle ends**: Camera returns to normal view
 
 ## Configuration
 

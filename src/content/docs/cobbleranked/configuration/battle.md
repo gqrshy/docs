@@ -176,25 +176,51 @@ fleePenalty:
 
 ## GUI Settings
 
-Configure leaderboard and GUI behavior:
-
 ```yaml
 # battle.yaml
 gui:
   leaderboardPageSize: 25
-  leaderboardCacheTtlSeconds: 30
-  defaultQueueFormat: "singles"
-  leaderboardDefaultFormat: "singles"
-  queueCooldownSeconds: 10
+  blacklistPageSize: 45
+  statsRefreshCooldownMs: 5000
 ```
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `leaderboardPageSize` | `25` | Players per leaderboard page |
-| `leaderboardCacheTtlSeconds` | `30` | Cache refresh interval |
-| `defaultQueueFormat` | `"singles"` | Default format when opening GUI |
-| `leaderboardDefaultFormat` | `"singles"` | Default format for leaderboard |
-| `queueCooldownSeconds` | `10` | Cooldown between queue joins |
+| `blacklistPageSize` | `45` | Items per blacklist page |
+| `statsRefreshCooldownMs` | `5000` | Cooldown between stat refreshes |
+
+## Cooldowns
+
+```yaml
+# battle.yaml
+cooldowns:
+  matchCooldownSeconds: 10
+  queueJoinCooldownSeconds: 3
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `matchCooldownSeconds` | `10` | Cooldown after a match ends |
+| `queueJoinCooldownSeconds` | `3` | Cooldown between queue joins |
+
+## Daily Elo Limits
+
+Cap daily Elo gains to prevent smurfing:
+
+```yaml
+# battle.yaml
+dailyLimits:
+  eloGainLimit: 200
+  resetTimezone: "UTC"
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `eloGainLimit` | `200` | Max positive Elo gain per day |
+| `resetTimezone` | `"UTC"` | Timezone for daily reset |
+
+See [Daily Limits](/docs/cobbleranked/configuration/daily-limits/) for details.
 
 ---
 

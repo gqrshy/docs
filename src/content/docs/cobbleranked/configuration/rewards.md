@@ -205,110 +205,11 @@ milestones:
 
 ## Reward Delivery
 
-Rewards are delivered via **MailLib**. Players claim them using:
-
-```
-/mailbox
-```
-
-Benefits:
-- Offline players receive rewards when they log in
-- Players can claim at their convenience
-- Configurable expiration period
+Rewards are delivered via **MailLib**. Players claim them with `/mailbox`. Offline players receive rewards on next login.
 
 ## Per-Format Rewards
 
-Each battle format has separate rankings and rewards. Configure rewards for each format:
-
-```yaml
-seasonRewards:
-  SINGLES:
-    - id: "singles_champion"
-      rankRange: "1"
-      # ...
-
-  DOUBLES:
-    - id: "doubles_champion"
-      rankRange: "1"
-      # ...
-
-  TRIPLES:
-    - id: "triples_champion"
-      rankRange: "1"
-      # ...
-```
-
-## Example: Complete Reward Tier
-
-```yaml
-seasonRewards:
-  SINGLES:
-    # Rank 1 - Champion
-    - id: "singles_champion"
-      rankRange: "1"
-      displayName: "&6&l★ Singles Champion ★"
-      displayItem: "minecraft:nether_star"
-      customModelData: 0
-      lore:
-        - "&7The undisputed #1 Singles player!"
-        - ""
-        - "&eRewards:"
-        - "&f• &bVictini &7(Mythical Pokemon)"
-        - "&f• &6$50,000 in-game currency"
-        - "&f• &dExclusive Champion Title"
-      commands:
-        - "pokegiveother {player} victini"
-        - "eco give {player} 50000"
-        - "lp user {player} permission set cobbleranked.title.champion true"
-      mailSender: "&6Season Champion"
-      mailTitle: "&6&l★ {format} Champion - Season {season} ★"
-      mailMessage: "&eCongratulations! You are the #1 {format} player!"
-
-    # Ranks 2-3 - Elite
-    - id: "singles_elite"
-      rankRange: "2-3"
-      displayName: "&e&lSingles Elite"
-      displayItem: "minecraft:diamond"
-      commands:
-        - "pokegiveother {player} victini"
-        - "eco give {player} 25000"
-
-    # Ranks 4-10 - Expert
-    - id: "singles_expert"
-      rankRange: "4-10"
-      displayName: "&9Singles Expert"
-      displayItem: "minecraft:gold_ingot"
-      commands:
-        - "pokegiveother {player} random"
-        - "eco give {player} 10000"
-
-    # Ranks 11-25 - Rising Star
-    - id: "singles_rising"
-      rankRange: "11-25"
-      displayName: "&dSingles Rising Star"
-      displayItem: "minecraft:iron_ingot"
-      commands:
-        - "give {player} cobblemon:rare_candy 5"
-        - "eco give {player} 5000"
-
-    # Ranks 26-50 - Competitor
-    - id: "singles_competitor"
-      rankRange: "26-50"
-      displayName: "&aSingles Competitor"
-      displayItem: "minecraft:copper_ingot"
-      commands:
-        - "give {player} cobblemon:rare_candy 3"
-        - "eco give {player} 2500"
-
-    # Ranks 51-100 - Participant
-    - id: "singles_participant"
-      rankRange: "51-100"
-      displayName: "&7Singles Participant"
-      displayItem: "minecraft:brick"
-      commands:
-        - "give {player} cobblemon:rare_candy 1"
-        - "eco give {player} 1000"
-```
+Each format (SINGLES, DOUBLES, TRIPLES) has separate rankings and reward tiers. Configure under `seasonRewards:` using the format name as key.
 
 ## See Also
 

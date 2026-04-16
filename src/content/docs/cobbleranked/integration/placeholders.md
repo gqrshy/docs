@@ -74,7 +74,7 @@ Stats are available per format: `singles`, `doubles`, `triples`.
 
 ## Top Players
 
-Leaderboard placeholders for ranks 1-10.
+Leaderboard placeholders for ranks 1-100.
 
 ### Default (Singles)
 

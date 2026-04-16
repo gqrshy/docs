@@ -5,7 +5,7 @@ description: The ultimate competitive Pokemon battle system for Cobblemon
 
 > **Transform your Cobblemon server into a competitive Pokemon arena**
 
-[Get Started](/docs/cobbleranked/getting-started/installation) | [View on Polymart](https://polymart.org/product/8733/cobbleranked)
+[Get Started](/docs/cobbleranked/getting-started/installation/) | [View on Polymart](https://polymart.org/product/8733/cobbleranked)
 
 ---
 
@@ -21,7 +21,7 @@ Choose between **Pokemon Showdown ELO** or **Glicko-2** rating systems. Dynamic 
 Run competitive seasons with scheduled start/end dates, soft or hard ELO resets, and automatic stat carryover. Archive previous season leaderboards and distribute exclusive rewards to top performers.
 
 ### Rank Tiers
-Six progression tiers from **Poké Ball** (1000+) to **Cherish Ball** (2100+). Players climb through Great Ball, Ultra Ball, Master Ball, and Beast Ball as they improve.
+Six progression tiers from **Poke Ball** (0+) to **Cherish Ball** (2100+). Players climb through Great Ball, Ultra Ball, Master Ball, and Beast Ball as they improve.
 
 ---
 
@@ -31,10 +31,10 @@ Six progression tiers from **Poké Ball** (1000+) to **Cherish Ball** (2100+). P
 Keep battles moving with configurable turn timeouts. Visual action bar shows remaining time with color stages - white → yellow → orange → red. Auto-select moves when time runs out.
 
 ### Battle Camera
-Cinematic camera system with orbit, terrain-adaptive, and dynamic tracking modes. ML-enhanced camera learns player preferences. Syncs with background music for immersive battles.
+Stadium camera integration via Cobblemon's camera API. Automatic camera activation for all ranked and casual matches when available. Toggle per-player preference.
 
 ### Battle Music
-Queue music, team selection music, and ELO-based battle tracks. High-rated battles get epic soundtracks. Fully customizable via resource packs.
+Queue music, team selection music, and ELO-based battle tracks. Fully customizable via resource packs.
 
 ### Arena System
 Multiple arenas with hot-swap support. Random or sequential selection. Configure player positions, spectator spots, and field effect centers per arena.

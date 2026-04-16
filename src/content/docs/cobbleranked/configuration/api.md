@@ -30,7 +30,6 @@ Your website needs endpoints to receive the data:
 ```javascript
 app.post('/api/usage-stats', (req, res) => {
   const data = req.body;
-  // Store data (database, cache, file)
   res.json({ success: true });
 });
 
@@ -38,11 +37,21 @@ app.post('/api/leaderboard', (req, res) => {
   const data = req.body;
   res.json({ success: true });
 });
+
+app.post('/api/battle-replay', (req, res) => {
+  const data = req.body;
+  res.json({ success: true });
+});
+
+app.post('/api/match-result', (req, res) => {
+  const data = req.body;
+  res.json({ success: true });
+});
 ```
 
-### Step 3: Test
+### Step 3: Verify
 
-Run `/rankedadmin api test` in-game to verify connection.
+Check server logs for sync confirmation after the configured interval.
 
 ---
 
@@ -67,7 +76,8 @@ Run `/rankedadmin api test` in-game to verify connection.
           "species": [
             {
               "name": "Garchomp",
-              "usagePercent": 45.2,
+                  "usagePercent": 45.2,
+                  "winRate": 62.3,
               "abilities": { "Rough Skin": 85.3 },
               "items": { "Choice Scarf": 42.1 },
               "moves": { "Earthquake": 98.2 }
@@ -108,6 +118,77 @@ Run `/rankedadmin api test` in-game to verify connection.
 }
 ```
 
+### Battle Replay
+
+**Endpoint:** `POST {baseUrl}/battle-replay`
+
+Full Showdown protocol log pushed after each ranked battle ends.
+
+```json
+{
+  "matchId": "abc-123",
+  "serverId": "battle-server-1",
+  "seasonName": "Season 1",
+  "format": "SINGLES",
+  "timestamp": "2026-01-02T12:00:00Z",
+  "turnCount": 24,
+  "players": [
+    {
+      "uuid": "550e8400-...",
+      "playerName": "PlayerA",
+      "team": ["Garchomp", "Rotom-Wash", "Togekiss"],
+      "isWinner": true
+    }
+  ],
+  "battleLog": [
+    "|start|",
+    "|switch|p1a: Garchomp|Garchomp, L100|100/100",
+    "|turn|1"
+  ],
+  "endReason": "VICTORY"
+}
+```
+
+### Match Result
+
+**Endpoint:** `POST {baseUrl}/match-result`
+
+Per-match data including ELO changes and full team composition.
+
+```json
+{
+  "matchId": "abc-123",
+  "serverId": "battle-server-1",
+  "seasonName": "Season 1",
+  "format": "SINGLES",
+  "matchType": "RANKED",
+  "timestamp": "2026-01-02T12:00:00Z",
+  "durationSeconds": 540,
+  "endReason": "VICTORY",
+  "players": [
+    {
+      "uuid": "550e8400-...",
+      "playerName": "PlayerA",
+      "eloBefore": 1500,
+      "eloAfter": 1524,
+      "eloChange": 24,
+      "isWinner": true,
+      "faintedCount": 1,
+      "team": [
+        {
+          "species": "Garchomp",
+          "ability": "Rough Skin",
+          "item": "Choice Scarf",
+          "moves": ["Earthquake", "Outrage", "Stone Edge", "Fire Fang"],
+          "nature": "Jolly",
+          "evSpread": "4/252/0/0/0/252"
+        }
+      ]
+    }
+  ]
+}
+```
+
 ---
 
 ## Configuration
@@ -120,6 +201,9 @@ Run `/rankedadmin api test` in-game to verify connection.
 | `sync.intervalMinutes` | How often to sync (default: 60) |
 | `sync.dataTypes.usageStats` | Send usage statistics |
 | `sync.dataTypes.leaderboard` | Send leaderboard data |
+| `sync.dataTypes.battleReplays` | Send full Showdown battle logs |
+| `sync.dataTypes.matchResults` | Send per-match ELO changes and team composition |
+| `sync.leaderboardLimit` | Max players per format (default: 100, 0 or negative = unlimited) |
 | `sync.push.enabled` | Enable pushing data to external API |
 | `sync.push.onlyIfChanged` | Only sync when data changes |
 | `http.timeoutSeconds` | Request timeout (default: 30) |
@@ -139,9 +223,12 @@ auth:
 
 sync:
   intervalMinutes: 60
+  leaderboardLimit: 100
   dataTypes:
     usageStats: true
     leaderboard: true
+    battleReplays: false
+    matchResults: false
   push:
     enabled: true
     onlyIfChanged: true
@@ -166,16 +253,6 @@ http:
 | `X-API-Key` | Your configured API key |
 
 Validate `X-API-Key` on your server before processing data.
-
----
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `/rankedadmin api sync` | Force immediate sync |
-| `/rankedadmin api status` | View sync status |
-| `/rankedadmin api test` | Test configuration |
 
 ---
 

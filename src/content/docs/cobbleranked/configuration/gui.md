@@ -18,6 +18,9 @@ Edit files in `config/cobbleranked/gui/`:
 | `reward_gui.json5` | Season and milestone rewards |
 | `missions_gui.json5` | Daily/weekly missions display |
 | `ready_gui.json5` | Match ready confirmation |
+| `team_selection_gui.json5` | Pokemon team selection |
+| `lead_selection_gui.json5` | Lead Pokemon selection |
+| `rank_reward_gui.json5` | Rank reward display |
 
 ## Border & Fill
 
@@ -74,7 +77,7 @@ See [Minecraft Wiki: Custom Model Data](https://minecraft.wiki/w/Model#Item_mode
 
 Glass panes (most common):
 - `WHITE_STAINED_GLASS_PANE`, `ORANGE_STAINED_GLASS_PANE`, `MAGENTA_STAINED_GLASS_PANE`
-- `LIGHT_BLUE_STAINED_GLASS_PANE`, `YELLOW_STAINED_GLASS_PENE`, `LIME_STAINED_GLASS_PANE`
+- `LIGHT_BLUE_STAINED_GLASS_PANE`, `YELLOW_STAINED_GLASS_PANE`, `LIME_STAINED_GLASS_PANE`
 - `PINK_STAINED_GLASS_PANE`, `GRAY_STAINED_GLASS_PANE`, `LIGHT_GRAY_STAINED_GLASS_PANE`
 - `CYAN_STAINED_GLASS_PANE`, `PURPLE_STAINED_GLASS_PANE`, `BLUE_STAINED_GLASS_PANE`
 - `BROWN_STAINED_GLASS_PANE`, `GREEN_STAINED_GLASS_PANE`, `RED_STAINED_GLASS_PANE`
@@ -204,4 +207,4 @@ Apply changes without restart:
 
 ---
 
-**See Also**: [Language Configuration](languages/) - Customize text and colors
+**See Also**: [Language Configuration](/docs/cobbleranked/configuration/languages/) - Customize text and colors
