@@ -4,23 +4,112 @@ import DocLayout from '../../layouts/DocLayout.astro';
 
 export const prerender = true;
 
+// Page order matches sidebar navigation
+const pageOrder = [
+	{ slug: 'cobbleranked', title: 'CobbleRanked' },
+	{ slug: 'cobbleranked/getting-started/introduction', title: 'Introduction' },
+	{ slug: 'cobbleranked/getting-started/installation', title: 'Installation' },
+	{ slug: 'cobbleranked/getting-started/quick-start', title: 'Quick Start' },
+	{ slug: 'cobbleranked/getting-started/commands', title: 'Commands' },
+	{ slug: 'cobbleranked/features/ranked-battles', title: 'Ranked Battles' },
+	{ slug: 'cobbleranked/features/casual-battles', title: 'Casual Battles' },
+	{ slug: 'cobbleranked/features/battle-formats', title: 'Battle Formats' },
+	{ slug: 'cobbleranked/features/elo-system', title: 'ELO System' },
+	{ slug: 'cobbleranked/features/seasons', title: 'Seasons' },
+	{ slug: 'cobbleranked/features/leaderboards', title: 'Leaderboards' },
+	{ slug: 'cobbleranked/features/turn-timer', title: 'Turn Timer' },
+	{ slug: 'cobbleranked/features/battle-camera', title: 'Battle Camera' },
+	{ slug: 'cobbleranked/configuration/config', title: 'Main Config' },
+	{ slug: 'cobbleranked/configuration/elo', title: 'ELO Settings' },
+	{ slug: 'cobbleranked/configuration/matchmaking', title: 'Matchmaking' },
+	{ slug: 'cobbleranked/configuration/battle', title: 'Battle Settings' },
+	{ slug: 'cobbleranked/configuration/season', title: 'Season Settings' },
+	{ slug: 'cobbleranked/configuration/announcements', title: 'Announcements' },
+	{ slug: 'cobbleranked/configuration/daily-limits', title: 'Daily Limits' },
+	{ slug: 'cobbleranked/configuration/arenas', title: 'Arenas' },
+	{ slug: 'cobbleranked/configuration/blacklist', title: 'Blacklist' },
+	{ slug: 'cobbleranked/configuration/restrictions', title: 'Restrictions' },
+	{ slug: 'cobbleranked/configuration/rewards', title: 'Rewards' },
+	{ slug: 'cobbleranked/configuration/missions', title: 'Missions' },
+	{ slug: 'cobbleranked/configuration/gui', title: 'GUI' },
+	{ slug: 'cobbleranked/configuration/languages', title: 'Languages' },
+	{ slug: 'cobbleranked/configuration/sounds', title: 'Sounds' },
+	{ slug: 'cobbleranked/configuration/camera', title: 'Camera' },
+	{ slug: 'cobbleranked/configuration/api', title: 'Web API' },
+	{ slug: 'cobbleranked/integration/luckperms', title: 'LuckPerms' },
+	{ slug: 'cobbleranked/integration/placeholders', title: 'Placeholders' },
+	{ slug: 'cobbleranked/advanced/database', title: 'Database' },
+	{ slug: 'cobbleranked/advanced/cross-server', title: 'Cross-Server' },
+	{ slug: 'cobbleranked/advanced/cross-server-troubleshooting', title: 'Cross-Server Troubleshooting' },
+	{ slug: 'cobbleranked/support/faq', title: 'FAQ & Troubleshooting' },
+	{ slug: 'gashilibs', title: 'GashiLibs' },
+	{ slug: 'maillib', title: 'MailLib' },
+];
+
 export async function getStaticPaths() {
 	const docs = await getCollection('docs');
-	return docs.map(entry => ({
-		params: { slug: entry.id.replace(/\.md$/, '').replace(/\/index$/, '') },
-		props: { entry },
-	}));
+	return docs.map(entry => {
+		const slug = entry.id.replace(/\.md$/, '').replace(/\/index$/, '');
+		const currentIndex = pageOrder.findIndex(p => p.slug === slug);
+
+		const prev = currentIndex > 0
+			? { slug: pageOrder[currentIndex - 1].slug, title: pageOrder[currentIndex - 1].title }
+			: null;
+		const next = currentIndex >= 0 && currentIndex < pageOrder.length - 1
+			? { slug: pageOrder[currentIndex + 1].slug, title: pageOrder[currentIndex + 1].title }
+			: null;
+
+		// Build breadcrumbs from slug
+		const parts = slug.split('/');
+		const breadcrumbs: { label: string; href: string }[] = [
+			{ label: 'Docs', href: '/docs/cobbleranked/' },
+		];
+
+		// Add category breadcrumbs
+		if (parts[0] === 'cobbleranked' && parts.length > 1) {
+			const categoryMap: Record<string, string> = {
+				'getting-started': 'Getting Started',
+				'features': 'Features',
+				'configuration': 'Configuration',
+				'integration': 'Integration',
+				'advanced': 'Advanced',
+				'support': 'Support',
+			};
+			if (categoryMap[parts[1]]) {
+				breadcrumbs.push({ label: categoryMap[parts[1]], href: '' });
+			}
+		} else if (parts[0] === 'gashilibs') {
+			breadcrumbs.push({ label: 'GashiLibs', href: '' });
+		} else if (parts[0] === 'maillib') {
+			breadcrumbs.push({ label: 'MailLib', href: '' });
+		}
+
+		return {
+			params: { slug },
+			props: { entry, prev, next, breadcrumbs },
+		};
+	});
 }
 
-const { entry } = Astro.props;
+const { entry, prev, next, breadcrumbs } = Astro.props;
 
 if (!entry) {
 	return Astro.redirect('/404');
 }
 
 const { Content, headings } = await render(entry);
+const slug = entry.id.replace(/\.md$/, '').replace(/\/index$/, '');
+const editUrl = `https://github.com/gqrshy/docs/edit/main/src/content/docs/${entry.id}`;
 ---
 
-<DocLayout title={entry.data.title} description={entry.data.description} headings={headings}>
+<DocLayout
+	title={entry.data.title}
+	description={entry.data.description}
+	headings={headings}
+	prev={prev}
+	next={next}
+	breadcrumbs={breadcrumbs}
+	editUrl={editUrl}
+>
 	<Content />
 </DocLayout>

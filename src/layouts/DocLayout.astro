@@ -9,9 +9,13 @@ interface Props {
 	description?: string;
 	headings?: { depth: number; slug: string; text: string }[];
 	ogImage?: string;
+	prev?: { slug: string; title: string } | null;
+	next?: { slug: string; title: string } | null;
+	breadcrumbs?: { label: string; href: string }[];
+	editUrl?: string;
 }
 
-const { title, description, headings = [], ogImage } = Astro.props;
+const { title, description, headings = [], ogImage, prev, next, breadcrumbs, editUrl } = Astro.props;
 const siteUrl = 'https://gashistudios.site';
 const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
 
@@ -58,13 +62,59 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 	<div class="doc-wrapper">
 		<main class="doc-main">
 			<article class="doc-content" transition:animate="fade">
+				{breadcrumbs && breadcrumbs.length > 0 && (
+					<nav class="doc-breadcrumbs" aria-label="Breadcrumb">
+						{breadcrumbs.map((crumb, i) => (
+							<>
+								{i > 0 && <span class="breadcrumb-sep">/</span>}
+								{crumb.href ? (
+									<a href={crumb.href} class="breadcrumb-link">{crumb.label}</a>
+								) : (
+									<span class="breadcrumb-current">{crumb.label}</span>
+								)}
+							</>
+						))}
+					</nav>
+				)}
+
 				<header class="doc-header">
-					<h1 id="doc-title" transition:name="page-title">{title}</h1>
+					<div class="doc-title-row">
+						<h1 id="doc-title" transition:name="page-title">{title}</h1>
+						{editUrl && (
+							<a href={editUrl} target="_blank" rel="noopener noreferrer" class="edit-link" aria-label="Edit on GitHub">
+								<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+								<span>Edit</span>
+							</a>
+						)}
+					</div>
 					{description && <p class="doc-description">{description}</p>}
 				</header>
 				<div class="prose">
 					<slot />
 				</div>
+
+				{(prev || next) && (
+					<nav class="doc-page-nav" aria-label="Page navigation">
+						{prev ? (
+							<a href={"/docs/" + prev.slug + "/"} class="page-nav-card page-nav-prev">
+								<span class="page-nav-direction">
+									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+									Previous
+								</span>
+								<span class="page-nav-title">{prev.title}</span>
+							</a>
+						) : <div class="page-nav-card page-nav-empty"></div>}
+						{next ? (
+							<a href={"/docs/" + next.slug + "/"} class="page-nav-card page-nav-next">
+								<span class="page-nav-direction">
+									Next
+									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+								</span>
+								<span class="page-nav-title">{next.title}</span>
+							</a>
+						) : <div class="page-nav-card page-nav-empty"></div>}
+					</nav>
+				)}
 			</article>
 
 			{headings.length > 0 && (
@@ -360,7 +410,126 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			transform: translateY(0);
 		}
 
-		/* ===== Header ===== */
+		
+			/* ===== Breadcrumbs ===== */
+			.doc-breadcrumbs {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				font-family: 'IBM Plex Mono', monospace;
+				font-size: 0.8rem;
+				color: var(--color-text-muted);
+				margin-bottom: 1.25rem;
+				opacity: 0.7;
+			}
+
+			.breadcrumb-link {
+				color: var(--color-text-muted);
+				text-decoration: none;
+				transition: color 0.2s ease;
+			}
+
+			.breadcrumb-link:hover {
+				color: var(--color-primary);
+			}
+
+			.breadcrumb-sep {
+				opacity: 0.4;
+			}
+
+			.breadcrumb-current {
+				color: var(--color-text);
+				opacity: 0.9;
+			}
+
+			/* ===== Edit Link ===== */
+			.edit-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.35rem;
+				font-family: 'IBM Plex Mono', monospace;
+				font-size: 0.75rem;
+				color: var(--color-text-muted);
+				text-decoration: none;
+				opacity: 0.5;
+				transition: opacity 0.2s ease, color 0.2s ease;
+				padding: 0.25rem 0;
+			}
+
+			.edit-link:hover {
+				opacity: 1;
+				color: var(--color-primary);
+			}
+
+			.doc-title-row {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+			}
+
+			/* ===== Page Navigation (Prev/Next) ===== */
+			.doc-page-nav {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+				margin-top: 3rem;
+				padding-top: 2rem;
+				border-top: 1px solid var(--color-border);
+			}
+
+			.page-nav-card {
+				display: flex;
+				flex-direction: column;
+				gap: 0.35rem;
+				padding: 1rem 1.25rem;
+				background: var(--color-bg-card);
+				border: 1px solid var(--color-border);
+				border-radius: 0.5rem;
+				text-decoration: none;
+				transition: border-color 0.2s ease, background 0.2s ease;
+			}
+
+			.page-nav-card:hover {
+				border-color: rgba(255, 255, 255, 0.25);
+				background: var(--color-bg-alt);
+			}
+
+			.page-nav-direction {
+				display: flex;
+				align-items: center;
+				gap: 0.35rem;
+				font-family: 'IBM Plex Mono', monospace;
+				font-size: 0.75rem;
+				color: var(--color-text-muted);
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+			}
+
+			.page-nav-title {
+				font-size: 0.9rem;
+				font-weight: 500;
+				color: var(--color-text);
+			}
+
+			.page-nav-card:hover .page-nav-title {
+				color: var(--color-primary);
+			}
+
+			.page-nav-next {
+				text-align: right;
+			}
+
+			.page-nav-next .page-nav-direction {
+				justify-content: flex-end;
+			}
+
+			.page-nav-empty {
+				background: transparent;
+				border-color: transparent;
+			}
+
+			/* ===== Header ===== */
 		.doc-header {
 			margin-bottom: 2.5rem;
 			padding-bottom: 1.5rem;
@@ -370,8 +539,11 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.doc-header h1 {
 			font-size: 2.5rem;
 			font-weight: 700;
+			font-family: 'IBM Plex Mono', monospace;
 			color: var(--color-text);
 			margin-bottom: 0.75rem;
+			padding-left: 1rem;
+			border-left: 2px solid rgba(255, 255, 255, 0.25);
 		}
 
 		.doc-description {
@@ -419,6 +591,9 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		.prose a:hover {
 			color: var(--color-primary-light);
+			text-decoration: underline;
+			text-decoration-style: dotted;
+			text-underline-offset: 3px;
 		}
 
 		.prose strong {
@@ -441,14 +616,38 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			color: var(--color-primary);
 		}
 
-		/* ===== Code ===== */
+		
+			/* ===== Heading Anchors ===== */
+			.prose h2 .heading-link,
+			.prose h3 .heading-link {
+				opacity: 0;
+				margin-left: 0.5rem;
+				color: var(--color-text-muted);
+				text-decoration: none;
+				font-weight: 400;
+				transition: opacity 0.2s ease;
+			}
+
+			.prose h2:hover .heading-link,
+			.prose h3:hover .heading-link {
+				opacity: 0.6;
+			}
+
+			.prose h2:hover .heading-link:hover,
+			.prose h3:hover .heading-link:hover {
+				opacity: 1;
+				color: var(--color-primary);
+			}
+
+			/* ===== Code ===== */
 		.prose code {
 			font-family: 'IBM Plex Mono', monospace;
-			background: rgba(255, 255, 255, 0.15);
-			color: var(--color-primary-lighter);
-			padding: 0.2rem 0.4rem;
+			background: rgba(255, 255, 255, 0.12);
+			color: rgba(255, 255, 255, 0.85);
+			padding: 0.15rem 0.4rem;
 			border-radius: 4px;
 			font-size: 0.9em;
+			border: 1px solid rgba(255, 255, 255, 0.08);
 		}
 
 		.prose pre {
@@ -549,8 +748,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		/* ===== Blockquotes ===== */
 		.prose blockquote {
-			border-left: 4px solid var(--color-primary);
-			background: rgba(255, 255, 255, 0.1);
+			border-left: 3px solid rgba(255, 255, 255, 0.4);
+			background: rgba(255, 255, 255, 0.04);
 			padding: 1rem 1.5rem;
 			margin: 1.5rem 0;
 			border-radius: 0 0.5rem 0.5rem 0;
@@ -1090,7 +1289,16 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			}
 		}
 
-		@media (max-width: 576px) {
+		
+			.doc-page-nav {
+				grid-template-columns: 1fr;
+			}
+
+			.doc-breadcrumbs {
+				font-size: 0.7rem;
+			}
+
+			@media (max-width: 576px) {
 			.doc-content {
 				padding: 1.5rem 1rem;
 			}
