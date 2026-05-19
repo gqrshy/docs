@@ -13,13 +13,17 @@ Configure in `battle.yaml`:
 # battle.yaml
 dailyLimits:
   eloGainLimit: 200
-  resetTimezone: "UTC"
 ```
+
+> 📝 **Timezone for daily reset is configured globally in `config.yaml`:**
+> ```yaml
+> # config.yaml
+> timezone: "Asia/Tokyo"  # IANA timezone format
+> ```
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `eloGainLimit` | `200` | Max positive Elo gain per day (0 = unlimited) |
-| `resetTimezone` | `"UTC"` | Timezone for daily reset |
 
 ## How Elo Limit Works
 

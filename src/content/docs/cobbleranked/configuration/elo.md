@@ -30,14 +30,14 @@ pokemonShowdown:
   newPlayerGames: 30
   newPlayerKFactor: 50
   kFactorBands:
-    - maxElo: 1100
-      kFactor: 40
-    - maxElo: 1300
-      kFactor: 32
-    - maxElo: 1600
-      kFactor: 24
+    - maxElo: 1500
+      kFactor: 48
+    - maxElo: 1700
+      kFactor: 36
     - maxElo: 2000
-      kFactor: 16
+      kFactor: 24
+    - maxElo: 2500
+      kFactor: 18
     - maxElo: 999999
       kFactor: 12
   streakBonus:
@@ -54,14 +54,14 @@ pokemonShowdown:
 | Player Type | K-Factor | Reason |
 |-------------|----------|--------|
 | New players (first 30 games) | 50 | Quickly find true skill level |
-| Low rating (< 1100) | 40 | Easier to climb out |
-| Mid rating (1100-1300) | 32 | Balanced progression |
-| Mid-high (1300-1600) | 24 | More stable |
-| High (1600-2000) | 16 | Stable rankings |
-| Top (2000+) | 12 | Very stable, small changes |
+| Low rating (< 1500) | 48 | Easier to climb out |
+| Mid rating (1500-1700) | 36 | Balanced progression |
+| Mid-high (1700-2000) | 24 | More stable |
+| High (2000-2500) | 18 | Stable rankings |
+| Top (2500+) | 12 | Very stable, small changes |
 
 **Example:**
-- Player A (1500 ELO, K=24) beats Player B (1500 ELO, K=24)
+- Player A (1800 ELO, K=24) beats Player B (1800 ELO, K=24)
 - Player A gains: 24 × (1 - 0.5) = **+12 ELO**
 
 </details>
@@ -129,25 +129,70 @@ glicko2:
 
 ## ELO Decay
 
-Inactive players lose ELO over time to keep the leaderboard competitive. Disabled by default.
+Inactive players lose ELO over time to keep the leaderboard competitive. Forces high-rated players to stay active to maintain their ranking. Inspired by Pokemon Showdown, Chess (FIDE), and League of Legends systems.
 
 ```yaml
 # elo.yaml
 eloDecay:
   enabled: false
-  thresholdDays: 14       # Days before decay starts
-  minimumElo: 1000        # Won't decay below this
-  decayPerDay: 2          # ELO lost per day
-  checkIntervalHours: 24  # How often to check
+  thresholdDays: 7        # Days before decay starts
+  minimumElo: 1500        # Must be above this to decay
+  decayPerDay: 10         # ELO lost per full day
+  checkIntervalHours: 6   # How often to check
 ```
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `enabled` | `false` | Enable/disable ELO decay |
-| `thresholdDays` | `14` | Grace period before decay starts |
-| `minimumElo` | `1000` | Floor — players won't drop below this |
-| `decayPerDay` | `2` | ELO lost per day after threshold |
-| `checkIntervalHours` | `24` | How often the decay check runs |
+| `thresholdDays` | `7` | Days of inactivity before decay starts |
+| `minimumElo` | `1500` | Only players above this ELO decay |
+| `decayPerDay` | `10` | ELO lost per **full day** of inactivity |
+| `checkIntervalHours` | `6` | How often the decay task runs |
+
+> **Note**: Decay stops at the top-level `floorElo` setting (default: 1000).
+
+### How Decay Works
+
+1. Players **above** `minimumElo` who haven't played in `thresholdDays` days start decaying
+2. Every full day of inactivity = `decayPerDay` ELO lost
+3. Decay stops when player reaches `floorElo`
+4. Playing **any** ranked match resets the inactivity timer
+
+**Example:**
+- Player has 1800 ELO
+- Config: `minimumElo: 1500`, `decayPerDay: 10`, `floorElo: 1000` (top-level setting)
+- Player doesn't play for 20 days
+- Decay starts after 7 days = 13 days of decay
+- ELO loss: 13 × 10 = 130 ELO
+- Final ELO: 1800 - 130 = **1670**
+
+<details>
+<summary><strong>Cross-Server Setup</strong></summary>
+
+For multi-server networks, the decay task runs on **one server only** using a Redis lock. This prevents duplicate ELO reductions across your network.
+
+**Requirements:**
+- Redis enabled in [`cross-server.yaml`](/docs/cobbleranked/advanced/cross-server/)
+- All servers share the same database
+
+**No extra configuration needed** — the lock is automatic when Redis is enabled.
+
+</details>
+
+<details>
+<summary><strong>Database Schema</strong></summary>
+
+ELO decay requires tracking last match time per player per format.
+
+**SQLite/MySQL:** `last_match_at` column in `format_stats` table
+```sql
+-- Auto-created on startup
+ALTER TABLE format_stats ADD COLUMN last_match_at BIGINT;
+```
+
+**MongoDB:** `last_match_at` field in `format_stats` documents (automatic)
+
+</details>
 
 ## Rank Tiers
 
@@ -176,7 +221,7 @@ rankTiers:
     minElo: 2100
 ```
 
-> 📝 These are **display only** - they don't affect matchmaking or rewards. Use [LuckPerms Integration](/docs/cobbleranked/integration/luckperms/) for rank-based permissions.
+> 📝 Tiers affect display and [rank rewards](/docs/cobbleranked/configuration/rewards/) only — they don't change matchmaking. Use [LuckPerms Integration](/docs/cobbleranked/integration/luckperms/) for rank-based permissions.
 
 ---
 

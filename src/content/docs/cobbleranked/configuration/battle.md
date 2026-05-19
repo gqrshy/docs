@@ -212,13 +212,17 @@ Cap daily Elo gains to prevent smurfing:
 # battle.yaml
 dailyLimits:
   eloGainLimit: 200
-  resetTimezone: "UTC"
 ```
+
+> **Note:** Timezone is now configured globally in `config.yaml`:
+> ```yaml
+> # config.yaml
+> timezone: "Asia/Tokyo"  # IANA timezone format
+> ```
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `eloGainLimit` | `200` | Max positive Elo gain per day |
-| `resetTimezone` | `"UTC"` | Timezone for daily reset |
 
 See [Daily Limits](/docs/cobbleranked/configuration/daily-limits/) for details.
 

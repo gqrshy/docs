@@ -9,13 +9,13 @@ Place all of these in your `mods/` folder:
 
 | Mod | Version | Download |
 |-----|---------|----------|
-| Fabric Loader | 0.17.0+ | [fabricmc.net](https://fabricmc.net/use/server/) |
+| Fabric Loader | 0.17.2+ | [fabricmc.net](https://fabricmc.net/use/server/) |
 | Fabric API | Latest | [Modrinth](https://modrinth.com/mod/fabric-api) |
 | Fabric Language Kotlin | 1.13.0+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
 | Cobblemon | 1.7.1+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
-| GashiLibs | 1.0.3+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
-| MailLib | 1.0.1+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
-| **CobbleRanked** | 2.0.29+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| GashiLibs | 1.0.7+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| MailLib | 1.0.5+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| **CobbleRanked** | Latest | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
 
 **Target:** Minecraft 1.21.1 (Fabric server)
 
@@ -23,23 +23,23 @@ Place all of these in your `mods/` folder:
 
 These mods are **NOT required** but add extra features:
 
-| Mod | Purpose | When to Install |
-|-----|---------|-----------------|
-| LuckPerms | Permissions | Only if you want granular permission control |
-| Text Placeholder API | Placeholders | Only if using with other mods that need placeholders |
+| Mod | Version | Purpose | When to Install |
+|-----|---------|---------|-----------------|
+| LuckPerms | Latest | Permissions | Only if you want granular permission control |
+| Text Placeholder API | Latest | Placeholders | For using placeholders in reward commands and other mods |
 
 ## Minimal Setup Example
 
-For a basic server, you only need:
+For a basic server, you need:
 
 ```
 mods/
 ├── fabric-api-x.x.x+1.21.1.jar
 ├── fabric-language-kotlin-x.x.x+kotlin.x.x.x.jar
 ├── Cobblemon-fabric-x.x.x+1.21.1.jar
-├── gashilibs-1.0.3.jar
-├── maillib-1.0.1.jar
-└── CobbleRanked-2.0.29.jar
+├── gashilibs-1.0.7.jar
+├── maillib-1.0.5.jar
+└── CobbleRanked-x.x.x.jar
 ```
 
 ## Installation Steps
@@ -56,7 +56,7 @@ On first launch, config files auto-generate:
 server/
 ├── config/
 │   └── cobbleranked/
-│       ├── config.yaml         ← Main config
+│       ├── config.yaml         ← Main config (language, database, cross-server)
 │       ├── elo.yaml            ← ELO/rating settings
 │       ├── battle.yaml         ← Battle formats, timers, sounds
 │       ├── matchmaking.yaml    ← Queue matching rules
@@ -69,7 +69,8 @@ server/
 │       ├── api.yaml            ← Web API settings
 │       ├── sounds.yaml         ← Sound effect settings
 │       ├── season_presets/     ← Season rule presets
-│       ├── camera/             ← Camera settings
+│       ├── integrations/       ← Integration configs
+│       │   └── luckperms.yaml  ← LuckPerms settings
 │       ├── data.db             ← SQLite database
 │       ├── gui/                ← GUI layouts
 │       └── language/           ← Language files
@@ -105,8 +106,15 @@ Edit `config/cobbleranked/config.yaml`:
 
 ```yaml
 # config.yaml
-language: "ja-jp"  # en-us or ja-jp
+language: "ja-jp"  # en-us, ja-jp, fr-fr, pt-br, ru-ru
 ```
+
+**Supported languages:**
+- `en-us` - English
+- `ja-jp` - Japanese
+- `fr-fr` - French
+- `pt-br` - Portuguese (Brazil)
+- `ru-ru` - Russian
 
 **Reload:** `/rankedadmin reload`
 
@@ -175,11 +183,10 @@ config/cobbleranked/
 ├── restrictions.yaml      # Queue/arena restriction levels
 ├── rewards.yaml           # Season-end rewards
 ├── missions.yaml          # Daily/weekly missions
-├── luckperms.yaml         # LuckPerms integration
 ├── api.yaml               # Web API settings
 ├── sounds.yaml            # Sound effect settings
-├── camera/
-│   └── camera.yaml        # Battle camera settings
+├── integrations/          # Integration configs
+│   └── luckperms.yaml     # LuckPerms integration
 ├── season_presets/        # Season rule presets
 │   ├── default.yml
 │   ├── smogon.yml
@@ -192,7 +199,10 @@ config/cobbleranked/
 │   └── ...
 └── language/
     ├── en-Us.json5        # English messages
-    └── ja-Jp.json5        # Japanese messages
+    ├── ja-Jp.json5        # Japanese messages
+    ├── fr-Fr.json5        # French messages
+    ├── pt-Br.json5        # Portuguese (Brazil) messages
+    └── ru-Ru.json5        # Russian messages
 ```
 
 ## Next Steps

@@ -13,7 +13,7 @@ File: `config/cobbleranked/season_presets/<preset_name>.yml`
 
 ## Structure Overview
 
-As of v2.0.13, season presets use a **flattened structure**. Blacklists are configured per-format directly under the format name:
+Season presets use a **flattened structure**. Blacklists are configured per-format directly under the format name:
 
 ```yaml
 # season_presets/default.yml
@@ -82,7 +82,6 @@ blacklist:
 | Regional | `Meowth-Alolan` | Regional variant |
 | Mega | `Charizard-Mega-X` | Mega evolution |
 
-> **v2.0.21+ Behavior:**
 > - `Landorus` → bans ALL Landorus forms (Incarnate, Therian)
 > - `Landorus-Therian` → bans ONLY Therian form
 > - `Landorus-Incarnate` → bans ONLY Incarnate form
@@ -212,7 +211,7 @@ blacklist:
     - "#cobblemon:experience_candies"
 ```
 
-> 📝 **v2.0.17+**: Inventory items are checked during the queue phase to prevent obtaining banned items after joining queue.
+> Inventory items are checked during the queue phase to prevent obtaining banned items after joining queue.
 
 ## Consumables Config
 

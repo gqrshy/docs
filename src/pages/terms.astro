@@ -34,7 +34,7 @@ import Footer from '../components/Footer.astro';
 						<line x1="8" y1="2" x2="8" y2="6"/>
 						<line x1="3" y1="10" x2="21" y2="10"/>
 					</svg>
-					Last Updated: November 28, 2025
+					Last Updated: May 19, 2026
 				</span>
 				<span class="meta-item">
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -56,7 +56,8 @@ import Footer from '../components/Footer.astro';
 				<ul class="toc-list">
 					<li><a href="#commerce" class="toc-link">Commerce Disclosure</a></li>
 					<li><a href="#license" class="toc-link">License Agreement</a></li>
-					<li><a href="#permitted" class="toc-link">Permitted Use</a></li>
+					<li><a href="#source-access" class="toc-link">Source Code Access</a></li>
+						<li><a href="#permitted" class="toc-link">Permitted Use</a></li>
 					<li><a href="#prohibited" class="toc-link">Prohibited Actions</a></li>
 					<li><a href="#ownership" class="toc-link">Ownership</a></li>
 					<li><a href="#updates" class="toc-link">Updates & Support</a></li>
@@ -82,7 +83,7 @@ import Footer from '../components/Footer.astro';
 					</span>
 					<h2>Commerce Disclosure (Japan)</h2>
 				</div>
-				<p class="section-intro">This software is sold through Polymart and complies with Japan's Specified Commercial Transaction Act (特定商取引法).</p>
+				<p class="section-intro">This software is sold through VoxelShop and complies with Japan's Specified Commercial Transaction Act (特定商取引法).</p>
 
 				<div class="info-card">
 					<h3>Business Information</h3>
@@ -124,7 +125,7 @@ import Footer from '../components/Footer.astro';
 					<div class="info-card small">
 						<h4>Delivery</h4>
 						<p class="delivery">Instant Download</p>
-						<p class="note">Available via Polymart after payment</p>
+						<p class="note">Available via VoxelShop after payment</p>
 					</div>
 				</div>
 
@@ -135,8 +136,9 @@ import Footer from '../components/Footer.astro';
 						</svg>
 					</span>
 					<div>
-						<strong>No Refunds Policy</strong>
-						<p>Due to the digital nature of this product, returns and refunds are not available after download. For bugs or issues, please contact us via Discord or email.</p>
+						<strong>Refund Policy (Updated May 2026)</strong>
+						<p><strong>Standard Policy:</strong> Due to the digital nature of this product, returns and refunds are not available after download.</p>
+						<p><strong>Special Refund Program:</strong> Customers who purchased between March 1, 2026 and May 19, 2026 <strong>who have NOT been granted source code access</strong> may request a refund. Once source code access is provided, refunds are no longer available. For bugs or issues, please contact us via Discord or email.</p>
 					</div>
 				</div>
 			</section>
@@ -151,9 +153,69 @@ import Footer from '../components/Footer.astro';
 					</span>
 					<h2>License Agreement</h2>
 				</div>
-				<p class="section-intro">CobbleRanked is a premium mod sold through Polymart. By purchasing, downloading, installing, or using CobbleRanked, you agree to be bound by these terms.</p>
+				<p class="section-intro">CobbleRanked is a premium mod sold through VoxelShop. By purchasing, downloading, installing, or using CobbleRanked, you agree to be bound by these terms.</p>
 			</section>
 
+n				<!-- Source Code Access -->
+				<section id="source-access" class="terms-section">
+					<div class="section-header">
+						<span class="section-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+							</svg>
+						</span>
+						<h2>Source Code Access</h2>
+					</div>
+					<p class="section-intro">Customers who purchased CobbleRanked before May 20, 2026 may request access to the private GitHub repository containing the source code.</p>
+
+					<div class="info-row">
+						<div class="info-card half">
+							<h4>Eligibility</h4>
+							<ul class="compact-list">
+								<li>Purchased before May 20, 2026</li>
+								<li>Valid purchase proof required</li>
+								<li>Non-refundable after access granted</li>
+								<li>Access is non-transferable</li>
+							</ul>
+						</div>
+						<div class="info-card half">
+							<h4>Request Process</h4>
+							<ul class="compact-list">
+								<li>Join Discord server</li>
+								<li>DM @gashicha with purchase proof</li>
+								<li>Provide GitHub username</li>
+								<li>Wait for repository invitation</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="license-note">
+						<strong>Source Access License Terms:</strong> You may read, study, and modify the code for personal learning or to submit pull requests. Exception: Forking for non-Fabric server environments (e.g., Arclight) is permitted for personal use. However, you may not redistribute modified versions or create independent derivative works.
+					</div>
+
+					<div class="prohibited-category">
+						<h3>Source Code Restrictions</h3>
+						<ul class="prohibited-list">
+							<li>Forking the repository (making it public) — Exception: Forks for non-Fabric environments (e.g., Arclight) are permitted if they remain private</li>
+							<li>Sharing access with others</li>
+							<li>Using code in other projects</li>
+							<li>Redistributing modified versions</li>
+							<li>Claiming ownership of any portion</li>
+						</ul>
+					</div>
+
+					<div class="warning-box">
+						<span class="warning-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+							</svg>
+						</span>
+						<div>
+							<strong>Violation Results in Immediate Access Revocation</strong>
+							<p>Source code access is a privilege, not a right. Abuse will result in permanent removal from the repository.</p>
+						</div>
+					</div>
+				</section>
 			<!-- Permitted Use -->
 			<section id="permitted" class="terms-section">
 				<div class="section-header">
@@ -223,12 +285,14 @@ import Footer from '../components/Footer.astro';
 
 				<div class="prohibited-category">
 					<h3>Reverse Engineering & Modification</h3>
+					<p style="color: var(--color-text-muted); margin-bottom: 0.75rem; font-size: 0.9rem;"><strong>Note:</strong> Source code access is provided to eligible customers (see Source Code Access section below). The following restrictions apply:</p>
 					<ul class="prohibited-list">
-						<li>Reverse engineering, decompiling, or disassembling the Software</li>
-						<li>Modifying, adapting, or creating derivative works</li>
-						<li>Using the Software's components in other projects or mods</li>
-						<li>Removing or altering any proprietary notices</li>
+						<li>Redistributing modified versions of the Software</li>
+						<li>Using the Software's source code in other projects or mods without permission</li>
+						<li>Removing or altering any proprietary notices or licenses</li>
+						<li>Publishing forks or derivative works publicly</li>
 					</ul>
+					<p style="color: var(--color-primary-light); margin-top: 0.75rem; font-size: 0.85rem;">✓ Allowed: Reading, studying, modifying, and submitting pull requests. Forks for non-Fabric environments (e.g., Arclight) are permitted for personal use.</p>
 				</div>
 
 				<div class="prohibited-category">
@@ -320,14 +384,16 @@ import Footer from '../components/Footer.astro';
 				</div>
 
 				<div class="no-refund-box">
-					<h4>No Refunds For:</h4>
+					<h4>No Refunds For (Standard Policy):</h4>
 					<div class="no-refund-grid">
 						<span>Compatibility issues</span>
 						<span>Third-party mod conflicts</span>
 						<span>Future version incompatibilities</span>
 						<span>Bugs (we fix them)</span>
 						<span>Change of mind</span>
+						<span><strong>After receiving source code access</strong></span>
 					</div>
+					<p style="color: var(--color-primary-light); margin-top: 0.75rem; font-size: 0.85rem;"><strong>Exception:</strong> Customers who purchased between March 1, 2026 and May 19, 2026 <strong>before receiving source code access</strong> may request a refund (see Refund Policy above).</p>
 				</div>
 			</section>
 
@@ -523,7 +589,7 @@ import Footer from '../components/Footer.astro';
 							<span class="contact-value">Join Server</span>
 						</div>
 					</a>
-					<a href="https://polymart.org/product/8733/cobbleranked" target="_blank" class="contact-card">
+					<a href="https://voxel.shop/product/8733/cobbleranked" target="_blank" class="contact-card">
 						<div class="contact-icon">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 								<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
@@ -531,7 +597,7 @@ import Footer from '../components/Footer.astro';
 						</div>
 						<div class="contact-info">
 							<span class="contact-label">Purchase</span>
-							<span class="contact-value">Polymart</span>
+							<span class="contact-value">VoxelShop</span>
 						</div>
 					</a>
 				</div>
@@ -580,7 +646,7 @@ import Footer from '../components/Footer.astro';
 				</div>
 
 				<div class="copyright">
-					© 2025 Gashi Studios. All rights reserved.
+					© 2026 Gashi Studios. All rights reserved.
 				</div>
 			</section>
 		</main>

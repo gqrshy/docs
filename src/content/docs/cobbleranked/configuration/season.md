@@ -10,7 +10,6 @@ Configure season behavior in `season.yaml`.
 ```yaml
 # season.yaml
 checkIntervalMinutes: 1
-timezone: "Asia/Tokyo"
 
 schedule:
   - name: "Season 1"
@@ -19,10 +18,15 @@ schedule:
     preset: "default"
 ```
 
+> 📝 **Timezone is now configured globally in `config.yaml`:**
+> ```yaml
+> # config.yaml
+> timezone: "Asia/Tokyo"  # IANA timezone format
+> ```
+
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `checkIntervalMinutes` | `1` | How often to check for season end |
-| `timezone` | Required | IANA timezone ID (e.g., `Asia/Tokyo`, `UTC`) |
 | `schedule` | Required | List of seasons in order |
 
 ### Season Schedule
@@ -170,19 +174,6 @@ Admins can pause the active season to temporarily stop ranked queues without end
 - Casual battles still work (if `allowCasual` is true)
 - Season rotation is blocked (no automatic season end)
 - Rankings remain visible (if `allowRankedView` is true)
-
-## Timezone Reference
-
-Use IANA timezone identifiers:
-
-| Region | Example Timezones |
-|--------|-------------------|
-| Asia | `Asia/Tokyo`, `Asia/Seoul`, `Asia/Shanghai` |
-| Europe | `Europe/London`, `Europe/Paris`, `Europe/Berlin` |
-| Americas | `America/New_York`, `America/Los_Angeles`, `America/Chicago` |
-| UTC | `UTC` |
-
-> 📝 **Important**: Always use IANA format, NOT abbreviations like `JST`, `EST`, `PST`.
 
 ---
 

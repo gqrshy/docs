@@ -18,7 +18,7 @@ A competitive ranked battle system for Cobblemon servers with:
 - Pokemon/move/ability/item blacklists
 - Label limits (e.g., max 1 legendary per team)
 - Cross-server support via Redis (optional)
-- Battle music and camera system
+- Battle music and turn timer system
 
 </details>
 
@@ -28,9 +28,9 @@ A competitive ranked battle system for Cobblemon servers with:
 | Requirement | Version |
 |-------------|---------|
 | Minecraft | 1.21.1 |
-| Fabric Loader | 0.17.0+ |
+| Fabric Loader | 0.17.2+ |
 | Cobblemon | 1.7.1+ |
-| GashiLibs | 1.0.6+ |
+| GashiLibs | 1.0.7+ |
 | MailLib | 1.0.5+ |
 | Fabric Language Kotlin | 1.13.0+ |
 
@@ -57,7 +57,7 @@ Cross-server requires MySQL or MongoDB (not SQLite).
 Edit `config/cobbleranked/config.yaml`:
 
 ```yaml
-language: ja-jp  # en-us or ja-jp
+language: ja-jp  # en-us, ja-jp, fr-fr, pt-br, ru-ru
 ```
 
 Then run `/rankedadmin reload`.
@@ -125,7 +125,7 @@ blacklist:
     - "Necrozma-Ultra"   # Only Ultra Necrozma
 ```
 
-**v2.0.21+ Behavior:**
+**Blacklist Behavior:**
 - Species-only entries (e.g., `Landorus`) ban ALL forms
 - Form-specific entries (e.g., `Landorus-Therian`) ban ONLY that form
 
@@ -315,7 +315,7 @@ Rewards are sent via MailLib when the season ends.
 <details>
 <summary><strong>Players not teleported back after battle</strong></summary>
 
-**This issue was fixed in v2.0.21.** Players are now correctly teleported back to their original position after ranked battles (single-server mode).
+Players are correctly teleported back to their original position after ranked battles (single-server mode).
 
 **If still experiencing issues:**
 

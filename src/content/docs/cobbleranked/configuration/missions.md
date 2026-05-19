@@ -17,20 +17,24 @@ File: `config/cobbleranked/missions.yaml`
 # missions.yaml
 enabled: true
 dailyResetTime: "00:00"
-dailyResetTimezone: "UTC"
 weeklyResetDay: "MONDAY"
 weeklyResetTime: "00:00"
-weeklyResetTimezone: "UTC"
 autoClaim: false
 announceCompletion: true
 ```
+
+> **Note:** Timezone is now configured globally in `config.yaml`:
+> ```yaml
+> # config.yaml
+> timezone: "Asia/Tokyo"  # IANA timezone format
+> ```
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `enabled` | `false` | Enable the mission system |
 | `dailyResetTime` | `"00:00"` | Time to reset daily missions (HH:mm) |
-| `dailyResetTimezone` | `"UTC"` | Timezone for daily reset |
 | `weeklyResetDay` | `"MONDAY"` | Day to reset weekly missions |
+| `weeklyResetTime` | `"00:00"` | Time to reset weekly missions (HH:mm) |
 | `autoClaim` | `false` | Automatically claim rewards on completion |
 | `announceCompletion` | `false` | Send chat message when mission completes |
 
@@ -38,16 +42,42 @@ announceCompletion: true
 
 ## Trigger Types
 
-| Trigger | Description |
-|---------|-------------|
-| `WIN` | Win matches |
-| `PLAY` | Play matches (win or lose) |
-| `STREAK` | Achieve a win streak |
-| `USE_TYPE` | Use Pokemon of specific types |
-| `GENERATION` | Use Pokemon from specific generations |
-| `EVOLUTION` | Use Pokemon at specific evolution stages |
-| `FORMAT` | Play in a specific format |
-| `DEFEAT` | Defeat opponent Pokemon |
+Use simple trigger names instead of enum values. Server admins can edit missions without knowing Kotlin internals.
+
+| Trigger | Description | Internal Enum |
+|---------|-------------|---------------|
+| `WIN` | Win matches | `WIN_COUNT` |
+| `PLAY` | Play matches (win or lose) | `MATCH_COUNT` |
+| `STREAK` | Achieve a win streak | `WIN_STREAK` |
+| `USE_TYPE` | Use Pokemon of specific types | `POKEMON_TYPE_USAGE` |
+| `GENERATION` | Use Pokemon from specific generations | `GENERATION_USAGE` |
+| `EVOLUTION` | Use Pokemon at specific evolution stages | `EVOLUTION_STAGE` |
+| `FORMAT` | Play in a specific format | `FORMAT_PARTICIPATION` |
+| `DEFEAT` | Defeat opponent Pokemon | `POKEMON_DEFEATED` |
+
+<details>
+<summary><strong>Legacy Format</strong></summary>
+
+**Old format still works** — no migration needed. New `daily`/`weekly` format takes priority if both exist.
+
+```yaml
+# Old format (still works)
+dailyMissions:
+  - type: WIN_COUNT
+    required: 3
+    rewards: ["give {player} diamond 1"]
+
+# New format (recommended)
+daily:
+  1:
+    title: "Win 3 Matches"
+    trigger: WIN
+    required: 3
+    rewards:
+      - "give {player} diamond 1"
+```
+
+</details>
 
 ---
 

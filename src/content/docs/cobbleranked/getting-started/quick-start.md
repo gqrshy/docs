@@ -50,7 +50,6 @@ Queue → Match Found → Ready Check → Team Selection → Lead Selection → 
 
 - Use Cobblemon's battle UI to select moves
 - Turn timer prevents stalling
-- Camera system provides cinematic view (toggle with `/battlecamera status`)
 
 ### After Battle
 
@@ -74,14 +73,12 @@ Same flow as ranked, but no ELO changes.
 |---------|-------------|
 | `/ranked` | Open ranked battle menu (stats, leaderboard, queue) |
 | `/casual` | Open casual battle menu |
-| `/battlecamera status` | Show battle camera status |
 
 ## Tips for New Players
 
 1. **Practice in Casual** - Get familiar with the system before ranked
 2. **Check Blacklist** - Some Pokemon/moves may be restricted
 3. **Mind the Timer** - Don't take too long on turns
-4. **Camera** - Use `/battlecamera status` to check camera state
 
 ---
 

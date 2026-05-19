@@ -20,8 +20,8 @@ Without LuckPerms, permissions work via OP level:
 
 | Permission | Description |
 |------------|-------------|
-| `cobbleranked.player.use` | Use /ranked and /battlecamera |
-| `cobbleranked.player.casual.use` | Use /casual |
+| `cobbleranked.player.use` | Use /ranked command |
+| `cobbleranked.player.casual.use` | Use /casual command |
 | `cobbleranked.player.queue.join` | Join queue |
 | `cobbleranked.player.queue.leave` | Leave queue |
 | `cobbleranked.player.stats.view` | View own stats |
@@ -101,7 +101,7 @@ CobbleRanked automatically grants rank-based permissions and display features:
 
 ## Rank Display Settings
 
-Configure in `config/cobbleranked/luckperms.yaml`:
+Configure in `config/cobbleranked/integrations/luckperms.yaml`:
 
 ```yaml
 luckperms:

@@ -79,6 +79,22 @@ seasonRewards:
 | `{season}` | Season name |
 | `{format}` | Battle format (SINGLES, DOUBLES, etc.) |
 
+**Text Placeholder API Support:**
+
+If Text Placeholder API is installed, reward commands also support general placeholders like:
+- `%player_name%` - Player name
+- `%player_uuid%` - Player UUID
+- `%server_name%` - Server name
+- And any placeholders registered by other mods
+
+Example with both placeholder types:
+```yaml
+commands:
+  - "eco give {player} 50000"              # CobbleRanked placeholder
+  - "eco give %player_name% 50000"         # Placeholder API (equivalent)
+  - "title %player_name% title "&6Reward!" # Placeholder API with formatting
+```
+
 ## Rank Rewards
 
 One-time rewards when a player reaches a new rank tier for the first time.
@@ -205,7 +221,7 @@ milestones:
 
 ## Reward Delivery
 
-Rewards are delivered via **MailLib**. Players claim them with `/mailbox`. Offline players receive rewards on next login.
+Rewards are delivered via **MailLib** (required). Players claim them with `/mailbox`. Offline players receive rewards on next login.
 
 ## Per-Format Rewards
 

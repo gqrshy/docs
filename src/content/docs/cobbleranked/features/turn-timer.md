@@ -32,26 +32,34 @@ Players see a boss bar countdown that changes color as time runs low. Audio warn
 
 ## Configuration
 
-Configure timers per format in `battle.yaml`:
+Format-specific timers are configured in **season presets**. Global timers (team selection, ready check, countdown) remain in `battle.yaml`.
+
+### Format-Specific Timers (Season Presets)
+
+```yaml
+# season_presets/default.yml
+singles:
+  turnTimer: 90           # seconds per turn
+  matchDuration: 15       # minutes total
+
+doubles:
+  turnTimer: 120
+  matchDuration: 20
+
+triples:
+  turnTimer: 150
+  matchDuration: 25
+```
+
+### Global Timers (battle.yaml)
 
 ```yaml
 # battle.yaml
-formats:
-  SINGLES:
-    turnTimeoutSeconds: 90
-
-  DOUBLES:
-    turnTimeoutSeconds: 120
-
-  TRIPLES:
-    turnTimeoutSeconds: 150
-
 timers:
   teamSelectionSeconds: 60
   leadSelectionSeconds: 30
   matchReadySeconds: 17
   countdownSeconds: 5
-  battleMinutes: 15
   battleTimeWarningSeconds:
     - 300
     - 60
@@ -85,61 +93,6 @@ sounds:
       volume: 3.0
       pitch: 2.0
 ```
-
-## Showdown/Chess Timer
-
-An alternative timer system where each player has their own cumulative clock, like chess. Time is tracked per-player instead of per-turn.
-
-**How it works:**
-1. Each player starts with a total time bank (e.g., 10 minutes)
-2. When it's your turn, your clock ticks down
-3. When your turn ends, an optional **increment** is added to your remaining time
-4. If your total time runs out, you lose (or the match is decided by tie-break)
-
-### Configuration
-
-Configure in season presets (`config/cobbleranked/season_presets/*.yml`):
-
-```yaml
-# season_presets/default.yml
-singles:
-  enabled: true
-  # ... other format settings ...
-
-  # Per-player showdown timer (0 = disabled, use traditional match timer)
-  playerBattleDurationMinutes: 10
-  incrementSeconds: 5
-
-  # What happens when a player runs out of time
-  tieBreakSystem: HEALTH
-```
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `playerBattleDurationMinutes` | `0` | Per-player total time in minutes. **0 = disabled** (uses traditional match timer) |
-| `incrementSeconds` | `0` | Seconds added to remaining time after each turn |
-| `tieBreakSystem` | `HEALTH` | How to decide the winner on time-out |
-
-### Tie-Break Systems
-
-| System | Behavior |
-|--------|----------|
-| `HEALTH` | Compare remaining HP percentage — player with more HP wins |
-| `TIME` | The player who ran out of time loses |
-
-<details>
-<summary><strong>Showdown Timer Example</strong></summary>
-
-With `playerBattleDurationMinutes: 10` and `incrementSeconds: 5`:
-
-1. Both players start with 10:00 each
-2. Player A takes a turn (takes 20 seconds) → remaining: 9:45 (9:40 + 5s increment)
-3. Player B takes a turn (takes 30 seconds) → remaining: 9:35 (9:30 + 5s increment)
-4. If Player A's clock hits 0:00 → Player B wins (or HP-based tie-break)
-
-This encourages fast play and rewards time management.
-
-</details>
 
 ---
 

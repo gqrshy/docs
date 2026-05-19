@@ -46,11 +46,11 @@ The K-factor controls how much your rating changes per match. CobbleRanked uses 
 | ELO Range | K-Factor | Effect |
 |-----------|----------|--------|
 | New players (first 30 games) | 50 | Fast calibration |
-| Below 1100 | 40 | Larger swings |
-| 1100-1299 | 32 | Moderate changes |
-| 1300-1599 | 24 | Balanced |
-| 1600-1999 | 16 | Stable ratings |
-| 2000+ | 12 | Very stable |
+| Below 1500 | 48 | Larger swings |
+| 1500-1699 | 36 | Moderate changes |
+| 1700-1999 | 24 | Balanced |
+| 2000-2499 | 18 | Stable ratings |
+| 2500+ | 12 | Very stable |
 
 Higher K-factor means bigger rating changes. New players calibrate quickly, while established players have stable ratings.
 
@@ -92,6 +92,20 @@ A 1700 player beats a 1400 player. Small gains for the favorite.
 - Favorite: 1700 → **1704** (+4)
 - Underdog: 1400 → **1392** (-8)
 
+## Rank Rewards
+
+Players receive one-time rewards when reaching a new tier. Configure in `rewards.yaml`.
+
+| Tier | Example Reward |
+|------|---------------|
+| Great Ball | 10 Poké Balls |
+| Ultra Ball | 10 Great Balls |
+| Master Ball | 10 Ultra Balls |
+| Beast Ball | 1 Master Ball |
+| Cherish Ball | 3 Master Balls |
+
+See [Rewards Configuration](/docs/cobbleranked/configuration/rewards/) for full setup.
+
 ## Configuration
 
 ```yaml
@@ -105,14 +119,14 @@ pokemonShowdown:
   newPlayerGames: 30
   newPlayerKFactor: 50
   kFactorBands:
-    - maxElo: 1100
-      kFactor: 40
-    - maxElo: 1300
-      kFactor: 32
-    - maxElo: 1600
-      kFactor: 24
+    - maxElo: 1500
+      kFactor: 48
+    - maxElo: 1700
+      kFactor: 36
     - maxElo: 2000
-      kFactor: 16
+      kFactor: 24
+    - maxElo: 2500
+      kFactor: 18
     - maxElo: 999999
       kFactor: 12
   streakBonus:

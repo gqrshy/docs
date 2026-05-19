@@ -20,13 +20,6 @@ description: Complete list of CobbleRanked commands.
 | `/casual` | Open casual battle GUI | `cobbleranked.player.casual.use` |
 | `/casual missions` | View daily/weekly missions | `cobbleranked.player.casual.use` |
 
-### Battle Camera
-
-| Command | Description | Permission |
-|---------|-------------|------------|
-| `/battlecamera toggle` | Enable/disable battle camera | `cobbleranked.player.use` |
-| `/battlecamera status` | Show camera status | `cobbleranked.player.use` |
-
 ## Admin Commands
 
 All admin commands require OP level 4 or `cobbleranked.admin` permission.
@@ -81,15 +74,19 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 | `/rankedadmin placeholder test <placeholder>` | Test a placeholder with player data |
 | `/rankedadmin placeholder list` | List all available placeholders |
 | `/rankedadmin placeholder clear` | Clear placeholder cache |
+| `/rankedadmin placeholder status` | Show placeholder API status |
 
 ### Data Management
 
 | Command | Description |
 |---------|-------------|
-| `/rankedadmin usage export` | Export usage statistics |
-| `/rankedadmin usage clear` | Clear usage statistics |
+| `/rankedadmin usage export [seasonName]` | Export usage statistics for season |
+| `/rankedadmin usage clear <seasonName>` | Clear usage statistics for season |
 | `/rankedadmin usage info` | Show usage statistics summary |
-| `/rankedadmin leaderboard export` | Export leaderboard data |
+| `/rankedadmin leaderboard export [seasonName] [limit]` | Export leaderboard data (default: 100 entries) |
+| `/rankedadmin api sync` | Manually trigger API data sync |
+| `/rankedadmin api status` | Show API sync status and statistics |
+| `/rankedadmin api test` | Test API connectivity |
 
 ### Data Migration (v1 to v2)
 
@@ -177,7 +174,7 @@ Migrate your v1 `seasons.json5` to v2 `season.yaml` format:
 
 | Permission | Description | Default |
 |------------|-------------|---------|
-| `cobbleranked.player.use` | Use /ranked and /battlecamera commands | true |
+| `cobbleranked.player.use` | Use /ranked command | true |
 | `cobbleranked.player.casual.use` | Use /casual command | true |
 | `cobbleranked.player.queue.join` | Join ranked queue | true |
 | `cobbleranked.player.queue.leave` | Leave ranked queue | true |
@@ -217,11 +214,6 @@ Migrate your v1 `seasons.json5` to v2 `season.yaml` format:
 /ranked
 ```
 Access stats, leaderboard, and queue from the GUI.
-
-### Toggle Battle Camera
-```
-/battlecamera toggle
-```
 
 ### Admin: Set player ELO
 ```

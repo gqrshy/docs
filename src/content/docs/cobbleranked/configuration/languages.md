@@ -15,6 +15,9 @@ These languages are included with CobbleRanked:
 |------|----------|
 | `en-Us.json5` | English (default) |
 | `ja-Jp.json5` | Japanese |
+| `fr-Fr.json5` | French |
+| `pt-Br.json5` | Portuguese (Brazil) |
+| `ru-Ru.json5` | Russian |
 
 > 📝 **You can create translations for any language!** See [Creating Custom Languages](#creating-custom-languages) below.
 
@@ -27,7 +30,7 @@ Edit `config/cobbleranked/config.yaml`:
 language: "ja-jp"  # Use any language code matching your file
 ```
 
-The language value must match your language file name (without extension).
+The language value is auto-normalized to match your language file name (e.g., "ja-jp" → "ja-Jp.json5", "pt-br" → "pt-Br.json5").
 
 Reload with `/rankedadmin reload`.
 

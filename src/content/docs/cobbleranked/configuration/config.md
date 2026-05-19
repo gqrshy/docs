@@ -7,7 +7,7 @@ Core server configuration for CobbleRanked. Advanced settings are organized in s
 
 ## Configuration Files
 
-CobbleRanked v2.0.29+ uses multiple YAML files in `config/cobbleranked/`:
+CobbleRanked uses multiple YAML files in `config/cobbleranked/`:
 
 | File | Purpose |
 |------|---------|
@@ -22,17 +22,16 @@ CobbleRanked v2.0.29+ uses multiple YAML files in `config/cobbleranked/`:
 | `restrictions.yaml` | Player action restrictions → [Restrictions](/docs/cobbleranked/configuration/restrictions/) |
 | `rewards.yaml` | Season rewards → [Rewards](/docs/cobbleranked/configuration/rewards/) |
 | `missions.yaml` | Daily/weekly missions → [Missions](/docs/cobbleranked/configuration/missions/) |
-| `luckperms.yaml` | LuckPerms integration → [LuckPerms](/docs/cobbleranked/integration/luckperms/) |
-| `camera/camera.yaml` | Battle camera system → [Camera](/docs/cobbleranked/configuration/camera/) |
+| `integrations/luckperms.yaml` | LuckPerms integration → [LuckPerms](/docs/cobbleranked/integration/luckperms/) |
 | `api.yaml` | Web API settings → [API](/docs/cobbleranked/configuration/api/) |
-| `season_presets/*.yml` | Format rules per season → [Battle Formats](/docs/cobbleranked/features/battle-formats/) |
+| `season_presets/*.yaml` | Format rules per season → [Battle Formats](/docs/cobbleranked/features/battle-formats/) |
 
-### Season Presets (v2.0.13+)
+### Season Presets
 
 Format-specific settings (team size, level cap, matchmaking rules, blacklists) are configured in **season presets** instead of the main config files. This keeps all format settings in one place.
 
 ```yaml
-# season_presets/default.yml
+# season_presets/default.yaml
 singles:
   enabled: true
   teamSize: 3
@@ -54,6 +53,9 @@ language: "en-us"
 |-------|----------|
 | `en-us` | English (default) |
 | `ja-jp` | Japanese |
+| `fr-fr` | French |
+| `pt-br` | Portuguese (Brazil) |
+| `ru-ru` | Russian |
 
 > 💡 **You can add ANY language!** Create a custom language file in `config/cobbleranked/language/` (e.g., `ko-KR.json5`, `zh-CN.json5`) and set the language code to match. See [Languages Configuration](/docs/cobbleranked/configuration/languages/) for details.
 
@@ -199,7 +201,6 @@ debug:
 | GUI Customization | [GUI Configuration](/docs/cobbleranked/configuration/gui/) |
 | Language Files | [Languages Configuration](/docs/cobbleranked/configuration/languages/) |
 | Sound Effects | [Sounds Configuration](/docs/cobbleranked/configuration/sounds/) |
-| Battle Camera | [Camera Configuration](/docs/cobbleranked/configuration/camera/) |
 | Web API | [API Configuration](/docs/cobbleranked/configuration/api/) |
 | LuckPerms Integration | [LuckPerms](/docs/cobbleranked/integration/luckperms/) |
 

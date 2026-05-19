@@ -50,10 +50,6 @@ Configure seasons in `config/cobbleranked/season.yaml`:
 # season.yaml
 checkIntervalMinutes: 1
 
-# Server timezone (IANA format)
-# Examples: "Asia/Tokyo", "America/New_York", "Europe/London", "UTC"
-timezone: "Asia/Tokyo"
-
 # Season schedule
 # Date format: "YYYY-MM-DD" (starts at 00:00:00)
 # DateTime format: "YYYY-MM-DD HH:mm:ss" (precise control)
@@ -99,10 +95,15 @@ announcements:
 
 | Setting | Description |
 |---------|-------------|
-| `timezone` | Server timezone for schedule interpretation |
 | `softResetElo` | Partial reset towards starting ELO |
 | `softResetFactor` | How much to reset (0.5 = halfway) |
 | `resetWinLoss` | Clear win/loss records each season |
+
+> 📝 **Timezone is now configured globally in `config.yaml`:**
+> ```yaml
+> # config.yaml
+> timezone: "Asia/Tokyo"  # IANA timezone format
+> ```
 
 ### Reset Types
 
@@ -211,32 +212,12 @@ When paused:
 
 ## ELO Decay
 
-Inactive players can lose ELO over time to keep the leaderboard competitive.
+Inactive players lose ELO over time to keep the leaderboard competitive. Forces high-rated players to stay active.
 
-<details>
-<summary><strong>Decay Configuration</strong></summary>
-
-Configure ELO decay in `elo.yaml`:
-
-```yaml
-# elo.yaml
-decay:
-  enabled: false
-  inactiveDays: 14          # Days before decay starts
-  decayAmount: 10           # ELO lost per decay tick
-  decayIntervalDays: 7      # How often decay ticks
-  minimumElo: 1000          # ELO floor (won't decay below this)
-```
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `enabled` | `false` | Enable/disable ELO decay |
-| `inactiveDays` | `14` | Grace period before decay starts |
-| `decayAmount` | `10` | ELO lost per tick |
-| `decayIntervalDays` | `7` | Days between decay ticks |
-| `minimumElo` | `1000` | Floor — players won't drop below this |
-
-</details>
+See [ELO Configuration](/docs/cobbleranked/configuration/elo/) for complete setup guide including:
+- Per-day decay with configurable thresholds
+- Cross-server Redis coordination
+- Database schema requirements
 
 ---
 

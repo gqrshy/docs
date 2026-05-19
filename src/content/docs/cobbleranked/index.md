@@ -5,14 +5,14 @@ description: The ultimate competitive Pokemon battle system for Cobblemon
 
 > **Transform your Cobblemon server into a competitive Pokemon arena**
 
-[Get Started](/docs/cobbleranked/getting-started/installation/) | [View on Polymart](https://polymart.org/product/8733/cobbleranked)
+[Get Started](/docs/cobbleranked/getting-started/installation/) | [View on VoxelShop](https://voxel.shop/product/8733/cobbleranked)
 
 ---
 
 ## Core Features
 
 ### Battle Formats
-Three competitive formats to master - **Singles**, **Doubles**, and **Triples**. Each format has its own leaderboard, meta, and rewards.
+Competitive formats including **Singles**, **Doubles**, and **Triples**. Enable formats per season preset. Each format has its own leaderboard, meta, and rewards.
 
 ### Smart Matchmaking
 Choose between **Pokemon Showdown ELO** or **Glicko-2** rating systems. Dynamic Elo range expansion ensures quick matches while maintaining competitive balance. Recent opponent avoidance prevents repetitive matchups.
@@ -30,9 +30,6 @@ Six progression tiers from **Poke Ball** (0+) to **Cherish Ball** (2100+). Playe
 ### Turn Timer
 Keep battles moving with configurable turn timeouts. Visual action bar shows remaining time with color stages - white → yellow → orange → red. Auto-select moves when time runs out.
 
-### Battle Camera
-Stadium camera integration via Cobblemon's camera API. Automatic camera activation for all ranked and casual matches when available. Toggle per-player preference.
-
 ### Battle Music
 Queue music, team selection music, and ELO-based battle tracks. Fully customizable via resource packs.
 
@@ -47,7 +44,7 @@ Multiple arenas with hot-swap support. Random or sequential selection. Configure
 Daily and weekly missions keep players engaged. Mission types include match count, win count, win streaks, Pokemon type usage, format participation, and more.
 
 ### Rewards
-Reward top 100 players per format each season. Tier-based rewards for reaching Elo milestones. Delivered via MailLib integration with command execution support.
+Reward top 100 players per format each season. Tier-based rewards for reaching Elo milestones. MailLib integration for in-game mail delivery with command execution support.
 
 ### Leaderboards
 Real-time cached leaderboards with 30-second refresh. Format-specific rankings. Off-season displays archived top 100 from previous season.
@@ -85,7 +82,7 @@ Sync leaderboards and Pokemon usage statistics to your website in real-time. Aut
 ## Integrations
 
 - **LuckPerms** - Permission-based rank assignment
-- **PlaceholderAPI** - Stats placeholders for chat and scoreboards
+- **Text Placeholder API** - Stats placeholders for chat and scoreboards
 - **MailLib** - Reward delivery via in-game mail
 - **Velocity** - Cross-server player transfers
 
@@ -100,4 +97,4 @@ Sync leaderboards and Pokemon usage statistics to your website in real-time. Aut
 
 ---
 
-**Available on [Polymart](https://polymart.org/product/8733/cobbleranked) - $10 USD**
+**Available on [VoxelShop](https://voxel.shop/product/8733/cobbleranked) - $10 USD**

@@ -50,7 +50,7 @@ Player: Steve
 
 ## Format Configuration
 
-As of v2.0.13, all format settings are configured in **season presets** (`config/cobbleranked/season_presets/*.yml`).
+All format settings are configured in **season presets** (`config/cobbleranked/season_presets/*.yml`).
 
 ### Enable/Disable Formats
 
@@ -147,11 +147,6 @@ singles:
       blockRevivalItems: true
       blockedRevivalItems: []
 
-  # Showdown/Chess-style per-player timer
-  playerBattleDurationMinutes: 0    # 0 = disabled (uses match timer)
-  incrementSeconds: 0               # Time added per turn
-  tieBreakSystem: HEALTH            # HEALTH or TIME
-
 doubles:
   enabled: true
   teamSize: 4
@@ -174,18 +169,6 @@ Control how players are matched within each format:
 | `expansionRate` | `50` | ELO added per expansion cycle |
 | `maxMultiplier` | `3.0` | Maximum range multiplier (3× initial range) |
 | `immediateMatchRange` | `100` | ELO range for instant matches |
-
-### Per-Player Timer Settings
-
-Showdown/chess-style cumulative timer per player:
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `playerBattleDurationMinutes` | `0` | Per-player total time. **0 = disabled** (uses match timer) |
-| `incrementSeconds` | `0` | Seconds added after each turn |
-| `tieBreakSystem` | `HEALTH` | Time-out resolution: `HEALTH` (HP%) or `TIME` (time-out player loses) |
-
-See [Turn Timer](/docs/cobbleranked/features/turn-timer/) for detailed explanation.
 
 **How range expansion works:**
 - Start: ±100 ELO (200 total range)
