@@ -1,5 +1,5 @@
 ---
-// Terms and Conditions page - Dynamic business-style layout
+// Terms and Conditions page - Clean, consolidated layout
 import CustomNav from '../components/CustomNav.astro';
 import Footer from '../components/Footer.astro';
 ---
@@ -14,73 +14,54 @@ import Footer from '../components/Footer.astro';
 	<title>Terms & Conditions - GashiStudios</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
-	<!-- Navigation -->
 	<CustomNav />
 
-	<!-- Hero -->
 	<header class="terms-hero">
 		<div class="hero-content">
-			<div class="hero-badge">Legal</div>
+			<div class="hero-badge">
+				<i class="ph ph-gavel"></i>
+				Legal
+			</div>
 			<h1>Terms & Conditions</h1>
 			<p class="hero-subtitle">Please read these terms carefully before purchasing or using our software.</p>
 			<div class="hero-meta">
 				<span class="meta-item">
-					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-						<line x1="16" y1="2" x2="16" y2="6"/>
-						<line x1="8" y1="2" x2="8" y2="6"/>
-						<line x1="3" y1="10" x2="21" y2="10"/>
-					</svg>
-					Last Updated: May 19, 2026
+					<i class="ph ph-calendar-blank"></i>
+					Last Updated: May 20, 2026
 				</span>
 				<span class="meta-item">
-					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<circle cx="12" cy="12" r="10"/>
-						<polyline points="12 6 12 12 16 14"/>
-					</svg>
-					~10 min read
+					<i class="ph ph-clock"></i>
+					~6 min read
 				</span>
 			</div>
 		</div>
 	</header>
 
-	<!-- Main Content -->
 	<div class="terms-layout">
-		<!-- Table of Contents (Sidebar) -->
 		<aside class="toc">
 			<div class="toc-sticky">
 				<h3>Contents</h3>
 				<ul class="toc-list">
-					<li><a href="#commerce" class="toc-link">Commerce Disclosure</a></li>
-					<li><a href="#license" class="toc-link">License Agreement</a></li>
-					<li><a href="#source-access" class="toc-link">Source Code Access</a></li>
-						<li><a href="#permitted" class="toc-link">Permitted Use</a></li>
-					<li><a href="#prohibited" class="toc-link">Prohibited Actions</a></li>
-					<li><a href="#ownership" class="toc-link">Ownership</a></li>
-					<li><a href="#updates" class="toc-link">Updates & Support</a></li>
-					<li><a href="#disclaimer" class="toc-link">Disclaimer</a></li>
-					<li><a href="#liability" class="toc-link">Limitation of Liability</a></li>
-					<li><a href="#privacy" class="toc-link">Privacy</a></li>
-					<li><a href="#termination" class="toc-link">Termination</a></li>
-					<li><a href="#governing" class="toc-link">Governing Law</a></li>
-					<li><a href="#contact" class="toc-link">Contact</a></li>
+					<li><a href="#commerce" class="toc-link"><i class="ph ph-storefront"></i>Commerce Disclosure</a></li>
+					<li><a href="#license" class="toc-link"><i class="ph ph-scroll"></i>License Summary</a></li>
+					<li><a href="#source-access" class="toc-link"><i class="ph ph-code"></i>Source Code Access</a></li>
+					<li><a href="#usage" class="toc-link"><i class="ph ph-list-checks"></i>Usage Rules</a></li>
+					<li><a href="#support" class="toc-link"><i class="ph ph-life-buoy"></i>Support & Refunds</a></li>
+					<li><a href="#legal" class="toc-link"><i class="ph ph-scales"></i>Legal</a></li>
+					<li><a href="#contact" class="toc-link"><i class="ph ph-envelope"></i>Contact</a></li>
 				</ul>
 			</div>
 		</aside>
 
-		<!-- Content -->
 		<main class="terms-content">
 			<!-- Commerce Disclosure -->
 			<section id="commerce" class="terms-section">
 				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/>
-						</svg>
-					</span>
+					<i class="ph ph-storefront section-icon"></i>
 					<h2>Commerce Disclosure (Japan)</h2>
 				</div>
 				<p class="section-intro">This software is sold through VoxelShop and complies with Japan's Specified Commercial Transaction Act (特定商取引法).</p>
@@ -89,20 +70,8 @@ import Footer from '../components/Footer.astro';
 					<h3>Business Information</h3>
 					<div class="info-grid">
 						<div class="info-item">
-							<span class="info-label">Business Name</span>
-							<span class="info-value">Disclosed upon request</span>
-						</div>
-						<div class="info-item">
 							<span class="info-label">Representative</span>
 							<span class="info-value highlight">Shiga Minato</span>
-						</div>
-						<div class="info-item">
-							<span class="info-label">Address</span>
-							<span class="info-value">Disclosed upon request</span>
-						</div>
-						<div class="info-item">
-							<span class="info-label">Phone</span>
-							<span class="info-value">Disclosed upon request</span>
 						</div>
 						<div class="info-item">
 							<span class="info-label">Email</span>
@@ -113,442 +82,221 @@ import Footer from '../components/Footer.astro';
 
 				<div class="info-row">
 					<div class="info-card small">
+						<i class="ph ph-currency-dollar"></i>
 						<h4>Pricing</h4>
-						<p class="price">$10 <span>USD</span></p>
-						<p class="note">Prices may change with future updates. Changes announced on Discord.</p>
+						<p class="price">$10 USD</p>
+						<p class="note">Subject to change with future updates</p>
 					</div>
 					<div class="info-card small">
+						<i class="ph ph-credit-card"></i>
 						<h4>Payment</h4>
-						<p class="payment-method">Credit Card (Stripe)</p>
-						<p class="note">Immediate payment required</p>
+						<p>Credit Card (Stripe)</p>
 					</div>
 					<div class="info-card small">
+						<i class="ph ph-download-simple"></i>
 						<h4>Delivery</h4>
-						<p class="delivery">Instant Download</p>
-						<p class="note">Available via VoxelShop after payment</p>
-					</div>
-				</div>
-
-				<div class="warning-box">
-					<span class="warning-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-						</svg>
-					</span>
-					<div>
-						<strong>Refund Policy (Updated May 2026)</strong>
-						<p><strong>Standard Policy:</strong> Due to the digital nature of this product, returns and refunds are not available after download.</p>
-						<p><strong>Special Refund Program:</strong> Customers who purchased between March 1, 2026 and May 19, 2026 <strong>who have NOT been granted source code access</strong> may request a refund. Once source code access is provided, refunds are no longer available. For bugs or issues, please contact us via Discord or email.</p>
+						<p>Instant via VoxelShop</p>
 					</div>
 				</div>
 			</section>
 
-			<!-- License Agreement -->
+			<!-- License Summary -->
 			<section id="license" class="terms-section">
 				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/>
-						</svg>
-					</span>
-					<h2>License Agreement</h2>
+					<i class="ph ph-scroll section-icon"></i>
+					<h2>License Summary</h2>
 				</div>
-				<p class="section-intro">CobbleRanked is a premium mod sold through VoxelShop. By purchasing, downloading, installing, or using CobbleRanked, you agree to be bound by these terms.</p>
+				<p class="section-intro">CobbleRanked is premium software. By purchasing, downloading, or using it, you agree to these terms.</p>
+
+				<div class="license-card">
+					<div class="license-type">
+						<i class="ph ph-key"></i>
+						<strong>Type:</strong> Limited, Non-Exclusive, Non-Transferable, Revocable License
+					</div>
+					<div class="license-scope">
+						<strong>Scope:</strong> Personal and commercial server use permitted
+					</div>
+					<div class="license-bound">
+						<strong>Bound to:</strong> Original purchaser only (non-transferable)
+					</div>
+				</div>
 			</section>
 
 			<!-- Source Code Access -->
-				<section id="source-access" class="terms-section">
-					<div class="section-header">
-						<span class="section-icon">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-							</svg>
-						</span>
-						<h2>Source Code Access</h2>
-					</div>
-					<p class="section-intro">Customers who purchased CobbleRanked before May 20, 2026 may request access to the private GitHub repository containing the source code.</p>
+			<section id="source-access" class="terms-section">
+				<div class="section-header">
+					<i class="ph ph-code section-icon"></i>
+					<h2>Source Code Access</h2>
+				</div>
+				<p class="section-intro">Customers who purchased before May 20, 2026 may request access to the private GitHub repository.</p>
 
-					<div class="info-row">
-						<div class="info-card half">
-							<h4>Eligibility</h4>
-							<ul class="compact-list">
-								<li>Purchased before May 20, 2026</li>
-								<li>Valid purchase proof required</li>
-								<li>Non-refundable after access granted</li>
-								<li>Access is non-transferable</li>
-							</ul>
-						</div>
-						<div class="info-card half">
-							<h4>Request Process</h4>
-							<ul class="compact-list">
-								<li>Join Discord server</li>
-								<li>DM @gashicha with purchase proof</li>
-								<li>Provide GitHub username</li>
-								<li>Wait for repository invitation</li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="license-note">
-						<strong>Source Access License Terms:</strong> You may read, study, and modify the code for personal learning or to submit pull requests. Exception: Forking for non-Fabric server environments (e.g., Arclight) is permitted for personal use. However, you may not redistribute modified versions or create independent derivative works.
-					</div>
-
-					<div class="prohibited-category">
-						<h3>Source Code Restrictions</h3>
-						<ul class="prohibited-list">
-							<li>Forking the repository (making it public) — Exception: Forks for non-Fabric environments (e.g., Arclight) are permitted if they remain private</li>
-							<li>Sharing access with others</li>
-							<li>Using code in other projects</li>
-							<li>Redistributing modified versions</li>
-							<li>Claiming ownership of any portion</li>
+				<div class="info-row">
+					<div class="info-card half">
+						<h4><i class="ph ph-check-circle"></i> Eligibility</h4>
+						<ul class="compact-list">
+							<li>Purchased before May 20, 2026</li>
+							<li>Valid purchase proof required</li>
+							<li>Non-refundable after access granted</li>
+							<li>Access is non-transferable</li>
 						</ul>
 					</div>
-
-					<div class="warning-box">
-						<span class="warning-icon">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-							</svg>
-						</span>
-						<div>
-							<strong>Violation Results in Immediate Access Revocation</strong>
-							<p>Source code access is a privilege, not a right. Abuse will result in permanent removal from the repository.</p>
-						</div>
-					</div>
-				</section>
-			<!-- Permitted Use -->
-			<section id="permitted" class="terms-section">
-				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
-						</svg>
-					</span>
-					<h2>Permitted Use</h2>
-				</div>
-				<p class="section-intro">You are granted a limited, non-exclusive, non-transferable, revocable license to use the Software solely for:</p>
-
-				<div class="permit-grid">
-					<div class="permit-card">
-						<div class="permit-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="6" y1="12" x2="10" y2="12"/><line x1="14" y1="12" x2="18" y2="12"/><rect x="2" y="6" width="20" height="12" rx="2"/>
-							</svg>
-						</div>
-						<h4>Personal Gameplay</h4>
-						<p>Use on your own Minecraft client</p>
-					</div>
-					<div class="permit-card">
-						<div class="permit-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-							</svg>
-						</div>
-						<h4>Server Use</h4>
-						<p>Install on servers you own or operate</p>
-					</div>
-					<div class="permit-card">
-						<div class="permit-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/>
-							</svg>
-						</div>
-						<h4>Commercial Servers</h4>
-						<p>Monetized servers are permitted</p>
-					</div>
-					<div class="permit-card">
-						<div class="permit-icon">
-							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>
-							</svg>
-						</div>
-						<h4>Multiple Servers</h4>
-						<p>Install on multiple servers you own</p>
+					<div class="info-card half">
+						<h4><i class="ph ph-github-logo"></i> Request Process</h4>
+						<ul class="compact-list">
+							<li>Join Discord server</li>
+							<li>DM @gashicha with proof</li>
+							<li>Provide GitHub username</li>
+							<li>Wait for repository invite</li>
+						</ul>
 					</div>
 				</div>
 
 				<div class="license-note">
-					<strong>One purchase = One license</strong> — The license is non-transferable and bound to the purchaser.
+					<i class="ph ph-info"></i>
+					<strong>You may:</strong> Read, study, and modify code for learning. Submit pull requests. Fork for non-Fabric environments (e.g., Arclight) for personal use.
+				</div>
+
+				<div class="warning-box">
+					<i class="ph ph-warning"></i>
+					<strong>You may NOT:</strong>
+					<ul>
+						<li>Redistribute modified versions</li>
+						<li>Create independent derivative works</li>
+						<li>Share access with others</li>
+						<li>Make forks public (except for PRs)</li>
+					</ul>
 				</div>
 			</section>
 
-			<!-- Prohibited -->
-			<section id="prohibited" class="terms-section">
+			<!-- Usage Rules -->
+			<section id="usage" class="terms-section">
 				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
-						</svg>
-					</span>
-					<h2>Strictly Prohibited</h2>
+					<i class="ph ph-list-checks section-icon"></i>
+					<h2>Usage Rules</h2>
 				</div>
+				<p class="section-intro">Clear guidelines on what you can and cannot do with CobbleRanked.</p>
 
-				<div class="prohibited-category">
-					<h3>Reverse Engineering & Modification</h3>
-					<p style="color: var(--color-text-muted); margin-bottom: 0.75rem; font-size: 0.9rem;"><strong>Note:</strong> Source code access is provided to eligible customers (see Source Code Access section below). The following restrictions apply:</p>
-					<ul class="prohibited-list">
-						<li>Redistributing modified versions of the Software</li>
-						<li>Using the Software's source code in other projects or mods without permission</li>
-						<li>Removing or altering any proprietary notices or licenses</li>
-						<li>Publishing forks or derivative works publicly</li>
-					</ul>
-					<p style="color: var(--color-primary-light); margin-top: 0.75rem; font-size: 0.85rem;">✓ Allowed: Reading, studying, modifying, and submitting pull requests. Forks for non-Fabric environments (e.g., Arclight) are permitted for personal use.</p>
-				</div>
+				<div class="rules-grid">
+					<div class="rule-card allowed">
+						<div class="rule-header">
+							<i class="ph ph-check-circle"></i>
+							<h3>Permitted</h3>
+						</div>
+						<ul class="rule-list">
+							<li>Use on personal Minecraft client</li>
+							<li>Install on servers you own/operate</li>
+							<li>Use on monetized/commercial servers</li>
+							<li>Install on multiple servers you own</li>
+							<li>Read and study source code (if granted access)</li>
+							<li>Submit pull requests to official repo</li>
+							<li>Fork for non-Fabric environments (Arclight, etc.) - private only</li>
+						</ul>
+					</div>
 
-				<div class="prohibited-category">
-					<h3>Distribution & Resale</h3>
-					<ul class="prohibited-list">
-						<li>Redistributing, sublicensing, or transferring the Software</li>
-						<li>Selling, renting, or leasing the Software</li>
-						<li>Sharing your purchased copy with others</li>
-						<li>Uploading to file-sharing websites or mod repositories</li>
-						<li>Including in modpacks without explicit written consent</li>
-					</ul>
-				</div>
-
-				<div class="prohibited-category">
-					<h3>Misrepresentation</h3>
-					<ul class="prohibited-list">
-						<li>Publicly claiming to be the original author or developer</li>
-						<li>Impersonating Gashi Studios or its representatives</li>
-					</ul>
+					<div class="rule-card prohibited">
+						<div class="rule-header">
+							<i class="ph ph-x-circle"></i>
+							<h3>Prohibited</h3>
+						</div>
+						<ul class="rule-list">
+							<li>Redistributing, sublicensing, or transferring the software</li>
+							<li>Selling, renting, or leasing the software</li>
+							<li>Sharing your purchased copy with others</li>
+							<li>Uploading to file-sharing sites or mod repositories</li>
+							<li>Including in modpacks without explicit written consent</li>
+							<li>Publicly claiming to be the original author/developer</li>
+							<li>Impersonating Gashi Studios or representatives</li>
+							<li>Redistributing modified versions or derivatives</li>
+							<li>Removing or altering proprietary notices/licenses</li>
+							<li>Using source code in other projects without permission</li>
+						</ul>
+					</div>
 				</div>
 
 				<div class="danger-box">
-					<strong>Violation of these terms will result in immediate license termination and may result in legal action.</strong>
+					<i class="ph ph-warning-octagon"></i>
+					<strong>Violations will result in immediate license termination and may lead to legal action.</strong>
 				</div>
 			</section>
 
-			<!-- Ownership -->
-			<section id="ownership" class="terms-section">
+			<!-- Support & Refunds -->
+			<section id="support" class="terms-section">
 				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v12"/><path d="m8 8 8 8"/><path d="m8 16 8-8"/>
-						</svg>
-					</span>
-					<h2>Ownership</h2>
-				</div>
-				<p class="section-intro">All rights, title, and interest in and to the Software, including all intellectual property rights, remain the sole and exclusive property of <strong>Gashi Studios</strong> (@gashicha / Shiga Minato).</p>
-
-				<p>This license does not grant you any rights to:</p>
-				<ul class="standard-list">
-					<li>Trademarks, service marks, or trade names of Gashi Studios</li>
-					<li>Source code or proprietary algorithms</li>
-					<li>Future updates or versions (updates are provided at our discretion)</li>
-				</ul>
-			</section>
-
-			<!-- Updates & Support -->
-			<section id="updates" class="terms-section">
-				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/>
-						</svg>
-					</span>
-					<h2>Updates & Support</h2>
+					<i class="ph ph-life-buoy section-icon"></i>
+					<h2>Support & Refunds</h2>
 				</div>
 
 				<div class="info-row">
 					<div class="info-card half">
-						<h4>Updates</h4>
+						<h4><i class="ph ph-arrows-clockwise"></i> Updates</h4>
 						<ul class="compact-list">
-							<li>Free updates provided at our discretion</li>
-							<li>May include bug fixes, new features, or compatibility improvements</li>
+							<li>Free updates at our discretion</li>
+							<li>May include bug fixes, features, compatibility</li>
 							<li>No guarantee of continued updates</li>
-							<li>Future version compatibility not guaranteed</li>
 						</ul>
 					</div>
 					<div class="info-card half">
-						<h4>Support</h4>
+						<h4><i class="ph ph-chat-circle-text"></i> Support</h4>
 						<ul class="compact-list">
-							<li>Community support via <a href="https://discord.gg/VVVvBTqqyP" target="_blank">Discord</a></li>
+							<li>Community support via Discord</li>
 							<li>Bug reports via Discord or email</li>
-							<li>We strive to fix bugs promptly</li>
-							<li>No SLA guaranteed</li>
+							<li>Third-party mod conflicts not supported</li>
 						</ul>
 					</div>
 				</div>
 
-				<div class="warning-box" style="margin-bottom: 1.5rem;">
-					<span class="warning-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-						</svg>
-					</span>
-					<div>
-						<strong>Third-Party Mod Conflicts Not Supported</strong>
-						<p>Issues caused by conflicts with other mods are outside our support scope. We only support CobbleRanked with its listed dependencies (Cobblemon, Fabric API, etc.).</p>
+				<div class="refund-section">
+					<h3><i class="ph ph-arrow-u-up-left"></i> Refund Policy (Updated May 2026)</h3>
+
+					<div class="refund-card standard">
+						<h4>Standard Policy</h4>
+						<p>Due to the digital nature of this product, returns and refunds are not available after download.</p>
 					</div>
-				</div>
 
-				<div class="no-refund-box">
-					<h4>No Refunds For (Standard Policy):</h4>
-					<div class="no-refund-grid">
-						<span>Compatibility issues</span>
-						<span>Third-party mod conflicts</span>
-						<span>Future version incompatibilities</span>
-						<span>Bugs (we fix them)</span>
-						<span>Change of mind</span>
-						<span><strong>After receiving source code access</strong></span>
-					</div>
-					<p style="color: var(--color-primary-light); margin-top: 0.75rem; font-size: 0.85rem;"><strong>Exception:</strong> Customers who purchased between March 1, 2026 and May 19, 2026 <strong>before receiving source code access</strong> may request a refund (see Refund Policy above).</p>
-				</div>
-			</section>
-
-			<!-- Disclaimer -->
-			<section id="disclaimer" class="terms-section">
-				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-						</svg>
-					</span>
-					<h2>Disclaimer of Warranties</h2>
-				</div>
-
-				<div class="legal-box">
-					<p>THE SOFTWARE IS PROVIDED <strong>"AS IS"</strong> WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:</p>
-					<ul>
-						<li>Warranties of merchantability</li>
-						<li>Fitness for a particular purpose</li>
-						<li>Non-infringement</li>
-						<li>Compatibility with your system or other software</li>
-					</ul>
-				</div>
-
-				<p><strong>Gashi Studios does not guarantee:</strong></p>
-				<ul class="standard-list">
-					<li>The Software will be error-free or uninterrupted</li>
-					<li>Defects will be corrected within a specific timeframe</li>
-					<li>The Software is free from harmful components</li>
-					<li>Compatibility with all server configurations or other mods</li>
-				</ul>
-			</section>
-
-			<!-- Liability -->
-			<section id="liability" class="terms-section">
-				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9.5" y1="9" x2="14.5" y2="14"/><line x1="14.5" y1="9" x2="9.5" y2="14"/>
-						</svg>
-					</span>
-					<h2>Limitation of Liability</h2>
-				</div>
-
-				<div class="legal-box">
-					<p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, GASHI STUDIOS SHALL NOT BE LIABLE FOR:</p>
-					<ul>
-						<li>Any direct, indirect, incidental, special, or consequential damages</li>
-						<li>Loss of data, profits, or business interruption</li>
-						<li>Damages arising from the use or inability to use the Software</li>
-						<li>Third-party claims related to your use of the Software</li>
-						<li>Server downtime or player complaints related to the Software</li>
-					</ul>
-				</div>
-
-				<div class="liability-cap">
-					<strong>Maximum liability is limited to the purchase price paid for the Software.</strong>
-				</div>
-			</section>
-
-			<!-- Privacy -->
-			<section id="privacy" class="terms-section">
-				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-						</svg>
-					</span>
-					<h2>Data Collection & Privacy</h2>
-				</div>
-
-				<p>The Software may collect anonymous usage data for:</p>
-				<ul class="standard-list">
-					<li>Bug reporting and diagnostics</li>
-					<li>Performance optimization</li>
-					<li>Feature usage analytics</li>
-				</ul>
-
-				<div class="privacy-note">
-					<strong>No personally identifiable information is collected without consent.</strong>
-					<p>Player data (ELO ratings, match history, etc.) remains on your server and is not transmitted to Gashi Studios.</p>
-				</div>
-
-				<h3>Third-Party Dependencies</h3>
-				<p>The Software relies on:</p>
-				<div class="dependency-grid">
-					<span>Minecraft (Mojang/Microsoft)</span>
-					<span>Cobblemon (Cable's Mods)</span>
-					<span>Fabric Loader & API</span>
-					<span>Other listed dependencies</span>
-				</div>
-				<p class="note">Use of these dependencies is subject to their respective licenses.</p>
-			</section>
-
-			<!-- Termination -->
-			<section id="termination" class="terms-section">
-				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
-						</svg>
-					</span>
-					<h2>Termination</h2>
-				</div>
-
-				<p>This license is effective until terminated. Your rights under this license will terminate automatically without notice if you fail to comply with any term.</p>
-
-				<div class="info-row">
-					<div class="info-card half">
-						<h4>Upon Termination, You Must:</h4>
-						<ul class="compact-list">
-							<li>Cease all use of the Software</li>
-							<li>Delete all copies from your systems</li>
-							<li>Destroy any derivative works</li>
-						</ul>
-					</div>
-					<div class="info-card half">
-						<h4>Gashi Studios Reserves the Right To:</h4>
-						<ul class="compact-list">
-							<li>Revoke your license for violations</li>
-							<li>Take legal action for infringement</li>
-							<li>Ban you from future purchases</li>
-						</ul>
+					<div class="refund-card special">
+						<h4>Special Refund Program</h4>
+						<p>Customers who purchased between <strong>March 1, 2026 and May 19, 2026</strong> who have <strong>NOT been granted source code access</strong> may request a refund.</p>
+						<p class="note"><i class="ph ph-warning"></i> Once source code access is provided, refunds are no longer available.</p>
 					</div>
 				</div>
 			</section>
 
-			<!-- Governing Law -->
-			<section id="governing" class="terms-section">
+			<!-- Legal -->
+			<section id="legal" class="terms-section">
 				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-						</svg>
-					</span>
-					<h2>Governing Law</h2>
+					<i class="ph ph-scales section-icon"></i>
+					<h2>Legal</h2>
 				</div>
 
-				<p>These terms shall be governed by and construed in accordance with the laws of <strong>Japan</strong>, without regard to its conflict of law provisions.</p>
+				<div class="legal-grid">
+					<div class="legal-card">
+						<h3><i class="ph ph-shield-warning"></i> Disclaimer</h3>
+						<p>Software provided "AS IS" without warranties. No guarantees for error-free operation or compatibility.</p>
+					</div>
 
-				<div class="dispute-steps">
-					<h4>Dispute Resolution:</h4>
-					<div class="steps">
-						<div class="step">
-							<span class="step-num">1</span>
-							<span>Good faith negotiation</span>
-						</div>
-						<div class="step">
-							<span class="step-num">2</span>
-							<span>Mediation (if agreed)</span>
-						</div>
-						<div class="step">
-							<span class="step-num">3</span>
-							<span>Jurisdiction: Tokyo, Japan</span>
-						</div>
+					<div class="legal-card">
+						<h3><i class="ph ph-warning-circle"></i> Liability Limitation</h3>
+						<p>Maximum liability limited to purchase price. Not liable for damages, data loss, or business interruption.</p>
+					</div>
+
+					<div class="legal-card">
+						<h3><i class="ph ph-copyright"></i> Ownership</h3>
+						<p>All rights remain with Gashi Studios. License grants usage rights only, not ownership.</p>
+					</div>
+
+					<div class="legal-card">
+						<h3><i class="ph ph-user-gear"></i> Termination</h3>
+						<p>License terminates automatically upon violation. Must cease use and delete all copies.</p>
+					</div>
+
+					<div class="legal-card">
+						<h3><i class="ph ph-lock-key"></i> Data & Privacy</h3>
+						<p>Anonymous usage data may be collected for diagnostics. No PII collected without consent.</p>
+					</div>
+
+					<div class="legal-card">
+						<h3><i class="ph ph-gavel"></i> Governing Law</h3>
+						<p>Governed by laws of Japan. Dispute resolution: Tokyo, Japan.</p>
 					</div>
 				</div>
 			</section>
@@ -556,46 +304,29 @@ import Footer from '../components/Footer.astro';
 			<!-- Contact -->
 			<section id="contact" class="terms-section">
 				<div class="section-header">
-					<span class="section-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-						</svg>
-					</span>
+					<i class="ph ph-envelope section-icon"></i>
 					<h2>Contact Information</h2>
 				</div>
-
-				<p>For questions, support, or licensing inquiries:</p>
+				<p class="section-intro">For questions, support, or licensing inquiries:</p>
 
 				<div class="contact-grid">
 					<a href="mailto:gashistudios.llc@gmail.com" class="contact-card">
-						<div class="contact-icon">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-							</svg>
-						</div>
-						<div class="contact-info">
+						<i class="ph ph-envelope-simple"></i>
+						<div>
 							<span class="contact-label">Email</span>
 							<span class="contact-value">gashistudios.llc@gmail.com</span>
 						</div>
 					</a>
 					<a href="https://discord.gg/VVVvBTqqyP" target="_blank" class="contact-card">
-						<div class="contact-icon">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-							</svg>
-						</div>
-						<div class="contact-info">
+						<i class="ph ph-discord-logo"></i>
+						<div>
 							<span class="contact-label">Discord</span>
 							<span class="contact-value">Join Server</span>
 						</div>
 					</a>
 					<a href="https://voxel.shop/product/8733/cobbleranked" target="_blank" class="contact-card">
-						<div class="contact-icon">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-							</svg>
-						</div>
-						<div class="contact-info">
+						<i class="ph ph-shopping-cart"></i>
+						<div>
 							<span class="contact-label">Purchase</span>
 							<span class="contact-value">VoxelShop</span>
 						</div>
@@ -607,42 +338,22 @@ import Footer from '../components/Footer.astro';
 			<section class="terms-section final">
 				<div class="final-notes">
 					<div class="final-item">
-						<h4>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -3px; margin-right: 6px;">
-								<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-							</svg>
-							Changes to Terms
-						</h4>
-						<p>Gashi Studios reserves the right to update these terms at any time without prior notice. Continued use constitutes acceptance.</p>
+						<h4><i class="ph ph-pencil-simple"></i> Changes to Terms</h4>
+						<p>Gashi Studios reserves the right to update these terms at any time. Continued use constitutes acceptance.</p>
 					</div>
 					<div class="final-item">
-						<h4>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -3px; margin-right: 6px;">
-								<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-							</svg>
-							Severability
-						</h4>
-						<p>If any provision is found invalid, the remaining provisions remain in full force and effect.</p>
+						<h4><i class="ph ph-scissors"></i> Severability</h4>
+						<p>If any provision is invalid, remaining provisions stay in effect.</p>
 					</div>
 					<div class="final-item">
-						<h4>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -3px; margin-right: 6px;">
-								<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
-							</svg>
-							Entire Agreement
-						</h4>
-						<p>These terms constitute the entire agreement between you and Gashi Studios regarding the Software.</p>
+						<h4><i class="ph ph-file-text"></i> Entire Agreement</h4>
+						<p>These terms constitute the entire agreement between you and Gashi Studios.</p>
 					</div>
 				</div>
 
 				<div class="acceptance-box">
-					<strong>
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -3px; margin-right: 6px;">
-							<polyline points="20 6 9 17 4 12"/>
-						</svg>
-						Acceptance
-					</strong>
-					<p>By purchasing and using the Software, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. If you do not agree, do not purchase, download, or use the Software.</p>
+					<strong><i class="ph ph-check-circle"></i> Acceptance</strong>
+					<p>By purchasing and using the Software, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.</p>
 				</div>
 
 				<div class="copyright">
@@ -652,21 +363,14 @@ import Footer from '../components/Footer.astro';
 		</main>
 	</div>
 
-	<!-- Gradient transition to footer -->
 	<div class="footer-transition"></div>
-
-	<!-- Footer -->
 	<Footer />
 
-	<!-- Back to top button -->
 	<button id="backToTop" class="back-to-top" aria-label="Back to top">
-		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-			<path d="M12 19V5M5 12l7-7 7 7"/>
-		</svg>
+		<i class="ph ph-arrow-up"></i>
 	</button>
 
 	<script is:inline>
-		// Smooth scroll for TOC links
 		document.querySelectorAll('.toc-link').forEach(link => {
 			link.addEventListener('click', (e) => {
 				e.preventDefault();
@@ -677,7 +381,6 @@ import Footer from '../components/Footer.astro';
 			});
 		});
 
-		// Active section highlighting
 		const sections = document.querySelectorAll('.terms-section[id]');
 		const tocLinks = document.querySelectorAll('.toc-link');
 
@@ -696,7 +399,6 @@ import Footer from '../components/Footer.astro';
 
 		sections.forEach(section => observer.observe(section));
 
-		// Back to top button
 		const backToTop = document.getElementById('backToTop');
 		window.addEventListener('scroll', () => {
 			if (window.scrollY > 500) {
@@ -712,7 +414,6 @@ import Footer from '../components/Footer.astro';
 	</script>
 
 	<style>
-		/* CSS Variables */
 		:root {
 			--color-bg: #0a0a0f;
 			--color-bg-alt: #111118;
@@ -722,13 +423,12 @@ import Footer from '../components/Footer.astro';
 			--color-primary: #ffffff;
 			--color-primary-light: rgba(255,255,255,0.7);
 			--color-border: rgba(255, 255, 255, 0.1);
+			--color-success: #22c55e;
+			--color-danger: #ef4444;
+			--color-warning: #f59e0b;
 		}
 
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
+		* { margin: 0; padding: 0; box-sizing: border-box; }
 
 		html {
 			scroll-behavior: smooth;
@@ -739,37 +439,27 @@ import Footer from '../components/Footer.astro';
 			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 			background: var(--color-bg);
 			color: var(--color-text);
-			line-height: 1.7;
+			line-height: 1.6;
 		}
 
-		a {
-			color: var(--color-primary);
-			text-decoration: none;
-			transition: color 0.2s;
-		}
-
-		a:hover {
-			color: var(--color-primary-light);
-		}
+		a { color: var(--color-primary); text-decoration: none; transition: 0.2s; }
+		a:hover { color: var(--color-primary-light); }
 
 		/* Hero */
 		.terms-hero {
-			padding: 8rem 2rem 4rem;
+			padding: 6rem 2rem 3rem;
 			background: var(--color-bg-alt);
 			border-bottom: 1px solid var(--color-border);
-		}
-
-		.hero-content {
-			max-width: 800px;
-			margin: 0 auto;
 			text-align: center;
 		}
 
 		.hero-badge {
-			display: inline-block;
-			background: rgba(255, 255, 255, 0.15);
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			background: rgba(255, 255, 255, 0.1);
 			color: var(--color-primary-light);
-			padding: 0.25rem 1rem;
+			padding: 0.4rem 1rem;
 			border-radius: 20px;
 			font-size: 0.85rem;
 			font-weight: 500;
@@ -777,9 +467,8 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.terms-hero h1 {
-			font-size: 3rem;
+			font-size: 2.5rem;
 			font-weight: 700;
-			color: var(--color-text);
 			margin-bottom: 1rem;
 		}
 
@@ -806,19 +495,15 @@ import Footer from '../components/Footer.astro';
 
 		/* Layout */
 		.terms-layout {
-			max-width: 1400px;
+			max-width: 1200px;
 			margin: 0 auto;
 			display: grid;
-			grid-template-columns: 280px 1fr;
-			gap: 4rem;
+			grid-template-columns: 250px 1fr;
+			gap: 3rem;
 			padding: 3rem 2rem;
 		}
 
-		/* Table of Contents */
-		.toc {
-			position: relative;
-		}
-
+		/* TOC */
 		.toc-sticky {
 			position: sticky;
 			top: 100px;
@@ -833,73 +518,65 @@ import Footer from '../components/Footer.astro';
 			margin-bottom: 1rem;
 		}
 
-		.toc-list {
-			list-style: none;
-		}
+		.toc-list { list-style: none; }
 
 		.toc-link {
-			display: block;
-			padding: 0.5rem 0;
-			padding-left: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+			padding: 0.6rem 0;
+			padding-left: 0.75rem;
 			color: var(--color-text-muted);
 			font-size: 0.9rem;
-			border-left: 2px solid rgba(255, 255, 255, 0.25);
+			border-left: 2px solid rgba(255, 255, 255, 0.2);
 			transition: all 0.2s;
 		}
 
 		.toc-link:hover {
 			color: var(--color-primary);
-			border-left-color: rgba(255, 255, 255, 0.5);
+			border-left-color: rgba(255, 255, 255, 0.4);
 		}
 
 		.toc-link.active {
 			color: var(--color-primary);
 			border-left-color: var(--color-primary);
-			background: rgba(255, 255, 255, 0.1);
+			background: rgba(255, 255, 255, 0.05);
 		}
+
+		.toc-link i { font-size: 1.1rem; }
 
 		/* Content */
-		.terms-content {
-			max-width: 900px;
-		}
+		.terms-content { max-width: 850px; }
 
 		.terms-section {
-			margin-bottom: 4rem;
-			padding-bottom: 3rem;
+			margin-bottom: 3rem;
+			padding-bottom: 2rem;
 			border-bottom: 1px solid var(--color-border);
 		}
 
-		.terms-section.final {
-			border-bottom: none;
-		}
+		.terms-section.final { border-bottom: none; }
 
 		.section-header {
 			display: flex;
 			align-items: center;
 			gap: 1rem;
-			margin-bottom: 1.5rem;
-		}
-
-		.section-icon {
-			width: 48px;
-			height: 48px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background: rgba(255, 255, 255, 0.15);
-			border-radius: 12px;
-			color: var(--color-primary);
-			flex-shrink: 0;
-		}
-
-		.section-icon svg {
-			stroke: var(--color-primary);
+			margin-bottom: 1rem;
 		}
 
 		.section-header h2 {
-			font-size: 1.75rem;
+			font-size: 1.5rem;
 			font-weight: 600;
-			color: var(--color-text);
+		}
+
+		.section-icon, .section-header i {
+			width: 40px;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 10px;
+			font-size: 1.25rem;
 		}
 
 		.section-intro {
@@ -907,229 +584,142 @@ import Footer from '../components/Footer.astro';
 			margin-bottom: 1.5rem;
 		}
 
-		/* Info Cards */
+		/* Cards */
 		.info-card {
 			background: var(--color-bg-card);
 			border: 1px solid var(--color-border);
 			border-radius: 12px;
-			padding: 1.5rem;
-			margin-bottom: 1.5rem;
+			padding: 1.25rem;
+			margin-bottom: 1rem;
 		}
 
 		.info-card h3, .info-card h4 {
 			color: var(--color-text);
-			margin-bottom: 1rem;
+			margin-bottom: 0.75rem;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
 		}
 
 		.info-grid {
 			display: grid;
-			gap: 1rem;
+			gap: 0.75rem;
 		}
 
 		.info-item {
 			display: flex;
 			justify-content: space-between;
-			padding: 0.75rem 0;
+			padding: 0.5rem 0;
 			border-bottom: 1px solid var(--color-border);
 		}
 
-		.info-item:last-child {
-			border-bottom: none;
-		}
+		.info-item:last-child { border-bottom: none; }
 
-		.info-label {
-			color: var(--color-text-muted);
-		}
-
-		.info-value {
-			color: var(--color-text);
-		}
-
-		.info-value.highlight {
-			color: var(--color-primary-light);
-		}
+		.info-label { color: var(--color-text-muted); }
+		.info-value { color: var(--color-text); }
+		.info-value.highlight { color: var(--color-primary-light); }
 
 		.info-row {
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 			gap: 1rem;
 			margin-bottom: 1.5rem;
 		}
 
 		.info-card.small {
 			text-align: center;
-			min-width: 0;
-			overflow: hidden;
+			padding: 1.5rem 1rem;
 		}
 
-		.info-card.half {
-			margin-bottom: 0;
-			min-width: 0;
-			overflow: hidden;
-		}
-
-		.price {
+		.info-card.small i {
 			font-size: 2rem;
-			font-weight: 700;
-			color: var(--color-text);
-		}
-
-		.price span {
-			font-size: 1rem;
-			color: var(--color-text-muted);
-		}
-
-		.payment-method, .delivery {
-			font-size: 1.1rem;
-			font-weight: 600;
-			color: var(--color-text);
-		}
-
-		.note {
-			font-size: 0.85rem;
-			color: var(--color-text-muted);
-			margin-top: 0.5rem;
-		}
-
-		/* Warning/Danger Boxes */
-		.warning-box {
-			display: flex;
-			gap: 1rem;
-			background: rgba(255, 255, 255, 0.1);
-			border: 1px solid rgba(255, 255, 255, 0.25);
-			border-radius: 12px;
-			padding: 1.25rem;
-		}
-
-		.warning-icon {
-			flex-shrink: 0;
 			color: var(--color-primary);
+			margin-bottom: 0.5rem;
 		}
 
-		.warning-icon svg {
-			stroke: var(--color-primary);
-		}
+		.info-card.half { margin-bottom: 0; }
 
-		.warning-box strong {
-			color: var(--color-text);
-		}
+		.price { font-size: 1.75rem; font-weight: 700; }
+		.note { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.5rem; }
 
-		.warning-box p {
-			color: var(--color-text-muted);
-			margin-top: 0.25rem;
-			font-size: 0.9rem;
-		}
-
-		.danger-box {
-			background: rgba(239, 68, 68, 0.1);
-			border: 1px solid rgba(239, 68, 68, 0.3);
-			border-radius: 12px;
-			padding: 1.25rem;
-			text-align: center;
-			color: #fca5a5;
-		}
-
-		/* Permit Grid */
-		.permit-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-			gap: 1rem;
-			margin-bottom: 1.5rem;
-		}
-
-		.permit-card {
+		/* License Card */
+		.license-card {
 			background: var(--color-bg-card);
 			border: 1px solid var(--color-border);
 			border-radius: 12px;
-			padding: 1.25rem;
-			text-align: center;
+			padding: 1.5rem;
 		}
 
-		.permit-icon {
-			margin-bottom: 0.5rem;
-			color: var(--color-primary);
+		.license-card > div {
+			padding: 0.75rem 0;
+			border-bottom: 1px solid var(--color-border);
 		}
 
-		.permit-icon svg {
-			stroke: var(--color-primary);
-		}
+		.license-card > div:last-child { border-bottom: none; }
 
-		.permit-card h4 {
-			color: var(--color-text);
-			font-size: 0.95rem;
-			margin-bottom: 0.25rem;
-		}
-
-		.permit-card p {
-			color: var(--color-text-muted);
-			font-size: 0.85rem;
-		}
-
+		/* License Note */
 		.license-note {
-			background: rgba(255, 255, 255, 0.1);
-			border-left: 3px solid var(--color-primary);
-			padding: 1rem 1.25rem;
-			border-radius: 0 8px 8px 0;
-			color: var(--color-text);
+			display: flex;
+			align-items: flex-start;
+			gap: 0.75rem;
+			background: rgba(34, 197, 94, 0.1);
+			border: 1px solid rgba(34, 197, 94, 0.3);
+			border-radius: 10px;
+			padding: 1rem;
+			margin-bottom: 1rem;
 		}
 
-		/* Prohibited */
-		.prohibited-category {
-			margin-bottom: 1.5rem;
+		.license-note i {
+			color: var(--color-success);
+			font-size: 1.25rem;
+			flex-shrink: 0;
 		}
 
-		.prohibited-category h3 {
-			color: var(--color-text);
-			font-size: 1.1rem;
-			margin-bottom: 0.75rem;
+		/* Warning Box */
+		.warning-box {
+			display: flex;
+			align-items: flex-start;
+			gap: 0.75rem;
+			background: rgba(245, 158, 11, 0.1);
+			border: 1px solid rgba(245, 158, 11, 0.3);
+			border-radius: 10px;
+			padding: 1rem;
+			margin-bottom: 1rem;
 		}
 
-		.prohibited-list {
+		.warning-box i {
+			color: var(--color-warning);
+			font-size: 1.25rem;
+			flex-shrink: 0;
+		}
+
+		.warning-box ul {
 			list-style: none;
+			margin-top: 0.5rem;
 		}
 
-		.prohibited-list li {
+		.warning-box li {
+			padding-left: 1rem;
 			position: relative;
-			padding-left: 1.5rem;
-			margin-bottom: 0.5rem;
 			color: var(--color-text-muted);
+			font-size: 0.9rem;
 		}
 
-		.prohibited-list li::before {
-			content: '×';
-			position: absolute;
-			left: 0;
-			color: #f87171;
-			font-weight: bold;
-		}
-
-		/* Standard Lists */
-		.standard-list {
-			list-style: none;
-			margin-bottom: 1.5rem;
-		}
-
-		.standard-list li {
-			position: relative;
-			padding-left: 1.5rem;
-			margin-bottom: 0.5rem;
-			color: var(--color-text-muted);
-		}
-
-		.standard-list li::before {
+		.warning-box li::before {
 			content: '•';
 			position: absolute;
 			left: 0;
-			color: var(--color-primary);
+			color: var(--color-warning);
 		}
 
+		/* Compact List */
 		.compact-list {
 			list-style: none;
 		}
 
 		.compact-list li {
-			position: relative;
 			padding-left: 1rem;
+			position: relative;
 			margin-bottom: 0.4rem;
 			color: var(--color-text-muted);
 			font-size: 0.9rem;
@@ -1139,151 +729,169 @@ import Footer from '../components/Footer.astro';
 			content: '–';
 			position: absolute;
 			left: 0;
-			color: var(--color-text-muted);
 		}
 
-		/* Legal Box */
-		.legal-box {
+		.compact-list h4 { display: flex; align-items: center; gap: 0.5rem !important; }
+
+		/* Rules Grid */
+		.rules-grid {
+			display: grid;
+			gap: 1.5rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.rule-card {
 			background: var(--color-bg-card);
 			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.5rem;
-			margin-bottom: 1.5rem;
-			font-family: 'IBM Plex Mono', monospace;
 		}
 
-		.legal-box p {
-			color: var(--color-text);
-			margin-bottom: 1rem;
+		.rule-card.allowed {
+			border-color: rgba(34, 197, 94, 0.3);
 		}
 
-		.legal-box ul {
-			list-style: none;
-			margin-left: 1rem;
+		.rule-card.prohibited {
+			border-color: rgba(239, 68, 68, 0.3);
 		}
 
-		.legal-box li {
-			color: var(--color-text-muted);
-			margin-bottom: 0.25rem;
-		}
-
-		.legal-box li::before {
-			content: '› ';
-			color: var(--color-primary);
-		}
-
-		.liability-cap {
-			background: rgba(255, 255, 255, 0.15);
-			border-radius: 8px;
-			padding: 1rem 1.5rem;
-			text-align: center;
-			color: var(--color-primary-light);
-		}
-
-		/* No Refund Box */
-		.no-refund-box {
-			background: var(--color-bg-card);
-			border: 1px solid var(--color-border);
-			border-radius: 12px;
-			padding: 1.25rem;
-		}
-
-		.no-refund-box h4 {
-			color: var(--color-text);
-			margin-bottom: 0.75rem;
-		}
-
-		.no-refund-grid {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 0.5rem;
-		}
-
-		.no-refund-grid span {
-			background: rgba(255, 255, 255, 0.15);
-			color: var(--color-text);
-			padding: 0.25rem 0.75rem;
-			border-radius: 20px;
-			font-size: 0.85rem;
-		}
-
-		/* Privacy */
-		.privacy-note {
-			background: var(--color-bg-card);
-			border: 1px solid var(--color-border);
-			border-radius: 12px;
-			padding: 1.25rem;
-			margin-bottom: 1.5rem;
-		}
-
-		.privacy-note strong {
-			color: var(--color-primary-light);
-		}
-
-		.privacy-note p {
-			color: var(--color-text-muted);
-			margin-top: 0.5rem;
-			font-size: 0.9rem;
-		}
-
-		.dependency-grid {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 0.5rem;
-			margin: 1rem 0;
-		}
-
-		.dependency-grid span {
-			background: rgba(255, 255, 255, 0.15);
-			color: var(--color-primary-light);
-			padding: 0.35rem 0.75rem;
-			border-radius: 6px;
-			font-size: 0.85rem;
-		}
-
-		/* Dispute Steps */
-		.dispute-steps {
-			background: var(--color-bg-card);
-			border: 1px solid var(--color-border);
-			border-radius: 12px;
-			padding: 1.5rem;
-			margin-top: 1.5rem;
-		}
-
-		.dispute-steps h4 {
-			color: var(--color-text);
-			margin-bottom: 1rem;
-		}
-
-		.steps {
-			display: flex;
-			gap: 1rem;
-			flex-wrap: wrap;
-		}
-
-		.step {
+		.rule-header {
 			display: flex;
 			align-items: center;
 			gap: 0.75rem;
-			flex: 1;
-			min-width: 150px;
+			margin-bottom: 1rem;
 		}
 
-		.step-num {
-			width: 32px;
-			height: 32px;
-			background: var(--color-primary);
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-weight: 600;
-			color: #fff;
+		.rule-card.allowed .rule-header i {
+			color: var(--color-success);
+			font-size: 1.5rem;
+		}
+
+		.rule-card.prohibited .rule-header i {
+			color: var(--color-danger);
+			font-size: 1.5rem;
+		}
+
+		.rule-card h3 { font-size: 1.1rem; }
+
+		.rule-list {
+			list-style: none;
+		}
+
+		.rule-list li {
+			padding-left: 1.5rem;
+			position: relative;
+			margin-bottom: 0.5rem;
+			color: var(--color-text-muted);
 			font-size: 0.9rem;
 		}
 
-		.step span:last-child {
+		.rule-card.allowed .rule-list li::before {
+			content: '✓';
+			position: absolute;
+			left: 0;
+			color: var(--color-success);
+			font-weight: bold;
+		}
+
+		.rule-card.prohibited .rule-list li::before {
+			content: '✗';
+			position: absolute;
+			left: 0;
+			color: var(--color-danger);
+			font-weight: bold;
+		}
+
+		/* Danger Box */
+		.danger-box {
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+			background: rgba(239, 68, 68, 0.1);
+			border: 1px solid rgba(239, 68, 68, 0.3);
+			border-radius: 10px;
+			padding: 1rem;
+			text-align: center;
+			justify-content: center;
+		}
+
+		.danger-box i {
+			color: var(--color-danger);
+			font-size: 1.5rem;
+		}
+
+		/* Refund Section */
+		.refund-section {
+			margin-top: 1.5rem;
+		}
+
+		.refund-section h3 {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			margin-bottom: 1rem;
+			color: var(--color-text);
+		}
+
+		.refund-card {
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
+			border-radius: 10px;
+			padding: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.refund-card.standard {
+			border-left: 3px solid var(--color-text-muted);
+		}
+
+		.refund-card.special {
+			border-left: 3px solid var(--color-warning);
+		}
+
+		.refund-card h4 {
+			margin-bottom: 0.5rem;
+			color: var(--color-text);
+		}
+
+		.refund-card .note {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			margin-top: 0.75rem;
+			color: var(--color-warning);
+		}
+
+		/* Legal Grid */
+		.legal-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 1rem;
+		}
+
+		.legal-card {
+			background: var(--color-bg-card);
+			border: 1px solid var(--color-border);
+			border-radius: 10px;
+			padding: 1.25rem;
+		}
+
+		.legal-card h3 {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			font-size: 1rem;
+			margin-bottom: 0.5rem;
+			color: var(--color-text);
+		}
+
+		.legal-card h3 i {
+			color: var(--color-primary-light);
+		}
+
+		.legal-card p {
 			color: var(--color-text-muted);
+			font-size: 0.9rem;
 		}
 
 		/* Contact Grid */
@@ -1300,33 +908,24 @@ import Footer from '../components/Footer.astro';
 			gap: 1rem;
 			background: var(--color-bg-card);
 			border: 1px solid var(--color-border);
-			border-radius: 12px;
+			border-radius: 10px;
 			padding: 1.25rem;
 			transition: all 0.2s;
-			min-width: 0;
-			overflow: hidden;
 		}
 
 		.contact-card:hover {
 			border-color: var(--color-primary);
 			transform: translateY(-2px);
-			box-shadow: 0 8px 20px rgba(255, 255, 255, 0.05);
 		}
 
-		.contact-icon {
-			flex-shrink: 0;
+		.contact-card i {
+			font-size: 1.5rem;
 			color: var(--color-primary);
 		}
 
-		.contact-icon svg {
-			stroke: var(--color-primary);
-		}
-
-		.contact-info {
+		.contact-card > div {
 			display: flex;
 			flex-direction: column;
-			min-width: 0;
-			overflow: hidden;
 		}
 
 		.contact-label {
@@ -1337,68 +936,70 @@ import Footer from '../components/Footer.astro';
 		.contact-value {
 			color: var(--color-text);
 			font-weight: 500;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
 		}
 
 		/* Final Notes */
 		.final-notes {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 1.5rem;
-			margin-bottom: 2rem;
+			gap: 1rem;
+			margin-bottom: 1.5rem;
 		}
 
 		.final-item {
 			background: var(--color-bg-card);
 			border: 1px solid var(--color-border);
-			border-radius: 12px;
+			border-radius: 10px;
 			padding: 1.25rem;
 		}
 
 		.final-item h4 {
-			color: var(--color-text);
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
 			margin-bottom: 0.5rem;
+			color: var(--color-text);
 		}
 
-		.final-item h4 svg {
-			stroke: var(--color-primary);
-		}
+		.final-item h4 i { color: var(--color-primary); }
+		.final-item p { color: var(--color-text-muted); font-size: 0.9rem; }
 
-		.final-item p {
-			color: var(--color-text-muted);
-			font-size: 0.9rem;
-		}
-
+		/* Acceptance Box */
 		.acceptance-box {
-			background: rgba(255, 255, 255, 0.1);
-			border: 1px solid rgba(255, 255, 255, 0.25);
-			border-radius: 12px;
+			display: flex;
+			align-items: flex-start;
+			gap: 0.75rem;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid var(--color-border);
+			border-radius: 10px;
 			padding: 1.5rem;
 			text-align: center;
-			margin-bottom: 2rem;
+			justify-content: center;
+			margin-bottom: 1.5rem;
 		}
 
 		.acceptance-box strong {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
 			color: var(--color-primary-light);
-			font-size: 1.1rem;
 		}
 
-		.acceptance-box strong svg {
-			stroke: var(--color-primary);
+		.acceptance-box i {
+			color: var(--color-success);
+			font-size: 1.25rem;
 		}
 
 		.acceptance-box p {
 			color: var(--color-text-muted);
-			margin-top: 0.75rem;
+			margin-top: 0.5rem;
 		}
 
 		.copyright {
 			text-align: center;
 			color: var(--color-text-muted);
 			font-size: 0.9rem;
-			padding-top: 2rem;
+			padding-top: 1.5rem;
 			border-top: 1px solid var(--color-border);
 		}
 
@@ -1407,12 +1008,12 @@ import Footer from '../components/Footer.astro';
 			position: fixed;
 			bottom: 2rem;
 			right: 2rem;
-			width: 48px;
-			height: 48px;
+			width: 44px;
+			height: 44px;
 			background: var(--color-primary);
 			border: none;
 			border-radius: 50%;
-			color: #fff;
+			color: #000;
 			cursor: pointer;
 			opacity: 0;
 			visibility: hidden;
@@ -1420,7 +1021,7 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+			font-size: 1.25rem;
 		}
 
 		.back-to-top.visible {
@@ -1430,12 +1031,10 @@ import Footer from '../components/Footer.astro';
 
 		.back-to-top:hover {
 			transform: translateY(-3px);
-			box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
 		}
 
-		/* Footer transition */
 		.footer-transition {
-			height: 80px;
+			height: 60px;
 			background: var(--color-bg);
 		}
 
@@ -1445,93 +1044,23 @@ import Footer from '../components/Footer.astro';
 				grid-template-columns: 1fr;
 			}
 
-			.toc {
-				display: none;
-			}
-
-			.terms-hero h1 {
-				font-size: 2.25rem;
-			}
-
-			.contact-grid {
-				grid-template-columns: repeat(2, 1fr);
-			}
+			.toc { display: none; }
+			.contact-grid { grid-template-columns: 1fr; }
 		}
 
 		@media (max-width: 768px) {
-			.info-row {
-				grid-template-columns: 1fr;
-			}
-
-			.contact-grid {
-				grid-template-columns: 1fr;
-			}
-
-			.permit-grid {
-				grid-template-columns: repeat(2, 1fr);
-			}
-
-			.final-notes {
-				grid-template-columns: 1fr;
-			}
+			.terms-hero h1 { font-size: 2rem; }
+			.info-row { grid-template-columns: 1fr; }
+			.rules-grid { grid-template-columns: 1fr; }
+			.legal-grid { grid-template-columns: 1fr; }
 		}
 
 		@media (max-width: 576px) {
-			.terms-hero {
-				padding: 6rem 1rem 3rem;
-			}
-
-			.terms-hero h1 {
-				font-size: 1.75rem;
-			}
-
-			.hero-meta {
-				flex-direction: column;
-				gap: 0.5rem;
-			}
-
-			.terms-layout {
-				padding: 2rem 1rem;
-			}
-
-			.section-header h2 {
-				font-size: 1.4rem;
-			}
-
-			.permit-grid {
-				grid-template-columns: 1fr;
-			}
-
-			.steps {
-				flex-direction: column;
-			}
-
-			.contact-card {
-				padding: 1rem;
-			}
-
-			.info-card {
-				padding: 1rem;
-			}
-
-			.info-card.small .price {
-				font-size: 1.5rem;
-			}
+			.terms-hero { padding: 4rem 1rem 2rem; }
+			.terms-hero h1 { font-size: 1.75rem; }
+			.terms-layout { padding: 2rem 1rem; }
+			.final-notes { grid-template-columns: 1fr; }
 		}
-
-/* ===== Viewport Frame ===== */
-.viewport-frame {
-	position: fixed;
-	inset: 8px;
-	z-index: 9999;
-	pointer-events: none;
-}
 	</style>
-
-<!-- Viewport frame -->
-<svg class="viewport-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
-	<rect x="0.4" y="0.4" width="99.2" height="99.2" rx="0.6" ry="0.6"
-		fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.12" vector-effect="non-scaling-stroke"/>
-</svg>
 </body>
 </html>
