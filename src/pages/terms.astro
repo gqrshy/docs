@@ -114,9 +114,11 @@ import Footer from '../components/Footer.astro';
 						<strong>Type:</strong> Limited, Non-Exclusive, Non-Transferable, Revocable License
 					</div>
 					<div class="license-scope">
+						<i class="ph ph-globe"></i>
 						<strong>Scope:</strong> Personal and commercial server use permitted
 					</div>
 					<div class="license-bound">
+						<i class="ph ph-user"></i>
 						<strong>Bound to:</strong> Original purchaser only (non-transferable)
 					</div>
 				</div>
@@ -153,7 +155,13 @@ import Footer from '../components/Footer.astro';
 
 				<div class="license-note">
 					<i class="ph ph-info"></i>
-					<strong>You may:</strong> Read, study, and modify code for learning. Submit pull requests. Fork for non-Fabric environments (e.g., Arclight) for personal use.
+					<strong>You may:</strong>
+					<ul>
+						<li>Read and study source code for learning purposes</li>
+						<li>Modify code for personal learning</li>
+						<li>Submit pull requests to official repository</li>
+						<li>Fork for non-Fabric environments (e.g., Arclight) for personal use only</li>
+					</ul>
 				</div>
 
 				<div class="warning-box">
@@ -549,7 +557,7 @@ import Footer from '../components/Footer.astro';
 		.terms-content { max-width: 850px; }
 
 		.terms-section {
-			margin-bottom: 3rem;
+			margin-bottom: 4rem;
 			padding-bottom: 2rem;
 			border-bottom: 1px solid var(--color-border);
 		}
@@ -651,65 +659,117 @@ import Footer from '../components/Footer.astro';
 		}
 
 		.license-card > div {
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
 			padding: 0.75rem 0;
 			border-bottom: 1px solid var(--color-border);
 		}
 
 		.license-card > div:last-child { border-bottom: none; }
 
+		.license-card i {
+			color: var(--color-primary-light);
+			font-size: 1.25rem;
+			flex-shrink: 0;
+		}
+
 		/* License Note */
 		.license-note {
-			display: flex;
-			align-items: flex-start;
-			gap: 0.75rem;
 			background: rgba(34, 197, 94, 0.1);
 			border: 1px solid rgba(34, 197, 94, 0.3);
 			border-radius: 10px;
-			padding: 1rem;
+			padding: 1.25rem;
 			margin-bottom: 1rem;
+		}
+
+		.license-note > div {
+			display: flex;
+			align-items: flex-start;
+			gap: 0.75rem;
 		}
 
 		.license-note i {
 			color: var(--color-success);
 			font-size: 1.25rem;
 			flex-shrink: 0;
+			margin-top: 0.15rem;
+		}
+
+		.license-note strong {
+			color: var(--color-success);
+			display: block;
+			margin-bottom: 0.5rem;
+		}
+
+		.license-note ul {
+			list-style: none;
+			margin-top: 0.75rem;
+		}
+
+		.license-note li {
+			padding-left: 1.25rem;
+			position: relative;
+			color: var(--color-text-muted);
+			font-size: 0.9rem;
+			margin-bottom: 0.4rem;
+		}
+
+		.license-note li::before {
+			content: '✓';
+			position: absolute;
+			left: 0;
+			color: var(--color-success);
+			font-weight: bold;
 		}
 
 		/* Warning Box */
 		.warning-box {
-			display: flex;
-			align-items: flex-start;
-			gap: 0.75rem;
 			background: rgba(245, 158, 11, 0.1);
 			border: 1px solid rgba(245, 158, 11, 0.3);
 			border-radius: 10px;
-			padding: 1rem;
+			padding: 1.25rem;
 			margin-bottom: 1rem;
+		}
+
+		.warning-box > div {
+			display: flex;
+			align-items: flex-start;
+			gap: 0.75rem;
 		}
 
 		.warning-box i {
 			color: var(--color-warning);
 			font-size: 1.25rem;
 			flex-shrink: 0;
+			margin-top: 0.15rem;
+		}
+
+		.warning-box strong {
+			color: var(--color-warning);
+			display: block;
+			margin-bottom: 0.5rem;
 		}
 
 		.warning-box ul {
 			list-style: none;
-			margin-top: 0.5rem;
+			margin-top: 0.75rem;
 		}
 
 		.warning-box li {
-			padding-left: 1rem;
+			padding-left: 1.25rem;
 			position: relative;
 			color: var(--color-text-muted);
 			font-size: 0.9rem;
+			margin-bottom: 0.4rem;
 		}
 
 		.warning-box li::before {
-			content: '•';
+			content: '✗';
 			position: absolute;
 			left: 0;
 			color: var(--color-warning);
+			font-weight: bold;
 		}
 
 		/* Compact List */
@@ -744,7 +804,7 @@ import Footer from '../components/Footer.astro';
 			background: var(--color-bg-card);
 			border: 1px solid var(--color-border);
 			border-radius: 12px;
-			padding: 1.5rem;
+			padding: 1.75rem;
 		}
 
 		.rule-card.allowed {
@@ -873,7 +933,7 @@ import Footer from '../components/Footer.astro';
 			background: var(--color-bg-card);
 			border: 1px solid var(--color-border);
 			border-radius: 10px;
-			padding: 1.25rem;
+			padding: 1.5rem;
 		}
 
 		.legal-card h3 {
