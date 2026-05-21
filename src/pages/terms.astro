@@ -31,7 +31,7 @@ import Footer from '../components/Footer.astro';
 			<div class="hero-meta">
 				<span class="meta-item">
 					<i class="ph ph-calendar-blank"></i>
-					Last Updated: May 20, 2026
+					Last Updated: May 21, 2026
 				</span>
 				<span class="meta-item">
 					<i class="ph ph-clock"></i>
@@ -130,48 +130,51 @@ import Footer from '../components/Footer.astro';
 					<i class="ph ph-code section-icon"></i>
 					<h2>Source Code Access</h2>
 				</div>
-				<p class="section-intro">Customers who purchased before May 20, 2026 may request access to the private GitHub repository.</p>
+				<p class="section-intro">Customers who have purchased CobbleRanked may request access to our private GitHub repository as contributors.</p>
 
 				<div class="info-row">
 					<div class="info-card half">
-						<h4><i class="ph ph-check-circle"></i> Eligibility</h4>
+						<h4><i class="ph ph-check-circle"></i> How to Request</h4>
+						<p class="note">You must have purchased CobbleRanked to request access. Please open a ticket and provide:</p>
 						<ul class="compact-list">
-							<li>Purchased before May 20, 2026</li>
-							<li>Valid purchase proof required</li>
-							<li>Non-refundable after access granted</li>
-							<li>Access is non-transferable</li>
+							<li><strong>Proof of purchase</strong> (VoxelShop receipt or transaction ID)</li>
+							<li><strong>GitHub username</strong> (e.g. <code>username</code> or <code>@username</code>)</li>
+							<li><strong>Contact information</strong> (Discord server invite you own, or email address)</li>
 						</ul>
 					</div>
 					<div class="info-card half">
-						<h4><i class="ph ph-github-logo"></i> Request Process</h4>
+						<h4><i class="ph ph-github-logo"></i> Access Terms</h4>
 						<ul class="compact-list">
-							<li>Join Discord server</li>
-							<li>DM @gashicha with proof</li>
-							<li>Provide GitHub username</li>
-							<li>Wait for repository invite</li>
+							<li>Access granted as GitHub contributor</li>
+							<li>Non-refundable once access is provided</li>
+							<li>Access is non-transferable</li>
+							<li>Repository remains private</li>
 						</ul>
 					</div>
 				</div>
 
 				<div class="license-note">
-					<i class="ph ph-info"></i>
-					<strong>You may:</strong>
+					<div>
+						<i class="ph ph-info"></i>
+						<strong>Permitted Uses:</strong>
+					</div>
 					<ul>
 						<li>Read and study source code for learning purposes</li>
-						<li>Modify code for personal learning</li>
 						<li>Submit pull requests to official repository</li>
-						<li>Fork for non-Fabric environments (e.g., Arclight) for personal use only</li>
+						<li>Fork for non-Fabric environments (e.g., Arclight) - private only</li>
 					</ul>
 				</div>
 
 				<div class="warning-box">
-					<i class="ph ph-warning"></i>
-					<strong>You may NOT:</strong>
+					<div>
+						<i class="ph ph-warning"></i>
+						<strong>Prohibited:</strong>
+					</div>
 					<ul>
-						<li>Redistribute modified versions</li>
-						<li>Create independent derivative works</li>
-						<li>Share access with others</li>
-						<li>Make forks public (except for PRs)</li>
+						<li>Redistribution or re-distribution of the source code in any form</li>
+						<li>Creating independent derivative works</li>
+						<li>Sharing access with others</li>
+						<li>Making forks public (except for PRs)</li>
 					</ul>
 				</div>
 			</section>
@@ -262,8 +265,8 @@ import Footer from '../components/Footer.astro';
 					</div>
 
 					<div class="refund-card special">
-						<h4>Special Refund Program</h4>
-						<p>Customers who purchased between <strong>March 1, 2026 and May 19, 2026</strong> who have <strong>NOT been granted source code access</strong> may request a refund.</p>
+						<h4>Source Code Access & Refunds</h4>
+						<p>Users who have been granted source code access are no longer eligible for refunds.</p>
 						<p class="note"><i class="ph ph-warning"></i> Once source code access is provided, refunds are no longer available.</p>
 					</div>
 				</div>
@@ -609,6 +612,11 @@ import Footer from '../components/Footer.astro';
 			gap: 0.5rem;
 		}
 
+		.info-card h4 i {
+			color: var(--color-primary-light);
+			font-size: 1.25rem;
+		}
+
 		.info-grid {
 			display: grid;
 			gap: 1rem;
@@ -687,6 +695,7 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			align-items: flex-start;
 			gap: 0.75rem;
+			margin-bottom: 0.75rem;
 		}
 
 		.license-note i {
@@ -736,6 +745,7 @@ import Footer from '../components/Footer.astro';
 			display: flex;
 			align-items: flex-start;
 			gap: 0.75rem;
+			margin-bottom: 0.75rem;
 		}
 
 		.warning-box i {
