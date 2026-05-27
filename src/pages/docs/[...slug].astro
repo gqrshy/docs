@@ -99,7 +99,6 @@ if (!entry) {
 
 const { Content, headings } = await render(entry);
 const slug = entry.id.replace(/\.md$/, '').replace(/\/index$/, '');
-const editUrl = `https://github.com/gqrshy/docs/edit/main/src/content/docs/${entry.id}`;
 ---
 
 <DocLayout
@@ -109,7 +108,6 @@ const editUrl = `https://github.com/gqrshy/docs/edit/main/src/content/docs/${ent
 	prev={prev}
 	next={next}
 	breadcrumbs={breadcrumbs}
-	editUrl={editUrl}
 >
 	<Content />
 </DocLayout>

@@ -184,6 +184,32 @@ Install [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) on all Fab
 - FabricProxy-Lite on all Fabric servers
 - `bungeecord: true` in Velocity's `velocity.toml` (under `[advanced]`)
 
+<details>
+<summary><strong>Arclight Server Configuration (Alternative to FabricProxy-Lite)</strong></summary>
+
+If you're using **Arclight servers** (NeoForge/Fabric servers with Bukkit/Spigot/Paper plugin support) instead of pure Fabric servers, you don't need FabricProxy-Lite/CrossStitch. Arclight has **native Velocity modern forwarding support** built-in.
+
+**For Arclight servers (1.20.4+):**
+
+1. Configure `arclight.conf` on each Arclight server:
+
+```hocon
+velocity {
+    enable=true
+    secret="your-forwarding-secret"
+}
+```
+
+2. Make sure the `secret` matches your Velocity proxy's `forwarding.secret` (defined in `velocity.toml`).
+
+3. Remove FabricProxy-Lite and CrossStitch mods from Arclight servers (they're not needed and may cause conflicts).
+
+**Note:** This native Velocity forwarding is only available for Arclight 1.20.4+ ("Arclight Whisper" and later). For Arclight 1.20.2 ("Arclight Net"), you may need additional plugins like [lightcity](https://github.com/ArclightPowered/lightcity) for legacy forwarding.
+
+See [Arclight FAQ - Velocity Support](https://github.com/IzzelAliz/Arclight/wiki/FAQ#support-of-bungeecord-and-velocity) for official documentation.
+
+</details>
+
 ---
 
 ## Server ID Reference

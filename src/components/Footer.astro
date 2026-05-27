@@ -155,6 +155,12 @@
 	overflow: hidden;
 }
 
+/* Marquee animation */
+@keyframes marquee {
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
+}
+
 /* Marquee strip top border */
 .footer-marquee {
 	background: rgba(255, 255, 255, 0.03);
@@ -165,6 +171,10 @@
 
 .footer-marquee-content {
 	animation: marquee 25s linear infinite;
+}
+
+.footer-marquee-content:hover {
+	animation-play-state: paused;
 }
 
 .footer-marquee-item {

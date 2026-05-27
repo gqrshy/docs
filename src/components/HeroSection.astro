@@ -9,7 +9,6 @@
 				<span data-i18n="heroHey">Hey there!</span>
 				<br />
 				<span class="name-highlight" data-i18n="heroName">I'm Gashi!</span>
-				<span class="hero-badge" data-i18n="heroBadge">mod dev</span>
 			</h1>
 			<p class="bio" data-i18n="heroBio">
 				Minecraft mod developer from Japan, creating tools for Cobblemon servers.<br />
@@ -114,7 +113,6 @@
 		en: {
 			heroHey: "Hey there!",
 			heroName: "I'm Gashi!",
-			heroBadge: "mod dev",
 			heroBio: "Minecraft mod developer from Japan, creating tools for Cobblemon servers.<br />Passionate about clean code and fun gameplay.",
 			heroDiscord: "Discord",
 			heroDocs: "Docs"
@@ -122,7 +120,6 @@
 		ja: {
 			heroHey: "こんにちは！",
 			heroName: "がしです！",
-			heroBadge: "mod開発者",
 			heroBio: "日本のMinecraft Mod開発者。Cobblemonサーバー向けツールを制作。<br />クリーンなコードと楽しいゲームプレイを追求。",
 			heroDiscord: "Discord",
 			heroDocs: "ドキュメント"
@@ -169,8 +166,6 @@
 	overflow: hidden;
 }
 
-/* Grid background removed - now using warped grid in layout */
-
 .hero-content {
 	position: relative;
 	z-index: 1;
@@ -200,20 +195,6 @@
 	color: #fff;
 }
 
-.hero-badge {
-	display: inline-block;
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	color: var(--color-text-muted);
-	padding: 0.15rem 0.6rem;
-	border-radius: 4px;
-	font-size: 0.35em;
-	font-weight: 600;
-	font-family: 'IBM Plex Mono', monospace;
-	letter-spacing: 0.05em;
-	vertical-align: middle;
-	margin-left: 0.75rem;
-}
-
 /* Bio */
 .bio {
 	color: var(--color-text-muted);
@@ -225,7 +206,7 @@
 	padding-left: 1rem;
 }
 
-/* Buttons — pill shape with hover inversion */
+/* Buttons */
 .hero-buttons {
 	display: flex;
 	gap: 1rem;
@@ -289,7 +270,7 @@
 	position: absolute;
 }
 
-/* ---- Main window: plain image, no dialog wrapper ---- */
+/* Main window */
 .char-window-main {
 	width: 500px;
 	z-index: 1;
@@ -298,7 +279,6 @@
 	translate: -50% 0;
 }
 
-/* Main img needs its own rules since no char-window-body parent */
 .char-window-main img {
 	display: block;
 	width: 100%;
@@ -307,7 +287,7 @@
 	object-position: center 30%;
 }
 
-/* ---- Sub-window body (shared) ---- */
+/* Sub-window body */
 .char-window-body {
 	padding: 0;
 	overflow: hidden;
@@ -319,19 +299,7 @@
 	object-fit: cover;
 }
 
-/* === Sub-window: Right eye zoom === */
-/*
- * Cropping mechanism:
- *   The .char-window-body is a fixed 160x160 square with overflow:hidden.
- *   Inside, the img is position:absolute with a large width (zoom level).
- *   Adjust these to control what's visible:
- *
- *   width  = zoom level (600px ≈ 3x, 1200px ≈ 6x)
- *   top    = vertical pan  (negative = shift up, positive = shift down)
- *   left   = horizontal pan (negative = shift left, positive = shift right)
- *
- *   Visible area = (|left|, |top|) to (|left|+160, |top|+160) on the scaled image
- */
+/* Right eye zoom */
 .char-window-eye {
 	width: 160px;
 	z-index: 3;
@@ -353,7 +321,7 @@
 	left: -300px;
 }
 
-/* === Sub-window: Gengar zoom === */
+/* Gengar zoom */
 .char-window-hand {
 	width: 160px;
 	z-index: 2;
@@ -499,10 +467,6 @@
 
 	.social-mobile {
 		display: flex;
-	}
-
-	.hero-badge {
-		display: none;
 	}
 }
 
