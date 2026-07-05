@@ -5,6 +5,8 @@ description: See where you stand. Track your rivals. Climb to the top.
 
 ## Your Name in Lights
 
+![Leaderboard](../../../../assets/images/leaderboard.png)
+
 The leaderboard shows the best players on your server. Every win pushes you higher. Every loss drops you down. Real-time rankings that update after every battle.
 
 ```
@@ -58,7 +60,7 @@ Leaderboards are cached for smooth performance even with thousands of players:
 
 | Setting | Value | Description |
 |---------|-------|-------------|
-| Cache TTL | 30 seconds | Auto-refresh interval |
+| Cache TTL | 15 minutes | Auto-refresh interval |
 | Default page size | 25 players | Players per page |
 | Max archive entries | 100 players | Off-season display limit |
 
@@ -68,7 +70,7 @@ Updates happen automatically in the background. You'll always see fresh data.
 
 - **First access**: Loads from database (may take 1-2 seconds)
 - **Subsequent access**: Returns cached data (instant)
-- **After 30 seconds**: Background refresh keeps data fresh
+- **After 15 minutes**: Background refresh keeps data fresh
 
 ---
 

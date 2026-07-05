@@ -5,6 +5,11 @@ description: Sync ranked battle data to your external website.
 
 Display live ranked data on your community website. Leaderboards, usage statistics, player rankings. All synced automatically.
 
+Here's a simple community leaderboard built entirely from the API — a rating/tier view, plus per-format win statistics:
+
+![A simple website leaderboard showing player ratings and tiers](../../../../assets/images/API-sample-website-elo&tier.png)
+![A simple website leaderboard showing per-format win statistics](../../../../assets/images/API-sample-website-winstats.png)
+
 ---
 
 ## Quick Setup
@@ -258,6 +263,7 @@ Validate `X-API-Key` on your server before processing data.
 
 ## See Also
 
+- [Web API Details](/docs/cobbleranked/advanced/api/) - Developer payload schemas and server examples
 - [Configuration](/docs/cobbleranked/configuration/config/) - Main configuration guide
 - [Leaderboards](/docs/cobbleranked/features/leaderboards/) - Leaderboard feature
 - [FAQ](/docs/cobbleranked/support/faq/) - Common questions and troubleshooting

@@ -30,14 +30,14 @@ A more advanced system that tracks rating uncertainty. Better for servers with i
 
 | ELO | Tier |
 |-----|------|
-| 2100+ | Cherish Ball |
-| 1900-2099 | Beast Ball |
-| 1700-1899 | Master Ball |
-| 1500-1699 | Ultra Ball |
-| 1300-1499 | Great Ball |
-| Below 1300 | Poke Ball |
+| 2000+ | Cherish Ball |
+| 1800-1999 | Beast Ball |
+| 1600-1799 | Master Ball |
+| 1400-1599 | Ultra Ball |
+| 1200-1399 | Great Ball |
+| Below 1200 | Poke Ball |
 
-New players start at **1000 ELO**. Win your way up or fall trying.
+New players start at **1000 ELO** in Pokémon Showdown mode, or **1500 ELO** in Glicko-2 mode (which matches Showdown's internal scale). Win your way up or fall trying.
 
 ## K-Factor Bands
 
@@ -53,6 +53,10 @@ The K-factor controls how much your rating changes per match. CobbleRanked uses 
 | 2500+ | 12 | Very stable |
 
 Higher K-factor means bigger rating changes. New players calibrate quickly, while established players have stable ratings.
+
+### Low-Rated Protection
+
+At low ratings the K-factor is **asymmetric**, matching Pokémon Showdown: winners gain more than losers lose. This protects newcomers: a rough start won't bury your rating, and climbing out of the low tiers is faster than sinking deeper into them.
 
 ## Win Streak Bonus
 
@@ -75,8 +79,8 @@ New Rating = Old Rating + K × (Result - Expected)
 
 Two 1500-rated players face off. 50/50 odds.
 
-- Winner: 1500 → **1510** (+10, K=20)
-- Loser: 1500 → **1490** (-10)
+- Winner: 1500 → **1518** (+18, K=36)
+- Loser: 1500 → **1482** (-18)
 
 ### Example: Upset Victory
 
@@ -135,32 +139,57 @@ pokemonShowdown:
     threshold5Wins: 5
 
 glicko2:
+  startingRating: 1500        # Glicko-2 starts at 1500 (Showdown's internal scale)
   startingRD: 150.0
   startingVolatility: 0.06
   systemConstant: 0.5
   rdDecayDays: 30
   maxRatingChange: 100
 
+# Tiers for Pokémon Showdown mode (centered on the 1000 start)
 rankTiers:
   - name: "POKEBALL"
     displayName: "Poké Ball"
     minElo: 0
   - name: "GREATBALL"
     displayName: "Great Ball"
-    minElo: 1300
+    minElo: 1200
+  - name: "ULTRABALL"
+    displayName: "Ultra Ball"
+    minElo: 1400
+  - name: "MASTERBALL"
+    displayName: "Master Ball"
+    minElo: 1600
+  - name: "BEASTBALL"
+    displayName: "Beast Ball"
+    minElo: 1800
+  - name: "CHERISH"
+    displayName: "Cherish Ball"
+    minElo: 2000
+
+# Separate tiers for Glicko-2 mode (centered on the 1500 start, spaced by σ)
+glicko2RankTiers:
+  - name: "POKEBALL"
+    displayName: "Poké Ball"
+    minElo: 0
+  - name: "GREATBALL"
+    displayName: "Great Ball"
+    minElo: 1410
   - name: "ULTRABALL"
     displayName: "Ultra Ball"
     minElo: 1500
   - name: "MASTERBALL"
     displayName: "Master Ball"
-    minElo: 1700
+    minElo: 1675
   - name: "BEASTBALL"
     displayName: "Beast Ball"
-    minElo: 1900
+    minElo: 1850
   - name: "CHERISH"
     displayName: "Cherish Ball"
-    minElo: 2100
+    minElo: 2020
 ```
+
+Rank tiers are **per rating system**: Pokémon Showdown mode uses `rankTiers`, Glicko-2 mode uses `glicko2RankTiers`. The correct set is selected automatically based on your active `ratingSystem`.
 
 ### Key Settings
 

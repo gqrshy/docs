@@ -7,6 +7,8 @@ description: No stalling. No waiting. Keep battles moving.
 
 Nothing kills competitive momentum like a player who takes forever to move. Turn timers ensure every battle flows smoothly with fair time limits for decisions.
 
+> This is the **per-turn** timer (time you get to pick each move). CobbleRanked also has an optional **per-match** cumulative [Player Timer](/docs/cobbleranked/features/player-timer/) (chess-clock style). The two are independent and can both be active.
+
 ## How It Works
 
 1. Each turn starts with full time
@@ -39,17 +41,12 @@ Format-specific timers are configured in **season presets**. Global timers (team
 ```yaml
 # season_presets/default.yml
 singles:
-  turnTimer: 90           # seconds per turn
-  matchDuration: 15       # minutes total
-
-doubles:
-  turnTimer: 120
-  matchDuration: 20
-
-triples:
-  turnTimer: 150
-  matchDuration: 25
+  turnTimer: 90           # seconds per turn (set 0 to disable the turn timer)
+  matchDuration: 15       # minutes total (set 0 to disable the match timer)
+  playerTimerSeconds: 0   # per-player cumulative budget (0 = Player Timer off)
 ```
+
+Set any timer to `0` to turn it off for that format. The Turn Timer, Match Timer, and [Player Timer](/docs/cobbleranked/features/player-timer/) are independent — you can run any combination.
 
 ### Global Timers (battle.yaml)
 
@@ -64,7 +61,12 @@ timers:
     - 300
     - 60
     - 30
+  matchTimerDisplay: "ACTION_BAR"   # ACTION_BAR (default) or BOSS_BAR
 ```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `matchTimerDisplay` | `ACTION_BAR` | Where the match-duration timer is shown. `ACTION_BAR` packs every timer into the action bar; `BOSS_BAR` shows the match timer as a boss bar at the top of the screen, leaving the action bar for the turn + player timers only. |
 
 ## On Timeout
 

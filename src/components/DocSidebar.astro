@@ -9,24 +9,41 @@ const navigation = [
 		items: [
 			{ label: 'Overview', href: '/docs/cobbleranked/' },
 			{
-				label: 'Getting Started',
+				label: 'Player Guide',
 				items: [
-					{ label: 'Introduction', href: '/docs/cobbleranked/getting-started/introduction/' },
-					{ label: 'Installation', href: '/docs/cobbleranked/getting-started/installation/' },
 					{ label: 'Quick Start', href: '/docs/cobbleranked/getting-started/quick-start/' },
-					{ label: 'Commands', href: '/docs/cobbleranked/getting-started/commands/' },
+					{ label: 'Ranked Battles', href: '/docs/cobbleranked/features/ranked-battles/' },
+					{ label: 'Random Battle', href: '/docs/cobbleranked/features/random-battle/' },
+					{ label: 'Casual Battles', href: '/docs/cobbleranked/features/casual-battles/' },
+					{ label: 'Seasons', href: '/docs/cobbleranked/features/seasons/' },
+					{ label: 'Leaderboards', href: '/docs/cobbleranked/features/leaderboards/' },
+					{ label: 'FAQ & Troubleshooting', href: '/docs/cobbleranked/support/faq/' },
 				]
 			},
 			{
-				label: 'Features',
+				label: 'Admin Guide',
 				items: [
-					{ label: 'Ranked Battles', href: '/docs/cobbleranked/features/ranked-battles/' },
-					{ label: 'Casual Battles', href: '/docs/cobbleranked/features/casual-battles/' },
-					{ label: 'Battle Formats', href: '/docs/cobbleranked/features/battle-formats/' },
+					{ label: 'Installation', href: '/docs/cobbleranked/getting-started/installation/' },
+					{ label: 'First Setup', href: '/docs/cobbleranked/getting-started/introduction/' },
+					{ label: 'Arena Setup', href: '/docs/cobbleranked/configuration/arenas/' },
+					{ label: 'Rewards', href: '/docs/cobbleranked/configuration/rewards/' },
+					{ label: 'Cross-Server', href: '/docs/cobbleranked/advanced/cross-server/' },
+				]
+			},
+			{
+				label: 'Reference',
+				items: [
+					{ label: 'Commands', href: '/docs/cobbleranked/getting-started/commands/' },
 					{ label: 'ELO System', href: '/docs/cobbleranked/features/elo-system/' },
-					{ label: 'Seasons', href: '/docs/cobbleranked/features/seasons/' },
-					{ label: 'Leaderboards', href: '/docs/cobbleranked/features/leaderboards/' },
+					{ label: 'Battle Formats', href: '/docs/cobbleranked/features/battle-formats/' },
 					{ label: 'Turn Timer', href: '/docs/cobbleranked/features/turn-timer/' },
+					{ label: 'Player Timer', href: '/docs/cobbleranked/features/player-timer/' },
+					{ label: 'Sleep Clause', href: '/docs/cobbleranked/features/sleep-clause/' },
+					{ label: 'Flee & Forfeit Penalties', href: '/docs/cobbleranked/features/forfeit-system/' },
+					{ label: 'Missions', href: '/docs/cobbleranked/configuration/missions/' },
+					{ label: 'Placeholders', href: '/docs/cobbleranked/integration/placeholders/' },
+					{ label: 'LuckPerms', href: '/docs/cobbleranked/integration/luckperms/' },
+					{ label: 'Database', href: '/docs/cobbleranked/advanced/database/' },
 				]
 			},
 			{
@@ -38,12 +55,8 @@ const navigation = [
 					{ label: 'Battle Settings', href: '/docs/cobbleranked/configuration/battle/' },
 					{ label: 'Season Settings', href: '/docs/cobbleranked/configuration/season/' },
 					{ label: 'Announcements', href: '/docs/cobbleranked/configuration/announcements/' },
-					{ label: 'Daily Limits', href: '/docs/cobbleranked/configuration/daily-limits/' },
-					{ label: 'Arenas', href: '/docs/cobbleranked/configuration/arenas/' },
 					{ label: 'Blacklist', href: '/docs/cobbleranked/configuration/blacklist/' },
 					{ label: 'Restrictions', href: '/docs/cobbleranked/configuration/restrictions/' },
-					{ label: 'Rewards', href: '/docs/cobbleranked/configuration/rewards/' },
-					{ label: 'Missions', href: '/docs/cobbleranked/configuration/missions/' },
 					{ label: 'GUI', href: '/docs/cobbleranked/configuration/gui/' },
 					{ label: 'Languages', href: '/docs/cobbleranked/configuration/languages/' },
 					{ label: 'Sounds', href: '/docs/cobbleranked/configuration/sounds/' },
@@ -51,20 +64,12 @@ const navigation = [
 				]
 			},
 			{
-				label: 'Integration',
-				items: [
-					{ label: 'LuckPerms', href: '/docs/cobbleranked/integration/luckperms/' },
-					{ label: 'Placeholders', href: '/docs/cobbleranked/integration/placeholders/' },
-				]
-			},
-			{
 				label: 'Advanced',
 				items: [
-					{ label: 'Database', href: '/docs/cobbleranked/advanced/database/' },
-					{ label: 'Cross-Server', href: '/docs/cobbleranked/advanced/cross-server/' },
+					{ label: 'Web API Details', href: '/docs/cobbleranked/advanced/api/' },
+					{ label: 'Cross-Server Troubleshooting', href: '/docs/cobbleranked/advanced/cross-server-troubleshooting/' },
 				]
 			},
-			{ label: 'FAQ & Troubleshooting', href: '/docs/cobbleranked/support/faq/' },
 		]
 	},
 	{
@@ -84,6 +89,7 @@ const navigation = [
 ];
 
 function isActive(href: string): boolean {
+	if (!href) return false;
 	return currentPath === href || currentPath === href.slice(0, -1);
 }
 

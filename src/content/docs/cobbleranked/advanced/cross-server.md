@@ -33,6 +33,18 @@ When two players are matched, they are transferred to the battle server via Velo
 >
 > CobbleRanked only syncs: Rankings, Match History, Queue State, Season Data
 
+### What Syncs Across Servers
+
+Beyond the queue and rankings, these follow the player across servers:
+
+- **Post-battle result screen**: when a player returns to their lobby server, they see the result with ELO shown as `before → after (+change)`, the outcome (Victory / Defeat / **Draw**), and remaining force (survivors + HP) for both sides. Draws now correctly display "Draw" instead of "Defeat".
+- **Flee / disconnect penalties**: a penalty earned on the battle server is stored in Redis and enforced on the lobby server, so a player can't dodge a queue ban by switching servers.
+- **Claimed rewards**: reward commands that couldn't run because the player disconnected are replayed on their next login (on whichever server they rejoin).
+
+![Defeat result screen](../../../../assets/images/battle-result-text-defeat-sample.png)
+
+---
+
 ---
 
 ## Requirements

@@ -144,6 +144,39 @@ queue:
 
 ---
 
+## Background Music (BGM)
+
+Background music config lives in the `music` section of `sounds.yaml`. It was **moved here from `config.yaml`** in v2.1.0. The old `music` block in `config.yaml` is no longer read, so if your music wasn't playing after upgrading, move it here.
+
+```yaml
+# sounds.yaml
+music:
+  enabled: true
+  # Played during the team-selection screen
+  teamSelectionMusic:
+    - { music: "minecraft:music.overworld.cherry_grove", volume: 0.6, pitch: 1.0 }
+  # Played during the battle itself (picked by average-Elo band)
+  battleMusic:
+    - minElo: 0
+      maxElo: 1500
+      musicList:
+        - { music: "minecraft:music.overworld.forest", volume: 0.6, pitch: 1.0 }
+    - minElo: 1500
+      maxElo: 9999
+      musicList:
+        - { music: "minecraft:music.overworld.jungle", volume: 0.7, pitch: 1.0 }
+```
+
+| Setting | Description |
+|---------|-------------|
+| `enabled` | Master switch for background music |
+| `teamSelectionMusic` | List of tracks; one is picked at random when the team-selection screen opens |
+| `battleMusic` | Elo-banded lists; the band matching the match's average Elo is used, then a track is picked at random |
+
+Music starts at the team-selection screen and continues through lead selection (so it doesn't cut out). In full-party formats where team selection is skipped (e.g. Random Battle), music starts at the lead-selection screen instead. Battle music overrides Cobblemon's default battle music once the battle begins.
+
+---
+
 ## Disabling Sounds
 
 To disable a specific sound, set `volume: 0`:

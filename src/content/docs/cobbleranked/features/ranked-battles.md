@@ -5,6 +5,8 @@ description: Prove your skills in competitive Pokemon battles.
 
 ## The Thrill of Competition
 
+![Victory result](../../../../assets/images/battle-result-victory-text-sample.png)
+
 Every ranked battle matters. Beat stronger opponents for massive ELO gains. Take down rivals and watch your name rise on the leaderboard. This is where legends are made.
 
 **Win** and your rating climbs. **Lose** and you'll need to fight your way back. Simple rules, endless competition.
@@ -28,13 +30,21 @@ Join Queue → Match Found → Ready Check → Team Selection → Lead Selection
 
 Both players must confirm they're ready. If you don't respond in time, the match is canceled and you'll face a cooldown penalty.
 
+### Results
+
+After the battle, you see the outcome — **Victory**, **Defeat**, or **Draw** — with your ELO shown as `before → after (+change)`, plus the surviving force (remaining Pokémon and HP) for both sides. Draws are shown as Draw, not silently counted as a loss.
+
+## Playing Fair
+
+Rage-quitting, mid-battle disconnects, and forfeiting all carry penalties, and alt-account ELO farming (repeated early forfeits) is hit extra hard. See [Flee & Forfeit Penalties](/docs/cobbleranked/features/forfeit-system/) for how the tiered penalties, early-forfeit multiplier, and optional forfeit block work.
+
 ### Team Selection
 
 Choose which Pokemon from your party will fight. You have 60 seconds to make your selection. Choose wisely.
 
 ### Lead Selection
 
-Pick your opening Pokemon. Your opponent won't see your choice until the battle begins. Mind games start here.
+Pick your opening Pokemon. Each lead's held item is shown alongside it, so you can read item-based strategies (Choice items, Focus Sash, Heavy-Duty Boots, etc.) before the battle begins. Your opponent won't see your choice until the battle starts. Mind games start here.
 
 ## Smart Matchmaking
 

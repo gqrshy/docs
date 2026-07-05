@@ -28,7 +28,7 @@ singles:
     pokemon: []
     moves: []
     abilities: []
-    items: []
+    heldItems: []
     labels:
       - "restricted"
       - "mythical"
@@ -370,7 +370,7 @@ doubles:
     abilities:
       - "moody"
       - "shadow_tag"
-    items: []
+    heldItems: []
     labels:
       - "restricted"
       - "mythical"
@@ -490,7 +490,7 @@ singles:
       - "moody"
       - "shadow_tag"
       - "arena_trap"
-    items: []
+    heldItems: []
     labels: []            # No label bans
     labelLimits: {}       # No label limits
 
@@ -615,7 +615,7 @@ moves:
 <summary>National Dex OU Banned Items</summary>
 
 ```yaml
-items:
+heldItems:
   - "cobblemon:king_rock"    # King's Rock flinch abuse
   - "cobblemon:razor_fang"   # Razor Fang flinch abuse
 ```
@@ -651,7 +651,7 @@ singles:
       - "shadow_tag"
       - "arena_trap"
       - "power_construct"
-    items:
+    heldItems:
       - "cobblemon:king_rock"
       - "cobblemon:razor_fang"
     labels: []              # No label bans

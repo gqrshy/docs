@@ -5,6 +5,8 @@ description: Fresh starts. New champions. Exclusive rewards for the best.
 
 ## Why Seasons?
 
+![Season schedule](../../../../assets/images/ranked-season-schedule-sample.png)
+
 Seasons keep competition alive. Every few weeks or months, the slate wipes clean. Last season's champion? They start at the same spot as everyone else. New players get a real shot at glory.
 
 **Top performers earn exclusive rewards**. Configure items, Pokemon, titles, and more. Give your players something to fight for.
@@ -206,7 +208,7 @@ When paused:
 - Players **cannot** join ranked queues
 - Players **can** still view rankings (if `allowRankedView` is true)
 - Casual battles continue normally (if `allowCasual` is true)
-- Season rotation is **blocked** — no automatic season end while paused
+- Season rotation is **blocked**: no automatic season end while paused
 
 </details>
 

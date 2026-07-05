@@ -30,6 +30,64 @@ timers:
 | `countdownSeconds` | `5` | Battle start countdown |
 | `battleTimeWarningSeconds` | `[300, 60, 30]` | Warning times (seconds) |
 
+## Battle Start Delays
+
+Fine-grained delays during battle start, useful for high-latency or cross-server (Arclight) setups where clients need extra time to receive battle packets:
+
+```yaml
+# battle.yaml
+timers:
+  startDelays:
+    leadGuiCloseMs: 500              # wait for lead-selection GUI to close
+    titleDisplayMs: 500              # hold the "battle start" title
+    crossServerPacketSyncMs: 1000    # cross-server only: packet sync
+    arclightInitMs: 500              # Arclight/Bukkit: wait for battle init
+    battleMusicMs: 1000              # delay before battle music overrides Cobblemon's
+```
+
+Raise these if players see battle UI issues or get stuck at battle start; lower them for snappier starts on low-latency single-server setups.
+
+## Random Battle (Randbats)
+
+Showdown-style Random Battle, where the server generates a balanced team for each player. See [Random Battle](/docs/cobbleranked/features/random-battle/) for the full guide.
+
+```yaml
+# battle.yaml
+randomBattle:
+  enabled: true
+  teamSize: 6
+  setsFile: "gen9randombattle.json"
+  # statsMode: OPTIMIZED (252/252/4 + boosting nature) | OFFICIAL (flat EV85 + neutral, Showdown-accurate) | FLAT (IV31/EV0/neutral)
+  statsMode: "OFFICIAL"
+  weighting:
+    enabled: true                   # team-composition constraints (Showdown parity)
+    multipliers: {}                 # speciesId -> weight multiplier
+    exclusions: []                  # speciesId list to exclude
+    speciesDuplication:
+      enabled: true
+      maxSameBaseSpecies: 1
+    typeDiversity:
+      enabled: true
+      maxPerType: 2
+    resistanceDiversity:
+      enabled: true
+      maxWeaknesses: 3
+      maxDoubleWeaknesses: 1
+  autoUpdate:
+    enabled: false                  # periodically fetch latest randbats data
+    intervalHours: 24
+    sourceUrl: "https://data.pkmn.cc/randbats"
+    battleServerOnly: true          # cross-server: only battle server fetches
+```
+
+| Setting | Description |
+|---------|-------------|
+| `statsMode` | How IVs/EVs/nature are assigned: `OPTIMIZED`, `OFFICIAL` (Showdown parity, default), or `FLAT` |
+| `weighting.*` | Team-composition constraints (species duplication, type/resistance diversity). Default ON for balanced teams |
+| `autoUpdate.*` | Periodically fetch the latest randbats data and hot-reload |
+
+The legacy `optimizeStats` flag is still respected for backward compatibility: when `statsMode` is `OPTIMIZED` (the default), `optimizeStats: false` is treated as `FLAT`. Setting `statsMode` explicitly always takes precedence.
+
 ## Format Settings (Season Presets)
 
 Format-specific settings are configured in season presets:
@@ -99,7 +157,7 @@ When set to `true`:
 
 ## Victory/Defeat Rewards
 
-Commands executed after each ranked match:
+Commands executed after each ranked match. **Both lists default to empty (disabled).** Add commands to enable them. Only runs for ranked matches.
 
 ```yaml
 # battle.yaml
@@ -113,9 +171,9 @@ rewards:
 
 > 📝 Placeholders: `{player}` = player name, `{uuid}` = player UUID
 
-## Flee Penalties
+## Flee & Forfeit Penalties
 
-Punish players who disconnect during battles:
+Penalize players who rage-quit, disconnect mid-battle, or forfeit, including alt-account ELO farming via repeated early forfeits. See [Flee & Forfeit Penalties](/docs/cobbleranked/features/forfeit-system/) for the full feature overview.
 
 ```yaml
 # battle.yaml
@@ -123,15 +181,21 @@ competitive:
   fleePenalty:
     enabled: true
     tiers:
-      - minFlees: 1
-        maxFlees: 5
-        penaltyMinutes: 5
-      - minFlees: 6
-        maxFlees: 10
-        penaltyMinutes: 15
-      - minFlees: 11
-        maxFlees: 999
-        penaltyMinutes: 30
+      - { minFlees: 1, maxFlees: 1, penaltyMinutes: 0 }       # 1st: warning
+      - { minFlees: 2, maxFlees: 2, penaltyMinutes: 5 }       # 2nd: 5 min
+      - { minFlees: 3, maxFlees: 3, penaltyMinutes: 30 }      # 3rd: 30 min
+      - { minFlees: 4, maxFlees: 5, penaltyMinutes: 180 }     # 4-5th: 3 hours
+      - { minFlees: 6, maxFlees: 9, penaltyMinutes: 360 }     # 6-9th: 6 hours
+      - { minFlees: 10, maxFlees: 999, penaltyMinutes: 1440 } # 10+: 1 day
+
+  earlyForfeit:
+    enabled: true
+    maxTurns: 3              # forfeits at turn < maxTurns are "early" (turn is 0-indexed)
+    penaltyMultiplier: 3.0   # base fleePenalty minutes * this value
+
+  forfeitBlock:
+    enabled: false           # when true, forfeit is forbidden within the first maxTurns turns
+    maxTurns: 3
 
   fleeDecay:
     enabled: true
@@ -141,17 +205,26 @@ competitive:
   pendingMatchTimeoutMinutes: 5
 ```
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `pendingMatchTimeoutMinutes` | `5` | Minutes before a pending match expires |
+| Offense | Queue Ban |
+|---------|-----------|
+| 1st | warning (0 min) |
+| 2nd | 5 min |
+| 3rd | 30 min |
+| 4th–5th | 3 hours |
+| 6th–9th | 6 hours |
+| 10th+ | 1 day |
 
-| Flee Count | Queue Ban |
-|------------|-----------|
-| 1-5 | 5 minutes |
-| 6-10 | 15 minutes |
-| 11+ | 30 minutes |
+Flee count decreases by 1 every 24 hours (configurable via `fleeDecay`).
 
-Flee count decreases by 1 every 24 hours (configurable).
+### Early-Forfeit Penalty
+
+`earlyForfeit` applies a multiplier to the base penalty when a player forfeits within the first `maxTurns` turns. This shuts down alt-account ELO farming (repeated turn-1 forfeits to feed rating).
+
+> Note: the base `fleePenalty` 1st tier is 0 min, so `0 × multiplier = 0` on the very first early forfeit. Raise the 1st tier above 0 if you want even the first early forfeit to hurt.
+
+### Forfeit Block
+
+`forfeitBlock` (off by default) forbids forfeiting entirely within the first `maxTurns` turns. The forfeit is cancelled, the player is re-prompted to choose an action, and shown a message. Once `maxTurns` has passed, forfeiting works normally.
 
 <details>
 <summary><strong>Customizing Penalty Tiers</strong></summary>
@@ -206,25 +279,9 @@ cooldowns:
 
 ## Daily Elo Limits
 
-Cap daily Elo gains to prevent smurfing:
+The daily rating-gain cap lives in [`elo.yaml`](/docs/cobbleranked/configuration/elo/) as `dailyEloGainLimit`. Losses are never capped. The reset time of day follows `config.yaml -> timezone`.
 
-```yaml
-# battle.yaml
-dailyLimits:
-  eloGainLimit: 200
-```
-
-> **Note:** Timezone is now configured globally in `config.yaml`:
-> ```yaml
-> # config.yaml
-> timezone: "Asia/Tokyo"  # IANA timezone format
-> ```
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `eloGainLimit` | `200` | Max positive Elo gain per day |
-
-See [Daily Limits](/docs/cobbleranked/configuration/daily-limits/) for details.
+See [ELO Configuration](/docs/cobbleranked/configuration/elo/#daily-elo-gain-limit) for details.
 
 ---
 
@@ -232,4 +289,4 @@ See [Daily Limits](/docs/cobbleranked/configuration/daily-limits/) for details.
 
 - [Turn Timer Feature](/docs/cobbleranked/features/turn-timer/) - Timer system details
 - [Announcements](/docs/cobbleranked/configuration/announcements/) - Match broadcasts
-- [Daily Limits](/docs/cobbleranked/configuration/daily-limits/) - Elo gain limits
+- [ELO Configuration](/docs/cobbleranked/configuration/elo/) - Rating system and daily limits

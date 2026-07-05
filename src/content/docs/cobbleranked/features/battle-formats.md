@@ -33,6 +33,12 @@ Full-scale warfare. Three Pokemon clash at once.
 
 Position matters. Center Pokemon can hit anyone; side Pokemon have limited reach. The ultimate test of team building.
 
+## Random Battle (Randbats)
+
+Pokémon Showdown-style **Random Battle** formats where the server generates your team for you. Available as `RANDOM_SINGLES`, `RANDOM_DOUBLES`, and `RANDOM_TRIPLES`. They use the same Singles/Doubles/Triples rules, but with a server-generated 6-Pokémon team instead of your own party.
+
+Random Battle has its **own separate rating and leaderboard**, fully isolated from the regular formats. See [Random Battle](/docs/cobbleranked/features/random-battle/) for the full guide.
+
 ## Independent Rankings
 
 Each format has its own:
@@ -112,11 +118,12 @@ singles:
   terastallize: false
 
   # Clauses
-  speciesClause: true
-  itemClause: 1
-  ohkoClause: true
-  evasionClause: true
-  endlessBattleClause: true
+  speciesClause: true        # no duplicate species
+  itemClause: 1              # max duplicates of the same held item (0 = off, 2 = allow two)
+  sleepClause: true          # only one opponent asleep at a time (see Sleep Clause page)
+  ohkoClause: true           # ban OHKO moves (Sheer Cold, etc.)
+  evasionClause: true        # ban evasion moves (Double Team, etc.)
+  endlessBattleClause: true  # auto-draw endless stall loops
 
   # Restricted Pokemon
   restrictedCount: 1
@@ -186,6 +193,10 @@ Some presets use a restricted Pokemon system (VGC-style):
 | `restrictedPokemon` | List of specific Pokemon marked as restricted |
 
 When `restrictedCount > 0`, players can only include that many Pokemon from the restricted list in their team.
+
+### Gimmick Control (Mega / Z-Moves / Dynamax / Tera)
+
+The `megaEvolution`, `zMoves`, `dynamax`, and `terastallize` toggles actually disable the gimmick in ranked battles. Because these mechanics (added by Mega Showdown) are gated by key items, simply banning the items isn't enough. CobbleRanked blocks the gimmick at the moveset level during battle (via a mixin on the action request) so it can't be used even if the player has the item. Casual and non-ranked battles are unaffected.
 
 ## Multi-Format Rewards
 

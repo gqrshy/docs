@@ -20,15 +20,15 @@ description: Welcome to CobbleRanked! Get up and running quickly.
 | Minecraft | 1.21.1 | - |
 | Fabric Loader | 0.17.2+ | [Fabric](https://fabricmc.net/) |
 | Fabric API | Latest | [Modrinth](https://modrinth.com/mod/fabric-api) |
-| Fabric Language Kotlin | 1.13.0+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
+| Fabric Language Kotlin | 1.13.6+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
 | Cobblemon | 1.7.1+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
 
 ### GashiStudios Dependencies
 
 | Mod | Version | Purpose |
 |-----|---------|---------|
-| **GashiLibs** | 1.0.7+ | Shared libraries (database drivers, Redis, config) |
-| **MailLib** | 1.0.5+ | Mail/reward delivery for season rewards |
+| **GashiLibs** | 1.1.0+ | Shared libraries (database drivers, Redis, config) |
+| **MailLib** | 1.0.7+ | Mail/reward delivery for season rewards |
 
 <details>
 <summary><strong>About GashiLibs</strong></summary>

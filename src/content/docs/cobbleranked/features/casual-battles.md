@@ -5,6 +5,8 @@ description: Practice without pressure. Test teams and battle friends.
 
 ## Why Casual?
 
+![Casual battles and missions](../../../../assets/images/casual-mission-sample.png)
+
 Not every battle needs to be life or death. Casual mode lets you:
 
 - **Experiment freely**: Test wild team compositions without consequences
@@ -18,7 +20,7 @@ Not every battle needs to be life or death. Casual mode lets you:
 |---|:---:|:---:|
 | ELO changes | ✓ | ✗ |
 | Affects leaderboard | ✓ | ✗ |
-| Matchmaking | Skill-based | Instant |
+| Matchmaking | Skill-based | Skill-based (no rating change) |
 | Penalties | Strict | Relaxed |
 
 ## How to Play

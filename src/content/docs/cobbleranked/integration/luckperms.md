@@ -104,19 +104,20 @@ CobbleRanked automatically grants rank-based permissions and display features:
 Configure in `config/cobbleranked/integrations/luckperms.yaml`:
 
 ```yaml
-luckperms:
-  enabled: true
-  syncMode: SUFFIX          # PREFIX, SUFFIX, GROUP, or ALL
-  removeOnRankLoss: true   # Remove display when losing rank
+# config/cobbleranked/integrations/luckperms.yaml
+enabled: true
+syncMode: SUFFIX          # PREFIX, SUFFIX, GROUP, or ALL
+removeOnRankLoss: true   # Remove display when losing rank
+opBypassAdminPermissions: true   # OPs (level 2+) can run admin commands without explicit nodes
 
-  tierMappings:
-    POKEBALL:
-      suffix: " &f[Poké Ball]&r"
-      weight: 100
-    GREATBALL:
-      suffix: " &9[Great Ball]&r"
-      weight: 101
-    # ... other tiers
+tierMappings:
+  POKEBALL:
+    suffix: " &f[Poké Ball]&r"
+    weight: 100
+  GREATBALL:
+    suffix: " &9[Great Ball]&r"
+    weight: 101
+  # ... other tiers
 ```
 
 | Setting | Description |
@@ -124,6 +125,23 @@ luckperms:
 | `syncMode` | How rank display is applied (suffix, prefix, group) |
 | `removeOnRankLoss` | Whether to remove display when player drops below tier |
 | `permissionMode` | ALLOW_BY_DEFAULT or REQUIRE_PERMISSION for command access |
+
+## Ranked Bans
+
+You can ban a player from ranked play through LuckPerms. The ban denies the `cobbleranked.player.use` permission, so the player can no longer open `/ranked` (Casual via `/casual` is still allowed).
+
+```bash
+/rankedadmin banranked <player>     # ban from ranked (requires LuckPerms)
+/rankedadmin unbanranked <player>   # lift the ban (requires LuckPerms)
+```
+
+**Cross-server sync:** a ranked ban only carries across servers if LuckPerms uses **shared storage** (e.g. MySQL). If each server uses local storage (SQLite/H2/JSON), the ban applies per-server only. Make sure every linked server points at the same LuckPerms storage so the ban follows the player.
+
+You can also set the denial node manually:
+
+```bash
+/lp user <player> permission set cobbleranked.player.use false
+```
 
 ---
 

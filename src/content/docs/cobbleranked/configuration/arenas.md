@@ -10,11 +10,13 @@ Arenas are where battles take place. Configure them in `config/cobbleranked/aren
 The fastest way to set up an arena:
 
 1. Stand at Player 1's position
-2. Run `/rankedadmin setArena myarena pos1`
+2. Run `/rankedadmin arena create myarena pos1`
 3. Move to Player 2's position
-4. Run `/rankedadmin setArena myarena pos2`
+4. Run `/rankedadmin arena create myarena pos2`
 5. Move to the exit location
-6. Run `/rankedadmin setArena myarena exit`
+6. Run `/rankedadmin arena create myarena exit`
+
+> 📝 The exit step records both the position **and the dimension** you're standing in. Stand in your lobby dimension (even a different one from the arena) to set up a **cross-dimension exit** — for example, return players from a Nether arena back to an Overworld lobby. If you skip the exit step entirely, players are returned to wherever they were before the match.
 
 ## Arena Structure
 
@@ -38,12 +40,15 @@ arenas:
       z: 100.5
       yaw: 180.0
       pitch: 0.0
+    # exitPosition and exitWorld are optional. If omitted, players return to
+    # their pre-match location after the battle.
     exitPosition:
       x: 0.5
       y: 64.0
       z: 0.5
       yaw: 0.0
       pitch: 0.0
+    exitWorld: "minecraft:overworld"   # optional, supports cross-dimension exits
 ```
 
 ## Configuration Fields
@@ -56,7 +61,8 @@ arenas:
 | `enabled` | boolean | Whether this arena is active |
 | `player1Position` | object | Spawn position for player 1 |
 | `player2Position` | object | Spawn position for player 2 |
-| `exitPosition` | object | Where players teleport after battle |
+| `exitPosition` | object (optional) | Where players teleport after battle. Omit to restore the pre-match location. |
+| `exitWorld` | string (optional) | Destination dimension for the exit. Defaults to the arena's `world`. Supports cross-dimension exits (e.g. battle in a Nether arena, return to an Overworld lobby). |
 
 ### Position Fields
 
@@ -85,16 +91,17 @@ Add more entries under `arenas:` for parallel battles. Each arena needs its own 
 
 | Command | Description |
 |---------|-------------|
-| `/rankedadmin setArena <name> pos1` | Set player 1 spawn |
-| `/rankedadmin setArena <name> pos2` | Set player 2 spawn |
-| `/rankedadmin setArena <name> exit` | Set exit location |
-| `/rankedadmin setArena <name> spectator` | Set spectator position |
-| `/rankedadmin setArena <name> setcenter [radius]` | Set field effect center (default radius: 8) |
-| `/rankedadmin setexit` | Set global exit position |
+| `/rankedadmin arena create <name> pos1` | Set player 1 spawn |
+| `/rankedadmin arena create <name> pos2` | Set player 2 spawn |
+| `/rankedadmin arena create <name> exit` | Set exit location |
+| `/rankedadmin arena create <name> spectator` | Set spectator position |
+| `/rankedadmin arena setcenter <name> [radius]` | Set field effect center (default radius: 8) |
+| `/rankedadmin arena setexit <name>` | Set the exit position for an arena |
 | `/rankedadmin arena status` | View all arena statuses |
 | `/rankedadmin arena enable <name>` | Enable an arena |
 | `/rankedadmin arena disable <name>` | Disable an arena |
-| `/rankedadmin teleportArena <name>` | Teleport to arena |
+| `/rankedadmin arena teleport <name>` | Teleport to an arena |
+| `/rankedadmin arena reset` | Reset all arena in-use flags |
 
 ## Arena Design Tips
 

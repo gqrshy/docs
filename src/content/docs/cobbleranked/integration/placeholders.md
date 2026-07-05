@@ -74,7 +74,7 @@ Stats are available per format: `singles`, `doubles`, `triples`.
 
 ## Top Players
 
-Leaderboard placeholders for ranks 1-100.
+Leaderboard placeholders for ranks 1-10 (the plugin registers placeholders for the top 10 of each format; higher ranks resolve to `-`).
 
 ### Default (Singles)
 

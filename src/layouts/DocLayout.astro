@@ -25,7 +25,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 ---
 
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1088,17 +1088,25 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			border-color: #ef4444;
 		}
 
-		/* ===== Images ===== */
+		/* ===== Images & Video (centered) ===== */
 		.prose img {
+			display: block;
 			max-width: 100%;
 			height: auto;
 			border-radius: 0.75rem;
-			margin: 1.5rem 0;
+			margin: 1.5rem auto;
 			object-fit: contain;
 			user-select: none;
 			-webkit-user-select: none;
 			pointer-events: auto;
 			caret-color: transparent;
+		}
+
+		.prose video {
+			display: block;
+			max-width: 100%;
+			border-radius: 0.75rem;
+			margin: 1.5rem auto;
 		}
 
 		/* ===== Image Lightbox ===== */

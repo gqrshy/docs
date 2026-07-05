@@ -94,6 +94,7 @@ Tracks rating **and** uncertainty (Rating Deviation). Better for servers where p
 ratingSystem: GLICKO2
 
 glicko2:
+  startingRating: 1500       # Glicko-2 starts at 1500 (matches Showdown's internal scale)
   startingRD: 150.0
   startingVolatility: 0.06
   systemConstant: 0.5
@@ -103,7 +104,8 @@ glicko2:
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `startingRD` | `150.0` | Rating Deviation — uncertainty in rating |
+| `startingRating` | `1500` | Starting rating for new players in Glicko-2 mode |
+| `startingRD` | `150.0` | Rating Deviation (uncertainty in rating) |
 | `startingVolatility` | `0.06` | Expected rating fluctuation |
 | `systemConstant` | `0.5` | Controls volatility changes (0.3-1.2) |
 | `rdDecayDays` | `30` | Days of inactivity before RD increases |
@@ -175,7 +177,7 @@ For multi-server networks, the decay task runs on **one server only** using a Re
 - Redis enabled in [`cross-server.yaml`](/docs/cobbleranked/advanced/cross-server/)
 - All servers share the same database
 
-**No extra configuration needed** — the lock is automatic when Redis is enabled.
+**No extra configuration needed.** The lock is automatic when Redis is enabled.
 
 </details>
 
@@ -196,32 +198,67 @@ ALTER TABLE format_stats ADD COLUMN last_match_at BIGINT;
 
 ## Rank Tiers
 
-Cosmetic ranks displayed in GUI and leaderboard:
+Cosmetic ranks displayed in GUI and leaderboard. **Tiers are per rating system**: Pokémon Showdown mode uses `rankTiers`, Glicko-2 mode uses `glicko2RankTiers`. The correct set is selected automatically based on your active `ratingSystem`.
 
 ```yaml
 # elo.yaml
+# Tiers for Pokémon Showdown mode (centered on the 1000 start)
 rankTiers:
-  - name: "POKEBALL"
-    displayName: "Poké Ball"
-    minElo: 0
-  - name: "GREATBALL"
-    displayName: "Great Ball"
-    minElo: 1300
-  - name: "ULTRABALL"
-    displayName: "Ultra Ball"
-    minElo: 1500
-  - name: "MASTERBALL"
-    displayName: "Master Ball"
-    minElo: 1700
-  - name: "BEASTBALL"
-    displayName: "Beast Ball"
-    minElo: 1900
-  - name: "CHERISH"
-    displayName: "Cherish Ball"
-    minElo: 2100
+  - { name: "POKEBALL",   displayName: "Poké Ball",   minElo: 0 }
+  - { name: "GREATBALL",  displayName: "Great Ball",  minElo: 1200 }
+  - { name: "ULTRABALL",  displayName: "Ultra Ball",  minElo: 1400 }
+  - { name: "MASTERBALL", displayName: "Master Ball", minElo: 1600 }
+  - { name: "BEASTBALL",  displayName: "Beast Ball",  minElo: 1800 }
+  - { name: "CHERISH",    displayName: "Cherish Ball", minElo: 2000 }
+
+# Separate tiers for Glicko-2 mode (centered on the 1500 start, spaced by σ)
+glicko2RankTiers:
+  - { name: "POKEBALL",   displayName: "Poké Ball",   minElo: 0 }
+  - { name: "GREATBALL",  displayName: "Great Ball",  minElo: 1410 }
+  - { name: "ULTRABALL",  displayName: "Ultra Ball",  minElo: 1500 }
+  - { name: "MASTERBALL", displayName: "Master Ball", minElo: 1675 }
+  - { name: "BEASTBALL",  displayName: "Beast Ball",  minElo: 1850 }
+  - { name: "CHERISH",    displayName: "Cherish Ball", minElo: 2020 }
 ```
 
-> 📝 Tiers affect display and [rank rewards](/docs/cobbleranked/configuration/rewards/) only — they don't change matchmaking. Use [LuckPerms Integration](/docs/cobbleranked/integration/luckperms/) for rank-based permissions.
+> 📝 Tiers affect display and [rank rewards](/docs/cobbleranked/configuration/rewards/) only; they don't change matchmaking. Use [LuckPerms Integration](/docs/cobbleranked/integration/luckperms/) for rank-based permissions.
+
+## Daily Elo Gain Limit
+
+Caps positive rating gains per day to curb smurfing and boosting. Players can still battle after hitting the limit, but wins grant no positive rating. Losses are never capped.
+
+```yaml
+# elo.yaml
+dailyEloGainLimit: 200   # 0 = unlimited
+```
+
+The reset time of day follows the global `config.yaml -> timezone`.
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `dailyEloGainLimit` | `200` | Max positive Elo gain per day (0 = unlimited) |
+
+<details>
+<summary><strong>Example</strong></summary>
+
+- Player starts at 1500 Elo
+- Plays 10 matches: wins 7 (+140 Elo), loses 3 (-30 Elo)
+- Remaining allowance: 200 - 140 = 60 Elo
+- After hitting 200 net positive gain: wins grant 0 Elo, losses still apply
+
+</details>
+
+## Draws
+
+By default, a draw (double-KO / indeterminate outcome) is **rating-neutral**. You can opt into a standard 0.5-score update for both players instead:
+
+```yaml
+# elo.yaml
+draws:
+  applyRatingChange: false   # true applies a 0.5-score update on draws
+```
+
+When enabled, draws apply a half-win/half-loss rating update (works with both rating systems), respect the daily gain cap, and fire rank-change/tier-reward checks as usual.
 
 ---
 

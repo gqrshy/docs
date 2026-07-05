@@ -11,10 +11,10 @@ Place all of these in your `mods/` folder:
 |-----|---------|----------|
 | Fabric Loader | 0.17.2+ | [fabricmc.net](https://fabricmc.net/use/server/) |
 | Fabric API | Latest | [Modrinth](https://modrinth.com/mod/fabric-api) |
-| Fabric Language Kotlin | 1.13.0+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
+| Fabric Language Kotlin | 1.13.6+ | [Modrinth](https://modrinth.com/mod/fabric-language-kotlin) |
 | Cobblemon | 1.7.1+ | [Modrinth](https://modrinth.com/mod/cobblemon) |
-| GashiLibs | 1.0.7+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
-| MailLib | 1.0.5+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| GashiLibs | 1.1.0+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
+| MailLib | 1.0.7+ | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
 | **CobbleRanked** | Latest | [GashiStudios Discord](https://discord.gg/VVVvBTqqyP) |
 
 **Target:** Minecraft 1.21.1 (Fabric server)
@@ -37,8 +37,8 @@ mods/
 ├── fabric-api-x.x.x+1.21.1.jar
 ├── fabric-language-kotlin-x.x.x+kotlin.x.x.x.jar
 ├── Cobblemon-fabric-x.x.x+1.21.1.jar
-├── gashilibs-1.0.7.jar
-├── maillib-1.0.5.jar
+├── gashilibs-1.1.0.jar
+├── maillib-1.0.7.jar
 └── CobbleRanked-x.x.x.jar
 ```
 
@@ -62,7 +62,6 @@ server/
 │       ├── matchmaking.yaml    ← Queue matching rules
 │       ├── season.yaml         ← Season schedule and reset
 │       ├── arenas.yaml         ← Battle coordinates
-│       ├── blacklist.yaml      ← Pokemon/move restrictions
 │       ├── restrictions.yaml   ← Queue/arena restrictions
 │       ├── rewards.yaml        ← Season rewards
 │       ├── missions.yaml       ← Daily/weekly missions
@@ -106,15 +105,14 @@ Edit `config/cobbleranked/config.yaml`:
 
 ```yaml
 # config.yaml
-language: "ja-jp"  # en-us, ja-jp, fr-fr, pt-br, ru-ru
+language: "ja-jp"  # en-us, ja-jp (others can be added)
 ```
 
-**Supported languages:**
+**Bundled languages:**
 - `en-us` - English
 - `ja-jp` - Japanese
-- `fr-fr` - French
-- `pt-br` - Portuguese (Brazil)
-- `ru-ru` - Russian
+
+Other languages can be added as custom files. See [Languages Configuration](/docs/cobbleranked/configuration/languages/).
 
 **Reload:** `/rankedadmin reload`
 
@@ -130,13 +128,13 @@ Teleport players to battle coordinates when battles start.
 **Step 2:** Run command:
 
 ```bash
-/rankedadmin setArena main_arena pos1
+/rankedadmin arena create main_arena pos1
 ```
 
 **Step 3:** Move to Player 2's position and run:
 
 ```bash
-/rankedadmin setArena main_arena pos2
+/rankedadmin arena create main_arena pos2
 ```
 
 **Saved:** Position (x, y, z), facing (yaw, pitch), dimension
@@ -179,7 +177,6 @@ config/cobbleranked/
 ├── matchmaking.yaml       # Queue matching rules
 ├── season.yaml            # Season schedule and reset behavior
 ├── arenas.yaml            # Battle coordinates
-├── blacklist.yaml         # Pokemon/move restrictions (per format)
 ├── restrictions.yaml      # Queue/arena restriction levels
 ├── rewards.yaml           # Season-end rewards
 ├── missions.yaml          # Daily/weekly missions
@@ -194,15 +191,12 @@ config/cobbleranked/
 │   └── ...
 ├── data.db                # SQLite database (auto-created)
 ├── gui/
-│   ├── ranked_gui.json5   # Ranked menu layout
-│   ├── casual_gui.json5   # Casual menu layout
+│   ├── ranked_gui.yaml   # Ranked menu layout
+│   ├── casual_gui.yaml   # Casual menu layout
 │   └── ...
 └── language/
-    ├── en-Us.json5        # English messages
-    ├── ja-Jp.json5        # Japanese messages
-    ├── fr-Fr.json5        # French messages
-    ├── pt-Br.json5        # Portuguese (Brazil) messages
-    └── ru-Ru.json5        # Russian messages
+    ├── en-Us.json5        # English messages (bundled)
+    └── ja-Jp.json5        # Japanese messages (bundled)
 ```
 
 ## Next Steps

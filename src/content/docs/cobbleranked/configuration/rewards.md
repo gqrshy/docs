@@ -13,6 +13,8 @@ Configure rewards in `config/cobbleranked/rewards.yaml`. CobbleRanked supports t
 
 Rewards given to top players when a season ends, based on their final leaderboard position.
 
+![Season reward sample](../../../../assets/images/season-reward-sample.png)
+
 ```yaml
 # rewards.yaml
 seasonRewards:

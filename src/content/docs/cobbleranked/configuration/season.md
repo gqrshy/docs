@@ -88,10 +88,10 @@ onSeasonEnd:
 | `resetWinLoss` | `true` | Clear win/loss records |
 | `resetStreak` | `true` | Clear win/loss streaks |
 
-**Soft Reset Example:**
-- Player has 1800 ELO, starting ELO is 1500
+**Soft Reset Example (Pokémon Showdown mode, starting ELO 1000):**
+- Player has 1800 ELO, starting ELO is 1000
 - `softResetFactor: 0.5`
-- New ELO = 1500 + (1800 - 1500) × 0.5 = **1650**
+- New ELO = 1000 + (1800 - 1000) × 0.5 = **1400**
 
 **When to use hard reset:**
 - Complete fresh start each season
@@ -164,8 +164,8 @@ offSeason:
 Admins can pause the active season to temporarily stop ranked queues without ending the season.
 
 ```bash
-/rankedadmin season pause     # Pause — stops new ranked queue entries
-/rankedadmin season resume    # Resume — re-enables ranked queues
+/rankedadmin season pause     # Pause: stops new ranked queue entries
+/rankedadmin season resume    # Resume: re-enables ranked queues
 ```
 
 **When paused:**

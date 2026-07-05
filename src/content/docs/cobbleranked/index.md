@@ -1,100 +1,85 @@
 ---
 title: CobbleRanked
-description: The ultimate competitive Pokemon battle system for Cobblemon
+description: Add a real ranked battle system to your Cobblemon server.
 ---
 
-> **Transform your Cobblemon server into a competitive Pokemon arena**
+<div style="max-width:400px;margin:0 auto 1.5rem">
 
-[Get Started](/docs/cobbleranked/getting-started/installation/) | [View on VoxelShop](https://voxel.shop/product/8733/cobbleranked)
+![CobbleRanked](../../../assets/images/cobbleranked-logo.png)
 
----
+</div>
 
-## Core Features
+<div class="hero-appeal">
 
-### Battle Formats
-Competitive formats including **Singles**, **Doubles**, and **Triples**. Enable formats per season preset. Each format has its own leaderboard, meta, and rewards.
+**A full competitive ranked battle system for Cobblemon servers.**
 
-### Smart Matchmaking
-Choose between **Pokemon Showdown ELO** or **Glicko-2** rating systems. Dynamic Elo range expansion ensures quick matches while maintaining competitive balance. Recent opponent avoidance prevents repetitive matchups.
+Set it up in minutes. Your players queue, get matched at their skill level, battle, and climb the ladder. Seasons, rewards, leaderboards, and cross-server support are all built in.
 
-### Season System
-Run competitive seasons with scheduled start/end dates, soft or hard ELO resets, and automatic stat carryover. Archive previous season leaderboards and distribute exclusive rewards to top performers.
+- ✔ ELO ratings that track real skill
+- ✔ Seasons on a fixed schedule
+- ✔ Auto-matchmaking against players near your level
+- ✔ One rating shared across every linked server
+- ✔ Automatic rewards at the end of each season
 
-### Rank Tiers
-Six progression tiers from **Poke Ball** (0+) to **Cherish Ball** (2100+). Players climb through Great Ball, Ultra Ball, Master Ball, and Beast Ball as they improve.
+</div>
 
----
-
-## Battle Experience
-
-### Turn Timer
-Keep battles moving with configurable turn timeouts. Visual action bar shows remaining time with color stages - white → yellow → orange → red. Auto-select moves when time runs out.
-
-### Battle Music
-Queue music, team selection music, and ELO-based battle tracks. Fully customizable via resource packs.
-
-### Arena System
-Multiple arenas with hot-swap support. Random or sequential selection. Configure player positions, spectator spots, and field effect centers per arena.
+![A ranked Cobblemon battle in progress](../../../assets/images/battle-scene.png)
 
 ---
 
-## Progression & Rewards
+## What players get
 
-### Missions
-Daily and weekly missions keep players engaged. Mission types include match count, win count, win streaks, Pokemon type usage, format participation, and more.
+### 🏆 Ranked Battles
+The server finds an opponent around your skill level. Win to climb, lose to drop. It's simple, and that's what makes every match feel like it matters. Team selection, lead selection, turn timers, the full competitive package.
 
-### Rewards
-Reward top 100 players per format each season. Tier-based rewards for reaching Elo milestones. MailLib integration for in-game mail delivery with command execution support.
+### 🎲 Random Battle
+A Pokémon Showdown-style mode where the server builds a balanced team for you. No team prep needed; just queue and play. It runs on its own rating and leaderboard, separate from regular ranked.
 
-### Leaderboards
-Real-time cached leaderboards with 30-second refresh. Format-specific rankings. Off-season displays archived top 100 from previous season.
+### 📅 Seasons and Rewards
+Each season runs on a fixed schedule. When it ends, top players and anyone who hit a rank milestone get rewards automatically. It gives the server something to work toward all season long.
 
----
+### 🌐 Cross-Server
+Link your servers together and ratings, queues, and leaderboards are shared across all of them. Players can queue from anywhere on your network.
 
-## Competitive Integrity
-
-### Team Validation
-Comprehensive blacklist system - ban Pokemon by species, form, or label (Legendary, Pseudo-Legendary). Item blacklists and item clause. Level caps and shiny restrictions per format.
-
-### Player Restrictions
-Two-phase restriction system (Queue and Arena). Block item use, block interaction, combat, teleportation, PC access, and commands during battles. Fully configurable.
-
-### Casual Mode
-Practice without affecting ratings. Available during off-season or anytime for friendly matches.
+![Matchmaking finds an opponent](../../../assets/images/matchmaking.gif)
 
 ---
 
-## Server Infrastructure
+## See it in action
 
-### Cross-Server Support
-Connect multiple servers via Redis pub/sub. Global queue, unified rankings, and automatic battle server election. Perfect for large networks with lobby/battle server architecture.
-
-### Database Options
-SQLite for single servers, MySQL for cross-server setups, MongoDB for cloud deployments. Automatic schema management.
-
-### Web API
-Sync leaderboards and Pokemon usage statistics to your website in real-time. Authenticated API endpoints with configurable sync intervals.
-
-**Live Demos:** [Leaderboard](/demo/leaderboard) | [Usage Stats](/demo/usage-stats)
+<video controls muted playsinline style="display:block;width:100%;max-width:960px;border-radius:10px;margin:1.5rem auto" src="/cobbleranked-showcase.mp4">
+  <a href="/cobbleranked-showcase.mp4">CobbleRanked v2.1.0 showcase video</a>
+</video>
 
 ---
 
-## Integrations
+## Get going in 3 minutes
 
-- **LuckPerms** - Permission-based rank assignment
-- **Text Placeholder API** - Stats placeholders for chat and scoreboards
-- **MailLib** - Reward delivery via in-game mail
-- **Velocity** - Cross-server player transfers
+Install, start the server, type `/ranked`. The shortest path to a first battle is in the [Quick Start](/docs/cobbleranked/getting-started/quick-start/).
 
----
-
-## Quick Links
-
-- [Installation](/docs/cobbleranked/getting-started/installation)
-- [Quick Start](/docs/cobbleranked/getting-started/quick-start)
-- [Commands](/docs/cobbleranked/getting-started/commands)
-- [Configuration](/docs/cobbleranked/configuration/config)
+<div class="cta-row">
+  <a class="cta-button" href="/docs/cobbleranked/getting-started/quick-start/">▶ Quick Start</a>
+  <a class="cta-button" href="/docs/cobbleranked/getting-started/installation/">📥 Installation</a>
+  <a class="cta-button" href="https://voxel.shop/product/8733/cobbleranked">🛒 Buy on VoxelShop</a>
+</div>
 
 ---
 
-**Available on [VoxelShop](https://voxel.shop/product/8733/cobbleranked) - $10 USD**
+## For server admins
+
+Start with the defaults and tune later. Out of the box, it's ready to play.
+
+1. **[Installation](/docs/cobbleranked/getting-started/installation/)**: drop the mods in and boot the server.
+2. **[Arena setup](/docs/cobbleranked/configuration/arenas/)**: pick where battles happen.
+3. **[Rewards](/docs/cobbleranked/configuration/rewards/)**: decide what players earn at season end.
+4. **[Cross-server](/docs/cobbleranked/advanced/cross-server/)**: link multiple servers (optional).
+
+Everything else lives under **Reference** and **Configuration** in the sidebar. Open them when you want to tweak something.
+
+---
+
+## Need help?
+
+The [FAQ](/docs/cobbleranked/support/faq/) covers the questions buyers ask most, and it's searchable. If you're still stuck, join us in [Discord](https://discord.gg/VVVvBTqqyP).
+
+**Available on [VoxelShop](https://voxel.shop/product/8733/cobbleranked)**

@@ -3,7 +3,7 @@ title: Language Configuration
 description: Customize messages and add translations for any language.
 ---
 
-Customize all CobbleRanked messages in `config/cobbleranked/language/`.
+Customize all CobbleRanked messages in `config/cobbleranked/language/`. Battle format names, mission titles and descriptions, GUI text, and every `/rankedadmin` message and admin notification are fully translatable.
 
 **You can add translations for ANY language** - not just English and Japanese. Create your own language file by copying an existing one and translating the strings.
 
@@ -15,9 +15,8 @@ These languages are included with CobbleRanked:
 |------|----------|
 | `en-Us.json5` | English (default) |
 | `ja-Jp.json5` | Japanese |
-| `fr-Fr.json5` | French |
-| `pt-Br.json5` | Portuguese (Brazil) |
-| `ru-Ru.json5` | Russian |
+
+French, Portuguese, Russian, and other languages are not bundled. Create them yourself following [Creating Custom Languages](#creating-custom-languages) below.
 
 > 📝 **You can create translations for any language!** See [Creating Custom Languages](#creating-custom-languages) below.
 

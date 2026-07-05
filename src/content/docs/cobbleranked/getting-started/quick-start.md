@@ -1,89 +1,75 @@
 ---
 title: Quick Start
-description: Get your first ranked battle started in 5 minutes.
+description: The shortest path to your first ranked battle.
 ---
 
-## Prerequisites
+## Start in 3 minutes
 
-- CobbleRanked installed and server running
-- At least one arena configured
-- Two players with Pokemon teams
-
-## Starting a Ranked Battle
-
-### Player 1
-
-1. Open the ranked menu: `/ranked`
-2. Click "Join Queue" for your desired format (Singles/Doubles/Triples)
-3. Wait for matchmaking
-
-### Player 2
-
-1. Open the ranked menu: `/ranked`
-2. Click "Join Queue" for the same format
-3. Matchmaking will pair you together
-
-### Match Found
-
-1. Both players see "Match Found!" notification
-2. Click "Ready" within the time limit
-3. Both players are teleported to the arena
-4. Battle begins!
-
-## Battle Flow
-
-```
-Queue → Match Found → Ready Check → Team Selection → Lead Selection → Battle → Results
-```
-
-### Team Selection (if enabled)
-
-- Select 3-6 Pokemon from your party for the battle
-- Time limit applies
-
-### Lead Selection (if enabled)
-
-- Choose which Pokemon to send out first
-- Opponent's selection is hidden
-
-### During Battle
-
-- Use Cobblemon's battle UI to select moves
-- Turn timer prevents stalling
-
-### After Battle
-
-- ELO is updated based on result
-- Stats are recorded
-- Players return to their original positions
-
-## Casual Battles
-
-For practice without affecting your rank:
-
-```
-/casual
-```
-
-Same flow as ranked, but no ELO changes.
-
-## Common Commands
-
-| Command | Description |
-|---------|-------------|
-| `/ranked` | Open ranked battle menu (stats, leaderboard, queue) |
-| `/casual` | Open casual battle menu |
-
-## Tips for New Players
-
-1. **Practice in Casual** - Get familiar with the system before ranked
-2. **Check Blacklist** - Some Pokemon/moves may be restricted
-3. **Mind the Timer** - Don't take too long on turns
+If you haven't installed yet, finish [Installation](/docs/cobbleranked/getting-started/installation/) first. This page picks up once the mod is on the server.
 
 ---
 
-## See Also
+### Step 1. Start the server
 
-- [Commands](/docs/cobbleranked/getting-started/commands/) - Full command reference
-- [Arena Setup](/docs/cobbleranked/configuration/arenas/) - Configure battle arenas
-- [FAQ](/docs/cobbleranked/support/faq/) - Common questions
+Drop the mods into `mods/` and boot up. Config files generate on their own, and **the defaults are ready to play right away**.
+
+### Step 2. Set up one arena
+
+You need at least one arena. Stand where each player should be and register it:
+
+```
+/rankedadmin arena create arena1 pos1     # player 1's spot
+/rankedadmin arena create arena1 pos2     # player 2's spot
+/rankedadmin arena create arena1 exit     # where to send players after the battle
+```
+
+> Full details in [Arena Setup](/docs/cobbleranked/configuration/arenas/).
+
+### Step 3. Open the menu
+
+In chat, type:
+
+```
+/ranked
+```
+
+The ranked menu opens with the player's rating, the leaderboard, and a **Join Queue** button.
+
+![Ranked menu](../../../../assets/images/ranked-maingui.png)
+
+### Step 4. Join the queue
+
+Click **Join Queue** for the format you want (Singles, Doubles, or Triples). The server looks for an opponent at a similar rating.
+
+### Step 5. Match, then battle
+
+A "Match Found!" prompt appears when someone's found. Click **Ready**, get teleported to the arena, and the battle starts.
+
+```
+Join Queue → Match → Ready check → Team selection → Lead selection → Battle → Results
+```
+
+![From match to lead selection and battle start](../../../../assets/images/select-lead-battlestart-flow.gif)
+
+Win to climb, lose to drop. That's the whole loop.
+
+---
+
+## Commands you'll use
+
+| Command | What it does |
+|---------|--------------|
+| `/ranked` | Opens the ranked menu (rating, leaderboard, queue) |
+| `/casual` | Opens the casual menu (practice, rating doesn't move) |
+
+## Just want to practice?
+
+`/casual` runs the same flow without touching rating. Good for warming up or trying a new team.
+
+---
+
+## Next steps
+
+- **[Ranked Battles](/docs/cobbleranked/features/ranked-battles/)**: how a match flows and the rules behind it.
+- **[Random Battle](/docs/cobbleranked/features/random-battle/)**: a no-prep mode with its own ladder.
+- **[FAQ](/docs/cobbleranked/support/faq/)**: search here if something's unclear.

@@ -18,20 +18,19 @@ CobbleRanked uses multiple YAML files in `config/cobbleranked/`:
 | `season.yaml` | Season schedule and reset behavior → [Season Settings](/docs/cobbleranked/configuration/season/) |
 | `sounds.yaml` | All sound effects → [Sounds](/docs/cobbleranked/configuration/sounds/) |
 | `arenas.yaml` | Battle arena positions → [Arenas](/docs/cobbleranked/configuration/arenas/) |
-| `blacklist.yaml` | Pokemon/move restrictions → [Blacklist](/docs/cobbleranked/configuration/blacklist/) |
 | `restrictions.yaml` | Player action restrictions → [Restrictions](/docs/cobbleranked/configuration/restrictions/) |
 | `rewards.yaml` | Season rewards → [Rewards](/docs/cobbleranked/configuration/rewards/) |
 | `missions.yaml` | Daily/weekly missions → [Missions](/docs/cobbleranked/configuration/missions/) |
 | `integrations/luckperms.yaml` | LuckPerms integration → [LuckPerms](/docs/cobbleranked/integration/luckperms/) |
 | `api.yaml` | Web API settings → [API](/docs/cobbleranked/configuration/api/) |
-| `season_presets/*.yaml` | Format rules per season → [Battle Formats](/docs/cobbleranked/features/battle-formats/) |
+| `season_presets/*.yml` | Format rules per season → [Battle Formats](/docs/cobbleranked/features/battle-formats/) |
 
 ### Season Presets
 
 Format-specific settings (team size, level cap, matchmaking rules, blacklists) are configured in **season presets** instead of the main config files. This keeps all format settings in one place.
 
 ```yaml
-# season_presets/default.yaml
+# season_presets/default.yml
 singles:
   enabled: true
   teamSize: 3
@@ -53,11 +52,8 @@ language: "en-us"
 |-------|----------|
 | `en-us` | English (default) |
 | `ja-jp` | Japanese |
-| `fr-fr` | French |
-| `pt-br` | Portuguese (Brazil) |
-| `ru-ru` | Russian |
 
-> 💡 **You can add ANY language!** Create a custom language file in `config/cobbleranked/language/` (e.g., `ko-KR.json5`, `zh-CN.json5`) and set the language code to match. See [Languages Configuration](/docs/cobbleranked/configuration/languages/) for details.
+> 📝 **You can add ANY language!** Create a custom language file in `config/cobbleranked/language/` (e.g., `fr-Fr.json5`, `zh-CN.json5`) and set the language code to match. See [Languages Configuration](/docs/cobbleranked/configuration/languages/) for details.
 
 Reload with `/rankedadmin reload` after changing.
 
@@ -157,6 +153,29 @@ When disabled (default), players on the battle server cannot join the queue. Thi
 
 ---
 
+## Timezone & Caching
+
+```yaml
+# config.yaml
+timezone: "Asia/Tokyo"          # Global timezone (IANA). Used for daily limits, missions, seasons.
+
+leaderboard:
+  cacheTtlMinutes: 15            # How long leaderboard results are cached
+  profileCacheTtlMinutes: 1440   # Offline-player skull profile cache (24h)
+  statsCacheTtlMinutes: 5        # Per-format player stats cache
+```
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `timezone` | server default | Global timezone for daily resets, missions, and seasons |
+| `leaderboard.cacheTtlMinutes` | `15` | Leaderboard cache duration |
+| `leaderboard.profileCacheTtlMinutes` | `1440` | Offline-player skull profile cache (avoids re-fetching skins) |
+| `leaderboard.statsCacheTtlMinutes` | `5` | Per-format player stats cache |
+
+Background music is configured in [`sounds.yaml`](/docs/cobbleranked/configuration/sounds/#background-music-bgm).
+
+---
+
 ## Debug Settings
 
 Enable for troubleshooting:
@@ -192,7 +211,6 @@ debug:
 | Battle Timers & Penalties | [Battle Configuration](/docs/cobbleranked/configuration/battle/) |
 | Season Schedule | [Season Configuration](/docs/cobbleranked/configuration/season/) |
 | Match Announcements | [Announcements Configuration](/docs/cobbleranked/configuration/announcements/) |
-| Daily Elo Limits | [Daily Limits Configuration](/docs/cobbleranked/configuration/daily-limits/) |
 | Pokemon/Move Restrictions | [Blacklist Configuration](/docs/cobbleranked/configuration/blacklist/) |
 | Player Action Restrictions | [Restrictions Configuration](/docs/cobbleranked/configuration/restrictions/) |
 | Season End Rewards | [Rewards Configuration](/docs/cobbleranked/configuration/rewards/) |

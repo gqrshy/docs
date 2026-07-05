@@ -22,3 +22,11 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 nul
+
+# large media — host externally (e.g. YouTube), do not commit
+public/cobbleranked-showcase.mp4
+src/assets/images/cobbleranked-v2.1.0update-showcase-video.mp4
+
+# Windows junk
+desktop.ini
+src/assets/images/desktop.ini

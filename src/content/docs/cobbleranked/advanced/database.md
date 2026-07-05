@@ -3,7 +3,9 @@ title: Database Configuration
 description: SQLite, MySQL, and MongoDB database setup.
 ---
 
-CobbleRanked supports SQLite (default), MySQL, and MongoDB databases.
+CobbleRanked supports SQLite (default), MySQL, and MongoDB databases. PostgreSQL is not supported.
+
+![Database support](../../../../assets/images/full-database-support-sampleimage.png)
 
 ## SQLite (Default)
 

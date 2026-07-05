@@ -10,6 +10,8 @@ description: Complete list of CobbleRanked commands.
 | Command | Description | Permission |
 |---------|-------------|------------|
 | `/ranked` | Open ranked battle GUI | `cobbleranked.player.use` |
+| `/ranked history` | View your recent match history | `cobbleranked.player.history.view` |
+| `/ranked history <player>` | View another player's match history | `cobbleranked.player.history.viewothers` |
 
 > All stats, leaderboard, and queue functions are accessible through the `/ranked` GUI.
 
@@ -43,9 +45,9 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 
 | Command | Description |
 |---------|-------------|
-| `/rankedadmin setArena <name> <pos1\|pos2\|exit\|spectator>` | Set arena position |
-| `/rankedadmin setexit` | Set global exit position |
-| `/rankedadmin teleportArena <name>` | Teleport to an arena |
+| `/rankedadmin arena create <name> <pos1\|pos2\|exit\|spectator>` | Set arena position |
+| `/rankedadmin arena setexit <name>` | Set exit position for an arena |
+| `/rankedadmin arena teleport <name>` | Teleport to an arena |
 | `/rankedadmin arena status` | Show all arena statuses |
 | `/rankedadmin arena enable <name>` | Enable an arena |
 | `/rankedadmin arena disable <name>` | Disable an arena |
@@ -60,12 +62,18 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 | `/rankedadmin addelo <amount> <player> <format>` | Add ELO to player |
 | `/rankedadmin removeelo <amount> <player> <format>` | Remove ELO from player |
 | `/rankedadmin setflee <player> <amount>` | Set player's flee count |
+| `/rankedadmin clearpenalty <player>` | Clear a player's active flee/disconnect penalty (queue ban) |
+| `/rankedadmin banranked <player>` | Ban a player from ranked (Casual still allowed). **Requires LuckPerms.** |
+| `/rankedadmin unbanranked <player>` | Lift a ranked ban. **Requires LuckPerms.** |
+
+> The `banranked` / `unbanranked` commands work through LuckPerms by denying the `cobbleranked.player.use` permission. They only sync across servers if LuckPerms uses shared storage (e.g. MySQL). See [LuckPerms Integration](/docs/cobbleranked/integration/luckperms/).
 
 ### Queue Management
 
 | Command | Description |
 |---------|-------------|
 | `/rankedadmin queue clear` | Clear all queues |
+| `/rankedadmin forceend [match_id]` | Force-end a stuck or ongoing ranked match |
 
 ### Placeholders
 
@@ -180,6 +188,8 @@ Migrate your v1 `seasons.json5` to v2 `season.yaml` format:
 | `cobbleranked.player.queue.leave` | Leave ranked queue | true |
 | `cobbleranked.player.stats.view` | View own stats | true |
 | `cobbleranked.player.leaderboard.view` | View leaderboard | true |
+| `cobbleranked.player.history.view` | View own match history | true |
+| `cobbleranked.player.history.viewothers` | View others' match history | op |
 
 ### Format Permissions
 
@@ -227,8 +237,8 @@ Access stats, leaderboard, and queue from the GUI.
 
 ### Admin: Set up arena
 ```
-/rankedadmin setArena arena1 pos1
-/rankedadmin setArena arena1 pos2
+/rankedadmin arena create arena1 pos1
+/rankedadmin arena create arena1 pos2
 ```
 
 ---
