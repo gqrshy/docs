@@ -45,14 +45,6 @@ Link your servers together and ratings, queues, and leaderboards are shared acro
 
 ---
 
-## See it in action
-
-<video controls muted playsinline style="display:block;width:100%;max-width:960px;border-radius:10px;margin:1.5rem auto" src="/cobbleranked-showcase.mp4">
-  <a href="/cobbleranked-showcase.mp4">CobbleRanked v2.1.0 showcase video</a>
-</video>
-
----
-
 ## Get going in 3 minutes
 
 Install, start the server, type `/ranked`. The shortest path to a first battle is in the [Quick Start](/docs/cobbleranked/getting-started/quick-start/).
