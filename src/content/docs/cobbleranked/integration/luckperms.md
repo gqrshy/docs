@@ -128,7 +128,7 @@ tierMappings:
 
 ## Dynamic Contexts (Tier / ELO)
 
-CobbleRanked can expose each player's current **tier** and **ELO** as LuckPerms contexts. This lets you write permission rules that depend on a player's rank — e.g. grant a permission only to Master Ball tier and above, or only above 1500 ELO. **Arclight + LuckPerms only** (requires the Bukkit `Player` class; pure-Fabric servers skip this automatically — no crash).
+CobbleRanked can expose each player's current **tier** and **ELO** as LuckPerms contexts. This lets you write permission rules that depend on a player's rank — e.g. grant a permission only to Master Ball tier and above, or only above 1500 ELO. Works on **both pure-Fabric and Arclight** (LuckPerms is available as a Fabric mod too).
 
 ```yaml
 # config/cobbleranked/integrations/luckperms.yaml
