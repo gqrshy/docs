@@ -59,6 +59,36 @@ Reload with `/rankedadmin reload` after changing.
 
 ---
 
+## Discord Webhook Notifications
+
+Send notifications to a Discord channel via Webhook when players rank up, when matches end, or when a season ends. Works on both pure-Fabric and Arclight servers (plain HTTP POST, no Bukkit dependency).
+
+```yaml
+# config.yaml
+discord:
+  enabled: false
+  webhookUrl: ""                 # Discord → Channel Settings → Integrations → Webhooks → New Webhook
+  username: "CobbleRanked"       # Bot display name
+  events:
+    rankUp: true                 # Notify when a player ranks up (tier change, up only)
+    seasonEnd: true              # Notify when a season ends
+    matchResultRanked: true      # Notify on ranked match results (win/loss/draw)
+    matchResultCasual: false     # Notify on casual match results
+```
+
+| Event | Trigger |
+|-------|---------|
+| `rankUp` | A player's tier goes **up** (e.g. Poké Ball → Great Ball). Down-ranks are silent. |
+| `seasonEnd` | The active season ends and rewards are distributed. |
+| `matchResultRanked` | A **ranked** match ends (victory / defeat / draw). Includes ELO change. |
+| `matchResultCasual` | A **casual** match ends. Off by default to avoid spam. |
+
+> Create a webhook in Discord: **Channel Settings → Integrations → Webhooks → New Webhook**, then paste the URL into `webhookUrl`.
+
+On cross-server setups, only the **battle server** sends match-result and season-end notifications (the event originates there), so you will not get duplicate posts.
+
+---
+
 ## Database Settings
 
 Configure data storage in `config.yaml`.

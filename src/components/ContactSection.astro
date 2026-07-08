@@ -147,16 +147,16 @@
 	color: var(--color-text);
 	margin: 0 0 8px;
 	line-height: 1.1;
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 }
 
 /* Straight underline */
 .title-underline {
 	display: block;
 	width: 80px;
-	height: 2px;
-	background: rgba(255, 255, 255, 0.3);
-	border-radius: 1px;
+	height: 3px;
+	background: var(--purple-300);
+	border-radius: 999px;
 	margin: 0 auto 16px;
 }
 
@@ -168,7 +168,7 @@
 }
 
 .highlight {
-	color: #ffffff;
+	color: var(--text-accent);
 }
 
 .contact-note {
@@ -182,13 +182,13 @@
 .success-banner {
 	text-align: center;
 	padding: 1.25rem;
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	background: var(--purple-100);
+	border: 1px solid var(--purple-200);
 	border-radius: 12px;
 	margin-bottom: 2rem;
-	color: #ffffff;
+	color: var(--text-accent);
 	font-weight: 600;
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 }
 
 .success-banner.animate-in {
@@ -213,7 +213,7 @@
 }
 
 .contact-form-card:hover {
-	border-color: rgba(255, 255, 255, 0.25);
+	border-color: var(--border-strong);
 }
 
 /* Form */
@@ -236,9 +236,9 @@
 	padding: 16px 20px;
 	border: 1px solid var(--color-border);
 	border-radius: 8px;
-	background: rgba(255, 255, 255, 0.03);
+	background: var(--bg-base);
 	font-size: 1rem;
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 	color: var(--color-text);
 	transition: all 0.2s ease;
 }
@@ -253,9 +253,9 @@
 .contact-form input:focus,
 .contact-form textarea:focus {
 	outline: none;
-	border-color: rgba(255, 255, 255, 0.4);
-	box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
-	background: rgba(255, 255, 255, 0.05);
+	border-color: var(--purple-400);
+	box-shadow: 0 0 0 3px var(--purple-100);
+	background: var(--bg-card);
 }
 
 .contact-form textarea {
@@ -271,12 +271,12 @@
 	gap: 10px;
 	padding: 14px 40px;
 	background: transparent;
-	color: #ffffff;
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	border-radius: 8px;
+	color: var(--text-accent);
+	border: 1px solid var(--border-strong);
+	border-radius: 999px;
 	font-size: 1rem;
 	font-weight: 600;
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 	cursor: pointer;
 	transition: all 0.2s ease;
 	align-self: center;
@@ -284,9 +284,9 @@
 }
 
 .submit-btn:hover {
-	background: #ffffff;
-	color: #000000;
-	border-color: #ffffff;
+	background: var(--purple-500);
+	color: #ffffff;
+	border-color: var(--purple-500);
 	transform: translateY(-2px);
 }
 

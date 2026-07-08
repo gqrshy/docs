@@ -30,7 +30,7 @@ All admin commands require OP level 4 or `cobbleranked.admin` permission.
 
 | Command | Description |
 |---------|-------------|
-| `/rankedadmin reload` | Reload configuration files |
+| `/rankedadmin reload` | Reload configuration files (language, presets, GUI, season/reward/mission/elo/battle YAML, **and randbats data** — picks up a new `setsFile` or local custom set file without a restart) |
 
 ### Season Management
 

@@ -126,6 +126,32 @@ tierMappings:
 | `removeOnRankLoss` | Whether to remove display when player drops below tier |
 | `permissionMode` | ALLOW_BY_DEFAULT or REQUIRE_PERMISSION for command access |
 
+## Dynamic Contexts (Tier / ELO)
+
+CobbleRanked can expose each player's current **tier** and **ELO** as LuckPerms contexts. This lets you write permission rules that depend on a player's rank — e.g. grant a permission only to Master Ball tier and above, or only above 1500 ELO. **Arclight + LuckPerms only** (requires the Bukkit `Player` class; pure-Fabric servers skip this automatically — no crash).
+
+```yaml
+# config/cobbleranked/integrations/luckperms.yaml
+context:
+  enableServerContext: false    # apply per-server (cross-server)
+  enableWorldContext: false     # apply per-world
+  # Dynamic tier/elo contexts (Arclight + LuckPerms only)
+  enableTierContext: false      # expose the player's tier as a context
+  enableEloContext: false       # expose the player's ELO as a context
+  tierKey: "cobbleranked_tier"  # LuckPerms context key for the tier
+  eloKey: "cobbleranked_elo"   # LuckPerms context key for the ELO
+```
+
+### Example: permission rule for a tier
+
+With `enableTierContext: true`, a player's tier is exposed under the `cobbleranked_tier` context. In LuckPerms you can then create a context-based rule:
+
+```
+/lp group masterball permission set some.permission.true cobbleranked_tier=MASTERBALL
+```
+
+This grants `some.permission` only when the player's CobbleRanked tier is MASTERBALL. Similarly, `enableEloContext` exposes the numeric ELO under `cobbleranked_elo`.
+
 ## Ranked Bans
 
 You can ban a player from ranked play through LuckPerms. The ban denies the `cobbleranked.player.use` permission, so the player can no longer open `/ranked` (Casual via `/casual` is still allowed).

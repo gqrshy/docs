@@ -1,0 +1,227 @@
+---
+// Team — member cards (built to grow past one member)
+import voxelshopLogo from '../assets/voxelshop.png';
+---
+
+<section id="team" class="team-section">
+	<div class="team-container">
+		<div class="team-header curtain-reveal">
+			<span class="section-label">// Team</span>
+			<h2 class="section-heading" data-i18n="teamTitle">Meet the team</h2>
+		</div>
+
+		<div class="team-grid stagger-children">
+			<div class="member-card">
+				<div class="member-top">
+					<div class="member-avatar">
+						<img src="/character.png" alt="Gashi" />
+					</div>
+					<div class="member-identity">
+						<h3 class="member-name">Gashi</h3>
+						<p class="member-role" data-i18n="teamGashiRole">Founder / Mod &amp; Plugin Developer</p>
+					</div>
+				</div>
+				<p class="member-bio" data-i18n="teamGashiBio">
+					Minecraft developer from Japan. Passionate about clean code and fun gameplay.
+				</p>
+				<div class="member-links">
+					<a href="https://github.com/gqrshy" target="_blank" rel="noopener noreferrer" class="member-link">
+						<img src="https://cdn.simpleicons.org/github/a1a1aa" alt="GitHub" loading="lazy" />
+						<span>GitHub</span>
+					</a>
+					<a href="https://modrinth.com/user/gashicha" target="_blank" rel="noopener noreferrer" class="member-link">
+						<img src="https://cdn.simpleicons.org/modrinth/a1a1aa" alt="Modrinth" loading="lazy" />
+						<span>Modrinth</span>
+					</a>
+					<a href="https://www.curseforge.com/members/gqrshy/projects" target="_blank" rel="noopener noreferrer" class="member-link">
+						<img src="https://cdn.simpleicons.org/curseforge/a1a1aa" alt="CurseForge" loading="lazy" />
+						<span>CurseForge</span>
+					</a>
+					<a href="https://voxel.shop/user/47282/gashi" target="_blank" rel="noopener noreferrer" class="member-link">
+						<img src={voxelshopLogo.src} alt="VoxelShop" />
+						<span>VoxelShop</span>
+					</a>
+					<a href="https://www.youtube.com/@Gqrshy" target="_blank" rel="noopener noreferrer" class="member-link">
+						<img src="https://cdn.simpleicons.org/youtube/a1a1aa" alt="YouTube" loading="lazy" />
+						<span>YouTube</span>
+					</a>
+					<a href="https://x.com/Gqrshy" target="_blank" rel="noopener noreferrer" class="member-link">
+						<img src="https://cdn.simpleicons.org/x/a1a1aa" alt="X" loading="lazy" />
+						<span>X</span>
+					</a>
+					<a href="https://note.com/gashicha" target="_blank" rel="noopener noreferrer" class="member-link">
+						<img src="https://cdn.simpleicons.org/note/a1a1aa" alt="note" loading="lazy" />
+						<span>note</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+(function() {
+	const translations = {
+		en: {
+			teamTitle: "Meet the team",
+			teamGashiRole: "Founder / Mod &amp; Plugin Developer",
+			teamGashiBio: "Minecraft developer from Japan. Passionate about clean code and fun gameplay."
+		},
+		ja: {
+			teamTitle: "チーム紹介",
+			teamGashiRole: "代表 / Mod・プラグイン開発者",
+			teamGashiBio: "日本のMinecraft開発者。クリーンなコードと楽しいゲームプレイを追求しています。"
+		}
+	};
+
+	function applyTranslations(lang) {
+		const t = translations[lang] || translations.en;
+		document.querySelectorAll('.team-section [data-i18n]').forEach(el => {
+			const key = el.getAttribute('data-i18n');
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
+		});
+	}
+
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyTranslations(lang);
+	}
+
+	window.addEventListener('langChange', (e) => {
+		applyTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+})();
+</script>
+
+<style>
+.team-section {
+	padding: 5.5rem 2rem;
+	background: var(--bg-raised);
+}
+
+.team-container {
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.team-header {
+	display: inline-block;
+	margin-bottom: 2.5rem;
+}
+
+.team-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 1.25rem;
+	max-width: 560px;
+}
+
+.member-card {
+	background: var(--bg-card);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-card);
+	padding: 1.75rem;
+	transition: transform var(--dur-base) var(--ease-bounce),
+		border-color var(--dur-base) var(--ease-out-expo);
+}
+
+.member-card:hover {
+	transform: translateY(-4px);
+	border-color: var(--border-strong);
+}
+
+.member-top {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.member-avatar {
+	width: 4.5rem;
+	height: 4.5rem;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 2px solid var(--border-strong);
+	background: var(--bg-hover);
+	flex-shrink: 0;
+}
+
+.member-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;
+}
+
+.member-name {
+	font-family: var(--font-display);
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--text-primary);
+}
+
+.member-role {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--text-accent);
+	margin-top: 0.2rem;
+}
+
+.member-bio {
+	font-size: 0.9rem;
+	color: var(--text-secondary);
+	line-height: 1.7;
+	margin-bottom: 1.25rem;
+}
+
+.member-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.member-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.4rem 0.85rem;
+	border-radius: 999px;
+	background: var(--bg-hover);
+	border: 1px solid var(--border-subtle);
+	color: var(--text-secondary);
+	text-decoration: none;
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	font-weight: 500;
+	transition: transform var(--dur-base) var(--ease-bounce),
+		border-color var(--dur-base) var(--ease-out-expo),
+		color var(--dur-base) var(--ease-out-expo);
+}
+
+.member-link:hover {
+	transform: translateY(-2px);
+	border-color: var(--border-strong);
+	color: var(--text-accent);
+}
+
+.member-link img {
+	width: 14px;
+	height: 14px;
+	object-fit: contain;
+}
+
+@media (max-width: 768px) {
+	.team-section {
+		padding: 3.5rem 1.25rem;
+	}
+}
+</style>

@@ -1,68 +1,59 @@
 ---
-// Products section - B&W window cards
+// "Our Specialization" — Phoenix-style featured product cards with pricing
+import { products, saleConfig, effectivePrice } from '../data/products';
+
+const featured = products.filter(p => p.featured);
+
+function fmt(n: number) {
+	return `$${n.toFixed(2)}`;
+}
 ---
 
-<section id="products" class="products-section">
-	<div class="products-container">
-		<div class="products-header">
-			<h2 class="products-title" data-i18n="productsTitle">Products</h2>
-			<p class="products-subtitle" data-i18n="productsSubtitle">Tools and libraries for Cobblemon servers</p>
+<section id="products" class="spec-section">
+	<div class="spec-container">
+		<div class="spec-header curtain-reveal">
+			<h2 class="section-heading spec-heading">
+				<span data-i18n="specTitle">Our Specialization</span>
+				<a href="#catalog" class="spec-arrow" aria-label="Browse catalog"><i class="ph-bold ph-caret-right"></i></a>
+			</h2>
 		</div>
 
-		<div class="products-grid">
-			<a href="/docs/cobbleranked/" class="product-card window-card featured">
-				<div class="window-titlebar">
-					<span class="window-close"></span>
-					<span class="window-title">cobbleranked.cfg</span>
-				</div>
-				<div class="window-content">
-					<div class="product-info">
-						<div class="product-header">
-							<h3 class="product-name">CobbleRanked</h3>
-							<span class="product-tag featured-tag">Featured</span>
+		<div class="spec-grid stagger-children">
+			{featured.map(p => (
+				<article class="spec-card" style={`--card-gradient: ${p.gradient}`}>
+					{saleConfig.active && p.salePrice != null && <span class="sale-ribbon">Sale</span>}
+					<a href={p.docsUrl || '#catalog'} class="spec-visual" aria-label={p.name}>
+						{p.image
+							? <img src={p.image} alt={p.name} class="spec-img" loading="lazy" />
+							: <span class="spec-logotype">{p.name}</span>}
+					</a>
+					<div class="spec-body">
+						<h3 class="spec-name">{p.name}</h3>
+						<p class="spec-desc">{p.description}</p>
+						<div class="spec-footer">
+							<div class="spec-price">
+								{p.price === 0 ? (
+									<span class="price-now">Free</span>
+								) : (
+									<>
+										{saleConfig.active && p.salePrice != null && <span class="price-old">{fmt(p.price)}</span>}
+										<span class="price-now">{fmt(effectivePrice(p))}</span>
+									</>
+								)}
+							</div>
+							{p.price === 0 ? (
+								<a href={p.docsUrl} class="spec-cta" aria-label={`View ${p.name} docs`}>
+									<i class="ph-bold ph-arrow-right"></i>
+								</a>
+							) : (
+								<button class="spec-cta" data-add-to-cart={p.id} aria-label={`Add ${p.name} to cart`}>
+									<i class="ph-bold ph-arrow-right"></i>
+								</button>
+							)}
 						</div>
-						<p class="product-desc" data-i18n="productRankedDesc">
-							Competitive Pokemon battle system with ELO ranking, tiers, and leaderboards for Cobblemon servers.
-						</p>
 					</div>
-				</div>
-			</a>
-
-			<a href="/docs/gashilibs/" class="product-card window-card">
-				<div class="window-titlebar">
-					<span class="window-close"></span>
-					<span class="window-title">gashilibs.jar</span>
-				</div>
-				<div class="window-content">
-					<div class="product-info">
-						<div class="product-header">
-							<h3 class="product-name">GashiLibs</h3>
-							<span class="product-tag">Library</span>
-						</div>
-						<p class="product-desc" data-i18n="productLibsDesc">
-							Shared utility library for Cobblemon addons. Database, UI, and common tools.
-						</p>
-					</div>
-				</div>
-			</a>
-
-			<a href="/docs/maillib/" class="product-card window-card">
-				<div class="window-titlebar">
-					<span class="window-close"></span>
-					<span class="window-title">maillib.jar</span>
-				</div>
-				<div class="window-content">
-					<div class="product-info">
-						<div class="product-header">
-							<h3 class="product-name">MailLib</h3>
-							<span class="product-tag">Library</span>
-						</div>
-						<p class="product-desc" data-i18n="productMailDesc">
-							In-game mail system library. Send, receive, and manage mail between players.
-						</p>
-					</div>
-				</div>
-			</a>
+				</article>
+			))}
 		</div>
 	</div>
 </section>
@@ -70,159 +61,208 @@
 <script is:inline>
 (function() {
 	const translations = {
-		en: {
-			productsTitle: "Products",
-			productsSubtitle: "Tools and libraries for Cobblemon servers",
-			productRankedDesc: "Competitive Pokemon battle system with ELO ranking, tiers, and leaderboards for Cobblemon servers.",
-			productLibsDesc: "Shared utility library for Cobblemon addons. Database, UI, and common tools.",
-			productMailDesc: "In-game mail system library. Send, receive, and manage mail between players."
-		},
-		ja: {
-			productsTitle: "プロダクト",
-			productsSubtitle: "Cobblemonサーバー向けのツールとライブラリ",
-			productRankedDesc: "ELOランキング、ティア、リーダーボードを備えたCobblemon向け競争型ポケモンバトルシステム。",
-			productLibsDesc: "Cobblemonアドオン向けの共有ユーティリティライブラリ。データベース、UI、共通ツール。",
-			productMailDesc: "ゲーム内メールシステムライブラリ。プレイヤー間でメールの送受信と管理。"
-		}
+		en: { specTitle: 'Our Specialization' },
+		ja: { specTitle: '注目のプロダクト' }
 	};
 
-	function applyProductsTranslations(lang) {
+	function apply(lang) {
 		const t = translations[lang] || translations.en;
-		document.querySelectorAll('.products-section [data-i18n]').forEach(el => {
+		document.querySelectorAll('.spec-section [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
-			if (t[key]) {
-				el.innerHTML = t[key];
-			}
+			if (t[key]) el.textContent = t[key];
 		});
 	}
 
-	function init() {
-		const lang = window.GashiLang?.get() || 'en';
-		applyProductsTranslations(lang);
-	}
-
-	window.addEventListener('langChange', (e) => {
-		applyProductsTranslations(e.detail.lang);
-	});
-
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', init);
-	} else {
-		init();
-	}
+	window.addEventListener('langChange', (e) => apply(e.detail.lang));
+	apply(window.GashiLang?.get() || 'en');
 })();
 </script>
 
 <style>
-.products-section {
-	padding: 5rem 2rem;
-	background: var(--color-bg);
+.spec-section {
+	padding: 4.5rem 2rem;
+	background: var(--bg-raised);
+}
+
+.spec-container {
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.spec-heading {
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+	margin-bottom: 2rem;
+}
+
+.spec-arrow {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: var(--bg-hover);
+	color: var(--text-primary);
+	font-size: 0.85rem;
+	text-decoration: none;
+	transition: transform var(--dur-base) var(--ease-bounce), background 0.2s ease;
+}
+
+.spec-arrow:hover {
+	background: var(--purple-500);
+	transform: scale(1.1);
+}
+
+.spec-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 1.5rem;
+}
+
+.spec-card {
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	background: var(--card-gradient);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-card);
+	overflow: hidden;
+	box-shadow: var(--shadow-card);
+	transition: transform var(--dur-base) var(--ease-bounce),
+		border-color var(--dur-base) var(--ease-out-expo),
+		box-shadow var(--dur-base) var(--ease-out-expo);
+}
+
+.spec-card:hover {
+	transform: translateY(-6px);
+	border-color: var(--border-strong);
+	box-shadow: var(--shadow-card-hover);
+}
+
+.sale-ribbon {
+	position: absolute;
+	top: 0;
+	left: 0.9rem;
+	z-index: 2;
+	writing-mode: vertical-rl;
+	background: #ec4899;
+	color: #fff;
+	font-size: 0.68rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	padding: 0.6rem 0.3rem;
+	border-radius: 0 0 6px 6px;
+}
+
+.spec-visual {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 250px;
+	text-decoration: none;
 	overflow: hidden;
 }
 
-/* Grid background removed */
-
-.products-container {
-	max-width: 1100px;
-	margin: 0 auto;
-	position: relative;
-	z-index: 1;
+.spec-img {
+	max-height: 82%;
+	width: auto;
+	transition: transform var(--dur-base) var(--ease-bounce);
 }
 
-.products-header {
-	margin-bottom: 2.5rem;
-}
+.spec-card:hover .spec-img { transform: scale(1.08) rotate(-2deg); }
 
-.products-title {
-	font-family: 'IBM Plex Mono', monospace;
-	font-size: 2rem;
+.spec-logotype {
+	font-family: var(--font-display);
+	font-size: 2.1rem;
 	font-weight: 700;
-	color: #fff;
-	margin-bottom: 0.5rem;
+	letter-spacing: -0.02em;
+	color: var(--text-primary);
+	transition: transform var(--dur-base) var(--ease-bounce);
 }
 
-.products-subtitle {
-	color: var(--color-text-muted);
-	font-size: 0.95rem;
+.spec-card:hover .spec-logotype { transform: scale(1.08) rotate(-2deg); }
+
+.spec-body {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	padding: 1.2rem 1.4rem 1.4rem;
+	background: var(--bg-card);
 }
 
-/* Grid */
-.products-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-	gap: 1.25rem;
+.spec-name {
+	font-family: var(--font-display);
+	font-size: 1.15rem;
+	font-weight: 700;
+	color: var(--text-primary);
+	margin-bottom: 0.4rem;
 }
 
-/* Product cards */
-.product-card {
-	text-decoration: none;
-	color: inherit;
+.spec-desc {
+	font-size: 0.83rem;
+	color: var(--text-secondary);
+	line-height: 1.65;
+	margin-bottom: 1rem;
+	flex-grow: 1;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
-.product-card .window-titlebar {
-	cursor: pointer;
-}
-
-/* Featured card */
-.product-card.featured {
-	border-color: rgba(255, 255, 255, 0.2);
-}
-
-.product-card.featured:hover {
-	border-color: rgba(255, 255, 255, 0.35);
-}
-
-/* Product info */
-.product-header {
+.spec-footer {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 0.75rem;
 }
 
-.product-name {
-	font-family: 'IBM Plex Mono', monospace;
-	font-size: 1.1rem;
-	font-weight: 600;
+.spec-price {
+	display: flex;
+	flex-direction: column;
+	line-height: 1.15;
+}
+
+.price-old {
+	font-size: 0.75rem;
+	color: var(--text-muted);
+	text-decoration: line-through;
+}
+
+.price-now {
+	font-family: var(--font-display);
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: var(--text-primary);
+}
+
+.spec-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 42px;
+	height: 42px;
+	border-radius: 50%;
+	background: var(--purple-100);
+	border: 1px solid var(--purple-200);
+	color: var(--purple-600);
+	font-size: 1rem;
+	cursor: pointer;
+	text-decoration: none;
+	transition: transform var(--dur-base) var(--ease-bounce), background 0.2s ease, color 0.2s ease;
+}
+
+.spec-cta:hover {
+	background: var(--purple-600);
+	border-color: var(--purple-600);
 	color: #fff;
+	transform: scale(1.1);
 }
 
-.product-tag {
-	font-family: 'IBM Plex Mono', monospace;
-	font-size: 0.7rem;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	padding: 0.2rem 0.6rem;
-	border-radius: 20px;
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	color: var(--color-text-muted);
-}
+.spec-cta:active { transform: scale(0.94); }
 
-.featured-tag {
-	border-color: rgba(255, 255, 255, 0.3);
-	color: #fff;
-}
-
-.product-desc {
-	color: var(--color-text-muted);
-	font-size: 0.9rem;
-	line-height: 1.7;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-	.products-section {
-		padding: 3rem 1rem;
-	}
-
-	.products-header {
-		text-align: center;
-	}
-
-	.products-grid {
-		grid-template-columns: 1fr;
-	}
+	.spec-section { padding: 3rem 1.25rem; }
 }
 </style>

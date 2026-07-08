@@ -147,7 +147,7 @@ import voxelshopLogo from '../assets/voxelshop.png';
 	margin: 0 0 2rem 0;
 	letter-spacing: -0.02em;
 	color: var(--color-text);
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 }
 
 /* Links Section */
@@ -163,7 +163,7 @@ import voxelshopLogo from '../assets/voxelshop.png';
 }
 
 .link-category:hover {
-	border-color: rgba(255, 255, 255, 0.25);
+	border-color: var(--border-strong);
 }
 
 .link-cards {
@@ -177,21 +177,21 @@ import voxelshopLogo from '../assets/voxelshop.png';
 	align-items: center;
 	gap: 0.5rem;
 	padding: 0.5rem 0.875rem;
-	background: rgba(255, 255, 255, 0.03);
-	border: 1px solid rgba(255, 255, 255, 0.08);
+	background: var(--bg-hover);
+	border: 1px solid var(--border-subtle);
 	border-radius: 8px;
 	color: var(--color-text);
 	text-decoration: none;
 	font-size: 0.8125rem;
 	font-weight: 500;
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 	transition: all 0.2s ease;
 }
 
 .link-card:hover {
 	transform: translateY(-2px);
-	border-color: rgba(255, 255, 255, 0.25);
-	background: rgba(255, 255, 255, 0.06);
+	border-color: var(--border-strong);
+	background: var(--purple-100);
 }
 
 .link-icon {

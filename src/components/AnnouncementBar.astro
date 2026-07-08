@@ -1,0 +1,170 @@
+---
+// Sale announcement bar with countdown (Phoenix-style).
+// Config lives in src/data/products.ts (saleConfig) — hides itself after endsAt.
+import { saleConfig } from '../data/products';
+---
+
+{saleConfig.active && (
+	<div class="announce-bar" id="announce-bar" data-ends={saleConfig.endsAt}>
+		<div class="announce-inner">
+			<div class="announce-left">
+				<span class="announce-title">{saleConfig.label}</span>
+				<span class="announce-sub">
+					<span class="announce-chip">{saleConfig.percent}% off</span>
+					<span class="announce-note">limited time offer!</span>
+				</span>
+			</div>
+			<div class="announce-timer" aria-label="Sale ends in">
+				<span class="timer-label">Ends in</span>
+				<span class="timer-group"><span class="timer-num" data-t="h">--</span><span class="timer-unit">H</span></span>
+				<span class="timer-group"><span class="timer-num" data-t="m">--</span><span class="timer-unit">M</span></span>
+				<span class="timer-group"><span class="timer-num" data-t="s">--</span><span class="timer-unit">S</span></span>
+			</div>
+			<a href="#catalog" class="announce-cta">
+				SAVE {saleConfig.percent}% NOW
+				<i class="ph-bold ph-arrow-right"></i>
+			</a>
+		</div>
+	</div>
+)}
+
+<script is:inline>
+(function() {
+	const bar = document.getElementById('announce-bar');
+	if (!bar) return;
+	const end = new Date(bar.dataset.ends).getTime();
+	const h = bar.querySelector('[data-t="h"]');
+	const m = bar.querySelector('[data-t="m"]');
+	const s = bar.querySelector('[data-t="s"]');
+
+	function tick() {
+		const diff = end - Date.now();
+		if (diff <= 0) {
+			bar.style.display = 'none';
+			clearInterval(iv);
+			return;
+		}
+		h.textContent = String(Math.floor(diff / 3600000));
+		m.textContent = String(Math.floor(diff / 60000) % 60).padStart(2, '0');
+		s.textContent = String(Math.floor(diff / 1000) % 60).padStart(2, '0');
+	}
+	const iv = setInterval(tick, 1000);
+	tick();
+})();
+</script>
+
+<style>
+.announce-bar {
+	position: relative;
+	z-index: 1001;
+	background:
+		radial-gradient(ellipse 40% 120% at 15% 50%, rgba(196, 181, 253, 0.35), transparent 70%),
+		radial-gradient(ellipse 40% 120% at 85% 50%, rgba(167, 139, 250, 0.3), transparent 70%),
+		var(--purple-100);
+	border-bottom: 1px solid var(--purple-200);
+	padding: 0.6rem 1.5rem;
+}
+
+.announce-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2.5rem;
+	flex-wrap: wrap;
+}
+
+.announce-left {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+}
+
+.announce-title {
+	font-family: var(--font-display);
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	color: var(--purple-600);
+}
+
+.announce-sub {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.announce-chip {
+	background: var(--purple-600);
+	color: #fff;
+	font-size: 0.65rem;
+	font-weight: 700;
+	padding: 0.1rem 0.5rem;
+	border-radius: 999px;
+}
+
+.announce-note {
+	font-size: 0.7rem;
+	color: var(--text-secondary);
+}
+
+.announce-timer {
+	display: flex;
+	align-items: baseline;
+	gap: 0.6rem;
+	color: var(--text-primary);
+}
+
+.timer-label {
+	font-size: 0.68rem;
+	color: var(--text-secondary);
+	align-self: center;
+	margin-right: 0.25rem;
+}
+
+.timer-group {
+	display: flex;
+	align-items: baseline;
+	gap: 0.2rem;
+}
+
+.timer-num {
+	font-family: var(--font-display);
+	font-size: 1.5rem;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	min-width: 2ch;
+	text-align: center;
+}
+
+.timer-unit {
+	font-size: 0.65rem;
+	font-weight: 600;
+	color: var(--text-secondary);
+}
+
+.announce-cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	background: var(--gradient-brand);
+	color: #fff;
+	text-decoration: none;
+	font-size: 0.78rem;
+	font-weight: 700;
+	padding: 0.5rem 1.2rem;
+	border-radius: 999px;
+	transition: transform var(--dur-base) var(--ease-bounce), filter var(--dur-base) var(--ease-out-expo);
+}
+
+.announce-cta:hover {
+	transform: scale(1.05);
+	filter: brightness(1.15);
+}
+
+@media (max-width: 720px) {
+	.announce-inner { gap: 1rem; }
+	.announce-timer { display: none; }
+}
+</style>

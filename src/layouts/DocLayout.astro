@@ -1,5 +1,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import '../styles/tokens.css';
+import '../styles/motion.css';
 import '@phosphor-icons/web/regular';
 import '@phosphor-icons/web/bold';
 import CustomNav from '../components/CustomNav.astro';
@@ -50,10 +52,10 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 	<meta name="twitter:image" content={finalOgImage} />
 
 	<!-- Theme Color (Discord embed sidebar) -->
-	<meta name="theme-color" content="#0a0a0f" />
+	<meta name="theme-color" content="#fafafa" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 	<ViewTransitions />
 </head>
 <body>
@@ -263,21 +265,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 	</script>
 
 	<style is:global>
-		/* ===== CSS Custom Properties - Dark Theme ===== */
-		:root {
-			--color-bg: #0a0a0f;
-			--color-bg-alt: #111118;
-			--color-bg-card: #16161e;
-			--color-text: #e4e4e7;
-			--color-text-muted: #a1a1aa;
-			--color-primary: #ffffff;
-			--color-primary-light: rgba(255,255,255,0.7);
-			--color-primary-lighter: rgba(255,255,255,0.5);
-			--color-border: rgba(255, 255, 255, 0.1);
-			--color-accent: #ffffff;
-			--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-		}
-
+		/* Color/motion tokens come from styles/tokens.css + motion.css */
 		* {
 			margin: 0;
 			padding: 0;
@@ -296,7 +284,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		body {
-			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			font-family: var(--font-sans);
 			background: var(--color-bg);
 			color: var(--color-text);
 			line-height: 1.7;
@@ -418,7 +406,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 				display: flex;
 				align-items: center;
 				gap: 0.5rem;
-				font-family: 'IBM Plex Mono', monospace;
+				font-family: var(--font-mono);
 				font-size: 0.8rem;
 				color: var(--color-text-muted);
 				margin-bottom: 1.25rem;
@@ -449,7 +437,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 				display: inline-flex;
 				align-items: center;
 				gap: 0.35rem;
-				font-family: 'IBM Plex Mono', monospace;
+				font-family: var(--font-mono);
 				font-size: 0.75rem;
 				color: var(--color-text-muted);
 				text-decoration: none;
@@ -493,15 +481,15 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			}
 
 			.page-nav-card:hover {
-				border-color: rgba(255, 255, 255, 0.25);
-				background: var(--color-bg-alt);
+				border-color: var(--border-strong);
+				background: var(--purple-100);
 			}
 
 			.page-nav-direction {
 				display: flex;
 				align-items: center;
 				gap: 0.35rem;
-				font-family: 'IBM Plex Mono', monospace;
+				font-family: var(--font-mono);
 				font-size: 0.75rem;
 				color: var(--color-text-muted);
 				text-transform: uppercase;
@@ -541,11 +529,11 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.doc-header h1 {
 			font-size: 2.5rem;
 			font-weight: 700;
-			font-family: 'IBM Plex Mono', monospace;
+			font-family: var(--font-mono);
 			color: var(--color-text);
 			margin-bottom: 0.75rem;
 			padding-left: 1rem;
-			border-left: 2px solid rgba(255, 255, 255, 0.25);
+			border-left: 3px solid var(--purple-300);
 		}
 
 		.doc-description {
@@ -643,17 +631,17 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 			/* ===== Code ===== */
 		.prose code {
-			font-family: 'IBM Plex Mono', monospace;
-			background: rgba(255, 255, 255, 0.12);
-			color: rgba(255, 255, 255, 0.85);
+			font-family: var(--font-mono);
+			background: var(--purple-100);
+			color: var(--text-accent);
 			padding: 0.15rem 0.4rem;
 			border-radius: 4px;
 			font-size: 0.9em;
-			border: 1px solid rgba(255, 255, 255, 0.08);
+			border: 1px solid var(--purple-200);
 		}
 
 		.prose pre {
-			background: #0d0d12 !important;
+			background: var(--bg-code) !important;
 			border: 1px solid var(--color-border);
 			border-radius: 0.75rem;
 			padding: 1.25rem;
@@ -666,35 +654,35 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			padding: 0;
 			font-size: 0.875rem;
 			line-height: 1.7;
-			color: #e4e4e7 !important;
+			color: var(--code-text) !important;
 		}
 
-		/* Syntax highlighting overrides for dark mode */
+		/* Syntax highlighting overrides for light mode */
 		.prose pre .line {
-			color: #e4e4e7 !important;
+			color: var(--code-text) !important;
 		}
 
 		.prose pre span {
 			color: inherit;
 		}
 
-		/* Common syntax highlighting colors for dark mode */
-		.prose pre .keyword { color: #c792ea !important; }
-		.prose pre .string { color: #c3e88d !important; }
-		.prose pre .number { color: #f78c6c !important; }
-		.prose pre .comment { color: #546e7a !important; }
-		.prose pre .function { color: #82aaff !important; }
-		.prose pre .variable { color: #f07178 !important; }
-		.prose pre .operator { color: #89ddff !important; }
-		.prose pre .punctuation { color: #89ddff !important; }
-		.prose pre .class { color: #ffcb6b !important; }
-		.prose pre .property { color: #f07178 !important; }
+		/* Common syntax highlighting colors for light mode */
+		.prose pre .keyword { color: var(--code-keyword) !important; }
+		.prose pre .string { color: var(--code-string) !important; }
+		.prose pre .number { color: var(--code-number) !important; }
+		.prose pre .comment { color: var(--code-comment) !important; }
+		.prose pre .function { color: var(--code-function) !important; }
+		.prose pre .variable { color: var(--code-variable) !important; }
+		.prose pre .operator { color: var(--code-operator) !important; }
+		.prose pre .punctuation { color: var(--code-punctuation) !important; }
+		.prose pre .class { color: var(--code-class) !important; }
+		.prose pre .property { color: var(--code-property) !important; }
 
 		.copy-btn {
 			position: absolute;
 			top: 0.75rem;
 			right: 0.75rem;
-			background: rgba(255, 255, 255, 0.1);
+			background: var(--bg-hover);
 			border: none;
 			border-radius: 6px;
 			padding: 0.5rem;
@@ -707,13 +695,13 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.copy-btn:hover {
-			background: rgba(255, 255, 255, 0.2);
+			background: var(--purple-100);
 			color: var(--color-text);
 		}
 
 		.copy-btn.copied {
-			background: rgba(34, 197, 94, 0.3);
-			color: #22c55e;
+			background: rgba(22, 163, 74, 0.3);
+			color: var(--accent-success);
 		}
 
 		/* ===== Tables ===== */
@@ -727,7 +715,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose th {
-			background: rgba(255, 255, 255, 0.05);
+			background: var(--bg-raised);
 			color: var(--color-text);
 			font-weight: 600;
 			text-align: left;
@@ -741,7 +729,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose tbody tr:hover {
-			background: rgba(255, 255, 255, 0.03);
+			background: var(--bg-hover);
 		}
 
 		.prose tbody tr:hover td {
@@ -750,8 +738,8 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 
 		/* ===== Blockquotes ===== */
 		.prose blockquote {
-			border-left: 3px solid rgba(255, 255, 255, 0.4);
-			background: rgba(255, 255, 255, 0.04);
+			border-left: 3px solid var(--purple-300);
+			background: var(--purple-100);
 			padding: 1rem 1.5rem;
 			margin: 1.5rem 0;
 			border-radius: 0 0.5rem 0.5rem 0;
@@ -774,7 +762,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose details:hover {
-			border-color: rgba(255, 255, 255, 0.4);
+			border-color: var(--border-strong);
 		}
 
 		.prose details[open] {
@@ -827,7 +815,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.prose details > summary:hover {
-			background: rgba(255, 255, 255, 0.03);
+			background: var(--bg-hover);
 		}
 
 		.prose details > summary:hover::before {
@@ -936,7 +924,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			padding: 0.875rem 1rem;
 			font-weight: 600;
 			color: var(--color-text);
-			background: rgba(255, 255, 255, 0.05);
+			background: var(--bg-raised);
 			border-bottom: 2px solid var(--color-border);
 		}
 
@@ -979,7 +967,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.prose details code:not(pre code) {
 			font-size: 0.85em;
 			padding: 0.2rem 0.4rem;
-			background: rgba(255, 255, 255, 0.2);
+			background: var(--purple-100);
 		}
 
 		/* Headings inside details - GitBook style with margins */
@@ -1071,23 +1059,23 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		.callout-note {
-			background: rgba(255, 255, 255, 0.1);
+			background: var(--purple-100);
 			border-color: var(--color-primary);
 		}
 
 		.callout-tip {
 			background: rgba(34, 197, 94, 0.1);
-			border-color: #22c55e;
+			border-color: var(--accent-success);
 		}
 
 		.callout-warning {
 			background: rgba(234, 179, 8, 0.1);
-			border-color: #eab308;
+			border-color: var(--accent-warning);
 		}
 
 		.callout-danger {
 			background: rgba(239, 68, 68, 0.1);
-			border-color: #ef4444;
+			border-color: var(--accent-danger);
 		}
 
 		/* ===== Images & Video (centered) ===== */
@@ -1256,17 +1244,17 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 
 		::-webkit-scrollbar-thumb {
-			background: rgba(255, 255, 255, 0.2);
+			background: var(--purple-300);
 			border-radius: 4px;
 		}
 
 		::-webkit-scrollbar-thumb:hover {
-			background: rgba(255, 255, 255, 0.3);
+			background: var(--purple-400);
 		}
 
 		/* ===== Selection ===== */
 		::selection {
-			background: rgba(255, 255, 255, 0.3);
+			background: var(--purple-200);
 			color: var(--color-text);
 		}
 
@@ -1336,20 +1324,12 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			}
 		}
 
-			/* ===== Viewport Frame ===== */
-			.viewport-frame {
-				position: fixed;
-				inset: 8px;
-				z-index: 9999;
-				pointer-events: none;
-			}
-
 		/* ===== Overview (landing) page ===== */
 		.hero-appeal {
 			font-size: 1.05rem;
 			line-height: 1.7;
 			color: var(--color-text-muted);
-			background: rgba(255, 255, 255, 0.02);
+			background: var(--bg-card);
 			border: 1px solid var(--color-border);
 			border-radius: 14px;
 			padding: 1.5rem 1.75rem;
@@ -1367,7 +1347,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			margin: 1.5rem 0;
 		}
 		.overview-card {
-			background: rgba(255, 255, 255, 0.02);
+			background: var(--bg-card);
 			border: 1px solid var(--color-border);
 			border-radius: 12px;
 			padding: 1.25rem 1.4rem;
@@ -1376,7 +1356,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		.overview-card:hover {
 			border-color: var(--color-primary);
 			transform: translateY(-2px);
-			background: rgba(255, 255, 255, 0.04);
+			background: var(--purple-100);
 		}
 		.overview-card .icon {
 			font-size: 1.55rem;
@@ -1424,7 +1404,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			padding: 0.7rem 1.25rem;
 			border-radius: 10px;
 			border: 1px solid var(--color-border);
-			background: rgba(255, 255, 255, 0.04);
+			background: var(--purple-100);
 			color: var(--color-text) !important;
 			text-decoration: none !important;
 			font-weight: 500;
@@ -1433,7 +1413,7 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 		}
 		.cta-button i { font-size: 1.05rem; }
 		.cta-button:hover {
-			background: rgba(255, 255, 255, 0.08);
+			background: var(--purple-200);
 			border-color: var(--color-primary);
 			color: var(--color-text) !important;
 			text-decoration: none !important;
@@ -1445,19 +1425,13 @@ const finalOgImage = ogImage ? `${siteUrl}${ogImage}` : defaultOgImage;
 			border-color: var(--color-text);
 		}
 		.cta-button.primary:hover {
-			background: rgba(255, 255, 255, 0.85);
-			color: var(--color-bg) !important;
+			background: var(--purple-600);
+			color: #ffffff !important;
 		}
 
 		@media (max-width: 600px) {
 			.overview-grid { grid-template-columns: 1fr; }
 		}
 	</style>
-
-		<!-- Viewport frame -->
-		<svg class="viewport-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
-			<rect x="0.4" y="0.4" width="99.2" height="99.2" rx="0.6" ry="0.6"
-				fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.12" vector-effect="non-scaling-stroke"/>
-		</svg>
 </body>
 </html>

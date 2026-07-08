@@ -85,21 +85,43 @@ randomSingles:
   sleepClause: true
   limitedSpecies: []              # whitelist: only these species appear (empty = all)
   excludedSpecies: []             # blacklist: these species never appear
+  # Gimmicks available in random battles. No accessory (Tera Orb / Dynamax Band / etc.) is needed.
+  megaEvolution: false
+  zMoves: false
+  dynamax: false
+  terastallize: true              # Tera is on by default (Gen9 SV parity)
 
 randomDoubles:
   enabled: true
   sleepClause: true
   limitedSpecies: []
   excludedSpecies: []
+  megaEvolution: false
+  zMoves: false
+  dynamax: false
+  terastallize: true
 
 randomTriples:
   enabled: true
   sleepClause: true
   limitedSpecies: []
   excludedSpecies: []
+  megaEvolution: false
+  zMoves: false
+  dynamax: false
+  terastallize: true
 ```
 
 This is in addition to the global `weighting.exclusions` in `battle.yaml`. Use `limitedSpecies` to run a themed season (e.g. Kanto-only randbats), or `excludedSpecies` to remove problem Pokémon.
+
+### Gimmick control (`megaEvolution` / `zMoves` / `dynamax` / `terastallize`)
+
+Each random format lets you toggle the gimmicks players can use. These are **independent of accessory items** — players do **not** need a Tera Orb, Mega Stone, Z-Ring, or Dynamax Band equipped; the flags alone gate the mechanic.
+
+- `terastallize: true` (default) — Terastallizing is available.
+- `megaEvolution`, `zMoves`, `dynamax` — off by default. Enable to allow Mega Evolution, Z-Moves, or Dynamax respectively.
+
+You can enable more than one, but a single gimmick per Pokémon is recommended to keep the gimmick button UI clean. Changes apply after a `/rankedadmin reload`.
 
 ---
 
@@ -119,6 +141,83 @@ randomBattle:
 ```
 
 On cross-server setups, only the battle server fetches — lobby servers don't generate teams, so they skip the update.
+
+---
+
+## Custom Sets (Local File or GitHub)
+
+You can swap the randbats data with your own set file — either a local file placed on the server, or a file fetched from a URL. The active file is chosen by `setsFile` in `battle.yaml`, and changes take effect at runtime with `/rankedadmin reload` (no server restart needed).
+
+### Load order
+
+When the server loads randbats data it checks these locations **in order** and uses the first match:
+
+1. **Local custom file** — `config/cobbleranked/<localSetsDir>/<setsFile>` (a file you place here)
+2. **Auto-update backup** — `config/cobbleranked/randbats/<setsFile>` (the previous auto-update download)
+3. **Bundled** — the file shipped inside the mod jar (`gen9randombattle.json` by default)
+4. **Fetch now** — if none of the above exist and `autoUpdate.enabled` is true, the file is downloaded immediately from `sourceUrl`
+
+### Option A: Local file (easiest)
+
+1. Place your file at `config/cobbleranked/random_battle/custom.json`
+2. In `battle.yaml`, set `setsFile: "custom.json"`
+3. Run `/rankedadmin reload`
+
+```yaml
+# battle.yaml
+randomBattle:
+  setsFile: "custom.json"
+  localSetsDir: "random_battle"   # directory under config/cobbleranked/ for local set files
+```
+
+### Option B: Switch between multiple files
+
+Put several files in the local directory, then switch `setsFile` and `/rankedadmin reload`:
+
+```
+config/cobbleranked/random_battle/
+  ├── gen9randombattle.json
+  ├── gen8randombattle.json
+  └── custom-theme.json
+```
+
+```yaml
+randomBattle:
+  setsFile: "gen8randombattle.json"   # change this, then /rankedadmin reload
+```
+
+### Option C: Fetch from a URL (GitHub)
+
+Use auto-update to pull a file from a URL. `sourceUrl` is the **base directory** (not the file) — the mod appends `/` + `setsFile` to build the download URL.
+
+```yaml
+randomBattle:
+  setsFile: "gen9randombattle.json"
+  autoUpdate:
+    enabled: true
+    sourceUrl: "https://raw.githubusercontent.com/<user>/<repo>/main/data"  # directory, not the file
+    intervalHours: 24
+```
+
+> `sourceUrl` must be the directory, not the full file URL. For GitHub, use `raw.githubusercontent.com` raw URLs.
+
+### Custom set file format
+
+The file uses the Pokémon Showdown randbats compact format — each species maps to one or more weighted sets:
+
+```json
+{
+  "charizard": {
+    "80,heavydutyboots,solarpower,fireblast,airslash,focusblast,roar,fire": 100,
+    "80,lifeorb,solarpower,fireblast,airslash,focusblast,earthquake,dragon": 60
+  }
+}
+```
+
+- **key**: `level,item,ability,move1,move2,move3,move4,teraType` (Showdown IDs)
+- **value**: weight (higher = more likely to be picked)
+
+The server picks one set per Pokémon using weighted randomness.
 
 ---
 

@@ -1,22 +1,31 @@
 ---
-// Custom navigation bar - B&W clean design
+// Navigation — Phoenix-style: logo left, center links, Discord + cart right
 ---
 
 <nav class="custom-nav">
 	<div class="nav-container">
-		<!-- Navigation Links - Left side -->
+		<a href="/" class="nav-brand" aria-label="GashiStudios home">
+			<img src="/gashistudios.png" alt="" class="brand-logo" />
+			<span class="brand-name">Gashi<br />Studios</span>
+		</a>
+
 		<div class="nav-links">
-			<a href="/" class="nav-link" data-i18n="navHome">home</a>
-			<a href="/docs/cobbleranked/" class="nav-link" data-i18n="navDocs">documents</a>
-			<a href="/terms" class="nav-link" data-i18n="navTerms">terms</a>
-			<a href="#contact" class="nav-link" data-i18n="navContact">contact</a>
+			<a href="/#catalog" class="nav-link" data-i18n="navProducts">Products <i class="ph-bold ph-caret-down nav-caret"></i></a>
+			<a href="/docs/cobbleranked/" class="nav-link" data-i18n-html="navDocs">Docs</a>
+			<a href="/#team" class="nav-link" data-i18n="navAbout">About Us</a>
+			<a href="/#contact" class="nav-link" data-i18n="navHelp">Help</a>
 		</div>
 
-		<!-- Shop Button - Right side (disabled) -->
-		<span class="shop-btn disabled">
-			<img src="/shop.svg" alt="" class="shop-icon" />
-			<span class="shop-text">shop <span class="coming-soon">(coming soon!)</span></span>
-		</span>
+		<div class="nav-actions">
+			<a href="https://discord.gg/VVVvBTqqyP" target="_blank" rel="noopener noreferrer" class="nav-discord">
+				<i class="ph ph-discord-logo"></i>
+				<span>Discord</span>
+			</a>
+			<button class="nav-icon-btn" id="cart-open-btn" aria-label="Cart">
+				<i class="ph ph-shopping-cart-simple"></i>
+				<span class="cart-count" id="cart-count" hidden>0</span>
+			</button>
+		</div>
 	</div>
 </nav>
 
@@ -30,14 +39,16 @@
 <!-- Mobile overlay menu -->
 <div class="mobile-menu-overlay" id="mobile-menu-overlay">
 	<div class="mobile-menu-content">
-		<a href="/" class="mobile-link" data-i18n="navHome">home</a>
-				<a href="/docs/cobbleranked/" class="mobile-link" data-i18n="navDocs">documents</a>
-		<a href="/terms" class="mobile-link" data-i18n="navTerms">terms</a>
-		<a href="#contact" class="mobile-link" data-i18n="navContact">contact</a>
-		<span class="mobile-shop-btn disabled">
-			<img src="/shop.svg" alt="" class="shop-icon" />
-			<span>shop <span class="coming-soon">(coming soon!)</span></span>
-		</span>
+		<a href="/#catalog" class="mobile-link" data-i18n="navProductsM">Products</a>
+		<a href="/docs/cobbleranked/" class="mobile-link" data-i18n="navDocsM">Docs</a>
+		<a href="/#team" class="mobile-link" data-i18n="navAboutM">About Us</a>
+		<a href="/#contact" class="mobile-link" data-i18n="navHelpM">Help</a>
+		<button class="mobile-link mobile-cart-link" id="cart-open-btn-mobile">
+			<i class="ph ph-shopping-cart-simple"></i> Cart
+		</button>
+		<a href="https://discord.gg/VVVvBTqqyP" target="_blank" rel="noopener noreferrer" class="mobile-discord">
+			<i class="ph ph-discord-logo"></i> Discord
+		</a>
 	</div>
 </div>
 
@@ -45,26 +56,36 @@
 (function() {
 	const translations = {
 		en: {
-			navHome: "home",
-					navDocs: "documents",
-			navTerms: "terms",
-			navContact: "contact"
+			navProducts: 'Products',
+			navDocs: 'Docs',
+			navAbout: 'About Us',
+			navHelp: 'Help',
+			navProductsM: 'Products',
+			navDocsM: 'Docs',
+			navAboutM: 'About Us',
+			navHelpM: 'Help'
 		},
 		ja: {
-			navHome: "ホーム",
-					navDocs: "ドキュメント",
-			navTerms: "利用規約",
-			navContact: "お問い合わせ"
+			navProducts: 'プロダクト',
+			navDocs: 'ドキュメント',
+			navAbout: 'チーム',
+			navHelp: 'サポート',
+			navProductsM: 'プロダクト',
+			navDocsM: 'ドキュメント',
+			navAboutM: 'チーム',
+			navHelpM: 'サポート'
 		}
 	};
 
 	function applyNavTranslations(lang) {
 		const t = translations[lang] || translations.en;
-		document.querySelectorAll('[data-i18n]').forEach(el => {
+		document.querySelectorAll('.custom-nav [data-i18n], .mobile-menu-overlay [data-i18n]').forEach(el => {
 			const key = el.getAttribute('data-i18n');
-			if (t[key] && (el.closest('.custom-nav') || el.closest('.mobile-menu-overlay'))) {
-				el.textContent = t[key];
-			}
+			if (!t[key]) return;
+			// Preserve trailing icon (caret) if present
+			const icon = el.querySelector('i');
+			el.textContent = t[key] + (icon ? ' ' : '');
+			if (icon) el.appendChild(icon);
 		});
 	}
 
@@ -72,7 +93,6 @@
 		const lang = window.GashiLang?.get() || 'en';
 		applyNavTranslations(lang);
 
-		// Mobile menu toggle
 		const menuBtn = document.getElementById('mobile-menu-btn');
 		const overlay = document.getElementById('mobile-menu-overlay');
 
@@ -83,8 +103,7 @@
 				document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
 			});
 
-			// Close menu on link click
-			overlay.querySelectorAll('a').forEach(link => {
+			overlay.querySelectorAll('a, button').forEach(link => {
 				link.addEventListener('click', () => {
 					menuBtn.classList.remove('active');
 					overlay.classList.remove('active');
@@ -108,14 +127,14 @@
 
 <style>
 .custom-nav {
-	position: fixed;
+	position: sticky;
 	top: 0;
 	left: 0;
 	right: 0;
 	z-index: 1000;
-	padding: 1rem 3rem;
-	background: rgba(10, 10, 15, 0.9);
-	border-bottom: 1px solid var(--color-border);
+	padding: 0.9rem 3rem;
+	background: rgba(250, 250, 250, 0.85);
+	border-bottom: 1px solid var(--border-subtle);
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
 }
@@ -126,89 +145,127 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	gap: 2rem;
 }
 
-/* Nav Links */
+/* Brand */
+.nav-brand {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	text-decoration: none;
+}
+
+.brand-logo {
+	width: 34px;
+	height: 34px;
+	border-radius: 8px;
+}
+
+.brand-name {
+	font-family: var(--font-display);
+	font-size: 0.82rem;
+	font-weight: 700;
+	line-height: 1.1;
+	color: var(--text-primary);
+	letter-spacing: 0.01em;
+}
+
+/* Center links */
 .nav-links {
 	display: flex;
-	gap: 1.5rem;
+	gap: 0.5rem;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .nav-link {
-	color: var(--color-text-muted);
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	color: var(--text-secondary);
 	text-decoration: none;
 	font-size: 0.9rem;
 	font-weight: 500;
-	font-family: 'IBM Plex Mono', monospace;
 	padding: 0.5rem 1rem;
-	border-radius: 8px;
+	border-radius: 10px;
 	transition: color 0.2s ease, background 0.2s ease;
-	position: relative;
 }
 
-.nav-link::after {
-	content: '';
-	position: absolute;
-	bottom: 4px;
-	left: 50%;
-	transform: translateX(-50%) scaleX(0);
-	width: 60%;
-	height: 1px;
-	background: rgba(255, 255, 255, 0.5);
-	border-radius: 1px;
-	transition: transform 0.2s ease;
-}
+.nav-caret { font-size: 0.7em; }
 
 .nav-link:hover {
-	color: var(--color-text);
-	background: rgba(255, 255, 255, 0.05);
+	color: var(--text-primary);
+	background: var(--purple-100);
 }
 
-.nav-link:hover::after {
-	transform: translateX(-50%) scaleX(1);
-}
-
-/* Shop Button */
-.shop-btn {
+/* Right actions */
+.nav-actions {
 	display: flex;
 	align-items: center;
+	gap: 0.75rem;
+}
+
+.nav-discord {
+	display: inline-flex;
+	align-items: center;
 	gap: 0.5rem;
-	background: transparent;
-	color: var(--color-text-muted);
+	color: var(--text-secondary);
 	text-decoration: none;
-	padding: 0.5rem 1rem;
-	border-radius: 8px;
-	font-size: 0.85rem;
-	font-weight: 600;
-	font-family: 'IBM Plex Mono', monospace;
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	font-size: 0.88rem;
+	font-weight: 500;
+	padding: 0.45rem 0.9rem;
+	border: 1px solid var(--border-subtle);
+	border-radius: 10px;
 	transition: all 0.2s ease;
 }
 
-.shop-btn.disabled {
-	cursor: default;
-	opacity: 0.4;
+.nav-discord i { font-size: 1.15rem; }
+
+.nav-discord:hover {
+	color: #fff;
+	background: var(--purple-600);
+	border-color: var(--purple-600);
 }
 
-.shop-btn:not(.disabled):hover {
-	background: #fff;
-	color: #000;
-	border-color: #fff;
+.nav-icon-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 38px;
+	height: 38px;
+	background: transparent;
+	border: none;
+	border-radius: 10px;
+	color: var(--text-secondary);
+	font-size: 1.3rem;
+	cursor: pointer;
+	transition: color 0.2s ease, background 0.2s ease;
 }
 
-.shop-icon {
-	width: 16px;
+.nav-icon-btn:hover {
+	color: var(--text-primary);
+	background: var(--purple-100);
+}
+
+.cart-count {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	min-width: 16px;
 	height: 16px;
-}
-
-.shop-text {
-	letter-spacing: 0.02em;
-}
-
-.coming-soon {
-	font-size: 0.7em;
-	font-weight: 500;
-	opacity: 0.9;
+	padding: 0 4px;
+	background: var(--purple-600);
+	color: #fff;
+	font-size: 0.62rem;
+	font-weight: 700;
+	border-radius: 999px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
 }
 
 /* Mobile menu button */
@@ -238,26 +295,15 @@
 	transition: all 0.3s ease;
 }
 
-.mobile-menu-btn.active .menu-line:nth-child(1) {
-	transform: rotate(45deg) translate(5px, 5px);
-}
-
-.mobile-menu-btn.active .menu-line:nth-child(2) {
-	opacity: 0;
-}
-
-.mobile-menu-btn.active .menu-line:nth-child(3) {
-	transform: rotate(-45deg) translate(5px, -5px);
-}
+.mobile-menu-btn.active .menu-line:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.mobile-menu-btn.active .menu-line:nth-child(2) { opacity: 0; }
+.mobile-menu-btn.active .menu-line:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
 /* Mobile overlay */
 .mobile-menu-overlay {
 	display: none;
 	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	inset: 0;
 	z-index: 1001;
 	background: var(--color-bg);
 	opacity: 0;
@@ -281,17 +327,24 @@
 }
 
 .mobile-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
 	color: var(--color-text);
+	background: none;
+	border: none;
 	text-decoration: none;
 	font-size: 1.5rem;
 	font-weight: 500;
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-display);
+	cursor: pointer;
 	transition: color 0.2s ease;
 	opacity: 0;
 	transform: translateY(20px);
 }
 
-.mobile-menu-overlay.active .mobile-link {
+.mobile-menu-overlay.active .mobile-link,
+.mobile-menu-overlay.active .mobile-discord {
 	animation: fadeInStagger 0.4s ease forwards;
 }
 
@@ -300,64 +353,30 @@
 .mobile-menu-overlay.active .mobile-link:nth-child(3) { animation-delay: 0.15s; }
 .mobile-menu-overlay.active .mobile-link:nth-child(4) { animation-delay: 0.2s; }
 .mobile-menu-overlay.active .mobile-link:nth-child(5) { animation-delay: 0.25s; }
+.mobile-menu-overlay.active .mobile-discord { animation-delay: 0.3s; }
 
-.mobile-link:hover {
-	color: #fff;
-}
+.mobile-link:hover { color: var(--text-accent); }
 
-.mobile-shop-btn {
-	display: flex;
+.mobile-discord {
+	display: inline-flex;
 	align-items: center;
-	gap: 0.5rem;
-	background: transparent;
-	color: var(--color-text-muted);
+	gap: 0.6rem;
+	color: #fff;
+	background: var(--purple-600);
 	text-decoration: none;
-	padding: 0.75rem 1.5rem;
-	border-radius: 8px;
+	padding: 0.75rem 1.75rem;
+	border-radius: 999px;
 	font-size: 1rem;
 	font-weight: 600;
-	font-family: 'IBM Plex Mono', monospace;
-	border: 1px solid rgba(255, 255, 255, 0.15);
 	margin-top: 1rem;
-}
-
-.mobile-shop-btn .shop-icon {
-	width: 20px;
-	height: 20px;
-}
-
-.mobile-shop-btn.disabled {
-	cursor: default;
-	opacity: 0.4;
+	opacity: 0;
+	transform: translateY(20px);
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-	.custom-nav {
-		display: none;
-	}
-
-	.mobile-menu-btn {
-		display: flex;
-	}
-
-	.mobile-menu-overlay {
-		display: block;
-	}
-}
-
-@media (max-width: 1100px) {
-	.nav-links {
-		gap: 0.75rem;
-	}
-
-	.nav-link {
-		padding: 0.4rem 0.75rem;
-		font-size: 0.85rem;
-	}
-
-	.custom-nav {
-		padding: 1rem 2rem;
-	}
+@media (max-width: 1000px) {
+	.custom-nav { display: none; }
+	.mobile-menu-btn { display: flex; }
+	.mobile-menu-overlay { display: block; }
 }
 </style>

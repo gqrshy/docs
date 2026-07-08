@@ -179,10 +179,10 @@
 }
 
 .section-title {
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 	font-size: 2rem;
 	font-weight: 700;
-	color: #fff;
+	color: var(--text-primary);
 	margin-bottom: 2rem;
 }
 
@@ -212,16 +212,16 @@
 	align-items: center;
 	gap: 0.5rem;
 	padding: 0.4rem 0.75rem;
-	border: 1px solid rgba(255, 255, 255, 0.08);
+	border: 1px solid var(--border-subtle);
 	border-radius: 6px;
 	font-size: 0.8rem;
 	color: var(--color-text-muted);
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 	transition: border-color 0.2s ease;
 }
 
 .tech-item:hover {
-	border-color: rgba(255, 255, 255, 0.2);
+	border-color: var(--border-strong);
 }
 
 .tech-item img {
@@ -238,7 +238,7 @@
 	height: 16px;
 	font-size: 0.55rem;
 	font-weight: 700;
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	border: 1px solid var(--border-subtle);
 	border-radius: 3px;
 	color: var(--color-text-muted);
 }

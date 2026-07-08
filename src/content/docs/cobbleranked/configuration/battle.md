@@ -57,6 +57,7 @@ randomBattle:
   enabled: true
   teamSize: 6
   setsFile: "gen9randombattle.json"
+  localSetsDir: "random_battle"     # local custom set files live under config/cobbleranked/<localSetsDir>/
   # statsMode: OPTIMIZED (252/252/4 + boosting nature) | OFFICIAL (flat EV85 + neutral, Showdown-accurate) | FLAT (IV31/EV0/neutral)
   statsMode: "OFFICIAL"
   weighting:
@@ -78,10 +79,13 @@ randomBattle:
     intervalHours: 24
     sourceUrl: "https://data.pkmn.cc/randbats"
     battleServerOnly: true          # cross-server: only battle server fetches
+    backupDir: "randbats"           # downloaded data is backed up here
 ```
 
 | Setting | Description |
 |---------|-------------|
+| `setsFile` | Which randbats data file to load. Load order: local custom → backup → bundled → fetch. See [Custom Sets](/docs/cobbleranked/features/random-battle/#custom-sets-local-file-or-github). |
+| `localSetsDir` | Directory under `config/cobbleranked/` for local custom set files (default `random_battle`) |
 | `statsMode` | How IVs/EVs/nature are assigned: `OPTIMIZED`, `OFFICIAL` (Showdown parity, default), or `FLAT` |
 | `weighting.*` | Team-composition constraints (species duplication, type/resistance diversity). Default ON for balanced teams |
 | `autoUpdate.*` | Periodically fetch the latest randbats data and hot-reload |
@@ -252,6 +256,8 @@ fleePenalty:
 ```yaml
 # battle.yaml
 gui:
+  detailedTooltips: true            # show ability/nature/moves/IV/EV in Pokémon tooltips
+  showOpponentDetails: false        # also show detailed tooltips for the opponent's Pokémon
   leaderboardPageSize: 25
   blacklistPageSize: 45
   statsRefreshCooldownMs: 5000
@@ -259,6 +265,8 @@ gui:
 
 | Setting | Default | Description |
 |---------|---------|-------------|
+| `detailedTooltips` | `true` | Show ability, nature, held item, moves, IVs and EVs in the lead/team-selection Pokémon tooltips |
+| `showOpponentDetails` | `false` | Also show detailed tooltips for the opponent's Pokémon (otherwise opponents see type badges only) |
 | `leaderboardPageSize` | `25` | Players per leaderboard page |
 | `blacklistPageSize` | `45` | Items per blacklist page |
 | `statsRefreshCooldownMs` | `5000` | Cooldown between stat refreshes |

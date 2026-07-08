@@ -4,7 +4,8 @@
       "mcp__zread__get_repo_structure",
       "mcp__web-reader__webReader",
       "mcp__web-search-prime__webSearchPrime",
-      "WebSearch"
+      "WebSearch",
+      "mcp__visualize__read_me"
     ]
   }
 }

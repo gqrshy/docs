@@ -127,21 +127,21 @@
 	align-items: center;
 	gap: 0.5rem;
 	background: var(--color-bg-card);
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	border: 1px solid var(--border-subtle);
 	border-radius: 50px;
 	padding: 0.75rem 1rem;
 	color: var(--color-text);
 	font-size: 0.9rem;
 	font-weight: 500;
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 	cursor: pointer;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+	box-shadow: var(--shadow-card);
 	transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .lang-toggle:hover {
-	background: var(--color-bg-alt);
-	border-color: rgba(255, 255, 255, 0.3);
+	background: var(--purple-100);
+	border-color: var(--border-strong);
 }
 
 /* Spinning globe */
@@ -165,7 +165,7 @@
 	right: 0;
 	margin-bottom: 0.5rem;
 	background: var(--color-bg-card);
-	border: 1px solid rgba(255, 255, 255, 0.12);
+	border: 1px solid var(--border-subtle);
 	border-radius: 12px;
 	padding: 0.5rem;
 	min-width: 140px;
@@ -173,7 +173,7 @@
 	visibility: hidden;
 	transform: translateY(10px);
 	transition: all 0.2s ease;
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+	box-shadow: var(--shadow-card-hover);
 }
 
 .lang-switcher.open .lang-menu {
@@ -193,7 +193,7 @@
 	border-radius: 8px;
 	color: var(--color-text-muted);
 	font-size: 0.9rem;
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-mono);
 	cursor: pointer;
 	transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 	text-align: left;
@@ -226,13 +226,13 @@
 }
 
 .lang-option:hover {
-	background: rgba(255, 255, 255, 0.06);
+	background: var(--purple-100);
 	color: var(--color-text);
 }
 
 .lang-option.active {
-	background: rgba(255, 255, 255, 0.1);
-	color: #ffffff;
+	background: var(--purple-200);
+	color: var(--text-primary);
 }
 
 .lang-flag {

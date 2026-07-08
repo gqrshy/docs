@@ -1,0 +1,199 @@
+---
+// Projects — flagship works in progress (Echelon)
+---
+
+<section id="projects" class="projects-section">
+	<div class="projects-container">
+		<div class="projects-header curtain-reveal">
+			<span class="section-label">// Projects</span>
+			<h2 class="section-heading" data-i18n="projTitle">What's coming next</h2>
+		</div>
+
+		<div class="echelon-card pop-in">
+			<!-- WIP placeholder visual — swap for real art when ready (REDESIGN.md §7.6) -->
+			<div class="echelon-visual">
+				<span class="echelon-wip-badge wip-pulse" data-i18n="projWip">In Development</span>
+				<span class="echelon-logotype">ECHELON</span>
+				<span class="echelon-coming">Coming soon</span>
+			</div>
+			<div class="echelon-body">
+				<h3 class="echelon-name">Echelon</h3>
+				<p class="echelon-desc" data-i18n="projEchelonDesc">
+					An MMORPG project built inside Minecraft. Details coming soon — follow along on Discord.
+				</p>
+				<div class="echelon-footer">
+					<span class="badge badge-mod">Minecraft</span>
+					<span class="badge badge-lib">MMORPG</span>
+					<a href="https://discord.gg/VVVvBTqqyP" target="_blank" rel="noopener noreferrer" class="btn btn-secondary echelon-cta">
+						<span data-i18n="projFollow">Follow on Discord</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+(function() {
+	const translations = {
+		en: {
+			projTitle: "What's coming next",
+			projWip: "In Development",
+			projEchelonDesc: "An MMORPG project built inside Minecraft. Details coming soon — follow along on Discord.",
+			projFollow: "Follow on Discord"
+		},
+		ja: {
+			projTitle: "進行中のプロジェクト",
+			projWip: "開発中",
+			projEchelonDesc: "Minecraft上で構想中のMMORPGプロジェクト。詳細は近日公開 — Discordで続報をお届けします。",
+			projFollow: "Discordで追う"
+		}
+	};
+
+	function applyTranslations(lang) {
+		const t = translations[lang] || translations.en;
+		document.querySelectorAll('.projects-section [data-i18n]').forEach(el => {
+			const key = el.getAttribute('data-i18n');
+			if (t[key]) {
+				el.innerHTML = t[key];
+			}
+		});
+	}
+
+	function init() {
+		const lang = window.GashiLang?.get() || 'en';
+		applyTranslations(lang);
+	}
+
+	window.addEventListener('langChange', (e) => {
+		applyTranslations(e.detail.lang);
+	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+})();
+</script>
+
+<style>
+.projects-section {
+	padding: 5.5rem 2rem;
+	background: var(--bg-base);
+}
+
+.projects-container {
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.projects-header {
+	display: inline-block;
+	margin-bottom: 2.5rem;
+}
+
+.echelon-card {
+	background: var(--bg-card);
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-card);
+	overflow: hidden;
+	transition: transform var(--dur-base) var(--ease-bounce),
+		box-shadow var(--dur-base) var(--ease-out-expo);
+}
+
+.echelon-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-card-hover);
+}
+
+.echelon-visual {
+	position: relative;
+	height: 240px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	background: linear-gradient(135deg, rgba(139, 92, 246, 0.35), rgba(139, 92, 246, 0.08) 85%);
+}
+
+.echelon-logotype {
+	font-family: var(--font-display);
+	font-size: clamp(2rem, 6vw, 3.25rem);
+	font-weight: 700;
+	letter-spacing: 0.28em;
+	color: var(--text-primary);
+	text-indent: 0.28em;
+}
+
+.echelon-coming {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.4em;
+	text-transform: uppercase;
+	color: var(--text-accent);
+	text-indent: 0.4em;
+}
+
+.echelon-wip-badge {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	padding: 0.3rem 0.85rem;
+	border-radius: 999px;
+	background: rgba(251, 191, 36, 0.12);
+	border: 1px solid rgba(251, 191, 36, 0.45);
+	color: var(--accent-amber);
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+}
+
+.echelon-body {
+	padding: 1.75rem;
+}
+
+.echelon-name {
+	font-family: var(--font-display);
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: var(--text-primary);
+	margin-bottom: 0.5rem;
+}
+
+.echelon-desc {
+	font-size: 0.95rem;
+	color: var(--text-secondary);
+	line-height: 1.7;
+	margin-bottom: 1.5rem;
+}
+
+.echelon-footer {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	flex-wrap: wrap;
+}
+
+.echelon-cta {
+	margin-left: auto;
+	padding: 0.55rem 1.4rem;
+	font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+	.projects-section {
+		padding: 3.5rem 1.25rem;
+	}
+
+	.echelon-visual {
+		height: 180px;
+	}
+
+	.echelon-cta {
+		margin-left: 0;
+	}
+}
+</style>

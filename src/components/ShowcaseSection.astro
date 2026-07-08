@@ -1,63 +1,24 @@
 ---
-// Showcase section - Built for Cobblemon
+// Showcase — Cobblemon integration highlight
 ---
 
-<section class="showcase-section">
+<section id="showcase" class="showcase-section">
 	<div class="showcase-content">
-		<div class="showcase-image">
+		<div class="showcase-image reveal-up">
 			<img src="/gengar.gif" alt="Gengar" />
 		</div>
-		<div class="showcase-text">
+		<div class="showcase-text stagger-children">
+			<span class="section-label">// Showcase</span>
 			<h2 class="showcase-title" data-i18n="showcaseTitle">Built for Cobblemon</h2>
 			<p class="showcase-desc" data-i18n="showcaseDesc">
 				Seamlessly integrated with the Cobblemon mod. Bringing competitive Pokemon battles
 				to your Minecraft server with style and precision.
 			</p>
-			<div class="showcase-marquee">
-				<div class="marquee-track">
-					<div class="marquee-content showcase-marquee-content">					<span>Java</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Kotlin</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>TypeScript</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Docker</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Firebase</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>MySQL</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Redis</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Figma</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>IntelliJ</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Git</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Java</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Kotlin</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>TypeScript</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Docker</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Firebase</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>MySQL</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Redis</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Figma</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>IntelliJ</span>
-					<span class="showcase-marquee-sep">//</span>
-					<span>Git</span>
-					<span class="showcase-marquee-sep">//</span>
-				</div>
+			<div class="showcase-badges">
+				<span class="badge badge-mod">Fabric</span>
+				<span class="badge badge-lib">Cobblemon</span>
+				<span class="badge badge-plugin">Multiplayer</span>
 			</div>
-		</div>
 		</div>
 	</div>
 </section>
@@ -105,7 +66,7 @@
 <style is:global>
 .showcase-section {
 	padding: 5rem 4rem 5rem 0;
-	background: var(--color-bg-alt);
+	background: var(--bg-base);
 	position: relative;
 	overflow: hidden;
 }
@@ -142,43 +103,26 @@
 }
 
 .showcase-title {
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: var(--font-display);
 	font-size: 2rem;
 	font-weight: 700;
-	color: #fff;
+	color: var(--text-primary);
+	letter-spacing: -0.02em;
 	text-align: left;
 }
 
 .showcase-desc {
-	color: var(--color-text-muted);
+	color: var(--text-secondary);
 	font-size: 1rem;
 	line-height: 1.8;
 	text-align: left;
 }
 
-/* Marquee */
-.showcase-marquee {
-	overflow: hidden;
+.showcase-badges {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
 	margin-top: 0.5rem;
-}
-
-.showcase-marquee-content {
-	animation: marquee 20s linear infinite;
-	font-family: 'IBM Plex Mono', monospace;
-	font-size: 0.75rem;
-	color: rgba(255, 255, 255, 0.25);
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
-	gap: 0;
-}
-
-.showcase-marquee-content span:not(.showcase-marquee-sep) {
-	margin: 0 1rem;
-}
-
-.showcase-marquee-sep {
-	color: rgba(255, 255, 255, 0.15);
-	margin: 0 0.25rem;
 }
 
 /* Responsive */
