@@ -1,7 +1,9 @@
 // GashiStudios product catalog — single source of truth for the store.
-// Prices are placeholders until Stripe products are finalized.
-// To enable real checkout: set STRIPE_SECRET_KEY in env and (optionally)
-// set `stripePriceId` per product to use pre-created Stripe Prices.
+// Paid mods are sold externally on VoxelShop (see `externalBuyUrl`).
+// The in-site Stripe cart is currently DISABLED — the nav shows a
+// "Store coming soon" badge and CartDrawer has no trigger.
+// To re-enable checkout: set STRIPE_SECRET_KEY in env, (optionally) set
+// `stripePriceId` per product, and restore the cart UI in CustomNav.
 
 export type ProductCategory = 'mods' | 'plugins' | 'libraries';
 
@@ -20,6 +22,9 @@ export interface Product {
 	salePrice?: number;
 	/** Pre-created Stripe Price ID (optional — falls back to price_data) */
 	stripePriceId?: string;
+	/** External purchase URL (e.g. VoxelShop). When set, the buy button
+	    links here instead of the in-site cart. */
+	externalBuyUrl?: string;
 	docsUrl?: string;
 	downloadUrl?: string;
 	image?: string;
@@ -30,7 +35,7 @@ export interface Product {
 }
 
 export const saleConfig = {
-	active: true,
+	active: false,
 	label: 'SUMMER SALE IS HERE!',
 	percent: 10,
 	/** ISO date — countdown target. Banner hides itself after this. */
@@ -50,9 +55,9 @@ export const products: Product[] = [
 		tags: ['Cobblemon', 'PvP', 'Ranked', 'GUI'],
 		mcVersions: ['1.21.1'],
 		platforms: ['Fabric'],
-		price: 19.99,
-		salePrice: 17.99,
+		price: 10,
 		docsUrl: '/docs/cobbleranked/',
+		externalBuyUrl: 'https://voxel.shop/product/8733/cobbleranked',
 		image: '/cobbleranked.png',
 		gradient: 'linear-gradient(135deg, #c4b5fd, #8b5cf6)',
 		featured: true,

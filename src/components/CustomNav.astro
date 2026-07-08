@@ -21,10 +21,10 @@
 				<i class="ph ph-discord-logo"></i>
 				<span>Discord</span>
 			</a>
-			<button class="nav-icon-btn" id="cart-open-btn" aria-label="Cart">
-				<i class="ph ph-shopping-cart-simple"></i>
-				<span class="cart-count" id="cart-count" hidden>0</span>
-			</button>
+			<span class="nav-store-soon" title="In-site store coming soon">
+				<i class="ph ph-storefront"></i>
+				<span data-i18n="navStoreSoon">Store soon</span>
+			</span>
 		</div>
 	</div>
 </nav>
@@ -43,9 +43,9 @@
 		<a href="/docs/cobbleranked/" class="mobile-link" data-i18n="navDocsM">Docs</a>
 		<a href="/#team" class="mobile-link" data-i18n="navAboutM">About Us</a>
 		<a href="/#contact" class="mobile-link" data-i18n="navHelpM">Help</a>
-		<button class="mobile-link mobile-cart-link" id="cart-open-btn-mobile">
-			<i class="ph ph-shopping-cart-simple"></i> Cart
-		</button>
+		<span class="mobile-link mobile-store-soon">
+			<i class="ph ph-storefront"></i> <span data-i18n="navStoreSoonM">Store coming soon</span>
+		</span>
 		<a href="https://discord.gg/VVVvBTqqyP" target="_blank" rel="noopener noreferrer" class="mobile-discord">
 			<i class="ph ph-discord-logo"></i> Discord
 		</a>
@@ -63,7 +63,9 @@
 			navProductsM: 'Products',
 			navDocsM: 'Docs',
 			navAboutM: 'About Us',
-			navHelpM: 'Help'
+			navHelpM: 'Help',
+			navStoreSoon: 'Store soon',
+			navStoreSoonM: 'Store coming soon'
 		},
 		ja: {
 			navProducts: 'プロダクト',
@@ -73,7 +75,9 @@
 			navProductsM: 'プロダクト',
 			navDocsM: 'ドキュメント',
 			navAboutM: 'チーム',
-			navHelpM: 'サポート'
+			navHelpM: 'サポート',
+				navStoreSoon: 'ストア準備中',
+				navStoreSoonM: 'ストア準備中'
 		}
 	};
 
@@ -268,7 +272,33 @@
 	line-height: 1;
 }
 
-/* Mobile menu button */
+/* "Store coming soon" badge (in-site cart disabled — buy on VoxelShop) */
+	.nav-store-soon {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.4rem 0.75rem;
+		border: 1px solid var(--purple-200);
+		border-radius: 10px;
+		background: var(--purple-100);
+		color: var(--purple-600);
+		font-family: var(--font-sans);
+		font-size: 0.72rem;
+		font-weight: 600;
+		white-space: nowrap;
+		cursor: default;
+	}
+
+	.nav-store-soon i {
+		font-size: 1.05rem;
+	}
+
+	.mobile-store-soon {
+		color: var(--text-muted);
+		cursor: default;
+	}
+
+	/* Mobile menu button */
 .mobile-menu-btn {
 	display: none;
 	position: fixed;

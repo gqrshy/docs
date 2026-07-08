@@ -45,6 +45,10 @@ function fmt(n: number) {
 								<a href={p.docsUrl} class="spec-cta" aria-label={`View ${p.name} docs`}>
 									<i class="ph-bold ph-arrow-right"></i>
 								</a>
+							) : p.externalBuyUrl ? (
+								<a href={p.externalBuyUrl} target="_blank" rel="noopener noreferrer" class="spec-cta" aria-label={`Buy ${p.name} on VoxelShop`}>
+									<i class="ph-bold ph-arrow-right"></i>
+								</a>
 							) : (
 								<button class="spec-cta" data-add-to-cart={p.id} aria-label={`Add ${p.name} to cart`}>
 									<i class="ph-bold ph-arrow-right"></i>
