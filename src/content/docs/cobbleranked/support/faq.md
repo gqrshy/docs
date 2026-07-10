@@ -3,7 +3,7 @@ title: FAQ & Troubleshooting
 description: Frequently asked questions and fixes for common issues.
 ---
 
-The most common questions from buyers, all in one place. **Press Ctrl+F (⌘+F on Mac) to search.**
+The most common questions from buyers, all in one place. **Press Ctrl+K (⌘+K on Mac) to search the whole documentation.**
 
 ## 💡 Basics
 

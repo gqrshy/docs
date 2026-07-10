@@ -1,7 +1,7 @@
 // GashiStudios product catalog — single source of truth for the store.
 // Paid mods are sold externally on VoxelShop (see `externalBuyUrl`).
-// The in-site Stripe cart is currently DISABLED — the nav shows a
-// "Store coming soon" badge and CartDrawer has no trigger.
+// The in-site Stripe cart is currently DISABLED — the nav "Store" button
+// links to VoxelShop and CartDrawer has no trigger.
 // To re-enable checkout: set STRIPE_SECRET_KEY in env, (optionally) set
 // `stripePriceId` per product, and restore the cart UI in CustomNav.
 

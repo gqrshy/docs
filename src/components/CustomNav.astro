@@ -21,10 +21,10 @@
 				<i class="ph ph-discord-logo"></i>
 				<span>Discord</span>
 			</a>
-			<span class="nav-store-soon" title="In-site store coming soon">
+			<a href="https://voxel.shop/product/8733/cobbleranked" target="_blank" rel="noopener noreferrer" class="nav-store">
 				<i class="ph ph-storefront"></i>
-				<span data-i18n="navStoreSoon">Store soon</span>
-			</span>
+				<span data-i18n="navStore">Store</span>
+			</a>
 		</div>
 	</div>
 </nav>
@@ -43,9 +43,9 @@
 		<a href="/docs/cobbleranked/" class="mobile-link" data-i18n="navDocsM">Docs</a>
 		<a href="/#team" class="mobile-link" data-i18n="navAboutM">About Us</a>
 		<a href="/#contact" class="mobile-link" data-i18n="navHelpM">Help</a>
-		<span class="mobile-link mobile-store-soon">
-			<i class="ph ph-storefront"></i> <span data-i18n="navStoreSoonM">Store coming soon</span>
-		</span>
+		<a href="https://voxel.shop/product/8733/cobbleranked" target="_blank" rel="noopener noreferrer" class="mobile-link">
+			<i class="ph ph-storefront"></i> <span data-i18n="navStoreM">Store</span>
+		</a>
 		<a href="https://discord.gg/VVVvBTqqyP" target="_blank" rel="noopener noreferrer" class="mobile-discord">
 			<i class="ph ph-discord-logo"></i> Discord
 		</a>
@@ -64,8 +64,8 @@
 			navDocsM: 'Docs',
 			navAboutM: 'About Us',
 			navHelpM: 'Help',
-			navStoreSoon: 'Store soon',
-			navStoreSoonM: 'Store coming soon'
+			navStore: 'Store',
+			navStoreM: 'Store'
 		},
 		ja: {
 			navProducts: 'プロダクト',
@@ -76,8 +76,8 @@
 			navDocsM: 'ドキュメント',
 			navAboutM: 'チーム',
 			navHelpM: 'サポート',
-				navStoreSoon: 'ストア準備中',
-				navStoreSoonM: 'ストア準備中'
+				navStore: 'ストア',
+				navStoreM: 'ストア'
 		}
 	};
 
@@ -272,30 +272,31 @@
 	line-height: 1;
 }
 
-/* "Store coming soon" badge (in-site cart disabled — buy on VoxelShop) */
-	.nav-store-soon {
+/* Store link (in-site cart disabled — buy on VoxelShop) */
+	.nav-store {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		padding: 0.4rem 0.75rem;
-		border: 1px solid var(--purple-200);
+		padding: 0.45rem 0.9rem;
+		border: 1px solid var(--purple-600);
 		border-radius: 10px;
-		background: var(--purple-100);
-		color: var(--purple-600);
+		background: var(--purple-600);
+		color: #fff;
+		text-decoration: none;
 		font-family: var(--font-sans);
-		font-size: 0.72rem;
-		font-weight: 600;
+		font-size: 0.88rem;
+		font-weight: 500;
 		white-space: nowrap;
-		cursor: default;
+		transition: background 0.2s ease, border-color 0.2s ease;
 	}
 
-	.nav-store-soon i {
-		font-size: 1.05rem;
+	.nav-store i {
+		font-size: 1.15rem;
 	}
 
-	.mobile-store-soon {
-		color: var(--text-muted);
-		cursor: default;
+	.nav-store:hover {
+		background: var(--purple-500);
+		border-color: var(--purple-500);
 	}
 
 	/* Mobile menu button */

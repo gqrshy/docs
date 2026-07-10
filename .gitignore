@@ -30,3 +30,12 @@ src/assets/images/cobbleranked-v2.1.0update-showcase-video.mp4
 # Windows junk
 desktop.ini
 src/assets/images/desktop.ini
+
+# Claude Code / AI assistant tooling (not source code)
+CLAUDE.md
+.claude/
+
+# IDE
+.idea/
+.vscode/
+*.iml

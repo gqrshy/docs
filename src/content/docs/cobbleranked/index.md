@@ -123,6 +123,45 @@ Link your servers together and ratings, queues, and leaderboards are shared acro
 
 ---
 
+<span class="overview-section-tag">Compare</span>
+
+## How it compares
+
+Free ranked mods exist for Cobblemon, and they're solid projects. Here's an honest look at where CobbleRanked goes further:
+
+| | **CobbleRanked** | [Cobblemon Ranked](https://modrinth.com/mod/cobblemon-ranked) | [Cobblemon Rankeds](https://modrinth.com/mod/cobblemon-rankeds) |
+|---|---|---|---|
+| Price | $10 | Free | Free |
+| Fully server-side | ✅ | ⚠️ Team preview needs a client mod | ✅ |
+| Rating system | Showdown ELO **+ Glicko-2** | ELO | ELO |
+| Formats | Singles, Doubles, Triples | Singles, Doubles, 2v2 Singles | Singles, Doubles, 2v2 |
+| Random Battle (Showdown-style) | ✅ Own rating & leaderboard | ❌ | ❌ |
+| Seasons & automatic rewards | ✅ In-game mailbox delivery | ✅ Command rewards | ✅ Command rewards |
+| Cross-server sync | ✅ Shared ratings, queues & leaderboards | ⚠️ Singles only, no longer maintained | ❌ |
+| Web API & live web leaderboard | ✅ | ❌ | ❌ |
+| Placeholder support | ✅ | ✅ | ❌ |
+| Missions & milestones | ✅ | ❌ | ❌ |
+| Themed GUIs via resource pack | ✅ | ❌ Chest GUI | ❌ Chest GUI |
+
+📝 Comparison based on each mod's public Modrinth listing as of July 2026. If you just need basic ranked battles, the free mods are a fine place to start — CobbleRanked is built for servers that want the full competitive package.
+
+---
+
+<span class="overview-section-tag">See it live</span>
+
+## Try the live demo
+
+The Web API isn't a promise on a feature list — it's running right now. These pages are powered by a real CobbleRanked server:
+
+<div class="cta-row">
+  <a class="cta-button" href="/demo/leaderboard"><i class="ph ph-ranking"></i> Live Leaderboard</a>
+  <a class="cta-button" href="/demo/usage-stats"><i class="ph ph-chart-bar"></i> Pokémon Usage Stats</a>
+</div>
+
+Build your own site or Discord bot on the same data — see the [Web API docs](/docs/cobbleranked/configuration/api/).
+
+---
+
 <span class="overview-section-tag">Get started</span>
 
 ## Live in 3 minutes
